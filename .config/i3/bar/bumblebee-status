@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import logging
+import bumblebee.theme
+import bumblebee.engine
+import bumblebee.config
+import bumblebee.output
+import bumblebee.input
+import bumblebee.modules.error
+
+def main():
+    config = bumblebee.config.Config(sys.argv[1:])
+
+    if config.debug():
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format="[%(asctime)s] %(levelname)-8s %(message)s",
+            filename=os.path.expanduser(config.logfile())
+        )
+    else:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format="[%(asctime)s] %(levelname)-8s %(message)s",
+            stream=sys.stderr
+        )
+
+    theme = bumblebee.theme.Theme(config.theme())
+    output = bumblebee.output.I3BarOutput(theme=theme)
+    inp = bumblebee.input.I3BarInput()
+    engine = None
+
+    try:
+        engine = bumblebee.engine.Engine(
+            config=config,
+            output=output,
+            inp=inp,
+        )
+        engine.run()
+    except KeyboardInterrupt as error:
+        inp.stop()
+        sys.exit(0)
+    except BaseException as e:
+        logging.exception(e)
+        if output.started():
+            output.flush()
+            output.end()
+        else:
+            output.start()
+        import time
+        while True:
+            output.begin()
+            error = bumblebee.modules.error.Module(engine, config)
+            error.set("exception occurred: {}".format(e))
+            widget = error.widgets()[0]
+            widget.link_module(error)
+            output.draw(widget, error)
+            output.flush()
+            output.end()
+            time.sleep(1)
+
+if __name__ == "__main__":
+    main()
+
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4

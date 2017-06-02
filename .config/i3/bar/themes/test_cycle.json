@@ -1,0 +1,18 @@
+{
+	"icons": [ "test" ],
+	"defaults": {
+		"prefix": "default-prefix",
+		"suffix": "default-suffix",
+		"fg": "#000000",
+		"bg": "#111111"
+	},
+	"cycle": [
+		{ "fg": "#aa0000" },
+		{ "fg": "#00aa00" },
+		{ "fg": "#0000aa" }
+	],
+	"test-widget": {
+		"fg": "#ababab",
+		"bg": "#222222"
+	}
+}

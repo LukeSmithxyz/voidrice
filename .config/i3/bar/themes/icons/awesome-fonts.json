@@ -1,0 +1,86 @@
+{
+	"defaults": {
+		"separator": "", "padding": " ",
+		"unknown": { "prefix": "" }
+	},
+	"date": { "prefix": ""	},
+	"time": { "prefix": "" },
+	"memory": { "prefix": "" },
+	"cpu": { "prefix": "" },
+	"disk": { "prefix": "" },
+	"dnf": { "prefix": "" },
+	"pacman": { "prefix": "" },
+	"brightness": { "prefix": "" },
+	"load": { "prefix": "" },
+	"layout": { "prefix": "" },
+	"cmus": {
+		"playing": { "prefix": "" },
+		"paused": { "prefix": "" },
+		"stopped": { "prefix": "" },
+		"prev": { "prefix": "" },
+		"next": { "prefix": "" },
+		"shuffle-on": { "prefix": "" },
+		"shuffle-off": { "prefix": "" },
+		"repeat-on": { "prefix": "" },
+		"repeat-off": { "prefix": "" }
+	},
+	"gpmdp": {
+		"playing": { "prefix": "" },
+		"paused": { "prefix": "" },
+		"stopped": { "prefix": "" },
+		"prev": { "prefix": "" },
+		"next": { "prefix": "" }
+	},
+	"pasink": {
+		"muted": { "prefix": "" },
+		"unmuted": { "prefix": "" }
+	},
+	"amixer": {
+		"muted": { "prefix": "" },
+		"unmuted": { "prefix": "" }
+	},
+	"pasource": {
+		"muted": { "prefix": "" },
+		"unmuted": { "prefix": "" }
+	},
+  "kernel": {
+    "prefix": "\uf17c"
+  },
+	"nic": {
+		"wireless-up": { "prefix": "" },
+		"wireless-down": { "prefix": "" },
+		"wired-up": { "prefix": "" },
+		"wired-down": { "prefix": "" },
+		"tunnel-up": { "prefix": "" },
+		"tunnel-down": { "prefix": "" }
+	},
+	"battery": {
+		"charged": { "prefix": "", "suffix": "" },
+		"AC": { "suffix": "" },
+		"charging": {
+			"prefix": [ "", "", "", "", "" ],
+			"suffix": ""
+		},
+		"discharging-10": { "prefix": "", "suffix": "" },
+		"discharging-25": { "prefix": "", "suffix": "" },
+		"discharging-50": { "prefix": "", "suffix": "" },
+		"discharging-80": { "prefix": "", "suffix": "" },
+		"discharging-100": { "prefix": "", "suffix": "" }
+	},
+	"caffeine": {
+		"activated": {"prefix": " " }, "deactivated": { "prefix": " " }
+	},
+	"xrandr": {
+		"on": { "prefix": " "}, "off": { "prefix": " " }
+	},
+	"redshift": {
+		"day": { "prefix": "" }, "night": { "prefix": "" }, "transition": { "prefix": "" }
+	},
+  "sensors": {
+    "prefix": "🌡"
+  },
+  "traffic":{
+	  "rx": { "prefix": "" },
+	  "tx": { "prefix": "" }
+  }
+}

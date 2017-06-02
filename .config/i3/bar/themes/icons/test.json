@@ -1,0 +1,6 @@
+{
+	"test-widget": {
+		"prefix": "widget-prefix",
+		"suffix": "widget-suffix"
+	}
+}

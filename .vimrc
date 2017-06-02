@@ -1,0 +1,1 @@
+so ~/.config/Scripts/vimrc

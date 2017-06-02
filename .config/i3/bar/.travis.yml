@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+install:
+  - pip install psutil
+  - pip install netifaces
+  - pip install -U coverage==4.3
+  - pip install codeclimate-test-reporter
+script:
+  - nosetests -v --with-coverage --cover-erase tests/
+  - CODECLIMATE_REPO_TOKEN=40cb00907f7a10e04868e856570bb997ab9c42fd3b63d980f2b2269433195fdf codeclimate-test-reporter
+addons:
+  code_climate:
+    repo_token: 40cb00907f7a10e04868e856570bb997ab9c42fd3b63d980f2b2269433195fdf

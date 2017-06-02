@@ -1,0 +1,393 @@
+# vim: filetype=i3
+
+#exec --no-startup-id xrdb ~/.Xresources; 
+#Basic settings
+set $mod Mod4
+floating_modifier $mod
+set $term urxvt
+set $screencast  --no-startup-id bash ~/.config/Scripts/screencast.sh
+set $screencast_sys  --no-startup-id bash ~/.config/Scripts/screencast_sys.sh
+set $video --no-startup-id bash ~/.config/Scripts/video.sh
+set $audio --no-startup-id bash ~/.config/Scripts/audio.sh
+set $stoprec --no-startup-id killall ffmpeg
+font pango:hack 9
+
+#The wifi manager applet:
+exec --no-startup-id nm-applet
+#For transparency and shadows:
+#exec --no-startup-id xcompmgr -slt
+exec --no-startup-id compton
+#This runs the script that renews the config shortcuts:
+exec_always --no-startup-id python ~/.config/Scripts/shortcuts.py
+
+exec --no-startup-id sudo mount -a
+
+#My background is always in ~/.config/wall.png. I have a shortcut in my file manager (ranger) that will automatically move a selected file here, so I can change by background on the go.
+exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
+
+#Remaps the caps lock button to escape
+exec --no-startup-id setxkbmap -option caps:escape
+#Remaps the menu button (usually between the right Alt and Ctrl to super
+exec_always --no-startup-id xmodmap $HOME/.config/Scripts/remaps
+#Makes the mouse invisible after a brief period
+exec --no-startup-id unclutter
+#Disables touchpad; you might like like this one! (I only use the ThinkPad trackpoint).
+exec --no-startup-id exec synclient TouchpadOff=1
+
+#Needed for i3-gaps
+hide_edge_borders both
+for_window [class="^.*"] border pixel 0 
+gaps inner 20
+gaps outer 20
+
+
+#MUSIC:
+##For moc:
+set $music mocp --config ~/.config/moc/config
+set $pause --no-startup-id mocp -G 
+set $next --no-startup-id mocp -f
+set $prev --no-startup-id mocp -r
+set $lilfor --no-startup-id mocp -k 10
+set $bigfor --no-startup-id mocp -k 120
+set $lilbak --no-startup-id mocp -k -10
+set $bigbak --no-startup-id mocp -k -120
+set $beg --no-startup-id mocp -j 0%
+
+##For cmus:
+#set $music cmus
+#set $pause --no-startup-id cmus-remote -u
+#set $next --no-startup-id cmus-remote -n
+#set $prev --no-startup-id cmus-remote -r
+#set $lilfor --no-startup-id cmus-remote -k +10
+#set $bigfor --no-startup-id cmus-remote -k +120
+#set $lilbak --no-startup-id cmus-remote -k -10
+#set $bigbak --no-startup-id cmus-remote -k -120
+#set $beg --no-startup-id cmus-remote -k 00:00:00
+
+#For PULSEAUDIO/PAMIXER
+#set $inc --no-startup-id pamixer --allow-boost -i 5
+#set $biginc --no-startup-id pamixer --allow-boost -i 15
+#set $dec --no-startup-id pamixer --allow-boost -d 5
+#set $bigdec --no-startup-id pamixer --allow-boost -d 15
+#set $mute --no-startup-id pamixer --allow-boost -t
+#set $micmute --no-startup-id pamixer --allow-boost -t
+#set $truemute --no-startup-id pamixer -m
+
+#FOR ALSA/AMIXER
+set $inc --no-startup-id amixer sset Master 2%+
+set $biginc --no-startup-id amixer sset Master 5%+
+set $dec --no-startup-id amixer sset Master 2%-
+set $bigdec --no-startup-id amixer sset Master 5%-
+set $mute --no-startup-id amixer sset Master toggle
+set $truemute --no-startup-id amixer sset Master mute
+
+bar {
+colors {
+	focused_workspace #008080 #008080 #ffffff
+	inactive_workspace #000000 #000000 #005050
+	active_workspace #000000 #000000 #008080
+	urgent_workspace #8B0000 #8B0000 #000000
+	}
+	status_command ~/.config/i3/bar/bumblebee-status -m amixer weather battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
+	#status_command ~/Downloads/bbs/bumblebee-status -m amixer  battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
+	position top
+	}
+
+set $flash --no-startup-id bash ~/.config/Scripts/flash_win.sh
+
+bindsym $mod+Return 		exec $term
+bindsym $mod+Shift+Return 	exec $term -e tmux -f ~/.config/tmux.conf
+
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+space		focus mode_toggle
+
+bindsym $mod+Escape		workspace prev
+bindsym $mod+Shift+Escape 	exec i3-msg exit
+
+bindsym $mod+BackSpace		exec $flash
+bindsym $mod+Shift+BackSpace	exec sudo reboot
+
+bindsym $mod+Tab		workspace back_and_forth
+
+bindsym $mod+grave		exec $flash
+#bindsym $mod+asciitilde
+
+#bindsym $mod+XF86Back	
+#bindsym $mod+Shift+XF86Back	
+
+#bindsym $mod+XF86Forward
+#bindsym $mod+Shift+XF86Forward	
+#END
+
+#Letter Keys
+
+bindsym $mod+q			kill
+bindsym $mod+Shift+q		kill
+
+bindsym $mod+w			exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+
+bindsym $mod+e			exec $term -e mutt -F ~/.config/mutt/muttrc
+bindsym $mod+Shift+e		exec $EMAIL
+
+bindsym $mod+r 			exec $term -e ranger
+bindsym $mod+Shift+r		restart; for_window [instance="dropdown"] move position center; for_window [instance="math"] move position center
+
+bindsym $mod+t			split toggle
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+y			exec $term -e calcurse -D $HOME/.config/calcurse/
+bindsym $mod+Shift+y		resize shrink width 10 px or 10ppt
+
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] move position center
+for_window [instance="dropdown"] move scratchpad
+
+
+exec --no-startup-id $term -name dropdown -e tmux -f ~/.config/Scripts/tmux.conf
+
+bindsym $mod+u			[instance="dropdown"] scratchpad show
+bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
+
+bindsym $mod+i 			exec $term -e htop
+bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
+
+bindsym $mod+o			exec --no-startup-id $beg
+bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
+
+bindsym $mod+p			exec $pause
+bindsym $mod+Shift+p		exec mypaint
+
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move position center
+for_window [instance="math"] move scratchpad
+
+exec --no-startup-id $term -name math -e R -q
+
+bindsym $mod+a			[instance="math"] scratchpad show
+bindsym $mod+Shift+a		exec $term -e alsamixer
+
+bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+Shift+s		gaps inner current minus 5
+
+bindsym $mod+d			exec rofi -show run
+bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
+
+bindsym $mod+f			fullscreen toggle
+bindsym $mod+Shift+f		exec --no-startup-id syncthing -home="$HOME/.syncthing"
+
+bindsym $mod+g			workspace prev
+bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
+
+bindsym $mod+h			focus left
+bindsym $mod+Shift+h		move left 30
+
+bindsym $mod+j			focus down
+bindsym $mod+Shift+j		move down 30
+
+bindsym $mod+k			focus up
+bindsym $mod+Shift+k		move up 30
+
+bindsym $mod+l			focus right
+bindsym $mod+Shift+l		move right 30
+
+bindsym $mod+z			gaps outer current plus 5
+bindsym $mod+Shift+z		gaps outer current minus 5
+
+bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+Shift+x		exec sudo shutdown -h now
+
+bindsym $mod+c			exec $term -e weechat -d ~/.config/weechat
+bindsym $mod+Shift+c		exec --no-startup-id audacity
+
+bindsym $mod+v			exec $term -e vis
+bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
+
+bindsym $mod+b			exec $prev
+bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
+
+bindsym $mod+n			exec $next
+bindsym $mod+Shift+n		exec $term -e newsbeuter
+
+bindsym $mod+m 			exec $term -e $music
+bindsym $mod+Shift+m		exec $mute
+
+bindsym $mod+semicolon		workspace next
+bindsym $mod+apostrophe		split horizontal ;; exec $term
+bindsym $mod+slash		split vertical ;; exec $term
+bindsym $mod+Shift+slash	kill
+bindsym $mod+backslash		workspace back_and_forth
+#END
+
+#Workspaces
+
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+set $ws8 "8: "
+set $ws9 "9: "
+set $ws10 "10: "
+
+# switch to workspace
+bindsym $mod+1		workspace $ws1
+bindsym $mod+2		workspace $ws2
+bindsym $mod+3		workspace $ws3
+bindsym $mod+4		workspace $ws4
+bindsym $mod+5		workspace $ws5
+bindsym $mod+6		workspace $ws6
+bindsym $mod+7		workspace $ws7
+bindsym $mod+8		workspace $ws8
+bindsym $mod+9		workspace $ws9
+bindsym $mod+0		workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1	move container to workspace $ws1
+bindsym $mod+Shift+2	move container to workspace $ws2
+bindsym $mod+Shift+3	move container to workspace $ws3
+bindsym $mod+Shift+4	move container to workspace $ws4
+bindsym $mod+Shift+5	move container to workspace $ws5
+bindsym $mod+Shift+6	move container to workspace $ws6
+bindsym $mod+Shift+7	move container to workspace $ws7
+bindsym $mod+Shift+8	move container to workspace $ws8
+bindsym $mod+Shift+9	move container to workspace $ws9
+bindsym $mod+Shift+0	move container to workspace $ws10
+
+for_window [class="Blender"] move to workspace $ws6
+for_window [class="Icedove"] move to workspace $ws9
+for_window [class="Thunderbird"] move to workspace $ws9
+for_window [class="marble"] move to workspace $ws7
+#for_window [class="Iceweasel"] move to workspace $ws2
+#for_window [class="Firefox"] move to workspace $ws2
+for_window [title="GIMP Startup"] move workspace $ws5
+for_window [class="Gimp"] move workspace $ws5
+for_window [class="VirtualBox"] floating enable
+for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
+for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
+for_window [window_role="tr-main"] move to workspace $ws8
+#for_window [title="projectM"] exec --no-startup-id transset -a --dec .25
+for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
+
+workspace $ws6 gaps inner 0
+workspace $ws6 gaps outer 0
+workspace $ws5 gaps inner 0
+workspace $ws5 gaps outer 0
+workspace $ws8 gaps inner 0
+workspace $ws8 gaps outer 0
+
+#Function Buttons
+#bindsym F1		nop
+#bindsym F2
+#bindsym F3
+#bindsym F4
+#bindsym F5
+#bindsym F6
+#bindsym F7
+#bindsym F8
+#bindsym F9
+#bindsym F10
+#bindsym F11		fullscreen toggle
+#bindsym F12
+
+bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/Scripts/luke_guide.pdf
+bindsym $mod+F2		exec --no-startup-id python ~/.config/Scripts/shortcuts.py
+bindsym $mod+F3		exec --no-startup-id arandr
+bindsym $mod+F4		exec --no-startup-id sudo zzz
+bindsym $mod+F5		exec --no-startup-id sudo sv restart NetworkManager
+bindsym $mod+F6		exec --no-startup-id ~/.config/Scripts/transmission.sh
+#bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
+bindsym $mod+F7		exec transset -a --dec .15
+bindsym $mod+F8		exec transset -a --inc .15
+bindsym $mod+F9		exec --no-startup-id sudo mount -a
+#bindsym $mod+F9		exec --no-startup-id bash ~/.config/i3/mount.sh
+bindsym $mod+F10	exec --no-startup-id bash ~/.config/i3/unmount.sh
+bindsym $mod+F11	exec $video
+bindsym $mod+F12	exec $screencast_sys
+
+#Arrow Keys
+bindsym $mod+Left		focus left
+bindsym $mod+Down		focus down
+bindsym $mod+Up			focus up
+bindsym $mod+Right 		focus right
+bindsym $mod+Shift+Left		move left
+bindsym $mod+Shift+Down		move down
+bindsym $mod+Shift+Up		move up
+bindsym $mod+Shift+Right 	move right
+#END
+
+#Quick Workspace Movement
+bindsym $mod+Home		workspace $ws1
+bindsym $mod+Shift+Home		move container to workspace $ws1
+bindsym $mod+End		workspace $ws10
+bindsym $mod+Shift+End		move container to workspace $ws10
+bindsym $mod+Prior		workspace prev
+bindsym $mod+Shift+Prior	move container to workspace prev
+bindsym $mod+Next		workspace next
+bindsym $mod+Shift+Next		move container to workspace next
+#END
+
+
+
+#Media
+bindsym $mod+plus		exec $inc
+bindsym $mod+Shift+plus		exec $biginc
+
+bindsym $mod+minus 		exec $dec
+bindsym $mod+Shift+minus	exec $bigdec
+
+bindsym $mod+bracketleft 	exec $lilbak
+bindsym $mod+Shift+bracketleft 	exec $bigbak
+
+bindsym $mod+bracketright 	exec $lilfor
+bindsym $mod+Shift+bracketright exec $bigfor
+
+bindsym $mod+greater		exec $inc
+bindsym $mod+Shift+greater	exec $biginc
+
+bindsym $mod+less 		exec $dec
+bindsym $mod+Shift+less		exec $bigdec
+
+bindsym Print 			exec --no-startup-id scrot
+bindsym Shift+Print 		exec --no-startup-id scrot -u
+
+bindsym Scroll_Lock		exec $audio
+bindsym Num_Lock		exec $video
+bindsym $mod+Scroll_Lock	exec $stoprec
+
+bindsym Pause			exec $screencast
+bindsym Shift+Pause		exec $screencast_sys
+bindsym $mod+Pause		exec $stoprec
+
+bindsym XF86Launch1		exec $stoprec
+bindsym $mod+XF86Launch1	exec --no-startup-id xset dpms force off
+
+bindsym XF86AudioPlay		exec $pause
+bindsym XF86AudioPause		exec $pause
+bindsym XF86AudioNext		exec $next
+bindsym XF86AudioPrev		exec $prev
+bindsym XF86AudioStop		exec $pause
+
+bindsym XF86AudioRaiseVolume	exec $inc
+bindsym XF86AudioLowerVolume	exec $dec
+bindsym XF86AudioMute		exec $mute
+bindsym XF86AudioMicMute	exec $micmute
+#END
+
+bindsym XF86Mail		exec $term -e mutt -F ~/.config/mutt/muttrc
+bindsym XF86MyComputer		exec $term -e ranger /
+#bindsym $mod+XF86MyComputer	exec
+bindsym XF86HomePage		exec --no-startup-id $BROWSER lukesmith.xyz
+bindsym $mod+XF86HomePage	exec --no-startup-id $BROWSER
+bindsym $mod+XF86WWW		exec --no-startup-id $BROWSER
+
+bindsym XF86Calculator		exec $term -e qalc
+
+bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
+bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
+
+for_window [instance="status"] move container to workspace $ws8

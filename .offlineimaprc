@@ -1,0 +1,25 @@
+[general]
+accounts = gmail
+#pythonfile = ~/.config/Scripts/decrypt.py
+starttls = yes
+ssl = yes
+
+
+#######
+[Account gmail]
+
+localrepository = gmail-local
+remoterepository = gmail-remote
+
+[Repository gmail-remote]
+type = Gmail
+remoteuser = YOURNAME@gmail.com
+remotepass = $PASSWORD
+#folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository gmail-local]
+type = Maildir
+localfolders = ~/.Mail/Gmail
+
+#######

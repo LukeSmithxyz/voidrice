@@ -1,0 +1,139 @@
+stty -ixon
+
+export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+
+if [[ -f /usr/bin/iceweasel ]]; then
+	export BROWSER="iceweasel"
+else
+	export BROWSER="firefox"
+fi
+
+shopt -s autocd
+
+#if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+	#exec startx
+#fi
+
+
+#Basic Aliases
+alias v="vim"
+#alias sv="sudo vim"
+alias r="ranger"
+alias ls='ls -hN --color=auto --group-directories-first'
+alias lsa='ls -A'
+g() { cd $1 && ls -a ;}
+alias b="cd .. && ls -a"
+alias ?="man"
+alias q="exit"
+alias e="exit"
+
+alias mutt="mutt -F ~/.config/mutt/muttrc"
+alias mocp="mocp --config ~/.config/moc/config"
+alias calcurse="calcurse -D ~/.config/calcurse"
+alias weechat="weechat -d ~/.config/weechat"
+alias syncthing="syncthing -home='$HOME/.syncthing'"
+alias tmux="tmux -f ~/.config/Scripts/tmux.conf"
+#NEWSBEUTER and W3M
+
+alias Xi="sudo xbps-install"
+alias Xu="sudo xbps-remove -R"
+alias Xup="sudo xbps-install -Suv"
+alias Xc="xbps-remove -Oo"
+alias Xq="xbps-query -Rs"
+alias XI="xbps-query -s"
+
+#Term only
+alias mute="pamixer -m"
+alias vd="pamixer -d 10"
+alias vu="pamixer -i 10"
+alias p="mocp -G &> /dev/null"
+alias next="mocp -f &> /dev/null"
+alias prev="mocp -r &> /dev/null"
+alias mnt="sudo bash ~/.config/Scripts/mount.sh"
+alias umnt="sudo bash ~/.config/Scripts/unmount.sh"
+alias sdn="sudo shutdown now"
+
+alias screenfetch="screenfetch -t"
+alias yt="youtube-dl -ic"
+alias yta="youtube-dl -xic"
+
+alias webedit="ssh -l lukesmith -p 2222 lukesmith.xyz"
+alias web="ssh -l lukesmith -p 2222 lukesmith.xyz"
+alias desk="ssh -l luke -p 22 10.193.0.46"
+serversend() { rsync -avr --rsh='ssh -p2222' $1 lukesmith@lukesmith.xyz:/home1/lukesmith/public_html ;}
+alias ein="ssh -l einchan -p 22 104.238.215.7"
+alias starwars="telnet towel.blinkenlights.nl"
+
+alias rcsync="rsync -avr --rsh='ssh -p2222' .bashrc .vimrc .Xdefaults .tmux.conf .muttrc .bash_profile .vim .w3m .moc lukesmith@lukesmith.xyz:/home1/lukesmith/config"
+
+alias newnet="sudo systemctl restart NetworkManager"
+alias atltime="sudo timedatectl set-timezone America/New_York && i3 restart"
+alias tuctime="sudo timedatectl set-timezone America/Phoenix && i3 restart"
+
+bl() { convert $@ -resize 1440x1080\> bl_$@ ;}
+
+alias pingme="ping lukesmith.xyz"
+
+alias youtube="youtube-viewer"
+alias YT="youtube-viewer"
+alias syt="youtube-viewer"
+
+alias etym="sdcv -u \"English Etymology\""
+
+alias Txa="cp ~/Documents/LaTeX/article.tex"
+alias Txs="cp ~/Documents/LaTeX/beamer.tex"
+alias Txh="cp ~/Documents/LaTeX/handout.tex"
+alias TC='find . -maxdepth 1 -regextype gnu-awk -regex "^.*\.(pyc|pyo|bak|swp|aux|log|nav|out|snm|toc|bcf|run\.xml|synctex\.gz|blg|bbl)" -delete'
+
+getgit() { git clone http://github.com/$1.git ;}
+
+folder() { echo -e "$1\t$2" >> ~/.config/Scripts/folders && i3 restart ;}
+weath() { curl wttr.in/$1 ;}
+alias work="mkdir ~/Work && cd ~/Work"
+
+
+longterm() { rsync -avr --rsh='ssh -p2222' $1 lukesmith@lukesmith.xyz:/home1/lukesmith/public_html/longterm ;}
+sendmine() { rsync -avr --rsh='ssh -p2222' $1 lukesmith@lukesmith.xyz:/home1/lukesmith/public_html/mine ;}
+
+alias test='~/.config/bumblebee-status/bumblebee-status -m pasink pasource battery nic pacman disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade'
+
+getlt() { wget http://lukesmith.xyz/longterm/$1 ;}
+getmine() { wget http://lukesmith.xyz/mine/$1 --user=lukesmith --ask-password ;}
+
+memefind() { find ~/Pictures/Memes/ -iname "*$1*" ;}
+CF() { cd ~/.config/$1 && ls ;}
+
+alias now="vim ~/Documents/Phonology/squib1.tex"
+
+alias ethspeed="speedometer -r enp0s25"
+
+note() { echo "$@" >> ~/notes ;}
+
+alias extract="~/.config/Script/ext.sh"
+
+alias refresh="python ~/.config/Scripts/shortcuts.py"
+
+backup() { cp $1 $1.bu ;}
+
+#alias man="w3mman"
+
+alias mailsync="bash ~/.config/Scripts/mailsyncloop.sh"
+
+alias wifispeed="speedometer -r wlp2s0"
+
+alias trigger="bash ~/Creations/Scripts/trigger.sh"
+
+alias bbs="python ~/.config/i3/bar/bumblebee-status"
+
+alias tr="transmission-remote"
+
+alias servs="ls /etc/sv"
+
+alias debase="sudo umount /home/Shared/Videos"
+
+alias makemine="sudo chown -R luke:luke /home/luke/Downloads/*"
+
+serven() { sudo ln -s /etc/sv/$1 /var/service/ ;}
+servdis() { sudo rm /var/service/$1 ;}
+
+aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvzf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}

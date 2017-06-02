@@ -1,0 +1,11 @@
+#text/html; qutebrowser %s &; test=test -n "$DISPLAY"; needsterminal;
+
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+#text/html; mv %s %s.html && qutebrowser %s.html > /dev/null; needsterminal;
+#
+application/pdf; mv %s %s.pdf && mupdf %s.pdf > /dev/null; needsterminal;
+
+image/*; ~/.config/mutt/muttimage.sh %s ; copiousoutput
+
+#application/pdf; pdftotext '%s' -; copiousoutput; description=PDF Document;
+#nametemplate=%s.pdf

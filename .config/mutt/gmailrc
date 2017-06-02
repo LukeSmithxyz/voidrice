@@ -1,0 +1,28 @@
+# vim: filetype=muttrc
+set imap_user = "YOURNAME@gmail.com"                       
+set smtp_url = "smtp://YOURNAME@smtp.gmail.com:587/"       
+set from = "YOURNAME@gmail.com"                            
+set realname = "YOUR ACTUAL NAME"                                  
+set mbox_type = Maildir
+set sendmail = "/usr/bin/msmtp -a gmail"
+set folder = "~/.Mail/Gmail"                     
+set spoolfile = "+INBOX"                                      
+set record = /dev/null
+set mbox = "+[Gmail].All Mail"
+set postponed = "+[Gmail].Drafts"                             
+set header_cache = ~/.config/mutt/gmail/cache/headers            
+set message_cachedir = ~/.config/mutt/gmail/cache/bodies         
+set certificate_file = ~/.config/mutt/gmail/certificates  
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+mailboxes +INBOX
+
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail].All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail].Sent Mail<enter>" "Go to sent mail"
+macro index gS "<change-folder>=[Gmail].Spam<enter>" "Go to spam"
+macro index gt "<change-folder>=[Gmail].Trash<enter>" "Go to trash"
+macro index gd "<change-folder>=[Gmail].Drafts<enter>" "Go to drafts"
+macro index gl "<change-folder>=lingcircle<enter>" "Go to lingcircle"
+macro index gr "<change-folder>=ugaroml<enter>" "Go to ugaroml"

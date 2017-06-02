@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+if ! type -P fakeroot >/dev/null; then
+	error 'Cannot find the fakeroot binary.'
+	exit 1
+fi
+
+if [[ -z $CHECKUPDATES_DB ]]; then
+	CHECKUPDATES_DB="${TMPDIR:-/tmp}/checkup-db-${USER}/"
+fi
+
+trap 'rm -f $CHECKUPDATES_DB/db.lck' INT TERM EXIT
+
+DBPath="${DBPath:-/var/lib/pacman/}"
+eval $(awk -F' *= *' '$1 ~ /DBPath/ { print $1 "=" $2 }' /etc/pacman.conf)
+
+mkdir -p "$CHECKUPDATES_DB"
+ln -s "${DBPath}/local" "$CHECKUPDATES_DB" &> /dev/null
+fakeroot -- pacman -Sy --dbpath "$CHECKUPDATES_DB" --logfile /dev/null &> /dev/null
+fakeroot pacman -Su -p --dbpath "$CHECKUPDATES_DB"
+
+exit 0

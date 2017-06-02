@@ -1,0 +1,13 @@
+pcm.softvol {
+	type softvol
+	slave.pcm "cards.pcm.default"
+	control {
+		name "Software"
+		card 0
+	}
+	max_db 20.0
+}
+pcm.!default {
+	type	plug
+	slave.pcm	"softvol"
+}

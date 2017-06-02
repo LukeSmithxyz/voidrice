@@ -1,0 +1,42 @@
+{
+	"icons": [ "ascii" ],
+	"defaults": {
+		"separator-block-width": 0,
+		"critical": {
+			"fg": "#002b36",
+			"bg": "#dc322f"
+		},
+		"warning": {
+			"fg": "#002b36",
+			"bg": "#b58900"
+		},
+		"default_separators": false,
+		"separator": ""
+	},
+	"cycle": [
+		{
+			"fg": "#93a1a1",
+			"bg": "#002b36"
+		},
+		{
+			"fg": "#eee8d5",
+			"bg": "#586e75"
+		}
+	],
+	"dnf": {
+		"good": {
+			"fg": "#002b36",
+			"bg": "#859900"
+		}
+	},
+	"battery": {
+		"charged": {
+			"fg": "#002b36",
+			"bg": "#859900"
+		},
+		"AC": {
+			"fg": "#002b36",
+			"bg": "#859900"
+		}
+	}
+}

@@ -1,0 +1,109 @@
+*live-latex-preview.txt*	For Vim version 7.4. Last change: 2014 Feb 01
+
+                                                            *live-latex-preview*
+
+A plugin for creating a live-updating PDF preview for a LaTeX file in MuPDF
+
+Default key bindings:~
+
+\o = Begin/end auto-compilation and live-updating (Note:
+       starting live compilation will also open PDF preview.)
+\p = Open/close PDF preview window. (Note: closing the
+       PDF preview will also stop auto-compilation.)
+\s = Check the result of the last compilation; 
+       jump to first error in case of errors.
+\f = Forward search to page in PDF matching cursor 
+       position in source. 
+\r = Reverse/inverse search to position in source
+       matching active page in MuPDF. (Very approximate.)
+\c = End any compilations in progress, and begin new compilation
+       now. (Useful for un-"stick"ing stalled compilations.)
+       Note: if auto-compilation is turned off, this will still
+       compile and show the results inside vim.
+
+\<PageUp>, \<PageDown>, \<Up>, \<Down>, \<Right>, \<Left>, \G
+    \m, \t, \-, \+, \= = Send the corresponding keystrokes
+    to the MuPDF preview without losing focus on vim Window
+
+The '\' can be changed by changing <LocalLeader>.
+
+To suppress the default key mappings, insert:
+
+      let no_tex_maps = 1
+
+into your .vimrc file. You may then define your own mappings which
+execute the command :call FunctionName(). The important function 
+names defined by the plugin are:
+*LaunchMuPDF()* which opens the PDF preview;
+*CloseMuPDF()* which closes the PDF preview;
+*PDFViewingToggle()* which toggles the PDF preview on/off;
+*UpdatingToggle()* which toggles live-updating on/off;
+*CheckLiveUpdateStatus()* which returns the results of the last 
+compilation, and jumps to the first error, if any; and
+*MuPDFForward()* and *MuPDFReverse()* for forward and reverse search.
+
+Autosaving~
+
+Be aware that when live updating is active, your file is saved whenever 
+the cursor moves. Be sure to take the appropriate measures to keep 
+back-up saves and undo files so you can undo changes if need be. If
+you would like the file to save with each keystroke even when the
+preview is not active, then put
+
+      let tex_preview_always_autosave = 1
+
+into your .vimrc file.
+
+                                            *LaTeX-compilation* options
+
+Using XeLaTeX~
+
+To compile with XeLaTeX rather than PDFLaTeX, include the string 
+'xelatex' somewhere in the first five lines of your file (e.g., in a
+comment).
+
+Using LaTeX > dvips > ps2pdf (for, e.g., PSTricks support)~
+
+If pstricks or related pst-* package is loaded in your preamble, this option
+will be automatically used. Otherwise, pdflatex or xelatex will be used.
+(Thanks to Hong Ying for implementing this.)
+
+(Support for LuaLaTeX may be added in the future.) 
+
+Using biber instead of bibTeX~
+
+To process bibliographic citations with biber instead of bibTeX, include
+the string 'biber' somewhere in the first five lines of your file (e.g.,
+in a comment).
+
+Using -shell-escape~
+
+To enable the -shell-escape command-line option, to allow 
+LaTeX's \write18{..} command (for, e.g., the minted package), include
+the string 'shell-escape' somewhere in the first five lines of your file
+(e.g., in a comment).
+
+                                             LaTeX *subdocuments*
+                                                 LaTeX *root*
+
+Working with subdocuments~
+
+If you want to use the live preview feature while editing a 
+sub-document, i.e., a document included in another document by means 
+of LaTeX's \input{..} or \include{..} commands, then put a comment 
+in the first five lines of the subdocument containing the string 
+'root = main.tex' (replacing 'main.tex' with the actual name 
+of the master file). This is meant to be compatible with the convention 
+adopted by other editors such as TeXworks and TeXshop, which use 
+the convention:
+
+     % !TeX root = main.tex
+
+to indicate that the master document for a given file is named "main.tex".
+
+All files should be in the same folder.
+
+
+Contact Kevin C. Klement <klement@philos.umass.edu> with bug reports.
+
+ vim:tw=78:ts=8:ft=help:norl:
