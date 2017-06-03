@@ -60,11 +60,9 @@ alias yta="youtube-dl -xic"
 alias webedit="ssh -l lukesmith -p 2222 lukesmith.xyz"
 alias web="ssh -l lukesmith -p 2222 lukesmith.xyz"
 alias desk="ssh -l luke -p 22 10.193.0.46"
-serversend() { rsync -avr --rsh='ssh -p2222' $1 lukesmith@lukesmith.xyz:/home1/lukesmith/public_html ;}
+serversend() { rsync -avr --rsh='ssh -p2222' $1 YOURNAME@YOURSERVER.xyz ;}
 alias ein="ssh -l einchan -p 22 104.238.215.7"
 alias starwars="telnet towel.blinkenlights.nl"
-
-alias rcsync="rsync -avr --rsh='ssh -p2222' .bashrc .vimrc .Xdefaults .tmux.conf .muttrc .bash_profile .vim .w3m .moc lukesmith@lukesmith.xyz:/home1/lukesmith/config"
 
 alias newnet="sudo systemctl restart NetworkManager"
 alias atltime="sudo timedatectl set-timezone America/New_York && i3 restart"
@@ -91,16 +89,6 @@ folder() { echo -e "$1\t$2" >> ~/.config/Scripts/folders && i3 restart ;}
 weath() { curl wttr.in/$1 ;}
 alias work="mkdir ~/Work && cd ~/Work"
 
-
-longterm() { rsync -avr --rsh='ssh -p2222' $1 lukesmith@lukesmith.xyz:/home1/lukesmith/public_html/longterm ;}
-sendmine() { rsync -avr --rsh='ssh -p2222' $1 lukesmith@lukesmith.xyz:/home1/lukesmith/public_html/mine ;}
-
-alias test='~/.config/bumblebee-status/bumblebee-status -m pasink pasource battery nic pacman disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade'
-
-getlt() { wget http://lukesmith.xyz/longterm/$1 ;}
-getmine() { wget http://lukesmith.xyz/mine/$1 --user=lukesmith --ask-password ;}
-
-memefind() { find ~/Pictures/Memes/ -iname "*$1*" ;}
 CF() { cd ~/.config/$1 && ls ;}
 
 alias now="vim ~/Documents/Phonology/squib1.tex"
@@ -121,7 +109,6 @@ alias mailsync="bash ~/.config/Scripts/mailsyncloop.sh"
 
 alias wifispeed="speedometer -r wlp2s0"
 
-alias trigger="bash ~/Creations/Scripts/trigger.sh"
 
 alias bbs="python ~/.config/i3/bar/bumblebee-status"
 
@@ -131,9 +118,5 @@ alias servs="ls /etc/sv"
 
 alias debase="sudo umount /home/Shared/Videos"
 
-alias makemine="sudo chown -R luke:luke /home/luke/Downloads/*"
-
 serven() { sudo ln -s /etc/sv/$1 /var/service/ ;}
 servdis() { sudo rm /var/service/$1 ;}
-
-aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvzf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
