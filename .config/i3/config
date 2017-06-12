@@ -88,7 +88,7 @@ colors {
 	active_workspace #000000 #000000 #008080
 	urgent_workspace #8B0000 #8B0000 #000000
 	}
-	status_command ~/.config/i3/bar/bumblebee-status -m amixer weather battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
+	status_command ~/.config/i3/bar/bumblebee-status -m mocp amixer weather battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
 	#status_command ~/Downloads/bbs/bumblebee-status -m amixer  battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
 	position top
 	}
