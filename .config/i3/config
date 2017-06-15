@@ -304,8 +304,7 @@ bindsym $mod+F6		exec --no-startup-id ~/.config/Scripts/transmission.sh
 bindsym $mod+F7		exec transset -a --dec .15
 bindsym $mod+F8		exec transset -a --inc .15
 bindsym $mod+F9		exec --no-startup-id sudo mount -a
-#bindsym $mod+F9		exec --no-startup-id bash ~/.config/i3/mount.sh
-bindsym $mod+F10	exec --no-startup-id bash ~/.config/i3/unmount.sh
+bindsym $mod+F10	exec --no-startup-id bash sudo umount /mnt/*
 bindsym $mod+F11	exec $video
 bindsym $mod+F12	exec $screencast_sys
 

@@ -1,6 +1,5 @@
 [general]
-accounts = gmail
-#pythonfile = ~/.config/Scripts/decrypt.py
+accounts = gmail, personal
 starttls = yes
 ssl = yes
 
@@ -23,3 +22,19 @@ type = Maildir
 localfolders = ~/.Mail/Gmail
 
 #######
+
+[Account personal]
+
+localrepository = personal-local
+remoterepository = personal-remote
+
+[Repository personal-local]
+type = IMAP
+remoteuser = USER@DOMAIN.COM
+remotepass = $PASSWORD
+remotehost = SERVER-ADDRESS
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository personal-remote]
+type = Maildir
+localfolders = ~/.Mail/Personal
