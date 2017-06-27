@@ -13,22 +13,22 @@ set $stoprec --no-startup-id killall ffmpeg
 font pango:hack 9
 
 #The wifi manager applet:
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 #For transparency and shadows:
 #exec --no-startup-id xcompmgr -slt
 exec --no-startup-id compton
 #This runs the script that renews the config shortcuts:
-exec_always --no-startup-id python ~/.config/Scripts/shortcuts.py
+exec --no-startup-id python ~/.config/Scripts/shortcuts.py
 
 exec --no-startup-id sudo mount -a
 
 #My background is always in ~/.config/wall.png. I have a shortcut in my file manager (ranger) that will automatically move a selected file here, so I can change by background on the go.
-exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
+exec --no-startup-id feh --bg-scale ~/.config/wall.png
 
-#Remaps the caps lock button to escape
-exec --no-startup-id setxkbmap -option caps:escape
-#Remaps the menu button (usually between the right Alt and Ctrl to super
-exec_always --no-startup-id xmodmap $HOME/.config/Scripts/remaps
+#Remaps the caps lock button to escape and uses the US international keyboard without dead keys
+exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
+exec --no-startup-id xmodmap ~/.config/Scripts/remaps
+#exec --no-startup-id xmodmap ~/.Xmodmap 
 #Makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Disables touchpad; you might like like this one! (I only use the ThinkPad trackpoint).
@@ -37,24 +37,36 @@ exec --no-startup-id exec synclient TouchpadOff=1
 #Needed for i3-gaps
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0 
-gaps inner 20
-gaps outer 20
+gaps inner 0
+gaps outer 0
 
 
 #MUSIC:
+
+##For mpc:
+set $music ~/.config/Scripts/music.sh
+set $pause --no-startup-id mpc toggle
+set $next --no-startup-id mpc next
+set $prev --no-startup-id mpc prev
+set $lilfor --no-startup-id mpc seek +10
+set $bigfor --no-startup-id mpc seek +120
+set $lilbak --no-startup-id mpc seek -10
+set $bigbak --no-startup-id mpc seek +120
+set $beg --no-startup-id mpc seek 0%
+
 ##For moc:
-set $music mocp --config ~/.config/moc/config
-set $pause --no-startup-id mocp -G 
-set $next --no-startup-id mocp -f
-set $prev --no-startup-id mocp -r
-set $lilfor --no-startup-id mocp -k 10
-set $bigfor --no-startup-id mocp -k 120
-set $lilbak --no-startup-id mocp -k -10
-set $bigbak --no-startup-id mocp -k -120
-set $beg --no-startup-id mocp -j 0%
+#set $music urxvt -e mocp --config ~/.config/moc/config
+#set $pause --no-startup-id mocp -G 
+#set $next --no-startup-id mocp -f
+#set $prev --no-startup-id mocp -r
+#set $lilfor --no-startup-id mocp -k 10
+#set $bigfor --no-startup-id mocp -k 120
+#set $lilbak --no-startup-id mocp -k -10
+#set $bigbak --no-startup-id mocp -k -120
+#set $beg --no-startup-id mocp -j 0%
 
 ##For cmus:
-#set $music cmus
+#set $music urxvt -e cmus
 #set $pause --no-startup-id cmus-remote -u
 #set $next --no-startup-id cmus-remote -n
 #set $prev --no-startup-id cmus-remote -r
@@ -81,17 +93,19 @@ set $bigdec --no-startup-id amixer sset Master 5%-
 set $mute --no-startup-id amixer sset Master toggle
 set $truemute --no-startup-id amixer sset Master mute
 
-bar {
-colors {
-	focused_workspace #008080 #008080 #ffffff
-	inactive_workspace #000000 #000000 #005050
-	active_workspace #000000 #000000 #008080
-	urgent_workspace #8B0000 #8B0000 #000000
-	}
-	status_command ~/.config/i3/bar/bumblebee-status -m amixer weather battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
-	#status_command ~/Downloads/bbs/bumblebee-status -m amixer  battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
-	position top
-	}
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#bar {
+#colors {
+	#focused_workspace #008080 #008080 #ffffff
+	#inactive_workspace #000000 #000000 #005050
+	#active_workspace #000000 #000000 #008080
+	#urgent_workspace #8B0000 #8B0000 #000000
+	#}
+	##status_command ~/.config/i3/bar/bumblebee-status -m amixer weather battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
+	#status_command polybar example
+	##status_command ~/Downloads/bbs/bumblebee-status -m amixer  battery nic disk datetime -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t kulade
+	#position top
+	#}
 
 set $flash --no-startup-id bash ~/.config/Scripts/flash_win.sh
 
@@ -124,7 +138,7 @@ bindsym $mod+grave		exec $flash
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w			exec --no-startup-id $BROWSER
+bindsym $mod+w			exec --no-startup-id urxvt -e w3m http://lukesmith.xyz
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e mutt -F ~/.config/mutt/muttrc
@@ -202,7 +216,7 @@ bindsym $mod+Shift+x		exec sudo shutdown -h now
 bindsym $mod+c			exec $term -e weechat -d ~/.config/weechat
 bindsym $mod+Shift+c		exec --no-startup-id audacity
 
-bindsym $mod+v			exec $term -e vis
+bindsym $mod+v			move position center
 bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
 
 bindsym $mod+b			exec $prev
@@ -211,7 +225,7 @@ bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
 bindsym $mod+n			exec $next
 bindsym $mod+Shift+n		exec $term -e newsbeuter
 
-bindsym $mod+m 			exec $term -e $music
+bindsym $mod+m 			exec --no-startup-id $music
 bindsym $mod+Shift+m		exec $mute
 
 bindsym $mod+semicolon		workspace next
@@ -259,18 +273,16 @@ bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
 
 for_window [class="Blender"] move to workspace $ws6
-for_window [class="Icedove"] move to workspace $ws9
 for_window [class="Thunderbird"] move to workspace $ws9
 for_window [class="marble"] move to workspace $ws7
-#for_window [class="Iceweasel"] move to workspace $ws2
 #for_window [class="Firefox"] move to workspace $ws2
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
-for_window [class="VirtualBox"] floating enable
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 for_window [window_role="tr-main"] move to workspace $ws8
 #for_window [title="projectM"] exec --no-startup-id transset -a --dec .25
+for_window [class="st"] exec --no-startup-id transset -a --dec .25
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 
 workspace $ws6 gaps inner 0
@@ -304,7 +316,8 @@ bindsym $mod+F6		exec --no-startup-id ~/.config/Scripts/transmission.sh
 bindsym $mod+F7		exec transset -a --dec .15
 bindsym $mod+F8		exec transset -a --inc .15
 bindsym $mod+F9		exec --no-startup-id sudo mount -a
-bindsym $mod+F10	exec --no-startup-id bash sudo umount /mnt/*
+#bindsym $mod+F9		exec --no-startup-id bash ~/.config/i3/mount.sh
+bindsym $mod+F10	exec --no-startup-id bash ~/.config/i3/unmount.sh
 bindsym $mod+F11	exec $video
 bindsym $mod+F12	exec $screencast_sys
 
@@ -384,7 +397,7 @@ bindsym XF86HomePage		exec --no-startup-id $BROWSER lukesmith.xyz
 bindsym $mod+XF86HomePage	exec --no-startup-id $BROWSER
 bindsym $mod+XF86WWW		exec --no-startup-id $BROWSER
 
-bindsym XF86Calculator		exec $term -e qalc
+bindsym XF86Calculator		exec $term -name math -e R -q
 
 bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
