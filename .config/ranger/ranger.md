@@ -20,6 +20,8 @@ Press any "verb" followed by any "argument" to perform a folder operation. "gd" 
 
 ## Many little things!
 
+(Some of this has been changed or depreciated. I'll update soon.)
+
 + bg -- (for i3 users) makes an image your background (assuming i3 is looking at ~/.config/wall.png for your background)
 + X -- Extract a zip/rar/tar.gz, whatever. Runs a script that picks the right command for the right archive.
 + Z -- zips a folder up into a .tar.gz archive.

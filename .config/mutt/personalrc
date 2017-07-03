@@ -1,0 +1,23 @@
+# vim: filetype=muttrc
+set imap_user = "YOU@YOURDOMAIN.COM"
+set smtp_url = "SMTPSERVERINFO:PORT"
+set realname = "YOUR NAME"                                  
+set mbox_type = Maildir
+set sendmail = "/usr/bin/msmtp -a personal"
+set folder = "~/.Mail/Personal"
+set spoolfile = +INBOX
+set record = +INBOX.Sent
+set postponed = +INBOX.Drafts
+set header_cache = ~/.config/mutt/Personal/cache/headers
+set message_cachedir = ~/.config/mutt/Personal/cache/bodies
+set certificate_file = ~/.config/mutt/Personal/certificates
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+bind index g noop
+bind index gg first-entry
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index gs "<change-folder>=INBOX.Sent<enter>" "Go to sent"
+macro index gd "<change-folder>=INBOX.Drafts<enter>" "Go to drafts"
+macro index gj "<change-folder>=INBOX.Junk<enter>" "Go to junk"
+macro index gt "<change-folder>=INBOX.Trash<enter>" "Go to trash"

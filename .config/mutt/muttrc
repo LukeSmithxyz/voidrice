@@ -1,4 +1,3 @@
-#source "gpg -dq ~/.ayylmao |"
 source ~/.config/mutt/gmailrc
 source ~/.config/mutt/muttcol
 source ~/.config/mutt/aliases
@@ -11,8 +10,6 @@ set mail_check = "10"
 set mailcap_path = ~/.config/mutt/mailcap
 set date_format="%m/%d %I:%M"
 set index_format="%2C %Z %d %-15.15F %s (%-4.4c)"
-#set status_format="mpv ~/.config/mutt/bump.wav"
-#set wrap = 0
 
 auto_view text/html
 alternative_order text/plain text/enriched text/html

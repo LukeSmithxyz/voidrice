@@ -1,13 +1,18 @@
-pcm.softvol {
-	type softvol
-	slave.pcm "cards.pcm.default"
-	control {
-		name "Software"
-		card 0
-	}
-	max_db 20.0
-}
 pcm.!default {
-	type	plug
-	slave.pcm	"softvol"
+    type plug
+    slave.pcm "softvol"
+}
+
+pcm.softvol {
+    type softvol
+    slave {
+        pcm "dmix"
+    }
+    control {
+        name "Pre-Amp"
+        card 0
+    }
+    min_dB -5.0
+    max_dB 26.0
+    resolution 6
 }

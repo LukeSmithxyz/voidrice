@@ -21,13 +21,16 @@ These are the files to my Void Linux Rice.
 
 ## More documentation
 
-Check other config folders for more specific documentation. For example [config mutt](.config/mutt/) contains documentation on how to set up mutt with your email account.
+Check other config folders for more specific documentation. For example [config contains documentation on how to set up mutt with your email account.
+
+[Email configuration](.config/mutt/email.md) 
+[ranger configuration](.config/ranger/) 
 
 ## Dynamic Configuration Files
 
 One of the most notable parts of my setup is that my ~/.bashrc and configs for ranger and qutebrowser are dynamically synchronized with by `~/.config/Scripts/shortcuts.py`. Each config file has a "base" form to which directory shortcuts are added and synchronized every time i3 refreshes or when you press Super+F2.
 
-Each of these programs have shortcuts to edit config files and to go to or move files to certain directories. Each time `shortcuts.py` is run, the pairs in both `~/.config/Scripts/folders` and `~/.config/Scripts/configs` are put in the syntax of each application and the 
+Each of these programs have shortcuts to edit config files and to go to or move files to certain directories. Each time `shortcuts.py` is run, the pairs in both `~/.config/Scripts/folders` and `~/.config/Scripts/configs` are put in the syntax of each application, added to the base configs, and the plopped in the appropriate location.
 
 ### What does this mean?
 
