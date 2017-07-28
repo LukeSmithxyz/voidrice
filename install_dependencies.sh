@@ -6,5 +6,8 @@ xbps-install xorg-minimal xorg-fonts xf86-input-synaptics xf86-video-intel base-
 
 tlmgr info collections | grep -o 'collection-[A-Za-z]*' | zargs tlmgr install
 
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 git clone https://github.com/ying17zi/vim-live-latex-preview.git
 mv vim-live-latex-preview ~/.vim/bundle/ 

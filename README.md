@@ -1,6 +1,6 @@
 # Luke's Void Linux Rice
 
-![pic1](pic1.png)
+![pic2](pic2.png)
 
 These are the files to my Void Linux Rice.
 
@@ -24,7 +24,8 @@ These are the files to my Void Linux Rice.
 Check other config folders for more specific documentation. For example [config contains documentation on how to set up mutt with your email account.
 
 [Email configuration](.config/mutt/email.md) 
-[ranger configuration](.config/ranger/) 
+
+[ranger configuration](.config/ranger/ranger.md) 
 
 ## Dynamic Configuration Files
 
@@ -68,3 +69,6 @@ As of now, I've listed most of the dependencies in a script in the main director
 Feel free to add other suggestions and I may implement them.
 
 I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing. You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith). Donations are earmarked for whatever the donator wants, usually to go to funds for buying new equipment for the [YouTube channel](https://youtube.com/c/LukeSmithxyz).
+
+With Bumblebee Status:
+![pic1](pic1.png)
