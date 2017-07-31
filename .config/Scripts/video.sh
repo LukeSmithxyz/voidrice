@@ -7,13 +7,13 @@
 if [[ -f ~/output.mkv ]]
 	then
 		n=1
-		while [[ -f ~/output_$n.mkv ]]
+		while [[ -f $HOME/output_$n.mkv ]]
 		do	
 			n=$((n+1))
 		done
-		filename="output_$n.mkv"
+		filename="$HOME/output_$n.mkv"
 	else
-		filename="output.mkv"
+		filename="$HOME/output.mkv"
 fi
 
 #The actual ffmpeg command:

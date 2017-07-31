@@ -17,23 +17,15 @@ shopt -s autocd
 
 #Basic Aliases
 alias v="vim"
-#alias sv="sudo vim"
 alias r="ranger"
-alias ls='ls -hN --color=auto --group-directories-first'
+#alias ls='ls -hN --color=auto --group-directories-first'
+alias ls='ls++'
 alias lsa='ls -A'
 g() { cd $1 && ls -a ;}
-alias b="cd .. && ls -a"
-alias ?="man"
-alias q="exit"
+alias mkd="mkdir -pv"
+mkcd() { mkdir -vp $1 && cd $1 ;}
 alias e="exit"
-
-alias mutt="mutt -F ~/.config/mutt/muttrc"
-alias mocp="mocp --config ~/.config/moc/config"
-alias calcurse="calcurse -D ~/.config/calcurse"
-alias weechat="weechat -d ~/.config/weechat"
-alias syncthing="syncthing -home='$HOME/.syncthing'"
-alias tmux="tmux -f ~/.config/Scripts/tmux.conf"
-#NEWSBEUTER and W3M
+alias crep="grep --color=always"
 
 alias Xi="sudo xbps-install"
 alias Xu="sudo xbps-remove -R"
@@ -41,42 +33,42 @@ alias Xup="sudo xbps-install -Suv"
 alias Xc="xbps-remove -Oo"
 alias Xq="xbps-query -Rs"
 alias XI="xbps-query -s"
+alias Xl="xbps-query -l"
 
-#Term only
-alias mute="pamixer -m"
-alias vd="pamixer -d 10"
-alias vu="pamixer -i 10"
-alias p="mocp -G &> /dev/null"
-alias next="mocp -f &> /dev/null"
-alias prev="mocp -r &> /dev/null"
-alias mnt="sudo bash ~/.config/Scripts/mount.sh"
-alias umnt="sudo bash ~/.config/Scripts/unmount.sh"
 alias sdn="sudo shutdown now"
 
 alias screenfetch="screenfetch -t"
 alias yt="youtube-dl -ic"
 alias yta="youtube-dl -xic"
 
-alias webedit="ssh -l lukesmith -p 2222 lukesmith.xyz"
-alias web="ssh -l lukesmith -p 2222 lukesmith.xyz"
-alias desk="ssh -l luke -p 22 10.193.0.46"
-serversend() { rsync -avr --rsh='ssh -p2222' $1 YOURNAME@YOURSERVER.xyz ;}
 alias ein="ssh -l einchan -p 22 104.238.215.7"
 alias starwars="telnet towel.blinkenlights.nl"
 
-alias newnet="sudo systemctl restart NetworkManager"
+alias newnet="sudo sv restart NetworkManager"
 alias atltime="sudo timedatectl set-timezone America/New_York && i3 restart"
 alias tuctime="sudo timedatectl set-timezone America/Phoenix && i3 restart"
 
 bl() { convert $@ -resize 1440x1080\> bl_$@ ;}
-
-alias pingme="ping lukesmith.xyz"
 
 alias youtube="youtube-viewer"
 alias YT="youtube-viewer"
 alias syt="youtube-viewer"
 
 alias etym="sdcv -u \"English Etymology\""
+alias spword="sdcv -u quick_spanish-english"
+alias tosp="sdcv -u quick_english-spanish"
+alias frword="sdcv -u quick_french-english"
+alias tofr="sdcv -u quick_english-french"
+alias lword="sdcv -u quick_latin-english"
+alias tol="sdcv -u quick_english-latin"
+alias rusword="sdcv -u quick_russian-english"
+alias torus="sdcv -u quick_english-russian"
+alias portword="sdcv -u quick_portuguese-english"
+alias toport="sdcv -u quick_english-portuguese"
+alias itword="sdcv -u quick_italian-english"
+alias toit="sdcv -u quick_english-italian"
+alias gword="sdcv -u quick_german-english"
+alias tog="sdcv -u quick_english-german"
 
 alias Txa="cp ~/Documents/LaTeX/article.tex"
 alias Txs="cp ~/Documents/LaTeX/beamer.tex"
@@ -89,26 +81,26 @@ folder() { echo -e "$1\t$2" >> ~/.config/Scripts/folders && i3 restart ;}
 weath() { curl wttr.in/$1 ;}
 alias work="mkdir ~/Work && cd ~/Work"
 
-CF() { cd ~/.config/$1 && ls ;}
 
-alias now="vim ~/Documents/Phonology/squib1.tex"
+
+CF() { cd ~/.config/$1 && ls ;}
 
 alias ethspeed="speedometer -r enp0s25"
 
 note() { echo "$@" >> ~/notes ;}
+alias notes="vim ~/notes"
 
-alias extract="~/.config/Script/ext.sh"
+alias extract="~/.config/Scripts/extract.sh"
 
 alias refresh="python ~/.config/Scripts/shortcuts.py"
 
 backup() { cp $1 $1.bu ;}
 
-#alias man="w3mman"
-
 alias mailsync="bash ~/.config/Scripts/mailsyncloop.sh"
 
-alias wifispeed="speedometer -r wlp2s0"
+alias wifispeed="speedometer -r wlp3s0"
 
+alias trigger="bash ~/Creations/Scripts/trigger.sh"
 
 alias bbs="python ~/.config/i3/bar/bumblebee-status"
 
@@ -116,7 +108,46 @@ alias tr="transmission-remote"
 
 alias servs="ls /etc/sv"
 
-alias debase="sudo umount /home/Shared/Videos"
+alias debase="sudo umount /home/Shared/Videos && xrandr --output LVDS1 --auto --output VGA1 --off && bash ~/.config/polybar/launch.sh &> /dev/null"
 
 serven() { sudo ln -s /etc/sv/$1 /var/service/ ;}
 servdis() { sudo rm /var/service/$1 ;}
+
+aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvzf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
+
+alias menuk="xmodmap -e 'keycode 135 = Super_R'"
+alias imgt="bash ~/.config/Scripts/imgt.sh"
+
+alias ref="python ~/.config/Scripts/shortcuts.py && source ~/.bashrc"
+alias ka="killall"
+alias bars="bash ~/.config/polybar/launch.sh"
+
+
+alias lsc="xrandr --output LVDS1 --auto --output VGA1 --off && bash ~/.config/polybar/launch.sh &> /dev/null"
+alias vsc="xrandr --output VGA1 --auto --output LVDS1 --off && bash ~/.config/polybar/launch.sh &> /dev/null"
+alias dsc="xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1 && bash ~/.config/polybar/launch.sh &> /dev/null"
+
+alias speedvid="bash ~/.config/Scripts/speedvid.sh"
+tag() {
+if [[ -f $1 ]]
+	then
+	echo "Enter a title."
+	read title
+	echo "Enter an artist name."
+	read artist
+	echo "Enter an album."
+	read album
+	echo "Enter an track number."
+	read numb
+	eyeD3 --remove-all "$1"
+	eyeD3 -a "$artist" -t "$title" -n "$numb" -A "$album" "$1"
+else
+	echo "No file found."
+fi
+}
+
+
+
+
+
+#Directory Shortcuts:

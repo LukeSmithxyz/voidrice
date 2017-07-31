@@ -1,9 +1,10 @@
 # vim: filetype=i3
 
 #This is Luke Smith's i3-gaps configuration file.
-#Email me: http://lukesmith.xyz
+#Me: http://lukesmith.xyz
 #Email: luke@lukesmith.xyz
-#YouTube Channel: https://youtube.com/c/LukeSmithxyz
+#YouTube: https://youtube.com/c/LukeSmithxyz
+#Github: https://github.com/LukeSmithxyz
 
 ###---Basic Definitions---###
 #Needed for i3-gaps
@@ -14,12 +15,10 @@ gaps outer 15
 font pango:hack 9
 set $mod Mod4
 set $term urxvt
-set $screencast  --no-startup-id bash ~/.config/Scripts/screencast.sh
-set $screencast_sys  --no-startup-id bash ~/.config/Scripts/screencast_sys.sh
 set $video --no-startup-id bash ~/.config/Scripts/video.sh
-set $audio --no-startup-id bash ~/.config/Scripts/audio.sh
-set $stoprec --no-startup-id killall ffmpeg
+set $stoprec --no-startup-id killall ffmpeg & killall screenkey
 set $flash --no-startup-id bash ~/.config/Scripts/flash_win.sh
+set $browser firefox
 
 
 ###---Starting External Scripts---###
@@ -35,8 +34,6 @@ exec --no-startup-id sudo mount -a
 exec --no-startup-id compton
 #Refresh bash/ranger shortcuts:
 exec --no-startup-id python ~/.config/Scripts/shortcuts.py
-#Remove any previous polybars
-#exec --no-startup-id killall polybar
 #Try to load VGA screen if available:
 exec --no-startup-id ~/.config/Scripts/screen.sh v
 #Launch Polybar where appropriate:
@@ -44,9 +41,10 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 #Add wallpaper:
 exec --no-startup-id feh --bg-scale ~/.config/wall.png
 #Remaps the caps lock button to escape and uses the US international keyboard with dead keys
-exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
+exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
 #Remap Menu button to Super:
-exec_always --no-startup-id xmodmap ~/.config/Scripts/remaps
+exec_always --no-startup-id xmodmap -e 'keycode 135 = Super_R'
+bindsym Menu	exec --no-startup-id xmodmap -e 'keycode 135 = Super_R'
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Disables touchpad; you might like like this one! (I only use the ThinkPad trackpoint).
@@ -87,6 +85,16 @@ set $beg --no-startup-id mpc seek 0%
 #set $bigbak --no-startup-id cmus-remote -k -120
 #set $beg --no-startup-id cmus-remote -k 00:00:00
 
+#FOR ALSA/AMIXER
+set $inc --no-startup-id amixer sset Master 2%+
+set $biginc --no-startup-id amixer sset Master 5%+
+set $dec --no-startup-id amixer sset Master 2%-
+set $bigdec --no-startup-id amixer sset Master 5%-
+set $mute --no-startup-id amixer sset Master toggle
+set $truemute --no-startup-id amixer sset Master mute
+set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_alsa.sh
+set $audio --no-startup-id bash ~/.config/Scripts/audio_alsa.sh
+
 #For PULSEAUDIO/PAMIXER
 #set $inc --no-startup-id pamixer --allow-boost -i 5
 #set $biginc --no-startup-id pamixer --allow-boost -i 15
@@ -95,14 +103,8 @@ set $beg --no-startup-id mpc seek 0%
 #set $mute --no-startup-id pamixer --allow-boost -t
 #set $micmute --no-startup-id pamixer --allow-boost -t
 #set $truemute --no-startup-id pamixer -m
-
-#FOR ALSA/AMIXER
-set $inc --no-startup-id amixer sset Master 2%+
-set $biginc --no-startup-id amixer sset Master 5%+
-set $dec --no-startup-id amixer sset Master 2%-
-set $bigdec --no-startup-id amixer sset Master 5%-
-set $mute --no-startup-id amixer sset Master toggle
-set $truemute --no-startup-id amixer sset Master mute
+#set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_pulse.sh
+#set $audio --no-startup-id bash ~/.config/Scripts/audio_pulse.sh
 
 
 ###---Dropdown/Scratchpad Windows---###
@@ -138,6 +140,8 @@ bindsym $mod+Shift+BackSpace	exec sudo reboot
 
 bindsym $mod+grave		exec $flash
 #bindsym $mod+asciitilde
+#STOP/HIDE EVERYTHING:
+bindsym $mod+Shift+Delete	exec $mute ; exec $pause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 
 ###---Letter Key Bindings---###
@@ -145,7 +149,7 @@ bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
 bindsym $mod+w			exec --no-startup-id $term -e w3m http://lukesmith.xyz
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w		exec --no-startup-id $browser
 
 bindsym $mod+e			exec $term -e mutt 
 #bindsym $mod+Shift+e
@@ -181,7 +185,7 @@ bindsym $mod+d			exec rofi -show run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f		exec --no-startup-id syncthing 
+#bindsym $mod+Shift+f
 
 bindsym $mod+g			workspace prev
 bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
@@ -205,7 +209,7 @@ bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+x		exec sudo shutdown -h now
 
 bindsym $mod+c			exec $term -e weechat
-bindsym $mod+Shift+c		exec --no-startup-id audacity
+#bindsym $mod+Shift+c
 
 bindsym $mod+v			exec urxvt -e ncmpcpp -s visualizer
 #bindsym $mod+Shift+v
@@ -308,7 +312,7 @@ workspace $ws8 gaps outer 0
 
 
 ###---Function Buttons---###
-bindsym F1		nop
+#bindsym F1		nop
 #bindsym F2
 #bindsym F3
 #bindsym F4
@@ -321,7 +325,7 @@ bindsym F1		nop
 bindsym F11		fullscreen toggle
 #bindsym F12
 
-bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/Scripts/luke_guide.pdf
+bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/Scripts/i3_guide.md.pdf
 bindsym $mod+F2		exec --no-startup-id python ~/.config/Scripts/shortcuts.py
 bindsym $mod+F3		exec --no-startup-id arandr
 bindsym $mod+F4		exec --no-startup-id sudo zzz
@@ -347,65 +351,116 @@ bindsym $mod+Shift+Right 	move right
 
 
 ###---Media Keys---###
+
+#Volume keys
 bindsym $mod+plus		exec $inc
 bindsym $mod+Shift+plus		exec $biginc
-
 bindsym $mod+minus 		exec $dec
 bindsym $mod+Shift+minus	exec $bigdec
-
-bindsym $mod+bracketleft 	exec $lilbak
-bindsym $mod+Shift+bracketleft 	exec $bigbak
-
-bindsym $mod+bracketright 	exec $lilfor
-bindsym $mod+Shift+bracketright exec $bigfor
-
 bindsym $mod+greater		exec $inc
 bindsym $mod+Shift+greater	exec $biginc
-
 bindsym $mod+less 		exec $dec
 bindsym $mod+Shift+less		exec $bigdec
 
+#For advancing forward/backward in an mpd song
+bindsym $mod+bracketleft 	exec $lilbak
+bindsym $mod+Shift+bracketleft 	exec $bigbak
+bindsym $mod+bracketright 	exec $lilfor
+bindsym $mod+Shift+bracketright exec $bigfor
+
+#Print screen takes a screenshot.
+#With shift, it takes one only of the given window.
 bindsym Print 			exec --no-startup-id scrot
 bindsym Shift+Print 		exec --no-startup-id scrot -u
 
-bindsym Scroll_Lock		exec $audio
-bindsym Num_Lock		exec $video
+#For recording audio/video or stop recording. Also screenkey for visual typing.
+bindsym $mod+Print		exec --no-startup-id screenkey
 bindsym $mod+Scroll_Lock	exec $audio
-
-
 bindsym $mod+Insert		exec $screencast
-bindsym $mod+Shift+Insert	exec $video
-
-bindsym Pause			exec $audio
-bindsym Shift+Pause		exec $screencast_sys
-bindsym $mod+Pause		exec $stoprec
-
+bindsym $mod+Pause		exec $video
+bindsym $mod+Delete		exec $stoprec
 bindsym XF86Launch1		exec $stoprec
-bindsym $mod+XF86Launch1	exec --no-startup-id xset dpms force off
 
-bindsym XF86AudioPlay		exec $pause
-bindsym XF86AudioPause		exec $pause
+
+
+###---Extra XF86 Keys---###
+#These are the extra media keys that some keyboards have.
+bindsym XF86AudioMute		exec $mute
+bindsym XF86AudioLowerVolume	exec $dec
+bindsym XF86AudioRaiseVolume	exec $inc
+bindsym XF86PowerOff		exec sudo shutdown -h now
+#bindsym XF86Copy		exec 
+#bindsym XF86Open		exec 
+#bindsym XF86Paste		exec 
+#bindsym XF86Cut		exec 
+#bindsym XF86MenuKB		exec 
+bindsym XF86Calculator		exec $term -e R -q
+bindsym XF86Sleep		exec sudo zzz
+#bindsym XF86WakeUp		exec 
+bindsym XF86Explorer		exec $term -e ranger
+#bindsym XF86Send		exec 
+#bindsym XF86Xfer		exec 
+bindsym XF86WWW			exec --no-startup-id $browser
+#bindsym XF86DOS		exec 
+bindsym XF86ScreenSaver		exec exec --no-startup-id ~/.config/i3/lock.sh
+#bindsym XF86RotateWindows	exec 
+#bindsym XF86TaskPane		exec 
+#bindsym XF86Favorites		exec 
+bindsym XF86MyComputer		exec $term -e ranger
+#bindsym XF86Back		exec 
+#bindsym XF86Forward		exec 
+bindsym XF86Eject		exec sudo umount -R /mnt
 bindsym XF86AudioNext		exec $next
+bindsym XF86AudioPlay		exec $pause
 bindsym XF86AudioPrev		exec $prev
 bindsym XF86AudioStop		exec $pause
-
-bindsym XF86AudioRaiseVolume	exec $inc
-bindsym XF86AudioLowerVolume	exec $dec
-bindsym XF86AudioMute		exec $mute
+bindsym XF86AudioRecord		exec $audio
+bindsym XF86AudioRewind		exec $lilbak
+bindsym XF86AudioForward	exec $lilfor
+#bindsym XF86Phone		exec 
+#bindsym XF86Tools		exec 
+bindsym XF86HomePage		exec $browser https://lukesmith.xyz
+bindsym XF86Reload		restart
+#bindsym XF86ScrollUp		exec 
+#bindsym XF86ScrollDown		exec 
+#bindsym XF86New		exec 
+#bindsym XF86LaunchA		exec
+#bindsym XF86LaunchB		exec 
+#bindsym XF86Launch2		exec 
+#bindsym XF86Launch3		exec 
+#bindsym XF86Launch4		exec 
+#bindsym XF86Launch5		exec 
+#bindsym XF86Launch6		exec 
+#bindsym XF86Launch7		exec 
+#bindsym XF86Launch8		exec 
+#bindsym XF86Launch9		exec 
 bindsym XF86AudioMicMute	exec $micmute
-
-
-###---Extra Keys---###
-bindsym XF86Mail		exec $term -e mutt 
-bindsym XF86MyComputer		exec $term -e ranger /
-#bindsym $mod+XF86MyComputer	exec
-bindsym XF86HomePage		exec --no-startup-id $BROWSER lukesmith.xyz
-bindsym $mod+XF86HomePage	exec --no-startup-id $BROWSER
-bindsym $mod+XF86WWW		exec --no-startup-id $BROWSER
-
-bindsym XF86Calculator		exec $term -name math -e R -q
-
-bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
+#bindsym XF86TouchpadToggle	exec 
+bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
+bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
+bindsym XF86Suspend		exec --no-startup-id ~/.config/i3/lock.sh
+bindsym XF86Close		kill
+bindsym XF86WebCam		exec mpv /dev/video0
+bindsym XF86Mail		exec $term -e mutt
+bindsym XF86Messenger		exec $term -e weechat
+bindsym XF86Search		exec $browser https://duckduckgo.com
+#bindsym XF86Go			exec 
+#bindsym XF86Finance		exec 
+#bindsym XF86Game		exec 
+bindsym XF86Shop		exec $browser https://ebay.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
+bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
+bindsym XF86AudioMedia		exec $music
+bindsym XF86Display		exec --no-startup-id arandr
+#bindsym XF86KbdLightOnOff	exec 
+bindsym XF86KbdBrightnessDown	exec --no-startup-id xbacklight -dec 15
+bindsym XF86KbdBrightnessUp	exec --no-startup-id xbacklight -inc 15
+#bindsym XF86Reply		exec 
+#bindsym XF86MailForward	exec 
+#bindsym XF86Save		exec 
+bindsym XF86Documents		exec $term -e ranger ~/Documents
+#bindsym XF86Battery		exec 
+#bindsym XF86Bluetooth		exec 
+bindsym XF86WLAN		exec --no-startup-id sudo sv restart NetworkManager
 
 
