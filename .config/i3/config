@@ -55,6 +55,7 @@ exec --no-startup-id exec synclient TouchpadOff=1
 ##For mpc:
 set $music urxvt -e ncmpcpp
 set $pause --no-startup-id mpc toggle
+set $trupause --no-startup-id mpc pause
 set $next --no-startup-id mpc next
 set $prev --no-startup-id mpc prev
 set $lilfor --no-startup-id mpc seek +10
@@ -66,6 +67,7 @@ set $beg --no-startup-id mpc seek 0%
 ##For moc:
 #set $music urxvt -e mocp
 #set $pause --no-startup-id mocp -G 
+#set $truepause --no-startup-id mocp -P
 #set $next --no-startup-id mocp -f
 #set $prev --no-startup-id mocp -r
 #set $lilfor --no-startup-id mocp -k 10
@@ -141,7 +143,7 @@ bindsym $mod+Shift+BackSpace	exec sudo reboot
 bindsym $mod+grave		exec $flash
 #bindsym $mod+asciitilde
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec $mute ; exec $pause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+Shift+Delete	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 
 ###---Letter Key Bindings---###

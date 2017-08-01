@@ -542,9 +542,9 @@
 #  quit
 #
 #
-def_key "t"
+def_key "f"
     find
-def_key "t"
+def_key "f"
     find_item_forward
 
 def_key "+"
@@ -595,3 +595,18 @@ def_key "l"
   run_action
 def_key "l"
   play_item
+def_key "m"
+  show_media_library
+def_key "m"
+  toggle_media_library_columns_mode
+def_key "t"
+  show_tag_editor
+def_key "v"
+  show_visualizer
+def_key "G"
+  move_end
+def_key "g"
+  move_home
+#jump_to_position_in_song
+def_key "U"
+  update_database

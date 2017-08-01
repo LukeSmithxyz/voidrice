@@ -113,7 +113,7 @@ visualizer_type = spectrum
 #
 ## Defines how long messages are supposed to be visible.
 ##
-#message_delay_time = 5
+message_delay_time = 1
 #
 ##### song format #####
 ##
@@ -182,23 +182,23 @@ visualizer_type = spectrum
 ## Note: colors can be nested.
 ##
 #
-#song_list_format = {%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
+song_list_format = {$4%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
 #
-#song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
+song_status_format = $b{{$8"%t"}} $3by {$4%a{ $3in $7%b{ (%y)}} $3}|{$8%f}
 #
-#song_library_format = {%n - }{%t}|{%f}
+song_library_format = {%n - }{%t}|{%f}
 #
-#alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
+alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
 #
-#alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
+alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 #
-#current_item_prefix = $(yellow)$r
+current_item_prefix = $(cyan)$r$b
 #
-#current_item_suffix = $/r$(end)
+current_item_suffix = $/r$(end)$/b
 #
-#current_item_inactive_column_prefix = $(white)$r
+current_item_inactive_column_prefix = $(magenta)$r
 #
-#current_item_inactive_column_suffix = $/r$(end)
+current_item_inactive_column_suffix = $/r$(end)
 #
 #now_playing_prefix = $b
 #
@@ -293,7 +293,7 @@ visualizer_type = spectrum
 ##
 #playlist_display_mode = columns
 #
-#browser_display_mode = classic
+browser_display_mode = columns
 #
 #search_engine_display_mode = classic
 #
@@ -317,7 +317,7 @@ visualizer_type = spectrum
 ## Note: You can specify third character which will be used to build 'empty'
 ## part of progressbar.
 ##
-#progressbar_look = =>
+progressbar_look = ->
 #
 ## Available values: database, playlist.
 ##
@@ -333,7 +333,7 @@ visualizer_type = spectrum
 ##
 media_library_primary_tag = album_artist
 #
-#media_library_albums_split_by_date = yes
+media_library_albums_split_by_date = no
 #
 ## Available values: wrapped, normal.
 ##
@@ -417,7 +417,7 @@ startup_screen = media_library
 #
 #clock_display_seconds = no
 #
-#display_volume_level = yes
+display_volume_level = no
 #
 #display_bitrate = no
 #
@@ -431,7 +431,7 @@ startup_screen = media_library
 ## Note: if below is enabled, ncmpcpp will ignore leading "The" word while
 ## sorting items in browser, tags in media library, etc.
 ##
-#ignore_leading_the = no
+ignore_leading_the = yes
 #
 ##
 ## Note: if below is enabled, ncmpcpp will ignore diacritics while searching and
@@ -472,11 +472,11 @@ startup_screen = media_library
 #
 #search_engine_default_search_mode = 1
 #
-#external_editor = nano
+external_editor = vim
 #
 ## Note: set to yes if external editor is a console application.
 ##
-#use_console_editor = yes
+use_console_editor = yes
 #
 ##### colors definitions #####
 ##
@@ -510,9 +510,9 @@ startup_screen = media_library
 #
 #colors_enabled = yes
 #
-#empty_tag_color = cyan
+empty_tag_color = magenta
 #
-#header_window_color = default
+header_window_color = blue
 #
 #volume_color = default
 #
@@ -520,19 +520,19 @@ startup_screen = media_library
 #
 #state_flags_color = default:b
 #
-#main_window_color = yellow
+main_window_color = green
 #
 #color1 = white
 #
 #color2 = green
 #
-#progressbar_color = black:b
+progressbar_color = black:b
 #
-#progressbar_elapsed_color = green:b
+progressbar_elapsed_color = blue:b
 #
-#statusbar_color = default
+statusbar_color = red
 #
-#statusbar_time_color = default:b
+statusbar_time_color = cyan:b
 #
 #player_state_color = default:b
 #
