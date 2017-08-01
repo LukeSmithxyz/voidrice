@@ -23,6 +23,8 @@ These are the files to my Void Linux Rice.
 
 Check other config folders for more specific documentation. For example [config contains documentation on how to set up mutt with your email account.
 
+[i3 guide and config](.config/Scripts/i3_guide.md)
+
 [Email configuration](.config/mutt/email.md) 
 
 [ranger configuration](.config/ranger/ranger.md) 
