@@ -47,14 +47,6 @@ Each of these programs have shortcuts to edit config files and to go to or move 
 
 Then simply remove the line in the i3 config that runs `shortcuts.py` and then edit configs as usual.
 
-## ~/.config Centrality
-
-Some programs, like mocp, tmux, mutt, calcurse and weechat look to `~` and not `~/.config` for their dotfiles. This annoys me since I like using Syncthing to sync my config files accross machines.
-
-To avoid this, I have bash aliases and i3 shortcuts that run these programs looking in `~/.config/` instead for their files. This makes managing files easier for me.
-
-You can easily change this if you want. As I decrease the number of machines I use anyway, I may gradually stop doing this.
-
 ## Differences from my Arch and Parabola Rices
 
 + **Since Void is more or less my main distro now, this repo is more likely to get updates over time.** The Arch and Parabola repos may get some, changes, but will remain mostly the same.
@@ -62,15 +54,19 @@ You can easily change this if you want. As I decrease the number of machines I u
 + This rice uses ALSA only, and **not** PulseAudio. This makes for a more minimal system, but there is some functionality of the Parabola rice not present here yet, specifically, I don't have a way of recording system sounds yet, or using music visualizers. If you have more experience than me in getting these to work, please email me your solution! [luke@lukesmith.xyz](mailto:lukesmith.xyz)
 + I use only Firefox on my Void Machine, not qutebrowser, so there are no qutebrowser configs here.
 
-## Note on dependencies
-
-As of now, I've listed most of the dependencies in a script in the main directory. I don't think list is exhaustive, so if you find another program that my rice requires, please notify me so I can add it for the facility of other users! Again, my mail is at [luke@lukesmith.xyz](mailto:luke@lukesmith.xyz).
-
 ## Like my rice?
 
 Feel free to add other suggestions and I may implement them.
 
 I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing. You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith). Donations are earmarked for whatever the donator wants, usually to go to funds for buying new equipment for the [YouTube channel](https://youtube.com/c/LukeSmithxyz).
+
+# Some dependencies
+
++ i3-gaps, NetworkManager,compton
++ Terminal apps -- ranger, ncmpcpp, mpd, htop, weechat, neomutt, calcurse, newsbeuter, transmission-remote-cli, w3m, youtube-dl, ffmpeg, scrot
++ Background stuff -- mpd, transmission
++ Lightweight non-terminal apps -- mupdf, feh, rofi, network manager applet, arandr, mpv
++ Big business programs -- Firefox, GIMP, Blender
 
 With Bumblebee Status:
 ![pic1](pic1.png)
