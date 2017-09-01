@@ -2,7 +2,7 @@
 
 ## Shortcuts
 
-I've added many folder-specific shortcuts; refer to rc.conf for the specifics, but here's the idea. There are for "verbs:"
+I've added many folder-specific shortcuts; refer to rc.conf for the specifics, but here's the idea. There are four "verbs:"
 
 + g -- "go or cd"
 + t -- "new tab"
