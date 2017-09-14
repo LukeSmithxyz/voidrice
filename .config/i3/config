@@ -9,7 +9,8 @@
 ###---Basic Definitions---###
 #Needed for i3-gaps
 hide_edge_borders both
-for_window [class="^.*"] border pixel 0 
+new_window 1pixel
+smart_borders on
 gaps inner 15
 gaps outer 15
 font pango:hack 9
