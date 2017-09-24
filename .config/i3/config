@@ -15,7 +15,7 @@ hide_edge_borders both
 for_window [class="^.*"] border pixel 0
 gaps inner 15
 gaps outer 15
-font pango:hack 9
+font pango:mono 9
 set $mod Mod4
 set $term urxvt
 set $video --no-startup-id bash ~/.config/Scripts/video.sh
