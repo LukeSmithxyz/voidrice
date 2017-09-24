@@ -1,8 +1,8 @@
-# Luke's Void Linux Rice
+# Luke's GNU/Linux Rice
 
 ![pic2](pic2.png)
 
-These are the files to my Void Linux Rice.
+There are my dotfiles! The name of the repo, "voidrice", came from the fact they were originally on my Void Linux machine, but these files are distro-independent. In fact, I now push changes from my X200 running Parabola.
 
 ## Programs whose configs can be found here
 
@@ -11,8 +11,10 @@ These are the files to my Void Linux Rice.
 + vim
 + bash
 + ranger
++ qutebrowser
 + mutt/msmtp/offlineimap (For offline syncing of email, with configs easy to change to a gmail account)
 + calcurse
++ ncmpcpp and mpd (my main music player)
 + Music on Console (moc and mocp)
 + mpv
 + neofetch
@@ -47,13 +49,6 @@ Each of these programs have shortcuts to edit config files and to go to or move 
 
 Then simply remove the line in the i3 config that runs `shortcuts.py` and then edit configs as usual.
 
-## Differences from my Arch and Parabola Rices
-
-+ **Since Void is more or less my main distro now, this repo is more likely to get updates over time.** The Arch and Parabola repos may get some, changes, but will remain mostly the same.
-+ Void uses a different pacakge manager and init system than Arch/Parabola, thus some of the relevant shortcuts have been changed.
-+ This rice uses ALSA only, and **not** PulseAudio. This makes for a more minimal system, but there is some functionality of the Parabola rice not present here yet, specifically, I don't have a way of recording system sounds yet, or using music visualizers. If you have more experience than me in getting these to work, please email me your solution! [luke@lukesmith.xyz](mailto:lukesmith.xyz)
-+ I use only Firefox on my Void Machine, not qutebrowser, so there are no qutebrowser configs here.
-
 ## Like my rice?
 
 Feel free to add other suggestions and I may implement them.
@@ -68,5 +63,6 @@ I have a job, but every penny I get from followers or subscribers is more incent
 + Lightweight non-terminal apps -- mupdf, feh, rofi, network manager applet, arandr, mpv
 + Big business programs -- Firefox, GIMP, Blender
 
-With Bumblebee Status:
+# With Bumblebee Status:
+
 ![pic1](pic1.png)

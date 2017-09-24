@@ -9,16 +9,20 @@
 ;=====================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #000
+background = ${xrdb:color0}
+;background = #000
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = ${xrdb:color7}
+;foreground = #dfdfdf
 foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
+primary = ${xrdb:color3}
+;primary = ${xrdb:color3}
+secondary = ${xrdb:color5}
+;secondary = #e60053
 alert = #bd2c40
 col = #00f
+;fg = ${xrdb:color7}
+;bg = ${xrdb:color2}
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -35,7 +39,7 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3
-line-color = #f00
+line-color = {$xrdb:color1}
 
 border-size = 0
 border-color = #00000000
@@ -48,7 +52,7 @@ module-margin-right = 2
 
 font-0 = mono:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=11;1
+font-2 = Wuncon Siji:pixelsize=11;1
 
 modules-left = i3 mpd
 #modules-center = mpd
@@ -164,25 +168,28 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song> <label-time> <toggle>
+format-online = <label-song> <label-time>
+# <icon-prev> <toggle> <icon-next>
+#<toggle>
 
-;icon-prev = 
-;icon-stop = 
-;icon-play = 
-;icon-pause = 
-;icon-next = 
-icon-prev = <-
-icon-stop = X
-icon-play-prefix = #f00
-icon-play = (Paused)
-icon-pause = 
-icon-next = ->
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+#icon-prev = <-
+#icon-stop = X
+#icon-play-prefix = #f00
+#icon-play = (Paused)
+#icon-pause = 
+#icon-next = ->
 
 ;bar-progress-width = 45
 ;bar-progress-indicator = |
 ;bar-progress-fill = -
 ;bar-progress-empty = -
 
+label-song =  %artist% - %title%
 label-song-maxlen = 70
 label-song-ellipsis = true
 
@@ -213,7 +220,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-underline = ${xrdb:color1}
 label = %percentage%%
 
 [module/memory]
@@ -221,16 +228,16 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-underline = ${xrdb:color6}
 label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+format-connected-underline = ${xrdb:color5}
 ;format-connected-underline = #9f78e1
 label-connected = %essid%
 
@@ -252,8 +259,8 @@ type = internal/network
 interface = enp0s25
 interval = 3.0
 
-format-connected-underline = #5ab738
-;format-connected-underline = #55aa55
+format-connected-underline = ${xrdb:color2}
+;format-connected-underline = ${xrdb:color10}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
@@ -278,7 +285,7 @@ time = " at %I:%M%p"
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #407ee7
+format-underline = ${xrdb:color12}
 ;format-underline = #0a6cf5
 
 label = %date% %time%
@@ -295,13 +302,13 @@ format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-foreground-0 = ${xrdb:color10}
+bar-volume-foreground-1 = ${xrdb:color10}
+bar-volume-foreground-2 = ${xrdb:color10}
+bar-volume-foreground-3 = ${xrdb:color10}
+bar-volume-foreground-4 = ${xrdb:color10}
+bar-volume-foreground-5 = ${xrdb:color11}
+bar-volume-foreground-6 = ${xrdb:color1}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
@@ -319,7 +326,7 @@ full-at = 98
 
 format-charging = Charging... <label-charging>
 #format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = ${xrdb:color3}
 
 format-discharging = <label-discharging> 
 #format-discharging = <ramp-capacity> <label-discharging>
@@ -346,7 +353,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f22c40
+format-underline = ${xrdb:color1}
 ;format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}

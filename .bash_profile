@@ -10,5 +10,3 @@
 
 #[ -z "$DISPLAY" -a "$(fgconsole)" -eq 1 ] && exec startx
 
-
-export BROWSER=firefox 

@@ -2,11 +2,18 @@ stty -ixon
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
-if [[ -f /usr/bin/iceweasel ]]; then
+if [[ -f /usr/bin/waterfox ]]; then
+	export BROWSER="waterfox"
+elif [[ -f /usr/bin/palemoon ]]; then
+	export BROWSER="palemoon"
+elif [[ -f /usr/bin/iceweasel ]]; then
 	export BROWSER="iceweasel"
 else
 	export BROWSER="firefox"
 fi
+
+export EDITOR="vim"
+export PATH=$PATH:$HOME/.config/Scripts
 
 shopt -s autocd
 
@@ -14,140 +21,86 @@ shopt -s autocd
 	#exec startx
 #fi
 
-
 #Basic Aliases
 alias v="vim"
 alias r="ranger"
-#alias ls='ls -hN --color=auto --group-directories-first'
-alias ls='ls++'
+alias ls='ls -hN --color=auto --group-directories-first'
+#alias ls='ls++'
 alias lsa='ls -A'
 g() { cd $1 && ls -a ;}
-alias mkd="mkdir -pv"
-mkcd() { mkdir -vp $1 && cd $1 ;}
+alias mkdir="mkdir -pv"
 alias e="exit"
 alias crep="grep --color=always"
 
-alias Xi="sudo xbps-install"
-alias Xu="sudo xbps-remove -R"
-alias Xup="sudo xbps-install -Suv"
-alias Xc="xbps-remove -Oo"
-alias Xq="xbps-query -Rs"
-alias XI="xbps-query -s"
-alias Xl="xbps-query -l"
+alias sv="sudo vim"
+
+alias p="sudo pacman"
 
 alias sdn="sudo shutdown now"
 
-alias screenfetch="screenfetch -t"
 alias yt="youtube-dl -ic"
 alias yta="youtube-dl -xic"
+
+aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
 
 alias ein="ssh -l einchan -p 22 104.238.215.7"
 alias starwars="telnet towel.blinkenlights.nl"
 
-alias newnet="sudo sv restart NetworkManager"
+alias temp="cp ~/Repos/website/template.php"
+
+alias nf="clear && neofetch"
+alias clock="ncmpcpp -s clock"
+alias rss="vim ~/Repos/website/rss.xml"
+
+alias newnet="sudo systemctl restart NetworkManager"
 alias atltime="sudo timedatectl set-timezone America/New_York && i3 restart"
 alias tuctime="sudo timedatectl set-timezone America/Phoenix && i3 restart"
 
 bl() { convert $@ -resize 1440x1080\> bl_$@ ;}
 
+alias pingme="ping lukesmith.xyz"
+
 alias youtube="youtube-viewer"
 alias YT="youtube-viewer"
 alias syt="youtube-viewer"
 
-alias etym="sdcv -u \"English Etymology\""
-alias spword="sdcv -u quick_spanish-english"
-alias tosp="sdcv -u quick_english-spanish"
-alias frword="sdcv -u quick_french-english"
-alias tofr="sdcv -u quick_english-french"
-alias lword="sdcv -u quick_latin-english"
-alias tol="sdcv -u quick_english-latin"
-alias rusword="sdcv -u quick_russian-english"
-alias torus="sdcv -u quick_english-russian"
-alias portword="sdcv -u quick_portuguese-english"
-alias toport="sdcv -u quick_english-portuguese"
-alias itword="sdcv -u quick_italian-english"
-alias toit="sdcv -u quick_english-italian"
-alias gword="sdcv -u quick_german-english"
-alias tog="sdcv -u quick_english-german"
-
 alias Txa="cp ~/Documents/LaTeX/article.tex"
 alias Txs="cp ~/Documents/LaTeX/beamer.tex"
 alias Txh="cp ~/Documents/LaTeX/handout.tex"
-alias TC='find . -maxdepth 1 -regextype gnu-awk -regex "^.*\.(pyc|pyo|bak|swp|aux|log|nav|out|snm|toc|bcf|run\.xml|synctex\.gz|blg|bbl)" -delete'
+alias TC='texclear'
 
 getgit() { git clone http://github.com/$1.git ;}
 
-folder() { echo -e "$1\t$2" >> ~/.config/Scripts/folders && i3 restart ;}
 weath() { curl wttr.in/$1 ;}
 alias work="mkdir ~/Work && cd ~/Work"
-
 
 
 CF() { cd ~/.config/$1 && ls ;}
 
 alias ethspeed="speedometer -r enp0s25"
 
-note() { echo "$@" >> ~/notes ;}
 alias notes="vim ~/notes"
 
-alias extract="~/.config/Scripts/extract.sh"
+alias mailsync="bash ~/.config/Scripts/mailsyncloop"
 
-alias refresh="python ~/.config/Scripts/shortcuts.py"
-
-backup() { cp $1 $1.bu ;}
-
-alias mailsync="bash ~/.config/Scripts/mailsyncloop.sh"
-
-alias wifispeed="speedometer -r wlp3s0"
-
-alias trigger="bash ~/Creations/Scripts/trigger.sh"
-
-alias bbs="python ~/.config/i3/bar/bumblebee-status"
+alias wifispeed="speedometer -r wlp2s0"
 
 alias tr="transmission-remote"
 
-alias servs="ls /etc/sv"
-
-alias debase="sudo umount /home/Shared/Videos && xrandr --output LVDS1 --auto --output VGA1 --off && bash ~/.config/polybar/launch.sh &> /dev/null"
-
-serven() { sudo ln -s /etc/sv/$1 /var/service/ ;}
-servdis() { sudo rm /var/service/$1 ;}
-
-aurinstall() { curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvzf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
-
-alias menuk="xmodmap -e 'keycode 135 = Super_R'"
-alias imgt="bash ~/.config/Scripts/imgt.sh"
-
 alias ref="python ~/.config/Scripts/shortcuts.py && source ~/.bashrc"
+
 alias ka="killall"
+
 alias bars="bash ~/.config/polybar/launch.sh"
 
-
-alias lsc="xrandr --output LVDS1 --auto --output VGA1 --off && bash ~/.config/polybar/launch.sh &> /dev/null"
-alias vsc="xrandr --output VGA1 --auto --output LVDS1 --off && bash ~/.config/polybar/launch.sh &> /dev/null"
-alias dsc="xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1 && bash ~/.config/polybar/launch.sh &> /dev/null"
+alias lsc="screen.sh l"
+alias vsc="screen.sh v"
+alias dsc="screen.sh d"
 
 alias speedvid="bash ~/.config/Scripts/speedvid.sh"
-tag() {
-if [[ -f $1 ]]
-	then
-	echo "Enter a title."
-	read title
-	echo "Enter an artist name."
-	read artist
-	echo "Enter an album."
-	read album
-	echo "Enter an track number."
-	read numb
-	eyeD3 --remove-all "$1"
-	eyeD3 -a "$artist" -t "$title" -n "$numb" -A "$album" "$1"
-else
-	echo "No file found."
-fi
-}
 
-
-
-
+alias g="git"
+alias gitup="git push origin master"
+alias gitall="git add . && git commit -m "whatever" && git push origin master"
 
 #Directory Shortcuts:

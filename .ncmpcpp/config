@@ -82,7 +82,8 @@ mpd_music_dir = "~/Music"
 ##
 visualizer_type = spectrum
 #
-#visualizer_look = ●▮
+#visualizer_look = ●卐
+#visualizer_look = 卐
 #
 #visualizer_color = blue, cyan, green, yellow, magenta, red
 #
@@ -512,7 +513,7 @@ use_console_editor = yes
 #
 empty_tag_color = magenta
 #
-header_window_color = blue
+#header_window_color = magenta
 #
 #volume_color = default
 #
@@ -520,7 +521,7 @@ header_window_color = blue
 #
 #state_flags_color = default:b
 #
-main_window_color = green
+#main_window_color = white
 #
 #color1 = white
 #

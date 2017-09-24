@@ -55,16 +55,16 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+r -- ranger (file browser/manager)
 + Mod+e -- mutt (email)
 + Mod+m -- ncmpcpp (music player)
-+ Mod+A -- alsamixer (volume control)
 + Mod+a -- R calculator (close with Mod+a for reusability)
 + Mod+i -- htop (system info)
 + Mod+N -- newsbeuter (RSS feed reader)
 + Mod+y -- calcurse (calendar and schedule)
 + Mod+u -- "Dropdown" terminal (close with Mod+u for reusability)
-+ Mod+Shift+Enter -- tmux
++ Mod+Shift+Enter -- new tmux window
 
 ## Larger programs
 
++ Mod+A -- Pavucontrol (audio system control)
 + Mod+W -- Firefox
 + Mod+B -- Blender
 + Mod+G -- GIMP
@@ -88,16 +88,14 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+F11 -- Switch to VGA display (if available)
 + Mod+F12 -- Switch to dual VGA/laptop display (if available)
 
-*Note: I am on Void Linux now, which uses runit instead of systemd. As a result, users of most Linux distros may have to adjust the bindings for these commands.
-
 ## Audio
 
 I use ncmpcpp as a music player, which is a front end for mpd. If you prefer cmus or mocp, I have commented out shortcuts you can activate for it instead in the i3 config.
 
 + Mod+m -- ncmpcpp music player
-+ Mod+n -- Next track
-+ Mod+b -- Previous track
-+ Mod+o -- Restart track
++ Mod+. -- Next track
++ Mod+, -- Previous track
++ Mod+< -- Restart track
 + Mod+p -- Pause
 + Mod+M -- Mute all audio
 + Mod+v -- visualizer
@@ -105,7 +103,7 @@ I use ncmpcpp as a music player, which is a front end for mpd. If you prefer cmu
 + Mod++ -- Increase volume (holding shift increases amount)
 + Mod+[ -- Back 10 seconds (holding shift increases amount)
 + Mod+] -- Forward 10 seconds (holding shift increases amount)
-+ Mod+A -- alsamixer (volume control)
++ Mod+A -- Pavucontrol (volume control)
 
 ## Workspaces
 

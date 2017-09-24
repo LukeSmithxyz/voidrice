@@ -1,5 +1,4 @@
 cfb	~/.config/Scripts/bashrc
-cfs	~/.config/Scripts/status.sh
 cfz	~/.zshrc
 cfv	~/.config/Scripts/vimrc
 cfr	~/.config/ranger/rc.conf.base

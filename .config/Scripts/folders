@@ -6,5 +6,5 @@ v	~/Videos
 m	~/Music
 b	~/Books
 s	~/.config/Scripts
-/	/
 r	/
+cf	~/.config
