@@ -1,5 +1,4 @@
 auto-reload yes
-browser iceweasel
 bind-key j down feedlist
 bind-key k up feedlist
 bind-key j next articlelist
@@ -25,10 +24,10 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
-macro w set browser "i3 exec mpv"; open-in-browser ; set browser iceweasel
-macro y set browser "i3 exec youtube-dl -ic"; open-in-browser ; set browser iceweasel
-macro d set browser "wget -P Downloads"; open-in-browser ; set browser iceweasel
-macro c set browser "echo -n %u | xclip -selection clipboard"; open-in-browser ; set browser iceweasel
-macro k set browser "i3 urxvt -e curl -o ~/dl.html "; open-in-browser ; set browser iceweasel
-macro o set browser "w3m"; open-in-browser ; set browser iceweasel
+macro w set browser "i3 exec mpv"; open-in-browser ; set browser $BROWSER
+macro y set browser "i3 exec youtube-dl -ic"; open-in-browser ; set browser $BROWSER
+macro d set browser "wget -P Downloads"; open-in-browser ; set browser $BROWSER
+macro c set browser "echo -n %u | xclip -selection clipboard"; open-in-browser ; set browser $BROWSER
+macro k set browser "i3 urxvt -e curl -o ~/dl.html "; open-in-browser ; set browser $BROWSER
+macro o set browser "w3m"; open-in-browser ; set browser $BROWSER
 macro o open-in-browser
