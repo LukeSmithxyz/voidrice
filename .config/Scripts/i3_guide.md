@@ -19,7 +19,6 @@ Questions or suggestions? Email me at [luke@lukesmith.xyz](mailto:luke@lukesmith
 + Capslock is now an alternative escape. Makes vim-craft much more efficient.
 + The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button. This is to make one-handing on my laptops easier.
 + The rice also uses the US International keyboard by default. This allows you to type a lot of characters in many different European languages.
-+ The Trackpad is turned off by default in my system. I only use either the Trackpoint or an external mouse.
 
 # The Polybar Status Bar
 
