@@ -25,7 +25,7 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 
 Check other config folders for more specific documentation. For example [config contains documentation on how to set up mutt with your email account.
 
-[i3 guide and config](.config/Scripts/i3_guide.md)
+[i3 guide and config](.config/i3/i3_guide.md)
 
 [Email configuration](.config/mutt/email.md) 
 
