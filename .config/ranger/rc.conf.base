@@ -1,7 +1,7 @@
 ###SETTINGS###
 set column_ratios 1,3,4
 #set hidden_filter ^\.|\.(?:pyc|pyo|bak|swp)$|^lost\+found$|^__(py)?cache__$
-set hidden_filter ^\.|\.(?:pyc|pyo|bak|swp|aux|log|nav|out|snm|toc|bcf|run\.xml|synctex\.gz|blg|bbl)$|^lost\+found$|^__(py)?cache__$
+set hidden_filter ^\.|\.(?:pyc|vrb|pyo|bak|swp|aux|log|nav|out|snm|toc|bcf|run\.xml|synctex\.gz|blg|bbl)$|^lost\+found$|^__(py)?cache__$
 set show_hidden false
 set confirm_on_delete multiple
 set preview_script ~/.config/ranger/scope.sh
@@ -107,17 +107,18 @@ map cd console cd%space
 #map Mp linemode permissions
 #map Mt linemode metatitle
 
-#Music
-map Mc shell mocp -c
-map Ma shell mocp -a %s
-map Ms shell mocp -p
-map MS shell mocp -S
-map Mp shell mocp -G
-map Mn shell mocp -f
-map Mb shell mocp -r
-map MN shell mocp -s && mocp -c && mocp -a %s && mocp -p
-map Mo shell mocp -j 0%%
-map MK shell killall mocp
+#moc
+#map Mc shell mocp -c
+#map Ma shell mocp -a %s
+#map Ms shell mocp -p
+#map MS shell mocp -S
+#map Mp shell mocp -G
+#map Mn shell mocp -f
+#map Mb shell mocp -r
+#map MN shell mocp -s && mocp -c && mocp -a %s && mocp -p
+#map Mo shell mocp -j 0%%
+#map MK shell killall mocp
+
 
 
 # Tagging / Marking
@@ -130,7 +131,6 @@ map uv      mark_files all=True val=False
 map vs       toggle_visual_mode
 map uV      toggle_visual_mode reverse=True
 
-map V console shell vim%space
 
 
 # For the nostalgics: Midnight Commander bindings
@@ -228,7 +228,6 @@ map yn shell -f echo -n %%f     | xsel -i; xsel -o | xsel -i -b
 # Filesystem Operations
 map =  chmod
 map cw console rename%space
-map cW bulkrename %s
 map aa  rename_append
 map A  eval fm.open_console('rename ' + fm.thisfile.relative_path)
 map I  eval fm.open_console('rename ' + fm.thisfile.relative_path, position=7)
@@ -242,8 +241,6 @@ map phl paste_hardlink
 map pht paste_hardlinked_subtree
 
 map dD console delete
-map D console delete
-map mkd console mkdir%space
 
 map dd cut
 map ud uncut
@@ -459,65 +456,69 @@ tmap <ESC> taskview_close
 copytmap <ESC> q Q w <C-c>
 
 
-#MUSIC TAGGING
-map Tr console shell taffy %s -r%space"
-map Tl console shell taffy %s -l%space"
-map Tt console shell taffy %s -t%space"
-map Tn console shell taffy %s -n%space"
-map Ty console shell taffy %s -n%space"
 
-#ETC
-map ss shell rsync -avrP --rsh='ssh -p2222' %s USERNAME@YOURSERVER
-map X shell ~/.config/Scripts/extract.sh %f
-map Z shell tar -cvzf %f.tar.gz %f
-map ytv console shell youtube-dl -ic%space
-map yta console shell youtube-dl -xic%space
 
-#IMAGES
-map bg shell cp %f ~/.config/wall.png && feh --bg-scale %f
-map C shell killall w3mimgdisplay && convert -rotate 90 %s %s
-map F shell killall w3mimgdisplay && convert -flop %s %s
-map bl shell killall w3mimgdisplay && convert %s -resize 1440x1080\> bl_%s
-map R shell convert %s %s
-map TR shell convert %s -transparent white %s
-
-map sv shell bash ~/.config/Scripts/shrinkvid.sh %f
 map sp console shell bash ~/.config/Scripts/speedvid.sh %f%space
+map x shell chmod -x %s
+map TT shell i3 exec urxvt "%d"
+map vc shell ~/.config/Scripts/concatenate.sh %s
 
-#MOUNTING
-map mnt shell sudo ~/.config/Scripts/mount.sh
-map umnt shell sudo ~/.config/Scripts/unmount.sh
+#General
+map V console shell vim%space
+map cW bulkrename %s
+map mkd console mkdir%space
+map sc console shell ln -sT%space
+map D console delete
+map X shell ~/.config/Scripts/extract %f
+map Z shell tar -cvzf %f.tar.gz %f
+map <C-f> fzf_select
+map <C-l> fzf_locate
 
-#LATEX
-map TC shell ~/.config/Scripts/clear.sh
-#map TC shell find . -maxdepth 1 -regextype gnu-awk -regex "^.*\.(pyc|pyo|bak|swp|aux|log|nav|out|snm|toc|bcf|run\.xml|synctex\.gz|blg|bbl)" -delete
+#Document Manipulation
+map p1s shell lpr -o sides=one-sided %f
+map p2s shell lpr -o sides=two-sided-long-edge %f
+map MP shell pandoc %f -o %f.pdf
+map MX shell xelatex %f
+map ML shell latex %f
+map TC shell ~/.config/Scripts/texclear
 map Txa console shell cp ~/Documents/LaTeX/article.tex%space
 map Txs console shell cp ~/Documents/LaTeX/beamer.tex%space
 map Txh console shell cp ~/Documents/LaTeX/handout.tex%space
 
+#Image commands
+map bg shell cp %f ~/.config/wall.png && feh --bg-scale %f
+map bw shell wal -c -i %f && cp %f ~/.config/wall.png
+map C shell killall w3mimgdisplay && convert -rotate 90 %s %s
+map F shell killall w3mimgdisplay && convert -flop %s %s
+map bl shell killall w3mimgdisplay && convert %s -resize 1440x1080\> bl_%s
+map TR shell convert %s -transparent white %s
 
-#MARKDOWN
-map MP shell ~/.config/Scripts/markdown-pdf.sh %f
-map MD shell ~/.config/Scripts/markdown.sh %f
+#Music (mpd) shortcuts
+map MS shell mpd
+map MK shell killall mpd
+map Ma shell mpc add "%s"
+map Ms shell mpc play
+map Mp shell mpc toggle
+map Mn shell mpc next
+map Mb shell mpc prev
+map MN shell mpc stop && mpc clear && mpc add "%s"
+map Mo shell mpc seek 0%
 
+#Audio tagging (Requires eyeD3)
+map Ta eval fm.open_console('shell eyeD3 -a  ' + fm.thisfile.relative_path, position=15)
+#Artist
+map TA eval fm.open_console('shell eyeD3 -A  ' + fm.thisfile.relative_path, position=15)
+#Album
+map Tb eval fm.open_console('shell eyeD3 -b  ' + fm.thisfile.relative_path, position=15)
+#Album artist
+map Tt eval fm.open_console('shell eyeD3 -t "" ' + fm.thisfile.relative_path, position=16)
+map Tn eval fm.open_console('shell eyeD3 -n "" ' + fm.thisfile.relative_path, position=16)
 
-map <C-f> fzf_select
-map <C-l> fzf_locate
+#Downloading
+map ytv console shell youtube-dl -ic%space
+map yta console shell youtube-dl -xic%space
 
-#Work folder
-
-map WK shell mkdir ~/Work -p && cd ~/Work
-map WAD shell rm -rf ~/Work
-
-#Printing
-
-map p1s shell lpr -o sides=one-sided %f
-map p2s shell lpr -o sides=two-sided-long-edge %f
-
-#Videos
-map vc shell ~/.config/Scripts/concatenate.sh %s
-
-map x shell chmod -x %s
-
-#MOVEMENT
-
+#My own
+map sup shell ~/.config/Scripts/webupdate
+map ss shell rsync -avrP --rsh='ssh -p2222' %s lukesmith@lukesmith.xyz:/home1/lukesmith/public_html
+map slt shell rsync -avrP --rsh='ssh -p2222' %s lukesmith@lukesmith.xyz:/home1/lukesmith/public_html/longterm

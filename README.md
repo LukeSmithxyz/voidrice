@@ -29,7 +29,7 @@ Check other config folders for more specific documentation. For example [config 
 
 [Email configuration](.config/mutt/email.md) 
 
-[ranger configuration](.config/ranger/ranger.md) 
+[ranger configuration](.config/ranger/luke_ranger_readme.md) 
 
 ## Dynamic Configuration Files
 
