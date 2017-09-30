@@ -30,13 +30,13 @@ localfolders = ~/.Mail/Gmail
 localrepository = personal-local
 remoterepository = personal-remote
 
-[Repository personal-local]
+[Repository personal-remote]
 type = IMAP
 remoteuser = USER@DOMAIN.COM
 remotepass = $PASSWORD
 remotehost = SERVER-ADDRESS
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-[Repository personal-remote]
+[Repository personal-local]
 type = Maildir
 localfolders = ~/.Mail/Personal
