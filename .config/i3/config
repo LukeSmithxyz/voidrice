@@ -331,7 +331,7 @@ workspace $ws8 gaps outer 0
 bindsym F11		fullscreen toggle
 #bindsym F12
 
-bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/Scripts/i3_guide.md.pdf
+bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.md.pdf
 bindsym $mod+F2		exec --no-startup-id python ~/.config/Scripts/shortcuts.py
 bindsym $mod+F3		exec --no-startup-id arandr
 bindsym $mod+F4		exec --no-startup-id sudo zzz
