@@ -1,0 +1,396 @@
+% dc-chg.txt
+%
+% (c) Copyright 1995, 1996, 1997 J"org Knappen
+%
+% This file is part of ecfonts version 1.0
+%
+% Please read the files 00readme.txt, 00inst.txt, 00error.txt, and
+% copyrite.txt for further information
+%
+% You find some documentation in ecdoc.tex (needs LaTeX2e)
+%
+
+dc-chg.txt
+
+This file documents the changes on the dc-fonts since version 1.1. Most 
+recent changes are on top of this file.
+
+ 1-FEB-1997 After the release of the ec fonts, this file is closed.
+            Further changes will be documented in ec-chg.txt.
+
+19-JAN-1997 Fought again with the |uc_hachek_accent| since it came out too
+            high (with white space above) in the metrics. Eliminated
+            |uc_acc_height#| from exrueast.mf and the driver files.
+            Fixed a bug in the single base quote (reported by Bernd Raichle)
+            Added anti-kernings to separate ```triple''' and 
+            ````quadruple'''' quotes nicely
+            ectc: Call exmligtb for monospace ligatures
+            Did some finish to the ligtables (this is the last chance, in
+            fact, since changing the ligtables changes the metrics).
+
+ 7-JAN-1997 Added ecfs (Fibonacci Slanted) as suggested by Ulrik Vieth
+            Changed |vair| for ecso from 13 to 15 (found by Ulrik Vieth)
+            Corrected Batch file generation in ecstdedt.tex
+            Deleted dxbase.ini_mf (suggested by Ulrik Vieth)
+
+23-DEC-1996 Made all fontnames 4 letters + 4 digits for the interpolating
+            fonts. Renamed ecr -> ecrm, ecb -> ecrb, ecu -> ecui.
+
+22-DEC-1996 Accents for small capital letters are now ``small capital 
+            accents''. Moved information from exaccess to exbase.
+            Made capital tilde accent 9u# wide. Reincluded 
+            |center_on| in exbase. Deleted all references to dcbase.
+            Consequently applied |hi.| in expseudo.mf. Improved the
+            |uc_hachek_accent| on small caps.
+            Added typewriter fonts (both visible and invisible) for
+            documentclass slides (former SliTeX), named [i]ecltt8.
+            ecltt8 is unfortunately different from ectt0800, because the
+            interpolation routines introduce some rounding errors on
+            the base points.
+
+21-DEC-1996 Deleted boolean variable |acute_sharp| from exbase, because
+            it was never used. Added switch |fancy_thorn| to choose
+            different thorn shapes.
+
+20-DEC-1996 Starting transition to ec: Renamed files, replaced
+            |dcchar| by |ecchar|, renamed |font_identifier|, changed
+            file headers, changed |version_check| to ask for (1,0).
+
+19-NOV-1996 Removed |big_...|-macros from dxbase. Added macro
+            |super_crescent| used in the Servicemark sign.
+
+18-NOV-1996 Adjusted parameters in dcbi (there was an awful bug
+            in |jut| causing no error messages but damaged
+            glyphs with dcbi0500)
+
+18-NOV-1996 Added more ligtable entries: Kv (Kvarner) Kw (Kwik),
+            V against consonants (russian transliteration)
+
+ 4-NOV-1996 Adjusted the position of the circumflex in \^a. Also made 
+            all lowercase circumflexes overshoot a little (oo).
+
+*********** Release of dc 1.3 Patchlevel 4 *************************************
+
+25-AUG-1996 Aplied the parameter change also to dcso at 5 pt
+
+*********** Release of dc 1.3 Patchlevel 3 *************************************
+
+23-AUG-1996 Changed Parameters for dcsx at 5 pt, adjusted
+            |lc_hachek_accent|
+
+23-AUG-1996 Added |zero_width| to the programme for the compound word
+            mark; without this statement the chardx value is wrong.
+
+*********** Release of dc 1.3 Patchlevel 2 *************************************
+
+ 3-JUL-1996 Added macro |clear_mode_guards|. This change makes modes like
+            |nechi| as defined in modes.mf 3.0 work.
+            Added missing |;| in the checking section
+            Corrected wording of one error message, hopefully
+            never to be seen by an end user.
+            All changes suggested by Andreas Schwab
+
+            Added file 00bugs.txt with known bugs.
+
+*********** Release of dc 1.3 Patchlevel 1 *************************************
+
+20-JUN-1996 Added |inner bye;| to dxbase before checking for
+            old versions.
+
+*********** Release of dc 1.3 **************************************************
+31-MAY-1996 Corrected |tiny| for dcsx..tcso at 5 pt
+            Renamed |clear_memory| to |clear_extra_memory|
+            Additional fontdimensions are now 8..16
+            Changed dcvi font identifier to DCVTTI 
+            Corrected |math_spread| for some fonts
+            Corrected |u#| for dcso at 5 pt
+            Set |true_mono| for dcst 
+            Changed unit of |notch_cut#| for some fonts
+            Don't interpolate |slant|
+            Corrected slant for dcfi
+            (the latter 7 changes were suggested by Ulrik Vieth)
+
+17-MAY-1996 Added |penstroke| to the |killtext|ed macros
+            New macro |clear_memory| to free some memory
+            after parameter interpolation
+            Changed |version_check| macro
+            Did some finish (file headers etc.)
+            Went through the documentation
+            Added danish style italic \ae
+
+13-MAY-1996 Added many kernings for accented letters
+            (dxrligtb.mf and dxiligtb.mf)
+
+12-MAY-1996 Added dcsc.mf and dcoc.mf (slanted and oblique=bold
+            extenden slanted caps and small caps)
+            Adapted dcsdtedt.tex appropriately
+            Added 30pt size (2986) to dcstdedt.tex
+            Made parameters of dcsl the same as dcr.mf, except,
+            of course, slant (Reported by Ulrik Vieth)
+            Added dcvi (variable width italic typewriter)
+            Made En- and Em-dash equal to hyphen in monospaced
+            fonts
+            Added kernings for nanovolts and hektowatts
+            Gave the cwm |x_height#|
+            Made the typewriter fonts really monospaced
+            (including ffl and ffi ligatures)
+            Added kerning >>. and >>, (suggested by Thierry Bouche)
+            Made dcsx0500 more extended (noted by Walter Schmidt)
+            Added more kernings after capital A
+            Added the additional font dimensions 23--31
+            Removed unneeded |lc_circle_height(#)|
+            Fixed lowercase hachek (dunhill!)
+
+11-MAY-1996 Tuned the |lower.cap_height#| of dccc1728
+
+10-MAY-1996 Corrected |corrital| to use the canonical sharp mode
+            (dxaccess.mf/Reported by Bernd Raichle)
+%%            Added check against old |plain.mf| (suggeseted by Bernd Raichle)
+            Added check against |cmbase|
+            Added check against METAFONT 1.x
+            Applied patch from Andreas Schwab to |beginchar_twice|,
+            fixing the annoying `missing fi'-bug.
+            Changed def's in |dxpseudo.mf| to vardef's (found by 
+            Andreas Schwab)
+           
+24-APR-1996 Added |lower.dot_size#| to dctc.mf, removed
+            |lower.uu#| from the same file.
+            Changed the |basedef|-line for dcbi to contain unrounded
+            sizes (14.4 instead of 14 etc.)
+            Added bold slitex fonts (dclb8, dclo8, idclb8, idclo8)
+            Buildt in version consistency control
+            Moved some information from |dxaccess.mf| to |dxpseudo.mf|
+
+16-APR-1996 Added Bold Extended Small Caps (dcxc.mf)
+            Removed |ligs| from all parameter files, since
+            it is never used, removed it also from dxbase 
+            Tuned some parameter in dccc
+            Introduced |lower.dot_size| as a new parameter
+
+15-APR-1996 Redid dxpseudo.mf; made many variables macros,
+            created macro pseudo_setup;
+            Inserted pseudo_setup at the appropriate places
+            Took provision for modes.mf in dxbase.mf
+            After some solid hacking the fonts compile again
+            Gone through the easern and western european letters,
+            did some clean up (character names, placement of \~N).
+
+14-APR-1996 Buildt in changes from plfonts 1.07 to fix resolution-
+            dependent metrics. This affects the following characters
+            and macros:
+            dxpunct.mf: French opening and closing quotes
+            dxruwest.mf/dxrueast.mf: All letters with acute, hungarian,
+            grave, and dot above; \L
+            dxrlwest, dxrleast, dxilwest, dxileast: All letters with acute,
+            hungarian, grave, and dot above; \L
+            dxaccess.mf: Corrections to |put_accent|, |put_dot|, |put_grave|
+            dxbase.mf: Included |beginchar_twice| and |repeat_once|            
+            Introduced switch |true_mono| to get monospaced ligatures
+            Deleted macros for big mathematical operators from dxbase
+
+12-APR-1996 Applied suggestions of Daniel Taupin to dxrlwest and dxruwest
+            (Fine tuning of some accent positions)
+            dxrlwest.mf: Removed superfluos vround from lowercase edh
+            Played around with the shape of the sharp s: Made upper bowl 
+            pos 4 lighter, moved pos 4 a bit leftwards. 
+            Increased width of guillemets. Changed `guillemot' to 
+            `guillemet' in order not to copy A*'s spelling error.
+
+28-FEB-1996 Applied fixes from cm85.bug
+            dxrulett.mf, letter J: pickup tiny.nib; bulb(3,4,5);  % bulb
+            ditto for dxspl.mf and dxrueast.mf (IJ)
+            dxrllett.mf, dxrulett.mf letters w and W:
+             else: fill diag_end(6r,5r,1,1,5l,6l)--.9[z5l,z6l]
+               ..{z5-z6}.1[z5r,z6r]--cycle; % middle stem
+            dxrllett.mf, letter m:
+             lft x1l=hround(2.5u-.5stem); x1l=x1'l=x2l=x2'l; % stem, sic
+             lft x3l=hround(.5w-.5mfudged.stem); x5-x3=x3-x1;
+             if not monospace: r:=hround(x5+x1)+r-w; fi  
+                                            % change width for better fit
+            dxrulett.mf, letter Q: Added penlabel No. 8
+            dxrllett.mf, letter i: Care for rounder dots
+            dxbase.mf: Use adjust_fit routines from cmbase1992
+            dxilwest.mf, dxrlwest.mf: Corrected italic correction of edh
+
+*********** Release of dc 1.2 Patchlevel 1 *************************************
+17-NOV-1995 Fixed bug #20:
+            Introduced ligature  <hyphen> + <hyphenchar> ---> <hyphenchar>
+            Fixed bug #3: (Font identifier of dcci)
+            Fixed bug #14: Disappearing hairline of digit `8'
+            by applying fix to cm fonts of 1989.
+            From #15: Fix to italic l:
+            old: top y1=h; x1=x2; filldraw stroke z1e--z2e;  % stem
+            new: top y1=h; x1=x2; filldraw stroke z1e--z2'e;  % stem
+            Did the same to \l, \'l and \v l in dxleast.mf
+            Marked Fixed and partially fixed bugs in 00bugs.txt
+
+ 6-NOV-1995 Released file 00bugs.txt with list of `known bugs'
+
+*********** Release of dc 1.2 **************************************************
+31-AUG-1995 Adjusted german scharfes s
+            Tuned spread for dcbx
+            Adjusted semicolon
+            Removed unused parameter uu# from parameter files and 
+            from dxbase
+            Restored line | forsuffixes $=notch_cut,cap_notch_cut: if $<3: 
+            $:=3; fi endfor| in dxbase from cmbase.
+            Did some finish: file headers, documentation files,
+            deletion of old files
+
+28-AUG-1995 Added kerning Wn and Vn (polish/russian proper names)
+            Kern italic "W" like "V" instead of "T"
+
+24-AUG-1995 Made dcsi and dcso conformant with dcss and dcsx
+            Made single size parameter files for dcssdc10.mf,
+            dcsq8.mf, dcqi8.mf, dclq8.mf, and dcli8.mf
+            Added invisible fonts idclq8.mf and idcli8.mf
+            Deleted old files dcssdc.mf, dcqi.mf and dcsq.mf
+            Made SliTeX-style `I' work
+            Added boolean parameter |one_serif| to control base
+            serif on digit `1'
+            Added parameters for dcfb0500 (Fibonacci font), corrected
+            basesizes to be Fibonacci numbers.
+            |notch_cut#| and |cap_notch_cut#| are measured in |pt#|, not
+            in |1/36pt#|. Corrected in several parameter files.
+            Tuned again the sans parameters, this time for small sizes;
+            dcsx0500 works now, but it is more condensed than dcss0500
+
+17-AUG-1995 Changed positions 6, 7, and 6' of capital R from |vair| to
+            |.5[vair,cap_band]|, because |vair| looks too thin at 99.99pt
+            Undid the previous change again, since it causes more trouble 
+            at low sizes than it saves a really large ones.
+            Changed |math_spread| in cmr to [-.2] for 17.28pt
+            Did the same for dcsl, dcss, and dcsi
+            Completely retuned the parameters for sans serif fonts.
+            dcsx is now always bolder then dcss, dcss much brighter
+            then in release 1.1
+            Tuned height of acute accent again.
+
+16-AUG-1995 Added some sidebearings to the double quotes
+            Added kerning for kV, kW, mV, mW, eV, Vv (Vvedensky)
+            Added kerning for \'n, \v{n}, \eng, and \~n
+            Added kerning for ,,j, ,,g, and ,,y
+            Added kerning between boundarychar and quotes
+            Defined |lig_O_table| and |lig_C_table|
+            Added kerning between Av and Aw
+            Added some special kerning for \l and \k{a}
+            Added `, ``, and '' to the characters with special kerning 
+            after f and ff
+            Corrected bugs in |lig_a_table| and |lig_o_table| for roman
+            fonts
+            Added kernings for boundarychar and quotes for italic fonts
+            Added \AE to |lig_A_table| for italic fonts
+
+22-JUL-1995 Included renovated section sign from txsymbol
+            Added missing penlabel (9) to italic \dj
+            Included new shape of sharp s from fc fonts, added boolean
+            switch |classic_sharp_s| to decide between old and new shape
+
+16-JUL-1995 Introduced |accent_gap| in Capital letter U with ring
+            Corrected height of uppercase hachek for sans serif case
+            Changed definition of uc_acc_height#
+            dxcsc now recalculates the pseudoparameters for the lowercase
+            settings, this fixes a problem with \sc{\^o}
+            Moved acute on `i' a little to the left
+
+11-JUL-1995 Deleted macro |pi_stroke| from dxbase
+            Renamed second argument of the circle accent macros to
+            |y_bottom| (was |y_center| bzw. |y_move|, which gives a
+            wrong impression of its function)
+            Deleted pens and macros needed for calligraphic letters only
+            from dxbase
+            Replaced the original cm accents in dxaccent.mf with the
+            lowercase version used in the precomposed letters
+            Made proviso for dot accent in dxaccess
+            Adjusted height of a and g with breve
+            Removed no longer needed accent macros from dxbase
+            Adjusted height of accent macros in dxbase 
+            Introduced |accent_gap| into dxbase, it is a little dirty 
+            at the moment, but I can be sure that it is known when needed (jk)
+
+10-JUL-1995 Minor fix to |put_dot| in dxaccess
+
+ 3-JUL-1995 Corrected fudge in dcss.mf (the value for 17.28 is changed
+            from 1 to 0.965). This gives good results upto 99.99 pt
+            (Problem reported by Klaus Barthelmann, Mainz).
+            There is another problem with the parameters left,
+            causing the `=' sign to collapse at large sizes, ditto
+            with `#', `>', and `<'.  (jk)
+
+19-JUN-1995 Corrected height of S with cedilla
+            Finally got the hachek on typewriter capitals looking okay
+                       
+18-JUN-1995 Made provision for tc blank symbol in dxaccess.mf 
+            Added humanist design for blank space in serifed fonts
+            Changed the height of the blank space sign to reduce the 
+            number of different heights in the font
+            Corrected height of T with cedilla
+            Made dotted capital I consistent with dotted capital Z (jk)
+
+17-JUN-1995 Made hyphenchar hanging iff not monospace (dxbraces.mf)
+            Adjusted height of lowercase umlaut (dxbase.mf, dxpseudo.mf) (jk)
+
+16-JUN-1995 Changed the naming scheme of dc fonts. Edited dcstdedt 
+            appropriately, renamed the driver files
+            Zeroed depth of italic digit 7 (compare Knuth's remark at the
+            end of cm85.bug)
+            Changed the quotation marks to sit symetrically in their
+            boxen (dxpunct.mf)
+            Corrected boundary box of german opening quotes (dxpunct.mf) (jk)
+
+29-MAY-1995 Included fine tuning from polkap.mf (plfonts: driver for
+            caps'n'small caps) into dxcsc.mf
+            Replaced capital Eng with the one from the fc fonts and
+            deleted macro eng_stroke from dxbase.mf
+            Modelled grave after the acute accent (dxaccess.mf)
+            Changed all letters with grave accent (jk)
+
+19-MAY-1995 Completed preparations for sans typewriter
+            Changed acute accent to agree with plfonts
+            Changed all letters with acute to agree with plfonts
+            Removed comment in dxbraces (same slope as in the acute accent)
+            since the acute accent was changed
+            Deleted |uppercase_acute| from dxbase.mf
+            Changed the Hungarian long umlaut to be consistent with
+            the new acute accent (jk)
+
+ 7-MAY-1995 Replaced all settings of dot_diam# and dot_diam in the dc
+            fonts by pseudoparameters.
+            Removed all initialisations of heavy_hair
+            Introduced pseudoparameter lc_trema_height# from csfonts
+            Introduced boolean variable slitex (controls serifs on 
+            capital I)
+            Introduced preparations for sans serif typewriter shape
+            (Serifs on I, upper serif on i and l if monospace [not completed])
+            Included some czech and slovak letter from csfonts
+            Included macros form csaccent.mf in dxaccess.mf (jk)
+
+22-APR-1995 Fixed more classic_serif bugs (dotless i and j)
+            Created dxpseudo.mf containing some pseudoparameters
+            Modified for test purposes the dot_height in dcr.mf (jk)
+
+21-APR-1995 Created dxaccess.mf from pl_dod.mf (plfonts)
+            Included polish special letters from plfonts
+            Included guillemets from plfonts
+            Modified the driver files to use dxaccess 
+            Minor bug fix: Changed `enj' to `eng' in dxrleast and dxileast
+            Ditto: Changed `Italic letter d' to `... with hachek' in dxileast
+            Fixed some if classical_serif bugs (r with acute and hachek in
+            dxileast, i with circumflex in dxilwest)
+            Called italic classic serif fonts dcci* and added them to
+            dcstdedt.tex (jk)
+
+19-APR-1995 Edited off all Ctrl-Z's
+            Replaced lowercase edh with fixed version by Yannis
+            Replaced lowercase thorn with Knuth's version from cmman
+              Changed base serif to extend also to the right of the stem
+            Replaced dcb.mf with improved version by Tomas Vanhala
+            Applied bug fix to pounds sign
+            Fixed lig_a_table to contain oct"240" instead of oct"242" (\c c)
+            Added ligtables for monospaced fonts (dxmligtb.mf) (jk)
+
+Long ago:   Edited stdedt.tex to produce all magstep sizes
+            Inserted endinput; to suppress Ctrl-Z
+            Fixed ?` and !` in the ligtable (jk)
+
+End.

@@ -1,0 +1,169 @@
+% tc-chg.txt
+%
+% (c) Copyright 1995, 1996, 1997 J"org Knappen
+%
+% This file is part of ecfonts version 1.0
+%
+% Please read the files 00readme.txt, 00inst.txt, 00error.txt, and
+% copyrite.txt for further information
+%
+% You find some documentation in ecdoc.tex (needs LaTeX2e)
+
+This file documents changes to the tc fonts after 17-JUN-1995
+
+ 1-FEB-1997 After the release of the ec fonts, this file is closed.
+            Further changes will be documented in ec-chg.txt.
+
+19-JAN-1997 Adjusted height of capital hachek accent
+            Added <hyphen><hyphenchar> ligature even for tc fonts.
+
+11-JAN-1997 Tuned the center dot to work well with catalan l.l
+
+ 7-JAN-1997 Replaced |monospace| by |hefty| in condition for pos3 in 
+            textsurd.
+            Added forgotten |pickup tiny.nib| to italic fractions
+            1/2 and 1/4.
+            Improved shape of the low lying tilde.
+            Corrected |font_identifier| for tcsl (found by Ulrik Vieth)
+            Changed |vair| for tcso from 13 to 15 (found by Ulrik Vieth)
+            Added tcfs (Fibonacci Slanted) as suggeseted by Ulrik Vieth
+
+            Finally found the bug in upwards and downwards arrows, causing
+            strange pathes at high resolution. Some r's and l's were 
+            switched.
+
+23-DEC-1996 Made all fontnames 4 letters + 4 digits for the interpolating
+            fonts. Renamed tcr -> tcrm, tcb -> tcrb, tcu -> tcui.
+
+22-DEC-1996 Got rid of txmacros.mf by moving the few definitions either
+            to exbase.mf or txaccent.mf.
+            Consequently applied |hi.| in txpseudo.mf.
+ 
+20-DEC-1996 Starting transition to ec: Renamed files, replaced |dcchar| by
+            |ecchar|, changed file headers, changed |version_check| to ask
+            for (1,0).
+
+19-NOV-1996 Added more characters: New capital tie, semantic brackets,
+            servicemark, abzueglich
+
+18-NOV-1996 Added more characters: textminus, ascender height cwm,
+            copyleft, circled P, new tie, capital new tie,
+            numero sign, aestimated sign, quill brackets,
+            reference mark, textsurd, open bullet
+
+18-NOV-1996 Applied the changes in dcbi parameters also to 
+            tcbi
+
+*********** Release of dc 1.3 Patchlevel 4 *************************************
+
+25-AUG-1996 Applied the parameter change also to tcso at 5 pt
+
+*********** Release of dc 1.3 Patchlevel 3 *************************************
+
+23-AUG-1996 Changed Parameters for tcsx at 5 pt.
+
+23-AUG-1996 Added |zero_width| to the programme for the capital compound word
+            mark; without this statement the chardx value is wrong.
+
+*********** Release of dc 1.3 **************************************************
+
+31-MAY-1996 Corrected |tiny| for dcsx..tcso at 5 pt
+            Changed |clear_memory| to |clear_extra_memory|
+            Finnish
+            Checked parameters for several fonts (suggested
+            by Ulrik Vieth)
+
+12-MAY-1996 Added a capital cwm to the tc fonts
+            Changed several def's to vardef's in txpseudo.mf
+            Brought tcstdedt.tex up-to-date
+            Added tcvi (variable width italic typewriter)
+            Made tcr and tcsl parameters equal to dcr/dcsl
+            Made tcsx0500 more expanded, ditto tcso
+            Added the additional font dimensions 23--31
+            Removed unneeded |lc_circle_height(#)|
+
+24-APR-1996 Changed the |basedef|-line for tcbi to contain unrounded
+            sizes (14.4 instead of 14 etc.)
+            Buildt in version consistency control
+            Added comma and full stop to the tc character set,
+            this facilates macros for oldstyle digits.
+
+15-APR-1996 Remade txpseudo in the style of dxpseudo, with all 
+            consequences
+
+14-APR-1996 Deleted superfluous |pickup fine.nib| in \textdivide
+            Added italic oldstyle digits by Gert-Jan Lockhorst
+
+*******************  Version 1.0  ***************************************** 
+ 2-SEP-1995 Fixed bug in double hyphen and double hyphenchar (strokes
+            were too thin)
+
+31-AUG-1995 Finish: Added file headers, clean up the directory
+
+24-AUG-1995 Made sans serif parameters conformant with the dc sans 
+            family
+
+ 6-AUG-1995 Added |if .5w <> good.x .5w: change_width; fi| to the bullet
+            Made superscripts and fractions less wide
+            Adjusted Registered (tail of R)
+
+ 4-AUG-1995 Changed depth of the big circle to 
+            |max(desc_depth#,paren_depth#)|
+            Adjusted the C inside the copyright sign
+
+ 3-AUG-1995 Changed pen for horizontal crossbars in Yen, Won, Naira, Lira, 
+            and Peso to |extra_rule.nib| (finer than |rule.nib|)
+            Added Female and Male Ordinal Indicators
+            Added trademark
+            Added Copyright and Registered, made the big circle deeper for
+            typewriter design (replaced |paren_depth| with |desc_depth|)
+            There are now all characters for release 1.0 implemented.
+
+25-JUL-1995 Added Baht sign (Thai currency)
+
+22-JUL-1995 Added Won, Naira, Peso and Dong
+            Added base serif to the pilcrow sign, if the font bears serifs,
+            the original design is still available in the sans serif font
+            Added Centigrade
+            Added alternate pilcrow with one vertical bar only in oct"231"
+            Added fractions 1/4, 1/2, 3/4
+            Added interrobang and gnaborretni
+            Added recipe, made provision for recipe in dxaccess.mf
+
+21-JUL-1995 Added superscript digits 1, 2, and 3 both for roman
+            and italic (New files txrsuper.mf and txisuper.mf)
+            Included degree sign and per ten thousand sign from
+            Yannis' Unicode Computer Modern fonts
+            Added symmetry fix from Alan Jeffrey's stmaryrd fonts to
+            the degree sign
+            Fine tuned the Lira sign to guarantee equal crossbars
+            Added tie accent, cm version (for lowercase) in txsymbol, 
+            oct"023", and a new uppercase version in txaccent, oct"033".
+            Duplicated the double hyphen, one instance is completely inside
+            its box, placed on `-', the other is hanging (oct"177")
+            Renovated the section sign (\S), very much improved especially
+            for bold extended parameters.
+
+16-JUL-1995 Sorted accents in txaccent by their font position
+            Introduced |accent_gap| to the ring accent
+            Changed width of capital ring accent
+
+11-JUL-1995 Adjusted heights of capital accents
+            Added |cap_accent_height#| and |cap_accent_height| to txpseudo.mf
+            Finally got all capital accents in a consitent look (jk) 
+
+10-JUL-1995 Adjusted umlaut, dot above and hachek accents to use with 
+            capitals. 
+            Added dirty trick for the sharp dimensions to txaccent.mf
+            Added a bunch of pseudoparameters to txpseudo.mf (jk)
+
+19-JUN-1995 Decided to add Ohm sign and Mho sign to the tc fonts.
+            Placed them on `W' and `M' respectively.
+
+18-JUN-1995 Added tick, double tick, back tick and double back tick
+            to txsymbol.mf 
+            Added blank sign to txsymbol.mf
+            Created file txpseudo.mf with pseudoparameters
+            Added this file to the input list of txsymb.mf
+
+17-JUN-1995 The tc fonts are consolidated enough that I open the change log

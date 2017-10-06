@@ -1,0 +1,25 @@
+% ec-chg.txt
+%
+% (c) Copyright 1997, 2012 J"org Knappen
+%
+% This file is part of ecfonts version 1.0
+%
+% Please read the files 00readme.txt, 00inst.txt, 00error.txt, and
+% copyrite.txt for further information
+%
+% You find some documentation in ecdoc.tex (needs LaTeX2e)
+
+This file documents changes to the ec and tc fonts after 1-FEB-1997
+
+ 5-JAN-2012 Removed the condition that the original files have to
+            be distributed together with derived changed files
+            from the licence in copyrite.txt (On request from the Free
+            Software Foundation)
+
+ 5-JAN-2012 On this occasion, I updated my address in copyrite.txt
+            All my old e-mail addresses are invalid now. A current
+            one is jknappen@web.de
+
+ 1-FEB-1997 Opened this file. Made minor corrections to the readme files.
+            Note the new e-mail adress:   joerg.knappen@uni-mainz.de
+            The old one will remain valid for some time.

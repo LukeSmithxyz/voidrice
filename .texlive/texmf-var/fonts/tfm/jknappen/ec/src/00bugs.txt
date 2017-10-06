@@ -1,0 +1,31 @@
+% 00bugs.txt
+% List of `known' bugs in the ec-fonts version 1.0 as of 19-JAN-1997
+
+
+This file contains the known bugs in version 1.0 of the ec-fonts. The bugs 
+are given in no particular order. If you think you have found a bug in ec 
+fonts 1.0, please check this list, if it is already `known'.
+
+ 1. With the following input files, some low resolution errors 
+    occur frequently even for 300dpi modes (strange path, 
+    Undefined x coordinate has been replaced by 0)
+
+ecit0800
+tcit0900
+
+Two bugs reported by mitek@email.cz (not fixed yet, because I want to get out
+the licence update really soon)
+
+ 2. The 'Copyleft' in txsymbol.mf has a different shape of the upper
+    serif than (reversed) 'C'. I think that there must be
+    opposite sign in the equation for x1' (something like
+    x1l-x1'=-2cap_curve+fine). (The same bug is in
+    cmbright/ttsymbol.mf, but this is not visible due to char shape).
+
+ 3. The 'Superscript numeral 3' in txrsuper.mf has its upper bulb
+    positioned too low. I think that there was ommited the replacement of
+    y0=min(.9h-.5bulb_diam1,.75[bot y8r,h]+.5bulb_diam1);
+    with
+    y0=min(.9[bot y8r,h]-.5bulb_diam1,.75[bot y8r,h]+.5bulb_diam1);
+    as is done in other equations and in 'Fraction three quarters'.
+

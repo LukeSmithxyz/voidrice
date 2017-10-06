@@ -1,0 +1,64 @@
+% 00error.txt
+%
+% (c) Copyright 1995, 1996, 1997 J"org Knappen
+%
+% This file is part of ecfonts version 1.0
+%
+% Please read the files 00readme.txt, 00inst.txt, 00error.txt, and
+% copyrite.txt for further information
+%
+% You find some documentation in dcdoc.tex (needs LaTeX2e)
+%
+
+           How to report errors and bugs with the ec fonts
+
+To improve the quality of the ec fonts and to make them free of any errors 
+and bugs, your feedback is appreciated. 
+
+Please make sure, that your report is concise, clear and reproduceable, also 
+make sure, that you are using the newest version of the ec fonts and that
+your bug isn't fixed yet.
+
+The following information is needed:
+
+Which font produced the bug?
+
+Which mode do you use?
+
+What is the error message issued by METAFONT?
+
+Which character carries the error? Is the error visible in the output and
+how can it be described? Always try to generate output and look at it 
+first, some errors may be invisible at all.
+
+Please include the .log file in your report.
+
+The fonts should work at resolutions from 200dpi upwards, and in a size 
+range from 5pt to 100pt. If your effective resolution lies below 200dpi
+-- for non square pixels the lower resolution counts -- (screen modes
+or fonts at reduced sizes), if the parameter blacker of your mode is 
+negative, or if you generate a font outside the given size range, problems 
+are to be expected and do not qualify as bugs.
+
+The funny fonts needn't work at all, they surely don't work at low sizes.
+The typewriter fonts don't work below 8pt.
+
+The fractions and the superscript digits from the tc fonts don't work at
+small sizes (below 10 pt) even for fair resolutions (about 300dpi).
+
+If you have a fix for your your problem, it is very appreaciated.
+
+Please report errors to 
+J"org Knappen                             AAA
+joerg.knappen@uni-mainz.de       <----  < new > 
+                                          VVV
+
+In case, that you are not sure, whether a strange feature or error message 
+qualifies as a bug, you may want to ask a question on the metafont 
+mailing list. To subscribe send a mail to
+
+LISTSERV@ens.fr
+
+containing the one line
+
+subscribe metafont "Your Full Name"

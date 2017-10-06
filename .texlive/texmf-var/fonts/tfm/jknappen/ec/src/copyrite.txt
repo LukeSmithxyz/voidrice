@@ -1,0 +1,81 @@
+% copyrite.txt
+%
+% (c) Copyright 2012 J"org Knappen
+%
+% This file is part of ecfonts version 1.0
+
+
+                Copyright notice to the ec fonts
+
+(c) Copyright 1995, 1996, 1997, 2012 J"org Knappen, Mainz
+(c) Copyright 1990, 1992 Norbert Schwarz, Ruhr-Universit"at Bochum
+
+
+C O P Y R I G H T (2012)
+------------------------
+
+This distribution is copyright 1990--2012 Norbert Schwarz and Joerg Knappen.
+
+
+WARRANTY
+
+There is NO WARRANTY for the ec fonts, to the extent permitted by 
+applicable law.  Except when otherwise stated in writing, the authors
+provides the program `as is' without warranty of any kind, either
+expressed or implied, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose.
+The entire risk as to the quality and performance of the program is
+with you.  Should the program prove defective, you assume the cost of
+all necessary servicing, repair or correction.
+
+In no event unless required by applicable law or agreed to in writing
+will the authors be liable to you for damages, including any general, 
+special, incidental or consequential damages arising out of any use of the
+program or out of inability to use the program (including but not
+limited to loss of data or data being rendered inaccurate or losses
+sustained by you or by third parties as a result of a failure of the
+program to operate with any other programs), even if such holder or
+other party has been advised of the possibility of such damages.
+
+
+DISTRIBUTION
+
+Redistribution of unchanged files is allowed provided that all files
+listed in the file 00files.txt are distributed, including this file.
+
+If you receive only some of these files from someone, complain!
+
+The distribution of changed versions of certain files included in
+the ec fonts, and the re-use of code from those files, are allowed
+under the following restrictions:
+
+ * It is allowed only if the legal notice in the file does not
+   expressly forbid it.
+ 
+ * You rename the file before you make any changes to it, unless the
+   file explicitly says that renaming is not required. Any such changed
+   files should be distributed under conditions that ensure that those
+   files, and any files derived from them, will never be redistributed
+   under the names used by the original files in the ec fonts.
+
+ * The names of the modified fonts must not start with the two letters
+   `ec' or `tc'.
+
+ * You change the `error report address' so that we do not get error
+   reports for files not maintained by us.
+
+ * You acknowledge the source and authorship of the original version
+   in the modified file.
+
+
+              J\"org Knappen
+              Dieselstra{\ss}e 13
+              66123 Saarbr\"ucken
+              Federal Republic of Germany
+
+
+              Norbert Schwarz
+              Ruhr-Universitaet Bochum
+              Rechenzentrum
+              Universitaetsstrasse 150
+              D-44801 Bochum

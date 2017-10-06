@@ -1,0 +1,136 @@
+% 00files.txt
+%
+% (c) Copyright 1995, 1996, 1997, 2012 J"org Knappen
+%
+% This file is part of ecfonts version 1.0
+%
+% Please read the files 00readme.txt, 00inst.txt, 00error.txt, and
+% copyrite.txt for further information
+
+
+ Length    Date     Name
+ ------    ----     ----
+   1253  02-05-97   00bugs.txt
+   2180  02-05-97   00error.txt
+   3934  05-01-12   00files.txt
+   5015  02-05-97   00inst.txt
+   1709  02-05-97   00readme.txt
+   2918  05-01-12   copyrite.txt
+  19368  02-05-97   dc-chg.txt
+  23101  01-19-97   dcdoc.tex
+    944  05-01-12   ec-chg.txt
+   6445  01-19-97   ecbi.mf
+   5836  01-19-97   ecbl.mf
+   6254  01-19-97   ecbm.mf
+   5823  01-19-97   ecbx.mf
+   9095  01-19-97   eccc.mf
+   4998  01-19-97   ecci.mf
+   6259  01-19-97   ecdh.mf
+   4757  01-19-97   ecfb.mf
+   4543  01-19-97   ecff.mf
+   4542  01-19-97   ecfi.mf
+   4772  01-19-97   ecfs.mf
+   4549  01-19-97   ecit.mf
+   1764  01-19-97   eclb8.mf
+   1832  01-19-97   ecli8.mf
+   1786  01-19-97   eclo8.mf
+   1809  01-19-97   eclq8.mf
+   1821  01-19-97   ecltt8.mf
+   9053  01-19-97   ecoc.mf
+   1774  01-19-97   ecqi8.mf
+   6047  01-19-97   ecrb.mf
+   6359  01-19-97   ecrm.mf
+   9058  01-19-97   ecsc.mf
+   4978  01-19-97   ecsi.mf
+   6361  01-19-97   ecsl.mf
+   4770  01-19-97   ecso.mf
+   1750  01-19-97   ecsq8.mf
+   4953  01-19-97   ecss.mf
+   1758  01-19-97   ecssdc10.mf
+   4551  01-19-97   ecst.mf
+  14009  01-19-97   ecstdedt.tex
+   4749  01-19-97   ecsx.mf
+   6555  01-19-97   ectc.mf
+   4983  01-19-97   ecti.mf
+   4539  01-19-97   ectt.mf
+   6256  01-19-97   ecui.mf
+   4498  01-07-97   ecvi.mf
+   4529  01-19-97   ecvt.mf
+   8977  01-19-97   ecxc.mf
+   3752  01-19-97   exaccent.mf
+  37536  01-19-97   exaccess.mf
+  52157  01-19-97   exbase.mf
+   9757  01-19-97   exbraces.mf
+   7581  01-19-97   excligtb.mf
+   3574  01-19-97   excsc.mf
+  10630  01-19-97   excspl.mf
+  12246  01-19-97   exidigit.mf
+  29081  01-19-97   exileast.mf
+  11579  01-19-97   exilig.mf
+   7576  01-19-97   exiligtb.mf
+  22489  01-19-97   exillett.mf
+  29528  01-19-97   exilwest.mf
+   2961  01-19-97   exisixts.mf
+   4219  01-19-97   exitalp.mf
+    952  01-19-97   exmligtb.mf
+   3212  01-19-97   expseudo.mf
+  11574  01-19-97   expunct.mf
+  14974  01-19-97   exrdigit.mf
+  52050  01-19-97   exrleast.mf
+   9844  01-19-97   exrlig.mf
+  10142  01-19-97   exrligtb.mf
+  39732  01-19-97   exrllett.mf
+  52110  01-19-97   exrlwest.mf
+   2293  01-19-97   exroman.mf
+   4622  01-19-97   exromp.mf
+  44920  01-19-97   exrueast.mf
+  36144  01-19-97   exrulett.mf
+  44016  01-19-97   exruwest.mf
+  10072  01-19-97   exsign.mf
+   2954  01-19-97   exsixtst.mf
+   2229  01-19-97   extextit.mf
+   1822  01-19-97   ieclb8.mf
+   1889  01-19-97   iecli8.mf
+   1844  01-19-97   ieclo8.mf
+   1866  01-19-97   ieclq8.mf
+   1834  01-19-97   iecltt8.mf
+   7284  02-05-97   tc-chg.txt
+   6434  01-19-97   tcbi.mf
+   5821  01-19-97   tcbl.mf
+   6250  01-19-97   tcbm.mf
+   5808  01-19-97   tcbx.mf
+   4978  01-19-97   tcci.mf
+   6279  01-19-97   tcdh.mf
+   4748  01-19-97   tcfb.mf
+   4526  01-19-97   tcff.mf
+   4525  01-19-97   tcfi.mf
+   4762  01-07-97   tcfs.mf
+   4533  01-19-97   tcit.mf
+   5850  01-19-97   tcrb.mf
+   6239  01-19-97   tcrm.mf
+   4963  01-19-97   tcsi.mf
+   6242  01-19-97   tcsl.mf
+   4753  01-19-97   tcso.mf
+   4939  01-19-97   tcss.mf
+   4519  01-19-97   tcst.mf
+  12807  12-23-96   tcstdedt.tex
+   4731  01-19-97   tcsx.mf
+   4970  01-19-97   tcti.mf
+   4524  01-19-97   tctt.mf
+   6251  01-19-97   tcui.mf
+   4533  01-19-97   tcvi.mf
+   4523  01-19-97   tcvt.mf
+   5344  01-19-97   txaccent.mf
+   4286  01-19-97   txgen.mf
+   5844  01-19-97   txifract.mf
+   4771  01-19-97   txisuper.mf
+  12634  01-19-97   txitlod.mf
+   2164  01-19-97   txpseudo.mf
+   8576  01-19-97   txrfract.mf
+  15206  01-19-97   txromod.mf
+   7814  01-19-97   txrsuper.mf
+   2058  01-19-97   txsymb.mf
+  93212  01-19-97   txsymbol.mf
+                    -------
+                    121    
+

@@ -1,0 +1,365 @@
+% ecstdedt.tex
+%
+% (c) Copyright 1995, 1996, 1997 J"org Knappen
+% (c) Copyright 1990, 1992 Norbert Schwarz
+%
+% This file is part of ecfonts version 1.0
+%
+% Please read the files 00readme.txt, 00inst.txt, 00error.txt, and
+% copyrite.txt for further information
+%
+% You find some documentation in ecdoc.tex (needs LaTeX2e)
+%
+% Generating MF-files for the EC fonts        EC Version 1.0 / 19-JAN-1997
+%
+%  Running TeX with this file as an input results in a lot of
+%  Metafont font driver files (ecrm5.mf, ecrm6.mf, ..). The files
+%  which should be generated are marked in the following macro
+%  \FontsToBeGenerated. For each font there has to be an entry
+%  with the pt sizes the font should be generate with. Additionally
+%  in the heading \tablevalues all used pt sizes have to be mentioned,
+%  just to get an fine printout.
+%
+%  Furthermore there is a batch file which can be customized for the
+%  Metafont batch run.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  please change only here:
+%
+\long\def\FontsToBeGenerated{
+
+     \tablevalues     ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 
+                          29.86[2986] 35.83[3583])
+
+     \makefont ecrm   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecsl   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecbx   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecbl   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecrb   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecti   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecui   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecbi   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont eccc   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecxc   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecsc   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecoc   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+     \makefont ecci   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ectt   (% 5[0500] 6[0600] 7[0700] 
+                          8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecit   (% 5[0500] 6[0600] 7[0700] 
+                          8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecvt   (% 5[0500] 6[0600] 7[0700] 
+                          8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecvi   (% 5[0500] 6[0600] 7[0700] 
+                          8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ectc   (% 5[0500] 6[0600] 7[0700] 
+                          8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecst   (% 5[0500] 6[0600] 7[0700] 
+                          8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecss   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecsi   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecsx   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+     \makefont ecso   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+                          35.83[3583])
+%     \makefont ecff   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+%                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+%                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+%                          35.83[3583])
+%     \makefont ecfi   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+%                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+%                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986]
+%                          35.83[3583])
+%     \makefont ecfb   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+%                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+%                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+%                          35.83[3583])
+     \makefont ecdh   ( 5[0500] 6[0600] 7[0700] 8[0800] 9[0900] 
+                          10[1000] 10.95[1095] 12[1200] 14.4[1440] 
+                          17.28[1728] 20.74[2074] 24.88[2488] 29.86[2986] 
+                          35.83[3583])
+}
+% If a font with a fraction, e.g. "7.5", should be generated
+% and the file name is not allowed to contain a period, an
+% optional file name part can be specified.
+%
+%      7.5[0750]
+%
+%      result in - may be - "dcr0750.mf" and an entry of "gensize:=7.5;"
+%      (The new value has to be specified in the \tablevalues-line too!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  The Batch file entries   ( #1 contains the fontname )
+%
+%   should be of the following form:
+%
+%    \def\BatchOutput{\BatchLine{...}%
+%                          ...
+%                     \BatchLine{...}}
+%
+%
+%  preset value, change \BatchOutput if you like ....
+%
+\def\BatchOutput#1{
+      \BatchLine{$ MF "\string\mode=localfont; input #1"}
+}
+%
+%   File naming conventions:
+%
+\def\BatchFileName{ecfonts.com}
+%
+%
+\def\MetafontFileExtension{.mf}
+%
+\def\modedef{} % e.g.  \def\modedef{\string\mode:=hplaser;}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% please  n o  changes from here, thanks !
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% (Avoiding inspecting the macros (sigh!)
+%
+%   Norbert Schwarz, Dezember 1990
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\magnification\magstep1
+\overfullrule=0pt
+%\tracingonline1
+%\tracingcommands=1
+%\tracingmacros=1
+% some token handling
+\let\EA\expandafter
+\def\JoinToks#1=(#2+#3){#1=\EA\EA\EA{\EA\the\EA#2\the#3}}
+\def\UpToHere{\relax}
+\def\IgnoreRest#1#2\UpToHere{#1}
+\def\IgnoreFirst#1#2\relax\UpToHere{#2}
+\def\First#1{\EA\IgnoreRest\the#1{}\UpToHere}
+\def\FirstOf#1{\EA\EA\EA{\EA\IgnoreRest\the#1{}\UpToHere}}
+\def\MoveFirst(#1to#2){#2\FirstOf#1}
+\def\Rest#1{\EA\IgnoreFirst\the#1\relax\UpToHere}
+\def\RestOf#1{\EA\EA\EA{\EA\IgnoreFirst\the#1\relax\UpToHere}}
+\def\MoveRest(#1to#2){#2=\RestOf{#1}}
+% borrowed from p. 132 in N.Schwarz, Introduction to TeX (some advertising ..)
+
+\newtoks\Basis
+\newtoks\Table
+\def\storetoks#1{\toks0={#1}\JoinToks\Table=(\Table+\toks0)}
+\Table={}
+%
+\def\hash{##}
+\newwrite \batchoutput
+\newwrite \fontoutput
+\def\today{\ifcase\month\or
+    January\or Februar\or March\or April\or May\or June\or
+    July\or August\or September\or October\or November\or December\fi,
+    \number\day,
+    \space\number\year}
+
+\def\BatchLine#1{\immediate\write\batchoutput{#1}}
+\immediate\openout\batchoutput=\BatchFileName
+
+\def\empty{}
+\def\minus{-}
+\def\blank{ }
+\def\singlefont#1 {%
+        \def\fontsize{#1}%\message{<#1>}%
+        \ifx\fontsize\minus\let\next\relax
+        \else
+            \ifx\fontsize\empty\let\next\singlefont
+            \else
+                \ifx\fontsize\blank\let\next\singlefont
+                \else
+                    \let\next\dofont
+          \fi\fi\fi
+        \next}
+
+\def\doentry{\MoveFirst(\Workbase to\Htok)%
+             \Workbase=\RestOf\Workbase
+             \edef\doou{\the\Htok}%
+             \ifx\doou\fontsize
+                 \def\dooU{\storetoks{\hfill $\bullet$\hfill&}}%
+                 \let\weiter\dooU
+             \else
+                 \def\weiter{\storetoks{~\hfill&}\doentry}%
+             \fi\weiter}
+
+
+\def\singletablevalue#1 {%
+        \def\fontsize{#1}%
+        \ifx\fontsize\blank\let\next\singletablevalue
+        \else
+                \ifx\minus\fontsize\let\next\relax
+                \else\let\next\dotablevalue\fi
+        \fi
+        \next}
+
+\newtoks\Htok
+\newtoks\Workbase
+\def\dotablevalue{\edef\dooo{\Htok={{\fontsize}}}%
+        \dooo
+        \EA\storetoks\EA{\fontsize&}%
+        \JoinToks\Basis=(\Basis+\Htok)\singletablevalue}
+
+\def\tablevalues(#1){\storetoks{\bf Fonts &}\singletablevalue#1 -
+        \storetoks{\cr}}
+
+\def\makefont #1 (#2){\JoinToks\Workbase=(\Basis+\Basis)%
+        \myc=0\immediate\write15{}%
+        \edef\fontnamebody{#1}%
+        \def\dostoretoks{\storetoks{#1 &}}\dostoretoks
+         \singlefont #2 - \storetoks{\cr}}
+
+\def~{\ifdim\dimen0>0pt
+        \message{\number\dimen0}%
+        \global\advance\dimen0 by -5.25pt
+        \message{ }\fi}
+
+\newcount\myc
+\def\extraspaces{\setbox0=\hbox{\tt\fontname}%
+\dimen0=78.75pt
+\advance\dimen0 by -\wd0\relax
+        \advance\myc by 1
+        \ifnum \myc=5
+        \immediate\write15{}%
+        \myc=0 \fi}
+
+
+\def\dofonttest#1[#2]#3\nothing{%
+\def\fontsize{#2}%
+\ifx\fontsize\empty
+        \def\fontsizename{#1}%
+        \def\fontsize{#1}%
+\else
+        \def\fontsize{#1}%
+        \def\fontsizename{#2}%
+\fi}
+\def\dofont{\doentry\expandafter\dofonttest\fontsize[]\nothing\Dofont}
+
+{\catcode`\%=11
+\catcode`\|=14
+\gdef\Dofont{|
+  \edef\fontname{\fontnamebody\fontsizename\MetafontFileExtension}|
+  \edef\dowrite{|
+  \immediate\openout \fontoutput = \fontname|
+  \immediate\write
+     \fontoutput {% This is \fontname\space
+     in text format as of \today}|
+  \immediate\write \fontoutput {if unknown exbase: input exbase fi;}|
+  \immediate\write \fontoutput {}|
+  \immediate\write \fontoutput {\modedef}|
+  \immediate\write \fontoutput {gensize:=\fontsize;}|
+  \immediate\write \fontoutput {generate \fontnamebody}|
+  \immediate\closeout \fontoutput|
+  \BatchOutput{\fontnamebody\fontsizename}
+  \message{\fontname\blank}|\extraspaces~~~~~~~~~~~|
+}\dowrite\singlefont}}
+\immediate\write15{generated mf-files:}
+\immediate\write15{-------------------}
+
+\nopagenumbers
+
+\def\minimumbox#1{\setbox0=\hbox{#1}%
+        \ifdim\wd0>15pt \box0\else \hbox to 15pt{\hfil
+        \box0\hfil}\fi}
+\storetoks{\hrule
+\medskip
+\centerline{Overview EC - Standard font set}
+\medskip
+\hrule
+\bigskip
+\noindent The following table describes the generated {*.mf} files which
+are needed for the setup of the standard DC/EC-font set.
+\bigskip
+\bigskip
+$$\vbox\bgroup\nointerlineskip\halign\bgroup\hash\hfil\quad&&\strut
+        \quad\minimumbox{\hash}\cr
+\noalign{\medskip}}
+
+
+
+%\tracingonline1
+%\tracingmacros2
+%\tracingcommands1
+
+\FontsToBeGenerated
+
+\storetoks{\egroup\egroup$$}
+
+\let\hash=#
+\the\Table
+\end
