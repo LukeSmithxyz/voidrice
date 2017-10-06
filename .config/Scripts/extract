@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -f $1 ] ; then
         # NAME=${1%.*}
         # mkdir $NAME && cd $NAME
