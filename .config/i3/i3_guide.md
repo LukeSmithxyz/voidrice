@@ -1,6 +1,6 @@
 # A friendly guide to Luke's i3 rice
 
-Use vim keys (h/j/k/l) to navigate this document. Pressing W will fit it to window width. + and - zoom in and out. f to toggle fullscreen. q to quit. (These are general mupdf shortcuts.)
+Use vim keys (h/j/k/l) to navigate this document. Pressing W will fit it to window width. + and - zoom in and out. f to toggle fullscreen. q to quit, i for Night Mode. (These are general mupdf shortcuts.)
 
 + Mod+F1 will show this document at any time.
 + By "Mod" I mean the Super Key, usually known as "the Windows Key."
