@@ -189,7 +189,7 @@ hint links yank-primary
     ;Y
 
 hint --rapid links tab-bg
-    ;r
+    ;R
 
 #hint --rapid links window
     #;R
@@ -440,8 +440,8 @@ follow-selected -t
     <ctrl-return>
     <ctrl-enter>
 
-hint inputs
-    ;p
+#hint inputs
+    #;p
 
 repeat-command
     .
