@@ -4,6 +4,7 @@
 accounts = gmail, personal
 starttls = yes
 ssl = yes
+autorefresh = 1
 
 
 # Here's an example Gmail account, just add in a username and password to use your own.

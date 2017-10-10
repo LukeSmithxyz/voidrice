@@ -42,7 +42,6 @@ alias Txs="cp ~/Documents/LaTeX/beamer.tex"
 alias Txh="cp ~/Documents/LaTeX/handout.tex"
 alias TC='texclear'
 alias ethspeed="speedometer -r enp0s25"
-alias mailsync="bash ~/.config/Scripts/mailsyncloop"
 alias wifispeed="speedometer -r wlp2s0"
 alias tr="transmission-remote"
 alias debase="sudo umount /home/Shared/Videos & screen.sh l"
