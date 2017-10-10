@@ -40,6 +40,9 @@ exec --no-startup-id python ~/.config/Scripts/shortcuts.py
 exec --no-startup-id ~/.config/Scripts/screen.sh v
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+#Start the offlineimap daemon;
+exec --no-startup-id killall python ~/.config/Scripts/offlineimap-daemon.py
+exec --no-startup-id python ~/.config/Scripts/offlineimap-daemon.py
 #Add wallpaper:
 #exec --no-startup-id feh --bg-scale ~/.config/wall.png
 exec_always --no-startup-id wal -c -i ~/.config/wall.png
