@@ -8,7 +8,7 @@ shopt -s autocd #Allows you to cd into directory merely by typing the directory 
 alias music="ncmpcpp"
 alias clock="ncmpcpp -s clock"
 alias visualizer="ncmpcpp -s visualizer"
-alias news="newsbeuter"
+alias news="newsboat"
 alias email="mutt"
 alias files="ranger"
 alias chat="weechat"

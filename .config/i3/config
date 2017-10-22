@@ -226,8 +226,8 @@ bindsym $mod+Shift+v		exec projectM-pulseaudio
 #bindsym $mod+b			exec $prev
 bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
 
-bindsym $mod+n			exec $term -e newsbeuter
-#bindsym $mod+Shift+n		exec $term -e newsbeuter
+bindsym $mod+n			exec $term -e newsboat
+#bindsym $mod+Shift+n		exec $term -e newsboat
 
 bindsym $mod+m 			exec $music
 bindsym $mod+Shift+m		exec $mute
