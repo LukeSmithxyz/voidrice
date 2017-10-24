@@ -10,7 +10,7 @@ Questions or suggestions? Email me at [luke@lukesmith.xyz](mailto:luke@lukesmith
 ## Basic goals and principles of my rice:
 
 + Naturalness -- I want the number of keypresses I have to make to get what I want to be as little as possible.
-+ Economy -- All the basic programs I use should be simple and light on system resources. Because of this, many are terminal or ncurses programsj
++ Economy -- All the basic programs I use should be simple and light on system resources. Because of this, many are terminal or ncurses programs.
 + Keyboard/vim-centrality -- All my terminal apps (and other programs) use vim keys when possible. My hands never need leave the home row or thereabout.
 + Lots of color -- Many rices stick to one general color palatte. I like my system to be very vibrant. If you disagree, you can easily change it.
 
