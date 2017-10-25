@@ -172,6 +172,8 @@ EDIT: July 31, 2017. All the feedback I've gotten is tremendous and I'm glad thi
 
 # Contact
 
+[Support the Channel!](https://patreon.com/lukesmith)
+
 [luke@lukesmith.xyz](mailto:luke@lukesmith.xyz)
 
 [http://lukesmith.xyz](http://lukesmith.xyz)
@@ -181,3 +183,4 @@ EDIT: July 31, 2017. All the feedback I've gotten is tremendous and I'm glad thi
 [My Github Page](https://github.com/LukeSmithxyz)
 
 [Twitter](https://twitter.com/lukesfiat)
+
