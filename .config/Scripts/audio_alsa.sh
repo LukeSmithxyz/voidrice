@@ -4,17 +4,11 @@
 
 #Picks a file name for the output file based on availability:
 
-if [[ -f ~/output.flac ]]
-	then
-		n=1
-		while [[ -f $HOME/output_$n.flac ]]
-		do	
-			n=$((n+1))
-		done
-		filename="$HOME/output_$n.flac"
-	else
-		filename="$HOME/output.flac"
-fi
+while [[ -f $HOME/audio$n.flac ]]
+do
+	n=$((n+1))
+done
+filename="$HOME/audio$n.flac"
 
 #The actual ffmpeg command:
 
