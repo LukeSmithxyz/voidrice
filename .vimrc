@@ -7,7 +7,7 @@ set relativenumber
 "let didit = 0
 "autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
 "autocmd! InsertLeave * let didit = 0
-
+#set spell
 vnoremap <C-c> "*y
 nnoremap <C-t> :tabnew<cr>
 
@@ -43,7 +43,8 @@ autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
 autocmd FileType tex inoremap <F5> <Esc>:!xelatex<spacE><c-r>%<Enter>i
 autocmd FileType tex nnoremap <F5> :!xelatex<spacE><c-r>%<Enter>
 autocmd FileType tex inoremap ;fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-autocmd FileType tex inoremap ;fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ;fit \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ;fig \begin{figure}<Enter><Enter>\end{figure}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ;exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ;em \emph{}<++><Esc>T{i
 autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
@@ -176,6 +177,8 @@ autocmd FileType php,html inoremap ;rd <font color="red"></font><Esc>F>a
 autocmd FileType php,html inoremap ;yl <font color="yellow"></font><Esc>F>a
 autocmd FileType php,html inoremap ;dt <dt></dt><Enter><dd><++></dd><Enter><++><esc>2kcit
 autocmd FileType php,html inoremap ;dl <dl><Enter><Enter></dl><enter><enter><++><esc>3kcc
+autocmd FileType php,html inoremap ;tag <DELRN><Enter><++><Enter></DELRN><Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
+
 
 """END
 
