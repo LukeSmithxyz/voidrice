@@ -58,6 +58,16 @@ exec --no-startup-id unclutter
 
 
 ###---Audio and Music Definitions---###
+##For spotify
+#set $music spotify
+#set $pause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+#set $trupause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+#set $play dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
+#set $next dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+#set $prev dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+#set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
+#set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
+
 ##For mpc:
 set $music urxvt -e ncmpcpp
 set $pause --no-startup-id mpc toggle
@@ -462,8 +472,8 @@ bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
 bindsym XF86AudioMedia		exec $music
 bindsym XF86Display		exec --no-startup-id arandr
 #bindsym XF86KbdLightOnOff	exec
-bindsym XF86KbdBrightnessDown	exec --no-startup-id xbacklight -dec 15
-bindsym XF86KbdBrightnessUp	exec --no-startup-id xbacklight -inc 15
+bindsym XF86KbdBrightnessDown	exec --no-startup-id python3.6 ~/.i3/kb-lights.py -
+bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.i3/kb-lights.py +
 #bindsym XF86Reply		exec
 #bindsym XF86MailForward	exec
 #bindsym XF86Save		exec
