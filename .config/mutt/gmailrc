@@ -1,4 +1,5 @@
 # vim: filetype=muttrc
+# Gmail app password should be generated for this configuration file. Never use your proper password in a standard text field.
 set imap_user = "YOURNAME@gmail.com"                       
 set smtp_url = "smtp://YOURNAME@smtp.gmail.com:587/"       
 set from = "YOURNAME@gmail.com"                            
