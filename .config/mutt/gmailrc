@@ -19,6 +19,7 @@ set ssl_force_tls = yes
 
 mailboxes +INBOX
 
+bind index g noop
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 macro index ga "<change-folder>=[Gmail].All Mail<enter>" "Go to all mail"
 macro index gs "<change-folder>=[Gmail].Sent Mail<enter>" "Go to sent mail"
