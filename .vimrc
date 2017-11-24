@@ -7,7 +7,6 @@ set relativenumber
 "let didit = 0
 "autocmd! InsertEnter * if ! didit | call feedkeys("\<C-\>\<C-o>:nohlsearch|let didit = 1\<CR>", 'n') | endif
 "autocmd! InsertLeave * let didit = 0
-"set spell
 vnoremap <C-c> "*y
 nnoremap <C-t> :tabnew<cr>
 

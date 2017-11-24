@@ -47,7 +47,8 @@ exec --no-startup-id python ~/.config/Scripts/offlineimap-daemon.py
 #exec --no-startup-id feh --bg-scale ~/.config/wall.png
 exec_always --no-startup-id wal -c -i ~/.config/wall.png
 #Remaps the caps lock button to escape and uses the US international keyboard with dead keys
-exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
+exec_always --no-startup-id setxkbmap -option caps:escape
+#exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
 #Remap Menu button to Super:
 #exec_always --no-startup-id xmodmap -e 'keycode 135 = Super_R'
 bindsym Menu	exec --no-startup-id xmodmap -e 'keycode 135 = Super_R' 
