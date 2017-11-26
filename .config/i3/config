@@ -170,7 +170,7 @@ bindsym $mod+Shift+q		kill
 bindsym $mod+w			exec --no-startup-id $term -e w3m http://lukesmith.xyz
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
-bindsym $mod+e			exec $term -e mutt
+bindsym $mod+e			exec $term -e neomutt
 #bindsym $mod+Shift+e
 
 bindsym $mod+r 			exec $term -e ranger
@@ -461,7 +461,7 @@ bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
 bindsym XF86Suspend		exec --no-startup-id ~/.config/i3/lock.sh
 bindsym XF86Close		kill
 bindsym XF86WebCam		exec mpv /dev/video0
-bindsym XF86Mail		exec $term -e mutt
+bindsym XF86Mail		exec $term -e neomutt
 bindsym XF86Messenger		exec $term -e weechat
 bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 #bindsym XF86Go			exec
