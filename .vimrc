@@ -38,6 +38,9 @@ vnoremap S :s//g<Left><Left>
 autocmd BufRead,BufNewFile /tmp/calcurse* set filetype=markdown
 autocmd BufRead,BufNewFile ~/.calcurse/notes/* set filetype=markdown
 
+"Auto-update shortcuts on change:
+autocmd BufWritePost ~/.config/Scripts/folders,~/.config/Scripts/configs !python ~/.config/Scripts/shortcuts.py
+
 """LATEX
 autocmd FileType tex inoremap <F5> <Esc>:!xelatex<spacE><c-r>%<Enter>i
 autocmd FileType tex nnoremap <F5> :!xelatex<spacE><c-r>%<Enter>
