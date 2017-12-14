@@ -3,8 +3,7 @@ cfz	~/.zshrc
 cfv	~/.config/Scripts/vimrc
 cfr	~/.config/ranger/rc.conf.base
 cfi	~/.config/i3/config
-cfq	~/.config/qutebrowser/keys.conf.base
-cfQ	~/.config/qutebrowser/qutebrowser.conf
+cfq	~/.config/qutebrowser/config.py
 cfm	~/.config/mutt/muttrc
 cfM	~/.config/moc/keymap
 cff	~/.config/Scripts/folders
@@ -13,11 +12,6 @@ cft	~/.config/termite/config
 cfT	~/.config/Scripts/tmux.conf
 eb	~/Documents/LaTeX/uni.bib
 cv	~/Documents/LaTeX/cv.tex
-cfl	~/.config/mutt/lukexyz.info
-cfx	~/.config/mutt/luxmyth.info
-cfk	~/.config/mutt/kulade.cock
-cfo	~/.config/mutt/kulade.info
 cfa	~/.config/mutt/aliases
 cfp	~/.config/polybar/config
 cfd	~/.Xdefaults
-TO	~/Creations/Videos/todo.md
