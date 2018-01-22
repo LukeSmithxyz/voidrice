@@ -1,0 +1,169 @@
+# vim:ft=perl:fenc=utf-8
+# Copyright (c) 2009-, Simon Lundström <simmel@soy.se>
+# Copyright (c) 2014 Maarten de Vries <maarten@de-vri.es>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+# Usage:
+# Set your font in ~/.Xresources:
+# urxvt.font: xft:Inconsolata:pixelsize=12
+# to set it with pixels or
+# urxvt.font: xft:Inconsolata:size=12
+# to set it with points.
+
+# And re-bind some keymappings (if you want, below are the defaults):
+# URxvt.keysym.C-minus:     resize-font:smaller
+# URxvt.keysym.C-plus:      resize-font:bigger
+# URxvt.keysym.C-equal:     resize-font:reset
+# URxvt.keysym.C-question:  resize-font:show
+#
+
+my @fonts = (
+  {'name' => 'font',           'code' => 710},
+  {'name' => 'boldFont',       'code' => 711},
+  {'name' => 'italicFont',     'code' => 712},
+  {'name' => 'boldItalicFont', 'code' => 713},
+);
+
+my @fixed = qw(4x6 5x7 5x8 6x9 6x10 6x12 6x13 7x13 7x14 8x13 8x16 9x15 9x18 10x20 12x24);
+
+sub on_start {
+  my ($self) = @_;
+
+  foreach (@fonts) {
+    $_->{'default'} = $self->resource($_->{'name'});
+  }
+}
+
+sub on_init {
+   my ($self) = @_;
+   my $commands = {
+     "smaller" => "C-minus",
+     "bigger"  => "C-plus",
+     "reset"   => "C-equal",
+     "show"    => "C-question",
+   };
+   bind_hotkeys($self, $commands);
+
+   ()
+}
+
+sub bind_hotkeys {
+  my ($self, $commands) = @_;
+
+  for (keys %$commands) {
+    my $hotkey = $$commands{$_};
+    my $hotkey_bound = $self->{'term'}->x_resource("keysym.$hotkey");
+    if (!defined($hotkey_bound) ) {
+      # Support old-style key bindings
+      if ($self->x_resource("%.$_")) {
+        $hotkey = $self->x_resource("%.$_");
+      }
+
+      # FIXME If we're bound to a keysym, don't bind the default.
+      $self->bind_action($hotkey, "%:$_") or
+      warn "unable to register '$hotkey' as hotkey for $_";
+    }
+    else {
+      if ($hotkey_bound !~ /^resize-font:/) {
+        warn "Hotkey $$commands{$_} already bound to $hotkey_bound, not binding to resize-font:$_ by default.";
+      }
+    }
+  }
+}
+
+sub on_action {
+  my ($self, $string) = @_;
+  my $regex = qr"(?!pixelsize=)(\d+)";
+
+  if ($string eq "bigger") {
+    foreach (@fonts) {
+      next if not defined($_->{'default'});
+      update_font_size($self, $_, +2);
+    }
+  }
+  elsif ($string eq "smaller") {
+    foreach (@fonts) {
+      next if not defined($_->{'default'});
+      update_font_size($self, $_, -2);
+    }
+  }
+  elsif ($string eq "reset") {
+    foreach (@fonts) {
+      next if not defined($_->{'default'});
+      set_font($self, $_, $_->{'default'});
+    }
+  }
+  elsif ($string eq "show") {
+
+    my $term = $self->{'term'};
+    $term->{'resize-font'}{'overlay'} = {
+      ov => $term->overlay_simple(0, -1, format_font_info($self)),
+      to => urxvt::timer
+      ->new
+      ->start(urxvt::NOW + 1)
+      ->cb(sub {
+        delete $term->{'resize-font'}{'overlay'};
+      }),
+    };
+  }
+
+  ()
+}
+
+sub get_font {
+  my ($self, $name) = @_;
+  return $self->resource($name);
+}
+
+sub set_font {
+  my ($self, $font, $new) = @_;
+  $self->cmd_parse(sprintf("\33]%d;%s\007", $font->{'code'}, $new));
+}
+
+sub update_font_size {
+  my ($self, $font, $delta) = @_;
+  my $regex = qr"(?<=size=)(\d+)";
+  my $current = get_font($self, $font->{'name'});
+
+  my ($index) = grep { $fixed[$_] eq $current } 0..$#fixed;
+  if ($index or $index eq 0) {
+    my $inc = $delta / abs($delta);
+    $index += $inc;
+    if ($index < 0) { $index = 0; }
+    if ($index > $#fixed) { $index = $#fixed; }
+    $current = $fixed[$index];
+  }
+  else {
+    $current =~ s/$regex/$1+$delta/ge;
+  }
+  set_font($self, $font, $current);
+}
+
+sub format_font_info {
+  my ($self) = @_;
+
+  my $width = 0;
+  foreach (@fonts) {
+    my $length = length($_->{'name'});
+    $width = $length > $width ? $length : $width;
+  }
+  ++$width;
+
+  my $info = '';
+  foreach (@fonts) {
+    $info .= sprintf("%-${width}s %s\n", $_->{'name'} . ':', get_font($self, $_->{'name'}));
+  }
+
+  return $info;
+}

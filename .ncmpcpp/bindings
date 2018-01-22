@@ -1,0 +1,612 @@
+##############################################################
+## This is the example bindings file. Copy it to            ##
+## ~/.ncmpcpp/bindings or $XDG_CONFIG_HOME/ncmpcpp/bindings ##
+## and set up your preferences                              ##
+##############################################################
+##
+##### General rules #####
+##
+## 1) Because each action has runtime checks whether it's
+##    ok to run it, a few actions can be bound to one key.
+##    Actions will be bound in order given in configuration
+##    file. When a key is pressed, first action in order
+##    will test itself whether it's possible to run it. If
+##    test succeeds, action is executed and other actions
+##    bound to this key are ignored. If it doesn't, next
+##    action in order tests itself etc.
+##
+## 2) It's possible to bind more that one action at once
+##    to a key. It can be done using the following syntax:
+##
+##    def_key "key"
+##      action1
+##      action2
+##      ...
+##
+##    This creates a chain of actions. When such chain is
+##    executed, each action in chain is run until the end of
+##    chain is reached or one of its actions fails to execute
+##    due to its requirements not being met. If multiple actions
+##    and/or chains are bound to the same key, they will be
+##    consecutively run until one of them gets fully executed.
+##
+## 3) When ncmpcpp starts, bindings configuration file is
+##    parsed and then ncmpcpp provides "missing pieces"
+##    of default keybindings. If you want to disable some
+##    bindings, there is a special action called 'dummy'
+##    for that purpose. Eg. if you want to disable ability
+##    to crop playlists, you need to put the following
+##    into configuration file:
+##
+##    def_key "C"
+##      dummy
+##
+##    After that ncmpcpp will not bind any default action
+##    to this key.
+##
+## 4) To let you write simple macros, the following special
+##    actions are provided:
+##
+##    - push_character "character" - pushes given special
+##      character into input queue, so it will be immediately
+##      picked by ncmpcpp upon next call to readKey function.
+##      Accepted values: mouse, up, down, page_up, page_down,
+##      home, end, space, enter, insert, delete, left, right,
+##      tab, ctrl-a, ctrl-b, ..., ctrl-z, ctrl-[, ctrl-\\,
+##      ctrl-], ctrl-^, ctrl-_, f1, f2, ..., f12, backspace.
+##      In addition, most of these names can be prefixed with
+##      alt-/ctrl-/shift- to be recognized with the appropriate
+##      modifier key(s).
+##
+##    - push_characters "string" - pushes given string into
+##      input queue.
+##
+##    - require_runnable "action" - checks whether given action
+##      is runnable and fails if it isn't. This is especially
+##      useful when mixed with previous two functions. Consider
+##      the following macro definition:
+##
+##      def_key "key"
+##        push_characters "custom_filter"
+##        apply_filter
+##
+##      If apply_filter can't be currently run, we end up with
+##      sequence of characters in input queue which will be
+##      treated just as we typed them. This may lead to unexpected
+##      results (in this case 'c' will most likely clear current
+##      playlist, 'u' will trigger database update, 's' will stop
+##      playback etc.). To prevent such thing from happening, we
+##      need to change above definition to this one:
+##
+##      def_key "key"
+##        require_runnable "apply_filter"
+##        push_characters "custom_filter"
+##        apply_filter
+##
+##      Here, first we test whether apply_filter can be actually run
+##      before we stuff characters into input queue, so if condition
+##      is not met, whole chain is aborted and we're fine.
+##
+##    - require_screen "screen" - checks whether given screen is
+##      currently active. accepted values: browser, clock, help,
+##      media_library, outputs, playlist, playlist_editor,
+##      search_engine, tag_editor, visualizer, last_fm, lyrics,
+##      selected_items_adder, server_info, song_info,
+##      sort_playlist_dialog, tiny_tag_editor.
+##
+##    - run_external_command "command" - runs given command using
+##      system() function.
+##
+## 5) In addition to binding to a key, you can also bind actions
+##    or chains of actions to a command. If it comes to commands,
+##    syntax is very similar to defining keys. Here goes example
+##    definition of a command:
+##
+##      def_command "quit" [deferred]
+##        stop
+##        quit
+##
+##    If you execute the above command (which can be done by
+##    invoking action execute_command, typing 'quit' and pressing
+##    enter), ncmpcpp will stop the player and then quit. Note the
+##    presence of word 'deferred' enclosed in square brackets. It
+##    tells ncmpcpp to wait for confirmation (ie. pressing enter)
+##    after you typed quit. Instead of 'deferred', 'immediate'
+##    could be used. Then ncmpcpp will not wait for confirmation
+##    (enter) and will execute the command the moment it sees it.
+##
+##    Note: while command chains are executed, internal environment
+##    update (which includes current window refresh and mpd status
+##    update) is not performed for performance reasons. However, it
+##    may be desirable to do so in some situration. Therefore it's
+##    possible to invoke by hand by performing 'update enviroment'
+##    action.
+##
+## Note: There is a difference between:
+##
+##         def_key "key"
+##           action1
+##
+##         def_key "key"
+##           action2
+##
+##       and
+##
+##         def_key "key"
+##           action1
+##           action2
+##
+##      First one binds two single actions to the same key whilst
+##      second one defines a chain of actions. The behavior of
+##      these two is different and is described in (1) and (2).
+##
+## Note: Function def_key accepts non-ascii characters.
+##
+##### List of unbound actions #####
+##
+## The following actions are not bound to any key/command:
+##
+##  - set_volume
+##
+#
+#def_key "mouse"
+#  mouse_event
+#
+#def_key "up"
+#  scroll_up
+#
+#def_key "shift-up"
+#  select_item
+#  scroll_up
+#
+#def_key "down"
+#  scroll_down
+#
+#def_key "shift-down"
+#  select_item
+#  scroll_down
+#
+#def_key "["
+#  scroll_up_album
+#
+#def_key "]"
+#  scroll_down_album
+#
+#def_key "{"
+#  scroll_up_artist
+#
+#def_key "}"
+#  scroll_down_artist
+#
+#def_key "page_up"
+#  page_up
+#
+#def_key "page_down"
+#  page_down
+#
+#def_key "home"
+#  move_home
+#
+#def_key "end"
+#  move_end
+#
+#def_key "insert"
+#  select_item
+#
+#def_key "enter"
+#  enter_directory
+#
+#def_key "enter"
+#  toggle_output
+#
+#def_key "enter"
+#  run_action
+#
+#def_key "enter"
+#  play_item
+#
+#def_key "space"
+#  add_item_to_playlist
+#
+#def_key "space"
+#  toggle_lyrics_update_on_song_change
+#
+#def_key "space"
+#  toggle_visualization_type
+#
+#def_key "delete"
+#  delete_playlist_items
+#
+#def_key "delete"
+#  delete_browser_items
+#
+#def_key "delete"
+#  delete_stored_playlist
+#
+#def_key "right"
+#  next_column
+#
+#def_key "right"
+#  slave_screen
+#
+#def_key "right"
+#  volume_up
+#
+#def_key "+"
+#  volume_up
+#
+#def_key "left"
+#  previous_column
+#
+#def_key "left"
+#  master_screen
+#
+#def_key "left"
+#  volume_down
+#
+#def_key "-"
+#  volume_down
+#
+#def_key ":"
+#  execute_command
+#
+#def_key "tab"
+#  next_screen
+#
+#def_key "shift-tab"
+#  previous_screen
+#
+#def_key "f1"
+#  show_help
+#
+#def_key "1"
+#  show_playlist
+#
+#def_key "2"
+#  show_browser
+#
+#def_key "2"
+#  change_browse_mode
+#
+#def_key "3"
+#  show_search_engine
+#
+#def_key "3"
+#  reset_search_engine
+#
+#def_key "4"
+#  show_media_library
+#
+#def_key "4"
+#  toggle_media_library_columns_mode
+#
+#def_key "5"
+#  show_playlist_editor
+#
+#def_key "6"
+#  show_tag_editor
+#
+#def_key "7"
+#  show_outputs
+#
+#def_key "8"
+#  show_visualizer
+#
+#def_key "="
+#  show_clock
+#
+#def_key "@"
+#  show_server_info
+#
+#def_key "s"
+#  stop
+#
+#def_key "p"
+#  pause
+#
+#def_key ">"
+#  next
+#
+#def_key "<"
+#  previous
+#
+#def_key "ctrl-h"
+#  jump_to_parent_directory
+#
+#def_key "ctrl-h"
+#  replay_song
+#
+#def_key "backspace"
+#  jump_to_parent_directory
+#
+#def_key "backspace"
+#  replay_song
+#
+#def_key "f"
+#  seek_forward
+#
+#def_key "b"
+#  seek_backward
+#
+#def_key "r"
+#  toggle_repeat
+#
+#def_key "z"
+#  toggle_random
+#
+#def_key "y"
+#  save_tag_changes
+#
+#def_key "y"
+#  start_searching
+#
+#def_key "y"
+#  toggle_single
+#
+#def_key "R"
+#  toggle_consume
+#
+#def_key "Y"
+#  toggle_replay_gain_mode
+#
+#def_key "T"
+#  toggle_add_mode
+#
+#def_key "|"
+#  toggle_mouse
+#
+#def_key "#"
+#  toggle_bitrate_visibility
+#
+#def_key "Z"
+#  shuffle
+#
+#def_key "x"
+#  toggle_crossfade
+#
+#def_key "X"
+#  set_crossfade
+#
+#def_key "u"
+#  update_database
+#
+#def_key "ctrl-s"
+#  sort_playlist
+#
+#def_key "ctrl-s"
+#  toggle_browser_sort_mode
+#
+#def_key "ctrl-s"
+#  toggle_media_library_sort_mode
+#
+#def_key "ctrl-r"
+#  reverse_playlist
+#
+#def_key "ctrl-f"
+#  apply_filter
+#
+#def_key "ctrl-_"
+#  select_found_items
+#
+#def_key "/"
+#  find
+#
+#def_key "/"
+#  find_item_forward
+#
+#def_key "?"
+#  find
+#
+#def_key "?"
+#  find_item_backward
+#
+#def_key "."
+#  next_found_item
+#
+#def_key ","
+#  previous_found_item
+#
+#def_key "w"
+#  toggle_find_mode
+#
+#def_key "e"
+#  edit_song
+#
+#def_key "e"
+#  edit_library_tag
+#
+#def_key "e"
+#  edit_library_album
+#
+#def_key "e"
+#  edit_directory_name
+#
+#def_key "e"
+#  edit_playlist_name
+#
+#def_key "e"
+#  edit_lyrics
+#
+#def_key "i"
+#  show_song_info
+#
+#def_key "I"
+#  show_artist_info
+#
+#def_key "g"
+#  jump_to_position_in_song
+#
+#def_key "l"
+#  show_lyrics
+#
+#def_key "ctrl-v"
+#  select_range
+#
+#def_key "v"
+#  reverse_selection
+#
+#def_key "V"
+#  remove_selection
+#
+#def_key "B"
+#  select_album
+#
+#def_key "a"
+#  add_selected_items
+#
+#def_key "c"
+#  clear_playlist
+#
+#def_key "c"
+#  clear_main_playlist
+#
+#def_key "C"
+#  crop_playlist
+#
+#def_key "C"
+#  crop_main_playlist
+#
+#def_key "m"
+#  move_sort_order_up
+#
+#def_key "m"
+#  move_selected_items_up
+#
+#def_key "n"
+#  move_sort_order_down
+#
+#def_key "n"
+#  move_selected_items_down
+#
+#def_key "M"
+#  move_selected_items_to
+#
+#def_key "A"
+#  add
+#
+#def_key "S"
+#  save_playlist
+#
+#def_key "o"
+#  jump_to_playing_song
+#
+#def_key "G"
+#  jump_to_browser
+#
+#def_key "G"
+#  jump_to_playlist_editor
+#
+#def_key "~"
+#  jump_to_media_library
+#
+#def_key "E"
+#  jump_to_tag_editor
+#
+#def_key "U"
+#  toggle_playing_song_centering
+#
+#def_key "P"
+#  toggle_display_mode
+#
+#def_key "\\"
+#  toggle_interface
+#
+#def_key "!"
+#  toggle_separators_between_albums
+#
+#def_key "L"
+#  toggle_lyrics_fetcher
+#
+#def_key "F"
+#  fetch_lyrics_in_background
+#
+#def_key "alt-l"
+#  toggle_fetching_lyrics_in_background
+#
+#def_key "ctrl-l"
+#  toggle_screen_lock
+#
+#def_key "`"
+#  toggle_library_tag_type
+#
+#def_key "`"
+#  refetch_lyrics
+#
+#def_key "`"
+#  add_random_items
+#
+#def_key "ctrl-p"
+#  set_selected_items_priority
+#
+#def_key "q"
+#  quit
+#
+#
+def_key "f"
+    find
+def_key "f"
+    find_item_forward
+
+def_key "+"
+    show_clock
+def_key "="
+    volume_up
+
+def_key "j"
+    scroll_down
+def_key "k"
+    scroll_up
+
+def_key "ctrl-u"
+    page_up
+#push_characters "kkkkkkkkkkkkkkk"
+def_key "ctrl-d"
+    page_down
+#push_characters "jjjjjjjjjjjjjjj"
+def_key "u"
+    page_up
+#push_characters "kkkkkkkkkkkkkkk"
+def_key "d"
+    page_down
+#push_characters "jjjjjjjjjjjjjjj"
+def_key "h"
+    previous_column
+def_key "l"
+    next_column
+
+def_key "."
+    show_lyrics
+
+def_key "n"
+    next_found_item
+def_key "N"
+    previous_found_item
+
+# not used but bound
+def_key "J"
+    move_sort_order_down
+def_key "K"
+    move_sort_order_up
+def_key "h"
+  jump_to_parent_directory
+def_key "l"
+  enter_directory
+def_key "l"
+  run_action
+def_key "l"
+  play_item
+def_key "m"
+  show_media_library
+def_key "m"
+  toggle_media_library_columns_mode
+def_key "t"
+  show_tag_editor
+def_key "v"
+  show_visualizer
+def_key "G"
+  move_end
+def_key "g"
+  move_home
+#jump_to_position_in_song
+def_key "U"
+  update_database

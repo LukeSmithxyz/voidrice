@@ -1,0 +1,4 @@
+#!/bin/bash
+dialog  --title "Welcome to LARBS!" --msgbox "If you're new to the system, hold down the Windows key and press F1 for a full tutorial!
+
+(This infobox will greet you at each login until you run the command \"hello-larbs\" in the terminal.)" 10 60
