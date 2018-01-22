@@ -1000,7 +1000,7 @@ c.qt.force_platform = None
 ## QtWebEngine to work with Nouveau drivers. This setting requires a
 ## restart.
 ## Type: Bool
-c.qt.force_software_rendering = False
+c.qt.force_software_rendering = True
 
 ## Show a scrollbar.
 ## Type: Bool

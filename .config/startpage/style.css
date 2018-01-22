@@ -1,0 +1,24 @@
+body {
+	color: #ddd;
+	background: url("../wall.png") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#middle{
+	border-radius: 24px;
+	float: left;
+	display: inline-block;
+	width: 161.803px;
+	height: 100px;
+	position: absolute;
+	top: 50%;
+	bottom: 50%;
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+	background-color: rgba(20, 20, 20, 0.9);
+}
