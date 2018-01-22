@@ -1,0 +1,70 @@
+#
+# Calcurse keys configuration file
+#
+# This file sets the keybindings used by Calcurse.
+# Lines beginning with "#" are comments, and ignored by Calcurse.
+# To assign a keybinding to an action, this file must contain a line
+# with the following syntax:
+#
+#        ACTION  KEY1  KEY2  ...  KEYn
+#
+# Where ACTION is what will be performed when KEY1, KEY2, ..., or KEYn
+# will be pressed.
+#
+# To define bindings which use the CONTROL key, prefix the key with 'C-'.
+# The escape, space bar and horizontal Tab key can be specified using
+# the 'ESC', 'SPC' and 'TAB' keyword, respectively.
+# Arrow keys can also be specified with the UP, DWN, LFT, RGT keywords.
+# Last, Home and End keys can be assigned using 'KEY_HOME' and 'KEY_END'
+# keywords.
+#
+# A description of what each ACTION keyword is used for is available
+# from calcurse online configuration menu.
+
+generic-cancel  ESC 
+generic-select  SPC 
+generic-credits  @ 
+generic-help  ? 
+generic-quit  q Q 
+generic-save  s S ^S 
+generic-reload  R 
+generic-copy  c 
+generic-paste  p ^V 
+generic-change-view  TAB 
+generic-import  i I 
+generic-export  x X 
+generic-goto  g G 
+generic-other-cmd  o O 
+generic-config-menu  C 
+generic-redraw  ^R 
+generic-add-appt  ^A 
+generic-add-todo  ^T 
+generic-prev-day  T ^H 
+generic-next-day  t ^L 
+generic-prev-week  W ^K 
+generic-next-week  w ^J 
+generic-prev-month  M 
+generic-next-month  m 
+generic-prev-year  Y 
+generic-next-year  y 
+generic-scroll-down  ^N 
+generic-scroll-up  ^P 
+generic-goto-today  ^G 
+generic-command  : 
+move-right  l L RGT 
+move-left  h H LFT 
+move-down  j J DWN 
+move-up  k K UP 
+start-of-week  0 
+end-of-week  $ 
+add-item  a A 
+del-item  d D 
+edit-item  e E 
+view-item  v V 
+pipe-item  | 
+flag-item  ! 
+repeat  r 
+edit-note  n N 
+view-note  > 
+raise-priority  + 
+lower-priority  - 

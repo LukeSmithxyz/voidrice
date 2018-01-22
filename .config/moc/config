@@ -1,0 +1,13 @@
+Keymap = ${HOME}/.config/moc/keymap
+Theme = ${HOME}/.config/moc/themes/theme
+#readtags = no
+QueueNextSongReturn = no
+FormatString = "%(n:%n :)%(t:%t:)%(a: \(by %a\):)%(A: \(in %A\):)"
+##%(A: \(%A\):)"
+
+MusicDir = ${HOME}/Music
+Fastdir1 = ${HOME}/Talks/Audiobooks
+Fastdir2 = ${HOME}/Talks/Lectures
+Fastdir3 = ${HOME}/Talks/Podcasts
+Fastdir4 = ${HOME}/Downloads
+Fastdir5 = ${HOME}/Creations
