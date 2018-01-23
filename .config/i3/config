@@ -34,20 +34,19 @@ exec --no-startup-id compton --xrender-sync-fence
 exec --no-startup-id ~/.config/Scripts/screen.sh v
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-#Start the offlineimap daemon;
-exec --no-startup-id killall python ~/.config/Scripts/offlineimap-daemon.py
-exec --no-startup-id python ~/.config/Scripts/offlineimap-daemon.py
 #Add wallpaper:
-exec --no-startup-id feh --bg-scale ~/.config/wall.png
+exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
 #exec_always --no-startup-id wal -c -i ~/.config/wall.png
 #Remaps the caps lock button to escape and uses the US international keyboard with dead keys
-exec_always --no-startup-id setxkbmap -option caps:escape
-#exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
+exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
+#exec_always --no-startup-id setxkbmap -option caps:escape
 #Remap Menu button to Super:
 #exec_always --no-startup-id xmodmap -e 'keycode 135 = Super_R'
 bindsym Menu	exec --no-startup-id xmodmap -e 'keycode 135 = Super_R'
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
+#Network Manager applet
+exec --no-startup-id nm-applet
 
 #OPENRC
 #set $shutdown sudo openrc-shutdown -p
@@ -59,7 +58,7 @@ set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 
-###---Audio and Music Definitions---###
+# #---Audio and Music Definitions---# #
 
 ##For spotify
 #set $music spotify
@@ -71,7 +70,6 @@ set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 #set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
 #set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
 
-# #---Audio and Music Definitions---# #
 # For mpc:
 set $music --no-startup-id st -e ncmpcpp
 set $pause --no-startup-id mpc toggle
@@ -286,15 +284,13 @@ bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
 
+for_window [class="Pinentry"] sticky enable
 for_window [class="Blender"] move to workspace $ws6
-for_window [class="Thunderbird"] move to workspace $ws9
 for_window [class="marble"] move to workspace $ws7
-#for_window [class="Firefox"] move to workspace $ws2
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
-for_window [window_role="tr-main"] move to workspace $ws8
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 
 
@@ -466,9 +462,9 @@ bindsym XF86Display		exec --no-startup-id arandr
 #bindsym XF86KbdLightOnOff	exec
 bindsym XF86KbdBrightnessDown	exec --no-startup-id python3.6 ~/.i3/kb-lights.py -
 bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.i3/kb-lights.py +
-#bindsym XF86Reply		exec
-#bindsym XF86MailForward	exec
-#bindsym XF86Save		exec
+##bindsym XF86Reply		exec
+##bindsym XF86MailForward	exec
+##bindsym XF86Save		exec
 bindsym XF86Documents		exec $term -e ranger ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
