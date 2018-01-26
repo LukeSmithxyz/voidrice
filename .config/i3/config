@@ -53,6 +53,11 @@ exec --no-startup-id nm-applet
 #set $reboot sudo openrc-shutdown -r
 #set $netrefresh --no-startup-id sudo rc-service NetworkManager restart
 
+#RUNIT
+#set $shutdown sudo shutdown -h now
+#set $reboot sudo reboot
+#set $netrefresh --no-startup-id sudo sv restart NetworkManager
+
 #SYSTEMD
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
@@ -468,4 +473,4 @@ bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.i3/kb-lights.py +
 bindsym XF86Documents		exec $term -e ranger ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
-bindsym XF86WLAN		exec --no-startup-id sudo systemctl restart NetworkManager
+bindsym XF86WLAN		exec $netrefresh
