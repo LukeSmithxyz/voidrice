@@ -224,8 +224,8 @@ bindsym $mod+Shift+x		exec $shutdown
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
 
-bindsym $mod+c			exec --no-startup-id mpv --geometry=-0-0 --autofit=30% /dev/video0
-bindsym $mod+Shift+c		exec pkill -f dev/video
+bindsym $mod+c			exec --no-startup-id camtoggle
+#bindsym $mod+Shift+c
 
 bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
 bindsym $mod+Shift+v		exec projectM-pulseaudio
