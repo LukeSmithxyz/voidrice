@@ -223,6 +223,7 @@ bindsym $mod+Shift+x		exec $shutdown
 # Bindings to make the webcam float and stick.
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
+for_window [title="video0 - mpv"] border pixel 0
 
 bindsym $mod+c			exec --no-startup-id camtoggle
 #bindsym $mod+Shift+c
