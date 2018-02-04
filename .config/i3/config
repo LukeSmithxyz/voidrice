@@ -24,7 +24,7 @@ font pango:mono 9
 set $mod Mod4
 set $term --no-startup-id st
 set $video --no-startup-id bash ~/.config/Scripts/video.sh
-set $stoprec --no-startup-id killall ffmpeg & killall screenkey
+set $stoprec --no-startup-id killall ffmpeg
 
 
 # #---Starting External Scripts---# #
@@ -374,8 +374,8 @@ bindsym $mod+Shift+bracketright exec $bigfor
 bindsym Print 			exec --no-startup-id scrot
 bindsym Shift+Print 		exec --no-startup-id scrot -u
 
-# For recording audio/video or stop recording. Also screenkey for visual typing.
-bindsym $mod+Print		exec --no-startup-id screenkey
+# For recording audio/video or stop recording. Also toggle screenkey for visual typing.
+bindsym $mod+Print		exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Scroll_Lock	exec $audio
 bindsym $mod+Insert		exec $screencast
 bindsym $mod+Pause		exec $video
@@ -389,7 +389,7 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 3
+for_window [instance="dropdown"] border pixel 5
 exec --no-startup-id $term -n dropdown -e tmux
 
 # Then I have a window running R I use for basic arithmetic
