@@ -1,4 +1,10 @@
 # vim: filetype=i3
+#  _          _          ____            _ _   _     _       _ _____    ____             __ _
+# | |   _   _| | _____  / ___| _ __ ___ (_) |_| |__ ( )___  (_)___ /   / ___|___  _ __  / _(_) __ _
+# | |  | | | | |/ / _ \ \___ \| '_ ` _ \| | __| '_ \|// __| | | |_ \  | |   / _ \| '_ \| |_| |/ _` |
+# | |__| |_| |   <  __/  ___) | | | | | | | |_| | | | \__ \ | |___) | | |__| (_) | | | |  _| | (_| |
+# |_____\__,_|_|\_\___| |____/|_| |_| |_|_|\__|_| |_| |___/ |_|____/   \____\___/|_| |_|_| |_|\__, |
+                                                                                            # |___/
 
 # This is Luke Smith's i3-gaps configuration file.
 # Me: http://lukesmith.xyz
@@ -219,7 +225,7 @@ for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
 
 bindsym $mod+c			exec --no-startup-id mpv --geometry=-0-0 --autofit=30% /dev/video0
-bindsym $mod+Shift+c		exec killall mpv /dev/video0
+bindsym $mod+Shift+c		exec pkill -f dev/video
 
 bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
 bindsym $mod+Shift+v		exec projectM-pulseaudio

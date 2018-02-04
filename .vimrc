@@ -15,13 +15,35 @@
 	"colorscheme wal
 	set encoding=utf-8
 	set number
-	"set relativenumber
+	set relativenumber
+
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+	set splitbelow
+	set splitright
+
+" Shortcutting split navigation, saving a keypress:
+	map <C-h> <C-w>h
+	map <C-j> <C-w>j
+	map <C-k> <C-w>k
+	map <C-l> <C-w>l
+
+" Replace all is aliased to S.
+	nnoremap S :%s//g<Left><Left>
+
+" Open my bibliography file in split
+	map <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
+
+" Open the selected text in a split (i.e. should be a file).
+	map <leader>o "oyaW:sp <C-R>o<CR>
+	xnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
+	vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 
 "For saving view folds:
 	"au BufWinLeave * mkview
 	"au BufWinEnter * silent loadview
 
-let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}	"Interpret .md files, etc. as .markdown
+" Interpret .md files, etc. as .markdown
+	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
 " Make calcurse notes markdown compatible:
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
@@ -33,12 +55,18 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 	so ~/.vim/luke/deadkeys.vim
 	nm <F7> :call ToggleDeadKeys()<CR>
 
+" Source my IPA shorcuts:
+	map <leader>i :so ~/.vim/luke/ipa.vim<CR>
+
+" Use urlview to choose and open a url:
+	:noremap <leader>u :w<Home>silent <End> !urlview<CR>
+
+" Copy selected text to system clipboard (requires xclip installed):
+	vnoremap <C-c> "cy<esc>:!echo -n '<C-R>c' \|<space>xclip<CR><enter>
+
 " Goyo plugin makes text more readable when writing prose:
 	map <F10> :Goyo<CR>
 	inoremap <F10> <esc>:Goyo<CR>a
-
-" Source my IPA shorcuts:
-	so ~/.vim/luke/ipa.vim
 
 " Enable Goyo by default for mutt writting
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=72
@@ -59,12 +87,6 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear
 
-" Use urlview to choose and open a url:
-	:noremap <leader>u :w<Home>silent <End> !urlview<CR>
-
-"Copy selected text to system clipboard (requires gvim installed):
-	vnoremap <C-c> "+y
-
 " Disables automatic commenting on newline:
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -81,17 +103,13 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 	inoremap jw <Esc>
 	inoremap wj <Esc>
 
-"Shortcutting split navigation, saving a keypress:
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
 
-"Replace all is aliased to S. Visual mode shortcut doesn't work yet for some
-"reason...
-	nnoremap S :%s//g<Left><Left>
-	vnoremap S noop
-	vnoremap S :s//g<Left><Left>
+ "____        _                  _
+"/ ___| _ __ (_)_ __  _ __   ___| |_ ___
+"\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
+ "___) | | | | | |_) | |_) |  __/ |_\__ \
+"|____/|_| |_|_| .__/| .__/ \___|\__|___/
+              "|_|   |_|
 
 """LATEX
 	" Word count:
@@ -165,7 +183,7 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 	autocmd Filetype tex inoremap ;inst {\textsc{inst}}
 	autocmd FileType tex inoremap ;tipa \textipa{}<Space><++><Esc>T{i
 
-"""PHP
+"""PHP/HTML
 	autocmd FileType php,html inoremap ;b <b></b><Space><++><Esc>FbT>i
 	autocmd FileType php,html inoremap ;i <em></em><Space><++><Esc>FeT>i
 	autocmd FileType php,html inoremap ;h1 <h1></h1><Enter><Enter><++><Esc>2kf<i
@@ -197,6 +215,7 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 	autocmd FileType bib inoremap ;c @incollection{<Enter>author<Space>=<Space>"<++>",<Enter>title<Space>=<Space>"<++>",<Enter>booktitle<Space>=<Space>"<++>",<Enter>editor<Space>=<Space>"<++>",<Enter>year<Space>=<Space>"<++>",<Enter>publisher<Space>=<Space>"<++>",<Enter>}<Enter><++><Esc>8kA,<Esc>i
 
 "MARKDOWN
+	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 	autocmd Filetype markdown,rmd inoremap ;n ---<Enter><Enter>
 	autocmd Filetype markdown,rmd inoremap ;b ****<++><Esc>F*hi
 	autocmd Filetype markdown,rmd inoremap ;s ~~~~<++><Esc>F~hi
@@ -210,7 +229,8 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 	autocmd Filetype markdown,rmd inoremap ;l --------<Enter>
 	autocmd Filetype markdown map <F5> :!pandoc<space><C-r>%<space>-o<space><C-r>%.pdf<Enter><Enter>
 	autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
-	autocmd Filetype rmd inoremap ;r ```{r,<space>echo=TRUE}<CR>```<CR><CR><esc>2kO
+	autocmd Filetype rmd inoremap ;r ```{r}<CR>```<CR><CR><esc>2kO
+	autocmd Filetype rmd inoremap ;p ```{python}<CR>```<CR><CR><esc>2kO
 
 """.xml
 	"autocmd FileType xml inoremap ;e <item><Enter><title><++></title><Enter><pubDate><Esc>:put<Space>=strftime('%c')<Enter>A</pubDate><Enter><link><++></link><Enter><description><++></description><Enter></item>
