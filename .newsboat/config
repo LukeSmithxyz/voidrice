@@ -26,7 +26,7 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
-
 browser webview
 macro w open-in-browser
 macro v set browser "i3 exec mpv"; open-in-browser ; set browser $BROWSER
+macro y set browser "spawndl"; open-in-browser ; set browser $BROWSER
