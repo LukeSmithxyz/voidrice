@@ -224,6 +224,7 @@ bindsym $mod+Shift+x		exec $shutdown
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
 for_window [title="video0 - mpv"] border pixel 0
+no_focus [title="video0 - mpv"]
 
 bindsym $mod+c			exec --no-startup-id camtoggle
 #bindsym $mod+Shift+c
@@ -304,6 +305,7 @@ for_window [class="Gimp"] move workspace $ws5
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
+for_window [instance="dl"] move workspace $ws10
 
 
 workspace $ws6 gaps inner 0
