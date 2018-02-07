@@ -393,7 +393,9 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 5
-exec --no-startup-id $term -n dropdown -e tmux
+# Runs the tmuxinit script, which searches for an earlier tmux instance,
+# otherwise starts a new one (to prevent multiple dropdown sessions).
+exec --no-startup-id $term -n dropdown -e tmuxinit
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
