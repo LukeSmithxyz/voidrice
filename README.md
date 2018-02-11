@@ -12,7 +12,7 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 + bash
 + ranger
 + qutebrowser
-+ mutt/msmtp/offlineimap (For offline syncing of email, with configs easy to change to a gmail account)
++ ~~mutt/msmtp/offlineimap~~ Now moved to [LukeSmithxyz/mutt-wizard](https://github.com/LukeSmithxyz/mutt-wizard)
 + calcurse
 + ncmpcpp and mpd (my main music player)
 + Music on Console (moc and mocp as an alternative music player)
@@ -23,11 +23,9 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 
 ## More documentation
 
-Check other config folders for more specific documentation. For example [config contains documentation on how to set up mutt with your email account.
+Check other config folders for more specific documentation.
 
 [i3 guide and config](.config/i3/i3_guide.md)
-
-[Email configuration](.config/mutt/email.md)
 
 [ranger configuration](.config/ranger/luke_ranger_readme.md)
 
