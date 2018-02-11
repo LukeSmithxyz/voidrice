@@ -27,9 +27,6 @@
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 
-" Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
-
 " Open my bibliography file in split
 	map <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
 
@@ -37,6 +34,9 @@
 	map <leader>o "oyaW:sp <C-R>o<CR>
 	xnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
 	vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
+
+" Replace all is aliased to S.
+	nnoremap S :%s//g<Left><Left>
 
 "For saving view folds:
 	"au BufWinLeave * mkview
@@ -69,9 +69,11 @@
 	inoremap <F10> <esc>:Goyo<CR>a
 
 " Enable Goyo by default for mutt writting
+	" Goyo's width will be the line limit in mutt.
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=72
 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
-	" Goyo's width will be the line limit in mutt.
+	" Automatically start in insert mode.
+	autocmd BufRead,BufNewFile /tmp/neomutt* :exe "normal! O"
 
 " Enable autocompletion:
 	set wildmode=longest,list,full
