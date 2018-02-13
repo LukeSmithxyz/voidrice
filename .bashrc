@@ -23,9 +23,9 @@ alias calender="calcurse"
 alias getmail="offlineimap && notmuch new"
 alias gm="offlineimap && notmuch new"
 
-o() { xdg-open $@ & }
-
 # System Maintainence
+alias mw="~/.config/mutt/mutt-wizard.sh"
+alias muttwizard="~/.config/mutt/mutt-wizard.sh"
 alias progs="pacman -Qet" # List programs I've installed
 alias orphans="pacman -Qdt" # List orphan programs
 alias upgr="neofetch && sudo pacman -Syyu --noconfirm && echo Update complete. | figlet"
