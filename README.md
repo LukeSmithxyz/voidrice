@@ -25,7 +25,7 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 
 Check other config folders for more specific documentation.
 
-[i3 guide and config](.config/i3/i3_guide.md)
+[i3 guide and config](.config/i3/i3_guide.rmd)
 
 [ranger configuration](.config/ranger/luke_ranger_readme.md)
 

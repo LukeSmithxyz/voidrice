@@ -72,8 +72,6 @@
 	" Goyo's width will be the line limit in mutt.
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=72
 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
-	" Automatically start in insert mode.
-	autocmd BufRead,BufNewFile /tmp/neomutt* :exe "normal! O"
 
 " Enable autocompletion:
 	set wildmode=longest,list,full
