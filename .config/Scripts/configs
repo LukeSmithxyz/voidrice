@@ -12,6 +12,6 @@ cft	~/.config/termite/config
 cfT	~/.tmux.conf
 eb	~/Documents/LaTeX/uni.bib
 cv	~/Documents/LaTeX/cv.tex
-cfa	~/.config/mutt/aliases
+cfa	~/.config/mutt/etc/aliases
 cfp	~/.config/polybar/config
 cfd	~/.Xdefaults
