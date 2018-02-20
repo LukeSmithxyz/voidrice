@@ -51,7 +51,7 @@ alias gitpass="git config --global credential.helper cache"
 alias tr="transmission-remote"
 alias mkd="mkdir -pv"
 alias rf="source ~/.bashrc"
-alias ref="~/.config/Scripts/shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
+alias ref="shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias bars="bash ~/.config/polybar/launch.sh" # Run Polybar relaunch script
 alias bw="wal -i ~/.config/wall.png" # Rerun pywal
 weath() { curl wttr.in/$1 ;} # Check the weather (give city or leave blank).
@@ -74,7 +74,7 @@ alias YT="youtube-viewer"
 alias ethspeed="speedometer -r enp0s25"
 alias wifispeed="speedometer -r wlp3s0"
 alias starwars="telnet towel.blinkenlights.nl"
-alias tpbs="clear && figlet -c TPB Search && ~/.config/Scripts/tpb.sh" # Pirate Bay search
+alias tpbs="clear && figlet -c TPB Search && tpb.sh" # Pirate Bay search
 
 # TeX
 alias Txa="cp ~/Documents/LaTeX/article.tex"
