@@ -133,7 +133,7 @@ I use scrot and ffmpeg to make different recordings of the desktop and audio. Al
 + Mod+Delete -- kills ffmpeg and screenkey, thus ending recordings and screen
 + ThinkVantage button (on Thinkpads) -- kills ffmpeg and screenkey, thus ending recordings
 
-Each of the recording scripts are located in `~/.config/Scripts/`. You can check them out or modify them if needed.
+Each of the recording scripts are located in `~/.scripts`. You can check them out or modify them if needed.
 
 ## Other buttons
 
