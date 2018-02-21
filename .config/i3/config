@@ -23,7 +23,7 @@ gaps outer 15
 font pango:mono 9
 set $mod Mod4
 set $term --no-startup-id st
-set $video --no-startup-id bash ~/.config/Scripts/video.sh
+set $video --no-startup-id bash video.sh
 set $stoprec --no-startup-id killall ffmpeg
 
 
@@ -37,7 +37,7 @@ exec --no-startup-id sudo mount -a
 #Composite manager:
 exec --no-startup-id compton --xrender-sync-fence
 #Try to load VGA screen if available:
-exec --no-startup-id ~/.config/Scripts/screen.sh v
+exec --no-startup-id screen.sh v
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 #Add wallpaper:
@@ -123,8 +123,8 @@ set $beg --no-startup-id mpc seek 0%
 #set $bigdec --no-startup-id amixer sset Master 5%-
 #set $mute --no-startup-id amixer sset Master toggle
 #set $truemute --no-startup-id amixer sset Master mute
-#set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_alsa.sh
-#set $audio --no-startup-id bash ~/.config/Scripts/audio_alsa.sh
+#set $screencast  --no-startup-id bash screencast_alsa.sh
+#set $audio --no-startup-id bash audio_alsa.sh
 
 #For PULSEAUDIO/PAMIXER
 set $inc --no-startup-id pamixer --allow-boost -i 5
@@ -134,8 +134,8 @@ set $bigdec --no-startup-id pamixer --allow-boost -d 15
 set $mute --no-startup-id pamixer --allow-boost -t
 set $micmute --no-startup-id pamixer --allow-boost -t
 set $truemute --no-startup-id pamixer -m
-set $screencast  --no-startup-id bash ~/.config/Scripts/screencast_pulse.sh
-set $audio --no-startup-id bash ~/.config/Scripts/audio_pulse.sh
+set $screencast  --no-startup-id bash screencast_pulse.sh
+set $audio --no-startup-id bash audio_pulse.sh
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
@@ -338,9 +338,9 @@ bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 ##bindsym $mod+F7
 ##bindsym $mod+F8
 bindsym $mod+F9		exec --no-startup-id sudo mount -a
-bindsym $mod+F10	exec --no-startup-id ~/.config/Scripts/screen.sh l ;; exec --no-startup-id ~/.config/polybar/launch.sh
-bindsym $mod+F11	exec --no-startup-id ~/.config/Scripts/screen.sh v ;; exec --no-startup-id ~/.config/polybar/launch.sh
-bindsym $mod+F12	exec --no-startup-id ~/.config/Scripts/screen.sh d ;; exec --no-startup-id ~/.config/polybar/launch.sh
+bindsym $mod+F10	exec --no-startup-id screen.sh l ;; exec --no-startup-id ~/.config/polybar/launch.sh
+bindsym $mod+F11	exec --no-startup-id screen.sh v ;; exec --no-startup-id ~/.config/polybar/launch.sh
+bindsym $mod+F12	exec --no-startup-id screen.sh d ;; exec --no-startup-id ~/.config/polybar/launch.sh
 
 
 # #---Arrow Keys---# #
