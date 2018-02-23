@@ -1,9 +1,6 @@
 stty -ixon
 shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
 
-# For directory and config shortcuts:
-source ~/.bash_shortcuts
-
 # Setting Bash prompt. Capitalizes username and host if root user (my root user uses this same config file).
 if [ "$EUID" -ne 0 ]
 	then export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
