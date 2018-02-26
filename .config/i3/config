@@ -28,6 +28,8 @@ set $stoprec --no-startup-id killall ffmpeg
 
 
 # #---Starting External Scripts---# #
+#Increase key rate
+exec --no-startup-id xset r rate 300 50
 #Music player daemon:
 exec --no-startup-id mpd
 #Torrent daemon:
@@ -139,7 +141,7 @@ set $audio --no-startup-id bash audio_pulse.sh
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
-##bindsym $mod+Shift+Return 	exec $term -e tmux
+bindsym $mod+Shift+Return 	exec $term -e vim ~/vimwiki/index.wiki
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
@@ -298,6 +300,7 @@ bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
 
 for_window [class="Pinentry"] sticky enable
+for_window [class="sent"] border pixel 0px
 for_window [class="Blender"] move to workspace $ws6
 for_window [class="marble"] move to workspace $ws7
 for_window [title="GIMP Startup"] move workspace $ws5
