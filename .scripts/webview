@@ -1,23 +1,29 @@
 #!/bin/bash
 
 # Feed script a url.
-# Opens the url with xdg-open unless it is an image,
-# in which case it downloads in feh.
+# If an image, it will view in feh,
+# if a video or gif, it will view in mpv
+# if a music file or pdf, it will download,
+# otherwise it opens link in browser.
+
+# List of sites that will be opened in mpv.
+vidsites="youtube.com
+	\|hooktube.com
+	\|bitchute.com
+	"
+detectVidSite() { (echo "$1" | grep "$vidsites">/dev/null) && mpv -quiet $1 > /dev/null & }
 
 ext="${1##*.}"
 mpvFiles="mkv mp4 gif"
 fehFiles="png jpg jpeg jpe"
 wgetFiles="mp3 flac opus mp3?source=feed pdf"
 
-pgrep i3 ifi3="i3 exec"
-
 if echo $fehFiles | grep -w $ext > /dev/null; then
-	nohup feh "$1" >/dev/null &
-#elif [[ "$ext" == "gif" ]]; then
+	feh "$1" >/dev/null &
 elif echo $mpvFiles | grep -w $ext > /dev/null; then
-	nohup mpv --loop --quiet "$1" > /dev/null &
+	mpv --loop --quiet "$1" > /dev/null &
 elif echo $wgetFiles | grep -w $ext > /dev/null; then
-	nohup wget "$1" >/dev/null &
+	wget "$1" >/dev/null &
 else
-	nohup $BROWSER "$1" >/dev/null &
+	detectVidSite "$1"
 fi
