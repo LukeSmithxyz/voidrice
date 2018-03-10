@@ -11,8 +11,6 @@ vidsites="youtube.com
 	\|hooktube.com
 	\|bitchute.com
 	"
-detectVidSite() { (echo "$1" | grep "$vidsites">/dev/null) && mpv -quiet $1 > /dev/null & }
-
 ext="${1##*.}"
 mpvFiles="mkv mp4 gif"
 fehFiles="png jpg jpeg jpe"
@@ -24,6 +22,8 @@ elif echo $mpvFiles | grep -w $ext > /dev/null; then
 	mpv --loop --quiet "$1" > /dev/null &
 elif echo $wgetFiles | grep -w $ext > /dev/null; then
 	wget "$1" >/dev/null &
+elif echo "$1" | grep "$vidsites">/dev/null; then
+	mpv -quiet "$1" > /dev/null &
 else
-	detectVidSite "$1"
+	$BROWSER "$1" 2>/dev/null & disown
 fi
