@@ -139,6 +139,7 @@ Each of the recording scripts are located in `~/.scripts`. You can check them ou
 
 I've mapped those extra buttons that some keyboards have (play and pause buttons, email, webbrowsing buttons, etc.) to what you would expect.
 
+
 # Special traits of my rice
 
 ## Easy config access
@@ -166,6 +167,12 @@ Each time you save changes to either the config shortcut file or the folder shor
 Don't like something about the rice? Change it. If you have a problem, try figuring it out yourself, but if you can't, ask on my YouTube or by my email.
 
 EDIT: July 31, 2017. All the feedback I've gotten is tremendous and I'm glad this has gotten so many people into customization!
+
+# Common questions
+
+## How do I change the background/wallpaper?
+
+The easiest way is to use ranger, navigate to the file you want as your background, and press `bg`. To be specific, i3 will always be looking to the file in `~/.config/wall.png` for the wallpaper, this ranger command copies the given file there and reruns feh to update it.
 
 # Contact
 
