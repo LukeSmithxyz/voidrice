@@ -1,6 +1,6 @@
 ---
-title: A Friendly Guide to Luke's i3 Rice
-author: Luke Smith
+title: A Friendly Guide to LARBS
+author: Luke Smith ([https://lukesmith.xyz](https://lukesmith.xyz))
 output: pdf_document
 linkcolor: blue
 ---
@@ -12,23 +12,31 @@ Use vim keys (h/j/k/l) to navigate this document. Pressing W will fit it to wind
 
 Questions or suggestions? Email me at [luke@lukesmith.xyz](mailto:luke@lukesmith.xyz).
 
+# Welcome!
+
 ## Basic goals and principles of this system:
 
 + Naturalness -- Remove the border between mind and matter: everything important should be as few keypresses as possible away from you, and you shouldn't have to think about what you're doing. Immersion.
 + Economy -- Programs should be simple and light on system resources and highly extensible. Because of this, many are terminal or small ncurses programs that have all the magic inside of them.
 + Keyboard/vim-centrality -- All terminal programs (and other programs) use vim keys when possible. Your hands never need leave the home row or thereabout.
 
-## General changes
+## General keyboard changes
 
-+ Capslock is now an alternative escape. Makes vim-craft much more efficient.
++ Capslock is a useless key in high quality space. It's now remapped. If you press it alone, it will function as escape, making vimcraft much more natural, but you can also hold it down and it will act as another Windows/super/mod key.
 + The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button. This is to make one-handing on my laptops easier.
-+ The rice also uses the US International keyboard by default. This allows you to type a lot of characters in many different European languages. If you'd like to change this, you need only remove the `setxkbmap` line in the i3 config.
++ The rice also uses the US International keyboard by default. This allows you to type a lot of characters in many different European languages.
 
-# The Polybar Status Bar
+If you'd like to change any of these keyboard changes, you need only open and change `~/.scripts/remaps`. Actually, this should go without saying, but *everything* here can easily be changed.
+
+## The Polybar Status Bar
 
 If you're new to i3, notice the status bar on the top of the screen. This is Polybar. To the left side, you'll see the numbers of your current workspace(s). If you have a song playing in mpd, its name will appear to the left as well. On the right side, you'll see various system status notifiers, date, CPU tempurature, remaining hard drive space, etc. I'm sure you can figure it out. Several modules will be click-sensitive, although if you're using my system as indended, you probably won't be doing much clicking.
 
+Polybar config: `cfp`: `~/.config/polybar/config`
+
 # Key Bindings
+
+All of the bindings below are in `~/.config/i3/config` (accessible by typing `cfi` in the terminal) and can all be easily changed.
 
 ## Window basics
 
@@ -55,10 +63,12 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 
 ## Basic Programs
 
+*Note:* LARBS will install nearly all of these programs by default, but some only come if you chose an extra option. Naturally, you can use `packer` to look for and install any you want to add.
+
 + Mod+r -- ranger (file browser/manager)
 + Mod+e -- mutt (email)
 + Mod+m -- ncmpcpp (music player)
-+ Mod+a -- R calculator (be sure to close with Mod+a for reusability)
++ Mod+a -- R/Python calculator (be sure to close with Mod+a for reusability)
 + Mod+i -- htop (system info)
 + Mod+n -- newsboat (RSS feed reader)
 + Mod+y -- calcurse (calendar and schedule)
@@ -86,8 +96,8 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+F4 -- Hibernate
 + Mod+F6 -- transmission torrent client (cli)
 + Mod+F5 -- Reset Network Manager, search for new networks
-+ Mod+F7 -- <++>
-+ Mod+F8 -- <++>
++ Mod+F7 -- (No mapping)
++ Mod+F8 -- (No mapping)
 + Mod+F10 -- Switch to laptop screen
 + Mod+F11 -- Switch to VGA display (if available)
 + Mod+F12 -- Switch to dual VGA/laptop display (if available)
@@ -116,7 +126,7 @@ There are ten workspaces. They work just like those in vanilla i3 with some addi
 + Mod+(Number) -- Go to that number workspace
 + Mod+Shift+(Number) -- Send window to that workspace
 + Mod+Tab -- Go to previous workspace
-+ Mod+g or escape -- Go to left workspace
++ Mod+g -- Go to left workspace
 + Mod+; -- Go to right workspace
 + Mod+Shift+Delete -- "Porno-mode" Press this key sequence if you want to hide what you have on your screen. Moves to a totally new workspace, mutes sound, pauses music and brings up distraction windows.
 
@@ -129,9 +139,9 @@ I use scrot and ffmpeg to make different recordings of the desktop and audio. Al
 + Mod+Insert -- Begin screencast
 + Mod+ScrollLock -- Begin audio recording
 + Mod+Pause -- Begin screen recording without audio
-+ Mod+Print Screen -- Start screenkey
-+ Mod+Delete -- kills ffmpeg and screenkey, thus ending recordings and screen
-+ ThinkVantage button (on Thinkpads) -- kills ffmpeg and screenkey, thus ending recordings
++ Mod+Print Screen -- Turn on and off screenkey (if installed) for visual typing display
++ Mod+Delete -- kills ffmpeg, thus ending recordings
++ ThinkVantage button (on Thinkpads) -- kills ffmpeg, thus ending recordings
 
 Each of the recording scripts are located in `~/.scripts`. You can check them out or modify them if needed.
 
@@ -162,17 +172,27 @@ Lastly qutebrowser implements these shortcuts as well. When you see a file or im
 
 Each time you save changes to either the config shortcut file or the folder shortcut file in vim, vim will automatically run a bash script that updates your bash/ranger config, allowing you to use your new shortcuts in your next instance of bash/ranger or after resourcing your rc files.
 
-# Explore and customize
-
-Don't like something about the rice? Change it. If you have a problem, try figuring it out yourself, but if you can't, ask on my YouTube or by my email.
-
-EDIT: July 31, 2017. All the feedback I've gotten is tremendous and I'm glad this has gotten so many people into customization!
-
-# Common questions
+# Other Housekeeping
 
 ## How do I change the background/wallpaper?
 
 The easiest way is to use ranger, navigate to the file you want as your background, and press `bg`. To be specific, i3 will always be looking to the file in `~/.config/wall.png` for the wallpaper, this ranger command copies the given file there and reruns feh to update it.
+
+## How do I set up my email?
+
+1. Create a GPG private/public key pair if you haven't already.
+2. Type `muttwizard` in the terminal and follow the directions, specifically:
+	a. Add an account.
+	b. Run `offlineimap -o` in the terminal.
+	c. Select the "Autodetect mailboxes" option.
+
+You should then be able to open your mail in mutt with Mod+e. And this is somewhat of a miracle considering all of the moving pieces that have come together to make this happen. Honestly, people give me all this credit for making LARBS, but the mutt-wizard is probably my favorite work.
+
+You might also want to run `notmuch setup` to set `notmuch` up as a mailindexer. This will allow quick searches of your mail in mutt with ctrl+f.
+
+## How do I set up my music?
+
+By default, mpd, the music daemon assumes that `~/Music` is your music directory. This can be changed in `~/.config/mpd/mpd.conf`. When you add music to your music folder, you may have to run `mpc up` in the terminal to update the database. mpd is controled by ncmpcpp, which is accessible by Mod+m.
 
 # Contact
 
@@ -180,7 +200,9 @@ The easiest way is to use ranger, navigate to the file you want as your backgrou
 
 [http://lukesmith.xyz](http://lukesmith.xyz) -- For stalking!
 
-[Send Me Money!](https://paypal.me/LukeMSmith) -- For gratitude!
+[PayPal](https://paypal.me/LukeMSmith) -- For gratitude!
+
+[Patreon](https://patreon.com/lukesmith) -- For support!
 
 [My Github Page](https://github.com/LukeSmithxyz) -- For the code behind it!
 
