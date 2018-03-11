@@ -45,12 +45,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 #Add wallpaper:
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
 #exec_always --no-startup-id wal -c -i ~/.config/wall.png
-#Remaps the caps lock button to escape and uses the US international keyboard with dead keys
-exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option caps:escape
-#exec_always --no-startup-id setxkbmap -option caps:escape
-#Remap Menu button to Super:
-#exec_always --no-startup-id xmodmap -e 'keycode 135 = Super_R'
-bindsym Menu	exec --no-startup-id xmodmap -e 'keycode 135 = Super_R'
+#Runs the key remapping scripts
+exec --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
@@ -467,7 +463,7 @@ bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
 bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
 bindsym XF86Suspend		exec --no-startup-id ~/.config/i3/lock.sh
 bindsym XF86Close		kill
-bindsym XF86WebCam		exec mpv /dev/video0
+bindsym XF86WebCam		exec --no-startup-id camtoggle
 bindsym XF86Mail		exec $term -e neomutt
 bindsym XF86Messenger		exec $term -e weechat
 bindsym XF86Search		exec $BROWSER https://duckduckgo.com
