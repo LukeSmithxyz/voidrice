@@ -17,6 +17,7 @@ ffmpeg -y \
 -framerate 60 \
 -s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
 -i :0.0 \
+-thread_queue_size 2048 \
 -f alsa -i default \
 -r 30 \
  -c:v libx264 -r 30 -c:a flac $filename
