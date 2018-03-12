@@ -22,7 +22,7 @@ elif echo $mpvFiles | grep -w $ext > /dev/null; then
 	mpv --loop --quiet "$1" > /dev/null &
 elif echo $wgetFiles | grep -w $ext > /dev/null; then
 	wget "$1" >/dev/null &
-elif echo "$1" | grep "$vidsites">/dev/null; then
+elif echo "$@" | grep "$vidsites">/dev/null; then
 	mpv -quiet "$1" > /dev/null &
 else
 	$BROWSER "$1" 2>/dev/null & disown
