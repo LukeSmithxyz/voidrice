@@ -48,7 +48,7 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+q or Q -- Close window
 + Mod+d -- rofi (For running commands or programs without shortcuts)
 + Mod+t -- Toggle between spawning vertically and horizontally
-+ Mod+f or F11 -- Fullscreen
++ Mod+f -- Fullscreen
 + Mod+h/j/k/l -- Move to different windows
 + Mod+H/J/K/L -- Move a window around
 + Mod+Y/U/I/O -- Resize windows
