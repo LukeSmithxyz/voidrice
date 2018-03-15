@@ -1225,7 +1225,7 @@ c.url.auto_search = 'naive'
 ## The page to open if :open -t/-b/-w is used without URL. Use
 ## `about:blank` for a blank page.
 ## Type: FuzzyUrl
-c.url.default_page = '/home/luke/.config/startpage/startpage.html'
+c.url.default_page = '~/.config/startpage/startpage.html'
 
 ## The URL segments where `:navigate increment/decrement` will search for
 ## a number.
@@ -1283,7 +1283,7 @@ c.url.searchengines = {
 
 ## The page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = ['/home/luke/.config/startpage/startpage.html']
+c.url.start_pages = ['~/.config/startpage/startpage.html']
 
 ## The URL parameters to strip with `:yank url`.
 ## Type: List of String
