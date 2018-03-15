@@ -315,19 +315,6 @@ workspace $ws8 gaps inner 0
 workspace $ws8 gaps outer 0
 
 # #---Function Buttons---# #
-##bindsym F1		nop
-##bindsym F2
-##bindsym F3
-##bindsym F4
-##bindsym F5
-##bindsym F6
-##bindsym F7
-##bindsym F8
-##bindsym F9
-##bindsym F10
-bindsym F11		fullscreen toggle
-##bindsym F12
-
 bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id arandr
