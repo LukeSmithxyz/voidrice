@@ -43,7 +43,7 @@ I have a job, but every penny I get from followers or subscribers is more incent
 
 # Programs Used
 
-+ i3-gaps, NetworkManager,compton
++ i3-gaps, NetworkManager, compton
 + Terminal apps -- ranger, ncmpcpp, mpd, htop, weechat, neomutt, calcurse, newsbeuter, transmission-remote-cli, w3m, youtube-dl, ffmpeg, scrot
 + Background stuff -- mpd, transmission
 + Lightweight non-terminal apps -- mupdf, feh, rofi, network manager applet, arandr, mpv
