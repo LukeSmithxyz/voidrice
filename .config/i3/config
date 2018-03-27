@@ -26,7 +26,6 @@ set $term --no-startup-id st
 set $video --no-startup-id bash video.sh
 set $stoprec --no-startup-id killall ffmpeg
 
-
 # #---Starting External Scripts---# #
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
@@ -42,9 +41,6 @@ exec --no-startup-id compton --xrender-sync-fence
 exec --no-startup-id screen.sh v
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-#Add wallpaper:
-exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
-#exec_always --no-startup-id wal -c -i ~/.config/wall.png
 #Runs the key remapping scripts
 exec --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
@@ -218,19 +214,13 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+x		exec $shutdown
 
-# Bindings to make the webcam float and stick.
-for_window [title="video0 - mpv"] floating enable
-for_window [title="video0 - mpv"] sticky enable
-for_window [title="video0 - mpv"] border pixel 0
-no_focus [title="video0 - mpv"]
-
 bindsym $mod+c			exec --no-startup-id camtoggle
 #bindsym $mod+Shift+c
 
 bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
 bindsym $mod+Shift+v		exec projectM-pulseaudio
 
-##bindsym $mod+b			exec $prev
+bindsym $mod+b			floating toggle; sticky toggle; exec --no-startup-id bottomleft
 bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
 
 bindsym $mod+n			exec $term -e newsboat
