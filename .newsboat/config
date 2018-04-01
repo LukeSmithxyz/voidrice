@@ -1,4 +1,4 @@
-auto-reload yes
+#auto-reload yes
 
 external-url-viewer "urlview"
 
@@ -14,6 +14,7 @@ bind-key d pagedown
 bind-key u pageup
 bind-key l open
 bind-key h quit
+bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread
 bind-key D pb-download
@@ -26,7 +27,11 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
-browser webview
-macro w open-in-browser
-macro v set browser "i3 exec mpv"; open-in-browser ; set browser $BROWSER
-macro y set browser "spawndl"; open-in-browser ; set browser $BROWSER
+browser linkhandler
+macro , open-in-browser
+macro v set browser "i3 exec mpv"; open-in-browser ; set browser linkhandler
+macro y set browser "spawndl"; open-in-browser ; set browser linkhandler
+macro w set browser "w3m"; open-in-browser ; set browser linkhandler
+# c copies the link to the clipboard.
+# The line below is probably the skiddiest line I've ever written.
+macro c set browser "copy(){ echo $1 | xclip ;}; copy "; open-in-browser ; set browser linkhandler
