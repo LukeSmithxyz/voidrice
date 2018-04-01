@@ -288,21 +288,43 @@ bindsym $mod+Shift+0	move container to workspace $ws10
 for_window [class="Pinentry"] sticky enable
 for_window [class="sent"] border pixel 0px
 for_window [class="Blender"] move to workspace $ws6
+workspace $ws6 gaps inner 0
+workspace $ws6 gaps outer 0
 for_window [class="marble"] move to workspace $ws7
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
+workspace $ws5 gaps inner 0
+workspace $ws5 gaps outer 0
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 for_window [instance="dl"] move workspace $ws10
 
+# First I have a tmux window used for background scripts.
+# I'll later bind this to mod+u.
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] move scratchpad
+for_window [instance="dropdown"] border pixel 5
+# Runs the tmuxinit script, which searches for an earlier tmux instance,
+# otherwise starts a new one (to prevent multiple dropdown sessions).
+exec --no-startup-id $term -n dropdown -e tmuxinit
+# Runs neofetch on first tmux screen if installed.
+exec_always --no-startup-id "tmux send-keys -t 0:0 'clear && neofetch 2>/dev/null' Enter"
 
-workspace $ws6 gaps inner 0
-workspace $ws6 gaps outer 0
-workspace $ws5 gaps inner 0
-workspace $ws5 gaps outer 0
-workspace $ws8 gaps inner 0
-workspace $ws8 gaps outer 0
+# Then I have a window running R I use for basic arithmetic
+# I'll later bind this to mod+a.
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 5
+exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
+
+# Bindings to make the webcam float and stick.
+for_window [title="mpvfloat"] floating enable
+for_window [title="mpvfloat"] sticky enable
+for_window [title="mpvfloat"] border pixel 0
+no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
@@ -359,29 +381,7 @@ bindsym $mod+Scroll_Lock	exec $audio
 bindsym $mod+Insert		exec $screencast
 bindsym $mod+Pause		exec $video
 bindsym $mod+Delete		exec $stoprec
-##bindsym XF86Launch1		exec $stoprec
 bindsym XF86Launch1		exec $stoprec & xset dpms force off
-
-# #---Dropdown/Scratchpad Windows---# #
-# First I have a tmux window used for background scripts.
-# I'll later bind this to mod+u.
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 625 400
-for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 5
-# Runs the tmuxinit script, which searches for an earlier tmux instance,
-# otherwise starts a new one (to prevent multiple dropdown sessions).
-exec --no-startup-id $term -n dropdown -e tmuxinit
-# Runs neofetch on first tmux screen if installed.
-exec_always --no-startup-id "tmux send-keys -t 0:0 'clear && neofetch 2>/dev/null' Enter"
-
-# Then I have a window running R I use for basic arithmetic
-# I'll later bind this to mod+a.
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 800 300
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 5
-exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
