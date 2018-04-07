@@ -96,13 +96,8 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+F2 -- Refresh i3
 + Mod+F3 -- Select screen/display to use
 + Mod+F4 -- Hibernate
-+ Mod+F6 -- transmission torrent client (cli)
 + Mod+F5 -- Reset Network Manager, search for new networks
-+ Mod+F7 -- (No mapping)
-+ Mod+F8 -- (No mapping)
-+ Mod+F10 -- Switch to laptop screen
-+ Mod+F11 -- Switch to VGA display (if available)
-+ Mod+F12 -- Switch to dual VGA/laptop display (if available)
++ Mod+F6 -- transmission torrent client (cli)
 
 ## Audio
 

@@ -1,0 +1,23 @@
+#!/bin/bash
+# Feed this script a link and it will give dmenu
+# some choice programs to use to open it.
+
+# The URL will be shown visually in 30 characters or less.
+if [[ "${#1}" -gt 30 ]];
+then
+visual="${1:0:20}"..."${1: -7}"
+else
+visual="$1"
+fi
+echo $visual
+
+x=$(echo -e "mpv\nmpv (loop)\nwget\nfeh\nbrowser\nw3m\nmpv (float)" | dmenu -i -p "How should I open '$visual'?")
+case "$x" in
+	mpv) mpv -quiet "$1" 2&>/dev/null & disown ;;
+	"mpv (loop)") mpv -quiet --loop "$1" 2&>/dev/null & disown ;;
+	wget) wget "$1" 2&>/dev/null & disown ;;
+	browser) $BROWSER "$1" 2&>/dev/null & disown ;;
+	feh) feh "$1" 2&>/dev/null & disown ;;
+	w3m) w3m "$1" 2&>/dev/null & disown ;;
+	"mpv (float)") mpv --geometry=+0-0 --autofit=30%  --title="mpvfloat" /dev/video0 "$1" 2&>/dev/null & disown ;;
+esac
