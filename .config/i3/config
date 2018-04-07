@@ -139,10 +139,10 @@ bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		workspace prev
-bindsym $mod+Shift+Escape 	exec i3-msg exit
+bindsym $mod+Shift+Escape 	exec prompt "Are you sure you want to leave i3?" i3-msg exit
 
 # bindsym $mod+BackSpace
-bindsym $mod+Shift+BackSpace	exec $reboot
+bindsym $mod+Shift+BackSpace	exec prompt "Are you sure you want to reboot?" $reboot
 
 # bindsym $mod+grave
 ##bindsym $mod+asciitilde
@@ -187,7 +187,7 @@ bindsym $mod+Shift+a		exec $term -e ncpamixer
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
-bindsym $mod+d			exec rofi -show run
+bindsym $mod+d			exec dmenu
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f			fullscreen toggle
@@ -212,7 +212,7 @@ bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+Shift+x		exec $shutdown
+bindsym $mod+Shift+x		exec prompt "Are you sure you want to shutdown?" $shutdown
 
 bindsym $mod+c			exec --no-startup-id camtoggle
 #bindsym $mod+Shift+c
@@ -388,7 +388,7 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 bindsym XF86AudioMute		exec $mute
 bindsym XF86AudioLowerVolume	exec $dec
 bindsym XF86AudioRaiseVolume	exec $inc
-bindsym XF86PowerOff		exec $shutdown
+bindsym XF86PowerOff		exec prompt "Are you sure you want to shutdown?" $shutdown
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
 ##bindsym XF86Paste		exec
