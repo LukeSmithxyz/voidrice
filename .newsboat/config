@@ -19,6 +19,7 @@ bind-key n next-unread
 bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
+bind-key x pb-delete
 
 color listnormal cyan default
 color listfocus black yellow standout bold
@@ -32,6 +33,7 @@ macro , open-in-browser
 macro v set browser "i3 exec mpv"; open-in-browser ; set browser linkhandler
 macro y set browser "spawndl"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
+macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
 # c copies the link to the clipboard.
 # The line below is probably the skiddiest line I've ever written.
 macro c set browser "copy(){ echo $1 | xclip ;}; copy "; open-in-browser ; set browser linkhandler
