@@ -62,6 +62,7 @@ exec --no-startup-id nm-applet
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+set $hibernate sudo systemctl suspend
 
 # #---Audio and Music Definitions---# #
 
@@ -330,15 +331,15 @@ no_focus [title="mpvfloat"]
 bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
-bindsym $mod+F4		exec --no-startup-id sudo zzz
+bindsym $mod+F4		exec --no-startup-id $hibernate
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 ##bindsym $mod+F7
 ##bindsym $mod+F8
 bindsym $mod+F9		exec --no-startup-id sudo mount -a
-bindsym $mod+F10	exec --no-startup-id screen.sh l ;; exec --no-startup-id ~/.config/polybar/launch.sh
-bindsym $mod+F11	exec --no-startup-id screen.sh v ;; exec --no-startup-id ~/.config/polybar/launch.sh
-bindsym $mod+F12	exec --no-startup-id screen.sh d ;; exec --no-startup-id ~/.config/polybar/launch.sh
+#bindsym $mod+F10
+#bindsym $mod+F11
+#bindsym $mod+F12
 
 
 # #---Arrow Keys---# #
