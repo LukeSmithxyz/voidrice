@@ -60,6 +60,8 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+T -- Restore gaps to default (15 pixels)
 + Mod+Shift+Space -- Make a window float (you can still resize and move floating windows with the same keys above)
 + Mod+Space -- Switch focus from a floating window to a non-floating one (or vice versa)
++ Mod+o -- Make floating window sticky (will stay on active workspace)
++ Mod+b -- Make window float in bottom left corner (good for video watched intermittently)
 
 ## Basic Programs
 
@@ -92,7 +94,7 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+Shift+Escape -- exit i3 (will give a dmenu confirm prompt)
 + Mod+F1 -- Shows this document
 + Mod+F2 -- Refresh i3
-+ Mod+F3 -- arandr (For adding screens/HDMI/VGA connections)
++ Mod+F3 -- Select screen/display to use
 + Mod+F4 -- Hibernate
 + Mod+F6 -- transmission torrent client (cli)
 + Mod+F5 -- Reset Network Manager, search for new networks
