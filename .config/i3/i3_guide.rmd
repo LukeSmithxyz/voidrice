@@ -133,12 +133,9 @@ I use scrot and ffmpeg to make different recordings of the desktop and audio. Al
 
 + Print Screen -- Take a scrot screenshot
 + Shift+Print Screen -- Take a scrot screenshot of only selected window
-+ Mod+Insert -- Begin screencast
-+ Mod+ScrollLock -- Begin audio recording
-+ Mod+Pause -- Begin screen recording without audio
-+ Mod+Print Screen -- Turn on and off screenkey (if installed) for visual typing display
++ Mod+Print Screen -- Opens dmenu menu to select kind of audio/video recording
++ Mod+ScrollLock -- Turn on and off screenkey (if installed) for visual typing display
 + Mod+Delete -- kills ffmpeg, thus ending recordings
-+ ThinkVantage button (on Thinkpads) -- kills ffmpeg, thus ending recordings
 
 Each of the recording scripts are located in `~/.scripts`. You can check them out or modify them if needed.
 
