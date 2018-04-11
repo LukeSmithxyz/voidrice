@@ -4,6 +4,7 @@
 " | |__| |_| |   <  __/  ___) | | | | | | | |_| | | | \__ \  \ V /| | | | | | | | | (__
 " |_____\__,_|_|\_\___| |____/|_| |_| |_|_|\__|_| |_| |___/   \_/ |_|_| |_| |_|_|  \___|
 
+let mapleader =" "
 " Load Pathogen for plugins:
 	execute pathogen#infect()
 	execute pathogen#helptags()
@@ -27,6 +28,12 @@
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 
+" Open file as suckless sent presentation
+	map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
+
+" View an image for a suckless sent presentation:
+	map <leader>v $F@ly$:!feh --scale-down --auto-zoom --image-bg black <c-r>" &<CR><CR>
+
 " Open my bibliography file in split
 	map <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
 
@@ -38,6 +45,12 @@
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 
+" Open corresponding.pdf
+	map <leader>p :!mupdf <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
+
+" Compile document
+	map <leader>c :!compiler <c-r>%<CR>
+
 "For saving view folds:
 	"au BufWinLeave * mkview
 	"au BufWinEnter * silent loadview
@@ -47,6 +60,9 @@
 
 " Make calcurse notes markdown compatible:
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+
+" Get line, word and character counts with F3:
+	map <F3> :!wc <C-R>%<CR>
 
 " Spell-check set to F6:
 	map <F6> :setlocal spell! spelllang=en_us,es<CR>
@@ -66,6 +82,7 @@
 
 " Goyo plugin makes text more readable when writing prose:
 	map <F10> :Goyo<CR>
+	map <leader>f :Goyo<CR>
 	inoremap <F10> <esc>:Goyo<CR>a
 
 " Enable Goyo by default for mutt writting
@@ -210,9 +227,9 @@
 
 
 """.bib
-	autocmd FileType bib inoremap ;a @article{<Enter>author<Space>=<Space>"<++>",<Enter>year<Space>=<Space>"<++>",<Enter>title<Space>=<Space>"<++>",<Enter>journal<Space>=<Space>"<++>",<Enter>volume<Space>=<Space>"<++>",<Enter>pages<Space>=<Space>"<++>",<Enter>}<Enter><++><Esc>8kA,<Esc>i
-	autocmd FileType bib inoremap ;b @book{<Enter>author<Space>=<Space>"<++>",<Enter>year<Space>=<Space>"<++>",<Enter>title<Space>=<Space>"<++>",<Enter>publisher<Space>=<Space>"<++>",<Enter>}<Enter><++><Esc>6kA,<Esc>i
-	autocmd FileType bib inoremap ;c @incollection{<Enter>author<Space>=<Space>"<++>",<Enter>title<Space>=<Space>"<++>",<Enter>booktitle<Space>=<Space>"<++>",<Enter>editor<Space>=<Space>"<++>",<Enter>year<Space>=<Space>"<++>",<Enter>publisher<Space>=<Space>"<++>",<Enter>}<Enter><++><Esc>8kA,<Esc>i
+	autocmd FileType bib inoremap ;a @article{<Enter><tab>author<Space>=<Space>"<++>",<Enter><tab>year<Space>=<Space>"<++>",<Enter><tab>title<Space>=<Space>"<++>",<Enter><tab>journal<Space>=<Space>"<++>",<Enter><tab>volume<Space>=<Space>"<++>",<Enter><tab>pages<Space>=<Space>"<++>",<Enter><tab>}<Enter><++><Esc>8kA,<Esc>i
+	autocmd FileType bib inoremap ;b @book{<Enter><tab>author<Space>=<Space>"<++>",<Enter><tab>year<Space>=<Space>"<++>",<Enter><tab>title<Space>=<Space>"<++>",<Enter><tab>publisher<Space>=<Space>"<++>",<Enter><tab>}<Enter><++><Esc>6kA,<Esc>i
+	autocmd FileType bib inoremap ;c @incollection{<Enter><tab>author<Space>=<Space>"<++>",<Enter><tab>title<Space>=<Space>"<++>",<Enter><tab>booktitle<Space>=<Space>"<++>",<Enter><tab>editor<Space>=<Space>"<++>",<Enter><tab>year<Space>=<Space>"<++>",<Enter><tab>publisher<Space>=<Space>"<++>",<Enter><tab>}<Enter><++><Esc>8kA,<Esc>i
 
 "MARKDOWN
 	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
@@ -227,14 +244,14 @@
 	autocmd Filetype markdown,rmd inoremap ;2 ##<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ;3 ###<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ;l --------<Enter>
-	autocmd Filetype markdown map <F5> :!pandoc<space><C-r>%<space>-o<space><C-r>%.pdf<Enter><Enter>
+	autocmd Filetype markdown map <F5> :!pandoc<space><C-r>%<space>--pdf-engine=xelatex<space>-o<space><C-r>%.pdf<Enter><Enter>
 	autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
 	autocmd Filetype rmd inoremap ;r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ;p ```{python}<CR>```<CR><CR><esc>2kO
 
 """.xml
 	"autocmd FileType xml inoremap ;e <item><Enter><title><++></title><Enter><pubDate><Esc>:put<Space>=strftime('%c')<Enter>A</pubDate><Enter><link><++></link><Enter><description><++></description><Enter></item>
-	autocmd FileType xml inoremap ;e <item><Enter><title><++></title><Enter><pubDate><Esc>:put<Space>=strftime('%c')<Enter>A</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>5kcit
+	autocmd FileType xml inoremap ;e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
 	autocmd FileType xml inoremap ;a <a href="<++>"><++></a><++><Esc>F"ci"
 
 vmap <expr> ++ VMATH_YankAndAnalyse()
@@ -244,3 +261,5 @@ vnoremap K xkP`[V`]
 vnoremap J xp`[V`]
 vnoremap L >gv
 vnoremap H <gv
+
+map <enter><enter> yi[:e <c-r>"<cr>
