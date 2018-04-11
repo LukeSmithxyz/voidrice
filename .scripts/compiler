@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This is a compilation handler, so to speak, which I have vim run.
+#
+# It compiles a document to pdf
+
+file=$(basename "$1")
+ext="${file##*.}"
+base="${file%.*}"
+
+echo $ext
+
+case "$ext" in
+	rmd) echo "require(rmarkdown); render('$file')" | R --vanilla ;;
+	tex) xelatex "$file" ;;
+	md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
+esac
