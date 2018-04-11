@@ -14,7 +14,10 @@ mountable=$(lsblk -lp | grep part | grep -v "t /" | awk '{print $1, "(" $4 ")"}'
 chosen=$(echo "$mountable" | dmenu -i -p "Mount which drive?" | awk '{print $1}')
 [[ "$chosen" = "" ]] && exit 1
 mount "$chosen" && exit 0
-dirs=$(find / -type d | grep -v denied)
+# You may want to change the line below for more suggestions for mounting.
+# I.e. you can increase the depth of the search, or add directories.
+# This will increase the load time briefly though.
+dirs=$(find /mnt /media /mount /home -type d -maxdepth 5 2>/dev/null)
 mountpoint=$(echo "$dirs" | dmenu -i -p "Type in mount point.")
 [[ "$mountpoint" = "" ]] && exit 1
 if [[ ! -d "$mountpoint" ]]; then
