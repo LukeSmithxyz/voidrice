@@ -26,8 +26,6 @@ set $term --no-startup-id st
 set $stoprec --no-startup-id killall ffmpeg
 
 # #---Starting External Scripts---# #
-#Increase key rate
-exec --no-startup-id xset r rate 300 50
 #Music player daemon:
 exec --no-startup-id mpd
 #Torrent daemon:
@@ -367,7 +365,7 @@ bindsym $mod+Shift+bracketright exec $bigfor
 # For screenshots and recording
 bindsym Print 			exec --no-startup-id scrot
 bindsym Shift+Print 		exec --no-startup-id scrot -u
-bindsym $mod+Print		exec --no-startup-id record
+bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
 bindsym XF86Launch1		exec $stoprec & xset dpms force off
