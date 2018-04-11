@@ -1,8 +1,0 @@
-#!/bin/bash
-# A dmenu recording prompt for my different
-
-case $(echo -e "Screencast\nVideo only\nAudio only" | dmenu -i -p "Select recording style:") in
-	Screencast) (pgrep -x pulseaudio && screencast_pulse.sh) || screencast_alsa.sh ;;
-	"Audio only") (pgrep -x pulseaudio && audio_pulse.sh) || audio_alsa.sh ;;
-	"Video only") video.sh ;;
-esac

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# A dmenu recording prompt for my different recording scripts.
+
+# Asks for type of recording and uses one of my three different scripts.
+asktype() { \
+case $(echo -e "Screencast\nVideo only\nAudio only" | dmenu -i -p "Select recording style:") in
+	Screencast) screencast ;;
+	"Audio only") audio ;;
+	"Video only") video ;;
+esac ;}
+
+# If already running, will ask to end previous recording.
+
+asktoend() { \
+response=$(echo -e "No\nYes" | dmenu -i -p "Recording still active. End recording?") &&
+if [[ "$response" = "Yes" ]]; then killall ffmpeg; fi ;}
+
+if (( $(pgrep dmenurecord | wc -l) > 2 )); then
+asktoend;
+else
+asktype;
+fi
+echo $response

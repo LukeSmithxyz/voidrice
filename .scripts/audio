@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# This script records audio.
+# It runs an appropriate record script for either ALSA and Pulseaudio.
+# It also names files smartly to prevent overwrites.
+
+# Picks a file name for the output file based on availability:
+while [[ -f $HOME/screencast$n.mkv ]]
+do
+	n=$((n+1))
+done
+filename="$HOME/screencast$n.mkv"
+
+# For Pulseaudio with ALSA:
+record_pulse() { \
+ffmpeg \
+-f alsa -i default \
+-c:a flac \
+$filename ;}
+
+# For ALSA:
+record_alsa() { \
+ffmpeg -y \
+-f alsa -ar 44100 -i hw:1 \
+$filename ;}
+
+if [[ $(pgrep -x pulseaudio) ]]; then record_pulse; else record_alsa; fi
