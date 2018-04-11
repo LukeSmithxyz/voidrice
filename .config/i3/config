@@ -23,7 +23,6 @@ gaps outer 15
 font pango:mono 9
 set $mod Mod4
 set $term --no-startup-id st
-set $video --no-startup-id bash video.sh
 set $stoprec --no-startup-id killall ffmpeg
 
 # #---Starting External Scripts---# #
@@ -33,8 +32,6 @@ exec --no-startup-id xset r rate 300 50
 exec --no-startup-id mpd
 #Torrent daemon:
 exec --no-startup-id transmission-daemon
-#Mount other drives:
-exec --no-startup-id sudo mount -a
 #Composite manager:
 exec --no-startup-id compton --xrender-sync-fence
 #Try to load VGA screen if available:
@@ -118,8 +115,6 @@ set $beg --no-startup-id mpc seek 0%
 #set $bigdec --no-startup-id amixer sset Master 5%-
 #set $mute --no-startup-id amixer sset Master toggle
 #set $truemute --no-startup-id amixer sset Master mute
-#set $screencast  --no-startup-id bash screencast_alsa.sh
-#set $audio --no-startup-id bash audio_alsa.sh
 
 #For PULSEAUDIO/PAMIXER
 set $inc --no-startup-id pamixer --allow-boost -i 5
@@ -129,8 +124,6 @@ set $bigdec --no-startup-id pamixer --allow-boost -d 15
 set $mute --no-startup-id pamixer --allow-boost -t
 set $micmute --no-startup-id pamixer --allow-boost -t
 set $truemute --no-startup-id pamixer -m
-set $screencast  --no-startup-id bash screencast_pulse.sh
-set $audio --no-startup-id bash audio_pulse.sh
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
@@ -145,7 +138,7 @@ bindsym $mod+Shift+Escape 	exec prompt "Are you sure you want to leave i3?" "i3-
 # bindsym $mod+BackSpace
 bindsym $mod+Shift+BackSpace	exec prompt "Are you sure you want to reboot?" "$reboot"
 
-# bindsym $mod+grave
+## bindsym $mod+grave
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
@@ -188,7 +181,7 @@ bindsym $mod+Shift+a		exec $term -e ncpamixer
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
-bindsym $mod+d			exec dmenu_run
+bindsym $mod+d			exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f			fullscreen toggle
@@ -216,7 +209,7 @@ bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+x		exec prompt "Are you sure you want to shutdown?" "$shutdown"
 
 bindsym $mod+c			exec --no-startup-id camtoggle
-#bindsym $mod+Shift+c
+##bindsym $mod+Shift+c
 
 bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
 bindsym $mod+Shift+v		exec projectM-pulseaudio
@@ -336,10 +329,10 @@ bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 ##bindsym $mod+F7
 ##bindsym $mod+F8
-bindsym $mod+F9		exec --no-startup-id sudo mount -a
-#bindsym $mod+F10
-#bindsym $mod+F11
-#bindsym $mod+F12
+bindsym $mod+F9		exec --no-startup-id dmenumount
+bindsym $mod+F10	exec --no-startup-id dmenuumount
+##bindsym $mod+F11
+##bindsym $mod+F12
 
 
 # #---Arrow Keys---# #
@@ -371,16 +364,11 @@ bindsym $mod+Shift+bracketleft 	exec $bigbak
 bindsym $mod+bracketright 	exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
 
-# Print screen takes a screenshot.
-# With shift, it takes one only of the given window.
+# For screenshots and recording
 bindsym Print 			exec --no-startup-id scrot
 bindsym Shift+Print 		exec --no-startup-id scrot -u
-
-# For recording audio/video or stop recording. Also toggle screenkey for visual typing.
-bindsym $mod+Print		exec --no-startup-id "killall screenkey || screenkey"
-bindsym $mod+Scroll_Lock	exec $audio
-bindsym $mod+Insert		exec $screencast
-bindsym $mod+Pause		exec $video
+bindsym $mod+Print		exec --no-startup-id record
+bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
 bindsym XF86Launch1		exec $stoprec & xset dpms force off
 
@@ -415,7 +403,7 @@ bindsym XF86AudioNext		exec $next
 bindsym XF86AudioPlay		exec $pause
 bindsym XF86AudioPrev		exec $prev
 bindsym XF86AudioStop		exec $pause
-bindsym XF86AudioRecord		exec $audio
+##bindsym XF86AudioRecord
 bindsym XF86AudioRewind		exec $lilbak
 bindsym XF86AudioForward	exec $lilfor
 ##bindsym XF86Phone		exec
