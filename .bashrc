@@ -1,3 +1,9 @@
+#  _          _          ____            _ _   _     _       _               _
+# | |   _   _| | _____  / ___| _ __ ___ (_) |_| |__ ( )___  | |__   __ _ ___| |__  _ __ ___
+# | |  | | | | |/ / _ \ \___ \| '_ ` _ \| | __| '_ \|// __| | '_ \ / _` / __| '_ \| '__/ __|
+# | |__| |_| |   <  __/  ___) | | | | | | | |_| | | | \__ \ | |_) | (_| \__ \ | | | | | (__
+# |_____\__,_|_|\_\___| |____/|_| |_| |_|_|\__|_| |_| |___/ |_.__/ \__,_|___/_| |_|_|  \___|
+
 stty -ixon
 shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
 
@@ -17,15 +23,13 @@ alias files="ranger"
 alias chat="weechat"
 alias audio="ncpamixer"
 alias calender="calcurse"
-alias getmail="offlineimap && notmuch new"
-alias gm="offlineimap && notmuch new"
 
 # System Maintainence
 alias mw="~/.config/mutt/mutt-wizard.sh"
 alias muttwizard="~/.config/mutt/mutt-wizard.sh"
-alias progs="pacman -Qet" # List programs I've installed
+alias progs="(pacman -Qet && pacman -Qm) | sort -u" # List programs I've installed
 alias orphans="pacman -Qdt" # List orphan programs
-alias upgr="neofetch && sudo pacman -Syyu --noconfirm && echo Update complete. | figlet"
+alias upgr="notify-send -i ~/.scripts/larbs.png 'Upgrade started' & neofetch && sudo packer -Syyuv --noconfirm && notify-send -i ~/.scripts/larbs.png 'Upgrade complete'."
 alias atltime="sudo timedatectl set-timezone America/New_York && i3 restart" # Eastcoast time
 alias tuctime="sudo timedatectl set-timezone America/Phoenix && i3 restart" # Arizona time
 alias sdn="sudo shutdown now"
@@ -37,6 +41,7 @@ alias psref="gpg-connect-agent RELOADAGENT /bye" # Refresh gpg
 
 # Some aliases
 alias p="sudo pacman"
+alias SS="sudo systemctl"
 alias v="vim"
 alias sv="sudo vim"
 alias r="ranger"
@@ -44,7 +49,6 @@ alias sr="sudo ranger"
 alias ka="killall"
 alias g="git"
 alias gitup="git push origin master"
-alias gitpass="git config --global credential.helper cache"
 alias trem="transmission-remote"
 alias mkd="mkdir -pv"
 alias rf="source ~/.bashrc"
@@ -57,12 +61,6 @@ weath() { curl wttr.in/$1 ;} # Check the weather (give city or leave blank).
 alias ls='ls -hN --color=auto --group-directories-first'
 alias crep="grep --color=always" # Color grep - highlight desired sequence.
 alias ccat="highlight --out-format=xterm256" #Color cat - print file with syntax highlighting.
-
-# Laptop management
-alias lsc="screen.sh l" # Use laptop screen only
-alias vsc="screen.sh v" # Use VGA only
-alias dsc="screen.sh d" # Use both laptop and VGA screen
-alias debase="sudo umount /home/Shared/Videos & screen.sh l && i3 restart" # Prep for taking my ThinkPad off Ultrabase
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
@@ -94,4 +92,5 @@ alias lilfor="mpc seek +10"
 alias bigbak="mpc seek -120"
 alias bigfor="mpc seek +120"
 
-hello-larbs() { sed -i -e '/LARBS/,$d' ~/.config/i3/config ;}
+hello-larbs() { sed -i -e '/larbs.png/,$d' ~/.config/i3/config ;}
+source ~/.bash_shortcuts
