@@ -1,0 +1,2 @@
+#!/bin/sh
+#acpi | cut -d " " -f3-5 |  sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g"
