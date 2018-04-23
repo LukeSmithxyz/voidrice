@@ -98,6 +98,8 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+F4 -- Hibernate
 + Mod+F5 -- Reset Network Manager, search for new networks
 + Mod+F6 -- transmission torrent client (cli)
++ Mod+F9 -- Mount a drive/partition
++ Mod+F10 -- Unmount a drive/partition (does not umount `/`, `/home` or `/boot`)
 
 ## Audio
 
