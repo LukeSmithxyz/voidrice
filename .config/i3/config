@@ -20,28 +20,37 @@
 for_window [class="^.*"] border pixel 3
 gaps inner 15
 gaps outer 15
-font pango:mono 9
+font pango:mono 12
 set $mod Mod4
 set $term --no-startup-id st
 set $stoprec --no-startup-id killall ffmpeg
 
 # #---Starting External Scripts---# #
+#Setting the background:
+exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
+#Starts dunst for notifications:
+exec --no-startup-id dunst
 #Music player daemon:
 exec --no-startup-id mpd
 #Torrent daemon:
 exec --no-startup-id transmission-daemon
 #Composite manager:
 exec --no-startup-id compton --xrender-sync-fence
-#Try to load VGA screen if available:
-exec --no-startup-id screen.sh v
 #Launch Polybar where appropriate:
-exec_always --no-startup-id ~/.scripts/polybar_launch
+#exec_always --no-startup-id ~/.scripts/polybar_launch
 #Runs the key remapping scripts
 exec --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
+
+bar {
+	status_command i3blocks
+	position top
+	mode dock
+	modifier None
+}
 
 #OPENRC
 #set $shutdown sudo openrc-shutdown -p
@@ -136,7 +145,7 @@ bindsym $mod+Shift+Escape 	exec prompt "Are you sure you want to leave i3?" "i3-
 # bindsym $mod+BackSpace
 bindsym $mod+Shift+BackSpace	exec prompt "Are you sure you want to reboot?" "$reboot"
 
-## bindsym $mod+grave
+##bindsym $mod+grave
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
@@ -212,8 +221,8 @@ bindsym $mod+c			exec --no-startup-id camtoggle
 bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
 bindsym $mod+Shift+v		exec projectM-pulseaudio
 
-bindsym $mod+b			floating toggle; sticky toggle; exec --no-startup-id bottomleft
-bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
+bindsym $mod+b			bar mode toggle
+bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
 bindsym $mod+n			exec $term -e newsboat
 ##bindsym $mod+Shift+n
@@ -317,6 +326,8 @@ for_window [title="mpvfloat"] floating enable
 for_window [title="mpvfloat"] sticky enable
 for_window [title="mpvfloat"] border pixel 0
 no_focus [title="mpvfloat"]
+
+for_window [title="Default - Wine desktop"] floating enable
 
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
@@ -449,3 +460,4 @@ bindsym XF86Documents		exec $term -e ranger ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
+
