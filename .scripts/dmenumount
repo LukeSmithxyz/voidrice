@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# Should be run with sudo.
-
 # Gives a dmenu prompt to mount unmounted drives.
 # If they're in /etc/fstab, they'll be mounted automatically.
 # Otherwise, you'll be prompted to give a mountpoint from already existsing directories.
@@ -24,4 +22,4 @@ if [[ ! -d "$mountpoint" ]]; then
 	mkdiryn=$(echo -e "No\nYes" | dmenu -i -p  "$mountpoint does not exist. Create it?")
 	[[ "$mkdiryn" = Yes ]] && sudo mkdir -p "$mountpoint"
 fi
-sudo mount "$chosen" "$mountpoint"
+sudo mount $chosen $mountpoint && pgrep -x dunst && notify-send "$chosen mounted to $mountpoint."
