@@ -4,7 +4,11 @@
 
 ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` >/dev/null || exit
 
-curl wttr.in > ~/.weatherreport
+### This is only if your location isn't automatically detected, otherwise you can leave it blank.
+loc=""
+location=${loc// /+}
+
+curl wttr.in/~$location > ~/.weatherreport
 
 echo -n ☔ $(cat ~/.weatherreport | sed -n 16p | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d')
 
