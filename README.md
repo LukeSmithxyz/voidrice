@@ -41,10 +41,12 @@ Feel free to add other suggestions and I may implement them.
 
 I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing. You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith). Donations are earmarked for whatever the donator wants, usually to go to funds for buying new equipment for the [YouTube channel](https://youtube.com/c/LukeSmithxyz).
 
-# Programs Used
+# "Dependencies" and programs used
 
-+ i3-gaps, NetworkManager, compton
-+ Terminal apps -- ranger, ncmpcpp, mpd, htop, weechat, neomutt, calcurse, newsbeuter, transmission-remote-cli, w3m, youtube-dl, ffmpeg, scrot
-+ Background stuff -- mpd, transmission
-+ Lightweight non-terminal apps -- mupdf, feh, rofi, network manager applet, arandr, mpv
-+ Big business programs -- qutebrowser, GIMP, Blender
+The programs I use here are always changing, but luckily you can just look at the installation list for [LARBS](http://larbs.xyz) here:
+
++ [List of programs installed by LARBS, including optional packages](https://github.com/LukeSmithxyz/LARBS/blob/master/src/progs.csv)
+
+For your info, if the second column is a capital letter, that means that it's *not* installed by default, only when the user specifically requests it. Those with lowercase letters are just for classification purposes. Don't think you have to install every package to get these dotfiles working of course, but this list is a *sufficient condition* for full functionality. If you run into an error running my dotfiles, chances are the package you need is there.
+
+The only program not listed on that list is the one you have to install manually: [my st build](https://github.com/lukesmithxyz/st), which is easy enough to install.
