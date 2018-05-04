@@ -8,6 +8,8 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 
 + i3 (i3-gaps)
 + urxvt (rxvt-unicode) (although these files use [my st build](https://github.com/lukesmithxyz/st) as the default terminal)
++ urxvt-perls (URL selection)
++ urxvt-resize-font-git (font resizing)
 + vim
 + bash
 + ranger
