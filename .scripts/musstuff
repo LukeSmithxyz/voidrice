@@ -1,0 +1,49 @@
+These are some old lines from the i3 config.
+
+I now use the lmc script to change volume and music tracks, which makes i3blocks integration better.
+
+I deleted the alternative lines for audio commands from the i3 config.
+Still, since they're a good reference for people who use ALSA, or people who use music players besides mpd, I've kept them in this file.
+
+You can replace the commands in the lmc script to get the setup you want. I might have the script autodecide the command later on.
+
+#FOR ALSA/AMIXER
+#set $inc --no-startup-id amixer sset Master 2%+
+#set $biginc --no-startup-id amixer sset Master 5%+
+#set $dec --no-startup-id amixer sset Master 2%-
+#set $bigdec --no-startup-id amixer sset Master 5%-
+#set $mute --no-startup-id amixer sset Master toggle
+#set $truemute --no-startup-id amixer sset Master mute
+
+##For spotify
+#set $music spotify
+#set $pause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+#set $trupause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+#set $play dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
+#set $next dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+#set $prev dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+#set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
+#set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
+
+# For moc:
+#set $music --no-startup-id st -e mocp
+#set $pause --no-startup-id mocp -G
+#set $truepause --no-startup-id mocp -P
+#set $next --no-startup-id mocp -f
+#set $prev --no-startup-id mocp -r
+#set $lilfor --no-startup-id mocp -k 10
+#set $bigfor --no-startup-id mocp -k 120
+#set $lilbak --no-startup-id mocp -k -10
+#set $bigbak --no-startup-id mocp -k -120
+#set $beg --no-startup-id mocp -j 0%
+
+# For cmus:
+#set $music --no-startup-id st -e cmus
+#set $pause --no-startup-id cmus-remote -u
+#set $next --no-startup-id cmus-remote -n
+#set $prev --no-startup-id cmus-remote -r
+#set $lilfor --no-startup-id cmus-remote -k +10
+#set $bigfor --no-startup-id cmus-remote -k +120
+#set $lilbak --no-startup-id cmus-remote -k -10
+#set $bigbak --no-startup-id cmus-remote -k -120
+#set $beg --no-startup-id cmus-remote -k 00:00:00

@@ -43,7 +43,7 @@ exec --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 bar {
 	status_command i3blocks
@@ -51,6 +51,8 @@ bar {
 	mode dock
 	modifier None
 }
+# Run the script to update the mpd i3block on change.
+exec --no-startup-id i3mpdupdate
 
 #OPENRC
 #set $shutdown sudo openrc-shutdown -p
@@ -67,70 +69,6 @@ set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $hibernate sudo systemctl suspend
-
-# #---Audio and Music Definitions---# #
-
-##For spotify
-#set $music spotify
-#set $pause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-#set $trupause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-#set $play dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
-#set $next dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-#set $prev dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-#set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
-#set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
-
-# For mpc:
-set $music --no-startup-id st -e ncmpcpp
-set $pause --no-startup-id mpc toggle
-set $trupause --no-startup-id mpc pause
-set $next --no-startup-id mpc next
-set $prev --no-startup-id mpc prev
-set $lilfor --no-startup-id mpc seek +10
-set $bigfor --no-startup-id mpc seek +120
-set $lilbak --no-startup-id mpc seek -10
-set $bigbak --no-startup-id mpc seek -120
-set $beg --no-startup-id mpc seek 0%
-
-# For moc:
-#set $music --no-startup-id st -e mocp
-#set $pause --no-startup-id mocp -G
-#set $truepause --no-startup-id mocp -P
-#set $next --no-startup-id mocp -f
-#set $prev --no-startup-id mocp -r
-#set $lilfor --no-startup-id mocp -k 10
-#set $bigfor --no-startup-id mocp -k 120
-#set $lilbak --no-startup-id mocp -k -10
-#set $bigbak --no-startup-id mocp -k -120
-#set $beg --no-startup-id mocp -j 0%
-
-# For cmus:
-#set $music --no-startup-id st -e cmus
-#set $pause --no-startup-id cmus-remote -u
-#set $next --no-startup-id cmus-remote -n
-#set $prev --no-startup-id cmus-remote -r
-#set $lilfor --no-startup-id cmus-remote -k +10
-#set $bigfor --no-startup-id cmus-remote -k +120
-#set $lilbak --no-startup-id cmus-remote -k -10
-#set $bigbak --no-startup-id cmus-remote -k -120
-#set $beg --no-startup-id cmus-remote -k 00:00:00
-
-#FOR ALSA/AMIXER
-#set $inc --no-startup-id amixer sset Master 2%+
-#set $biginc --no-startup-id amixer sset Master 5%+
-#set $dec --no-startup-id amixer sset Master 2%-
-#set $bigdec --no-startup-id amixer sset Master 5%-
-#set $mute --no-startup-id amixer sset Master toggle
-#set $truemute --no-startup-id amixer sset Master mute
-
-#For PULSEAUDIO/PAMIXER
-set $inc --no-startup-id pamixer --allow-boost -i 5
-set $biginc --no-startup-id pamixer --allow-boost -i 15
-set $dec --no-startup-id pamixer --allow-boost -d 5
-set $bigdec --no-startup-id pamixer --allow-boost -d 15
-set $mute --no-startup-id pamixer --allow-boost -t
-set $micmute --no-startup-id pamixer --allow-boost -t
-set $truemute --no-startup-id pamixer -m
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
@@ -149,7 +87,7 @@ bindsym $mod+Shift+BackSpace	exec prompt "Are you sure you want to reboot?" "$re
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+Shift+Delete	exec lmc truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
@@ -179,7 +117,7 @@ bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
 bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
 
-bindsym $mod+p			exec $pause
+bindsym $mod+p			exec lmc toggle
 bindsym $mod+Shift+p		exec mypaint
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
@@ -227,8 +165,8 @@ bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id botto
 bindsym $mod+n			exec $term -e newsboat
 ##bindsym $mod+Shift+n
 
-bindsym $mod+m 			exec $music
-bindsym $mod+Shift+m		exec $mute
+bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
+bindsym $mod+Shift+m		exec lmc mute
 
 
 # #---Workspace Bindings---# #
@@ -358,20 +296,20 @@ bindsym $mod+Shift+Right 	move right
 # #---Media Keys---# #
 
 # Volume keys
-bindsym $mod+plus		exec $inc
-bindsym $mod+Shift+plus		exec $biginc
-bindsym $mod+minus 		exec $dec
-bindsym $mod+Shift+minus	exec $bigdec
-bindsym $mod+less 		exec $prev
-bindsym $mod+Shift+less		exec $beg
-bindsym $mod+greater		exec $next
-bindsym $mod+Shift+greater	exec $next
+bindsym $mod+plus		exec lmc up 5
+bindsym $mod+Shift+plus		exec lmc up 15
+bindsym $mod+minus 		exec lmc down 5
+bindsym $mod+Shift+minus	exec lmc down 15
+bindsym $mod+less 		exec lmc prev
+bindsym $mod+Shift+less		exec lmc replay
+bindsym $mod+greater		exec lmc next
+bindsym $mod+Shift+greater	exec lmc next
 
 # For advancing forward/backward in an mpd song
-bindsym $mod+bracketleft 	exec $lilbak
-bindsym $mod+Shift+bracketleft 	exec $bigbak
-bindsym $mod+bracketright 	exec $lilfor
-bindsym $mod+Shift+bracketright exec $bigfor
+bindsym $mod+bracketleft 	exec lmc back 10
+bindsym $mod+Shift+bracketleft 	exec lmc back 120
+bindsym $mod+bracketright 	exec lmc forward 10
+bindsym $mod+Shift+bracketright exec lmc forward 120
 
 # For screenshots and recording
 bindsym Print 			exec --no-startup-id scrot
@@ -383,9 +321,9 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
-bindsym XF86AudioMute		exec $mute
-bindsym XF86AudioLowerVolume	exec $dec
-bindsym XF86AudioRaiseVolume	exec $inc
+bindsym XF86AudioMute		exec lmc mute
+bindsym XF86AudioLowerVolume	exec lmc down 5
+bindsym XF86AudioRaiseVolume	exec lmc up 5
 bindsym XF86PowerOff		exec prompt "Are you sure you want to shutdown?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
@@ -408,13 +346,13 @@ bindsym XF86MyComputer		exec $term -e ranger
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec sudo umount -R /mnt
-bindsym XF86AudioNext		exec $next
-bindsym XF86AudioPlay		exec $pause
-bindsym XF86AudioPrev		exec $prev
-bindsym XF86AudioStop		exec $pause
+bindsym XF86AudioNext		exec lmc next
+bindsym XF86AudioPlay		exec lmc toggle
+bindsym XF86AudioPrev		exec lmc prev
+bindsym XF86AudioStop		exec lmc toggle
 ##bindsym XF86AudioRecord
-bindsym XF86AudioRewind		exec $lilbak
-bindsym XF86AudioForward	exec $lilfor
+bindsym XF86AudioRewind		exec lmc back 10
+bindsym XF86AudioForward	exec lmc forward 10
 ##bindsym XF86Phone		exec
 ##bindsym XF86Tools		exec
 bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
@@ -432,7 +370,7 @@ bindsym XF86Reload		restart
 ##bindsym XF86Launch7		exec
 ##bindsym XF86Launch8		exec
 ##bindsym XF86Launch9		exec
-bindsym XF86AudioMicMute	exec $micmute
+#bindsym XF86AudioMicMute	exec $micmute
 ##bindsym XF86TouchpadToggle	exec
 bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
 bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
@@ -448,7 +386,7 @@ bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 bindsym XF86Shop		exec $BROWSER https://ebay.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
 bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
-bindsym XF86AudioMedia		exec $music
+bindsym XF86AudioMedia		exec --no-startup-id st -e ncmpcpp
 bindsym XF86Display		exec --no-startup-id arandr
 #bindsym XF86KbdLightOnOff	exec
 bindsym XF86KbdBrightnessDown	exec --no-startup-id python3.6 ~/.i3/kb-lights.py -
@@ -460,4 +398,3 @@ bindsym XF86Documents		exec $term -e ranger ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
-

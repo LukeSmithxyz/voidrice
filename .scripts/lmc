@@ -1,0 +1,19 @@
+#!/bin/bash
+
+newvol="pkill -RTMIN+10 i3blocks"
+newmpd="pkill -RTMIN+11 i3blocks"
+
+case "$1" in
+	"up") pamixer --allow-boost -i "$2" ; $newvol ;;
+	"down") pamixer --allow-boost -d "$2" ; $newvol ;;
+	"mute") pamixer --allow-boost -t ; $newvol ;;
+	"truemute") pamixer --allow-boost -m ; $newvol ;;
+	"toggle") mpc toggle ; $newmpd ;;
+	"pause") mpc pause ; $newmpd ;;
+	"forward") mpc seek +"$2" ; $newmpd ;;
+	"back") mpc seek -"$2" ; $newmpd ;;
+	"next") mpc next ; $newmpd ;;
+	"prev") mpc prev ; $newmpd ;;
+	"replay") mpc seek 0% ; $newmpd ;;
+esac
+exit
