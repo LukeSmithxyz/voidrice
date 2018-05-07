@@ -28,11 +28,11 @@ Questions or suggestions? Email me at [luke@lukesmith.xyz](mailto:luke@lukesmith
 
 If you'd like to change any of these keyboard changes, you need only open and change `~/.scripts/remaps`. Actually, this should go without saying, but *everything* here can easily be changed.
 
-## The Polybar Status Bar
+## The Status Bar
 
-If you're new to i3, notice the status bar on the top of the screen. This is Polybar. To the left side, you'll see the numbers of your current workspace(s). If you have a song playing in mpd, its name will appear to the left as well. On the right side, you'll see various system status notifiers, date, CPU tempurature, remaining hard drive space, etc. I'm sure you can figure it out. Several modules will be click-sensitive, although if you're using my system as indended, you probably won't be doing much clicking.
+If you're new to i3, notice the status bar on the top of the screen. To the left side, you'll see the numbers of your current workspace(s). On the right side, you'll see various system status notifiers, the date, volume, even music and local weather if possible  etc. I'm sure you can figure it out. Several modules will be click-sensitive, although if you're using my system as indended, you probably won't be doing much clicking.
 
-Polybar config: `cfp`: `~/.config/polybar/config`
+i3blocks config: `cfib`: `~/.i3blocks`
 
 # Key Bindings
 
@@ -61,7 +61,8 @@ Be sure you play around with these. Be flexible with the basic commands and the 
 + Mod+Shift+Space -- Make a window float (you can still resize and move floating windows with the same keys above)
 + Mod+Space -- Switch focus from a floating window to a non-floating one (or vice versa)
 + Mod+o -- Make floating window sticky (will stay on active workspace)
-+ Mod+b -- Make window float in bottom left corner (good for video watched intermittently)
++ Mod+b -- Toggle status bar
++ Mod+B -- Make window float in bottom left corner (good for video watched intermittently)
 
 ## Basic Programs
 

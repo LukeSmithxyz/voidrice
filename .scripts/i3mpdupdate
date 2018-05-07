@@ -1,0 +1,5 @@
+#!/bin/bash
+while : ; do
+	mpc idle > /dev/null
+	pkill -RTMIN+11 i3blocks ;
+done
