@@ -17,7 +17,7 @@ fi
 alias music="ncmpcpp"
 alias clock="ncmpcpp -s clock"
 alias visualizer="ncmpcpp -s visualizer"
-alias news="newsbeuter"
+alias news="newsboat"
 alias email="neomutt"
 alias files="ranger"
 alias chat="weechat"
