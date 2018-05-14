@@ -10,7 +10,7 @@ if [[ "$location" != "" ]]
     then
     location="~${location// /+}"
 fi
-curl wttr.in/$location > ~/.weatherreport
+curl -s wttr.in/$location > ~/.weatherreport
 
 echo -n ☔ $(cat ~/.weatherreport | sed -n 16p | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d')
 
