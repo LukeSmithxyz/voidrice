@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Approximate timeout rate in milliseconds (checked every 5 seconds).
+timeout="10000"
+
 # Take a screenshot:
 scrot /tmp/screen.png
 
@@ -16,5 +19,8 @@ mpc pause
 # Lock it up!
 i3lock -e -f -c 000000 -i /tmp/screen.png
 
-# If still locked after 20 seconds, turn off screen.
-sleep 20 && pgrep i3lock && xset dpms force off
+# If still locked after $timeout milliseconds, turn off screen.
+while [[ $(pgrep -x i3lock) ]]; do
+	[[ $timeout -lt $(xssstate -i) ]] && xset dpms force off
+	sleep 5
+done
