@@ -1,3 +1,10 @@
+
+" Installation
+" Source the file wherever you put it:
+"	so ~/.vim/luke/deadkeys.vim
+" Map ToggleDeadKeys to whatever you want:
+"	nm <F7> :call ToggleDeadKeys()<CR>
+
 let g:DeadKeysOn=0
 
 function! ToggleDeadKeys()
@@ -69,7 +76,67 @@ function! DeadKeys()
 	imap 'u ú
 	imap 'U Ú
 	imap '<space> '
+
+	" under dot
+	imap .D Ḍ
+	imap .d ḍ
+	imap .H Ḥ
+	imap .h ḥ
+	imap .L Ḹ
+	imap .l ḹ
+	imap .M Ṃ
+	imap .m ṃ
+	imap .N Ṇ
+	imap .n ṇ
+	imap .R Ṛ
+	imap .r ṛ
+	imap .G Ṝ
+	imap .g ṝ
+	imap .S Ṣ
+	imap .s ṣ
+	imap .T Ṭ
+	imap .t ṭ
+
+	" tilde
+	imap ~a ã
+	imap ~A Ã
+	imap ~e ẽ
+	imap ~E Ẽ
+	imap ~i ĩ
+	imap ~I Ĩ
+	imap ~o õ
+	imap ~O Õ
+	imap ~u ũ
+	imap ~U Ũ
+	imap ~n ñ
+	imap ~N Ñ
+
+	" caron
+	imap >A Ǎ
+	imap >a ǎ
+	imap >C Č
+	imap >c č
+	imap >E Ě
+	imap >e ě
+	imap >G Ǧ
+	imap >g ǧ
+	imap >I Ǐ
+	imap >i ǐ
+	imap >O Ǒ
+	imap >o ǒ
+	imap >R Ř
+	imap >r ř
+	imap >S Ṧ
+	imap >s ṧ
+	imap >U Ǔ
+	imap >u ǔ
+	imap >V Ǚ
+	imap >v ǚ
+	imap >Z Ž
+	imap >z ž
+
 endfunction "deadkeys()
+
 
 function! DeadKeysOff()
 	echo "Dead Keys: Off"
@@ -133,4 +200,61 @@ function! DeadKeysOff()
 	iunmap 'u
 	iunmap 'U
 	iunmap '<space>
+	" under dot
+	iunmap .D
+	iunmap .d
+	iunmap .H
+	iunmap .h
+	iunmap .L
+	iunmap .l
+	iunmap .M
+	iunmap .m
+	iunmap .N
+	iunmap .n
+	iunmap .R
+	iunmap .r
+	iunmap .G
+	iunmap .g
+	iunmap .S
+	iunmap .s
+	iunmap .T
+	iunmap .t
+
+	"tilde
+	iunmap ~a
+	iunmap ~A
+	iunmap ~e
+	iunmap ~E
+	iunmap ~i
+	iunmap ~I
+	iunmap ~o
+	iunmap ~O
+	iunmap ~u
+	iunmap ~U
+	iunmap ~n
+
+	" caron
+	iunmap >A
+	iunmap >a
+	iunmap >C
+	iunmap >c
+	iunmap >E
+	iunmap >e
+	iunmap >G
+	iunmap >g
+	iunmap >I
+	iunmap >i
+	iunmap >O
+	iunmap >o
+	iunmap >R
+	iunmap >r
+	iunmap >S
+	iunmap >s
+	iunmap >U
+	iunmap >u
+	iunmap >V
+	iunmap >v
+	iunmap >Z
+	iunmap >z
+
 endfunction
