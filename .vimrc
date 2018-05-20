@@ -13,7 +13,6 @@ let mapleader =" "
 	set nocompatible
 	filetype plugin on
 	syntax on
-	"colorscheme wal
 	set encoding=utf-8
 	set number
 	set relativenumber
@@ -36,6 +35,7 @@ let mapleader =" "
 
 " Open my bibliography file in split
 	map <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
+	map <leader>b :vsp<space>~/Documents/LaTeX/uni.bib<CR>
 
 " Open the selected text in a split (i.e. should be a file).
 	map <leader>o "oyaW:sp <C-R>o<CR>
@@ -67,23 +67,30 @@ let mapleader =" "
 " Spell-check set to F6:
 	map <F6> :setlocal spell! spelllang=en_us,es<CR>
 
-" Toggle DeadKeys set to F7 (for accent marks):
+" Toggle DeadKeys set (for accent marks):
 	so ~/.vim/luke/deadkeys.vim
-	nm <F7> :call ToggleDeadKeys()<CR>
+	nm <leader><leader>d :call ToggleDeadKeys()<CR>
+	imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
 
 " Source my IPA shorcuts:
-	map <leader>i :so ~/.vim/luke/ipa.vim<CR>
+	so ~/.vim/luke/ipa.vim
+	nm <leader><leader>i :call ToggleIPA()<CR>
+	imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
 
 " Use urlview to choose and open a url:
 	:noremap <leader>u :w<Home>silent <End> !urlview<CR>
 
-" Copy selected text to system clipboard (requires xclip installed):
-	vnoremap <C-c> "cy<esc>:!echo -n '<C-R>c' \|<space>xclip<CR><enter>
+" Copy selected text to system clipboard (requires gvim installed):
+	vnoremap <C-c> "*y :let @+=@*<CR>
 
 " Goyo plugin makes text more readable when writing prose:
 	map <F10> :Goyo<CR>
-	map <leader>f :Goyo<CR>
+	map <leader>f :Goyo \| set linebreak<CR>
 	inoremap <F10> <esc>:Goyo<CR>a
+
+" Toggle Prose Mode with F8:
+    so ~/.vim/luke/prose.vim
+    nm <F8> :call ToggleProse()<CR>
 
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
@@ -97,8 +104,7 @@ let mapleader =" "
 " Automatically deletes all tralling whitespace on save.
 	autocmd BufWritePre * %s/\s\+$//e
 
-" When shortcut files are updated, renew bash and ranger configs with new
-" material:
+" When shortcut files are updated, renew bash and ranger configs with new material:
 	autocmd BufWritePost ~/.scripts/folders,~/.scripts/configs !bash ~/.scripts/shortcuts.sh
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
@@ -119,7 +125,6 @@ let mapleader =" "
 " For normal mode when in terminals (in X I have caps mapped to esc, this replaces it when I don't have X)
 	inoremap jw <Esc>
 	inoremap wj <Esc>
-
 
  "____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
@@ -250,7 +255,6 @@ let mapleader =" "
 	autocmd Filetype rmd inoremap ;p ```{python}<CR>```<CR><CR><esc>2kO
 
 """.xml
-	"autocmd FileType xml inoremap ;e <item><Enter><title><++></title><Enter><pubDate><Esc>:put<Space>=strftime('%c')<Enter>A</pubDate><Enter><link><++></link><Enter><description><++></description><Enter></item>
 	autocmd FileType xml inoremap ;e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
 	autocmd FileType xml inoremap ;a <a href="<++>"><++></a><++><Esc>F"ci"
 
