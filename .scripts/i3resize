@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# This script was made by `goferito` on Github.
+
+direction=$1
+pts="2"
+distanceStr="$pts px or $pts ppt"
+
+[ -z $1 ] && echo "No direction provided" && exit 1
+
+if [ "$1" == "up" ]; then
+i3-msg resize grow up $distanceStr | grep '"success":true' || \
+  i3-msg resize shrink down $distanceStr
+fi
+
+if [ "$1" == "down" ]; then
+i3-msg resize shrink up $distanceStr | grep '"success":true' || \
+  i3-msg resize grow down $distanceStr
+fi
+
+if [ "$1" == "left" ]; then
+i3-msg resize shrink right $distanceStr | grep '"success":true' || \
+  i3-msg resize grow left $distanceStr
+fi
+
+if [ "$1" == "right" ]; then
+i3-msg resize grow right $distanceStr | grep '"success":true' || \
+  i3-msg resize shrink left $distanceStr
+fi
+
