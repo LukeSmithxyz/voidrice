@@ -87,13 +87,14 @@ bindsym $mod+Shift+BackSpace	exec prompt "Are you sure you want to reboot?" "$re
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec lmc truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w			exec $term -e sudo wifi-menu
+bindsym $mod+w			exec --no-startup-id openweb
+#bindsym $mod+w			exec $term -e sudo wifi-menu
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e neomutt
@@ -106,18 +107,19 @@ bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
 bindsym $mod+y			exec $term -e calcurse
-bindsym $mod+Shift+y		resize shrink width 10 px or 10ppt
+bindsym $mod+Shift+y  exec --no-startup-id "bash ~/.scripts/i3resize left"
 
 bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+u  exec --no-startup-id "bash ~/.scripts/i3resize down"
 
 bindsym $mod+i 			exec $term -e htop
-bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+i  exec --no-startup-id "bash ~/.scripts/i3resize up"
 
 bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
+bindsym $mod+Shift+o  exec --no-startup-id "bash ~/.scripts/i3resize right"
 
-bindsym $mod+p			exec lmc toggle
+
+bindsym $mod+p			exec --no-startup-id lmc toggle
 bindsym $mod+Shift+p		exec mypaint
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
@@ -166,7 +168,7 @@ bindsym $mod+n			exec $term -e newsboat
 ##bindsym $mod+Shift+n
 
 bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
-bindsym $mod+Shift+m		exec lmc mute
+bindsym $mod+Shift+m		exec --no-startup-id lmc mute
 
 
 # #---Workspace Bindings---# #
@@ -296,20 +298,20 @@ bindsym $mod+Shift+Right 	move right
 # #---Media Keys---# #
 
 # Volume keys
-bindsym $mod+plus		exec lmc up 5
-bindsym $mod+Shift+plus		exec lmc up 15
-bindsym $mod+minus 		exec lmc down 5
-bindsym $mod+Shift+minus	exec lmc down 15
-bindsym $mod+less 		exec lmc prev
-bindsym $mod+Shift+less		exec lmc replay
-bindsym $mod+greater		exec lmc next
-bindsym $mod+Shift+greater	exec lmc next
+bindsym $mod+plus		exec --no-startup-id lmc up 5
+bindsym $mod+Shift+plus		exec --no-startup-id lmc up 15
+bindsym $mod+minus 		exec --no-startup-id lmc down 5
+bindsym $mod+Shift+minus	exec --no-startup-id lmc down 15
+bindsym $mod+less 		exec --no-startup-id lmc prev
+bindsym $mod+Shift+less		exec --no-startup-id lmc replay
+bindsym $mod+greater		exec --no-startup-id lmc next
+bindsym $mod+Shift+greater	exec --no-startup-id lmc next
 
 # For advancing forward/backward in an mpd song
-bindsym $mod+bracketleft 	exec lmc back 10
-bindsym $mod+Shift+bracketleft 	exec lmc back 120
-bindsym $mod+bracketright 	exec lmc forward 10
-bindsym $mod+Shift+bracketright exec lmc forward 120
+bindsym $mod+bracketleft 	exec --no-startup-id lmc back 10
+bindsym $mod+Shift+bracketleft 	exec --no-startup-id lmc back 120
+bindsym $mod+bracketright 	exec --no-startup-id lmc forward 10
+bindsym $mod+Shift+bracketright exec --no-startup-id lmc forward 120
 
 # For screenshots and recording
 bindsym Print 			exec --no-startup-id scrot
@@ -321,9 +323,9 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
-bindsym XF86AudioMute		exec lmc mute
-bindsym XF86AudioLowerVolume	exec lmc down 5
-bindsym XF86AudioRaiseVolume	exec lmc up 5
+bindsym XF86AudioMute		exec --no-startup-id lmc mute
+bindsym XF86AudioLowerVolume	exec --no-startup-id lmc down 5
+bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
 bindsym XF86PowerOff		exec prompt "Are you sure you want to shutdown?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
@@ -346,13 +348,13 @@ bindsym XF86MyComputer		exec $term -e ranger
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec sudo umount -R /mnt
-bindsym XF86AudioNext		exec lmc next
-bindsym XF86AudioPlay		exec lmc toggle
-bindsym XF86AudioPrev		exec lmc prev
-bindsym XF86AudioStop		exec lmc toggle
+bindsym XF86AudioNext		exec --no-startup-id lmc next
+bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
+bindsym XF86AudioPrev		exec --no-startup-id lmc prev
+bindsym XF86AudioStop		exec --no-startup-id lmc toggle
 ##bindsym XF86AudioRecord
-bindsym XF86AudioRewind		exec lmc back 10
-bindsym XF86AudioForward	exec lmc forward 10
+bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
+bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
 ##bindsym XF86Phone		exec
 ##bindsym XF86Tools		exec
 bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
