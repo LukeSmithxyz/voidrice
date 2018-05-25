@@ -93,8 +93,7 @@ bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; 
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w			exec --no-startup-id openweb
-#bindsym $mod+w			exec $term -e sudo wifi-menu
+bindsym $mod+w			exec $term -e sudo wifi-menu
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e neomutt
