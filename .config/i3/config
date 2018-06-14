@@ -52,7 +52,7 @@ bar {
 	modifier None
 }
 # Run the script to update the mpd i3block on change.
-exec --no-startup-id i3mpdupdate
+exec --no-startup-id "pgrep i3mpdupdate || i3mpdupdate"
 
 #OPENRC
 #set $shutdown sudo openrc-shutdown -p
@@ -72,16 +72,16 @@ set $hibernate sudo systemctl suspend
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
-bindsym $mod+Shift+Return 	exec $term -e vim ~/vimwiki/index.wiki
+##bindsym $mod+Shift+Return
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		workspace prev
-bindsym $mod+Shift+Escape 	exec prompt "Are you sure you want to leave i3?" "i3-msg exit"
+bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Are you sure you want to leave i3?" "i3-msg exit"
 
 # bindsym $mod+BackSpace
-bindsym $mod+Shift+BackSpace	exec prompt "Are you sure you want to reboot?" "$reboot"
+bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Are you sure you want to reboot?" "$reboot"
 
 ##bindsym $mod+grave
 ##bindsym $mod+asciitilde
@@ -93,7 +93,7 @@ bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; 
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w			exec $term -e sudo wifi-menu
+bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e neomutt
@@ -106,20 +106,20 @@ bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
 bindsym $mod+y			exec $term -e calcurse
-bindsym $mod+Shift+y  exec --no-startup-id "bash ~/.scripts/i3resize left"
+bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
 
 bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-bindsym $mod+Shift+u  exec --no-startup-id "bash ~/.scripts/i3resize down"
+bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
 
 bindsym $mod+i 			exec $term -e htop
-bindsym $mod+Shift+i  exec --no-startup-id "bash ~/.scripts/i3resize up"
+bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
 
 bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o  exec --no-startup-id "bash ~/.scripts/i3resize right"
+bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
 
 
 bindsym $mod+p			exec --no-startup-id lmc toggle
-bindsym $mod+Shift+p		exec mypaint
+#bindsym $mod+Shift+p
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+Shift+a		exec $term -e ncpamixer
@@ -152,7 +152,7 @@ bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+Shift+x		exec prompt "Are you sure you want to shutdown?" "$shutdown"
+bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
 
 bindsym $mod+c			exec --no-startup-id camtoggle
 ##bindsym $mod+Shift+c
@@ -269,7 +269,7 @@ no_focus [title="mpvfloat"]
 for_window [title="Default - Wine desktop"] floating enable
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
+bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id $hibernate
@@ -325,7 +325,7 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 bindsym XF86AudioMute		exec --no-startup-id lmc mute
 bindsym XF86AudioLowerVolume	exec --no-startup-id lmc down 5
 bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
-bindsym XF86PowerOff		exec prompt "Are you sure you want to shutdown?" "$shutdown"
+bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
 ##bindsym XF86Paste		exec
