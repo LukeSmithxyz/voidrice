@@ -6,11 +6,8 @@ timeout="10000"
 # Take a screenshot:
 scrot /tmp/screen.png
 
-# Create a blur on the shot:
-convert /tmp/screen.png -paint 1 -swirl 360 /tmp/screen.png
-
-# Add the lock to the blurred image:
-[[ -f ~/.config/i3/lock.png ]] && convert /tmp/screen.png  ~/.config/i3/lock.png -gravity center -composite -matte /tmp/screen.png
+# Add the lock to the swirled and blurred image:
+[[ -f ~/.config/i3/lock.png ]] && convert /tmp/screen.png -paint 1 -swirl 360  ~/.config/i3/lock.png -gravity center -composite -matte /tmp/screen.png
 
 # Pause music (mocp and mpd):
 mocp -P
