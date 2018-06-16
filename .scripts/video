@@ -15,4 +15,7 @@ ffmpeg \
 -f x11grab \
 -s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
 -i :0.0 \
- -c:v libx264 -qp 0 -r 30 $filename
+ -c:v libx264 -qp 0 -r 30 $filename &
+
+# Updating i3blocks recording icon:
+echo ⏺️ > ~/.scripts/.recording && pkill -RTMIN+9 i3blocks

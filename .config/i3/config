@@ -23,7 +23,8 @@ gaps outer 15
 font pango:mono 12
 set $mod Mod4
 set $term --no-startup-id st
-set $stoprec --no-startup-id killall ffmpeg
+set $stoprec --no-startup-id killrecording
+exec --no-startup-id rm -f ~/.larbs/.recording
 
 # #---Starting External Scripts---# #
 #Setting the background:

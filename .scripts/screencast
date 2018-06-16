@@ -33,4 +33,6 @@ ffmpeg -y \
  -c:v libx264 -r 30 -c:a flac $filename ;}
 
 
-if [[ $(pgrep -x pulseaudio) ]]; then record_pulse; else record_alsa; fi
+if [[ $(pgrep -x pulseaudio) ]]; then record_pulse; else record_alsa; fi &
+# Updating i3blocks recording icon:
+echo ⏺️ > ~/.scripts/.recording && pkill -RTMIN+9 i3blocks
