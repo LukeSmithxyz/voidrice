@@ -5,11 +5,11 @@
 # It also names files smartly to prevent overwrites.
 
 # Picks a file name for the output file based on availability:
-while [[ -f $HOME/screencast$n.mkv ]]
+while [[ -f $HOME/audio$n.flac ]]
 do
 	n=$((n+1))
 done
-filename="$HOME/screencast$n.mkv"
+filename="$HOME/audio$n.flac"
 
 # For Pulseaudio with ALSA:
 record_pulse() { \
@@ -24,4 +24,6 @@ ffmpeg -y \
 -f alsa -ar 44100 -i hw:1 \
 $filename ;}
 
-if [[ $(pgrep -x pulseaudio) ]]; then record_pulse; else record_alsa; fi
+if [[ $(pgrep -x pulseaudio) ]]; then record_pulse; else record_alsa; fi &
+# Updating i3blocks recording icon:
+echo 🎙️ > ~/.scripts/.recording && pkill -RTMIN+9 i3blocks
