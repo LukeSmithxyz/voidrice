@@ -2,4 +2,4 @@
 case $BLOCK_BUTTON in
     1) $TERMINAL -e neomutt ;;
 esac
-echo $(find ~/.mail -wholename */INBOX/new/* | wc -l | sed -e "s/^0$//g")
+echo $(find ~/.mail -wholename */INBOX/new/* | wc -l | sed -e "s/^0$//g") $(cat ~/.config/mutt/.dl)
