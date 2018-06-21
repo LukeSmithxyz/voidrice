@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 # Approximate timeout rate in milliseconds (checked every 5 seconds).
 timeout="10000"
