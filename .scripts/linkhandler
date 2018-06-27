@@ -17,13 +17,13 @@ fehFiles="png jpg jpeg jpe"
 wgetFiles="mp3 flac opus mp3?source=feed pdf"
 
 if echo $fehFiles | grep -w $ext > /dev/null; then
-	feh "$1" >/dev/null & disown
+	setsid nohup feh "$1" >/dev/null & disown
 elif echo $mpvFiles | grep -w $ext > /dev/null; then
-	mpv -quiet "$1" > /dev/null & disown
+	setsid nohup mpv -quiet "$1" > /dev/null & disown
 elif echo $wgetFiles | grep -w $ext > /dev/null; then
 	wget "$1" >/dev/null & disown
 elif echo "$@" | grep "$vidsites">/dev/null; then
-	mpv -quiet "$1" > /dev/null & disown
+	setsid nohup mpv -quiet "$1" > /dev/null & disown
 else
-	$BROWSER "$1" 2>/dev/null & disown
+	setsid nohup $BROWSER "$1" 2>/dev/null & disown
 fi
