@@ -91,8 +91,8 @@ bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Are you sure you want 
 bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 # #---Letter Key Bindings---# #
-bindsym $mod+q			kill
-bindsym $mod+Shift+q		kill
+bindsym $mod+q			[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
 
 bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
