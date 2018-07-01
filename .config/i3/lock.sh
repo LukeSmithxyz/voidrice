@@ -4,22 +4,17 @@
 timeout="10000"
 
 # Take a screenshot of every screen available:
+scrot -m -z /tmp/lock.png
 xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
 {
+  cmd="convert"
   while IFS=' :x@,' read i w h x y; do
-    INDEX=$i
-    import -window root -crop ${w}x$h+$x+$y /tmp/head_$i.png
+    cmd+=" /tmp/lock.png -paint 1 -swirl 360 -crop ${w}x$h+$x+$y -geometry ${w}x$h+$x+$y ~/.config/i3/lock.png -gravity center -composite -matte"
   done
+  cmd+=" /tmp/screen.png"
 
-# Add the lock to the swirled and blurred images:
-  for i in `seq 0 ${INDEX}`;
-    do
-      convert /tmp/head_${i}.png -paint 1 -swirl 360 ~/.config/i3/lock.png -gravity center -composite -matte /tmp/head_${i}.png;
-    done
+  eval $cmd
 }
-
-#Combine all screen images into one big image
-convert +append /tmp/head_*.png /tmp/screen.png
 
 # Pause music (mocp and mpd):
 mocp -P
