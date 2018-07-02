@@ -1,18 +1,18 @@
-# vim: filetype=i3
-#  _          _          ____            _ _   _     _       _ _____    ____             __ _
-# | |   _   _| | _____  / ___| _ __ ___ (_) |_| |__ ( )___  (_)___ /   / ___|___  _ __  / _(_) __ _
-# | |  | | | | |/ / _ \ \___ \| '_ ` _ \| | __| '_ \|// __| | | |_ \  | |   / _ \| '_ \| |_| |/ _` |
-# | |__| |_| |   <  __/  ___) | | | | | | | |_| | | | \__ \ | |___) | | |__| (_) | | | |  _| | (_| |
-# |_____\__,_|_|\_\___| |____/|_| |_| |_|_|\__|_| |_| |___/ |_|____/   \____\___/|_| |_|_| |_|\__, |
-                                                                                            # |___/
+#vim: filetype=i3
+#
+#                   _ _       _ ____
+#                  (_| )     (_)___ \
+#  _   _ _   _ _ __ _|/ ___   _  __) |
+# | | | | | | | '__| | / __| | ||__ <
+# | |_| | |_| | |  | | \__ \ | |___) |
+#  \__, |\__,_|_|  |_| |___/ |_|____/
+#   __/ |
+#  |___/
 
-# This is Luke Smith's i3-gaps configuration file.
-# Me: http://lukesmith.xyz
-# Email: luke@lukesmith.xyz
-# YouTube: https://youtube.com/c/LukeSmithxyz
-# Github: https://github.com/LukeSmithxyz
+# hidud
+# Email: explordtv@gmail.com
 
-# Be sure that you have your $BROWSER environmental variable set to your favorite browser.
+# be sur that you have your $BROWSER environmental variable set to yur favorite browser.
 # E.g., put `export BROWSER="firefox"` into your bash_profile
 
 # #---Basic Definitions---# #
@@ -23,28 +23,32 @@ gaps outer 15
 font pango:mono 12
 set $mod Mod4
 set $term --no-startup-id st
-set $stoprec --no-startup-id killrecording
-exec --no-startup-id rm -f ~/.larbs/.recording
+set $stoprec --no-startup-id killall ffmpeg
 
 # #---Starting External Scripts---# #
+#NumLock on i3
+exec_always numlockx
 #Setting the background:
-exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
+exec_always --no-startup-id feh --bg-scale ~/.config/i3/wall.jpg
 #Starts dunst for notifications:
-exec --no-startup-id dunst
-#Music player daemon:
-exec --no-startup-id mpd
+exec_always --no-startup-id dunst
 #Torrent daemon:
 exec --no-startup-id transmission-daemon
 #Composite manager:
 exec --no-startup-id compton --xrender-sync-fence
+#exec --no-startup-id compton --config ~/.config/compton.conf
 #Launch Polybar where appropriate:
 #exec_always --no-startup-id ~/.scripts/polybar_launch
 #Runs the key remapping scripts
-exec --no-startup-id ~/.scripts/remaps
+exec_always --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
 exec --no-startup-id nm-applet
+#Other stuff
+exec pa-applet
+# I used this for my CZ KB layout. I already solved that
+#exec fcitx
 
 bar {
 	status_command i3blocks
@@ -53,7 +57,7 @@ bar {
 	modifier None
 }
 # Run the script to update the mpd i3block on change.
-exec --no-startup-id "pgrep i3mpdupdate || i3mpdupdate"
+exec --no-startup-id i3mpdupdate
 
 #OPENRC
 #set $shutdown sudo openrc-shutdown -p
@@ -73,32 +77,30 @@ set $hibernate sudo systemctl suspend
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
-##bindsym $mod+Shift+Return
-
+bindsym $mod+shift+Return 	exec $term -e sudo alsamixer
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		workspace prev
-bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Are you sure you want to leave i3?" "i3-msg exit"
+bindsym $mod+Shift+Escape 	exec (zenity --question --text "Do you want to exit?") && i3-msg exit
 
-# bindsym $mod+BackSpace
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Are you sure you want to reboot?" "$reboot"
+bindsym $mod+Shift+BackSpace	exec (zenity --question --text "Do you want to reboot?") && reboot
 
 ##bindsym $mod+grave
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+Shift+Delete	exec --no-startup-id pactl set-sink-mute 0 toggle ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w			exec --no-startup-id $BROWSER
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+bindsym $mod+w			exec $term -e sudo wifi-menu
+bindsym $mod+Shift+w            exec chromium
 
 bindsym $mod+e			exec $term -e neomutt
-##bindsym $mod+Shift+e
+bindsym $mod+Shift+e		exec discord-canary
 
 bindsym $mod+r 			exec $term -e ranger
 bindsym $mod+Shift+r		exec $term -e sudo ranger /
@@ -107,23 +109,24 @@ bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
 bindsym $mod+y			exec $term -e calcurse
-bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
+bindsym $mod+Shift+y 		bash ~/.scripts/i3resize leftndsym $mod+u
 
-bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
+#bindsym $mod+u 			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+#bindsym $mod+u			exec $term -e tmux ; floating toggle
+bindsym $mod+Shift+u  exec --no-startup-id "bash ~/.scripts/i3resize down"
 
 bindsym $mod+i 			exec $term -e htop
-bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
+bindsym $mod+Shift+i  exec --no-startup-id "bash ~/.scripts/i3resize up"
 
 bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
+bindsym $mod+Shift+o  exec --no-startup-id "bash ~/.scripts/i3resize right"
 
 
 bindsym $mod+p			exec --no-startup-id lmc toggle
-#bindsym $mod+Shift+p
+bindsym $mod+Shift+p		exec mypaint
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+Shift+a		exec $term -e ncpamixer
+bindsym $mod+Shift+a		exec $term -e sudo alsamixer
 
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
@@ -135,7 +138,8 @@ bindsym $mod+f			fullscreen toggle
 ##bindsym $mod+Shift+f
 
 bindsym $mod+g			workspace prev
-bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
+bindsym $mod+Shift+g		exec --no-startup-id /usr/share/playonlinux/playonlinux --run "Adobe Photoshop CS6" %F; workspace $ws5; bar mode toggle
+
 
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
@@ -153,21 +157,21 @@ bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
+bindsym $mod+Shift+x		exec (zenity --question --text "Do you want to shutdown?") && shutdown -h now
 
 bindsym $mod+c			exec --no-startup-id camtoggle
 ##bindsym $mod+Shift+c
 
-bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
+bindsym $mod+v			exec $term -e cava
 bindsym $mod+Shift+v		exec projectM-pulseaudio
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
 bindsym $mod+n			exec $term -e newsboat
-##bindsym $mod+Shift+n
+bindsym $mod+Shift+n		exec $term -e rtv
 
-bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
+bindsym $mod+m 			exec spotify
 bindsym $mod+Shift+m		exec --no-startup-id lmc mute
 
 
@@ -240,7 +244,8 @@ for_window [window_role="gimp-dock"] floating disable; move left; resize shrink 
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 for_window [instance="dl"] move workspace $ws10
-
+for_window [class="photoshop.exe"] move workspace $ws5
+for_window [window_role="Adobe Photoshop CS6 Extended"] move workspace $ws5
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
 for_window [instance="dropdown"] floating enable
@@ -252,6 +257,7 @@ for_window [instance="dropdown"] border pixel 5
 exec --no-startup-id $term -n dropdown -e tmuxinit
 # Runs neofetch on first tmux screen if installed.
 exec_always --no-startup-id "tmux send-keys -t 0:0 'clear && neofetch 2>/dev/null' Enter"
+
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
@@ -270,7 +276,7 @@ no_focus [title="mpvfloat"]
 for_window [title="Default - Wine desktop"] floating enable
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
+bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id $hibernate
@@ -314,8 +320,8 @@ bindsym $mod+bracketright 	exec --no-startup-id lmc forward 10
 bindsym $mod+Shift+bracketright exec --no-startup-id lmc forward 120
 
 # For screenshots and recording
-bindsym Print 			exec --no-startup-id scrot
-bindsym Shift+Print 		exec --no-startup-id scrot -u
+bindsym Print 			exec spectacle
+bindsym Shift+Print 		exec spectacle -r
 bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
@@ -323,10 +329,11 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
-bindsym XF86AudioMute		exec --no-startup-id lmc mute
-bindsym XF86AudioLowerVolume	exec --no-startup-id lmc down 5
-bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
-bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute 		exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86PowerOff		exec (zenity --question --text "Do you want to shutdown?") && shutdown -h now
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
 ##bindsym XF86Paste		exec
@@ -348,10 +355,11 @@ bindsym XF86MyComputer		exec $term -e ranger
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec sudo umount -R /mnt
-bindsym XF86AudioNext		exec --no-startup-id lmc next
-bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
-bindsym XF86AudioPrev		exec --no-startup-id lmc prev
-bindsym XF86AudioStop		exec --no-startup-id lmc toggle
+# Spotify related key bindings
+bindsym XF86AudioPlay 		exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioStop 		exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym XF86AudioPrev 		exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioNext 		exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 ##bindsym XF86AudioRecord
 bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
 bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
@@ -372,7 +380,7 @@ bindsym XF86Reload		restart
 ##bindsym XF86Launch7		exec
 ##bindsym XF86Launch8		exec
 ##bindsym XF86Launch9		exec
-#bindsym XF86AudioMicMute	exec $micmute
+bindsym XF86AudioMicMute	exec pactl set-source-mute 1 toggle
 ##bindsym XF86TouchpadToggle	exec
 bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
 bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
@@ -400,3 +408,4 @@ bindsym XF86Documents		exec $term -e ranger ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
+EXEC_always --no-startup-id notify-send -i ~/.scripts/saguwu.png '<b>Welcome to WEEBS:</b> Press Super+F1 for the manual.' -t 10000
