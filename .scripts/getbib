@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Give this script a .pdf and it will attempt
+# to return a proper .bib citation via doi.
+# Internet connection required.
+
+# Get the doi from metadata, if not possible, get
+# doi from pdftotext output, if not possible, exit.
+doi=$(pdfinfo "$1" | grep -o doi:.*) ||
+	doi=$(pdftotext "$1" - | grep -o doi.* -m 1) ||
+	exit 1
+
+# Check crossref.org for the bib citation.
+curl -s "http://api.crossref.org/works/$doi/transform/application/x-bibtex" -w "\n" |
+	sed -e "/^[^\(\t\|@\|}\)]/d"
