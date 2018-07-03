@@ -281,8 +281,6 @@ for_window [instance="dropdown"] border pixel 5
 # Runs the tmuxinit script, which searches for an earlier tmux instance,
 # otherwise starts a new one (to prevent multiple dropdown sessions).
 exec --no-startup-id $term -n dropdown -e tmuxinit
-# Runs neofetch on first tmux screen if installed.
-exec_always --no-startup-id "tmux send-keys -t 0:0 'clear && neofetch 2>/dev/null' Enter"
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
