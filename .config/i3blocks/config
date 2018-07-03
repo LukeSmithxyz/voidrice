@@ -14,12 +14,17 @@ interval=once
 align=left
 signal=11
 
+[pacman]
+command=i3pacman
+interval=once
+signal=8
+
 [weather]
 command=i3weather
 interval=3600
 
 [mail]
-label=📮
+label=📬
 command=i3mail
 interval=180
 align=left
@@ -28,15 +33,16 @@ signal=12
 [volume]
 interval=once
 command=i3volume
-markup=pango
 signal=10
 
 [iface]
+label=🌐
 #instance=wlan0
 color=#00FF00
 interval=10
 
 [wifi]
+label=📶
 #instance=wlp3s0
 interval=10
 
