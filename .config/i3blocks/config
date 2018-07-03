@@ -1,50 +1,6 @@
-command=/usr/lib/i3blocks/$BLOCK_NAME
-separator_block_width=15
-markup=pango
-
-[record]
-command=cat ~/.scripts/.recording
-interval=once
-signal=9
-
 [mpd]
 label=🎼
-command=i3mpd
-interval=once
+command=bash ~/.scripts/i3mpd
+interval=1
 align=left
 signal=11
-
-[weather]
-command=i3weather
-interval=3600
-
-[mail]
-label=📮
-command=i3mail
-interval=180
-align=left
-signal=12
-
-[volume]
-interval=once
-command=i3volume
-markup=pango
-signal=10
-
-[iface]
-#instance=wlan0
-color=#00FF00
-interval=10
-
-[wifi]
-#instance=wlp3s0
-interval=10
-
-[battery]
-command=acpi | cut -d " " -f3-5 |  sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g"
-interval=5
-
-[time]
-label=📅
-command=echo $(date '+%Y %b %d %I:%M%p') 🕓
-interval=30
