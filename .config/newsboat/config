@@ -30,9 +30,9 @@ color article cyan default
 
 browser linkhandler
 macro , open-in-browser
-macro t set browser "tsp youtube-dl"; open-in-browser ; set browser linkhandler
+macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
+macro a set browser "tsp youtube-dl --add-metadata -xic"; open-in-browser ; set browser linkhandler
 macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandler
-macro y set browser "setsid nohup spawndl"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
 macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
 # c copies the link to the clipboard.
