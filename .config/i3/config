@@ -165,8 +165,12 @@ bindsym $mod+Shift+s		gaps inner current minus 5
 bindsym $mod+d			exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
+set $freeze Distraction-free mode (mod+shift+esc to exit)
+mode "$freeze" { bindsym $mod+Shift+Escape mode "default"
+}
+
 bindsym $mod+f			fullscreen toggle
-##bindsym $mod+Shift+f
+bindsym $mod+Shift+f		mode "$freeze"
 
 bindsym $mod+g			workspace prev
 bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
