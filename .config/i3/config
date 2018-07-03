@@ -73,7 +73,7 @@ set $hibernate sudo systemctl suspend
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
-##bindsym $mod+Shift+Return
+bindsym $mod+Shift+Return	exec samedir
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
