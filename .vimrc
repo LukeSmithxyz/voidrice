@@ -267,3 +267,6 @@ vnoremap L >gv
 vnoremap H <gv
 
 map <enter><enter> yi[:e <c-r>"<cr>
+
+#disable visual mode when using mouse (you can't copy with that option enabled.)
+set mouse-=a
