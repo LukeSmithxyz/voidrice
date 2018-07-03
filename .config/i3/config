@@ -157,7 +157,7 @@ bindsym $mod+p			exec --no-startup-id lmc toggle
 #bindsym $mod+Shift+p
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+Shift+a		exec $term -e ncpamixer
+bindsym $mod+Shift+a		exec $term -e pulsemixer
 
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
