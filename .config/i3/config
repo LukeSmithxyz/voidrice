@@ -1,26 +1,25 @@
 # vim: filetype=i3
-#  _          _          ____            _ _   _     _       _ _____    ____             __ _
-# | |   _   _| | _____  / ___| _ __ ___ (_) |_| |__ ( )___  (_)___ /   / ___|___  _ __  / _(_) __ _
-# | |  | | | | |/ / _ \ \___ \| '_ ` _ \| | __| '_ \|// __| | | |_ \  | |   / _ \| '_ \| |_| |/ _` |
-# | |__| |_| |   <  __/  ___) | | | | | | | |_| | | | \__ \ | |___) | | |__| (_) | | | |  _| | (_| |
-# |_____\__,_|_|\_\___| |____/|_| |_| |_|_|\__|_| |_| |___/ |_|____/   \____\___/|_| |_|_| |_|\__, |
-                                                                                            # |___/
-
-# This is Luke Smith's i3-gaps configuration file.
-# Me: http://lukesmith.xyz
+#  _        _    ____  ____ ____
+# | |      / \  |  _ \| __ ) ___|
+# | |     / _ \ | |_) |  _ \___ \
+# | |___ / ___ \|  _ <| |_) |__) |
+# |_____/_/   \_\_| \_\____/____/
+#
+# File originally by Luke Smith
+# Website: http://lukesmith.xyz
 # Email: luke@lukesmith.xyz
 # YouTube: https://youtube.com/c/LukeSmithxyz
 # Github: https://github.com/LukeSmithxyz
 
 # Be sure that you have your $BROWSER environmental variable set to your favorite browser.
-# E.g., put `export BROWSER="firefox"` into your bash_profile
+# E.g., put `export BROWSER="firefox"` into your ~/.bash_profile
 
 # #---Basic Definitions---# #
 #Needed for i3-gaps
 for_window [class="^.*"] border pixel 3
 gaps inner 15
 gaps outer 15
-font pango:mono 12
+font pango:mono 11
 set $mod Mod4
 set $term --no-startup-id st
 set $stoprec --no-startup-id killrecording
