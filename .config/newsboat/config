@@ -1,4 +1,4 @@
-#auto-reload yes
+auto-reload yes
 
 external-url-viewer "urlview"
 
