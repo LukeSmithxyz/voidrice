@@ -46,14 +46,48 @@ exec --no-startup-id unclutter
 #Network Manager applet
 exec --no-startup-id nm-applet
 
+set_from_resource $darkblack	color0  #000000
+set_from_resource $black	color8  #000000
+set_from_resource $darkred	color1  #000000
+set_from_resource $red		color9  #000000
+set_from_resource $darkgreen	color2  #000000
+set_from_resource $green	color10 #000000
+set_from_resource $darkyellow	color3  #000000
+set_from_resource $yellow	color11 #000000
+set_from_resource $darkblue	color4  #000000
+set_from_resource $blue		color12 #000000
+set_from_resource $darkmagenta	color5  #000000
+set_from_resource $magenta	color13 #000000
+set_from_resource $darkcyan	color6  #000000
+set_from_resource $cyan		color14 #000000
+set_from_resource $darkwhite	color7  #000000
+set_from_resource $white	color15 #000000
+set $transparent		#00000000
+
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused		$red		$red		$magenta		$darkmagenta		$darkblue
+client.unfocused		$transparent		$blue      $white      $darkblue		$transparent
+client.focused_inactive	$transparent		$blue      $white      $darkblue		$transparent
+client.urgent		$darkred	$darkred		$black		$darkred		$darkred
+client.background $black
+
 bar {
+	colors {
+			background $darkblack
+			statusline $darkwhite
+			separator $cyan
+			focused_workspace  $blue $darkblue $darkwhite
+        		active_workspace   $blue $darkblue $darkwhite
+      			inactive_workspace $darkblack $darkblack $white
+        		urgent_workspace   $darkblack $darkblack $white
+		}
 	status_command i3blocks
 	position top
 	mode dock
 	modifier None
 }
 # Run the script to update the mpd i3block on change.
-exec --no-startup-id "pgrep i3mpdupdate || i3mpdupdate"
+exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 
 #OPENRC
 #set $shutdown sudo openrc-shutdown -p
