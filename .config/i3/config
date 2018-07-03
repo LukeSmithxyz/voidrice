@@ -27,6 +27,7 @@ exec --no-startup-id rm -f ~/.larbs/.recording
 
 # #---Starting External Scripts---# #
 #Setting the background:
+#exec_always --no-startup-id wal -i ~/.config/wall.png
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
 #Starts dunst for notifications:
 exec --no-startup-id dunst
