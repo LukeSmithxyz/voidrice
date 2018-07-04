@@ -11,13 +11,18 @@ signal=9
 label=🎼
 command=i3mpd
 interval=once
-align=left
 signal=11
 
 [pacman]
+label=📦
 command=i3pacman
 interval=once
 signal=8
+
+#[torrents]
+#command=i3torrent
+#interval=20
+#signal=7
 
 [weather]
 command=i3weather
@@ -27,7 +32,6 @@ interval=3600
 label=📬
 command=i3mail
 interval=180
-align=left
 signal=12
 
 [volume]

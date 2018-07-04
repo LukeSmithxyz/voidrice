@@ -5,4 +5,4 @@ esac
 
 pacman -Qu | wc -l | sed -e '/^0$/d' > ~/.larbs/.pacupgrade && pkill -RTMIN+8 i3blocks
 
-cat ~/.larbs/.pacupgrade | sed -e "/^$/d;s/^/📦 /g"
+cat ~/.larbs/.pacupgrade | sed -e "/^$/d"
