@@ -51,7 +51,7 @@ label=📶
 interval=10
 
 [battery]
-command=echo $(cat /sys/class/power_supply/BAT0/status | sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g") $(cat /sys/class/power_supply/BAT0/capacity)
+command=echo $(cat /sys/class/power_supply/BAT0/status | sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g") $(cat /sys/class/power_supply/BAT0/capacity | sed -e 's/$/%/')
 interval=5
 
 [time]
