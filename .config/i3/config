@@ -19,7 +19,6 @@
 for_window [class="^.*"] border pixel 3
 gaps inner 15
 gaps outer 15
-font pango:mono 11
 set $mod Mod4
 set $term --no-startup-id st
 set $stoprec --no-startup-id killrecording
@@ -64,20 +63,21 @@ set_from_resource $darkwhite	color7  #000000
 set_from_resource $white	color15 #000000
 set $transparent		#00000000
 
-#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.focused		$red		$red		$magenta		$darkmagenta		$darkblue
-client.unfocused		$transparent		$blue      $white      $darkblue		$transparent
-client.focused_inactive	$transparent		$blue      $white      $darkblue		$transparent
-client.urgent		$darkred	$darkred		$black		$darkred		$darkred
+#                       BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
+client.focused		$red		$red		$magenta	$darkmagenta		$darkblue
+client.unfocused	$transparent	$blue		$white		$darkblue		$transparent
+client.focused_inactive	$transparent	$blue		$white		$darkblue		$transparent
+client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
+	font pango:mono 11
 	colors {
 			background $darkblack
 			statusline $darkwhite
 			separator $cyan
 			focused_workspace  $blue $darkblue $darkwhite
-        		active_workspace   $blue $darkblue $darkwhite
+        		active_workspace   $blue $blue $darkwhite
       			inactive_workspace $darkblack $darkblack $white
         		urgent_workspace   $darkblack $darkblack $white
 		}
