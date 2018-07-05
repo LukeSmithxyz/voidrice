@@ -7,11 +7,15 @@ timeout="10000"
 scrot -m -z /tmp/lock.png
 xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
 {
-  cmd="convert"
+  cmd="convert /tmp/lock.png"
+	cmdend=""
   while IFS=' :x@,' read i w h x y; do
-    cmd+=" /tmp/lock.png -paint 1 -swirl 360 -crop ${w}x$h+$x+$y -geometry ${w}x$h+$x+$y ~/.config/i3/lock.png -gravity center -composite -matte"
+    cmd+=" -region ${w}x$h+$x+$y -paint 1 -swirl 360"
+    xc=$((x+(w/2)-79))
+    yc=$((y+(h/2)-79))
+    cmdend+=" ~/.config/i3/lock.png  -geometry +${xc}+${yc} -composite -matte"
   done
-  cmd+=" /tmp/screen.png"
+  cmd+="${cmdend} /tmp/screen.png"
 
   eval $cmd
 }
