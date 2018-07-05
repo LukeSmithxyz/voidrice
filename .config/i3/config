@@ -197,7 +197,7 @@ bindsym $mod+c			exec --no-startup-id camtoggle
 ##bindsym $mod+Shift+c
 
 bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
-bindsym $mod+Shift+v		exec projectM-pulseaudio
+bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
