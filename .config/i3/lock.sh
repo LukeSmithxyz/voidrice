@@ -14,7 +14,7 @@ xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
 # Add the lock to the swirled and blurred images:
   for i in `seq 0 ${INDEX}`;
     do
-      convert /tmp/head_${i}.png -paint 1 -swirl 360 ~/.config/i3/lock.png -gravity center -composite -matte /tmp/head_${i}.png;
+      convert /tmp/head_${i}.png -paint 1 -swirl 360 ~/.config/i3/lock1.png -swirl -30 -gravity center -composite -matte /tmp/head_${i}.png;
     done
 }
 
