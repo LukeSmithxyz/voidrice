@@ -15,36 +15,44 @@
 # E.g., put `export BROWSER="firefox"` into your ~/.bash_profile
 
 # #---Basic Definitions---# #
-#Needed for i3-gaps
+# Needed for i3-gaps
 for_window [class="^.*"] border pixel 3
 gaps inner 15
 gaps outer 15
 set $mod Mod4
 set $term --no-startup-id st
 set $stoprec --no-startup-id killrecording
-exec --no-startup-id rm -f ~/.larbs/.recording
+set $shutdown sudo shutdown -h now
+set $reboot sudo reboot
+set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+set $hibernate sudo systemctl suspend
 
 # #---Starting External Scripts---# #
-#Setting the background:
+# Setting the background:
 #exec_always --no-startup-id wal -i ~/.config/wall.png
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
-#Starts dunst for notifications:
+# Starts dunst for notifications:
 exec --no-startup-id dunst
-#Music player daemon:
+# Music player daemon:
 exec --no-startup-id mpd
-#Torrent daemon:
-exec --no-startup-id transmission-daemon
-#Composite manager:
+# Torrent daemon:
+#exec --no-startup-id transmission-daemon
+# Composite manager:
 exec --no-startup-id compton --xrender-sync-fence
-#Launch Polybar where appropriate:
+# Launch Polybar where appropriate:
 #exec_always --no-startup-id ~/.scripts/polybar_launch
-#Runs the key remapping scripts
+# Runs the key remapping scripts
 exec --no-startup-id ~/.scripts/remaps
-#Unclutter makes the mouse invisible after a brief period
+# Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
-#Network Manager applet
+# Network Manager applet
 exec --no-startup-id nm-applet
+# Run the script to update the mpd i3block on change.
+exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
+# Remove recording icon if not properly closed on last shutdown.
+exec --no-startup-id rm -f ~/.larbs/.recording
 
+# Set Xresources colors:
 set_from_resource $darkblack	color0  #000000
 set_from_resource $black	color8  #000000
 set_from_resource $darkred	color1  #000000
@@ -86,24 +94,6 @@ bar {
 	mode dock
 	modifier None
 }
-# Run the script to update the mpd i3block on change.
-exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
-
-#OPENRC
-#set $shutdown sudo openrc-shutdown -p
-#set $reboot sudo openrc-shutdown -r
-#set $netrefresh --no-startup-id sudo rc-service NetworkManager restart
-
-#RUNIT
-#set $shutdown sudo shutdown -h now
-#set $reboot sudo reboot
-#set $netrefresh --no-startup-id sudo sv restart NetworkManager
-
-#SYSTEMD
-set $shutdown sudo shutdown -h now
-set $reboot sudo reboot
-set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
-set $hibernate sudo systemctl suspend
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
@@ -151,7 +141,6 @@ bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
 
 bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
-
 
 bindsym $mod+p			exec --no-startup-id lmc toggle
 #bindsym $mod+Shift+p
@@ -207,7 +196,6 @@ bindsym $mod+n			exec $term -e newsboat
 
 bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
 bindsym $mod+Shift+m		exec --no-startup-id lmc mute
-
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
@@ -271,6 +259,7 @@ for_window [class="marble"] move to workspace $ws7
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
+for_window [title="Default - Wine desktop"] floating enable
 
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
@@ -290,14 +279,6 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 5
 exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
 
-# Bindings to make the webcam float and stick.
-for_window [title="mpvfloat"] floating enable
-for_window [title="mpvfloat"] sticky enable
-for_window [title="mpvfloat"] border pixel 0
-no_focus [title="mpvfloat"]
-
-for_window [title="Default - Wine desktop"] floating enable
-
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
@@ -312,7 +293,6 @@ bindsym $mod+F10	exec --no-startup-id dmenuumount
 ##bindsym $mod+F11
 ##bindsym $mod+F12
 
-
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
 bindsym $mod+Down		focus down
@@ -322,7 +302,6 @@ bindsym $mod+Shift+Left		move left
 bindsym $mod+Shift+Down		move down
 bindsym $mod+Shift+Up		move up
 bindsym $mod+Shift+Right 	move right
-
 
 # #---Media Keys---# #
 
@@ -362,7 +341,7 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shut
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
 bindsym XF86Calculator		exec $term -e R -q
-bindsym XF86Sleep		exec sudo zzz
+bindsym XF86Sleep		exec $hibernate
 ##bindsym XF86WakeUp		exec
 bindsym XF86Explorer		exec $term -e ranger
 ##bindsym XF86Send		exec
