@@ -58,6 +58,14 @@ The i3blocks config is `~/.config/i3blocks/config`, which you can access by the
 terminal shortcut `cfib`. Notice that the config file refers to several module
 scripts in the `~/.scripts/` directory.
 
+## Deeper Tutorials
+
+In addition to this guide and reading the dotfiles of programs manually, you
+can also get program-specific information by running the `getkeys` command.
+This will give you the bindings of what program you want. You can also press
+`Mod+E` (that's a capital `E`) to get be able to watch tutorial videos on
+specific programs or concepts directly from YouTube.
+
 # Key Bindings
 
 All of the bindings below are in the file `~/.config/i3/config` (easily
@@ -65,7 +73,10 @@ accessible by typing `cfi` in the terminal) and can all be easily changed.
 
 ## Window basics
 
-Notice the case sensitivity of the shortcuts.
+Notice the case sensitivity of the shortcuts.^[To type capital letters, hold
+down the `Shift` key---that might sound like an obvious and consedcending thing
+to tell you, but there have literally been multiple people (Boomers) who have
+emailed me asking how to type a capital letter since caps lock isn't enabled.]
 
 Be sure you play around with these. Be flexible with the basic commands and the
 system will grow on you quick.
@@ -167,7 +178,7 @@ I use scrot and ffmpeg to make different recordings of the desktop and audio.
 All of these recording shortcuts will output into `~`, and will not overwrite
 previous recordings.
 
-+ `Print` Screen -- Take a scrot screenshot
++ `PrintScreen` -- Take a scrot screenshot
 + `Shift+Print` Screen -- Take a scrot screenshot of only selected window
 + `Mod+Print` Screen -- Opens dmenu menu to select kind of audio/video recording
 + `Mod+ScrollLock` -- Turn on and off screenkey (if installed) for visual typing display
@@ -198,7 +209,7 @@ or ranger.
 
 Open a terminal and type `cff`. This opens a file when you can keep and create
 folder shortcuts. There are only a few here now, because I don't know what your
-folder structure is going to look like, but on my machine, I have 81 and
+folder structure is going to look like, but on my machine, I have 109 and
 growing.
 
 Each line has a shortcut key/keys and its target. These can be used in serveral
@@ -259,7 +270,7 @@ the database. mpd is controled by ncmpcpp, which is accessible by Mod+m.
 
 + [luke@lukesmith.xyz](mailto:luke@lukesmith.xyz) -- For questions!
 
-+ [http://lukesmith.xyz](http://lukesmith.xyz) -- For stalking!
++ [https://lukesmith.xyz](http://lukesmith.xyz) -- For stalking!
 
 + [PayPal](https://paypal.me/LukeMSmith) -- For gratitude!
 
