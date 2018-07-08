@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mpv $(grep -P "^$(cat ~/.larbs/tutorialvids | grep https | awk '{print $1}' | dmenu -i -p "Learn about what? (ESC to cancel)" -l 5)\t" ~/.larbs/tutorialvids | awk '{print $2}')
