@@ -1,0 +1,11 @@
+ _ _____
+(_)___ /
+| | |_ \
+| |___) |
+|_|____/
+
+i3 is the window manager.
+
+The bindings for i3 can be accessed in LARBS by typing Super+F1.
+
+This file is in `~/.config/i3/i3_guide.pdf`.

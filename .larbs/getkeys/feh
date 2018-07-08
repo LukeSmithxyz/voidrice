@@ -1,0 +1,14 @@
+  __      _
+ / _| ___| |__
+| |_ / _ \ '_ \
+|  _|  __/ | | |
+|_|  \___|_| |_|
+
+feh is the image viewer.
+	h/j/k/l - Pan image
+	J/K - Zoom out/in
+	f - Fullscreen
+	H/L - Previous/next image in list/directory
+	r - Reload image if changed
+	! - Zoom to fill window
+	w - Zoom to fit window
