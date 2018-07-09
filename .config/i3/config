@@ -293,7 +293,7 @@ bindsym $mod+F4		exec --no-startup-id $hibernate
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 ##bindsym $mod+F7
-##bindsym $mod+F8
+bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 ##bindsym $mod+F11
