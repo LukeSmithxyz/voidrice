@@ -279,6 +279,12 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 5
 exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
 
+# Bindings to make the webcam float and stick.
+for_window [title="mpvfloat"] floating enable
+for_window [title="mpvfloat"] sticky enable
+for_window [title="mpvfloat"] border pixel 0
+no_focus [title="mpvfloat"]
+
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
