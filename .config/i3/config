@@ -16,7 +16,7 @@
 
 # #---Basic Definitions---# #
 # Needed for i3-gaps
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 1
 gaps inner 15
 gaps outer 15
 set $mod Mod4
@@ -73,8 +73,8 @@ set $transparent		#00000000
 
 #                       BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
 client.focused		$red		$red		$magenta	$darkmagenta		$darkblue
-client.unfocused	$transparent	$blue		$white		$darkblue		$transparent
-client.focused_inactive	$transparent	$blue		$white		$darkblue		$transparent
+client.unfocused	$transparent	$blue		$white		$darkblue		$darkblack
+client.focused_inactive	$transparent	$blue		$white		$darkblue		$darkblack
 client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
