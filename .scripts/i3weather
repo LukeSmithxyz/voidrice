@@ -2,15 +2,13 @@
 ### This is only if your location isn't automatically detected, otherwise you can leave it blank.
 location=""
 
-[[ $BLOCK_BUTTON = "1" ]] && st -e w3m wttr.in
+[[ "$location" != "" ]] && location="~${location// /+}"
+
+[[ $BLOCK_BUTTON = "1" ]] && st -e w3m wttr.in/$location
+
+curl -s wttr.in/$location > ~/.weatherreport
 
 ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` >/dev/null || exit
-
-if [[ "$location" != "" ]]
-    then
-    location="~${location// /+}"
-fi
-curl -s wttr.in/$location > ~/.weatherreport
 
 echo -n $(cat ~/.weatherreport | sed '16q;d' | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g")
 
