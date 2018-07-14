@@ -260,6 +260,7 @@ for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 for_window [title="Default - Wine desktop"] floating enable
+for_window [class="Firefox" title="Library"] floating enable
 
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
