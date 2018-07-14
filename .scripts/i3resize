@@ -2,7 +2,7 @@
 # This script was made by `goferito` on Github.
 
 direction=$1
-pts="2"
+pts="30"
 distanceStr="$pts px or $pts ppt"
 
 [ -z $1 ] && echo "No direction provided" && exit 1
