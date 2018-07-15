@@ -26,6 +26,8 @@ set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $hibernate sudo systemctl suspend
+focus_follows_mouse no
+mouse_warping none
 
 # #---Starting External Scripts---# #
 # Setting the background:
