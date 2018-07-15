@@ -1,11 +1,6 @@
-#  _          _          ____            _ _   _     _       _               _
-# | |   _   _| | _____  / ___| _ __ ___ (_) |_| |__ ( )___  | |__   __ _ ___| |__  _ __ ___
-# | |  | | | | |/ / _ \ \___ \| '_ ` _ \| | __| '_ \|// __| | '_ \ / _` / __| '_ \| '__/ __|
-# | |__| |_| |   <  __/  ___) | | | | | | | |_| | | | \__ \ | |_) | (_| \__ \ | | | | | (__
-# |_____\__,_|_|\_\___| |____/|_| |_| |_|_|\__|_| |_| |___/ |_.__/ \__,_|___/_| |_|_|  \___|
-
 stty -ixon
 shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
+HISTSIZE= HISTFILESIZE=
 
 # Setting Bash prompt. Capitalizes username and host if root user (my root user uses this same config file).
 if [ "$EUID" -ne 0 ]
