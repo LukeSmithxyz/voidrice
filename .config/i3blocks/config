@@ -19,10 +19,10 @@ command=i3pacman
 interval=once
 signal=8
 
-#[torrents]
-#command=i3torrent
-#interval=20
-#signal=7
+[torrents]
+command=i3torrent
+interval=20
+signal=7
 
 [weather]
 command=i3weather
