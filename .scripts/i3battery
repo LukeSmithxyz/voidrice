@@ -6,7 +6,7 @@ colorget() {
 if [[ $NUM -ge 80 ]]; then
 	color="#00FF00"
 elif [[ $NUM -ge 60 ]]; then
-	color="#FF0000"
+	color="#FFFFFF"
 elif [[ $NUM -ge 40 ]]; then
 	color="#FFF600"
 elif [[ $NUM -ge 20 ]]; then
