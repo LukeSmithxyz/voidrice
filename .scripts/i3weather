@@ -4,7 +4,7 @@ location=""
 
 [[ "$location" != "" ]] && location="~${location// /+}"
 
-[[ $BLOCK_BUTTON = "1" ]] && st -e w3m wttr.in/$location
+[[ $BLOCK_BUTTON = "1" ]] && st -e popweather
 
 curl -s wttr.in/$location > ~/.weatherreport
 
