@@ -56,7 +56,8 @@ indended, you probably won't be doing much clicking.
 
 The i3blocks config is `~/.config/i3blocks/config`, which you can access by the
 terminal shortcut `cfib`. Notice that the config file refers to several module
-scripts in the `~/.scripts/` directory.
+scripts in the `~/.scripts/` directory. You can read a summary of all of these
+scripts in the file `~/.scripts/SCRIPTS.md`.
 
 ## Deeper Tutorials
 
