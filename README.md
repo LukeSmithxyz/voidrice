@@ -27,6 +27,8 @@ Check other config folders for more specific documentation.
 
 [ranger configuration](.config/ranger/luke_ranger_readme.md)
 
+[list of scripts in the `~/.scripts/ directory](.scripts/SCRIPTS.md)
+
 ## Dynamic Configuration Files
 
 Store your favorite or high-traffic folders in `~/.config/Scripts/folders` or your most important config files in `~/.config/Scripts/configs` with keyboard shortcuts. When you add things to theses files my vimrc will automatically run `~/.config/Scripts/shortcuts.sh` which will dynamically generate shortcuts for these in bash, ranger and qutebrowser!
