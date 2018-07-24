@@ -258,7 +258,8 @@ together to make this happen. Honestly, people give me all this credit for
 making LARBS, but the mutt-wizard is probably my favorite work.
 
 You might also want to run `notmuch setup` to set `notmuch` up as a
-mailindexer. This will allow quick searches of your mail in mutt with ctrl+f.
+mailindexer. This will allow quick searches of your mail in mutt with `ctrl+f`.
+The mailsync script will update the notmuch database once you do this.
 
 ## How do I set up my music?
 
