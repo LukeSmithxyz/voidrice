@@ -4,14 +4,28 @@
 #
 # It compiles a document to pdf
 
-file=$(basename "$1")
+file=$(readlink -f "$1")
 ext="${file##*.}"
 base="${file%.*}"
 
-echo $ext
+textype() { [ grep -i addbibresource "$file" ] && bib=1
+
+if sed 5q "$file" | grep -i -q 'xelatex' > /dev/null 2>&1; then
+	[ -z ${bib+x} ] || (xelatex "$base" && break)
+	xelatex "$base" &&
+	biber "$base" &&
+	xelatex "$base" &&
+	xelatex "$base"
+else
+	[ -z ${bib+x} ] || (pdflatex "$base" && break)
+	pdflatex "$base" &&
+	biber "$base" &&
+	pdflatex "$base" &&
+	pdflatex "$base"
+fi ;}
 
 case "$ext" in
 	rmd) echo "require(rmarkdown); render('$file')" | R --vanilla ;;
-	tex) xelatex "$file" ;;
+	tex) textype "$file" ;;
 	md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 esac
