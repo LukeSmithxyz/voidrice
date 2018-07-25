@@ -3,29 +3,30 @@
 # This is a compilation handler, so to speak, which I have vim run.
 #
 # It compiles a document to pdf
+#
+# If you put the sequence `xelatex` somewhere in the first 5 lines of a .tex
+# file, it will be compiled with `xelatex` rather than `pdflatex`.
+#
+# If it detects an `addbibresource` line, it will run `biber` and perform
+# multiple compiles to get the references correct.
 
 file=$(readlink -f "$1")
 ext="${file##*.}"
 base="${file%.*}"
 
-textype() { [ grep -i addbibresource "$file" ] && bib=1
-
-if sed 5q "$file" | grep -i -q 'xelatex' > /dev/null 2>&1; then
-	[ -z ${bib+x} ] || (xelatex "$base" && break)
-	xelatex "$base" &&
+textype() { \
+	command="pdflatex"
+	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
+	$command "$base" &&
+	grep -i addbibresource "$file" &&
 	biber "$base" &&
-	xelatex "$base" &&
-	xelatex "$base"
-else
-	[ -z ${bib+x} ] || (pdflatex "$base" && break)
-	pdflatex "$base" &&
-	biber "$base" &&
-	pdflatex "$base" &&
-	pdflatex "$base"
-fi ;}
+	$command "$base" &&
+	$command "$base"
+	}
 
 case "$ext" in
 	rmd) echo "require(rmarkdown); render('$file')" | R --vanilla ;;
 	tex) textype "$file" ;;
 	md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
+	*) sent "$file" 2>/dev/null & ;;
 esac
