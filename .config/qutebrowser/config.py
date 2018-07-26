@@ -464,13 +464,6 @@ c.content.cookies.store = True
 ## Type: String
 c.content.default_encoding = 'iso-8859-1'
 
-## Enable extra tools for Web developers. This needs to be enabled for
-## `:inspector` to work and also adds an _Inspect_ entry to the context
-## menu. For QtWebEngine, see `--enable-webengine-inspector` in
-## `qutebrowser --help` instead.
-## Type: Bool
-c.content.developer_extras = False
-
 ## Try to pre-fetch DNS entries to speed up browsing.
 ## Type: Bool
 c.content.dns_prefetch = True
@@ -996,12 +989,6 @@ c.qt.args = []
 ## Type: String
 c.qt.force_platform = None
 
-## Force software rendering for QtWebEngine. This is needed for
-## QtWebEngine to work with Nouveau drivers. This setting requires a
-## restart.
-## Type: Bool
-c.qt.force_software_rendering = True
-
 ## Show a scrollbar.
 ## Type: Bool
 c.scrolling.bar = False
@@ -1099,7 +1086,7 @@ c.tabs.favicons.scale = 1.0
 
 ## Show favicons in the tab bar.
 ## Type: Bool
-c.tabs.favicons.show = True
+#c.tabs.favicons.show = True
 
 ## Padding for tab indicators
 ## Type: Padding
@@ -1276,7 +1263,10 @@ c.url.searchengines = {
         'vw': 'https://wiki.voidlinux.eu/index.php?search={}&title=Special%3ASearch',
         'thw': 'http://www.thinkwiki.org/w/index.php?search={}&title=Special%3ASearch',
         'vw': 'http://vim.wikia.com/wiki/Special:Search?fulltext=Search&query={}',
+        'mtp': 'http://en.metapedia.org/m/index.php?title=Special%3ASearch&search={}',
         'bc': 'https://www.bitchute.com/search?q={}&sort=date_created%20desc',
+        'yt': 'https://hooktube.com/results?search_query={}',
+        'ytv': 'https://youtube.com/search?q={}',
         'mdbg': 'https://mdbg.net/chinese/dictionary?page=worddict&wdrst=0&wdqb={}',
         }
 
@@ -1291,7 +1281,7 @@ c.url.yank_ignored_parameters = ['ref', 'utm_source', 'utm_medium', 'utm_campaig
 
 ## Hide the window decoration when using wayland (requires restart)
 ## Type: Bool
-c.window.hide_wayland_decoration = False
+#c.window.hide_wayland_decoration = False
 
 ## The format to use for the window title. The following placeholders are
 ## defined:  * `{perc}`: The percentage as a string like `[10%]`. *
@@ -1578,6 +1568,9 @@ config.bind('<Tab>', 'prompt-item-focus next', mode='prompt')
 config.bind('<Up>', 'prompt-item-focus prev', mode='prompt')
 config.bind('n', 'prompt-accept no', mode='prompt')
 config.bind('y', 'prompt-accept yes', mode='prompt')
+config.bind(';;', 'hint links download')
 
 ## Bindings for register mode
 config.bind('<Escape>', 'leave-mode', mode='register')
+
+config.source('shortcuts.py')
