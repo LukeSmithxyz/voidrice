@@ -407,8 +407,8 @@ bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
 bindsym XF86AudioMedia		exec --no-startup-id st -e ncmpcpp
 bindsym XF86Display		exec --no-startup-id arandr
 #bindsym XF86KbdLightOnOff	exec
-bindsym XF86KbdBrightnessDown	exec --no-startup-id python3.6 ~/.i3/kb-lights.py -
-bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.i3/kb-lights.py +
+bindsym XF86KbdBrightnessDown	exec --no-startup-id python3.6 ~/.scripts/kb-lights.py -
+bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.scripts/kb-lights.py +
 ##bindsym XF86Reply		exec
 ##bindsym XF86MailForward	exec
 ##bindsym XF86Save		exec
