@@ -11,8 +11,11 @@
 # YouTube: https://youtube.com/c/LukeSmithxyz
 # Github: https://github.com/LukeSmithxyz
 
-# Be sure that you have your $BROWSER environmental variable set to your favorite browser.
-# E.g., put `export BROWSER="firefox"` into your ~/.bash_profile
+# This config file will use environmental variables such as $BROWSER and $TERMINAL.
+# You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
+#
+# export BROWSER="firefox"
+# export TERMINAL="st"
 
 # #---Basic Definitions---# #
 # Needed for i3-gaps
@@ -20,7 +23,6 @@ for_window [class="^.*"] border pixel 1
 gaps inner 15
 gaps outer 15
 set $mod Mod4
-set $term --no-startup-id st
 set $stoprec --no-startup-id killrecording
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
@@ -96,7 +98,7 @@ bar {
 }
 
 # #---Basic Bindings---# #
-bindsym $mod+Return 		exec $term
+bindsym $mod+Return 		exec $TERMINAL
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
 
 bindsym $mod+Shift+space 	floating toggle
@@ -112,7 +114,7 @@ bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Are you sure you want 
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; workspace lmao ; exec $TERMINAL -e htop ; exec $TERMINAL -e ranger
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
@@ -121,22 +123,22 @@ bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!math|dropdown).*$"] ki
 bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
-bindsym $mod+e			exec $term -e neomutt
+bindsym $mod+e			exec $TERMINAL -e neomutt
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
-bindsym $mod+r 			exec $term -e ranger
-bindsym $mod+Shift+r		exec $term -e sudo ranger /
+bindsym $mod+r 			exec $TERMINAL -e ranger
+bindsym $mod+Shift+r		exec $TERMINAL -e sudo ranger /
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+y			exec $term -e calcurse
+bindsym $mod+y			exec $TERMINAL -e calcurse
 bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
 
 bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
 
-bindsym $mod+i 			exec $term -e htop
+bindsym $mod+i 			exec $TERMINAL -e htop
 bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
 
 bindsym $mod+o			sticky toggle
@@ -146,7 +148,7 @@ bindsym $mod+p			exec --no-startup-id lmc toggle
 #bindsym $mod+Shift+p
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+Shift+a		exec $term -e pulsemixer
+bindsym $mod+Shift+a		exec $TERMINAL -e pulsemixer
 
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
@@ -185,13 +187,13 @@ bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shut
 bindsym $mod+c			exec --no-startup-id camtoggle
 ##bindsym $mod+Shift+c
 
-bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
+bindsym $mod+v			exec $TERMINAL -e ncmpcpp -s visualizer
 bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
-bindsym $mod+n			exec $term -e newsboat
+bindsym $mod+n			exec $TERMINAL -e newsboat
 ##bindsym $mod+Shift+n
 
 bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
@@ -212,8 +214,8 @@ bindsym $mod+XF86Back		workspace prev
 bindsym $mod+XF86Forward	workspace next
 ##bindsym $mod+Shift+XF86Forward
 bindsym $mod+semicolon		workspace next
-bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		split vertical ;; exec $term
+bindsym $mod+apostrophe		split horizontal ;; exec $TERMINAL
+bindsym $mod+slash		split vertical ;; exec $TERMINAL
 bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
 
@@ -269,7 +271,7 @@ for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 3
 # Runs the tmuxinit script, which searches for an earlier tmux instance,
 # otherwise starts a new one (to prevent multiple dropdown sessions).
-exec --no-startup-id $term -n dropdown -e tmuxinit
+exec --no-startup-id $TERMINAL -n dropdown -e tmuxinit
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
@@ -277,7 +279,7 @@ for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
-exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
+exec --no-startup-id $TERMINAL -n math -f mono:pixelsize=24 -e dropdowncalc
 
 # Bindings to make the webcam float and stick.
 for_window [title="mpvfloat"] floating enable
@@ -291,7 +293,7 @@ bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id $hibernate
 bindsym $mod+F5		exec --no-startup-id $netrefresh
-bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
+bindsym $mod+F6		exec --no-startup-id $TERMINAL -e transmission-remote-cli
 ##bindsym $mod+F7
 bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
@@ -346,10 +348,10 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shut
 ##bindsym XF86Paste		exec
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
-bindsym XF86Calculator		exec $term -e R -q
+bindsym XF86Calculator		exec $TERMINAL -e R -q
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
-bindsym XF86Explorer		exec $term -e ranger
+bindsym XF86Explorer		exec $TERMINAL -e ranger
 ##bindsym XF86Send		exec
 ##bindsym XF86Xfer		exec
 bindsym XF86WWW			exec --no-startup-id $BROWSER
@@ -358,7 +360,7 @@ bindsym XF86ScreenSaver		exec exec --no-startup-id ~/.config/i3/lock.sh
 ##bindsym XF86RotateWindows	exec
 ##bindsym XF86TaskPane		exec
 ##bindsym XF86Favorites		exec
-bindsym XF86MyComputer		exec $term -e ranger
+bindsym XF86MyComputer		exec $TERMINAL -e ranger
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec sudo umount -R /mnt
@@ -393,8 +395,8 @@ bindsym XF86TouchpadOff		exec --no-startup-id synclient TouchpadOff=1
 bindsym XF86Suspend		exec --no-startup-id ~/.config/i3/lock.sh
 bindsym XF86Close		kill
 bindsym XF86WebCam		exec --no-startup-id camtoggle
-bindsym XF86Mail		exec $term -e neomutt
-bindsym XF86Messenger		exec $term -e weechat
+bindsym XF86Mail		exec $TERMINAL -e neomutt
+bindsym XF86Messenger		exec $TERMINAL -e weechat
 bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 ##bindsym XF86Go			exec
 ##bindsym XF86Finance		exec
@@ -410,7 +412,7 @@ bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.i3/kb-lights.py +
 ##bindsym XF86Reply		exec
 ##bindsym XF86MailForward	exec
 ##bindsym XF86Save		exec
-bindsym XF86Documents		exec $term -e ranger ~/Documents
+bindsym XF86Documents		exec $TERMINAL -e ranger ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
