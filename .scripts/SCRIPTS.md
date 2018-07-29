@@ -11,6 +11,10 @@ Starts/kills /dev/video0 webcam. Placed in bottom right by default.
 
 ## `compiler`
 Compiles a markdown, R markdown or LaTeX document with the approriate command.
+Will also run `make && sudo make install` if in a `config.h` file.
+Otherwise it will create a sent presentation.
+This can be thought of a general output handler.
+I have it bound to `<leader>c` in vim.
 
 ## `crontog`
 Turns off/on all user cronjobs.
@@ -69,6 +73,10 @@ i3blocks module. Shows volume percentage or mute notification.
 ## `i3weather`
 i3blocks module. Gets weather forcast from wttr.in and returns today's precipitation chance (☔), daily low (❄️) and daily high (☀️).
 
+## `kb-lights.py`
+A Python 3 script which will increase or decrease keyboard lights when given
+either a `+` or `-` argument.
+
 ## `killrecording`
 End a recording started by `dmenurecord` the proper way.
 
@@ -78,11 +86,24 @@ The automatic link handler used by `newsboat` and other programs. Urls of video 
 ## `lmc`
 A music controller that simplifies music/audio management and improves the interface with i3blocks. Check inside to see what it does. This is what i3 audio/music commands run by default. If you use a difference music system or ALSA, you can change this script rather than changing all the shortcuts in different places.
 
+## `lockscreen`
+The screen locker. Gives a confirm prompt and if user says yes, all audio will
+be paused and the screen will be distorted and locked and screen will soon time out. User must insert password to unlock.
+
 ## `musstuff`
 Some old notes and commands on deleted music shortcuts.
 
+## `pauseallmpv`
+Pauses all mpv instances by sending the `,` key to each. Used by several
+scripts, but can be used alone as well.
+
 ## `polybar_launch`
 For `polybar` users. Launches `polybar` on every screen. Should be run in the i3 config.
+
+## `popweather`
+The script called by clicking on the i3 weather module. Brings up the forecast
+from `http://wttr.in` and waits for input to prevent immediate closing of
+spawned window.
 
 ## `prompt`
 Gives a Yes/No prompt to a question given as an argument. Used by numerous bindings like `mod+shift+x`, `mod+shift+backspace` and `mod+shift+escape`.
@@ -101,6 +122,10 @@ Remove all `.tex` related build files. This is run by my vim when I stop editing
 
 ## `tmuxinit`
 The startup script for the dropdown terminal (toggleable with `mod+u`). Either attaches to an existing tmux session or begins a new one.
+
+## `toggletouchpad`
+As the name suggests, turns off TouchPad if on, and turns it on if off.
+Requires `xf86-input-synaptics`.
 
 ## `tpb`
 Search Pirate Bay for the certain search terms given as arguments.
