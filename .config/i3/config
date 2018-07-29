@@ -84,7 +84,7 @@ bar {
 			background $darkblack
 			statusline $darkwhite
 			separator $cyan
-			focused_workspace  $blue $darkblue $darkwhite
+			focused_workspace  $blue $darkblue $darkblack
         		active_workspace   $blue $blue $darkwhite
       			inactive_workspace $darkblack $darkblack $white
         		urgent_workspace   $darkblack $darkblack $white
