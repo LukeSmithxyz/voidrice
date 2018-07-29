@@ -13,16 +13,19 @@ xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
     cmd+=" -region ${w}x$h+$x+$y -paint 1 -swirl 360"
     xc=$((x+(w/2)-79))
     yc=$((y+(h/2)-79))
-    cmdend+=" ~/.config/i3/lock.png  -geometry +${xc}+${yc} -composite -matte"
+    cmdend+=" ~/.scripts/lock.png  -geometry +${xc}+${yc} -composite -matte"
   done
   cmd+="${cmdend} /tmp/screen.png"
 
   eval $cmd
-}
+} &
+
+prompt "Are you sure you want to lock the computer?" "" || exit
 
 # Pause music (mocp and mpd):
 mocp -P
 mpc pause
+pauseallmpv
 
 # Lock it up!
 i3lock -e -f -c 000000 -i /tmp/screen.png

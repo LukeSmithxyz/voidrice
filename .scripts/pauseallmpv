@@ -1,0 +1,4 @@
+#!/bin/bash
+# Sends a , key to all mpv instances, pausing them at the last frame.
+
+xdotool search --class mpv | xargs -I % xdotool key --window % comma
