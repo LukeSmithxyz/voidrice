@@ -266,7 +266,7 @@ for_window [title="Default - Wine desktop"] floating enable
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 5
+for_window [instance="dropdown"] border pixel 3
 # Runs the tmuxinit script, which searches for an earlier tmux instance,
 # otherwise starts a new one (to prevent multiple dropdown sessions).
 exec --no-startup-id $term -n dropdown -e tmuxinit
@@ -276,7 +276,7 @@ exec --no-startup-id $term -n dropdown -e tmuxinit
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 5
+for_window [instance="math"] border pixel 2
 exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
 
 # Bindings to make the webcam float and stick.
@@ -347,7 +347,7 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shut
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
 bindsym XF86Calculator		exec $term -e R -q
-bindsym XF86Sleep		exec $hibernate
+##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
 bindsym XF86Explorer		exec $term -e ranger
 ##bindsym XF86Send		exec
