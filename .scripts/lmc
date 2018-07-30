@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# A general audio interface for LARBS.
+
 newvol="pkill -RTMIN+10 i3blocks"
-newmpd="pkill -RTMIN+11 i3blocks"
+# Uncomment if i3mpdupdate isn't running:
+#newmpd="pkill -RTMIN+11 i3blocks"
 
 case "$1" in
 	"up") pamixer --allow-boost -i "$2" ; $newvol ;;
@@ -9,11 +12,10 @@ case "$1" in
 	"mute") pamixer --allow-boost -t ; $newvol ;;
 	"truemute") pamixer --allow-boost -m ; $newvol ;;
 	"toggle") mpc toggle ; $newmpd ;;
-	"pause") mpc pause ; $newmpd ;;
+	"pause") mpc pause ; $newmpd ; pauseallmpv ;;
 	"forward") mpc seek +"$2" ; $newmpd ;;
 	"back") mpc seek -"$2" ; $newmpd ;;
 	"next") mpc next ; $newmpd ;;
 	"prev") mpc prev ; $newmpd ;;
 	"replay") mpc seek 0% ; $newmpd ;;
 esac
-exit

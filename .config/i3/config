@@ -146,7 +146,7 @@ bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
 
 bindsym $mod+p			exec --no-startup-id lmc toggle
-#bindsym $mod+Shift+p
+bindsym $mod+Shift+p		exec --no-startup-id lmc pause
 
 bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+Shift+a		exec $term -e pulsemixer
