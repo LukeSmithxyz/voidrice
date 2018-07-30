@@ -62,13 +62,13 @@ let mapleader =" "
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 
 " Readmes autowrap text:
-	autocmd BufRead,BufNewFile *README.md set tw=79
+	autocmd BufRead,BufNewFile *.md,*.tex set tw=79
 
 " Get line, word and character counts with F3:
 	map <F3> :!wc <C-R>%<CR>
 
 " Spell-check set to F6:
-	map <F6> :setlocal spell! spelllang=en_us,es<CR>
+	map <F6> :setlocal spell! spelllang=en_us<CR>
 
 " Toggle DeadKeys set (for accent marks):
 	so ~/.vim/luke/deadkeys.vim
