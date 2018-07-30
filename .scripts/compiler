@@ -9,9 +9,12 @@
 # config.h files: (For suckless utils) recompiles and installs program.
 # all others: run `sent` to show a presentation
 
+oridir=$(pwd)
+
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
 base="${file%.*}"
+cd $dir
 
 textype() { \
 	command="pdflatex"
@@ -30,3 +33,4 @@ case "$file" in
 	*config.h) make && sudo make install ;;
 	*) sent "$file" 2>/dev/null & ;;
 esac
+cd $oridir
