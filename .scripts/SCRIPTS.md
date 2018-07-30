@@ -93,6 +93,11 @@ be paused and the screen will be distorted and locked and screen will soon time 
 ## `musstuff`
 Some old notes and commands on deleted music shortcuts.
 
+## `opout`
+"Open output", opens the corresponding `.pdf` file if run on a `.md`, `.tex` or
+`.rmd` file, or if given an `.html` file, will open it in the browser.
+Bound to `<leader>p` in my vim config to reveal typical output.
+
 ## `pauseallmpv`
 Pauses all mpv instances by sending the `,` key to each. Used by several
 scripts, but can be used alone as well.

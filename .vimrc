@@ -46,7 +46,7 @@ let mapleader =" "
 	nnoremap S :%s//g<Left><Left>
 
 " Open corresponding.pdf
-	map <leader>p :!zathura <c-r>%<backspace><backspace><backspace>pdf &<CR><CR>
+	map <leader>p :!opout <c-r>%<CR><CR>
 
 " Compile document
 	map <leader>c :!compiler <c-r>%<CR>

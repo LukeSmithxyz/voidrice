@@ -1,0 +1,12 @@
+#!/bin/bash
+# opout: "open output": A general handler for opening a file's intended output.
+# I find this useful especially running from vim.
+
+filename=$(readlink -f "$1")
+ext="${filename##*.}"
+filename="${filename%.*}"
+
+case "$ext" in
+	tex|md|rmd) zathura $filename.pdf & ;;
+	html) $BROWSER --new-window $filename.html & ;;
+esac
