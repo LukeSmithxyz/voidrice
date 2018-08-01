@@ -9,6 +9,8 @@ export BROWSER="firefox"
 export READER="zathura"
 export BIB="$HOME/Documents/LaTeX/uni.bib"
 
+[[ -f ~/.scripts/shortcuts.sh ]] && ~/.scripts/shortcuts.sh
+
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Start graphical server if i3 not already running.
