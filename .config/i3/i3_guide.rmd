@@ -5,9 +5,9 @@ output: pdf_document
 linkcolor: blue
 ---
 
-Use vim keys (`h`/`j`/`k`/`l`) to navigate this document. Pressing `s` will fit it to
-window width (`a` to revert). `K` and `J` zoom in and out. `Mod+f` to toggle fullscreen. `q` to quit.
-(These are general mupdf shortcuts.)
+Use vim keys (`h`/`j`/`k`/`l`) to navigate this document. Pressing `s` will fit
+it to window width (`a` to revert). `K` and `J` zoom in and out. `Mod+f` to
+toggle fullscreen. `q` to quit.  (These are general zathura shortcuts.)
 
 + `Mod+F1` will show this document at any time.
 + By `Mod` I mean the Super Key, usually known as "the Windows Key."
@@ -136,9 +136,15 @@ for and install any you want to add.
 + `Mod+F4` -- Hibernate
 + `Mod+F5` -- Reset Network Manager, search for new networks
 + `Mod+F6` -- transmission torrent client (cli)
++ `Mod+F7` -- Check mail, if
+  [mutt-wizard](https://github.com/lukesmithxyz/mutt-wizard) is installed
 + `Mod+F9` -- Mount a drive/partition
 + `Mod+F10` -- Unmount a drive/partition (does not umount `/`, `/home` or
   `/boot`)
++ `Mod+F12` -- Wifi-menu for selecting the wireless internet source.
+
+`Mod+7` and `Mod+11` are currently unmapped. If you have any ideas that would
+benefit users as the default, feel free to tell me.
 
 ## Audio
 
@@ -247,7 +253,13 @@ given file there and reruns feh to update it.
 ## How do I set up my email?
 
 1. Create a GPG private/public key pair if you haven't already.
-2. Type `muttwizard` in the terminal and follow the directions, specifically:
+2. Download the mutt-wizard repository to the mutt config directory:
+
+```
+git clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt
+```
+
+3. There run `mutt-wizard.sh` and follow the directions, specifically:
    a. Add an account.
    b. Run `offlineimap -o` in the terminal.
    c. Select the "Autodetect mailboxes" option.
@@ -257,7 +269,9 @@ somewhat of a miracle considering all of the moving pieces that have come
 together to make this happen. Honestly, people give me all this credit for
 making LARBS, but the mutt-wizard is probably my favorite work.
 
-You might also want to run `notmuch setup` to set `notmuch` up as a
+You can, through the mutt-wizard, schedule automatic mail checks every several
+minutes. You can also press `Mod-F8` at any time to check for new mail in your
+accounts.  You might also want to run `notmuch setup` to set `notmuch` up as a
 mailindexer. This will allow quick searches of your mail in mutt with `ctrl+f`.
 The mailsync script will update the notmuch database once you do this.
 
@@ -279,7 +293,5 @@ the database. mpd is controled by ncmpcpp, which is accessible by Mod+m.
 + [Patreon](https://patreon.com/lukesmith) -- For support!
 
 + [My Github Page](https://github.com/LukeSmithxyz) -- For the code behind it!
-
-+ [Twitter](https://twitter.com/lukesfiat) -- For updates!
 
 + [RSS](http://lukesmith.xyz/rss.xml) -- For even better updates!
