@@ -19,7 +19,7 @@
 
 # #---Basic Definitions---# #
 # Needed for i3-gaps
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 gaps inner 15
 gaps outer 15
 set $term --no-startup-id $TERMINAL
@@ -48,8 +48,6 @@ exec --no-startup-id compton --xrender-sync-fence
 exec --no-startup-id ~/.scripts/remaps
 # Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
-# Network Manager applet
-exec --no-startup-id nm-applet
 # Run the script to update the mpd i3block on change.
 exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 # Remove recording icon if not properly closed on last shutdown.
@@ -300,7 +298,7 @@ bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 ##bindsym $mod+F11
-##bindsym $mod+F12
+bindsym $mod+F12	exec $term -e sudo -A wifi-menu
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
