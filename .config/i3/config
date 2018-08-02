@@ -31,19 +31,14 @@ set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $hibernate sudo systemctl suspend
 
 # #---Starting External Scripts---# #
-# Setting the background:
-#exec_always --no-startup-id wal -i ~/.config/wall.png
-exec_always --no-startup-id feh --bg-scale ~/.config/wall.png
+# Setting the background and colorscheme:
+exec_always --no-startup-id wal -i ~/.config/wall.png
 # Starts dunst for notifications:
 exec --no-startup-id dunst
-# Music player daemon:
-exec --no-startup-id mpd
 # Torrent daemon:
 #exec --no-startup-id transmission-daemon
 # Composite manager:
 exec --no-startup-id compton --xrender-sync-fence
-# Launch Polybar where appropriate:
-#exec_always --no-startup-id ~/.scripts/polybar_launch
 # Runs the key remapping scripts
 exec --no-startup-id ~/.scripts/remaps
 # Unclutter makes the mouse invisible after a brief period
@@ -52,6 +47,8 @@ exec --no-startup-id unclutter
 exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 # Remove recording icon if not properly closed on last shutdown.
 exec --no-startup-id rm -f ~/.larbs/.recording
+# Network manager applet
+exec --no-startup-id nm-applet
 
 # Set Xresources colors:
 set_from_resource $darkblack	color0  #000000
