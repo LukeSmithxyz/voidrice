@@ -1,3 +1,0 @@
-# License
-
-GPLv3
