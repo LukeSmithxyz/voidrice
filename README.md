@@ -45,7 +45,7 @@ I have a job, but every penny I get from followers or subscribers is more incent
 
 The programs I use here are always changing, but luckily you can just look at the installation list for [LARBS](http://larbs.xyz) here:
 
-+ [List of programs installed by LARBS, including optional packages](https://github.com/LukeSmithxyz/LARBS/blob/master/src/progs.csv)
++ [List of programs installed by LARBS, including optional packages](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv)
 
 For your info, if the second column is a capital letter, that means that it's *not* installed by default, only when the user specifically requests it. Those with lowercase letters are just for classification purposes. Don't think you have to install every package to get these dotfiles working of course, but this list is a *sufficient condition* for full functionality. If you run into an error running my dotfiles, chances are the package you need is there.
 
