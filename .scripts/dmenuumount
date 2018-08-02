@@ -9,4 +9,4 @@ drives=$(lsblk -rpo "$COLS" | awk '$2=="part"&&$4!~/boot|home|SWAP/&&length($4)>
 [ -z "$drives" ] && exit
 chosen=$(echo "$drives" | dmenu -i -p "Unmount which drive?" | awk '{print $1}')
 [ -z "$chosen" ] && exit
-sudo umount "$chosen" && pgrep -x dunst && notify-send "$chosen unmounted."
+sudo -A umount "$chosen" && pgrep -x dunst && notify-send "$chosen unmounted."
