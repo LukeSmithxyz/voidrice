@@ -2,6 +2,8 @@
 
 # This script is called by i3 on startup.
 
+# Increase key speed via a rate change
+xset r rate 300 50
 # Map the caps lock key to super...
 setxkbmap -layout us -variant altgr-intl -option caps:super
 # If you don't want a us international keyboard, rather whatever keyboard
