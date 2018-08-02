@@ -25,10 +25,10 @@ gaps outer 15
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $stoprec --no-startup-id killrecording
-set $shutdown sudo shutdown -h now
-set $reboot sudo reboot
-set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
-set $hibernate sudo systemctl suspend
+set $shutdown sudo -A shutdown -h now
+set $reboot sudo -A reboot
+set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
+set $hibernate sudo -A systemctl suspend
 
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
@@ -359,7 +359,7 @@ bindsym XF86ScreenSaver		exec exec --no-startup-id lockscreen
 bindsym XF86MyComputer		exec $term -e ranger
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
-bindsym XF86Eject		exec sudo umount -R /mnt
+bindsym XF86Eject		exec --no-startup-id dmenuumount
 bindsym XF86AudioNext		exec --no-startup-id lmc next
 bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
 bindsym XF86AudioPrev		exec --no-startup-id lmc prev
