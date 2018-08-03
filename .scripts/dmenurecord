@@ -8,7 +8,8 @@ case $(echo -e "Screencast\nVideo only\nAudio only" | dmenu -i -p "Select record
 	Screencast) screencast ;;
 	"Audio only") audio ;;
 	"Video only") video ;;
-esac ;}
+esac
+echo $! > ~/.larbs/.recordpid ;}
 
 # If already running, will ask to end previous recording.
 
@@ -21,4 +22,4 @@ asktoend;
 else
 asktype;
 fi
-echo $response
+echo "$response"

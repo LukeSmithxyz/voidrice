@@ -9,7 +9,6 @@ visual="${1:0:20}"..."${1: -7}"
 else
 visual="$1"
 fi
-echo $visual
 
 x=$(echo -e "mpv\nmpv (loop)\nwget\nfeh\nbrowser\nw3m\nmpv (float)" | dmenu -i -p "How should I open '$visual'?")
 case "$x" in
