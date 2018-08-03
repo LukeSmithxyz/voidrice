@@ -49,6 +49,8 @@ exec --no-startup-id "pgrep -x i3mpdupdate || i3mpdupdate"
 exec --no-startup-id rm -f ~/.larbs/.recording
 # Network manager applet
 exec --no-startup-id nm-applet
+# mpd startup
+exec --no-startup-id mpd
 
 # Set Xresources colors:
 set_from_resource $darkblack	color0  #000000

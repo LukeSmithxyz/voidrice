@@ -9,8 +9,6 @@ export BROWSER="firefox"
 export READER="zathura"
 export BIB="$HOME/Documents/LaTeX/uni.bib"
 
-mpd &
-
 [[ -f ~/.scripts/shortcuts.sh ]] && ~/.scripts/shortcuts.sh
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
