@@ -1,3 +1,16 @@
 #!/bin/sh
+vidlist="
+status bar	https://www.youtube.com/watch?v=gKumet6b-WY
+feh
+i3
+mutt		https://www.youtube.com/watch?v=2U3vRbF7v5A
+ncmpcpp		https://www.youtube.com/watch?v=sZIEdI9TS2U
+newsboat	https://www.youtube.com/watch?v=dUFCRqs822w
+ranger		https://www.youtube.com/watch?v=L6Vu7WPkoJo
+zathura
+gpg keys	https://www.youtube.com/watch?v=DMGIlj7u7Eo
+calcurse	https://www.youtube.com/watch?v=hvc-pHjbhdE
+urlview		https://www.youtube.com/watch?v=IgzpAjFgbCw
+"
 
-mpv $(grep -P "^$(grep https: ~/.larbs/tutorialvids | sed 's/\t.*//g' | dmenu -i -p "Learn about what? (ESC to cancel)" -l 5)\t" ~/.larbs/tutorialvids | sed 's/.*\t//')
+mpv $(grep -P "^$(grep https: <<< $vidlist | sed 's/\t.*//g' | dmenu -i -p "Learn about what? (ESC to cancel)" -l 5)\t" <<<$vidlist | sed 's/.*\t//')
