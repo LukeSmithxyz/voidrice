@@ -1,37 +1,19 @@
 #!/bin/bash
 
-# Approximate timeout rate in milliseconds (checked every 5 seconds).
-timeout="10000"
+rm -f /tmp/locked.png
 
-# Take a screenshot of every screen available:
-scrot -m -z /tmp/lock.png
-xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
-{
-  cmd="convert /tmp/lock.png"
-	cmdend=""
-  while IFS=' :x@,' read i w h x y; do
-    cmd+=" -region ${w}x$h+$x+$y -paint 1 -swirl 360"
-    xc=$((x+(w/2)-79))
-    yc=$((y+(h/2)-79))
-    cmdend+=" ~/.scripts/lock.png  -geometry +${xc}+${yc} -composite -matte"
-  done
-  cmd+="${cmdend} /tmp/screen.png"
+# If `imagemagick` is not installed, use a blank screen.
+[[ -f /usr/bin/convert ]] &&
+scrot -m -z /tmp/base.png &&
+pgrep -x dunst && notify-send -i ~/.scripts/lock.png "Locking computer..." &&
+convert /tmp/base.png -blur 0x8 /tmp/locked.png
 
-  eval $cmd
-} &
+# Pause music (mocp, mpd and send the pause key to all mpv videos):
+mocp -P &>/dev/null
+mpc pause &>/dev/null
+pauseallmpv &>/dev/null
 
-prompt "Are you sure you want to lock the computer?" "" || exit
+i3lock -e -f -c 000000 -i /tmp/locked.png
 
-# Pause music (mocp and mpd):
-mocp -P
-mpc pause
-pauseallmpv
-
-# Lock it up!
-i3lock -e -f -c 000000 -i /tmp/screen.png
-
-# If still locked after $timeout milliseconds, turn off screen.
-while [[ $(pgrep -x i3lock) ]]; do
-  [[ $timeout -lt $(xssstate -i) ]] && xset dpms force off
-  sleep 5
-done
+# In five seconds, turn off display unless key press in last 4 seconds.
+sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x i3lock && xset dpms force off
