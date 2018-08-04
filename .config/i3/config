@@ -38,7 +38,7 @@ exec --no-startup-id dunst
 # Torrent daemon:
 #exec --no-startup-id transmission-daemon
 # Composite manager:
-exec --no-startup-id compton --xrender-sync-fence
+exec --no-startup-id compton
 # Runs the key remapping scripts
 exec --no-startup-id ~/.scripts/remaps
 # Unclutter makes the mouse invisible after a brief period
