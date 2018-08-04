@@ -35,4 +35,4 @@ ffmpeg -y \
 
 if [[ $(pgrep -x pulseaudio) ]]; then record_pulse; else record_alsa; fi &
 # Updating i3blocks recording icon:
-echo ⏺️ > ~/.scripts/.recording && pkill -RTMIN+9 i3blocks
+echo ⏺️ > ~/.recordingicon && pkill -RTMIN+9 i3blocks

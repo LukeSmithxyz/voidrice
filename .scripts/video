@@ -18,4 +18,4 @@ ffmpeg \
  -c:v libx264 -qp 0 -r 30 $filename &
 
 # Updating i3blocks recording icon:
-echo ⏺️ > ~/.scripts/.recording && pkill -RTMIN+9 i3blocks
+echo ⏺️ > ~/.recordingicon && pkill -RTMIN+9 i3blocks

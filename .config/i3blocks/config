@@ -3,7 +3,7 @@ separator_block_width=15
 markup=pango
 
 [record]
-command=cat ~/.scripts/.recording
+command=cat ~/.recordingicon
 interval=once
 signal=9
 
