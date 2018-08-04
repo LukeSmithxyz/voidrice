@@ -8,6 +8,8 @@ if [ "$EUID" -ne 0 ]
 	else export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 4)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 fi
 
+export GPG_TTY=$(tty)
+
 # System Maintainence
 alias mw="~/.config/mutt/mutt-wizard.sh"
 alias muttwizard="~/.config/mutt/mutt-wizard.sh"
@@ -30,6 +32,7 @@ alias mkd="mkdir -pv"
 alias rf="source ~/.bashrc"
 alias ref="shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias bw="wal -i ~/.config/wall.png" # Rerun pywal
+alias pi="bash ~/.larbs/wizard/wizard.sh"
 
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
@@ -51,3 +54,5 @@ alias Txh="cp ~/Documents/LaTeX/handout.tex"
 alias TC='texclear'
 
 source ~/.shortcuts
+
+shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
