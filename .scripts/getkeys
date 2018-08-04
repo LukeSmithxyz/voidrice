@@ -2,11 +2,11 @@
 
 elsewhere() { echo Key mappings available for the following programs:
 ls ~/.larbs
-echo Run \`larbs-keys\` followed by a program name to get bindings ;}
+echo Run \`getkeys\` followed by a program name to get bindings ;}
 
-if [[ -f ~/.larbs/getkeys/$1 ]]; then
-cat ~/.larbs/getkeys/$1
+if [[ -f ~/.scripts/.getkeys/$1 ]]; then
+cat ~/.scripts/.getkeys/$1
 else
 echo Run command with one of the following arguments for info about that program:
-ls ~/.larbs/getkeys
+ls ~/.scripts/.getkeys
 fi
