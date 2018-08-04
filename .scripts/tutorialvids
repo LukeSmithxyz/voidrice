@@ -11,6 +11,7 @@ zathura
 gpg keys	https://www.youtube.com/watch?v=DMGIlj7u7Eo
 calcurse	https://www.youtube.com/watch?v=hvc-pHjbhdE
 urlview		https://www.youtube.com/watch?v=IgzpAjFgbCw
+vi mode in shell	https://www.youtube.com/watch?v=GqoJQft5R2E
 "
 
 mpv $(grep -P "^$(grep https: <<< $vidlist | sed 's/\t.*//g' | dmenu -i -p "Learn about what? (ESC to cancel)" -l 5)\t" <<<$vidlist | sed 's/.*\t//')

@@ -45,6 +45,12 @@ If you'd like to change any of these keyboard changes, you need only open and
 change `~/.scripts/remaps`. Actually, this should go without saying, but
 *everything* here can easily be changed.
 
+Additionally, while this isn't a part of i3, the default editing mode in the
+shell is using vi bindings. If you want to learn more of this, run
+`Mod+Super+E` and type and select the option for "vi mode in shell".  This
+setting can be changed if you don't like it by deleting or commenting out the
+contents of `~/.inputrc`.
+
 ## The Status Bar
 
 If you're new to i3, notice the status bar on the top of the screen. To the
