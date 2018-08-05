@@ -1,30 +1,36 @@
 #!/bin/bash
-# there are two different ways this script can work.
-# for the first way, uncomment the two lines after the if and place two '.' in front of the /$1 
-#       this creates a new directory in the directory where the compressed file is and dumps the content in it
-# for the second way, comment the two lines under the if and place just one '.' in front of the /$1
-#       this just dumps the content of the compressed file in the same directory of the compressed file 
-if [ -f "$1" ] ; then
-        NAME=${1%.*}
-        mkdir "$NAME" && cd "$NAME"
-        case "$1" in          
-          *.tar.bz2) tar xvjf ../"$1" ;;
-          *.tar.gz) tar xvzf ../"$1" ;;
-          *.tar.xz) tar xvJf ../"$1" ;;
-          *.lzma) unlzma ../"$1" ;;
-          *.bz2) bunzip2 ../"$1" ;;
-          *.rar) unrar x -ad ../"$1" ;;
-          *.gz) gunzip ../"$1" ;;
-          *.tar) tar xvf ../"$1" ;;
-          *.tbz2) tar xvjf ../"$1" ;;
-          *.tgz) tar xvzf ../"$1" ;;
-          *.zip) unzip ../"$1" ;;
-          *.Z) uncompress ../"$1" ;;
-          *.7z) 7z x ../"$1" ;;
-          *.xz) unxz ../"$1" ;;
-          *.exe) cabextract ../"$1" ;;
-          *) echo "extract: '$1' - unknown archive method" ;;
-        esac
+# A general, all-purpose extraction script.
+#
+# Default behavior: Extract archive into new directory
+# Behavior with `-c` option: Extract contents into current directory
+
+while getopts "hc" o; do case "${o}" in
+	h) echo -e "Options:\n   -c: Extract archive into current directory rather than a new one." && exit ;;
+	c) dirpref="" && archive=${@:2} ;;
+esac done
+
+[ -z ${dirpref+x} ] && dirpref="../" &&  archive="$@"
+
+if [ -f "$archive" ] ; then
+	[[ "$dirpref" == "../" ]] && NAME=${archive%.*} && mkdir "$NAME" && cd "$NAME"
+	case "$archive" in
+		*.tar.bz2) tar xvjf "$dirpref""$archive" ;;
+		*.tar.gz) tar xvzf "$dirpref""$archive" ;;
+		*.tar.xz) tar xvJf "$dirpref""$archive" ;;
+		*.lzma) unlzma "$dirpref""$archive" ;;
+		*.bz2) bunzip2 "$dirpref""$archive" ;;
+		*.rar) unrar x -ad "$dirpref""$archive" ;;
+		*.gz) gunzip "$dirpref""$archive" ;;
+		*.tar) tar xvf "$dirpref""$archive" ;;
+		*.tbz2) tar xvjf "$dirpref""$archive" ;;
+		*.tgz) tar xvzf "$dirpref""$archive" ;;
+		*.zip) unzip "$dirpref""$archive" ;;
+		*.Z) uncompress "$dirpref""$archive" ;;
+		*.7z) 7z x "$dirpref""$archive" ;;
+		*.xz) unxz "$dirpref""$archive" ;;
+		*.exe) cabextract "$dirpref""$archive" ;;
+		*) echo "extract: '$archive' - unknown archive method" ;;
+	esac
 else
-echo "$1 - file does not exist"
-    fi
+	echo "File \"$archive\" not found."
+fi
