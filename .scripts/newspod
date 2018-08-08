@@ -1,0 +1,5 @@
+#!/bin/sh
+# Another script because i3 is too dumb to call basic operations right.
+# Brings up newsboat, if newsboat is open, opens podboat
+
+newsboat || podboat
