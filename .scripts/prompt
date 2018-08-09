@@ -3,6 +3,8 @@
 # Gives a dmenu prompt labeled with $1 to perform command $2.
 # For example:
 # `./prompt "Do you want to shutdown?" "shutdown -h now"`
+# Import the colors
+. "${HOME}/.cache/wal/colors.sh"
 
-[ $(echo -e "No\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray -fn mono) \
+[ $(echo -e "No\nYes" | dmenu -i -p "$1" -nb "$color0" -sb "$color1" -sf "$color15" -nf "$color15" -fn mono) \
 == "Yes" ] && $2
