@@ -5,4 +5,4 @@ esac
 
 pacman -Qu | wc -l | sed -e '/^0$/d' > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks
 
-cat ~/.larbs/.pacupgrnum | sed -e "/^$/d"
+cat ~/.pacupgrnum | sed -e "/^$/d"
