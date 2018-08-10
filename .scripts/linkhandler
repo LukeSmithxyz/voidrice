@@ -31,7 +31,7 @@ elif echo $wgetFiles | grep -w $ext > /dev/null; then
 elif echo "$@" | grep "$vidsites">/dev/null; then
 	setsid nohup mpv -quiet "$1" > /dev/null & disown
 elif echo "$@" | grep "$academic">/dev/null; then
-	curl -sO $(curl -s "$scihub""$@" | grep location.href | grep -o http.*pdf) & disown
+	curl -sO "$(curl -s "$scihub$*" | grep -Po "(?<=location.href=').+.pdf")" & disown
 else
 	setsid nohup $BROWSER "$1" 2>/dev/null & disown
 fi
