@@ -27,5 +27,5 @@ asktype() { \
 if grep simple-mtpfs /etc/mtab; then
 	asktype
 else
-	unmountusb && rmdiryn=$(printf "No\\nYes" | dmenu -i -p "Remove directory \`$chosen\`?") && [ "$rmdiryn" = "Yes" ] && (rmdir "$chosen" || sudo -A rmdir "$chosen")
+	unmountusb
 fi
