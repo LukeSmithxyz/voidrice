@@ -1,5 +1,11 @@
 #!/bin/sh
+
+# i3blocks mail module.
+# Displays number of unread mail and an loading icon if updating.
+# When clicked, brings up `neomutt`.
+
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e neomutt ;;
+	1) $TERMINAL -e neomutt ;;
 esac
-echo $(find ~/.mail -wholename */INBOX/new/* | sed -n '$=') $(cat ~/.config/mutt/.dl)
+
+echo "$(du -a ~/.mail/*/INBOX/new/* | sed -n '$=')" $(cat ~/.config/mutt/.dl)
