@@ -1,8 +1,15 @@
-#!/bin/bash
+#!/bin/sh
+
+# i3blocks module for pacman upgrades.
+# Displays number of upgradeable packages.
+# For this to work, have a `pacman -Sy` command run in the background as a
+# cronjob every so often as root. This script will then read those packages.
+# When clicked, it will run an upgrade via `yay`. (`yay` required, duh.)
+
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e sudo pacman -Syu && pacman -Qu | wc -l > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks ;;
+    1) $TERMINAL -e yay -Syu && pacman -Qu | wc -l > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks ;;
 esac
 
 pacman -Qu | wc -l | sed -e '/^0$/d' > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks
 
-cat ~/.pacupgrnum | sed -e "/^$/d"
+sed -e "/^$/d" ~/.pacupgrnum
