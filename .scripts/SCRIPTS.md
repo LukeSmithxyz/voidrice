@@ -146,6 +146,11 @@ out. User must insert password to unlock.
 
 Some old notes and commands on deleted music shortcuts.
 
+## `note`
+
+Give this script some text/a message as an argument. It will print it to the
+terminal, and if `dunst` is running, display a notification.
+
 ## `opout`
 
 "Open output", opens the corresponding `.pdf` file if run on a `.md`, `.tex` or
