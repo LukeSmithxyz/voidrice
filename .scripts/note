@@ -1,2 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+
+# A super basic command. Give it some arguments to use as anotification.  It
+# will echo them on the terminal, and if you have `dunst` running, will send a
+# `notify-send` message to it.
+
 echo "$@" && pgrep -x dunst >/dev/null && notify-send "$@"
