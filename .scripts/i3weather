@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 ### This is only if your location isn't automatically detected, otherwise you can leave it blank.
 location=""
 
-[[ "$location" != "" ]] && location="~${location// /+}"
+[ "$location" != "" ] && location="$location+"
 
-[[ $BLOCK_BUTTON = "1" ]] && st -e popweather
+[ "$BLOCK_BUTTON" = "1" ] && $TERMINAL -e popweather
 
 curl -s wttr.in/$location > ~/.weatherreport
 
-ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` >/dev/null || exit
+ping -q -w 1 -c 1 "$(ip r | grep default | cut -d ' ' -f 3)" >/dev/null || exit
 
-echo -n $(cat ~/.weatherreport | sed '16q;d' | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g")
+printf "%s" "$(sed '16q;d' ~/.weatherreport | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')"
 
-cat ~/.weatherreport | sed '13q;d' | sed -e 's/[^m]*m//g;s/[^0-9]/ /g;s/ /\n/g;/^s*$/d' | grep [0-9] | sort -n | sed -e 1b -e '$!d' | tr '\n' ' ' | awk '{print " ❄️",$1 "°","☀️",$2 "°"}'
+sed '13q;d' ~/.weatherreport | grep -o "m[0-9]\\+" | sort -n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","☀️",$2 "°"}'
