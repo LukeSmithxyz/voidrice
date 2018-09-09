@@ -1,6 +1,6 @@
 #!/bin/sh
 
-killall -e screencast audio video
+kill -9 "$(cat ~/.recordingpid)"
 
 # Update i3bar.
 echo "" > ~/.recordingicon
