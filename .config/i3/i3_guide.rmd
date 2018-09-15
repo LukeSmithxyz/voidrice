@@ -142,15 +142,14 @@ for and install any you want to add.
 + `Mod+F4` -- Hibernate
 + `Mod+F5` -- Reset Network Manager, search for new networks
 + `Mod+F6` -- transmission torrent client (cli)
-+ `Mod+F7` -- Check mail, if
++ `Mod+F7` -- Toggle on/off transmission client via dmenu
++ `Mod+F8` -- Check mail, if
   [mutt-wizard](https://github.com/lukesmithxyz/mutt-wizard) is installed
 + `Mod+F9` -- Mount a drive/partition
 + `Mod+F10` -- Unmount a drive/partition (does not umount `/`, `/home` or
   `/boot`)
++ `Mod+F11` -- Search term in the Arch Wiki
 + `Mod+F12` -- Wifi-menu for selecting the wireless internet source.
-
-`Mod+7` and `Mod+11` are currently unmapped. If you have any ideas that would
-benefit users as the default, feel free to tell me.
 
 ## Audio
 
