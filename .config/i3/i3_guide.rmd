@@ -191,8 +191,8 @@ All of these recording shortcuts will output into `~`, and will not overwrite
 previous recordings.
 
 + `PrintScreen` -- Take a scrot screenshot
-+ `Shift+Print` Screen -- Take a scrot screenshot of only selected window
-+ `Mod+Print` Screen -- Opens dmenu menu to select kind of audio/video recording
++ `Shift+PrintScreen` -- Take a scrot screenshot of only selected window
++ `Mod+PrintScreen` -- Opens dmenu menu to select kind of audio/video recording
 + `Mod+ScrollLock` -- Turn on and off screenkey (if installed) for visual typing display
 + `Mod+Delete` -- kills ffmpeg, thus ending recordings
 
