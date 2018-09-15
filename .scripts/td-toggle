@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# If transmission-daemon is running, will ask to kill, else will ask to start.
+
+if  pgrep -x transmission-da ;
+then
+	yn=$(printf "No\\nYes" | dmenu -i -p "Kill transmission-daemon?")
+	[ "$yn" = "Yes" ] && killall transmission-daemon
+else
+	yn=$(printf "No\\nYes" | dmenu -i -p "Start transmission daemon?")
+	[ "$yn" = "Yes" ] && transmission-daemon
+fi
+sleep 3 && pkill -RTMIN+7 i3blocks
