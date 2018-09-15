@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Gives a dmenu prompt to search the Arch Wiki in your preferred web browser
+# Home goes to the home page of the Arch Wiki
+# Anything else, it search it
+
+# Original idea/script by Github user @Caedis. Minor changes by Luke.
+
+pgrep -x dmenu && exit
+
+choice=$(echo "📖" | dmenu -i -p "Type ArchWiki page or search term:") || exit 1
+
+if [ "$choice" = "📖"  ]; then
+	$BROWSER "https://wiki.archlinux.org"
+else
+	$BROWSER "https://wiki.archlinux.org/index.php?search=$choice"
+fi
