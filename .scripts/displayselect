@@ -1,8 +1,6 @@
 #!/bin/sh
 
-choices="laptop\nlaptopdual\nVGA\nHDMI\nManual selection"
-
-chosen=$(echo -e "$choices" | dmenu -i)
+chosen=$(printf "laptop\\nlaptopdual\\nVGA\\nHDMI\\nManual selection" | dmenu -i)
 
 case "$chosen" in
 	laptopdual) xrandr --output LVDS-1 --auto --output VGA-1 --auto --right-of LVDS-1 ;;
@@ -13,4 +11,4 @@ case "$chosen" in
 esac
 
 # Relaunch polybar if there was a selection.
-[ "$chosen" == "" ] || polybar_launch
+[ "$chosen" = "" ] || polybar_launch
