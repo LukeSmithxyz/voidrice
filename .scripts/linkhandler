@@ -10,7 +10,7 @@
 scihub="http://sci-hub.tw/"
 
 # If no url given. Opens browser. For using script as $BROWSER.
-[ -z "$1" ] && "$TRUEBROWSER" ; exit
+[ -z "$1" ] && { "$TRUEBROWSER"; exit; }
 
 case "$1" in
 	*mkv|*webm|*mp4|*gif|*youtube.com*|*hooktube.com*)
