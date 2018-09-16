@@ -20,5 +20,5 @@ case "$1" in
 		setsid tsp wget "$1" >/dev/null 2>&1 & ;;
 	*springer.com*)
 		setsid curl -sO "$(curl -s "$scihub$*" | grep -Po "(?<=location.href=').+.pdf")" >/dev/null 2>&1 & ;;
-	*) setsid "$BROWSER" "$1" >/dev/null 2>&1 & ;;
+	*) setsid "$TRUEBROWSER" "$1" >/dev/null 2>&1 & ;;
 esac
