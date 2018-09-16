@@ -1,6 +1,6 @@
 auto-reload yes
 
-external-url-viewer "urlview"
+external-url-viewer "urlscan -dc"
 
 bind-key j down
 bind-key k up
