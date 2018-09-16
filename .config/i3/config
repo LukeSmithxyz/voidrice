@@ -11,10 +11,10 @@
 # YouTube: https://youtube.com/c/LukeSmithxyz
 # Github: https://github.com/LukeSmithxyz
 
-# This config file will use environmental variables such as $TRUEBROWSER and $TERMINAL.
+# This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 #
-# export TRUEBROWSER="firefox"
+# export BROWSER="firefox"
 # export TERMINAL="st"
 
 # #---Basic Definitions---# #
@@ -118,8 +118,8 @@ bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; 
 bindsym $mod+q			[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
 
-bindsym $mod+w			exec --no-startup-id $TRUEBROWSER
-bindsym $mod+Shift+w		exec --no-startup-id $TRUEBROWSER
+bindsym $mod+w			exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e neomutt
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
@@ -352,7 +352,7 @@ bindsym XF86Calculator		exec $term -e R -q
 bindsym XF86Explorer		exec $term -e ranger
 ##bindsym XF86Send		exec
 ##bindsym XF86Xfer		exec
-bindsym XF86WWW			exec --no-startup-id $TRUEBROWSER
+bindsym XF86WWW			exec --no-startup-id $BROWSER
 ##bindsym XF86DOS		exec
 bindsym XF86ScreenSaver		exec exec --no-startup-id lockscreen
 ##bindsym XF86RotateWindows	exec
@@ -371,7 +371,7 @@ bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
 bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
 ##bindsym XF86Phone		exec
 ##bindsym XF86Tools		exec
-bindsym XF86HomePage		exec $TRUEBROWSER https://lukesmith.xyz
+bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
 bindsym XF86Reload		restart
 ##bindsym XF86ScrollUp		exec
 ##bindsym XF86ScrollDown		exec
@@ -395,11 +395,11 @@ bindsym XF86Close		kill
 bindsym XF86WebCam		exec --no-startup-id camtoggle
 bindsym XF86Mail		exec $term -e neomutt
 bindsym XF86Messenger		exec $term -e weechat
-bindsym XF86Search		exec $TRUEBROWSER https://duckduckgo.com
+bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 ##bindsym XF86Go			exec
 ##bindsym XF86Finance		exec
 ##bindsym XF86Game		exec
-bindsym XF86Shop		exec $TRUEBROWSER https://ebay.com
+bindsym XF86Shop		exec $BROWSER https://ebay.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
 bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
 bindsym XF86AudioMedia		exec --no-startup-id st -e ncmpcpp
