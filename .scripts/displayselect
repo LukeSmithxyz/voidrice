@@ -1,14 +1,50 @@
 #!/bin/sh
 
-chosen=$(printf "laptop\\nlaptopdual\\nVGA\\nHDMI\\nManual selection" | dmenu -i)
+# A UI for detecting and selecting all displays.
+# Probes xrandr for connected displays and lets user select one to use.
+# User may also select "manual selection" which opens arandr.
+# I plan on adding a routine from multi-monitor setups later.
 
+
+twoscreen() { # If multi-monitor is selected and there are two screens.
+	primary=$(echo "$screens" | dmenu -i -p "asdf")
+	secondary=$(echo "$screens" | grep -v "$primary")
+	direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
+	xrandr --output "$primary" --auto --output "$secondary" --"$direction"-of "$primary" --auto
+	}
+
+morescreen() { # If multi-monitor is selected and there are more than two screens.
+	primary=$(echo "$screens" | dmenu -i -p "asdf")
+	secondary=$(echo "$screens" | grep -v "$primary" | dmenu -i -p "Select secondary display:")
+	direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
+	tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | dmenu -i -p "Select third display:")
+	xrandr --output "$primary" --auto --output "$secondary" --"$direction"-of "$primary" --auto --output "$tertiary" --"$(printf "left\\nright" | grep -v "$direction")"-of "$primary" --auto
+	}
+
+multimon() { # Multi-monitor handler.
+	case "$(echo "$screens" | wc -l)" in
+		2) twoscreen ;;
+		*) morescreen ;;
+	esac ;}
+
+# Get all possible displays
+allposs=$(xrandr -q | grep "connected")
+
+# Get all connected screens.
+screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
+
+# If only one screen, activate it and exit.
+[ "$(echo "$screens" | wc -l)" -lt 2 ] && xrandr $(echo "$allposs" | awk '{print "--output", $1, "--auto"}' | tr '\n' ' ') ||
+
+# Get user choice including multi-monitor and manual selection:
+chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
 case "$chosen" in
-	laptopdual) xrandr --output LVDS-1 --auto --output VGA-1 --auto --right-of LVDS-1 ;;
-	laptop) xrandr --output LVDS-1 --auto --output VGA-1 --off ;;
-	VGA) xrandr --output VGA-1 --auto --output LVDS-1 --off ;;
-	HDMI) xrandr --output HDMI-1 --auto --output LVDS-1 --off ;;
-	"Manual selection") arandr ;;
+	"manual selection") arandr ; exit ;;
+	"multi-monitor") multimon ;;
+	*) xrandr --output "$chosen" --auto $(echo "$screens" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 
-# Relaunch polybar if there was a selection.
-[ "$chosen" = "" ] || polybar_launch
+# Fix feh background if screen size/arangement has changed.
+feh --bg-scale "$HOME/.config/wall.png"
+# Polybar users will want to uncomment this line, which reactivates polybar on all new displays:
+#polybar_launch
