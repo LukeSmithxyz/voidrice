@@ -8,5 +8,5 @@ filename="${filename%.*}"
 
 case "$ext" in
 	tex|md|rmd) zathura $filename.pdf & ;;
-	html) $BROWSER --new-window $filename.html & ;;
+	html) $TRUEBROWSER --new-window $filename.html & ;;
 esac
