@@ -15,7 +15,7 @@ case "$x" in
 	mpv) mpv -quiet "$1" 2&>/dev/null & disown ;;
 	"mpv (loop)") mpv -quiet --loop "$1" 2&>/dev/null & disown ;;
 	wget) wget "$1" 2&>/dev/null & disown ;;
-	browser) setsid nohup $BROWSER "$1" & disown ;;
+	browser) setsid nohup $TRUEBROWSER "$1" & disown ;;
 	feh) feh "$1" 2&>/dev/null & disown ;;
 	w3m) w3m "$1" 2&>/dev/null & disown ;;
 	"mpv (float)") mpv --geometry=+0-0 --autofit=30%  --title="mpvfloat" "$1" 2&>/dev/null & disown ;;
