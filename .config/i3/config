@@ -339,7 +339,11 @@ bindsym XF86Launch1		exec $stoprec & xset dpms force off
 # These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute		exec --no-startup-id lmc mute
 bindsym XF86AudioLowerVolume	exec --no-startup-id lmc down 5
+bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id lmc down 10
+bindsym Control+XF86AudioLowerVolume	exec --no-startup-id lmc down 1
 bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
+bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id lmc up 10
+bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id lmc up 1
 bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
