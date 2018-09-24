@@ -24,7 +24,7 @@ gaps inner 15
 gaps outer 15
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
-set $stoprec --no-startup-id killrecording
+set $stoprec --no-startup-id dmenurecord kill
 set $shutdown sudo -A shutdown -h now
 set $reboot sudo -A reboot
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
