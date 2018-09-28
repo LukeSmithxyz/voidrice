@@ -33,8 +33,6 @@ set $hibernate sudo -A systemctl suspend
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
 exec_always --no-startup-id wal -i ~/.config/wall.png
-# Starts dunst for notifications:
-exec --no-startup-id dunst
 # Torrent daemon:
 #exec --no-startup-id transmission-daemon
 # Composite manager:
