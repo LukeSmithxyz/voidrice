@@ -2,6 +2,11 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+[news]
+command=cat ~/.newsup
+interval=once
+signal=6
+
 [record]
 command=cat ~/.recordingicon
 interval=once

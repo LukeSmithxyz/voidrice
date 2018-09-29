@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "📰 🔃" > ~/.newsup
+pkill -RTMIN+6 i3blocks
+printf "Loading new RSS entries for newsboat...\\n"
+/usr/bin/newsboat -x reload &&
+	printf "Done.\\n"
+echo "" > ~/.newsup
+pkill -RTMIN+6 i3blocks
