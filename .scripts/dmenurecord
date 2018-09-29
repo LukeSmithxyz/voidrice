@@ -63,7 +63,7 @@ audiopulse() { \
 	ffmpeg \
 	-f alsa -i default \
 	-c:a flac \
-	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').mkv" &
+	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > ~/.recordingpid
 	updateicon "🎙️"
 	}
