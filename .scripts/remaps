@@ -12,7 +12,7 @@ setxkbmap -layout us -variant altgr-intl -option caps:super
 #setxkbmap -option caps:super
 
 # But when it is pressed only once, treat it as escape.
-xcape -e 'Super_L=Escape'
+killall xcape ; xcape -e 'Super_L=Escape'
 
 # Map the menu button to right super as well.
 xmodmap -e 'keycode 135 = Super_R'
