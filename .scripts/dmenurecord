@@ -15,10 +15,15 @@ updateicon() { \
 	}
 
 killrecording() {
-	kill -9 "$(cat ~/.recordingpid)"
+	recpid="$(cat ~/.recordingpid)"
+	# kill with SIGTERM, allowing finishing touches.
+	kill -15 "$recpid"
 	rm -f ~/.recordingpid
 	updateicon ""
 	pkill -RTMIN+9 i3blocks
+	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
+	sleep 3
+	kill -9 "$recpid"
 	exit
 	}
 
