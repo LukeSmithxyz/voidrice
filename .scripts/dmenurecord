@@ -71,13 +71,18 @@ audiopulse() { \
 audioalsa() { \
 	ffmpeg -y \
 	-f alsa -ar 44100 -i hw:1 \
-	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').mkv" &
+	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > ~/.recordingpid
 	updateicon "🎙️"
 	}
 
 askrecording() { \
-	printf "screencast\\nvideo\\naudio" | dmenu -i -p "Select recording style:"
+	choice=$(printf "screencast\\nvideo\\naudio" | dmenu -i -p "Select recording style:")
+	case "$choice" in
+		screencast) screencastpulse;;
+		audio) audiopulse;;
+		video) video;;
+	esac
 	}
 
 asktoend() { \
