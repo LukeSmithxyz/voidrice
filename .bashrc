@@ -1,6 +1,12 @@
-stty -ixon
+#  _               _
+# | |__   __ _ ___| |__  _ __ ___
+# | '_ \ / _` / __| '_ \| '__/ __|
+# | |_) | (_| \__ \ | | | | | (__
+# |_.__/ \__,_|___/_| |_|_|  \___|
+
+stty -ixon # Disable ctrl-s and ctrl-q.
 shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
-HISTSIZE= HISTFILESIZE=
+HISTSIZE= HISTFILESIZE= # Infinite history.
 
 # Setting Bash prompt. Capitalizes username and host if root user (my root user uses this same config file).
 if [ "$EUID" -ne 0 ]
@@ -29,15 +35,14 @@ alias ka="killall"
 alias g="git"
 alias trem="transmission-remote"
 alias mkd="mkdir -pv"
-alias rf="source ~/.bashrc"
 alias ref="shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias bw="wal -i ~/.config/wall.png" # Rerun pywal
 alias pi="bash ~/.larbs/wizard/wizard.sh"
 
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
-alias crep="grep --color=always" # Color grep - highlight desired sequence.
-alias ccat="highlight --out-format=ansi" #Color cat - print file with syntax highlighting.
+alias grep="grep --color=auto" # Color grep - highlight desired sequence.
+alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax highlighting.
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
@@ -51,7 +56,6 @@ alias starwars="telnet towel.blinkenlights.nl"
 alias Txa="cp ~/Documents/LaTeX/article.tex"
 alias Txs="cp ~/Documents/LaTeX/beamer.tex"
 alias Txh="cp ~/Documents/LaTeX/handout.tex"
-alias TC='texclear'
 
 source ~/.shortcuts
 
