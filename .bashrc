@@ -37,7 +37,7 @@ alias pi="bash ~/.larbs/wizard/wizard.sh"
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
 alias crep="grep --color=always" # Color grep - highlight desired sequence.
-alias ccat="highlight --out-format=xterm256" #Color cat - print file with syntax highlighting.
+alias ccat="highlight --out-format=ansi" #Color cat - print file with syntax highlighting.
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
