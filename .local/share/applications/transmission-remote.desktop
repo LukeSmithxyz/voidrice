@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Transmission Addition
+Exec=/usr/bin/env transadd %U
