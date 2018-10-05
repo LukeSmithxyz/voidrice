@@ -19,8 +19,6 @@ export GPG_TTY=$(tty)
 # System Maintainence
 alias mw="~/.config/mutt/mutt-wizard.sh"
 alias muttwizard="~/.config/mutt/mutt-wizard.sh"
-alias progs="(pacman -Qet && pacman -Qm) | sort -u" # List programs I've installed
-alias orphans="pacman -Qdt" # List orphan programs
 alias sdn="sudo shutdown now"
 alias psref="gpg-connect-agent RELOADAGENT /bye" # Refresh gpg
 
