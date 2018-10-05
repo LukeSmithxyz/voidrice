@@ -32,11 +32,9 @@ set $hibernate sudo -A systemctl suspend
 
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
-exec_always --no-startup-id wal -i ~/.config/wall.png
+exec --no-startup-id wal -i ~/.config/wall.png >/dev/null
 # Starts dunst for notifications:
 exec --no-startup-id dunst
-# Torrent daemon:
-#exec --no-startup-id transmission-daemon
 # Composite manager:
 exec --no-startup-id compton
 # Runs the key remapping scripts
@@ -79,7 +77,7 @@ client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
-	font pango:mono 11
+	font pango:mono 10
 	colors {
 			background $darkblack
 			statusline $darkwhite
