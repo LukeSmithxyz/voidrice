@@ -1,36 +1,44 @@
-#!/bin/bash
+#!/bin/sh
 # A general, all-purpose extraction script.
 #
 # Default behavior: Extract archive into new directory
 # Behavior with `-c` option: Extract contents into current directory
 
 while getopts "hc" o; do case "${o}" in
-	h) echo -e "Options:\n   -c: Extract archive into current directory rather than a new one." && exit ;;
-	c) dirpref="" && archive=${@:2} ;;
+	c) extracthere="True" ;;
+	*) printf "Options:\\n   -c: Extract archive into current directory rather than a new one.\\n" && exit ;;
 esac done
 
-[ -z ${dirpref+x} ] && dirpref="../" &&  archive="$@"
+if [ -z "$extracthere" ]; then
+	archive="$(readlink -f "$*")" &&
+	directory=${archive%.*} &&
+	mkdir -p "$directory" &&
+	cd "$directory" || exit
+else
+	archive="$(readlink -f "$(echo "$*" | cut -d' ' -f2)")"
+fi
+
+[ "$archive" = "" ] && printf "Give archive to extract as argument.\\n" && exit
 
 if [ -f "$archive" ] ; then
-	[[ "$dirpref" == "../" ]] && NAME=${archive%.*} && mkdir "$NAME" && cd "$NAME"
 	case "$archive" in
-		*.tar.bz2) tar xvjf "$dirpref""$archive" ;;
-		*.tar.gz) tar xvzf "$dirpref""$archive" ;;
-		*.tar.xz) tar xvJf "$dirpref""$archive" ;;
-		*.lzma) unlzma "$dirpref""$archive" ;;
-		*.bz2) bunzip2 "$dirpref""$archive" ;;
-		*.rar) unrar x -ad "$dirpref""$archive" ;;
-		*.gz) gunzip "$dirpref""$archive" ;;
-		*.tar) tar xvf "$dirpref""$archive" ;;
-		*.tbz2) tar xvjf "$dirpref""$archive" ;;
-		*.tgz) tar xvzf "$dirpref""$archive" ;;
-		*.zip) unzip "$dirpref""$archive" ;;
-		*.Z) uncompress "$dirpref""$archive" ;;
-		*.7z) 7z x "$dirpref""$archive" ;;
-		*.xz) unxz "$dirpref""$archive" ;;
-		*.exe) cabextract "$dirpref""$archive" ;;
-		*) echo "extract: '$archive' - unknown archive method" ;;
+		*.tar.bz2) tar xvjf "$archive" ;;
+		*.tar.gz) tar xvzf "$archive" ;;
+		*.tar.xz) tar xvJf "$archive" ;;
+		*.lzma) unlzma "$archive" ;;
+		*.bz2) bunzip2 "$archive" ;;
+		*.rar) unrar x -ad "$archive" ;;
+		*.gz) gunzip "$archive" ;;
+		*.tar) tar xvf "$archive" ;;
+		*.tbz2) tar xvjf "$archive" ;;
+		*.tgz) tar xvzf "$archive" ;;
+		*.zip) unzip "$archive" ;;
+		*.Z) uncompress "$archive" ;;
+		*.7z) 7z x "$archive" ;;
+		*.xz) unxz "$archive" ;;
+		*.exe) cabextract "$archive" ;;
+		*) printf "extract: '%s' - unknown archive method\\n" "$archive" ;;
 	esac
 else
-	echo "File \"$archive\" not found."
+	printf "File \"%s\" not found.\\n" "$archive"
 fi
