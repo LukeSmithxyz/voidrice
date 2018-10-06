@@ -10,6 +10,4 @@ case $BLOCK_BUTTON in
     1) $TERMINAL -e "popupgrade" ;;
 esac
 
-yay -Qum | wc -l > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks
-
-sed -e "/^0$/d" ~/.pacupgrnum
+yay -Qu | wc -l | sed -e "s/^0$//g"
