@@ -7,9 +7,9 @@
 # When clicked, it will run an upgrade via `yay`. (`yay` required, duh.)
 
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e yay -Syu && pacman -Qu | wc -l > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks ;;
+    1) $TERMINAL -e "popupgrade" ;;
 esac
 
-pacman -Qu | wc -l | sed -e '/^0$/d' > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks
+yay -Qum | wc -l > ~/.pacupgrnum && pkill -RTMIN+8 i3blocks
 
-sed -e "/^$/d" ~/.pacupgrnum
+sed -e "/^0$/d" ~/.pacupgrnum
