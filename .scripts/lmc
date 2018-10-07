@@ -6,10 +6,10 @@ newvol="pkill -RTMIN+10 i3blocks"
 # Uncomment if i3mpdupdate isn't running:
 
 case "$1" in
-	"up") pamixer --allow-boost -i "$2" ; $newvol ;;
-	"down") pamixer --allow-boost -d "$2" ; $newvol ;;
-	"mute") pamixer --allow-boost -t ; $newvol ;;
-	"truemute") pamixer --allow-boost -m ; $newvol ;;
+	"up") pulsemixer --change-volume +"$2" ; $newvol ;;
+	"down") pulsemixer --change-volume -"$2" ; $newvol ;;
+	"mute") pulsemixer --toggle-mute ; $newvol ;;
+	"truemute") pulsemixer --mute ; $newvol ;;
 	"toggle") mpc toggle ;;
 	"pause") mpc pause ; pauseallmpv ;;
 	"forward") mpc seek +"$2" ;;
