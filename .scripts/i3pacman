@@ -10,4 +10,4 @@ case $BLOCK_BUTTON in
     1) $TERMINAL -e "popupgrade" ;;
 esac
 
-yay -Qu | wc -l | sed -e "s/^0$//g"
+yay -Qu | sed -e '/^Get/d' | wc -l | sed -e "s/^0$//g"
