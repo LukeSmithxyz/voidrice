@@ -294,7 +294,7 @@ bindsym $mod+F7		exec --no-startup-id td-toggle
 bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
-bindsym $mod+F11	exec --no-startup-id dmenuarchwiki
+bindsym $mod+F11	exec --no-startup-id ducksearch
 bindsym $mod+F12	exec $term -e sudo -A wifi-menu
 
 # #---Arrow Keys---# #

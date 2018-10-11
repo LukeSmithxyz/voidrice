@@ -28,6 +28,12 @@ Turns off/on all user cronjobs.
 
 Select which displays to use. Bound to `mod+F3`.
 
+## `dmenuarchwiki`
+
+Bind this script to a key and it will give you a prompt to search for a term in
+the Arch Wiki. Used to be binded to `mod+F11`, but has been replaced by
+`ducksearch` there.
+
 ## `dmenuhandler`
 
 Give this script a url and it will offer dmenu options for opening it. Used by
@@ -52,6 +58,12 @@ if none are mounted.
 
 The command initially run in the `math` window (toggeable with `mod+a`). Runs
 `r` if available, else `python`.
+
+## `ducksearch`
+
+Show a dmenu prompt and search for the inputed text in DuckDuckGo. Can take
+bangtags as expected, i.e. typing in `!aw Arch Linux` will search the Arch Wiki
+for "Arch Linux" or `!yt Luke Smith` will search YouTube for "Luke Smith", etc.
 
 ## `extract`
 

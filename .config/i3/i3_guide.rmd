@@ -148,7 +148,7 @@ for and install any you want to add.
 + `Mod+F9` -- Mount a drive/partition
 + `Mod+F10` -- Unmount a drive/partition (does not umount `/`, `/home` or
   `/boot`)
-+ `Mod+F11` -- Search term in the Arch Wiki
++ `Mod+F11` -- Search term on DuckDuckGo
 + `Mod+F12` -- Wifi-menu for selecting the wireless internet source.
 
 ## Audio
