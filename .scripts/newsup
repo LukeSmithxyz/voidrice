@@ -1,5 +1,6 @@
 #!/bin/sh
 
+ping -q -t 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 echo "📰 🔃" > ~/.newsup
 pkill -RTMIN+6 i3blocks
 printf "Loading new RSS entries for newsboat...\\n"
