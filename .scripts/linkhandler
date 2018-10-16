@@ -28,6 +28,9 @@ imgurClientId=""
 # Temp file directory
 tmpDir="/tmp/linkhandler"
 
+# SciHub domain
+sciHub="http://sci-hub.tw"
+
 
 ## Handlers
 # Images
@@ -284,6 +287,12 @@ for arg; do
 	elif [[ $arg =~ v\.redd\.it/[a-z0-9]+ ]]; then
 		printMessage "Link type: Gif"
 		gifQueue+=( "${arg%/DASHPlaylist.mpd}/DASHPlaylist.mpd" )
+
+	# SciHub document
+	elif [[ $arg =~ springer\.com/.+ ]]; then
+		printMessage "Link type: Download"
+		curl -sO "$(curl -s "$sciHub/$arg" |
+			grep -Po "(?<=location.href=').+.pdf")" &disown
 
 	# Gif
 	elif echo "$arg" | grep -q "$gifSites" ||
