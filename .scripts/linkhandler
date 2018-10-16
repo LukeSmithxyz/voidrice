@@ -1,25 +1,359 @@
-#!/bin/sh
+#!/bin/bash
+# Open media links in your preferred program, or browser as fallback
 
-# Feed script a url.
-# If an image, it will view in feh,
-# if a video or gif, it will view in mpv
-# if a music file or pdf, it will download,
-# otherwise it opens link in browser.
+# Handlers and templates for common file extensions and media sites are below.
+# You should change the defaults to your liking.
+#
+# Imgur support for indirect links (so any link not on i.imgur.com) is also
+# available, using Imgur's API to determine wether you're trying to open an
+# album or an image, then feeding all direct image links to either your
+# gif handler for gifs, or image handler for images.
+# If you intend to use this feature often, please replace the imgur client id
+# below with yours, because API requests are limited for each one.
+# You can get your own client id here: https://api.imgur.com/oauth2/addclient
+#
+# This script assumes that your image and video players support direct links
+# as opposed to local files, but if they don't you can simply remove any sites
+# or file extensions in the templates below and use the -d or --detect flag;
+# they'll be downloaded to a temporary directory before being played (except
+# for imgur.com and v.redd.it links).
+# It also assumes that they support multiple links as arguments, instead of
+# just one. There's no easy workaround for this though.
 
-# Sci-Hub's domain occasionally changes due to shutdowns:
-scihub="http://sci-hub.tw/"
 
-# If no url given. Opens browser. For using script as $BROWSER.
-[ -z "$1" ] && { "$TRUEBROWSER"; exit; }
+# Imgur client id
+# Required for indirect imgur links
+imgurClientId=""
 
-case "$1" in
-	*mkv|*webm|*mp4|*gif|*youtube.com*|*hooktube.com*)
-		setsid mpv -quiet "$1" >/dev/null 2>&1 & ;;
-	*png|*jpg|*jpe|*jpeg)
-		setsid feh "$1" >/dev/null 2>&1 & ;;
-	*mp3|*flac|*opus|*mp3?source)
-		setsid tsp wget "$1" >/dev/null 2>&1 & ;;
-	*springer.com*)
-		setsid curl -sO "$(curl -s "$scihub$*" | grep -Po "(?<=location.href=').+.pdf")" >/dev/null 2>&1 & ;;
-	*) setsid "$TRUEBROWSER" "$1" >/dev/null 2>&1 & ;;
-esac
+# Temp file directory
+tmpDir="/tmp/linkhandler"
+
+
+## Handlers
+# Images
+imgHandler="feh"
+
+# Gifs
+gifHandler="mpv --quiet --loop"
+
+# Videos
+vidHandler="mpv --quiet"
+
+# Download
+dwnHandler="tsp wget"
+
+# Fallback browser
+browser="$TRUEBROWSER"
+
+
+## Templates
+# Images
+imgFiles="png apng jpg jpeg jpe bmp tiff"
+imgSites="i.imgur.com/
+	\|i.redd.it/
+	\|deviantart.com/
+	\|tinypic.com/
+	\|unsplash.com/photos/
+	\|gyazo.com/
+	\|prnt.sc/
+	"
+
+# Gifs
+gifFiles="gif webm"
+gifSites="gfycat.com/
+	\|giphy.com/
+	\|gph.is/
+	\|gifbin.com/
+	\|clips.twitch.tv/
+	\|streamable.com/
+	"
+
+# Video
+vidFiles="mkv mp4 mov mpv flv avi"
+vidSites="youtube.com/watch
+	\|youtube.com/embed/
+	\|youtube.com/video/
+	\|youtu.be/
+	\|hooktube.com/
+	\|bitchute.com/
+	\|vimeo.com/
+	\|liveleak.com/
+	\|twitch.tv/
+	\|neatclip.com/
+	"
+
+# Download
+dwnFiles="pdf csv doc docx xls xlsx ppt pptx mp3 flac opus ogg aac"
+dwnSites="raw.githubusercontent.com/"
+
+# Browser
+brwFiles="htm html shtm shtml php asp aspx"
+brwSites="reddit.com/
+	\|wikipedia.org/
+	\|archlinux.org/
+	\|wiki.gentoo.org/
+	\|twitter.com/
+	\|github.com/
+	\|stackoverflow.com/
+	\|stackexchange.com/
+	\|superuser.com/
+	"
+
+
+### Functions
+# Usage
+usage() {
+	cat << EOF
+USAGE
+   $(basename "$0") [OPTIONS] URLS...
+
+OPTIONS
+   -h, --help        Print help and exit.
+   -d, --detect      Detect link type instead of opening in browser.
+                     (it will then be opened in the appropiate handler)
+   -v, --verbose     Print progress as links are being processed.
+EOF
+}
+
+# Print to stdout if verbose mode is enabled
+printMessage() {
+	if [[ -n $verbose ]]; then
+		echo -e "$@"
+	fi
+}
+
+# Check dependecies
+checkDep() {
+	if ! command -v "$1" > /dev/null; then
+		echo "$(basename "$0"): \"$1\" isn't installed!" >&2
+		return 1
+	fi
+}
+
+# Determine appropiate handler based on filetype
+# Indirect links will usually be opened in the browser,
+# unless you add the site to one of the templates above.
+detectLinkType() {
+	# Download file
+	mkdir -p "${tmpDir:-/tmp/linkhandler}"
+	tmp="$(mktemp -d "${tmpDir:-/tmp/linkhandler}/XXXXXXXX")/$(basename "$1")"
+	checkDep wget && wget -q -O "$tmp" -- "$1"
+
+	# Detect mime type
+	case "$(file -b --mime-type "$tmp" 2>/dev/null)" in
+		image/gif|video/webm)
+			printMessage "Link type: Gif"
+			gifQueue+=( "$tmp" )
+			;;
+		image/*)
+			printMessage "Link type: Image"
+			imgQueue+=( "$tmp" )
+			;;
+		video/*|audio/*)
+			printMessage "Link type: Video"
+			vidQueue+=( "$tmp" )
+			;;
+		*)
+			printMessage "Link type: Browser"
+			brwQueue+=( "$1" )
+			;;
+	esac
+}
+
+## Imgur
+# Send Imgur API request
+imgurReq() {
+	checkDep curl &&
+		curl -s -H "Authorization: Client-ID $imgurClientId" \
+			  -- "https://api.imgur.com/3/$1/${2##*/}"
+}
+
+# Queue Imgur links into the appropiate handler's queue
+# Turns all animated formats into mp4
+imgurQueue() {
+	# For indirect imgurCheck links
+	if [[ $1 == -i ]]; then
+		local indirectLink="true"
+		unset printNewline
+		shift 1
+	fi
+
+	for link; do
+		[[ -n $indirectLink ]] && printMessage "Link: $link"
+		[[ $link =~ \?.+$ ]] && link="${link%\?*}"
+
+		# Gif
+		if [[ "${link##*.}" =~ ^(gif|gifv|mov|mp4)$ ]]; then
+			printMessage "Link type: Gif"
+			[[ -n $indirectLink ]] && printMessage
+			gifQueue+=( "${link%.*}.mp4" )
+
+		# Image
+		elif [[ "${link##*.}" =~ ^(jpg|jpeg|png|apng|tiff)$  ]]; then
+			printMessage "Link type: Image"
+			[[ -n $indirectLink ]] && printMessage
+			imgQueue+=( "$link" )
+
+		# Indirect link
+		else
+			printMessage "Link type: Indirect Imgur link. Detecting type..."
+			imgurCheckQueue+=( "$link" )
+		fi
+	done
+}
+
+# Determine wether Imgur link is of an album or an image,
+# then add it to the respective handler's queue
+imgurCheck() {
+	for link; do
+		# Album
+		if imgurReply="$(imgurReq album "$link")" &&
+		[[ $(echo "$imgurReply" | jq -j '.status') = 200 ]]; then
+			printMessage "Imgur link type: Album\n"
+			imgurLinks="$(echo "$imgurReply" | jq -r '.data.images[].link')"
+			imgurQueue -i $imgurLinks
+
+		# Single image/gif
+		elif imgurReply="$(imgurReq image "$link")" &&
+		[[ $(echo "$imgurReply" | jq -j '.status') = 200 ]]; then
+			printMessage "Imgur link type: Single image/gif\n"
+			imgurLinks="$(echo "$imgurReply" | jq -r '.data.link')"
+			imgurQueue -i $imgurLinks
+
+		# Invalid link
+		else
+			echo "Error: Invalid Imgur link!" >&2
+		fi
+	done
+}
+
+
+## Flags
+[[ $# = 0 ]] && { ${browser:-usage}; exit 0; }
+checkDep getopt &&
+	eval set -- $(getopt -o "h,d,v" -l "help,detect,verbose" \
+	                     -n "$(basename "$0")" -- "$@")
+while true; do
+	case "$1" in
+		-h|--help)
+			usage
+			exit 0
+			;;
+		-d|--detect)
+			detect="true"
+			shift 1
+			;;
+		-v|--verbose)
+			verbose="true"
+			shift 1
+			;;
+		--)
+			shift 1
+			break
+			;;
+	esac
+done
+
+## Parse links
+for arg; do
+	printMessage "Link: $arg"
+	printNewline="true"
+	ext="${arg##*.}"
+
+	# Embedded markdown link
+	if [[ $arg =~ \]\(https?://.+ ]] && checkDep sed; then
+		arg="$(echo "$arg" | sed -E 's|.*\]\((https?://.+)|\1|; s|\)$||')"
+	fi
+
+	# Imgur image/gif/album
+	if [[ $arg =~ imgur\.com/.+ ]]; then
+		imgurQueue "$arg"
+
+		# Indirect link
+		if [[ -n $imgurCheckQueue ]] && checkDep jq; then
+			if [[ -n $imgurClientId ]]; then
+				imgurCheck ${imgurCheckQueue[@]}
+			else
+				echo "Error: Imgur client id not set!" >&2
+				printMessage "Link type: Browser"
+				brwQueue+=( "$arg" )
+			fi
+		fi
+
+	# Reddit gif/video
+	elif [[ $arg =~ v\.redd\.it/[a-z0-9]+ ]]; then
+		printMessage "Link type: Gif"
+		gifQueue+=( "${arg%/DASHPlaylist.mpd}/DASHPlaylist.mpd" )
+
+	# Gif
+	elif echo "$arg" | grep -q "$gifSites" ||
+	echo "$gifFiles" | grep -q "${ext%%\?*}"; then
+		printMessage "Link type: Gif"
+		gifQueue+=( "$arg" )
+
+	# Image
+	elif echo "$arg" | grep -q "$imgSites" ||
+	echo "$imgFiles" | grep -q "${ext%%\?*}"; then
+		printMessage "Link type: Image"
+		imgQueue+=( "$arg" )
+
+	# Video
+	elif echo "$arg" | grep -q "$vidSites" ||
+	echo "$vidFiles" | grep -q "${ext%%\?*}"; then
+		printMessage "Link type: Video"
+		vidQueue+=( "$arg" )
+
+	# Download
+	elif echo "$arg" | grep -q "$dwnSites" ||
+	echo "$dwnFiles" | grep -q "${ext%%\?*}"; then
+		printMessage "Link type: Download"
+		dwnQueue+=( "$arg" )
+
+	# Browser
+	elif echo "$arg" | grep -q "$brwSites" ||
+	echo "$brwFiles" | grep -q "${ext%%\?*}" ||
+	[[ -z $detect ]]; then
+		printMessage "Link type: Browser"
+		brwQueue+=( "$arg" )
+
+	# Detect link type
+	else
+		printMessage "Detecting link type..."
+		detectLinkType "$arg"
+	fi
+
+	# Newline at the end
+	if [[ -n $printNewline ]]; then
+		printMessage
+		unset printNewline
+	fi
+done
+
+
+## Open queued links
+printMessage "Opening links..."
+
+# Image
+if [[ -n $imgQueue ]] && checkDep ${imgHandler%%\ *}; then
+	$imgHandler ${imgQueue[@]} &disown
+fi
+
+# Gif
+if [[ -n $gifQueue ]] && checkDep ${gifHandler%%\ *}; then
+	$gifHandler ${gifQueue[@]} &disown
+fi
+
+# Video
+if [[ -n $vidQueue ]] && checkDep ${vidHandler%%\ *}; then
+	$vidHandler ${vidQueue[@]} &disown
+fi
+
+# Download
+if [[ -n $dwnQueue ]] && checkDep ${dwnHandler%%\ *}; then
+	$dwnHandler ${dwnQueue[@]} &disown
+fi
+
+# Browser
+if [[ -n $brwQueue ]] && checkDep ${browser%%\ *}; then
+	$browser ${brwQueue[@]} &disown
+fi
