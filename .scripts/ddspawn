@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# This script simplifies dropdown windows in i3.
+# Usage:
+#	argument 1: script to run in dropdown window
+#	all other args are interpreted as options for your terminal
+# My usage:
+#	ddpawn
+# bindsym $mod+u	exec --no-startup-id ddspawn tmuxdd
+#	Will hide/show window running the `tmuxdd` script when I press mod+u in i3
+# bindsym $mod+a	exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
+#	Similar to above but with `dropdowncalc` and the other args are interpretated as for my terminal emulator (to increase font)
+
+
+[ -z "$1" ] && exit
+
+if xwininfo -tree -root | grep "(\"$1\" ";
+then
+	echo "Window detected."
+else
+	echo "Window not detected... spawning."
+	i3 "exec --no-startup-id $TERMINAL -n $1 $(echo "$@" | cut -d ' ' -f2-) -e $1" && i3 "[instance=\"$1\"] scratchpad show; [instance=\"$1\"] move position center"
+	sleep .25 # This sleep is my laziness, will fix later (needed for immediate appearance after spawn).
+fi
+i3 "[instance=\"$1\"] scratchpad show; [instance=\"$1\"] move position center"

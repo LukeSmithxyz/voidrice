@@ -30,6 +30,22 @@ set $reboot sudo -A reboot
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
 
+# #---Dropdown Windows---# #
+
+# First I have a tmux window used for background scripts.
+# I'll later bind this to mod+u.
+for_window [instance="tmuxdd"] floating enable
+for_window [instance="tmuxdd"] resize set 625 400
+for_window [instance="tmuxdd"] move scratchpad
+for_window [instance="tmuxdd"] border pixel 3
+
+# Then I have a window running R I use for basic arithmetic
+# I'll later bind this to mod+a.
+for_window [instance="dropdowncalc"] floating enable
+for_window [instance="dropdowncalc"] resize set 800 300
+for_window [instance="dropdowncalc"] move scratchpad
+for_window [instance="dropdowncalc"] border pixel 2
+
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
 exec --no-startup-id wal -i ~/.config/wall.png >/dev/null
@@ -113,8 +129,8 @@ bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$re
 bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e ranger
 
 # #---Letter Key Bindings---# #
-bindsym $mod+q			[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
-bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!math|dropdown).*$"] kill
+bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
 
 bindsym $mod+w			exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
@@ -131,7 +147,7 @@ bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 bindsym $mod+y			exec $term -e calcurse
 bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
 
-bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
 
 bindsym $mod+i 			exec $term -e htop
@@ -143,7 +159,7 @@ bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
 bindsym $mod+p			exec --no-startup-id lmc toggle
 bindsym $mod+Shift+p		exec --no-startup-id lmc pause
 
-bindsym $mod+a			[instance="math"] scratchpad show; [instance="math"] move position center
+bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a		exec $term -e pulsemixer
 
 bindsym $mod+s			gaps inner current plus 5
@@ -258,24 +274,6 @@ for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
 for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 for_window [title="Default - Wine desktop"] floating enable
-
-# First I have a tmux window used for background scripts.
-# I'll later bind this to mod+u.
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 625 400
-for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 3
-# Runs the tmuxinit script, which searches for an earlier tmux instance,
-# otherwise starts a new one (to prevent multiple dropdown sessions).
-exec --no-startup-id $term -n dropdown -e tmuxinit
-
-# Then I have a window running R I use for basic arithmetic
-# I'll later bind this to mod+a.
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 800 300
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 2
-exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
 
 # Bindings to make the webcam float and stick.
 for_window [title="mpvfloat"] floating enable
