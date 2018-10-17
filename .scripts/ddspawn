@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # This script simplifies dropdown windows in i3.
+# Shows/hides a scratchpad of a given name, if it doesn't exist, creates it.
 # Usage:
 #	argument 1: script to run in dropdown window
 #	all other args are interpreted as options for your terminal
