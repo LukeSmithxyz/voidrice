@@ -38,6 +38,7 @@ for_window [instance="tmuxdd"] floating enable
 for_window [instance="tmuxdd"] resize set 625 400
 for_window [instance="tmuxdd"] move scratchpad
 for_window [instance="tmuxdd"] border pixel 3
+for_window [instance="tmuxdd"] sticky enable
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
@@ -45,6 +46,7 @@ for_window [instance="dropdowncalc"] floating enable
 for_window [instance="dropdowncalc"] resize set 800 300
 for_window [instance="dropdowncalc"] move scratchpad
 for_window [instance="dropdowncalc"] border pixel 2
+for_window [instance="dropdowncalc"] sticky enable
 
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
@@ -346,7 +348,7 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdow
 ##bindsym XF86Paste		exec
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
-bindsym XF86Calculator		exec $term -e R -q
+bindsym XF86Calculator		exec $term -e R -q --no-save
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
 bindsym XF86Explorer		exec $term -e ranger
