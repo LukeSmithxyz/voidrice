@@ -4,7 +4,6 @@
 # Drives mounted at /, /boot and /home will not be options to unmount.
 
 unmountusb() {
-	drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$2=="part"&&$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
 	[ -z "$drives" ] && exit
 	chosen=$(echo "$drives" | dmenu -i -p "Unmount which drive?" | awk '{print $1}')
 	[ -z "$chosen" ] && exit
@@ -24,8 +23,14 @@ asktype() { \
 	esac
 	}
 
-if grep simple-mtpfs /etc/mtab; then
-	asktype
-else
+drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$2=="part"&&$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
+
+if ! grep simple-mtpfs /etc/mtab; then
+	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
+	echo "Unmountable USB drive detected."
 	unmountusb
+else
+	[ -z "$drives" ] && echo "Unmountable Android device detected." && unmountandroid
+	echo "Unmountable USB drive(s) and Android device(s) detected."
+	asktype
 fi
