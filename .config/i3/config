@@ -147,16 +147,16 @@ bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
 bindsym $mod+y			exec $term -e calcurse
-bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
+bindsym $mod+Shift+y		exec --no-startup-id "sh ~/.scripts/i3resize left"
 
 bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
-bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
+bindsym $mod+Shift+u		exec --no-startup-id "sh ~/.scripts/i3resize down"
 
 bindsym $mod+i 			exec $term -e htop
-bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
+bindsym $mod+Shift+i		exec --no-startup-id "sh ~/.scripts/i3resize up"
 
 bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
+bindsym $mod+Shift+o		exec --no-startup-id "sh ~/.scripts/i3resize right"
 
 bindsym $mod+p			exec --no-startup-id lmc toggle
 bindsym $mod+Shift+p		exec --no-startup-id lmc pause
