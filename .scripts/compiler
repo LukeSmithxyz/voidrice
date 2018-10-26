@@ -1,33 +1,29 @@
 #!/bin/sh
 
 # This script will compile or run another finishing operation on a document. I
-# have this script run via vim/emacs.
+# have this script run via vim.
 #
 # tex files: Compiles to pdf, including bibliography if necessary
 # md files: Compiles to pdf via pandoc
 # rmd files: Compiles via R Markdown
-# c files: Compiles via whatever compiler is set to cc. Usually gcc. 
+# c files: Compiles via whatever compiler is set to cc. Usually gcc.
 # py files: runs via python command
 # go files: compiles and runs with "go run"
 # config.h files: (For suckless utils) recompiles and installs program.
 # all others: run `sent` to show a presentation
 
-
-oridir=$(pwd)
-
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
 base="${file%.*}"
-shebang=$(sed -n 1p $file)
+shebang=$(sed -n 1p "$file")
 
-cd $dir
-
+cd "$dir" || exit
 
 textype() { \
 	command="pdflatex"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
-	grep -i addbibresource "$file" &&
+	grep -i addbibresource "$file" >/dev/null &&
 	biber --input-directory "$dir" "$base" &&
 	$command --output-directory="$dir" "$base" &&
 	$command --output-directory="$dir" "$base"
@@ -49,11 +45,5 @@ case "$file" in
         *\.c) cc "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;
 	*\.go) go run "$file" ;;
-
-
-
 	*) shebangtest ;;
-
 esac
-cd $oridir
-
