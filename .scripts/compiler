@@ -40,7 +40,7 @@ shebangtest() {
 [ -f "$REFBIB" ] && groffbib="-p $REFBIB"
 
 case "$file" in
-	*\.ms) refer $groffbib "$file" | groff -ms -T pdf > "$base".pdf ;;
+	*\.ms) refer -PS -e $groffbib "$file"  | groff -kejpt -ms -T pdf > "$base".pdf ;;
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R --vanilla && mv "$base".pdf "$dir"/pdfs;;
 	*\.tex) textype "$file" ;;
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
