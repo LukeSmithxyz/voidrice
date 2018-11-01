@@ -9,6 +9,7 @@ export BROWSER="linkhandler"
 export TRUEBROWSER="firefox"
 export READER="zathura"
 export BIB="$HOME/Documents/LaTeX/uni.bib"
+export REFER="$HOME/.referbib"
 
 [ -f ~/.scripts/shortcuts.sh ] && ~/.scripts/shortcuts.sh
 
@@ -21,4 +22,4 @@ fi
 
 # Switch escape and caps and use wal colors if tty:
 sudo -n loadkeys ~/.scripts/ttymaps.kmap 2>/dev/null
-wal -Rn
+tty | grep tty >/dev/null && wal -Rns
