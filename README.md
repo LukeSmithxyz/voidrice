@@ -27,7 +27,7 @@ Check other config folders for more specific documentation.
 
 [ranger configuration](.config/ranger/luke_ranger_readme.md)
 
-[list of scripts in the `~/.scripts/ directory](.scripts/SCRIPTS.md)
+[list of scripts in the `~/.scripts/ directory`](.scripts/SCRIPTS.md)
 
 ## Dynamic Configuration Files
 
