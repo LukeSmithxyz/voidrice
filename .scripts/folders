@@ -7,3 +7,7 @@ pp	~/Pictures
 vv	~/Videos
 s	~/.scripts
 cf	~/.config
+sc	~/.scripts
+mn	/mnt
+e	/etc
+R	/
