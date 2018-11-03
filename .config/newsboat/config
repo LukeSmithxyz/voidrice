@@ -37,5 +37,4 @@ macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandle
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
 macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
 # c copies the link to the clipboard.
-# The line below is probably the skiddiest line I've ever written.
-macro c set browser "copy(){ echo $1 | xclip ;}; copy "; open-in-browser ; set browser linkhandler
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkandler
