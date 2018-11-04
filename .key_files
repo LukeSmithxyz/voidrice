@@ -1,5 +1,5 @@
-cff	~/.scripts/folders
-cfc	~/.scripts/configs
+bf	~/.key_files
+bd	~/.key_directories
 cfb	~/.bashrc
 cfz	~/.zshrc
 cfv	~/.vimrc
