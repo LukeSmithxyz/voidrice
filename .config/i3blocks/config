@@ -50,7 +50,11 @@ label=🌐
 interval=10
 
 [battery]
-command=i3battery
+command=i3battery BAT1
+interval=5
+
+[battery]
+command=i3battery BAT0
 interval=5
 
 [time]

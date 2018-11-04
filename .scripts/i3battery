@@ -1,20 +1,22 @@
-#!/bin/bash
+#!/bin/sh
 
-NUM=`cat /sys/class/power_supply/BAT0/capacity` || exit
-STATUS=`cat /sys/class/power_supply/BAT0/status`
+# Give a battery name (e.g. BAT0) as an argument.
 
-if [ "$NUM" -ge 80 ]; then
+capacity=$(cat /sys/class/power_supply/"$1"/capacity) || exit
+status=$(cat /sys/class/power_supply/"$1"/status)
+
+if [ "$capacity" -ge 80 ]; then
 	color="#00FF00"
-elif [ "$NUM" -ge 60 ]; then
+elif [ "$capacity" -ge 60 ]; then
 	color="#FFFFFF"
-elif [ "$NUM" -ge 40 ]; then
+elif [ "$capacity" -ge 40 ]; then
 	color="#FFF600"
-elif [ "$NUM" -ge 20 ]; then
+elif [ "$capacity" -ge 20 ]; then
 	color="#FFAE00"
 else
 	color="#FF0000"
 fi
 
-[ "$STATUS" = "Charging" ] && color="#FFF"
+[ "$status" = "Charging" ] && color="#FFF"
 
-echo "<span color='$color'>`sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/❓/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g" <<<"$STATUS"` `sed -e 's/$/%/' <<<"$NUM"`</span>"
+printf "<span color='%s'>%s %s</span>" "$color" "$(echo "$status" | sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/♻️/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g")" "$(echo "$capacity" | sed -e 's/$/%/')"
