@@ -36,12 +36,9 @@ shebangtest() {
 	esac
 }
 
-# If there is a global $REFBIB variable/file for `refer`, use it.
-[ -f "$REFBIB" ] && groffbib="-p $REFBIB"
-
 case "$file" in
-	*\.ms) refer -PS -e $groffbib "$file"  | groff -kejpt -ms -T pdf > "$base".pdf ;;
-	*\.rmd) echo "require(rmarkdown); render('$file')" | R --vanilla && mv "$base".pdf "$dir"/pdfs;;
+	*\.ms) refer -PS -e "$file" | groff -me -ms -kejpt -T pdf > "$base".pdf ;;
+	*\.rmd) echo "require(rmarkdown); render('$file')" | R --vanilla ;;
 	*\.tex) textype "$file" ;;
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 	*config.h) make && sudo make install ;;
