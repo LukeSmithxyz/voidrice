@@ -2,6 +2,17 @@
 # Give dmenu list of all unicode characters to copy.
 # Shows the selected character in dunst if running.
 
-grep -v "#" ~/.scripts/unicode | dmenu -i -l 20 -fn Monospace-18 | awk '{print $1}' | tr -d '\n' | xclip -selection clipboard
+# Must have xclip installed to even show menu.
+xclip -h >/dev/null || exit
 
-pgrep -x dunst >/dev/null && notify-send "$(xclip -o -selection clipboard) copied to clipboard."
+chosen=$(grep -v "#" ~/.emoji | dmenu -i -l 20 -fn Monospace-18)
+
+[ "$chosen" != "" ] || exit
+
+c=$(echo "$chosen" | sed "s/ .*//")
+echo "$c" | tr -d '\n' | xclip -selection clipboard
+pgrep -x dunst >/dev/null && notify-send "'$c' copied to clipboard."
+
+s=$(echo "$chosen" | sed "s/.*; //" | awk '{print $1}')
+echo "$s" | tr -d '\n' | xclip
+pgrep -x dunst >/dev/null && notify-send "'$s' copied to primary."
