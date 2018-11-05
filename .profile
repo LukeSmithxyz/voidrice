@@ -2,7 +2,7 @@
 
 # Profile file. Runs on login.
 
-export PATH="$PATH:$HOME/.scripts"
+export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
 export EDITOR="vim"
 export TERMINAL="st"
 export BROWSER="linkhandler"

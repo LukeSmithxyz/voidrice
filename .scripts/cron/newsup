@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Set as a cron job to check for new RSS entries for newsboat.
+# Note that newsbot cannot be opened during the sync and this
+# sync cannot run while another instance of newsboat is open.
+
 ping -q -t 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 echo "📰 🔃" > ~/.newsup
 pkill -RTMIN+6 i3blocks

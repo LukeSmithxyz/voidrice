@@ -1,5 +1,0 @@
-#!/bin/bash
-# Toggles all cronjobs off/on.
-# Stores disabled crontabs in ~/.consaved until restored.
-
-([[ -f ~/.cronsaved ]] && cat ~/.cronsaved | crontab - && rm ~/.cronsaved && notify-send "Cronjobs have been re-enabled." && echo cronjobs re-enabled.) || ( crontab -l > ~/.cronsaved && crontab -r && echo cronjobs saved and disabled.;notify-send "Cronjobs have been saved and disabled.")
