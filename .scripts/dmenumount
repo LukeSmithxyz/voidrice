@@ -18,7 +18,7 @@ getmount() { \
 mountusb() { \
 	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?" | awk '{print $2}')"
 	sudo -A mount "$chosen" && exit 0
-	getmount "/mnt /media /mount -maxdepth 3 -type d"
+	getmount "/mnt /media /mount /home -maxdepth 5 -type d"
 	sudo -A mount "$chosen" "$mp" && pgrep -x dunst && notify-send "$chosen mounted to $mp."
 	}
 
