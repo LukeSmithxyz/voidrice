@@ -114,40 +114,40 @@ system will grow on you quick.
 ## Basic Programs
 
 *Note:* LARBS will install nearly all of these programs by default, but some
-only come if you chose an extra option. Naturally, you can use `packer` to look
+only come if you chose an extra option. Naturally, you can use `yay` to look
 for and install any you want to add.
 
 + `Mod+r` -- ranger (file browser/manager)
 + `Mod+e` -- mutt (email)
 + `Mod+m` -- ncmpcpp (music player)
-+ `Mod+a` -- R/Python calculator (be sure to close with Mod+a for reusability)
++ `Mod+w` -- nmtui (for connecting to wireless internet)
++ `Mod+a` -- R/Python calculator (hide with `mod+a`)
 + `Mod+i` -- htop (system info)
 + `Mod+n` -- newsboat (RSS feed reader)
 + `Mod+y` -- calcurse (calendar and schedule)
-+ `Mod+u` -- "Dropdown" terminal (close with Mod+u for reusability)
++ `Mod+u` -- "Dropdown" terminal (hide with `mod+u`)
 + `Mod+A` -- pulsemixer (audio system control)
-+ `Mod+w/W` -- Web Browser
++ `Mod+W` -- Web Browser
 + `Mod+G` -- GIMP (for general image manipulation)
 
 ## System
 
 + `Mod+R` -- ranger as root user
 + `Mod+x` -- i3lock (Enter password to return)
-+ `Mod+X` -- shutdown (will give a dmenu confirm prompt)
-+ `Mod+Shift+Backspace` -- reboot (will give a dmenu confirm prompt)
-+ `Mod+Shift+Escape` -- exit i3 (will give a dmenu confirm prompt)
++ `Mod+X` -- shutdown (will ask to confirm)
++ `Mod+Shift+Backspace` -- reboot (will ask to confirm)
++ `Mod+Shift+Escape` -- exit i3 (will ask to confirm)
 + `Mod+F1` -- Shows this document
 + `Mod+F2` -- Refresh i3
 + `Mod+F3` -- Select screen/display to use
-+ `Mod+F4` -- Hibernate
++ `Mod+F4` -- Hibernate (will ask to confirm)
 + `Mod+F5` -- Reset Network Manager, search for new networks
 + `Mod+F6` -- transmission torrent client (cli)
 + `Mod+F7` -- Toggle on/off transmission client via dmenu
 + `Mod+F8` -- Check mail, if
   [mutt-wizard](https://github.com/lukesmithxyz/mutt-wizard) is installed
-+ `Mod+F9` -- Mount a drive/partition
-+ `Mod+F10` -- Unmount a drive/partition (does not umount `/`, `/home` or
-  `/boot`)
++ `Mod+F9` -- Mount a USB drive/hard drive or Android
++ `Mod+F10` -- Unmount a non-essential drive or Android
 + `Mod+F11` -- Search term on DuckDuckGo
 + `Mod+F12` -- Wifi-menu for selecting the wireless internet source.
 
@@ -188,43 +188,42 @@ additions.
 
 I use scrot and ffmpeg to make different recordings of the desktop and audio.
 All of these recording shortcuts will output into `~`, and will not overwrite
-previous recordings.
+previous recordings as their names are based on their exact times.
 
 + `PrintScreen` -- Take a scrot screenshot
 + `Shift+PrintScreen` -- Take a scrot screenshot of only selected window
 + `Mod+PrintScreen` -- Opens dmenu menu to select kind of audio/video recording
++ `Mod+Delete` -- Kills any recording started in the above way.
 + `Mod+ScrollLock` -- Turn on and off screenkey (if installed) for visual typing display
-+ `Mod+Delete` -- kills ffmpeg, thus ending recordings
-
-Each of the recording scripts are located in `~/.scripts`. You can check them
-out or modify them if needed.
++ `Mod+Shift+c` -- Toggles a webcam in the bottom right for screencasting.
 
 ## Other buttons
 
 I've mapped those extra buttons that some keyboards have (play and pause
-buttons, email, webbrowsing buttons, etc.) to what you would expect.
-
+buttons, screen brightness, email, web browsing buttons, etc.) to what you
+would expect.
 
 # Special traits of this system
 
 ## Easy config access
 
-Open a terminal and type `cfc`. This will open a file where you will see
-customizable pairs of key shortcuts and config files. Enter any of these
-shortcuts in bash or ranger to immediately open the file in vim.
+Open a terminal and type `bf`. This will open a file where you will see
+customizable pairs of key shortcuts and config files and other important text
+files. Enter any of these shortcuts in bash or ranger to immediately open the
+file in vim.
 
 You may add new entries here and they will be refreshed when you save the file
 in vim. This will take effect immediately once you start a new instance of bash
-or ranger.
+or ranger or reload your previous sessions.
 
 ## Folder and config shortcuts
 
-Open a terminal and type `cff`. This opens a file when you can keep and create
-folder shortcuts. There are only a few here now, because I don't know what your
-folder structure is going to look like, but on my machine, I have 109 and
-growing.
+Open a terminal and type `bd`. This opens a file when you can keep and create
+directory/folder shortcuts. There are only a few here now, because I don't know
+what your folder structure is going to look like, but on my machine, I have 109
+and growing.
 
-Each line has a shortcut key/keys and its target. These can be used in serveral
+Each line has a shortcut key/keys and its target. These can be used in several
 applications. In bash, simply press `d`, the shortcut for `~/Documents` and you
 will cd there (and automatically `ls -a`).
 

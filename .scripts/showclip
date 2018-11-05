@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# Display contents of selection via dunst if running.
-# Separate script for i3.
-
-pgrep -x dunst >/dev/null && notify-send "$(xclip -o -selection clipboard)"
