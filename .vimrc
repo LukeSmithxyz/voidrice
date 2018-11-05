@@ -27,8 +27,8 @@ let mapleader =" "
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 
-" Open file as suckless sent presentation
-	map <leader>s :!sent<space><C-r>% 2>/dev/null &<CR><CR>
+" Check file in shellcheck:
+	map <leader>s :!clear && shellcheck %<CR>
 
 " View an image for a suckless sent presentation:
 	map <leader>v $F@ly$:!feh --scale-down --auto-zoom --image-bg black <c-r>" &<CR><CR>
@@ -45,7 +45,7 @@ let mapleader =" "
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 
-" Open corresponding.pdf
+" Open corresponding .pdf
 	map <leader>p :!opout <c-r>%<CR><CR>
 
 " Compile document
