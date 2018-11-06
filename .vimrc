@@ -5,9 +5,15 @@
 "   \_/ |_|_| |_| |_|_|  \___|
 
 let mapleader =" "
-" Load Pathogen for plugins:
-	execute pathogen#infect()
-	execute pathogen#helptags()
+
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/goyo.vim'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'jreybert/vimagit'
+Plug 'LukeSmithxyz/vimling'
+Plug 'vimwiki/vimwiki'
+Plug 'dylanaraps/wal.vim'
+call plug#end()
 
 " Some basics:
 	set nocompatible
@@ -61,28 +67,24 @@ let mapleader =" "
 " Make calcurse notes markdown compatible:
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 
+" groff files automatically detected
+	autocmd BufRead,BufNewFile *.ms,*.me,*.mom set filetype=groff
+
+" .tex files automatically detected
+	autocmd BufRead,BufNewFile *.tex set filetype=tex
+
 " Readmes autowrap text:
-	autocmd BufRead,BufNewFile *.md,*.tex set tw=79
+	autocmd BufRead,BufNewFile *.md set tw=79
 
 " Get line, word and character counts with F3:
-	map <F3> :!wc <C-R>%<CR>
+	map <F3> :!wc %<CR>
 
 " Spell-check set to F6:
 	map <F6> :setlocal spell! spelllang=en_us<CR>
 
-" Toggle DeadKeys set (for accent marks):
-	so ~/.vim/luke/deadkeys.vim
-	nm <leader><leader>d :call ToggleDeadKeys()<CR>
-	imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
-
-" Source my IPA shorcuts:
-	so ~/.vim/luke/ipa.vim
-	nm <leader><leader>i :call ToggleIPA()<CR>
-	imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
-
 " Use urlview to choose and open a url:
-	:noremap <leader>u :w<Home>silent <End> !urlview<CR>
-	:noremap ,, :w<Home>silent <End> !urlview<CR>
+	:noremap <leader>u :w<Home>silent <End> !urlscan<CR>
+	:noremap ,, :w<Home>silent <End> !urlscan<CR>
 
 " Copy selected text to system clipboard (requires gvim installed):
 	vnoremap <C-c> "*Y :let @+=@*<CR>
@@ -92,10 +94,6 @@ let mapleader =" "
 	map <F10> :Goyo<CR>
 	map <leader>f :Goyo \| set linebreak<CR>
 	inoremap <F10> <esc>:Goyo<CR>a
-
-" Toggle Prose Mode with F8:
-    so ~/.vim/luke/prose.vim
-    nm <F8> :call ToggleProse()<CR>
 
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
