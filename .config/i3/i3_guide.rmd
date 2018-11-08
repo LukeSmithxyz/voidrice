@@ -27,7 +27,7 @@ Questions or suggestions? Email me at
   have all the magic inside of them.
 + Keyboard/vim-centrality -- All terminal programs (and other programs) use vim
   keys when possible. Your hands never need leave the home row or thereabout.
-+ Decentralization -- This system is a web of small, modifyiable and
++ Decentralization -- This system is a web of small, modifiable and
   replaceable programs that users can easily customize.
 
 ## General keyboard changes
@@ -42,7 +42,7 @@ Questions or suggestions? Email me at
   you to type a lot of characters in many different European languages.
 
 If you'd like to change any of these keyboard changes, you need only open and
-change `~/.scripts/remaps`. Actually, this should go without saying, but
+change `~/.scripts/tools/remaps`. Actually, this should go without saying, but
 *everything* here can easily be changed.
 
 Additionally, while this isn't a part of i3, the default editing mode in the
@@ -58,7 +58,7 @@ left side, you'll see the numbers of your current workspace(s). On the right
 side, you'll see various system status notifiers, the date, volume, even music
 and local weather if possible  etc. I'm sure you can figure it out. Several
 modules will be click-sensitive, although if you're using my system as
-indended, you probably won't be doing much clicking.
+indented, you probably won't be doing much clicking.
 
 The i3blocks config is `~/.config/i3blocks/config`, which you can access by the
 terminal shortcut `cfib`. Notice that the config file refers to several module
@@ -81,7 +81,7 @@ accessible by typing `cfi` in the terminal) and can all be easily changed.
 ## Window basics
 
 Notice the case sensitivity of the shortcuts.^[To type capital letters, hold
-down the `Shift` key---that might sound like an obvious and consedcending thing
+down the `Shift` key---that might sound like an obvious and condescending thing
 to tell you, but there have literally been multiple people (Boomers) who have
 emailed me asking how to type a capital letter since caps lock isn't enabled.]
 
@@ -102,8 +102,7 @@ system will grow on you quick.
 + `Mod+z/Z` -- Increase/decrease outer gaps
 + `Mod+D` -- Reduce gaps to 0 pixels
 + `Mod+T` -- Restore gaps to default (15 pixels)
-+ `Mod+Shift+Space` -- Make a window float (you can still resize and move
-  floating windows with the same keys above)
++ `Mod+Shift+Space` -- Make a window float (it will still be resizeable)
 + `Mod+Space` -- Switch focus from a floating window to a non-floating one (or
   vice versa)
 + `Mod+o` -- Make floating window sticky (will stay on active workspace)
@@ -153,9 +152,7 @@ for and install any you want to add.
 
 ## Audio
 
-I use ncmpcpp as a music player, which is a front end for mpd. If you prefer
-cmus or mocp, I have commented out shortcuts you can activate for it instead in
-the i3 config.
+I use ncmpcpp as a music player, which is a front end for mpd.
 
 + `Mod+m` -- ncmpcpp music player
 + `Mod+.` -- Next track
@@ -276,7 +273,7 @@ making LARBS, but the mutt-wizard is probably my favorite work.
 You can, through the mutt-wizard, schedule automatic mail checks every several
 minutes. You can also press `Mod-F8` at any time to check for new mail in your
 accounts.  You might also want to run `notmuch setup` to set `notmuch` up as a
-mailindexer. This will allow quick searches of your mail in mutt with `ctrl+f`.
+mail indexer. This will allow quick searches of your mail in mutt with `ctrl+f`.
 The mailsync script will update the notmuch database once you do this.
 
 ## How do I set up my music?
@@ -284,7 +281,7 @@ The mailsync script will update the notmuch database once you do this.
 By default, mpd, the music daemon assumes that `~/Music` is your music
 directory. This can be changed in `~/.config/mpd/mpd.conf`. When you add music
 to your music folder, you may have to run `mpc up` in the terminal to update
-the database. mpd is controled by ncmpcpp, which is accessible by Mod+m.
+the database. mpd is controlled by ncmpcpp, which is accessible by Mod+m.
 
 # Contact
 
