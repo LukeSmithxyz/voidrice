@@ -1,5 +1,9 @@
 #!/bin/sh
 
-[ "$BLOCK_BUTTON" = "1" ] && "$READER" ~/.config/i3/i3_guide.pdf
+case $BLOCK_BUTTON in
+    1) "$READER" ~/.config/i3/i3_guide.pdf ;;
+    3) pgrep -x dunst >/dev/null && notify-send "<b>❓ Help module:</b>
+- Left click to open LARBS guide.";;
+esac
 
 echo "❓"
