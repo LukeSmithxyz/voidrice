@@ -44,11 +44,6 @@ interval=once
 command=i3volume
 signal=10
 
-[iface]
-label=🌐
-#instance=wlan0
-interval=10
-
 [battery]
 command=i3battery BAT1
 interval=5
@@ -59,9 +54,13 @@ interval=5
 
 [time]
 label=📅
-command=echo $(date '+%Y %b %d (%a)  %I:%M%p') 🕓
+command=i3date
 interval=30
 
-[wifi]
-command=i3wifi
+[internet]
+command=i3internet
 interval=10
+
+[help]
+command=i3help
+interval=once
