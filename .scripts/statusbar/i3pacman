@@ -4,10 +4,13 @@
 # Displays number of upgradeable packages.
 # For this to work, have a `pacman -Sy` command run in the background as a
 # cronjob every so often as root. This script will then read those packages.
-# When clicked, it will run an upgrade via `yay`. (`yay` required, duh.)
+# When clicked, it will run an upgrade via pacman.
 
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e "popupgrade" ;;
+	1) $TERMINAL -e popupgrade ;;
+	3) pgrep -x dunst >/dev/null && notify-send "<b>Upgrade module:</b>
+📦: number of upgradable packages" ;;
 esac
 
-yay -Qu | sed -e '/^Get/d' | wc -l | sed -e "s/^0$//g"
+
+pacman -Qu | wc -l | sed -e "s/^0$//g"
