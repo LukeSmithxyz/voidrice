@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$BLOCK_BUTTON" = "1" ] && "$READER" ~/.config/i3/i3_guide.pdf
+
+echo "❓"
