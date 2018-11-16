@@ -11,7 +11,7 @@ export READER="zathura"
 export BIB="$HOME/Documents/LaTeX/uni.bib"
 export REFER="$HOME/.referbib"
 
-[ ! -f ~/.shortcuts ] && shortcuts 2>/dev/null
+[ ! -f ~/.shortcuts ] && shortcuts >/dev/null 2>&1
 
 [ -f ~/.bashrc ] && source ~/.bashrc
 

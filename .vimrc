@@ -13,6 +13,7 @@ Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
 Plug 'dylanaraps/wal.vim'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 " Some basics:
