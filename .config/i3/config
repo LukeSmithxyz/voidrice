@@ -142,7 +142,7 @@ bindsym $mod+e			exec $term -e neomutt
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
 bindsym $mod+r 			exec $term -e ranger
-bindsym $mod+Shift+r		exec $term -e sudo ranger /
+bindsym $mod+Shift+r		exec --no-startup-id winresize
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
