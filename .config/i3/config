@@ -139,7 +139,7 @@ bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*
 bindsym $mod+w			exec $term -e nmtui
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
-bindsym $mod+e			exec $term -e neomutt
+bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
 bindsym $mod+r 			exec $term -e ranger
@@ -209,7 +209,7 @@ bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
-bindsym $mod+n			exec $term -e newspod
+bindsym $mod+n			exec $term -e newspod && pkill -RTMIN+6 i3blocks
 ##bindsym $mod+Shift+n
 
 bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
@@ -397,7 +397,7 @@ bindsym XF86TouchpadOff		exec --no-startup-id synclient TouchpadOff=1
 bindsym XF86Suspend		exec --no-startup-id lockscreen
 bindsym XF86Close		kill
 bindsym XF86WebCam		exec --no-startup-id camtoggle
-bindsym XF86Mail		exec $term -e neomutt
+bindsym XF86Mail		exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym XF86Messenger		exec $term -e weechat
 bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 ##bindsym XF86Go			exec
