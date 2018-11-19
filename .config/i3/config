@@ -51,6 +51,8 @@ for_window [instance="dropdowncalc"] sticky enable
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
 exec --no-startup-id wal -i ~/.config/wall.png >/dev/null
+# If you don't want to use wal, comment out the line above and uncomment this one:
+#exec --no-startup-id feh --bg-scale ~/.config/wall.png
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager:
