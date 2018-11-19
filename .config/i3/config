@@ -129,7 +129,8 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e ranger
 
 # Show selection:
-bindsym $mod+Shift+Insert	exec --no-startup-id showclip
+bindsym $mod+Insert		exec --no-startup-id showclip
+bindsym $mod+Pause		exec --no-startup-id xcqr
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
