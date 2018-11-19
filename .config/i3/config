@@ -35,7 +35,7 @@ set $hibernate sudo -A systemctl suspend
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
 for_window [instance="tmuxdd"] floating enable
-for_window [instance="tmuxdd"] resize set 625 400
+for_window [instance="tmuxdd"] resize set 625 450
 for_window [instance="tmuxdd"] move scratchpad
 for_window [instance="tmuxdd"] border pixel 3
 for_window [instance="tmuxdd"] sticky enable
@@ -63,10 +63,6 @@ exec --no-startup-id remaps
 exec --no-startup-id unclutter
 # Run the script to update the mpd i3block on change.
 exec --no-startup-id i3mpdupdate
-# Remove recording icon if not properly closed on last shutdown.
-exec --no-startup-id rm -f ~/.larbs/.recording
-# Network manager applet
-exec --no-startup-id nm-applet
 # mpd startup
 exec --no-startup-id mpd
 
@@ -175,12 +171,12 @@ bindsym $mod+Shift+s		gaps inner current minus 5
 bindsym $mod+d			exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
-set $freeze Distraction-free mode (mod+shift+esc to exit)
-mode "$freeze" { bindsym $mod+Shift+Escape mode "default"
+set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
+mode "$freeze" { bindsym $mod+Shift+f mode "default"
 }
 
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f		mode "$freeze"
+bindsym $mod+Shift+f		mode "$freeze" ;; exec --no-startup-id notify-send "<b>Distraction-free mode activated.</b> Press Super+Shift+f to return."
 
 bindsym $mod+g			workspace prev
 bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
