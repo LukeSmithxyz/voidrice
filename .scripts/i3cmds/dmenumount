@@ -17,16 +17,16 @@ getmount() { \
 
 mountusb() { \
 	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?" | awk '{print $1}')"
-	sudo -A mount "$chosen" && exit 0
+	sudo -A mount "$chosen" && notify-send "$chosen mounted." && exit 0
 	getmount "/mnt /media /mount /home -maxdepth 5 -type d"
-	sudo -A mount "$chosen" "$mp" && pgrep -x dunst && notify-send "$chosen mounted to $mp."
+	sudo -A mount "$chosen" "$mp" && notify-send "$chosen mounted to $mp."
 	}
 
 mountandroid() { \
 	chosen=$(echo "$anddrives" | dmenu -i -p "Which Android device?" | cut -d : -f 1)
 	getmount "$HOME -maxdepth 3 -type d"
 	simple-mtpfs --device "$chosen" "$mp"
-	echo simple-mtpfs --device "$chosen" "$mp"
+	notify-send "Android device mounted to $mp."
 	}
 
 asktype() { \
