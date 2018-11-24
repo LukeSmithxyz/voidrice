@@ -30,7 +30,12 @@ if ! grep simple-mtpfs /etc/mtab; then
 	echo "Unmountable USB drive detected."
 	unmountusb
 else
-	[ -z "$drives" ] && echo "Unmountable Android device detected." && unmountandroid
-	echo "Unmountable USB drive(s) and Android device(s) detected."
-	asktype
+	if [ -z "$drives" ]
+	then
+		echo "Unmountable Android device detected."
+	       	unmountandroid
+	else
+		echo "Unmountable USB drive(s) and Android device(s) detected."
+		asktype
+	fi
 fi
