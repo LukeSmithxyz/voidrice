@@ -286,7 +286,7 @@ for_window [title="mpvfloat"] border pixel 0
 no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
+bindsym $mod+F1		exec --no-startup-id groff -mom ~/.readme.mom -Tpdf | zathura -
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"

@@ -1,0 +1,393 @@
+.de LI
+.LIST
+.SHIFT_LIST 10p
+..
+.PARA_SPACE 1m
+.TITLE "\s+(10A Friendly Guide to LARBS!\s0"
+.AUTHOR "\s+5Luke Smith\s0"
+.DOCTYPE    DEFAULT
+.COPYSTYLE  FINAL
+.PRINTSTYLE TYPESET
+.PT_SIZE 10
+.START
+Use vim keys (\f(CWh/j/k/l\fP) to navigate this document.
+Pressing \f(CWs\fP will fit it to window width (\f(CWa\fP to revert).
+\f(CWK\fP and \f(CWJ\fP zoom in and out.
+\f(CWMod+f\fP to toggle fullscreen.
+\f(CWf\fP will highlight links to follow which are selectable by typing the number that appears plus \f(CWEnter\fP.
+\f(CWq\fP to quit.
+(These are general zathura shortcuts.)
+.LI
+.ITEM
+\f(CWMod+F1\fP will show this document at any time.
+.ITEM
+By \f(CWMod\fP I mean the Super Key, usually known as "the Windows Key."
+.LIST OFF
+.PP
+Questions or suggestions? Email me at
+.PDF_WWW_LINK "mailto:luke@lukesmith.xyz" "luke@lukesmith.xyz"
+.LI
+.ITEM
+LARBS website:
+.PDF_WWW_LINK "https://larbs.xyz"
+.ITEM
+My website:
+.PDF_WWW_LINK "https://lukesmith.xyz"
+.ITEM
+Donate:
+.PDF_WWW_LINK "https://paypal.me/LukeMSmith/20" "https://paypal.me/LukeMSmith"
+.LIST OFF
+.HEADING 1 "Welcome!"
+.HEADING 2 "Basic goals and principles of this system:"
+.LI
+.ITEM
+\fBNaturalness\fP \(en
+Remove the border between mind and matter:
+everything important should be as few keypresses as possible away from you,
+and you shouldn't have to think about what you're doing.
+Immersion.
+.ITEM
+\fBEconomy\fP \(en
+Programs should be simple and light on system resources and highly extensible.
+Because of this, many are terminal or small ncurses programs that have all the magic inside of them.
+.ITEM
+\fBKeyboard/vim-centrality\fP \(en
+All terminal programs (and other programs) use vim keys when possible.
+Your hands never need leave the home row or thereabout.
+.ITEM
+\fBDecentralization\fP \(en
+This system is a web of small, modifiable and replaceable programs that users can easily customize.
+.LIST OFF
+.HEADING 2 "General keyboard changes"
+.LI
+.ITEM
+Capslock is a useless key in high quality space.
+It's now remapped.
+If you press it alone, it will function as escape, making vimcraft much more natural,
+but you can also hold it down and it will act as another Windows/super/mod key.
+.ITEM
+The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button.
+This is to make one-handing on laptops easier.
+.ITEM
+The system also uses the US International keyboard by default.
+This allows you to type a lot of characters in many different European languages.
+.LIST OFF
+.PP
+If you'd like to change any of these keyboard changes, you need only open and change \f(CW~/.scripts/tools/remaps\fP.
+Actually, this should go without saying, but \fIeverything\fP here can easily be changed.
+.PP
+Additionally, while this isn't a part of i3, the default editing mode in the shell is using vi bindings.
+If you want to learn more of this, run \f(CWMod+Super+E\fP and type and select the option for "vi mode in shell".
+This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.inputrc\fP.
+.HEADING 2 "The Status Bar"
+.PP
+If you're new to i3, notice the status bar on the top of the screen.
+To the left side, you'll see the numbers of your current workspace(s).
+On the right side, you'll see various system status notifiers, the date, volume, even music and local weather if possible, etc.
+I'm sure you can figure it out.
+Several modules will be click-sensitive, although if you're using my system as indented, you probably won't be doing much clicking.
+Still, you can right click on a module to get some information about what exactly it means.
+.PP
+The i3blocks config is \f(CW~/.config/i3blocks/config\fP, which you can access by the
+terminal shortcut \f(CWcfib\fP. Notice that the config file refers to several module
+scripts in the \f(CW~/.scripts/\fP directory. You can read a summary of all of these
+scripts in the file \f(CW~/.scripts/SCRIPTS.md\fP.
+.HEADING 2 "Deeper Tutorials"
+.PP
+In addition to this guide and reading the dotfiles of programs manually, you
+can also get program-specific information by running the \f(CWgetkeys\fP command.
+This will give you the bindings of what program you want. You can also press
+\f(CWMod+E\fP (that's a capital \f(CWE\fP) to get be able to watch tutorial videos on
+specific programs or concepts directly from YouTube.
+.HEADING 1 "Key Bindings"
+.PP
+All of the bindings below are in the file \f(CW~/.config/i3/config\fP (easily accessible by typing \f(CWcfi\fP in the terminal) and can all be easily changed.
+.HEADING 2 "Window basics"
+.PP
+Notice the case sensitivity of the shortcuts\c
+.FOOTNOTE
+To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound like an obvious and condescending thing to tell you, but there have literally been multiple people (Boomers) who have emailed me asking how to type a capital letter since caps lock isn't enabled.
+.FOOTNOTE OFF
+ , Be sure you play around with these. Be flexible with the basic commands and the system will grow on you quick.
+.LI
+.ITEM
+\f(CWMod+Enter\fP \(en Spawn terminal
+.ITEM
+\f(CWMod+q/Q\fP \(en Close window
+.ITEM
+\f(CWMod+d\fP \(en rofi (For running commands or programs without shortcuts)
+.ITEM
+\f(CWMod+t\fP \(en Toggle between spawning vertically and horizontally
+.ITEM
+\f(CWMod+f\fP \(en Fullscreen
+.ITEM
+\f(CWMod+h/j/k/l\fP \(en Move to different windows
+.ITEM
+\f(CWMod+H/J/K/L\fP \(en Move a window around
+.ITEM
+\f(CWMod+Y/U/I/O\fP \(en Resize windows
+.ITEM
+\f(CWMod+/\fP \(en Spawn vertical terminal
+.ITEM
+\f(CWMod+'\fP \(en Spawn horizontal terminal
+.ITEM
+\f(CWMod+s/S\fP \(en Increase/decrease inner gaps
+.ITEM
+\f(CWMod+z/Z\fP \(en Increase/decrease outer gaps
+.ITEM
+\f(CWMod+D\fP \(en Reduce gaps to 0 pixels
+.ITEM
+\f(CWMod+T\fP \(en Restore gaps to default (15 pixels)
+.ITEM
+\f(CWMod+Shift+Space\fP \(en Make a window float (it will still be resizeable)
+.ITEM
+\f(CWMod+Space\fP \(en Switch focus from a floating window to a non-floating one (or
+  vice versa)
+.ITEM
+\f(CWMod+o\fP \(en Make floating window sticky (will stay on active workspace)
+.ITEM
+\f(CWMod+b\fP \(en Toggle status bar
+.ITEM
+\f(CWMod+B\fP \(en Make window float in bottom left corner (good for video watched
+  intermittently)
+.LIST OFF
+.HEADING 2 "Basic Programs"
+.PP
+\fINote:\fP LARBS will install nearly all of these programs by default, but some only come if you chose an extra option.
+Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
+.LI
+.ITEM
+\f(CWMod+r\fP \(en ranger (file browser/manager)
+.ITEM
+\f(CWMod+e\fP \(en mutt (email)
+.ITEM
+\f(CWMod+m\fP \(en ncmpcpp (music player)
+.ITEM
+\f(CWMod+w\fP \(en nmtui (for connecting to wireless internet)
+.ITEM
+\f(CWMod+a\fP \(en R/Python calculator (hide with \f(CWmod+a\fP)
+.ITEM
+\f(CWMod+i\fP \(en htop (system info)
+.ITEM
+\f(CWMod+n\fP \(en newsboat (RSS feed reader)
+.ITEM
+\f(CWMod+y\fP \(en calcurse (calendar and schedule)
+.ITEM
+\f(CWMod+u\fP \(en "Dropdown" terminal (hide with \f(CWmod+u\fP)
+.ITEM
+\f(CWMod+A\fP \(en pulsemixer (audio system control)
+.ITEM
+\f(CWMod+W\fP \(en Web Browser
+.ITEM
+\f(CWMod+G\fP \(en GIMP (for general image manipulation; starts on workspace 5)
+.LIST OFF
+.HEADING 2 "System"
+.LI
+.ITEM
+\f(CWMod+R\fP \(en resize a floating window to give size (width height)
+.ITEM
+\f(CWMod+x\fP \(en i3lock (Enter password to return)
+.ITEM
+\f(CWMod+X\fP \(en shutdown (will ask to confirm)
+.ITEM
+\f(CWMod+Shift+Backspace\fP \(en reboot (will ask to confirm)
+.ITEM
+\f(CWMod+Shift+Escape\fP \(en exit i3 (will ask to confirm)
+.ITEM
+\f(CWMod+F1\fP \(en Shows this document
+.ITEM
+\f(CWMod+F2\fP \(en Refresh i3
+.ITEM
+\f(CWMod+F3\fP \(en Select screen/display to use
+.ITEM
+\f(CWMod+F4\fP \(en Hibernate (will ask to confirm)
+.ITEM
+\f(CWMod+F5\fP \(en Reset Network Manager, search for new networks
+.ITEM
+\f(CWMod+F6\fP \(en transmission torrent client (cli)
+.ITEM
+\f(CWMod+F7\fP \(en Toggle on/off transmission client via dmenu
+.ITEM
+\f(CWMod+F8\fP \(en Check mail, if
+.PDF_WWW_LINK "https://github.com/lukesmithxyz/mutt-wizard" "mutt-wizard"
+is installed.
+.ITEM
+\f(CWMod+F9\fP \(en Mount a USB drive/hard drive or Android
+.ITEM
+\f(CWMod+F10\fP \(en Unmount a non-essential drive or Android
+.ITEM
+\f(CWMod+F11\fP \(en Search term on DuckDuckGo
+.ITEM
+\f(CWMod+F12\fP \(en \f(CWnmtui\fP for selecting the wireless internet source.
+.ITEM
+\f(CWMod+`\fP \(en Select an emoji to copy to clipboard
+.ITEM
+\f(CWMod+Insert\fP \(en Show contents of clipboard/primary selection
+.ITEM
+\f(CWMod+Pause\fP \(en Show QR code from clipboard contents (requires \f(CWqrencode\fP)
+.LIST OFF
+.HEADING 2 "Audio"
+.PP
+I use ncmpcpp as a music player, which is a front end for mpd.
+.LI
+.ITEM
+\f(CWMod+m\fP \(en ncmpcpp music player
+.ITEM
+\f(CWMod+.\fP \(en Next track
+.ITEM
+\f(CWMod+,\fP \(en Previous track
+.ITEM
+\f(CWMod+<\fP \(en Restart track
+.ITEM
+\f(CWMod+p\fP \(en Pause
+.ITEM
+\f(CWMod+M\fP \(en Mute all audio
+.ITEM
+\f(CWMod+v\fP \(en visualizer
+.ITEM
+\f(CWMod+-\fP \(en Decrease volume (holding shift increases amount)
+.ITEM
+\f(CWMod++\fP \(en Increase volume (holding shift increases amount)
+.ITEM
+\f(CWMod+[\fP \(en Back 10 seconds (holding shift increases amount)
+.ITEM
+\f(CWMod+]\fP \(en Forward 10 seconds (holding shift increases amount)
+.ITEM
+\f(CWMod+A\fP \(en ncpamixer (general volume sink/source control)
+.LIST OFF
+.HEADING 2 "Workspaces"
+.PP
+There are ten workspaces. They work just like those in vanilla i3 with some
+additions.
+.LI
+.ITEM
+\f(CWMod+(Number)\fP \(en Go to that number workspace
+.ITEM
+\f(CWMod+Shift+(Number)\fP \(en Send window to that workspace
+.ITEM
+\f(CWMod+Tab\fP \(en Go to previous workspace
+.ITEM
+\f(CWMod+g\fP \(en Go to left workspace
+.ITEM
+\f(CWMod+;\fP \(en Go to right workspace
+.ITEM
+\f(CWMod+Shift+Delete\fP \(en "Porno-mode" Press this key sequence if you want to hide
+  what you have on your screen. Moves to a totally new workspace, mutes sound,
+  pauses music and brings up distraction windows.
+.LIST OFF
+.HEADING 2 "Recording"
+.PP
+I use scrot and ffmpeg to make different recordings of the desktop and audio.
+All of these recording shortcuts will output into \f(CW~\fP, and will not overwrite
+previous recordings as their names are based on their exact times.
+.LI
+.ITEM
+\f(CWPrintScreen\fP \(en Take a scrot screenshot
+.ITEM
+\f(CWShift+PrintScreen\fP \(en Take a scrot screenshot of only selected window
+.ITEM
+\f(CWMod+PrintScreen\fP \(en Opens dmenu menu to select kind of audio/video recording
+.ITEM
+\f(CWMod+Delete\fP \(en Kills any recording started in the above way.
+.ITEM
+\f(CWMod+ScrollLock\fP \(en Turn on and off screenkey (if installed) for visual typing display
+.ITEM
+\f(CWMod+Shift+c\fP \(en Toggles a webcam in the bottom right for screencasting.
+.LIST OFF
+.HEADING 2 "Other buttons"
+.PP
+I've mapped those extra buttons that some keyboards have (play and pause
+buttons, screen brightness, email, web browsing buttons, etc.) to what you
+would expect.
+.HEADING 1 "Special traits of this system"
+.HEADING 2 "Easy config access"
+.PP
+Open a terminal and type \f(CWbf\fP. This will open a file where you will see
+customizable pairs of key shortcuts and config files and other important text
+files. Enter any of these shortcuts in bash or ranger to immediately open the
+file in vim.
+.PP
+You may add new entries here and they will be refreshed when you save the file
+in vim. This will take effect immediately once you start a new instance of bash
+or ranger or reload your previous sessions.
+.HEADING 2 "Folder and config shortcuts"
+.PP
+Open a terminal and type \f(CWbd\fP. This opens a file when you can keep and create
+directory/folder shortcuts. There are only a few here now, because I don't know
+what your folder structure is going to look like, but on my machine, I have 109
+and growing.
+.PP
+Each line has a shortcut key/keys and its target. These can be used in several
+applications. In bash, simply press \f(CWd\fP, the shortcut for \f(CW~/Documents\fP and you
+will cd there (and automatically \f(CWls -a\fP).
+.PP
+ranger works similarly.
+When in ranger, just press \f(CWg\fP then the shortcut of the folder you want to go to.
+You may also press \f(CWt\fP plus the shortcut to open a new tab there.
+\f(CWm\fP plus the shortcut moves the selected files to the folder and \f(CWY\fP copies them there.
+\fBGet good at this. It will make management of even the most complex file system easy.\fP
+.HEADING 2 "Dynamically constructed configs"
+.PP
+Each time you save changes to either the config shortcut file or the folder shortcut file in vim, vim will automatically run a bash script that updates your bash/ranger config, allowing you to use your new shortcuts in your next instance of bash/ranger or after resourcing your rc files.
+.HEADING 1 "Frequently Asked Questions (FAQs)"
+.HEADING 2 "How do I change the background/wallpaper?"
+.PP
+The easiest way is to use ranger, navigate to the file you want as your background, and press \f(CWbg\fP.
+To be specific, i3 will always be looking to the file in \f(CW~/.config/wall.png\fP for the wallpaper, this ranger command copies the given file there and reruns feh to update it.
+So if you want a persistent wallpaper, move/rename it to \f(CW~/.config/wall.png\fP.
+.HEADING 2 "How do I set up my email?"
+.LI
+.ITEM
+Create a GPG private/public key pair if you haven't already.
+.ITEM
+ Download the mutt-wizard repository to the mutt config directory:
+\f(CWgit clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt\fP
+.PP
+.ITEM
+There run \f(CWmutt-wizard.sh\fP and follow the directions, specifically:
+.LI
+.ITEM
+Add an account.
+.ITEM
+Run \f(CWofflineimap -o\fP in the terminal.
+.ITEM
+Select the "Autodetect mailboxes" option.
+.LIST OFF
+.LIST OFF
+.PP
+You should then be able to open your mail in mutt with Mod+e.
+And this is somewhat of a miracle considering all of the moving pieces that have come together to make this happen.
+Honestly, people give me all this credit for making LARBS, but the mutt-wizard is probably my favorite work.
+.PP
+You can, through the mutt-wizard, schedule automatic mail checks every several minutes.
+You can also press \f(CWMod-F8\fP at any time to check for new mail in your accounts.
+You might also want to run \f(CWnotmuch setup\fP to set \f(CWnotmuch\fP up as a mail indexer.
+This will allow quick searches of your mail in mutt with \f(CWctrl+f\fP.
+The mailsync script will update the notmuch database once you do this.
+.HEADING 2 "How do I set up my music?"
+.PP
+By default, mpd, the music daemon assumes that \f(CW~/Music\fP is your music directory.
+This can be changed in \f(CW~/.config/mpd/mpd.conf\fP.
+When you add music to your music folder, you may have to run \f(CWmpc up\fP in the terminal to update the database.
+mpd is controlled by ncmpcpp, which is accessible by \f(CWMod+m\fP.
+.HEADING 1 "Contact"
+.LI
+.ITEM
+.PDF_WWW_LINK "mailto:luke@lukesmith.xyz" "luke@lukesmith.xyz"
+\(en For questions!
+.ITEM
+.PDF_WWW_LINK "http://lukesmith.xyz" "https://lukesmith.xyz"
+\(en For stalking!
+.ITEM
+.PDF_WWW_LINK "https://paypal.me/LukeMSmith" "PayPal"
+\(en For gratitude!
+.ITEM
+.PDF_WWW_LINK "https://patreon.com/lukesmith" "Patreon"
+\(en For support!
+.ITEM
+.PDF_WWW_LINK "https://github.com/LukeSmithxyz" "My Github Page"
+\(en For the code behind it!
+.ITEM
+.PDF_WWW_LINK "http://lukesmith.xyz/rss.xml" "RSS"
+\(en For even better updates!
+.LIST OFF
