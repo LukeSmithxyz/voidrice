@@ -1,0 +1,22 @@
+#!/bin/sh
+# Syncs repositories and downloads updates, meant to be run as a cronjob.
+# For notifications, must export DBUS_SESSION_BUS_ADDRESS.
+# See my cronjob below and mimic it:
+#
+# 9 12 * * * eval "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"; /home/luke/.scripts/cron/checkup
+
+ping -q -w 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
+
+note "Checking for pacakge updates..." "$PIX/larbs.gif"
+
+sudo pacman -Syyuw --noconfirm || note "Error downloading updates.
+
+Check your internet connection, if pacman is already running, or run update manually to see errors."
+pkill -RTMIN+8 i3blocks
+
+if pacman -Qul
+then
+	note "Package updates available. Click statusbar icon for update." "$PIX/larbs.gif"
+else
+	note "Repository sync complete. No new packages for update." "$PIX/larbs.gif"
+fi

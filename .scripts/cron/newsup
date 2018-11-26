@@ -6,9 +6,13 @@
 
 ping -q -t 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 
+note "Updating RSS feeds..." "$PIX/rss.gif"
+
 echo 🔃 > ~/.config/newsboat/.update
 pkill -RTMIN+6 i3blocks
 
 /usr/bin/newsboat -x reload
 rm -f ~/.config/newsboat/.update
 pkill -RTMIN+6 i3blocks
+
+note "RSS feed update complete." "$PIX/rss.gif"
