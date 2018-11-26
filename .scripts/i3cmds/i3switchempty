@@ -1,0 +1,16 @@
+#!/bin/bash
+# Original sript below modified to not use `jq` for improved performance (~4 times as fast) and no dependencies.
+# https://github.com/tasinet/i3-switch-if-workspace-empty/blob/master/i3-switch-if-workspace-empty.sh
+
+new_workspace=$1
+
+if [ "" == "$new_workspace" ]; then
+    echo expecting workspace name/number
+    exit 1
+fi
+
+active_workspace=$(i3-msg -t get_workspaces | grep -Po '[0-9]*","visible":[a-z]*,"focused":true' | head -c1)
+
+toplevel_containers=$(i3-msg -t get_tree | grep -Po "\"num\":$active_workspace.*" | grep -Po '"nodes":(\d*?,|.*?[^\\]",)' | head -n1 | grep -Po '"nodes":\[\]')
+
+[ "$toplevel_containers" != "" ] && i3-msg workspace $new_workspace
