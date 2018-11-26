@@ -247,16 +247,16 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1		workspace $ws1
-bindsym $mod+2		workspace $ws2
-bindsym $mod+3		workspace $ws3
-bindsym $mod+4		workspace $ws4
-bindsym $mod+5		workspace $ws5
-bindsym $mod+6		workspace $ws6
-bindsym $mod+7		workspace $ws7
-bindsym $mod+8		workspace $ws8
-bindsym $mod+9		workspace $ws9
-bindsym $mod+0		workspace $ws10
+bindsym $mod+1		workspace $ws1 exec i3switchempty $ws1
+bindsym $mod+2		workspace $ws2; exec i3switchempty $ws2
+bindsym $mod+3		workspace $ws3; exec i3switchempty $ws3
+bindsym $mod+4		workspace $ws4; exec i3switchempty $ws4
+bindsym $mod+5		workspace $ws5; exec i3switchempty $ws5
+bindsym $mod+6		workspace $ws6; exec i3switchempty $ws6
+bindsym $mod+7		workspace $ws7; exec i3switchempty $ws7
+bindsym $mod+8		workspace $ws8; exec i3switchempty $ws8
+bindsym $mod+9		workspace $ws9; exec i3switchempty $ws9
+bindsym $mod+0		workspace $ws10; exec i3switchempty $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1	move container to workspace $ws1
