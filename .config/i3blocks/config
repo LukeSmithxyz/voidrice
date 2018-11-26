@@ -3,7 +3,8 @@ separator_block_width=15
 markup=pango
 
 [news]
-command=cat ~/.newsup
+label=📰
+command=i3news
 interval=once
 signal=6
 
