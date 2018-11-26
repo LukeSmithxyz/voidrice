@@ -52,8 +52,7 @@ browser="$TRUEBROWSER"
 ## Templates
 # Images
 imgFiles="png apng jpg jpeg jpe bmp tiff"
-imgSites="i.imgur.com/
-	\|i.redd.it/
+imgSites="i.redd.it/
 	\|deviantart.com/
 	\|tinypic.com/
 	\|unsplash.com/photos/
@@ -69,6 +68,7 @@ gifSites="gfycat.com/
 	\|gifbin.com/
 	\|clips.twitch.tv/
 	\|streamable.com/
+	\|streamja.com/
 	"
 
 # Video
@@ -76,6 +76,8 @@ vidFiles="mkv mp4 mov mpv flv avi"
 vidSites="youtube.com/watch
 	\|youtube.com/embed/
 	\|youtube.com/video/
+	\|youtube.com/playlist
+	\|youtube.com/attribution_link
 	\|youtu.be/
 	\|hooktube.com/
 	\|bitchute.com/
@@ -183,19 +185,20 @@ imgurQueue() {
 
 	for link; do
 		[[ -n $indirectLink ]] && printMessage "Link: $link"
-		[[ $link =~ \?.+$ ]] && link="${link%\?*}"
+		[[ $link =~ \?.+$ ]] && link="${link%%\?*}"
 
 		# Gif
-		if [[ "${link##*.}" =~ ^(gif|gifv|mov|mp4)$ ]]; then
+		if [[ ${link##*.} =~ ^(gif|gifv|mp4)$ ]]; then
 			printMessage "Link type: Gif"
 			[[ -n $indirectLink ]] && printMessage
 			gifQueue+=( "${link%.*}.mp4" )
 
 		# Image
-		elif [[ "${link##*.}" =~ ^(jpg|jpeg|png|apng|tiff)$  ]]; then
+		elif [[ ${link##*.} =~ ^(jpg|jpeg|png)$  ]]; then
 			printMessage "Link type: Image"
 			[[ -n $indirectLink ]] && printMessage
-			imgQueue+=( "$link" )
+			[[ $link == *_d.$BASH_REMATCH ]] && link="${link%_d*}.$BASH_REMATCH"
+			imgQueue+=( "${link%.*}.png" )
 
 		# Indirect link
 		else
@@ -211,14 +214,14 @@ imgurCheck() {
 	for link; do
 		# Album
 		if imgurReply="$(imgurReq album "$link")" &&
-		[[ $(echo "$imgurReply" | jq -j '.status') = 200 ]]; then
+		[[ $(echo "$imgurReply" | jq -j '.status') -eq 200 ]]; then
 			printMessage "Imgur link type: Album\n"
 			imgurLinks="$(echo "$imgurReply" | jq -r '.data.images[].link')"
 			imgurQueue -i $imgurLinks
 
 		# Single image/gif
 		elif imgurReply="$(imgurReq image "$link")" &&
-		[[ $(echo "$imgurReply" | jq -j '.status') = 200 ]]; then
+		[[ $(echo "$imgurReply" | jq -j '.status') -eq 200 ]]; then
 			printMessage "Imgur link type: Single image/gif\n"
 			imgurLinks="$(echo "$imgurReply" | jq -r '.data.link')"
 			imgurQueue -i $imgurLinks
@@ -232,7 +235,7 @@ imgurCheck() {
 
 
 ## Flags
-[[ $# = 0 ]] && { ${browser:-usage}; exit 0; }
+[[ $# -eq 0 ]] && { ${browser:-usage}; exit 0; }
 checkDep getopt &&
 	eval set -- $(getopt -o "h,d,v" -l "help,detect,verbose" \
 	                     -n "$(basename "$0")" -- "$@")
@@ -259,6 +262,7 @@ done
 
 ## Parse links
 for arg; do
+	[[ $arg =~ /$ ]] && arg="${arg%/}"
 	printMessage "Link: $arg"
 	printNewline="true"
 	ext="${arg##*.}"
@@ -295,32 +299,32 @@ for arg; do
 			grep -Po "(?<=location.href=').+.pdf")" &disown
 
 	# Gif
-	elif echo "$arg" | grep -q "$gifSites" ||
-	echo "$gifFiles" | grep -q "${ext%%\?*}"; then
+	elif echo "$arg" | grep -qi "$gifSites" ||
+	echo "$gifFiles" | grep -qi "${ext%%\?*}"; then
 		printMessage "Link type: Gif"
 		gifQueue+=( "$arg" )
 
 	# Image
-	elif echo "$arg" | grep -q "$imgSites" ||
-	echo "$imgFiles" | grep -q "${ext%%\?*}"; then
+	elif echo "$arg" | grep -qi "$imgSites" ||
+	echo "$imgFiles" | grep -qi "${ext%%\?*}"; then
 		printMessage "Link type: Image"
 		imgQueue+=( "$arg" )
 
 	# Video
-	elif echo "$arg" | grep -q "$vidSites" ||
-	echo "$vidFiles" | grep -q "${ext%%\?*}"; then
+	elif echo "$arg" | grep -qi "$vidSites" ||
+	echo "$vidFiles" | grep -qi "${ext%%\?*}"; then
 		printMessage "Link type: Video"
 		vidQueue+=( "$arg" )
 
 	# Download
-	elif echo "$arg" | grep -q "$dwnSites" ||
-	echo "$dwnFiles" | grep -q "${ext%%\?*}"; then
+	elif echo "$arg" | grep -qi "$dwnSites" ||
+	echo "$dwnFiles" | grep -qi "${ext%%\?*}"; then
 		printMessage "Link type: Download"
 		dwnQueue+=( "$arg" )
 
 	# Browser
-	elif echo "$arg" | grep -q "$brwSites" ||
-	echo "$brwFiles" | grep -q "${ext%%\?*}" ||
+	elif echo "$arg" | grep -qi "$brwSites" ||
+	echo "$brwFiles" | grep -qi "${ext%%\?*}" ||
 	[[ -z $detect ]]; then
 		printMessage "Link type: Browser"
 		brwQueue+=( "$arg" )
