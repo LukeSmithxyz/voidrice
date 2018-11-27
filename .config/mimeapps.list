@@ -1,3 +1,7 @@
 [Default Applications]
-x-scheme-handler/magnet=transmission-remote.desktop
+x-scheme-handler/magnet=transmission-remote.desktop;
 x-scheme-handler/mailto=mutt.desktop;
+text/plain=vim.desktop;
+application/pdf=zathura.desktop;
+image/png=feh.desktop;
+image/jpeg=feh.desktop;
