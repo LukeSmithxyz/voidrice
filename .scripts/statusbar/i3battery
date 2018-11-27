@@ -7,6 +7,7 @@ case $BLOCK_BUTTON in
 ♻: stagnant charge
 🔌: charging
 ⚡: charged
+❗: battery very low!
 - Text color reflects charge left" ;;
 esac
 
@@ -23,8 +24,11 @@ elif [ "$capacity" -ge 20 ]; then
 	color="#FFAE00"
 else
 	color="#FF0000"
+	warn="❗"
 fi
+
+[ -z $warn ] && warn=" "
 
 [ "$status" = "Charging" ] && color="#FFF"
 
-printf "<span color='%s'>%s %s</span>" "$color" "$(echo "$status" | sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/♻️/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g")" "$(echo "$capacity" | sed -e 's/$/%/')"
+printf "<span color='%s'>%s%s%s</span>" "$color" "$(echo "$status" | sed -e "s/,//g;s/Discharging/🔋/;s/Charging/🔌/;s/Unknown/♻️/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g")" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')"
