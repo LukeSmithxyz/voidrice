@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=feh image viewer
+Exec=/usr/bin/feh %u

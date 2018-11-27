@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Vim
+Exec=/usr/local/bin/st -e vim %u
