@@ -248,8 +248,6 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 .ITEM
 \f(CWMod+M\fP \(en Mute all audio
 .ITEM
-\f(CWMod+v\fP \(en visualizer
-.ITEM
 \f(CWMod+-\fP \(en Decrease volume (holding shift increases amount)
 .ITEM
 \f(CWMod++\fP \(en Increase volume (holding shift increases amount)
