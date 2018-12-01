@@ -3,7 +3,7 @@
 location=""
 
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e popweather ;;
+    1) $TERMINAL -e less -S ~/.weatherreport ;;
     3) pgrep -x dunst >/dev/null && notify-send "<b>🌈 Weather module:</b>
 - Click for wttr.in forecast.
 ☔: Chance of rain/snow
