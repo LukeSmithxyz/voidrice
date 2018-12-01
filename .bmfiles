@@ -1,5 +1,5 @@
-bf	~/.key_files
-bd	~/.key_directories
+bf	~/.bmfiles
+bd	~/.bmdirs
 cfb	~/.bashrc
 cfz	~/.zshrc
 cfv	~/.vimrc

@@ -41,22 +41,17 @@ call plug#end()
 	map <leader>v $F@ly$:!feh --scale-down --auto-zoom --image-bg black <c-r>" &<CR><CR>
 
 " Open my bibliography file in split
-	map <F9> :vsp<space>~/Documents/LaTeX/uni.bib<CR>
-	map <leader>b :vsp<space>~/Documents/LaTeX/uni.bib<CR>
-
-" Open the selected text in a split (i.e. should be a file).
-	map <leader>o "oyaW:sp <C-R>o<CR>
-	xnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
-	vnoremap <leader>o "oy<esc>:sp <C-R>o<CR>
+	map <leader>b :vsp<space>$BIB<CR>
+	map <leader>r :vsp<space>$REFER<CR>
 
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 
-" Open corresponding .pdf
+" Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 
-" Compile document
-	map <leader>c :!compiler <c-r>%<CR>
+" Compile document, be it groff/LaTeX/markdown/etc.
+	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
 
 "For saving view folds:
 	"au BufWinLeave * mkview
@@ -69,7 +64,7 @@ call plug#end()
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 
 " groff files automatically detected
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom set filetype=groff
+	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 
 " .tex files automatically detected
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
@@ -77,11 +72,11 @@ call plug#end()
 " Readmes autowrap text:
 	autocmd BufRead,BufNewFile *.md set tw=79
 
-" Get line, word and character counts with F3:
-	map <F3> :!wc %<CR>
+" Get line, word and character counts with <leader>w:
+	map <leader>w :!wc %<CR>
 
-" Spell-check set to F6:
-	map <F6> :setlocal spell! spelllang=en_us<CR>
+" Spell-check set to <leader>o, 'o' for 'orthography':
+	map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Use urlview to choose and open a url:
 	:noremap <leader>u :w<Home>silent <End> !urlscan<CR>
@@ -92,9 +87,7 @@ call plug#end()
 	map <C-p> "+P
 
 " Goyo plugin makes text more readable when writing prose:
-	map <F10> :Goyo<CR>
 	map <leader>f :Goyo \| set linebreak<CR>
-	inoremap <F10> <esc>:Goyo<CR>a
 
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
@@ -106,10 +99,10 @@ call plug#end()
 	set wildmenu
 
 " Automatically deletes all tralling whitespace on save.
-	autocmd BufWritePre * %s/\s\+$//e
+	"autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost ~/.key_directories,~/.key_files !bash ~/.scripts/tools/shortcuts
+	autocmd BufWritePost ~/.bm* !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
@@ -134,11 +127,8 @@ call plug#end()
 
 """LATEX
 	" Word count:
-	autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
-	autocmd FileType tex inoremap <F3> <Esc>:w !detex \| wc -w<CR>
-	" Compile document using xelatex:
-	autocmd FileType tex inoremap <F5> <Esc>:!xelatex<space><c-r>%<Enter>a
-	autocmd FileType tex nnoremap <F5> :!xelatex<space><c-r>%<Enter>
+	autocmd FileType tex map <leader>o :w !detex \| wc -w<CR>
+	autocmd FileType tex inoremap <leader>o <Esc>:w !detex \| wc -w<CR>
 	" Code snippets
 	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
