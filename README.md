@@ -5,41 +5,49 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 ## Programs whose configs can be found here
 
 + i3 (i3-gaps)
-+ urxvt (rxvt-unicode) (although these files use [my st build](https://github.com/lukesmithxyz/st) as the default terminal)
++ Xresourses info used by [my st build](https://github.com/lukesmithxyz/st) as a terminal
 + vim
 + bash
-+ ranger
-+ qutebrowser
++ ranger (see full documentation [here](.config/ranger/luke_ranger_readme.md))
 + ~~mutt/msmtp/offlineimap~~ Now moved to [LukeSmithxyz/mutt-wizard](https://github.com/LukeSmithxyz/mutt-wizard)
 + calcurse
 + ncmpcpp and mpd (my main music player)
-+ Music on Console (moc and mocp as an alternative music player)
 + mpv
 + neofetch
-+ compton (For transparency and to stop screen tearing)
-+ And many little scripts I use
++ And many little scripts I use filed in the `~/.scripts/` directory
 
 ## More documentation
 
-Check other config folders for more specific documentation.
+I've added very thorough documentation of this whole system to `.readme.mom`.
+Compile it to be read with the following command:
 
-[i3 guide and config](.config/i3/i3_guide.rmd)
+```
+groff -mom .readme.mom -Tpdf > larbs_readme.pdf
+```
 
-[ranger configuration](.config/ranger/luke_ranger_readme.md)
+Or, if you actually installed my dotfiles, you can just press `Super+F1`. The
+reason this document is written in groff rather than markdown is so it can be
+compiled realtime on the system, avoiding me pushing bloated .pdfs to this repo
+everytime there's a need for documentation additions.
 
-[list of scripts in the `~/.scripts/ directory`](.scripts/SCRIPTS.md)
+In the system, you can also press `Super+Shift+e` to watch tutorial videos on
+different programs used. See [my YouTube channel](https://youtube.com/c/LukeSmithxyz) for more.
 
 ## Dynamic Configuration Files
 
-Store your favorite or high-traffic folders in `~/.config/Scripts/folders` or your most important config files in `~/.config/Scripts/configs` with keyboard shortcuts. When you add things to theses files my vimrc will automatically run `~/.config/Scripts/shortcuts.sh` which will dynamically generate shortcuts for these in bash, ranger and qutebrowser!
-
-Check out more info at the main repo for this: [shortcut-sync](https://github.com/lukesmithxyz/shortcut-sync). You will really want to take advantage of this for an extremely efficient setup!
+Store your favorite or high-traffic directories in `~/.bmdirs` or your most
+important config files in `~/.bmfiles` with keyboard shortcuts. When you add
+things to theses files my vimrc will automatically run `shortcuts` which will
+dynamically generate shortcuts for these in bash, ranger and optionally
+qutebrowser and fish.
 
 ## Like my rice?
 
 Feel free to add other suggestions and I may implement them.
 
-I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing. You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith). Donations are earmarked for whatever the donator wants, usually to go to funds for buying new equipment for the [YouTube channel](https://youtube.com/c/LukeSmithxyz).
+I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing.
+You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith).
+Donations are earmarked for whatever the donator wants, usually to go to funds for buying new equipment for the [YouTube channel](https://youtube.com/c/LukeSmithxyz).
 
 # "Dependencies" and programs used
 
@@ -47,6 +55,4 @@ The programs I use here are always changing, but luckily you can just look at th
 
 + [List of programs installed by LARBS, including optional packages](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv)
 
-For your info, if the second column is a capital letter, that means that it's *not* installed by default, only when the user specifically requests it. Those with lowercase letters are just for classification purposes. Don't think you have to install every package to get these dotfiles working of course, but this list is a *sufficient condition* for full functionality. If you run into an error running my dotfiles, chances are the package you need is there.
-
-The only program not listed on that list is the one you have to install manually: [my st build](https://github.com/lukesmithxyz/st), which is easy enough to install.
+`A` marks programs in the AUR, `G` marks git repositories.
