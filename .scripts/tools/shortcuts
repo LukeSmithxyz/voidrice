@@ -3,20 +3,19 @@
 # Shell rc file (i.e. bash vs. zsh, etc.)
 shellrc="$HOME/.bashrc"
 
-# Config locations
-folders="$HOME/.key_directories"
-configs="$HOME/.key_files"
+# Bookmark file locations
+bmdirs="$HOME/.bmdirs"
+bmfiles="$HOME/.bmfiles"
 
-# Output locations
+# Output locations. Unactivated progs should go to /dev/null.
 shell_shortcuts="$HOME/.shortcuts"
 ranger_shortcuts="$HOME/.config/ranger/shortcuts.conf"
-#qute_shortcuts="$HOME/.config/qutebrowser/shortcuts.py"
 qute_shortcuts="/dev/null"
-fish_shortcuts="$HOME/.config/fish/shortcuts.fish"
+fish_shortcuts="/dev/null"
 
-# Remove
+# Remove, prepare files
 rm -f "$ranger_shortcuts" "$qute_shortcuts" 2>/dev/null
-echo "abbr \\" > "$fish_shortcuts"
+#echo "abbr \\" > "$fish_shortcuts"
 echo "alias \\" > "$shell_shortcuts"
 
 # Ensure text of argument 1 exists in the file argument 2
@@ -25,15 +24,15 @@ ensure() { (grep "$1" "$2")>/dev/null 2>&1 || echo "$1" >> "$2" ;}
 ensure "source $shell_shortcuts" "$shellrc"
 ensure "source $HOME/.config/ranger/shortcuts.conf" "$HOME/.config/ranger/rc.conf"
 #ensure "config.source('shortcuts.py')" "$HOME/.config/qutebrowser/config.py"
-ensure "source $HOME/.config/fish/shortcuts.fish" "$HOME/.config/fish/config.fish"
+#ensure "source $HOME/.config/fish/shortcuts.fish" "$HOME/.config/fish/config.fish"
 
-# Format the `folders` file in the correct syntax and sent it to all three configs.
-sed "s/#.*$//;/^$/d" "$folders" | tee >(awk '{print $1"=\"cd "$2" && ls -a\" \\"}' >> "$shell_shortcuts") \
+# Format the `bmdirs` file in the correct syntax and sent it to all three configs.
+sed "s/#.*$//;/^$/d" "$bmdirs" | tee >(awk '{print $1"=\"cd "$2" && ls -a\" \\"}' >> "$shell_shortcuts") \
 	>(awk '{print $1, "\"cd " $2 " ; ls -a\" \\"}' >> "$fish_shortcuts") \
 	>(awk '{print "config.bind(\";"$1"\", \"set downloads.location.directory "$2" ;; hint links download\")"}' >> "$qute_shortcuts") \
 	| awk '{print "map g"$1" cd "$2"\nmap t"$1" tab_new "$2"\nmap m"$1" shell mv -v %s "$2"\nmap Y"$1" shell cp -rv %s "$2}' >> "$ranger_shortcuts"
 
 # Format the `configs` file in the correct syntax and sent it to both configs.
-sed "s/#.*$//;/^$/d"  "$configs" | tee >(awk '{print $1"=\"$EDITOR "$2"\" \\"}' >> "$shell_shortcuts") \
+sed "s/#.*$//;/^$/d"  "$bmfiles" | tee >(awk '{print $1"=\"$EDITOR "$2"\" \\"}' >> "$shell_shortcuts") \
 	>(awk '{print $1, "\"$EDITOR "$2"\" \\"}' >> "$fish_shortcuts") \
 	| awk '{print "map "$1" shell $EDITOR "$2}' >> "$ranger_shortcuts"
