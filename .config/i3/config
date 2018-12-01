@@ -198,16 +198,16 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+x			exec --no-startup-id lockscreen
 bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 
-bindsym $mod+c			exec --no-startup-id freealf
+#bindsym $mod+c	
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
 
-bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
-bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
+#bindsym $mod+v			
+#bindsym $mod+Shift+v	
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
-bindsym $mod+n			exec $term -e newspod && pkill -RTMIN+6 i3blocks
+bindsym $mod+n			exec $term -e newsboat && pkill -RTMIN+6 i3blocks
 ##bindsym $mod+Shift+n
 
 bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
