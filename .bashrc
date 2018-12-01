@@ -33,28 +33,19 @@ alias ka="killall"
 alias g="git"
 alias trem="transmission-remote"
 alias mkd="mkdir -pv"
-alias ref="shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
+alias ref="shortcuts && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias bw="wal -i ~/.config/wall.png" # Rerun pywal
-alias pi="bash ~/.larbs/wizard/wizard.sh"
 
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
-alias grep="grep --color=auto" # Color grep - highlight desired sequence.
+alias grep="grep --color=auto" 
+alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax highlighting.
 
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
 alias YT="youtube-viewer"
-alias ethspeed="speedometer -r enp0s25"
-alias wifispeed="speedometer -r wlp3s0"
-alias starwars="telnet towel.blinkenlights.nl"
-
-# TeX
-alias Txa="cp ~/Documents/LaTeX/article.tex"
-alias Txs="cp ~/Documents/LaTeX/beamer.tex"
-alias Txh="cp ~/Documents/LaTeX/handout.tex"
-
-source ~/.shortcuts
 
 shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
+vf() { $EDITOR $(fzf) ;}
