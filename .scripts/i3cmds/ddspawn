@@ -12,7 +12,6 @@
 # bindsym $mod+a	exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 #	Similar to above but with `dropdowncalc` and the other args are interpretated as for my terminal emulator (to increase font)
 
-
 [ -z "$1" ] && exit
 
 if xwininfo -tree -root | grep "(\"$1\" ";

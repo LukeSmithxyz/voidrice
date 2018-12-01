@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # A general audio interface for LARBS.
 
@@ -18,7 +18,7 @@ case "$1" in
 	p*) mpc pause ; pauseallmpv ;;
 	f*) mpc seek +"$num" ;;
 	b*) mpc seek -"$num" ;;
-	r*) mpc seek 0\% ;;
+	r*) mpc seek 0% ;;
 	*) cat << EOF
 lmc: cli music interface for mpd and pulse for those with divine intellect too
 grand to remember the mpc/pamixer commands.
