@@ -342,13 +342,12 @@ To be specific, i3 will always be looking to the file in \f(CW~/.config/wall.png
 So if you want a persistent wallpaper, move/rename it to \f(CW~/.config/wall.png\fP.
 .HEADING 2 "How I change the colorscheme?"
 .PP
-LARBS uses 
-.PDF_WWW_LINK "https://www.youtube.com/watch?v=Es79N_9BblE" "\f(CWwal/pyal\fP"
-to automatically produce colorschemes based on the background.
-In the same way that you can set wallpapers in ranger with \f(CWbg\fP, you can change wallpapers \fIand\fP colorschemes with \f(CWbw\fP.
-.PP
-If you want to use your own custom colorscheme, you can set your colors in \f(CW~/.Xdefaults\fP, but you should also remove the \f(CWwal\fP command from the i3 config (\f(CW~/.config/i3/config\fP) so \f(CWwal\fP does not overwrite them.
-Be sure to uncomment the \f(CWfeh\fP command right below it to continue setting the wallpaper on startup.
+You can edit \f(CW~/.Xresources\fP to change the colorscheme.
+The terminal, status bar and other programs will automatically read the Xresources colors.
+Check
+.PDF_WWW_LINK "https://wiki.archlinux.org/index.php/X_resources" "the Arch Wiki's article"
+for more information.
+LARBS is also compatible with pywal, but it is not installed or used by default anymore.
 .HEADING 2 "How do I set up my email?"
 .LI
 .ITEM
