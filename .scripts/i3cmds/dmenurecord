@@ -27,7 +27,7 @@ killrecording() {
 	exit
 	}
 
-screencastpulse() { \
+screencast() { \
 	ffmpeg -y \
 	-f x11grab \
 	-framerate 60 \
@@ -41,19 +41,6 @@ screencastpulse() { \
 	updateicon "⏺️🎙️"
        	}
 
-screencastalsa() { \
-	ffmpeg -y \
-	-f x11grab \
-	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
-	-i :0.0 \
-	-thread_queue_size 1024 \
- 	-f alsa -ar 44100 -i hw:1 \
- 	-c:v libx264 -r 30 -c:a flac \
-	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
-	updateicon "⏺️"
-	}
-
 video() { ffmpeg \
 	-f x11grab \
 	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
@@ -64,7 +51,26 @@ video() { ffmpeg \
 	updateicon "⏺️"
 	}
 
-audiopulse() { \
+webcamhidef() { ffmpeg \
+	-f v412 \
+	-i /dev/video0 \
+	-video_size 1920x1080 \
+	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
+	echo $! > ~/.recordingpid
+	updateicon "🎥"
+	}
+
+webcam() { ffmpeg \
+	-f v412 \
+	-i /dev/video0 \
+	-video_size 640x480 \
+	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
+	echo $! > ~/.recordingpid
+	updateicon "🎥"
+	}
+
+
+audio() { \
 	ffmpeg \
 	-f alsa -i default \
 	-c:a flac \
@@ -73,20 +79,14 @@ audiopulse() { \
 	updateicon "🎙️"
 	}
 
-audioalsa() { \
-	ffmpeg -y \
-	-f alsa -ar 44100 -i hw:1 \
-	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-	echo $! > ~/.recordingpid
-	updateicon "🎙️"
-	}
-
 askrecording() { \
-	choice=$(printf "screencast\\nvideo\\naudio" | dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nvideo\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -p "Select recording style:")
 	case "$choice" in
-		screencast) screencastpulse;;
-		audio) audiopulse;;
+		screencast) screencast;;
+		audio) audio;;
 		video) video;;
+		webcam) webcamrecord;;
+		"webcam (hi-def)") webcamrecord;;
 	esac
 	}
 
@@ -97,8 +97,8 @@ asktoend() { \
 
 
 case "$1" in
-	screencast) screencastpulse;;
-	audio) audiopulse;;
+	screencast) screencast;;
+	audio) audio;;
 	video) video;;
 	kill) killrecording;;
 	*) ([ -f ~/.recordingpid ] && asktoend && exit) || askrecording;;
