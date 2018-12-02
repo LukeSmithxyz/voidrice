@@ -2,12 +2,6 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
-[news]
-label=📰
-command=i3news
-interval=once
-signal=6
-
 [record]
 command=cat ~/.recordingicon
 interval=once
@@ -18,6 +12,12 @@ label=🎼
 command=i3mpd
 interval=once
 signal=11
+
+[news]
+label=📰
+command=i3news
+interval=once
+signal=6
 
 [pacman]
 label=📦
@@ -40,10 +40,28 @@ command=i3mail
 interval=180
 signal=12
 
+#[memory]
+#command=i3mem
+#interval=30
+#label=🧠
+
+#[cpu]
+#command=i3cpu
+#interval=15
+#label=💻
+
 [volume]
 interval=once
 command=i3volume
 signal=10
+
+#[diskspace]
+#interval=60
+#command=i3disk /
+
+#[diskspace]
+#interval=60
+#command=i3disk /home 🏠
 
 [battery]
 command=i3battery BAT1
