@@ -18,20 +18,15 @@ There are my dotfiles! The name of the repo, "voidrice", came from the fact they
 
 ## More documentation
 
-I've added very thorough documentation of this whole system to `.readme.mom`.
-Compile it to be read with the following command:
+There's a full .pdf write-up of the repository [here: https://larbs.xyz/larbs_readme.pdf](https://larbs.xyz/larbs_readme.pdf).
 
-```
-groff -mom .readme.mom -Tpdf > larbs_readme.pdf
-```
-
-Or, if you actually installed my dotfiles, you can just press `Super+F1`. The
-reason this document is written in groff rather than markdown is so it can be
-compiled realtime on the system, avoiding me pushing bloated .pdfs to this repo
-everytime there's a need for documentation additions.
+Or, if you actually installed my dotfiles, you can just press `Super+F1` to
+show the same document offline.
 
 In the system, you can also press `Super+Shift+e` to watch tutorial videos on
 different programs used. See [my YouTube channel](https://youtube.com/c/LukeSmithxyz) for more.
+
+The command `getkeys` will also show basic key binds for different programs.
 
 ## Dynamic Configuration Files
 
