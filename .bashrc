@@ -1,3 +1,4 @@
+#!/bin/bash
 #  _               _
 # | |__   __ _ ___| |__  _ __ ___
 # | '_ \ / _` / __| '_ \| '__/ __|
@@ -23,6 +24,7 @@ alias sdn="sudo shutdown now"
 alias psref="gpg-connect-agent RELOADAGENT /bye" # Refresh gpg
 
 # Some aliases
+alias e="$EDITOR"
 alias p="sudo pacman"
 alias SS="sudo systemctl"
 alias v="vim"
@@ -38,7 +40,7 @@ alias bw="wal -i ~/.config/wall.png" # Rerun pywal
 
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
-alias grep="grep --color=auto" 
+alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax highlighting.
 
