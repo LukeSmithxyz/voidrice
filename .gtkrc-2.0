@@ -2,7 +2,7 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/luke/.gtkrc-2.0.mine"
-gtk-theme-name="Adwaita-dark"
+gtk-theme-name="Arc-Gruvbox"
 gtk-icon-theme-name="Adwaita"
 gtk-font-name="Sans 10"
 gtk-cursor-theme-name="Adwaita"
