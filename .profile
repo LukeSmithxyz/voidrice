@@ -38,4 +38,3 @@ fi
 
 # Switch escape and caps and use wal colors if tty:
 sudo -n loadkeys ~/.scripts/ttymaps.kmap 2>/dev/null
-tty | grep tty >/dev/null && wal -Rns
