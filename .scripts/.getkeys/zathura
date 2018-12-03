@@ -16,3 +16,4 @@ zathura is the pdf/djvu reader.
 	r - Reload document if changed
 	R - Rotate document
 	D - Toggle dual-page mode
+	p - Print document
