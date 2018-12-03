@@ -1,0 +1,2 @@
+#!/bin/sh
+man -Tpdf $(man -k . | awk '{print $1}' | uniq | dmenu -l 20) | zathura -
