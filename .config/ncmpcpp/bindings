@@ -542,10 +542,10 @@
 #  quit
 #
 #
-def_key "f"
-    find
-def_key "f"
-    find_item_forward
+#def_key "f"
+#	find
+#def_key "f"
+#	find_item_forward
 
 def_key "+"
     show_clock
@@ -610,3 +610,15 @@ def_key "g"
 #jump_to_position_in_song
 def_key "U"
   update_database
+def_key "s"
+  reset_search_engine
+def_key "s"
+  show_search_engine
+def_key "f"
+  show_browser
+def_key "f"
+  change_browse_mode
+def_key "x"
+  delete_playlist_items
+def_key "P"
+  show_playlist
