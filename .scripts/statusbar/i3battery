@@ -15,15 +15,15 @@ capacity=$(cat /sys/class/power_supply/"$1"/capacity) || exit
 status=$(cat /sys/class/power_supply/"$1"/status)
 
 if [ "$capacity" -ge 80 ]; then
-	color="#00FF00"
+	color="#b8bb26"
 elif [ "$capacity" -ge 60 ]; then
-	color="#FFFFFF"
+	color="#ebdbb2"
 elif [ "$capacity" -ge 40 ]; then
-	color="#FFF600"
+	color="#fabd2f"
 elif [ "$capacity" -ge 20 ]; then
-	color="#FFAE00"
+	color="#fe8019"
 else
-	color="#FF0000"
+	color="#fb4934"
 	warn="❗"
 fi
 
