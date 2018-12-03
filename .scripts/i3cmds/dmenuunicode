@@ -11,8 +11,8 @@ chosen=$(grep -v "#" ~/.emoji | dmenu -i -l 20 -fn Monospace-18)
 
 c=$(echo "$chosen" | sed "s/ .*//")
 echo "$c" | tr -d '\n' | xclip -selection clipboard
-pgrep -x dunst >/dev/null && notify-send "'$c' copied to clipboard."
+notify-send "'$c' copied to clipboard." &
 
 s=$(echo "$chosen" | sed "s/.*; //" | awk '{print $1}')
 echo "$s" | tr -d '\n' | xclip
-pgrep -x dunst >/dev/null && notify-send "'$s' copied to primary."
+notify-send "'$s' copied to primary." &
