@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Feed script a url.
+# Feed script a url or file location.
 # If an image, it will view in feh,
 # if a video or gif, it will view in mpv
 # if a music file or pdf, it will download,
