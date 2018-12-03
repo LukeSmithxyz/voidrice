@@ -12,7 +12,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
-Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 " Some basics:
