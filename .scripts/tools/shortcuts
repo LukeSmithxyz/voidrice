@@ -28,7 +28,7 @@ ensure "source $HOME/.config/ranger/shortcuts.conf" "$HOME/.config/ranger/rc.con
 
 # Format the `bmdirs` file in the correct syntax and sent it to all three configs.
 sed "s/#.*$//;/^$/d" "$bmdirs" | tee >(awk '{print $1"=\"cd "$2" && ls -a\" \\"}' >> "$shell_shortcuts") \
-	>(awk '{print $1, "\"cd " $2 " ; ls -a\" \\"}' >> "$fish_shortcuts") \
+	>(awk '{print $1, "\"cd " $2 "; and ls -a\" \\"}' >> "$fish_shortcuts") \
 	>(awk '{print "config.bind(\";"$1"\", \"set downloads.location.directory "$2" ;; hint links download\")"}' >> "$qute_shortcuts") \
 	| awk '{print "map g"$1" cd "$2"\nmap t"$1" tab_new "$2"\nmap m"$1" shell mv -v %s "$2"\nmap Y"$1" shell cp -rv %s "$2}' >> "$ranger_shortcuts"
 
