@@ -12,7 +12,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
-Plug 'dylanaraps/wal.vim'
 Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
@@ -21,12 +20,20 @@ call plug#end()
 	filetype plugin on
 	syntax on
 	set encoding=utf-8
-	set number
-	set relativenumber
+	set number relativenumber
+" Enable autocompletion:
+	set wildmode=longest,list,full
+" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Goyo plugin makes text more readable when writing prose:
+	map <leader>f :Goyo \| set linebreak<CR>
+
+" Spell-check set to <leader>o, 'o' for 'orthography':
+	map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow
-	set splitright
+	set splitbelow splitright
 
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
@@ -37,9 +44,6 @@ call plug#end()
 " Check file in shellcheck:
 	map <leader>s :!clear && shellcheck %<CR>
 
-" View an image for a suckless sent presentation:
-	map <leader>v $F@ly$:!feh --scale-down --auto-zoom --image-bg black <c-r>" &<CR><CR>
-
 " Open my bibliography file in split
 	map <leader>b :vsp<space>$BIB<CR>
 	map <leader>r :vsp<space>$REFER<CR>
@@ -47,38 +51,25 @@ call plug#end()
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 
-" Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
-
 " Compile document, be it groff/LaTeX/markdown/etc.
 	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
 
-"For saving view folds:
-	"au BufWinLeave * mkview
-	"au BufWinEnter * silent loadview
+" Open corresponding .pdf/.html or preview
+	map <leader>p :!opout <c-r>%<CR><CR>
 
-" Interpret .md files, etc. as .markdown
+" Runs a script that cleans out tex build files whenever I close out of a .tex file.
+	autocmd VimLeave *.tex !texclear %
+
+" Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-
-" Make calcurse notes markdown compatible:
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-
-" groff files automatically detected
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-
-" .tex files automatically detected
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Readmes autowrap text:
 	autocmd BufRead,BufNewFile *.md set tw=79
 
-" Get line, word and character counts with <leader>w:
-	map <leader>w :!wc %<CR>
-
-" Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
-
-" Use urlview to choose and open a url:
+" Use urlscan to choose and open a url:
 	:noremap <leader>u :w<Home>silent <End> !urlscan<CR>
 	:noremap ,, :w<Home>silent <End> !urlscan<CR>
 
@@ -86,32 +77,19 @@ call plug#end()
 	vnoremap <C-c> "*Y :let @+=@*<CR>
 	map <C-p> "+P
 
-" Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set linebreak<CR>
-
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 
-" Enable autocompletion:
-	set wildmode=longest,list,full
-	set wildmenu
-
-" Automatically deletes all tralling whitespace on save.
-	"autocmd BufWritePre * %s/\s\+$//e
+" Automatically deletes all trailing whitespace on save.
+	autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
 	autocmd BufWritePost ~/.bm* !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
-
-" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
-
-" Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Navigating with guides
 	inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
@@ -238,12 +216,3 @@ call plug#end()
 	autocmd FileType xml inoremap ,e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
 	autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 
-vmap <expr> ++ VMATH_YankAndAnalyse()
-nmap ++ vip++
-
-vnoremap K xkP`[V`]
-vnoremap J xp`[V`]
-vnoremap L >gv
-vnoremap H <gv
-
-map <enter><enter> yi[:e <c-r>"<cr>
