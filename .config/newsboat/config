@@ -1,6 +1,7 @@
+#show-read-feeds no
 auto-reload yes
 
-external-url-viewer "urlscan -dc"
+external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 
 bind-key j down
 bind-key k up
@@ -36,5 +37,4 @@ macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open
 macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
 macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
-# c copies the link to the clipboard.
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkandler
