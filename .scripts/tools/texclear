@@ -3,12 +3,36 @@
 # Clears the build files of a LaTeX/XeLaTeX build.
 # I have vim run this file whenever I exit a .tex file.
 
-case "$1" in
-	*.tex)
-	file=$(readlink -f "$1")
-	dir=$(dirname "$file")
-	base="${file%.*}"
-	find "$dir"  -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|tmp|pyc|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete ;;
-	*) printf "Give .tex file as argument.\\n" ;;
-esac
+exts="(4tc|aux|bak|bbl|bcf|blg|fdb_latexmk|fls|lof|log|nav|out|pyc|pyo|run\\.xml|snm|swp|synctex\\(busy\\)|synctex\\.gz|tmp|toc|vrb|xref)"
+# match all files with build extensions
+regex=(\"^.*\\."$build_exts"$\")
 
+remove_build_files () {
+	regex=("$2")
+	# eval find "$1" "${find_flags[@]}" "${regex[0]}" -delete -print
+	eval find "$1" "${find_flags[@]}" "${regex[0]}" -delete
+}
+
+# when less than one argument, remove build files in current dir
+if [[ "$#" -lt 1 ]]; then
+	regex=(\"^.*\\."$build_exts"$\")
+	remove_build_files . "${regex[0]}"
+else
+	case "$1" in
+		# if tex file, remove only build files for that file
+		*.tex)
+			file=$(readlink -f "$1")
+			dir=$(dirname "$file")
+			base="${file%.*}"
+			# remove build files matching file name
+			regex=(\"^"$base"\\."$build_exts"$\")
+			remove_build_files "$dir" "${regex[0]}" ;;
+		# remove all build files in directory if given valid one
+		*)
+			if [[ -d "$1" ]]; then
+				remove_build_files "$1" "${regex[0]}"
+			else
+				printf "Give .tex file or directory as argument.\\n"
+			fi ;;
+	esac
+fi
