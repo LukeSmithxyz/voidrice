@@ -68,9 +68,6 @@ but you can also hold it down and it will act as another Windows/super/mod key.
 .ITEM
 The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button.
 This is to make one-handing on laptops easier.
-.ITEM
-The system also uses the US International keyboard by default.
-This allows you to type a lot of characters in many different European languages.
 .LIST OFF
 .PP
 If you'd like to change any of these keyboard changes, you need only open and change \f(CW~/.scripts/tools/remaps\fP.
