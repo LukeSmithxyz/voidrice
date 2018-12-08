@@ -104,8 +104,7 @@ call plug#end()
 
 """LATEX
 	" Word count:
-	autocmd FileType tex map <leader>o :w !detex \| wc -w<CR>
-	autocmd FileType tex inoremap <leader>o <Esc>:w !detex \| wc -w<CR>
+	autocmd FileType tex map <leader><leader>o :w !detex \| wc -w<CR>
 	" Code snippets
 	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
