@@ -69,11 +69,11 @@ call plug#end()
 	autocmd BufRead,BufNewFile *.md set tw=79
 
 " Use urlscan to choose and open a url:
-	:noremap <leader>u :w<Home>silent <End> !urlscan<CR>
-	:noremap ,, :w<Home>silent <End> !urlscan<CR>
+	:noremap <leader>u :w<Home> !urlscan -r 'linkhandler {}'<CR>
+	:noremap ,, !urlscan -r 'linkhandler {}'<CR>
 
-" Copy selected text to system clipboard (requires gvim installed):
-	vnoremap <C-c> "*Y :let @+=@*<CR>
+" Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
+	vnoremap <C-c> "+y
 	map <C-p> "+P
 
 " Enable Goyo by default for mutt writting
