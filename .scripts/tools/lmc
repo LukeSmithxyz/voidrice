@@ -1,16 +1,13 @@
 #!/bin/sh
-
 # A general audio interface for LARBS.
-
-newvol="pkill -RTMIN+10 i3blocks"
 
 [ -z "$2" ] && num="2" || num="$2"
 
 case "$1" in
-	u*) pulsemixer --change-volume +"$num" ; $newvol ;;
-	d*) pulsemixer --change-volume -"$num" ; $newvol ;;
-	m*) pulsemixer --toggle-mute ; $newvol ;;
-	truemute) pulsemixer --mute ; $newvol ;;
+	u*) pulsemixer --change-volume +"$num" ;;
+	d*) pulsemixer --change-volume -"$num" ;;
+	m*) pulsemixer --toggle-mute ;;
+	truemute) pulsemixer --mute ;;
 	play) mpc play ;;
 	n*) mpc next ;;
 	prev) mpc prev ;;
@@ -41,3 +38,5 @@ All of these commands, except for \`truemute\`, \`prev\` and \`play\` can be tru
 i.e. \`lmc r\` for \`lmc restart\`.
 EOF
 esac
+
+pkill -RTMIN+10 i3blocks
