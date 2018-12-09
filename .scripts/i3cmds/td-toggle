@@ -2,7 +2,7 @@
 
 # If transmission-daemon is running, will ask to kill, else will ask to start.
 
-[ ! -f /usr/bin/transmission-daemon ] && echo "Transmission not installed." && exit
+[ ! -f /usr/bin/transmission-daemon ] && notify-send "Transmission daemon not installed." && exit
 
 if  pgrep -x transmission-da >/dev/null ;
 then
