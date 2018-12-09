@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Animated gif handler
+Exec=/usr/bin/mpv --loop %u
