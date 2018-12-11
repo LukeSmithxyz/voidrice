@@ -150,8 +150,9 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+b\fP \(en Toggle status bar
 .ITEM
-\f(CWMod+B\fP \(en Make window float in bottom left corner (good for video watched
-  intermittently)
+\f(CWMod+B\fP \(en Toggle window float in bottom left corner (good for video watched intermittently)
+.ITEM
+\f(CWMod+N\fP \(en Same as above, but for the botttom right corner.
 .LIST OFF
 .HEADING 2 "Basic Programs"
 .PP
