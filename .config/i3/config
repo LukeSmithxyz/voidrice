@@ -200,17 +200,17 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+x			exec --no-startup-id lockscreen
 bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 
-#bindsym $mod+c	
+#bindsym $mod+c
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
 
-#bindsym $mod+v			
-#bindsym $mod+Shift+v	
+#bindsym $mod+v
+#bindsym $mod+Shift+v
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
 
 bindsym $mod+n			exec $term -e newsboat && pkill -RTMIN+6 i3blocks
-##bindsym $mod+Shift+n
+bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id bottomright
 
 bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
 bindsym $mod+Shift+m		exec --no-startup-id lmc mute
@@ -333,7 +333,7 @@ bindsym Shift+Print 		exec --no-startup-id scrot -u
 bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
-bindsym XF86Launch1		exec $stoprec & xset dpms force off
+bindsym XF86Launch1		exec --no-startup-id xset dpms force off
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
