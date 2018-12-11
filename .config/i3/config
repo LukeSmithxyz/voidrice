@@ -64,7 +64,7 @@ exec_always --no-startup-id i3mpdupdate
 # mpd startup
 exec --no-startup-id mpd
 # Podboat automatic queue and download
-exec --no-startup-id podentr
+exec_always --no-startup-id podentr
 
 # Set Xresources colors:
 set_from_resource $darkblack	color0  #000000
