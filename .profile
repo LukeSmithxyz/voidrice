@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # Profile file. Runs on login.
 
 # Adds `~/.scripts` and all subdirectories to $PATH
-export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
+export PATH="$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')$PATH"
 export EDITOR="vim"
 export TERMINAL="st"
 export BROWSER="firefox"
@@ -24,7 +24,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 [ ! -f ~/.shortcuts ] && shortcuts >/dev/null 2>&1
 
-[ -f ~/.bashrc ] && source ~/.bashrc
+[ -f ~/.bashrc ] && source "$HOME/.bashrc"
 
 # Start graphical server if i3 not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx
