@@ -1,0 +1,21 @@
+#!/bin/sh
+
+powerlevel=$(echo "Power off\nReboot" | dmenu -i -p "Power off or reboot?")
+
+if [ "$powerlevel" = "" ]
+then
+	 exit
+fi
+
+if [ $(echo "No\nYes" | dmenu -i -p "Are you sure?") = "Yes" ]
+then
+	if [ "$powerlevel" = "Power off" ]
+	then
+		exec sudo -A shutdown -hP now
+	fi
+
+	if [ "$powerlevel" = "Reboot" ]
+	then
+                exec sudo -A reboot
+	fi
+fi
