@@ -51,4 +51,3 @@ alias YT="youtube-viewer"
 
 shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
 vf() { $EDITOR $(fzf) ;}
-cur_pri_size_h() { xrandr | sed -n '/connected primary/p' | awk '{print $4}' | sed 's/x/\n/g' | sed -n 1p }
