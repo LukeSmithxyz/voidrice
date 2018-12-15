@@ -32,7 +32,7 @@ color article cyan default
 
 browser linkhandler
 macro , open-in-browser
-macro t set browser "tsp youtube-dl --add-metadata -ic -f '(best[height<=`xdotool getdisplaygeometry | awk '{print $1}'`])/best'"; open-in-browser ; set browser linkhandler
+macro t set browser "tsp youtube-dl --add-metadata -ic -f '(best[height<=`xdotool getdisplaygeometry | awk '{print $2}'`])/best'"; open-in-browser ; set browser linkhandler
 macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser linkhandler
 macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler

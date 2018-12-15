@@ -7,7 +7,7 @@ case "$(printf "copy url\\nmpv\\nmpv (loop)\\nqueue download\\n\\nqueue youtube-
 	mpv) setsid mpv -quiet "$1" >/dev/null 2>&1 & ;;
 	"mpv (loop)") setsid mpv -quiet --loop "$1" >/dev/null 2>&1 & ;;
 	"queue download") tsp curl -LO "$1" >/dev/null 2>&1 ;;
-	"queue youtube-dl") tsp "youtube-dl --add-metadata -ic -f '(best[height<=`xdotool getdisplaygeometry | awk '{print $1}'`])/best'" "$1" >/dev/null 2>&1 ;;
+	"queue youtube-dl") tsp "youtube-dl --add-metadata -ic -f '(best[height<=`xdotool getdisplaygeometry | awk '{print $2}'`])/best'" "$1" >/dev/null 1>&1 ;;
 	browser) setsid "$TRUEBROWSER" "$1" >/dev/null 2>&1 & ;;
 	feh) setsid feh "$1" >/dev/null 2>&1 & ;;
 	w3m) w3m "$1" >/dev/null 2>&1 ;;
