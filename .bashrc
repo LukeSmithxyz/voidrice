@@ -45,7 +45,7 @@ alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax highlighting.
 
 # Internet
-alias yt="youtube-dl --add-metadata -ic -f '(best[height<=`xrandr | sed -n '/connected primary/p' | awk '{print $4}' | sed 's/x/\n/g' | sed -n 1p`])/best'" #Download video link
+alias yt="youtube-dl --add-metadata -ic -f '(best[height<=`xdotool getdisplaygeometry | awk '{print $1}'`])/best'" #Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
 alias YT="youtube-viewer"
 
