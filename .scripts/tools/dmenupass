@@ -1,0 +1,2 @@
+#!/bin/sh
+dmenu -fn Monospace-18 -sb "#d79921" -sf "#1d2021" -nf "#000000" -nb "#000000" -p "Please type password and press Enter." <&- && echo
