@@ -60,7 +60,7 @@ exec --no-startup-id remaps
 # Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 # Run the script to update the mpd i3block on change.
-exec_always --no-startup-id i3mpdupdate
+exec_always --no-startup-id mpdupdate
 # mpd startup
 exec --no-startup-id mpd
 # Podboat automatic queue and download

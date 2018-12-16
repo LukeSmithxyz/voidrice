@@ -1,6 +1,0 @@
-#!/bin/sh
-case $BLOCK_BUTTON in
-    1) $TERMINAL -e transmission-remote-cli
-esac
-
-transmission-remote -l | grep % | sed -e "s/.*100%.*/Z/g;s/.*Idle.*/A/g;s/.*%.*/M/g" | sort -h | uniq -c | sed -e "s/Z/🌱/g;s/M/⬇️/g;s/A/⌛️/g" | awk '{print $2, $1}' | tr '\n' ' ' | sed -e "s/ $//g"
