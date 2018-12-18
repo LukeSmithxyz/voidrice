@@ -1,18 +1,16 @@
 #!/bin/sh
-
 # Set as a cron job to check for new RSS entries for newsboat.
-# Note that newsboat cannot be opened during the sync and this
-# sync cannot run while another instance of newsboat is open.
+# If newsboat is open, sends it an "R" key to refresh.
 
 ping -q -t 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 
-note "Updating RSS feeds..." "$PIX/rss.gif"
+/usr/bin/notify-send -i "$PIX/rss.gif" "Updating RSS feeds..."
+
+pgrep -x newsboat >/dev/null && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
 
 echo 🔃 > ~/.config/newsboat/.update
 pkill -RTMIN+6 i3blocks
-
 /usr/bin/newsboat -x reload
 rm -f ~/.config/newsboat/.update
 pkill -RTMIN+6 i3blocks
-
-note "RSS feed update complete." "$PIX/rss.gif"
+/usr/bin/notify-send -i "$PIX/rss.gif" "RSS feed update complete."
