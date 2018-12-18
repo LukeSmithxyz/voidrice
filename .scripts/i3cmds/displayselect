@@ -45,3 +45,5 @@ esac
 feh --bg-scale "$HOME/.config/wall.png"
 # Re-remap keys if keyboard added (for laptop bases)
 remaps
+# Restart dunst to ensure proper location on screen
+pgrep -x dunst >/dev/null && killall dunst && setsid dunst &
