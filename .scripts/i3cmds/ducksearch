@@ -2,14 +2,21 @@
 
 # Gives a dmenu prompt to search DuckDuckGo.
 # Without input, will open DuckDuckGo.com.
+# URLs will be directly handed to the browser.
 # Anything else, it search it.
+browser=${BROWSER:-firefox}
 
 pgrep -x dmenu && exit
 
 choice=$(echo "🦆" | dmenu -i -p "Search DuckDuckGo:") || exit 1
 
 if [ "$choice" = "🦆"  ]; then
-	$BROWSER "https://duckduckgo.com"
+    $browser "https://duckduckgo.com"
 else
-	$BROWSER "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
+    # Detect if url
+    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
+        $browser "$choice"
+    else
+        $browser "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
+    fi
 fi
