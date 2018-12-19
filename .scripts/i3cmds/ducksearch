@@ -14,7 +14,7 @@ if [ "$choice" = "🦆"  ]; then
     $browser "https://duckduckgo.com"
 else
     # Detect if url
-    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+.[a-zA-Z]+(/)?.*$ ]]; then
+    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
         $browser "$choice"
     else
         $browser "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
