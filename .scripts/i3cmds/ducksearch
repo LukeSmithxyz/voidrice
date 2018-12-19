@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Gives a dmenu prompt to search DuckDuckGo.
 # Without input, will open DuckDuckGo.com.
