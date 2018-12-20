@@ -13,7 +13,7 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
 	}
 
 morescreen() { # If multi-monitor is selected and there are more than two screens.
-	primary=$(echo "$screens" | dmenu -i -p "asdf")
+	primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
 	secondary=$(echo "$screens" | grep -v "$primary" | dmenu -i -p "Select secondary display:")
 	direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
 	tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | dmenu -i -p "Select third display:")
