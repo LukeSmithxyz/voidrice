@@ -1,6 +1,5 @@
 #!/bin/sh
-### This is only if your location isn't automatically detected, otherwise you can leave it blank.
-location=""
+[ "$(stat -c %y .weatherreport | awk '{print $1}')" != "$(date '+%Y-%m-%d')" ] && getforecast
 
 case $BLOCK_BUTTON in
     1) $TERMINAL -e less -S ~/.weatherreport ;;
@@ -10,12 +9,6 @@ case $BLOCK_BUTTON in
 ❄: Daily low
 🌞: Daily high" ;;
 esac
-
-[ "$location" != "" ] && location="$location+"
-
-ping -q -w 1 -c 1 "$(ip r | grep default | tail -1 | cut -d ' ' -f 3)" >/dev/null || exit
-
-curl -s wttr.in/$location > ~/.weatherreport
 
 printf "%s" "$(sed '16q;d' ~/.weatherreport | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')"
 

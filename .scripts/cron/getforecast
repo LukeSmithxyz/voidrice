@@ -1,0 +1,6 @@
+#!/bin/sh
+# Updates weather forecast
+ping -q -w 1 -c 1 "$(ip r | grep default | tail -1 | cut -d ' ' -f 3)" >/dev/null || exit
+location="$1"; [ -z "$location" ] || location="$location+"
+curl -s "wttr.in/$location" > ~/.weatherreport
+pkill -RTMIN+5 i3blocks && notify-send "🌞 Weather forecast updated."
