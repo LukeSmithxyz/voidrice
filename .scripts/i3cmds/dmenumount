@@ -19,7 +19,12 @@ mountusb() { \
 	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?" | awk '{print $1}')"
 	sudo -A mount "$chosen" && notify-send "$chosen mounted." && exit 0
 	getmount "/mnt /media /mount /home -maxdepth 5 -type d"
-	sudo -A mount "$chosen" "$mp" && notify-send "$chosen mounted to $mp."
+	partitiontype="$(lsblk -no "fstype" "$chosen")"
+	case "$partitiontype" in
+		"vfat") sudo -A mount -t vfat "$chosen" "$mp" -o rw,umask=0000;;
+		*) sudo -A mount "$chosen" "$mp";;
+	esac
+	notify-send "$chosen mounted to $mp."
 	}
 
 mountandroid() { \
