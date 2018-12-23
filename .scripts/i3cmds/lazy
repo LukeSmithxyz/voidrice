@@ -1,0 +1,73 @@
+#!/bin/bash
+
+#  The lazy executer - Only starts an external X client once if the search criteria
+#		       is correct.
+
+#  Usage:
+#
+#	lazy {xdotool search args} -- {other command to execute with 'i3-msg exec'}
+#
+
+#  Example (i3 window manager):
+#
+#	bindkey $mod+Control+k exec --no-startup-id \
+#					lazy --name "Google Calendar" \
+#					-- gnome-www-browser --app=https://calendar.google.com
+#
+
+# We are going through all the arg wrangling due to needing to split the arguments
+# between xdotool and i3-msg exec. The argument quoting here is hell, touch it at your
+# own peril.
+
+# The following commands are intercepted for xdotool. Refer to the man page under search
+# options.
+#
+#	--all
+#	--any
+#	--class {class}
+#	--classname {classname}
+#	--name {window title}
+#	--title {window title} [deprecated]
+#
+# All passed search criteria with arguments appear to be partial and regex enabled.
+#
+# Any other arguments before the '--' will be flagged as an error. Anything after will
+# be passed to 'i3-msg exec'.
+#
+eval set -- $(getopt  -l all,any,class:,classname:,name:,title: -n $0 -- "eatme" "$@")
+
+declare -A SEARCH_ARGS
+while true; do
+	case "$1" in
+		--) 	shift;
+			break;;
+
+		--all|--any)
+			eval SEARCH_ARGS[${1}]+='${1}';
+			shift;
+			continue;;
+
+		--class|--classname|--name|--title)
+			eval SEARCH_ARGS[${1}]+='${2}'
+			shift 2;
+			continue;;
+
+		*) 	echo "ERROR - Existing bad argment, ${1@Q}!";
+			exit -1;;
+	esac
+done
+
+# The eval is needed to handling argument quoting correctly
+
+# xdotool searches for existing X clients using the passed search criteria. If _NOT_
+# found, the 'i3-msg exec' is executed.
+
+eval xdotool search 									\
+	${SEARCH_ARGS[--all]} 								\
+	${SEARCH_ARGS[--any]} 								\
+	${SEARCH_ARGS[--class]:+--class "\"${SEARCH_ARGS[--class]}\""} 			\
+	${SEARCH_ARGS[--classname]:+--classname "\"${SEARCH_ARGS[--classname]}\""} 	\
+       	${SEARCH_ARGS[--name]:+--name "\"${SEARCH_ARGS[--name]}\""} 			\
+	${SEARCH_ARGS[--title]:+--title "\"${SEARCH_ARGS[--title]}\""} 			\
+	|| i3-msg exec -- $@
+
