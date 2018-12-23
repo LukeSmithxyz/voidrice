@@ -17,6 +17,6 @@ sed "s/\s*#.*$//;/^\s*$/d" "$HOME/.bmdirs" | tee >(awk '{print $1"=\"cd "$2" && 
 	| awk '{print "map g"$1" cd "$2"\nmap t"$1" tab_new "$2"\nmap m"$1" shell mv -v %s "$2"\nmap Y"$1" shell cp -rv %s "$2}' >> "$ranger_shortcuts"
 
 # Format the `configs` file in the correct syntax and sent it to both configs.
-sed "s/\s*#.*$//;/^$\s*/d"  "$HOME/.bmfiles" | tee >(awk '{print $1"=\"$EDITOR "$2"\" \\"}' >> "$shell_shortcuts") \
+sed "s/\s*#.*$//;/^\s*$/d"  "$HOME/.bmfiles" | tee >(awk '{print $1"=\"$EDITOR "$2"\" \\"}' >> "$shell_shortcuts") \
 	>(awk '{print $1, "\"$EDITOR "$2"\" \\"}' >> "$fish_shortcuts") \
 	| awk '{print "map "$1" shell $EDITOR "$2}' >> "$ranger_shortcuts"
