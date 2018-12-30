@@ -22,7 +22,7 @@ mountusb() { \
 	partitiontype="$(lsblk -no "fstype" "$chosen")"
 	case "$partitiontype" in
 		"vfat") sudo -A mount -t vfat "$chosen" "$mp" -o rw,umask=0000;;
-		*) sudo -A mount "$chosen" "$mp";;
+		*) sudo -A mount "$chosen" "$mp"; user="$(whoami)"; ug="$(groups | awk '{print $1}')"; sudo -A chown "$user":"$ug" 741 "$mp";;
 	esac
 	notify-send "$chosen mounted to $mp."
 	}
