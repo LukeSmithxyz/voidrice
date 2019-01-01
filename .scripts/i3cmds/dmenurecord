@@ -52,7 +52,7 @@ video() { ffmpeg \
 	}
 
 webcamhidef() { ffmpeg \
-	-f v412 \
+	-f v4l2 \
 	-i /dev/video0 \
 	-video_size 1920x1080 \
 	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
@@ -61,7 +61,7 @@ webcamhidef() { ffmpeg \
 	}
 
 webcam() { ffmpeg \
-	-f v412 \
+	-f v4l2 \
 	-i /dev/video0 \
 	-video_size 640x480 \
 	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
@@ -85,8 +85,8 @@ askrecording() { \
 		screencast) screencast;;
 		audio) audio;;
 		video) video;;
-		webcam) webcamrecord;;
-		"webcam (hi-def)") webcamrecord;;
+		webcam) webcam;;
+		"webcam (hi-def)") webcamhidef;;
 	esac
 	}
 
