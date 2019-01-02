@@ -10,7 +10,7 @@
 scihub="http://sci-hub.tw/"
 
 # If no url given. Opens browser. For using script as $BROWSER.
-[ -z "$1" ] && { "$TRUEBROWSER"; exit; }
+[ -z "$1" ] && { "$BROWSER"; exit; }
 
 case "$1" in
 	*mkv|*webm|*mp4|*gif|*youtube.com*|*youtu.be*|*hooktube.com*|*bitchute.com*)
@@ -23,5 +23,5 @@ case "$1" in
 		setsid curl -sO "$(curl -s "$scihub$*" | grep -Po "(?<=location.href=').+.pdf")" >/dev/null 2>&1 & ;;
 	*)
 		if [ -f "$1" ]; then "$TERMINAL" -e "$EDITOR $1"
-		else setsid "$TRUEBROWSER" "$1" >/dev/null 2>&1 & fi ;;
+		else setsid "$BROWSER" "$1" >/dev/null 2>&1 & fi ;;
 esac
