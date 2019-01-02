@@ -3,7 +3,7 @@ separator_block_width=15
 markup=pango
 
 [record]
-command=cat ~/.recordingicon
+command=cat /tmp/recordingicon
 interval=once
 signal=9
 
