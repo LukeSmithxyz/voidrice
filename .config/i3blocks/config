@@ -28,6 +28,7 @@ signal=7
 
 [weather]
 interval=3600
+signal=5
 
 [mailbox]
 label=📬
