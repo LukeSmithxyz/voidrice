@@ -12,59 +12,72 @@ export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
 
 For modules used in i3blocks.
 
-### `i3battery`
+### `battery`
 
 i3blocks module. Shows available power remaining with icon indicating battery
 status. Colors indicate different levels of charge.
 
-### `i3mail`
+### `clock`
+
+Shows time and date. If clicked, brings up calender or coming calcuse events.
+
+### `cpu`
+
+Shows CPU temperature. If clicked, shows most processor-intensive processes.
+
+### `help`
+
+Module which appears as a question mark. Brings up readme if clicked.
+
+### `internet`
+
+Shows whether machine is connected to wifi and ethernet. If clicked, brings up `nmtui`.
+
+### `mailbox`
 
 i3blocks module for use with mutt-wizard. Shows unread mail and if
 `mailsync.sh` is running.
 
-### `i3mpd`
+### `mem`
+
+Shows memory usage. If clicked, shows most memory-intensive processes.
+
+### `music`
 
 i3blocks module. Shows current song; if paused, name will be grayed and italic.
 
-### `i3mpdupdate`
+### `mpdupdate`
 
 A daemon running by default that will update the i3mpd block on mpd change.
 
-### `i3pacman`
+### `news`
+
+Shows unread newsboat articles. Brings up newsboat or refreshes RSS feeds.
+
+### `pacpackages`
 
 i3blocks module. Detects new installable upgrades. Only works if you use
 cronjobs to automatically sync repositories.
 
-### `i3torrent`
-
-i3blocks module. Shows torrents idle (⌛️), downloading (⬇️) or
-finished (🌱).
-
-### `i3volume`
-
-i3blocks module. Shows volume percentage or mute notification.
-
-### `i3weather`
-
-i3blocks module. Gets weather forcast from wttr.in and returns today's
-precipitation chance (☔), daily low (❄️) and daily high (☀️).
-
-### `i3wifi`
-
-A modified version of the i3blocks wifi module. Clicked, it brings up wifi-menu
-and also appears when there is no wifi connection.
-
-### `popupdate`
+### `popupgrade`
 
 Called by clicking on the update icon if there are new packages. Spawns a `yay`
 upgrade of the main Arch repos and AUR packages, updates the i3blocks module
 once complete.
 
-### `popweather`
+### `torrent`
 
-The script called by clicking on the i3 weather module. Brings up the forecast
-from `http://wttr.in` and will close on <Enter>.
+i3blocks module. Shows torrents idle (⌛️), downloading (⬇️) or
+finished (🌱).
 
+### `volume`
+
+i3blocks module. Shows volume percentage or mute notification.
+
+### `weather`
+
+i3blocks module. Gets weather forcast from wttr.in and returns today's
+precipitation chance (☔), daily low (❄️) and daily high (☀️).
 
 ## `cron/`
 
@@ -87,6 +100,10 @@ Gives a dunst notification if the battery is less than 25%.
 ### `crontog`
 
 Not actually a cronjob, but just turns off/on all user cronjobs.
+
+### `getforecast`
+
+Updates the weather forecast. This is automatically run by `weather` if there hasn't been a new forecast today.
 
 ### `newsup`
 
@@ -224,7 +241,7 @@ Gives a dmenu prompt for mounting USB drives or Android devices. Bound to
 ### `dmenurecord`
 
 Gives a list of recording commands: `audio`, `video` and `screencast` (both) in
-dmenu for selection. Bound to `mod+Print Screen` by default. Should be kill by
+dmenu for selection. Bound to `mod+PrintScreen` by default. Should be killed by
 `killrecording`.
 
 ### `dmenuumount`
