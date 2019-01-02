@@ -1,5 +1,5 @@
 #!/bin/sh
-[ "$(stat -c %y .weatherreport | awk '{print $1}')" != "$(date '+%Y-%m-%d')" ] && getforecast
+[ "$(stat -c %y /tmp/weatherreport | awk '{print $1}')" != "$(date '+%Y-%m-%d')" ] && getforecast
 
 case $BLOCK_BUTTON in
     1) $TERMINAL -e less -S /tmp/weatherreport ;;
