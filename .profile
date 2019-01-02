@@ -2,16 +2,15 @@
 # Profile file. Runs on login.
 
 # Adds `~/.scripts` and all subdirectories to $PATH
-export PATH="$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')$PATH"
+export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
 export EDITOR="vim"
 export TERMINAL="st"
 export BROWSER="firefox"
 export READER="zathura"
 export BIB="$HOME/Documents/LaTeX/uni.bib"
 export REFER="$HOME/.referbib"
-# PIX is here I have LARBS keep icons. Subject to change, hence a variable.
-export PIX="$HOME/.scripts/pix"
 export SUDO_ASKPASS="$HOME/.scripts/tools/dmenupass"
+export PIX="$HOME/.pix/"
 
 # less/man colors
 export LESS=-R
