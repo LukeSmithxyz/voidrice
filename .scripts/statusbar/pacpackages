@@ -16,4 +16,4 @@ case $BLOCK_BUTTON in
 esac
 
 
-pacman -Qu | wc -l | sed -e "s/^0$//g"
+pacman -Qu | grep -v "[ignored]" | wc -l | sed -e "s/^0$//g"
