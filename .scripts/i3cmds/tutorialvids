@@ -1,7 +1,7 @@
 #!/bin/sh
 vidlist="
 status bar	https://www.youtube.com/watch?v=gKumet6b-WY
-feh
+sxiv (image viewer)	https://www.youtube.com/watch?v=GYW9i_u5PYs
 st (terminal)	https://www.youtube.com/watch?v=9H75enWM22k
 i3 (window manager)		https://www.youtube.com/watch?v=GKviflL9XeI
 mutt (email)		https://www.youtube.com/watch?v=2U3vRbF7v5A
