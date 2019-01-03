@@ -6,7 +6,7 @@
 #	argument 1: script to run in dropdown window
 #	all other args are interpreted as options for your terminal
 # My usage:
-#	ddpawn
+#	ddspawn
 # bindsym $mod+u	exec --no-startup-id ddspawn tmuxdd
 #	Will hide/show window running the `tmuxdd` script when I press mod+u in i3
 # bindsym $mod+a	exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
@@ -17,9 +17,8 @@
 if xwininfo -tree -root | grep "(\"$1\" ";
 then
 	echo "Window detected."
+	i3 "[instance=\"$1\"] scratchpad show; [instance=\"$1\"] move position center"
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINAL -n $1 $(echo "$@" | cut -d ' ' -f2-) -e $1" && i3 "[instance=\"$1\"] scratchpad show; [instance=\"$1\"] move position center"
-	sleep .25 # This sleep is my laziness, will fix later (needed for immediate appearance after spawn).
+	i3 "exec --no-startup-id $1" 
 fi
-i3 "[instance=\"$1\"] scratchpad show; [instance=\"$1\"] move position center"
