@@ -20,5 +20,5 @@ then
 	i3 "[instance=\"$1\"] scratchpad show; [instance=\"$1\"] move position center"
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $1" 
+	i3 "exec --no-startup-id $TERMINAL -n $1 $(echo "$@" | cut -d ' ' -f2-) -e $1"
 fi
