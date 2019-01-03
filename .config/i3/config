@@ -39,6 +39,8 @@ for_window [instance="tmuxdd"] resize set 625 450
 for_window [instance="tmuxdd"] move scratchpad
 for_window [instance="tmuxdd"] border pixel 3
 for_window [instance="tmuxdd"] sticky enable
+for_window [instance="tmuxdd"] scratchpad show
+for_window [instance="tmuxdd"] move position center
 
 # Then I have a window running R I use for basic arithmetic
 # I'll later bind this to mod+a.
@@ -47,6 +49,8 @@ for_window [instance="dropdowncalc"] resize set 800 300
 for_window [instance="dropdowncalc"] move scratchpad
 for_window [instance="dropdowncalc"] border pixel 2
 for_window [instance="dropdowncalc"] sticky enable
+for_window [instance="dropdowncalc"] scratchpad show
+for_window [instance="dropdowncalc"] move position center
 
 # #---Starting External Scripts---# #
 # Setting the background:
