@@ -3,16 +3,16 @@
 
 ping -q -w 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 
-note "Checking for pacakge updates..." "$PIX/larbs.gif"
+notify-send -i "$PIX/larbs.gif" "Checking for pacakge updates..."
 
-sudo pacman -Syyuw --noconfirm || note "Error downloading updates.
+sudo pacman -Syyuw --noconfirm || notify-send "Error downloading updates.
 
 Check your internet connection, if pacman is already running, or run update manually to see errors."
 pkill -RTMIN+8 i3blocks
 
-if pacman -Qul
+if pacman -Qu | grep -v "[ignored]"
 then
-	note "Package updates available. Click statusbar icon for update." "$PIX/larbs.gif"
+	notify-send -i "$PIX/larbs.gif" "Package updates available. Click statusbar icon (📦) for update."
 else
-	note "Repository sync complete. No new packages for update." "$PIX/larbs.gif"
+	notify-send -i "$PIX/larbs.gif" "Repository sync complete. No new packages for update."
 fi
