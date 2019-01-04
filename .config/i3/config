@@ -32,25 +32,16 @@ set $hibernate sudo -A systemctl suspend
 
 # #---Dropdown Windows---# #
 
-# First I have a tmux window used for background scripts.
-# I'll later bind this to mod+u.
-for_window [instance="tmuxdd"] floating enable
-for_window [instance="tmuxdd"] resize set 625 450
-for_window [instance="tmuxdd"] move scratchpad
-for_window [instance="tmuxdd"] border pixel 3
-for_window [instance="tmuxdd"] sticky enable
-for_window [instance="tmuxdd"] scratchpad show
-for_window [instance="tmuxdd"] move position center
-
-# Then I have a window running R I use for basic arithmetic
-# I'll later bind this to mod+a.
-for_window [instance="dropdowncalc"] floating enable
-for_window [instance="dropdowncalc"] resize set 800 300
-for_window [instance="dropdowncalc"] move scratchpad
-for_window [instance="dropdowncalc"] border pixel 2
-for_window [instance="dropdowncalc"] sticky enable
-for_window [instance="dropdowncalc"] scratchpad show
-for_window [instance="dropdowncalc"] move position center
+# General dropdown window traits. The order can matter.
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+for_window [instance="dropdown_tmuxdd"] resize set 625 450
+for_window [instance="dropdown_dropdowncalc"] resize set 800 300
+for_window [instance="dropdown_tmuxdd"] border pixel 3
+for_window [instance="dropdown_dropdowncalc"] border pixel 2
+for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
 # Setting the background:
@@ -137,8 +128,8 @@ bindsym $mod+Insert		exec --no-startup-id showclip
 bindsym $mod+Pause		exec --no-startup-id xcqr
 
 # #---Letter Key Bindings---# #
-bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
-bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdowncalc|tmuxdd).*$"] kill
+bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 
 bindsym $mod+w			exec $term -e nmtui
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
