@@ -323,7 +323,7 @@ bindsym $mod+bracketright 	exec --no-startup-id lmc forward 10
 bindsym $mod+Shift+bracketright exec --no-startup-id lmc forward 120
 
 # For screenshots and recording
-bindsym Print 			exec --no-startup-id maim
+bindsym Print 			exec --no-startup-id maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
 bindsym Shift+Print 		exec --no-startup-id maimpick
 bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
