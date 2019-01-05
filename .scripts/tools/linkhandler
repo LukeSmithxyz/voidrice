@@ -13,11 +13,11 @@ scihub="http://sci-hub.tw/"
 [ -z "$1" ] && { "$BROWSER"; exit; }
 
 case "$1" in
-	*mkv|*webm|*mp4|*gif|*youtube.com*|*youtu.be*|*hooktube.com*|*bitchute.com*)
-		setsid mpv -quiet "$1" >/dev/null 2>&1 & ;;
-	*png|*jpg|*jpe|*jpeg)
-		setsid feh "$1" >/dev/null 2>&1 & ;;
-	*mp3|*flac|*opus|*mp3?source)
+	*mkv|*webm|*mp4|*youtube.com*|*youtu.be*|*hooktube.com*|*bitchute.com*)
+		setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 & ;;
+	*png|*jpg|*jpe|*jpeg|*gif)
+		setsid sxiv -a "$1" >/dev/null 2>&1 & ;;
+	*mp3|*flac|*opus|*mp3?source*)
 		setsid tsp curl -LO "$1" >/dev/null 2>&1 & ;;
 	*springer.com*)
 		setsid curl -sO "$(curl -s "$scihub$*" | grep -Po "(?<=location.href=').+.pdf")" >/dev/null 2>&1 & ;;

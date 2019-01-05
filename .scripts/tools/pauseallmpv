@@ -1,4 +1,4 @@
 #!/bin/sh
-# Sends a , key to all mpv instances, pausing them at the last frame.
-
-xdotool search --class mpv | xargs -I % xdotool key --window % comma
+for i in $(ls /tmp/mpvsoc*); do
+	echo '{ "command": ["set_property", "pause", true] }' | socat - $i;
+done
