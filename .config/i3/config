@@ -14,7 +14,7 @@
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 #
-# export BROWSER="firefox"
+# export FILE="ranger"
 # export TERMINAL="st"
 
 # #---Basic Definitions---# #
@@ -121,7 +121,7 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
@@ -348,7 +348,7 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdow
 bindsym XF86Calculator		exec $term -e R -q --no-save
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
-bindsym XF86Explorer		exec $term -e ranger
+bindsym XF86Explorer		exec $term -e $FILE
 ##bindsym XF86Send		exec
 ##bindsym XF86Xfer		exec
 bindsym XF86WWW			exec --no-startup-id $BROWSER
@@ -357,7 +357,7 @@ bindsym XF86ScreenSaver		exec exec --no-startup-id lockscreen
 ##bindsym XF86RotateWindows	exec
 ##bindsym XF86TaskPane		exec
 ##bindsym XF86Favorites		exec
-bindsym XF86MyComputer		exec $term -e ranger
+bindsym XF86MyComputer		exec $term -e $FILE
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec --no-startup-id dmenuumount
@@ -402,14 +402,16 @@ bindsym XF86Shop		exec $BROWSER https://ebay.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
 bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
 bindsym XF86AudioMedia		exec --no-startup-id $term -e ncmpcpp
-bindsym XF86Display		exec --no-startup-id arandr
+bindsym XF86Display		exec --no-startup-id displayselect
 #bindsym XF86KbdLightOnOff	exec
 #bindsym XF86KbdBrightnessDown	exec
 #bindsym XF86KbdBrightnessUp	exec
 ##bindsym XF86Reply		exec
 ##bindsym XF86MailForward	exec
 ##bindsym XF86Save		exec
-bindsym XF86Documents		exec $term -e ranger ~/Documents
+bindsym XF86Documents		exec $term -e $FILE ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
+
+exec --no-startup-id lukescripts
