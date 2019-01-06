@@ -3,7 +3,7 @@ separator_block_width=15
 markup=pango
 
 [record]
-command=cat ~/.recordingicon
+command=cat /tmp/recordingicon
 interval=once
 signal=9
 
@@ -28,6 +28,7 @@ signal=7
 
 [weather]
 interval=3600
+signal=5
 
 [mailbox]
 label=📬

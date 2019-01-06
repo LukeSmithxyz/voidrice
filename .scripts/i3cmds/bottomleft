@@ -8,9 +8,9 @@ current=$(xdotool getwindowfocus)
 newwidth=$(($(xdotool getdisplaygeometry | awk '{print $2}') / 3))
 newheight=$(($(xdotool getdisplaygeometry | awk '{print $1}') / 3))
 
-xdotool windowsize "$(xdotool getwindowfocus)" $newheight $newwidth
+xdotool windowsize "$current" $newheight $newwidth
 
-newsize=$(xdotool getwindowgeometry "$(xdotool getwindowfocus)" | grep Geometry | sed -e 's/x/ /g' | awk '{print $3}')
+newsize=$(xdotool getwindowgeometry "$current" | grep Geometry | sed -e 's/x/ /g' | awk '{print $3}')
 
 height=$(($(xdotool getdisplaygeometry | awk '{print $2}') - newsize))
 xdotool windowmove "$current" 0 $height

@@ -10,15 +10,15 @@
 # If there is already a running instance, user will be prompted to end it.
 
 updateicon() { \
-	echo "$1" > ~/.recordingicon
+	echo "$1" > /tmp/recordingicon
 	pkill -RTMIN+9 i3blocks
 	}
 
 killrecording() {
-	recpid="$(cat ~/.recordingpid)"
+	recpid="$(cat /tmp/recordingpid)"
 	# kill with SIGTERM, allowing finishing touches.
 	kill -15 "$recpid"
-	rm -f ~/.recordingpid
+	rm -f /tmp/recordingpid
 	updateicon ""
 	pkill -RTMIN+9 i3blocks
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
@@ -37,7 +37,7 @@ screencast() { \
 	-r 30 \
  	-c:v libx264rgb -crf 0 -preset ultrafast -c:a flac \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "⏺️🎙️"
        	}
 
@@ -47,25 +47,25 @@ video() { ffmpeg \
 	-i :0.0 \
  	-c:v libx264 -qp 0 -r 30 \
 	"$HOME/video-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "⏺️"
 	}
 
 webcamhidef() { ffmpeg \
-	-f v412 \
+	-f v4l2 \
 	-i /dev/video0 \
 	-video_size 1920x1080 \
 	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "🎥"
 	}
 
 webcam() { ffmpeg \
-	-f v412 \
+	-f v4l2 \
 	-i /dev/video0 \
 	-video_size 640x480 \
 	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "🎥"
 	}
 
@@ -75,7 +75,7 @@ audio() { \
 	-f alsa -i default \
 	-c:a flac \
 	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-	echo $! > ~/.recordingpid
+	echo $! > /tmp/recordingpid
 	updateicon "🎙️"
 	}
 
@@ -85,8 +85,8 @@ askrecording() { \
 		screencast) screencast;;
 		audio) audio;;
 		video) video;;
-		webcam) webcamrecord;;
-		"webcam (hi-def)") webcamrecord;;
+		webcam) webcam;;
+		"webcam (hi-def)") webcamhidef;;
 	esac
 	}
 
@@ -101,5 +101,5 @@ case "$1" in
 	audio) audio;;
 	video) video;;
 	kill) killrecording;;
-	*) ([ -f ~/.recordingpid ] && asktoend && exit) || askrecording;;
+	*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
 esac
