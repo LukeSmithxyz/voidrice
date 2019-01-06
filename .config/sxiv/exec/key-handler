@@ -1,7 +1,6 @@
 #!/bin/sh
 while read file
 do
-	fullpath="$(pwd)/$file"
         case "$1" in
         "w")
                 cp "$file" ~/.config/wall.png &&
@@ -10,12 +9,12 @@ do
         "c")
 		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ~/.bmdirs | awk '{print $2}' | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")"
 		[ -z "$destdir" ] && exit
-		cp "$file" "$destdir" && notify-send -i "$fullpath" "$file copied to $destdir." &
+		cp "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file copied to $destdir." &
 		;;
         "m")
 		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ~/.bmdirs | awk '{print $2}' | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")"
 		[ -z "$destdir" ] && exit
-		cp "$file" "$destdir" && notify-send -i "$fullpath" "$file moved to $destdir." &
+		mv "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file moved to $destdir." &
 		;;
 	"r")
 		convert -rotate 90 "$file" "$file" ;;
@@ -27,8 +26,8 @@ do
 		echo -n "$file" | xclip -selection clipboard &&
 		notify-send "$file copied to clipboard" & ;;
 	"Y")
-		echo -n "$fullpath" | xclip -selection clipboard &&
-		notify-send "$fullpath copied to clipboard" & ;;
+		echo -n "$(readlink -f "$file")" | xclip -selection clipboard &&
+			notify-send "$(readlink -f "$file") copied to clipboard" & ;;
 	"d")
 		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
 	"G")
