@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Version=1.0
-Terminal=false
-Type=Application
-Name=Wunderlist for Chrome
-Exec=/opt/google/chrome/google-chrome --profile-directory=Default --app-id=ojcflmmmcfpacggndoaaflkmcoblhnbh
-Icon=chrome-ojcflmmmcfpacggndoaaflkmcoblhnbh-Default
-StartupWMClass=crx_ojcflmmmcfpacggndoaaflkmcoblhnbh
