@@ -15,7 +15,32 @@
 *.color13: #d3869b
 *.color14: #8ec07c
 *.color15: #ebdbb2
+
+!! base16 Tomorrow Night theme
+!! https://github.com/honza/base16-st
+!!*.color0: #1d1f21
+!!*.color1: #cc6666
+!!*.color2: #b5bd68
+!!*.color3: #f0c674
+!!*.color4: #81a2be
+!!*.color5: #b294bb
+!!*.color6: #8abeb7
+!!*.color7: #c5c8c6
+!!*.color8: #969896
+!!*.color9: #de935f
+!!*.color10: #282a2e
+!!*.color11: #373b41
+!!*.color12: #b4b7b4
+!!*.color13: #e0e0e0
+!!*.color14: #a3685a
+!!*.color15: #ebdbb2
+
 !! Transparency (0-255):
-*.alpha: 230
+!!*.alpha: 230
+!! My custom entry
+!!*.alpha: 235
 !! Set a default font and font size as below:
 !! *.font: Monospace-14;
+!! My custom entry
+!!*.font: Source Code Pro for Powerline:pixelsize=16:antialias=true:autohint=true;
+*.font: SauceCodePro Nerd Font Mono:pixelsize=15:antialias=true:autohint=true;

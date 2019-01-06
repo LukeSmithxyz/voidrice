@@ -1,6 +1,6 @@
 #!/bin/bash
 stty -ixon # Disable ctrl-s and ctrl-q.
-shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
+#shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
 HISTSIZE= HISTFILESIZE= # Infinite history.
 export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
@@ -28,6 +28,7 @@ alias ref="shortcuts >/dev/null ; source ~/.bashrc" # Refresh shortcuts manually
 alias mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)"
 alias x="sxiv -ft *"
 alias lp="pacman -Qett --color=always | less"
+alias bw="wal -i ~/.config/wall.png" # Rerun pywal
 
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'

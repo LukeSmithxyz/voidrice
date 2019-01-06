@@ -1,0 +1,4 @@
+#!/bin/bash
+result=$(nmcli -t -f type,state,connection d | egrep "^(tun|tap):connected" | awk -F':' '{ print $3 }')
+[[ -z $result ]] || echo " $result"
+# [[ -z $result ]] && echo ' N/A' || echo " $result"

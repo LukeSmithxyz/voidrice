@@ -3,7 +3,7 @@ separator_block_width=15
 markup=pango
 
 [record]
-command=cat /tmp/recordingicon
+command=cat ~/.recordingicon
 interval=once
 signal=9
 
@@ -26,22 +26,33 @@ signal=8
 interval=20
 signal=7
 
-[weather]
-interval=3600
-signal=5
+#[weather]
+#interval=3600
+#signal=5
 
 [mailbox]
 label=📬
 interval=180
 signal=12
 
+#[bandwidth]
+#instance=wlp3s0
+#interval=5
+
+#[openvpn]
+#interval=20
+
+[bandwidth3]
+interval=persist
+markup=pango
+
 #[memory]
 #interval=30
-#label=🧠
+#label=
 
-#[cpu]
+#cpu]
 #interval=15
-#label=💻
+#label=
 
 [volume]
 interval=once
@@ -55,16 +66,21 @@ signal=10
 #interval=60
 #command=disk /home 🏠
 
-[battery]
-command=battery BAT0
-interval=5
+[internet]
+interval=20
+#interval=10
 
 [clock]
-label=📅
+label=
 interval=30
 
-[internet]
-interval=10
+[kbdd_layout]
+interval=persist
 
-[help]
-interval=once
+[battery]
+command=battery BAT0
+interval=10
+#interval=5
+
+#[help]
+#interval=once

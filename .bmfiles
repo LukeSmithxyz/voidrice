@@ -5,6 +5,7 @@ cfz	~/.zshrc
 cfv	~/.vimrc
 cfr	~/.config/ranger/rc.conf
 cfi	~/.config/i3/config
+cfib	~/.config/i3blocks/config
 cfq	~/.config/qutebrowser/config.py
 cfm	~/.config/mutt/muttrc
 cft	~/.config/termite/config

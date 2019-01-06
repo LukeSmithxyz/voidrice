@@ -20,8 +20,8 @@
 # #---Basic Definitions---# #
 # Needed for i3-gaps
 for_window [class="^.*"] border pixel 2
-gaps inner 15
-gaps outer 15
+gaps inner 10
+gaps outer 10
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $stoprec --no-startup-id dmenurecord kill
@@ -45,7 +45,8 @@ for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
 # Setting the background:
-exec --no-startup-id feh --bg-scale ~/.config/wall.png
+# exec --no-startup-id feh --bg-scale ~/.config/wall.png
+exec --no-startup-id feh --bg-scale ~/Dropbox/Infrastructure/Desktop-Backgrounds/fluorescence.jpg
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager:
@@ -88,10 +89,15 @@ client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
-	font pango:mono 10
+	# font pango:mono 10
+	# font pango:Source Code Pro for Powerline,Font Awesome 5 Free-Regular-400,Font Awesome 5 Free-Solid-900 8
+	# font pango:SauceCodePro Nerd Font,Font Awesome 5 Free-Regular-400,Font Awesome 5 Free-Solid-900 8
+	font pango:SauceCodePro Nerd Font,Font Awesome 5 Free 8
+	# font pango:Inconsolata for Powerline 9
 	colors {
 			background $darkblack
 			statusline $darkwhite
+			# statusline $white
 			separator $cyan
 			focused_workspace  $blue $darkblue $darkblack
         		active_workspace   $blue $blue $darkwhite
@@ -121,7 +127,7 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
+bindsym $mod+Shift+Delete exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
@@ -141,7 +147,7 @@ bindsym $mod+r 			exec $term -e ranger
 bindsym $mod+Shift+r		exec --no-startup-id winresize
 
 bindsym $mod+t			split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+bindsym $mod+Shift+t		gaps inner current set 10; gaps outer current set 10
 
 bindsym $mod+y			exec $term -e calcurse
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
@@ -361,10 +367,13 @@ bindsym XF86MyComputer		exec $term -e $FILE
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec --no-startup-id dmenuumount
-bindsym XF86AudioNext		exec --no-startup-id lmc next
-bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
-bindsym XF86AudioPrev		exec --no-startup-id lmc prev
-bindsym XF86AudioStop		exec --no-startup-id lmc toggle
+# bindsym XF86AudioNext		exec --no-startup-id lmc next
+# bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
+# bindsym XF86AudioPrev		exec --no-startup-id lmc prev
+# bindsym XF86AudioStop		exec --no-startup-id lmc toggle
+bindsym XF86AudioNext		exec --no-startup-id playerctl next
+bindsym XF86AudioPlay		exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev		exec --no-startup-id playerctl previous
 ##bindsym XF86AudioRecord
 bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
 bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
@@ -415,3 +424,9 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 bindsym XF86WLAN		exec $netrefresh
 
 exec --no-startup-id lukescripts
+
+# My entries
+# Dropbox Start
+exec --no-startup-id dropbox start
+# Clipboard History manager
+exec --no-startup-id clipit

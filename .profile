@@ -5,13 +5,14 @@
 export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
 export EDITOR="vim"
 export TERMINAL="st"
-export BROWSER="firefox"
+export BROWSER="google-chrome-stable"
 export READER="zathura"
 export FILE="ranger"
 export BIB="$HOME/Documents/LaTeX/uni.bib"
 export REFER="$HOME/.referbib"
-export SUDO_ASKPASS="$HOME/.scripts/tools/dmenupass"
+# export PIX="$HOME/.scripts/pix"
 export PIX="$HOME/.pix/"
+export SUDO_ASKPASS="$HOME/.scripts/tools/dmenupass"
 
 # less/man colors
 export LESS=-R
@@ -25,7 +26,8 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 [ ! -f ~/.shortcuts ] && shortcuts >/dev/null 2>&1
 
-echo "$0" | grep "bash$" >/dev/null && [ -f ~/.bashrc ] && source "$HOME/.bashrc"
+[ -f ~/.bashrc ] && source "$HOME/.bashrc"
+# echo "$0" | grep "bash$" >/dev/null && [ -f ~/.bashrc ] && source "$HOME/.bashrc"
 
 # Start graphical server if i3 not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx
