@@ -2,6 +2,11 @@ $include /etc/inputrc
 set editing-mode vi
 $if mode=vi
 
+set show-mode-in-prompt on
+
+set vi-ins-mode-string
+set vi-cmd-mode-string "\e[34;1m\+"
+
 set keymap vi-command
 # these are for vi-command mode
 Control-l: clear-screen
