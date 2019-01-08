@@ -4,7 +4,7 @@ do
         case "$1" in
         "w")
                 cp "$file" ~/.config/wall.png &&
-		feh --bg-scale "$HOME/.config/wall.png"
+		setbg
 		notify-send -i "$HOME/.config/wall.png" "Wallpaper changed." ;;
         "c")
 		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ~/.bmdirs | awk '{print $2}' | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")"

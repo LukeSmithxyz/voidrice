@@ -45,7 +45,7 @@ for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
 # Setting the background:
-exec --no-startup-id feh --bg-scale ~/.config/wall.png
+exec --no-startup-id setbg
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager:
