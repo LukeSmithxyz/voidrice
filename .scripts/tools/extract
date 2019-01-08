@@ -11,7 +11,7 @@ esac done
 
 if [ -z "$extracthere" ]; then
 	archive="$(readlink -f "$*")" &&
-	directory=${archive%.*} &&
+	directory="$(echo "$archive" | sed 's/\.[^\/.]*$//')" &&
 	mkdir -p "$directory" &&
 	cd "$directory" || exit
 else
