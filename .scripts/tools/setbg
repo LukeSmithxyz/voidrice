@@ -1,3 +1,4 @@
 #!/bin/sh
-# Sets the background. Many scripts need to do this, but I've put it here so you can easily change all their actions.
+# Sets the background. If given an argument, will set file as background.
+[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
 xwallpaper --center ~/.config/wall.png
