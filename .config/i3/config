@@ -137,7 +137,7 @@ bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
-bindsym $mod+r 			exec $term -e ranger
+bindsym $mod+r 			exec $term -e $FILE
 bindsym $mod+Shift+r		exec --no-startup-id winresize
 
 bindsym $mod+t			split toggle
