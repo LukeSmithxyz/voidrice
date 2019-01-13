@@ -27,7 +27,7 @@ alias mkd="mkdir -pv"
 alias ref="shortcuts >/dev/null ; source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)"
 alias x="sxiv -ft *"
-alias lp="pacman -Qett --color=always | less"
+alias lsp="pacman -Qett --color=always | less"
 
 # Adding color
 alias ls='ls -hN --color=auto --group-directories-first'
