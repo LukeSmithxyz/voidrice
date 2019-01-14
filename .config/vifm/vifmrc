@@ -1,0 +1,146 @@
+" vim: filetype=vim
+source ~/.vifmshortcuts
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-o> <C-w>o
+map <C-s> <C-w>s
+map <C-v> <C-w>v
+
+map x :!sxiv -ft * 2>/dev/null &<CR>
+nnoremap o :file &<cr>l
+map E :!$EDITOR %f<CR>
+map mkd :mkdir<space>
+map bg :!setbg %f &<CR>
+
+nmap <space> tj
+nmap q ZQ
+fileviewer *.html,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex highlight -O ansi %c
+
+set syscalls
+
+set nofollowlinks
+
+" Natural sort of (version) numbers within text.
+
+set sortnumbers
+
+" Maximum number of changes that can be undone.
+
+set undolevels=100
+
+colorscheme Default
+
+set wildmenu
+
+" Display completions in a form of popup with descriptions of the matches
+
+set wildstyle=popup
+
+" Display suggestions in normal, visual and view modes for keys, marks and
+" registers (at most 5 files).  In other view, when available.
+
+set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+
+set ignorecase
+set smartcase
+set nohlsearch
+set incsearch
+
+" Try to leave some space from cursor to upper/lower border in lists
+
+set scrolloff=4
+
+" Don't do too many requests to slow file systems
+
+if !has('win')
+    set slowfs=curlftpfs
+endif
+
+" Set custom status line look
+
+" :com[mand][!] command_name action
+" The following macros can be used in a command
+" %a is replaced with the user arguments.
+" %c the current file under the cursor.
+" %C the current file under the cursor in the other directory.
+" %f the current selected file, or files.
+" %F the current selected file, or files in the other directory.
+" %b same as %f %F.
+" %d the current directory name.
+" %D the other window directory name.
+" %m run the command in a menu window
+
+filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu zathura %f 2>/dev/null &,
+fileviewer *.pdf pdftotext -nopgbrk %c -
+
+" Audio
+filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) %c
+
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx] mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) %f 2>/dev/null &,
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx],*mp3,*.flac mediainfo %c 2>&1 &
+
+filextype *.html,*.htm firefox %f 2>/dev/null &
+
+filetype *.o nm %f | less
+
+filetype *.[1-8] man ./%c
+fileviewer *.[1-8] man ./%c | col -b
+
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm  rotdir %f 2>/dev/null | sxiv -ia 2>/dev/null &
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm file %f
+filextype *.svg inkscape %f 2>/dev/null &
+filextype *.xcf gimp %f 2>/dev/null &
+
+" MD5
+filetype *.md5
+       \ {Check MD5 hash sum}
+       \ md5sum -c %f %S,
+
+" SHA1
+filetype *.sha1
+       \ {Check SHA1 hash sum}
+       \ sha1sum -c %f %S,
+
+" SHA256
+filetype *.sha256
+       \ {Check SHA256 hash sum}
+       \ sha256sum -c %f %S,
+
+" SHA512
+filetype *.sha512
+       \ {Check SHA512 hash sum}
+       \ sha512sum -c %f %S,
+
+" GPG signature
+filetype *.asc
+       \ {Check signature}
+       \ !!gpg --verify %c,
+
+set vifminfo=dhistory,chistory,tui,shistory,
+    \phistory,fhistory,dirstack,registers,bookmarks,bmarks
+
+" Start shell in current directory
+nnoremap s :shell<cr>
+
+" Toggle visibility of preview window
+nnoremap w :view<cr>
+vnoremap w :view<cr>gv
+
+" Yank current directory path into the clipboard
+nnoremap yd :!echo %d | xclip %i<cr>
+
+" Yank current file path into the clipboard
+nnoremap yf :!echo %c:p | xclip %i<cr>
+
+nnoremap I cw<c-a>
+nnoremap cc cw<c-u>
+nnoremap A cw
+
+" Open editor to edit vifmrc and apply settings after returning to vifm
+nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
+
+" Toggle wrap setting on ,w key
+nnoremap ,w :set wrap!<cr>
