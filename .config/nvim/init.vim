@@ -15,6 +15,7 @@ Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " Some basics:
+	color peachpuff
 	set nocompatible
 	filetype plugin on
 	syntax on
