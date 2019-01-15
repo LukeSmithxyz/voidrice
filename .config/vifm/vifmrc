@@ -19,6 +19,7 @@ nmap <space> tj
 nmap q ZQ
 fileviewer *.html,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex highlight -O ansi %c
 fileview */ tree %c -L 1 --dirsfirst
+fileview ../ tree %c -L 1 --dirsfirst
 
 set vicmd=$EDITOR
 
