@@ -1,21 +1,14 @@
 #!/bin/sh
-
 # This script will compile or run another finishing operation on a document. I
 # have this script run via vim.
 #
-# tex files: Compiles to pdf, including bibliography if necessary
-# md files: Compiles to pdf via pandoc
-# rmd files: Compiles via R Markdown
-# c files: Compiles via whatever compiler is set to cc. Usually gcc.
-# py files: runs via python command
-# go files: compiles and runs with "go run"
-# config.h files: (For suckless utils) recompiles and installs program.
-# all others: run `sent` to show a presentation
+# Compiles .tex. groff (.mom, .ms), .rmd, .md.
+# Opens .sent files as sent presentations.
+# Runs scripts based on extention or shebang
 
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
 base="${file%.*}"
-shebang=$(sed -n 1p "$file")
 
 cd "$dir" || exit
 
@@ -29,22 +22,16 @@ textype() { \
 	$command --output-directory="$dir" "$base"
 	}
 
-shebangtest() {
-	case "$shebang" in
-		\#\!*) "$file" ;;
-		*) sent "$file" 2>/dev/null & ;;
-	esac
-}
-
 case "$file" in
 	*\.ms) refer -PS -e "$file" | groff -me -ms -kejpt -T pdf > "$base".pdf ;;
 	*\.mom) refer -PS -e "$file" | groff -mom -kejpt -T pdf > "$base".pdf ;;
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
 	*\.tex) textype "$file" ;;
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
-	*config.h) make && sudo make install ;;
+	*config.h) sudo make install ;;
         *\.c) cc "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;
 	*\.go) go run "$file" ;;
-	*) shebangtest ;;
+	*\.sent) setsid sent "$file" 2>/dev/null & ;;
+	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac
