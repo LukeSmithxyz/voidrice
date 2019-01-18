@@ -17,21 +17,21 @@ getmount() { \
 
 mountusb() { \
 	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?" | awk '{print $1}')"
-	sudo -A mount "$chosen" && notify-send "$chosen mounted." && exit 0
+	sudo -A mount "$chosen" && notify-send -i "$PIX/usb.svg" "$chosen mounted." && exit 0
 	getmount "/mnt /media /mount /home -maxdepth 5 -type d"
 	partitiontype="$(lsblk -no "fstype" "$chosen")"
 	case "$partitiontype" in
 		"vfat") sudo -A mount -t vfat "$chosen" "$mp" -o rw,umask=0000;;
 		*) sudo -A mount "$chosen" "$mp"; user="$(whoami)"; ug="$(groups | awk '{print $1}')"; sudo -A chown "$user":"$ug" 741 "$mp";;
 	esac
-	notify-send "$chosen mounted to $mp."
+	notify-send -i "$PIX/usb.svg" "$chosen mounted to $mp."
 	}
 
 mountandroid() { \
 	chosen=$(echo "$anddrives" | dmenu -i -p "Which Android device?" | cut -d : -f 1)
 	getmount "$HOME -maxdepth 3 -type d"
 	simple-mtpfs --device "$chosen" "$mp"
-	notify-send "Android device mounted to $mp."
+	notify-send -i "$PIX/android.svg" "Android device mounted to $mp."
 	}
 
 asktype() { \
