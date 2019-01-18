@@ -3,7 +3,7 @@
 
 ping -q -w 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 
-notify-send -i "$PIX/larbs.gif" "Checking for pacakge updates..."
+notify-send -i "$PIX/larbs.svg" "Checking for pacakge updates..."
 
 sudo pacman -Syyuw --noconfirm || notify-send "Error downloading updates.
 
