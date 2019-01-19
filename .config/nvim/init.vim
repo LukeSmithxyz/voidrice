@@ -1,21 +1,22 @@
-"        _
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-"   \_/ |_|_| |_| |_|_|  \___|
-
-let mapleader =" "
+let mapleader =","
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
+set bg=light
+set mouse=a
+set nohlsearch
+set clipboard=unnamedplus
 " Some basics:
-	color peachpuff
 	set nocompatible
 	filetype plugin on
 	syntax on
@@ -35,6 +36,10 @@ call plug#end()
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
 
+" Nerd tree
+	map <C-n> :NERDTreeToggle<CR>
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
@@ -52,7 +57,7 @@ call plug#end()
 	nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
+	map <leader>c :w! \| !compiler <c-r>%<CR>
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
@@ -62,16 +67,10 @@ call plug#end()
 
 " Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
-
-" Readmes autowrap text:
-	autocmd BufRead,BufNewFile *.md set tw=79
-
-" Use urlscan to choose and open a url:
-	:noremap <leader>u :w<Home> !urlscan -r 'linkhandler {}'<CR>
-	:noremap ,, !urlscan -r 'linkhandler {}'<CR>
 
 " Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
 	vnoremap <C-c> "+y
@@ -86,22 +85,15 @@ call plug#end()
 	autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost ~/.bm* !shortcuts
+	autocmd BufWritePost ~/.bmdirs,~/.bmfiles !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 
 " Navigating with guides
-	inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
-	vnoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
-	map <Space><Tab> <Esc>/<++><Enter>"_c4l
-
- "____        _                  _
-"/ ___| _ __ (_)_ __  _ __   ___| |_ ___
-"\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
- "___) | | | | | |_) | |_) |  __/ |_\__ \
-"|____/|_| |_|_| .__/| .__/ \___|\__|___/
-              "|_|   |_|
+	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+	vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+	map <leader><leader> <Esc>/<++><Enter>"_c4l
 
 """LATEX
 	" Word count:
