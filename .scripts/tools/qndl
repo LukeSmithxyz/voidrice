@@ -1,0 +1,11 @@
+#!/bin/sh
+# $1 is a url; $2 is a command
+[ -z "$1" ] && exit
+base="$(basename "$1")"
+notify-send -i "$PIX/dl.svg" "Queuing $base..."
+cmd="$2"
+[ -z "$cmd" ] && cmd="youtube-dl --add-metadata"
+idnum="$(tsp $cmd "$1")"
+realname="$(echo "$base" | sed "s/?\(source\|dest\).*//;s/%20/ /g")"
+tsp -D "$idnum" mv "$base" "$realname"
+tsp -D "$idnum" notify-send -i "$PIX/check.svg" "$realname done."
