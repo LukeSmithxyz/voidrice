@@ -23,7 +23,7 @@ mountusb() { \
 	eval declare -A devices=($hmap)
 	chosen=${devices["$device"]}
 
-	sudo -A mount "$chosen" && notify-send -i "$PIX/usb.svg" "$chosen mounted." && exit 0
+	sudo -A mount "$chosen" && notify-send -i "$PIX/usb.svg" "$device mounted." && exit 0
 	getmount "/mnt /media /mount /home -maxdepth 5 -type d"
 	partitiontype="$(lsblk -no "fstype" "$chosen")"
 	case "$partitiontype" in
