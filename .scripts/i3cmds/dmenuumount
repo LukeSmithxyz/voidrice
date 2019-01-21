@@ -5,9 +5,16 @@
 
 unmountusb() {
 	[ -z "$drives" ] && exit
-	chosen=$(echo "$drives" | dmenu -i -p "Unmount which drive?" | awk '{print $1}')
+
+	keys=$(echo -e $drives | awk '/name/{ if ($6 != "null") printf "%s (%s)\\n", $6, $4; else printf "%s (%s)\\n", $2, $4; }')
+	map=$(echo -e $drives | awk '/name/{ if ($6 != "null") printf "[\"%s\"]=%s\n", $6, $2; else printf "[\"%s\"]=%s\n", $2, $2; }')
+	chosen="$(echo -e "$keys" | sort -r | dmenu -i -p "Unmount which drive?" | awk '{print $1}')"
+
+	eval declare -A devices=($map)
+	mp=${devices["$chosen"]}
+
 	[ -z "$chosen" ] && exit
-	sudo -A umount "$chosen" && pgrep -x dunst && notify-send -i "$PIX/usb.svg" "$chosen unmounted."
+	sudo -A umount "$mp" && pgrep -x dunst && notify-send -i "$PIX/usb.svg" "$chosen unmounted."
 	}
 
 unmountandroid() { \
@@ -23,7 +30,7 @@ asktype() { \
 	esac
 	}
 
-drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$2=="part"&&$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
+drives=$(lsblk -Jplf -o name,size,label,type,mountpoint | tr -d " \"{}" | sed 's/:\|,/ /g' | awk /name/'{ if ($NF != "null" && $NF !~/\/boot|\/home$|SWAP/&&length($NF)>1 && $8 == "part") printf "%s\\n", $0; }')
 
 if ! grep simple-mtpfs /etc/mtab; then
 	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
