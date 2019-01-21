@@ -35,6 +35,7 @@ set $hibernate sudo -A systemctl suspend
 # General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] scratchpad show
 for_window [instance="dropdown_tmuxdd"] resize set 625 450
 for_window [instance="dropdown_dropdowncalc"] resize set 800 300
