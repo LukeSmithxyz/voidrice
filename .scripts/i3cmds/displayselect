@@ -65,7 +65,7 @@ chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
-	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$screens" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
+	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 
 setbg		# Fix background if screen size/arangement has changed.
