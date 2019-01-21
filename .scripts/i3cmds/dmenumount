@@ -16,11 +16,11 @@ getmount() { \
 	}
 
 mountusb() { \
-	keys=$(echo -e $usbdrives | awk '/name/{ if ($6 != "null") printf "%s (%s)\\n", $6, $4; else printf "%s (%s)\\n", $2, $4; }')
-	map=$(echo -e $usbdrives | awk '/name/{ if ($6 != "null") printf "[\"%s\"]=%s\n", $6, $2; else printf "[\"%s\"]=%s\n", $2, $2; }')
+	keys=$(echo -e "$usbdrives" | awk '{ printf "%s (%s)\\n", $2 != "null" ? $2 : $1, $3; }')
+	hmap=$(echo -e "$usbdrives" | awk '{ printf "[\"%s\"]=%s\n", $2 != "null" ? $2 : $1, $1; }')
 	device="$(echo -e "$keys" | sort -r | dmenu -i -p "Mount which drive?" | awk '{print $1}')"
 
-	eval declare -A devices=($map)
+	eval declare -A devices=($hmap)
 	chosen=${devices["$device"]}
 
 	sudo -A mount "$chosen" && notify-send -i "$PIX/usb.svg" "$chosen mounted." && exit 0
@@ -48,7 +48,9 @@ asktype() { \
 	}
 
 anddrives=$(simple-mtpfs -l 2>/dev/null)
-usbdrives=$(lsblk -Jplf -o name,size,label,type,mountpoint | tr -d " \"{}" | sed 's/:\|,/ /g' | awk /name/'{ if ($NF == "null" && $8 == "part") printf "%s\\n", $0; }')
+usbdrives=$(lsblk -Jplf -o name,label,size,type,mountpoint | tr -d " \"{}" | sed 's/:\|,/ /g' | awk '/name/ && $NF=="null" && $8=="part"{print $2, $4, $6; }')
+
+echo "$usbdrives"
 
 if [ -z "$usbdrives" ]; then
 	[ -z "$anddrives" ] && echo "No USB drive or Android device detected" && exit

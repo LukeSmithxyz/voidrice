@@ -6,11 +6,11 @@
 unmountusb() {
 	[ -z "$drives" ] && exit
 
-	keys=$(echo -e $drives | awk '/name/{ if ($6 != "null") printf "%s (%s)\\n", $6, $4; else printf "%s (%s)\\n", $2, $4; }')
-	map=$(echo -e $drives | awk '/name/{ if ($6 != "null") printf "[\"%s\"]=%s\n", $6, $2; else printf "[\"%s\"]=%s\n", $2, $2; }')
+	keys=$(echo -e "$drives" | awk '{ printf "%s (%s)\n", $2 != "null" ? $2 : $1, $3; }')
+	hmap=$(echo -e "$drives" | awk '{ printf "[\"%s\"]=%s\n", $2 != "null" ? $2 : $1, $1; }')
 	chosen="$(echo -e "$keys" | sort -r | dmenu -i -p "Unmount which drive?" | awk '{print $1}')"
 
-	eval declare -A devices=($map)
+	eval declare -A devices=($hmap)
 	mp=${devices["$chosen"]}
 
 	[ -z "$chosen" ] && exit
@@ -30,7 +30,7 @@ asktype() { \
 	esac
 	}
 
-drives=$(lsblk -Jplf -o name,size,label,type,mountpoint | tr -d " \"{}" | sed 's/:\|,/ /g' | awk /name/'{ if ($NF != "null" && $NF !~/\/boot|\/home$|SWAP/&&length($NF)>1 && $8 == "part") printf "%s\\n", $0; }')
+drives=$(lsblk -Jplf -o name,label,size,type,mountpoint | tr -d " \"{}" | sed 's/:\|,/ /g' | awk '/name/ && $NF != "null" && $NF !~/\/boot|\/home$|SWAP/&&length($NF)>1 && $8=="part" {print $2, $4, $6;}')
 
 if ! grep simple-mtpfs /etc/mtab; then
 	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
