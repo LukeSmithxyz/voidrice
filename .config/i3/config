@@ -164,7 +164,7 @@ bindsym $mod+Shift+a		exec $term -e pulsemixer
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
-bindsym $mod+d			exec --no-startup-id dmenu_run
+bindsym $mod+d                  exec --no-startup-id dmenu_run -nb '$darkblack' -nf '$white' -sb '$darkblue' -sf '$white'
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
