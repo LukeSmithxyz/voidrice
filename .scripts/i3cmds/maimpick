@@ -4,6 +4,6 @@ case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area
 	"current window") maim -i "$(xdotool getactivewindow)" pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
 	"full screen") maim pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
 	"a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
-	"current window (copy)") maim -i | xclip -selection clipboard -t image/png ;;
+	"current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
 	"full screen (copy)") maim | xclip -selection clipboard -t image/png ;;
 esac
