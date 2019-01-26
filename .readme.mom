@@ -166,7 +166,7 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+r\fP \(en ranger (file browser/manager)
 .ITEM
-\f(CWMod+e\fP \(en mutt (email)
+\f(CWMod+e\fP \(en mutt (email; not installed by default, see below)
 .ITEM
 \f(CWMod+m\fP \(en ncmpcpp (music player)
 .ITEM
@@ -360,10 +360,13 @@ LARBS is also compatible with pywal, but it is not installed or used by default 
 .HEADING 2 "How do I set up my email?"
 .LI
 .ITEM
+Install \f(CWneomutt\fP, \f(CWofflineimap\fP and \f(CWmsmtp\fP if you haven't already.
+.ITEM
 Create a GPG private/public key pair if you haven't already. Type \f(CWmod+shift+e\fP and you can select a tutorial for how to do this.
 .ITEM
  Download the mutt-wizard repository to the mutt config directory:
 \f(CWgit clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt\fP
+\fBREAD THE README.\fP
 .PP
 .ITEM
 There run \f(CWmutt-wizard.sh\fP and follow the directions, specifically:
