@@ -74,7 +74,7 @@ If you'd like to change any of these keyboard changes, you need only open and ch
 Actually, this should go without saying, but \fIeverything\fP here can easily be changed.
 .PP
 Additionally, while this isn't a part of i3, the default editing mode in the shell is using vi bindings.
-If you want to learn more of this, run \f(CWMod+Super+E\fP and type and select the option for "vi mode in shell".
+If you want to learn more of this, run \f(CWMod+Shift+E\fP and type and select the option for "vi mode in shell".
 This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.inputrc\fP.
 .HEADING 2 "The Status Bar"
 .PP
