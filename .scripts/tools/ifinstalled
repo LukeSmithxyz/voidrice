@@ -1,3 +1,3 @@
 #!/bin/sh
 # If $1 command is not available, error code and notify.
-command -v "$1" >/dev/null || { notify-send "$1 is not installed." && exit 1 ;}
+command -v "$1" >/dev/null || { notify-send -i "$PIX/larbs.svg" "<b>$1</b> must be installed for this function." && exit 1 ;}
