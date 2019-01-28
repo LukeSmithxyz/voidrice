@@ -15,7 +15,7 @@ This is a partial key list.
 	q	kill win	kill win
 	w	browser		browser
 	e	neomutt		tutorials
-	r	ranger		sudo ranger
+	r	ranger		winresize
 	t	toggle hor/vert	gaps=15px
 	y	calcurse	resize left
 	u	dropdown term	resize down
