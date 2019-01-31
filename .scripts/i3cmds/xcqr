@@ -1,6 +1,6 @@
 #!/bin/sh
 # Credit to Maddison Hellstrom (@b0o on Github)
-qrencode -o - -s 1 \
+ifinstalled feh && qrencode -o - -s 1 \
 	"$(xclip -out -selection clipboard)" |
 	feh --zoom max \
 		-F \
