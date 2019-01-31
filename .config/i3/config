@@ -292,6 +292,7 @@ bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
 bindsym $mod+F12	exec $term -e nmtui
+bindsym $mod+Shift+F12  exec keymap
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left

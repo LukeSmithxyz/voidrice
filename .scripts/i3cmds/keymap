@@ -1,0 +1,9 @@
+#!/bin/sh
+# A dmenu keymap script to change the languish
+# Its also easy to add xkb -options to this script
+list_default=$(localectl list-x11-keymap-layouts)
+list=$(sed '/! variant/,/^$/!d;/..:/!d;s/:/ /g' < /usr/share/X11/xkb/rules/evdev.lst| awk -F" " '{print $2" "$1}')
+list="$list_default$list"
+
+choice=$(printf "$list" | dmenu -i -p "$1" -nb darkblue -sb blue -sf white -nf gray )
+setxkbmap $choice
