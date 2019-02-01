@@ -1,0 +1,10 @@
+[Unit]
+Description=dunst notifications
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=dunst
+
+[Install]
+WantedBy=default.target
