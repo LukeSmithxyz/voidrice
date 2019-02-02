@@ -40,6 +40,13 @@ set clipboard=unnamedplus
 	map <C-n> :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" vimling:
+	nm <leader>d :call ToggleDeadKeys()<CR>
+	imap <leader>d <esc>:call ToggleDeadKeys()<CR>a
+	nm <leader>i :call ToggleIPA()<CR>
+	imap <leader>i <esc>:call ToggleIPA()<CR>a
+	nm <leader>q :call ToggleProse()<CR>
+
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
