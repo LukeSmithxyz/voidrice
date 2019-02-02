@@ -2,7 +2,7 @@ bf	~/.bmfiles
 bd	~/.bmdirs
 cfb	~/.bashrc
 cfz	~/.zshrc
-cfv	~/.vimrc
+cfv	~/.config/nvim/init.vim
 cfr	~/.config/ranger/rc.conf
 cfi	~/.config/i3/config
 cfq	~/.config/qutebrowser/config.py
