@@ -6,10 +6,12 @@ transmission-remote -l | grep % |
 	s/.*Seeding.*/Z/g;
 	s/.*100%.*/N/g;
 	s/.*Idle.*/B/g;
+	s/.*Uploading.*/L/g;
 	s/.*%.*/M/g" |
 		sort -h | uniq -c | sed " # Now we replace the standin letters with icons.
 				s/A/🛑/g;
 				s/B/⌛️/g;
+				s/L/🔼/g;
 				s/M/🔽/g;
 				s/N/✅/g;
 				s/Z/🌱/g" | awk '{print $2, $1}' | tr '\n' ' ' | sed -e "s/ $//g"
@@ -18,7 +20,8 @@ case $BLOCK_BUTTON in
     1) $TERMINAL -e transmission-remote-cli ;;
     3) pgrep -x dunst >/dev/null && notify-send "<b>Torrent module:</b>
 🛑: paused
-⏳: waiting
+⏳: idle (seeds needed)
+🔼: uploading (unfinished)
 🔽: downloading
 ✅: done
 🌱: done and seeding" ;;

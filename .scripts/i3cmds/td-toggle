@@ -1,15 +1,10 @@
 #!/bin/sh
-
 # If transmission-daemon is running, will ask to kill, else will ask to start.
-
-[ ! -f /usr/bin/transmission-daemon ] && notify-send "Transmission daemon not installed." && exit
-
-if  pgrep -x transmission-da >/dev/null ;
+if pgrep -x transmission-da >/dev/null ;
 then
-	yn=$(printf "No\\nYes" | dmenu -i -p "Kill transmission-daemon?")
-	[ "$yn" = "Yes" ] && killall transmission-da
+	[ "$(printf "No\\nYes" | dmenu -i -p "Kill transmission-daemon?")" = "Yes" ] && killall transmission-da && notify-send -i "$PIX/torrent.svg" "transmission-daemon killed."
 else
-	yn=$(printf "No\\nYes" | dmenu -i -p "Start transmission daemon?")
-	[ "$yn" = "Yes" ] && transmission-daemon
+	ifinstalled transmission-cli || exit
+	[ "$(printf "No\\nYes" | dmenu -i -p "Start transmission daemon?")" = "Yes" ] && transmission-daemon && notify-send -i "$PIX/torrent.svg" "tranmission-daemon started."
 fi
 sleep 3 && pkill -RTMIN+7 i3blocks

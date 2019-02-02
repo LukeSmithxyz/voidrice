@@ -11,7 +11,7 @@
 ## ncmpcpp.
 ##
 #
-#ncmpcpp_directory = ~/.ncmpcpp
+ncmpcpp_directory = ~/.config/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
