@@ -7,12 +7,7 @@ queuefile="$HOME/.local/share/newsboat/queue"
 while read -r line; do
 	[ -z "$line" ] && continue
 	url="$(echo "$line" | awk '{print $1}')"
-	base="$(basename "$url")"
-	notify-send -i "$PIX/dl.png" "Queuing $base..."
-	idnum="$(tsp curl -LO "$url")"
-	realname="$(echo "$base" | sed "s/?\(source\|dest\).*//;s/%20/ /g")"
-	tsp -D "$idnum" mv "$base" "$realname"
-	tsp -D "$idnum" notify-send -i "$PIX/check.png" "$realname done."
+	qndl "$url" "curl -LO"
 done < "$queuefile"
 
 echo > "$queuefile"

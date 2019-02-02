@@ -49,7 +49,7 @@ morescreen() { # If multi-monitor is selected and there are more than two screen
 
 multimon() { # Multi-monitor handler.
 	case "$(echo "$screens" | wc -l)" in
-		1) xrandr $(echo "$allposs" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
+		1) xrandr $(echo "$allposs" | grep -v "$screens" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 		2) twoscreen ;;
 		*) morescreen ;;
 	esac ;}
@@ -65,7 +65,7 @@ chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
-	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$screens" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
+	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 
 setbg		# Fix background if screen size/arangement has changed.

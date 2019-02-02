@@ -44,6 +44,8 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
+# mpd startup
+exec --no-startup-id mpd
 # Setting the background:
 exec --no-startup-id setbg
 # Starts dunst for notifications:
@@ -56,8 +58,6 @@ exec --no-startup-id remaps
 exec --no-startup-id unclutter
 # Run the script to update the mpd i3block on change.
 exec_always --no-startup-id mpdupdate
-# mpd startup
-exec --no-startup-id mpd
 # Podboat automatic queue and download
 exec_always --no-startup-id podentr
 
@@ -198,7 +198,7 @@ bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdow
 bindsym $mod+c			exec --no-startup-id freealf
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
 
-bindsym $mod+v			exec --no-startup-id st -e vim -c "VimwikiIndex"
+bindsym $mod+v			exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
 #bindsym $mod+Shift+v
 
 bindsym $mod+b			bar mode toggle
@@ -267,11 +267,10 @@ bindsym $mod+Shift+0	move container to workspace $ws10
 
 for_window [class="Pinentry"] sticky enable
 for_window [class="sent"] border pixel 0px
-for_window [class="Blender"] move to workspace $ws6
-for_window [class="marble"] move to workspace $ws7
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
-for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [title="Default - Wine desktop"] floating enable
 
 # Bindings to make the webcam float and stick.
@@ -286,7 +285,7 @@ bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 bindsym $mod+F5		exec --no-startup-id $netrefresh
-bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
+bindsym $mod+F6		exec --no-startup-id torwrap
 bindsym $mod+F7		exec --no-startup-id td-toggle
 bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
@@ -413,5 +412,3 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
-
-exec --no-startup-id lukescripts

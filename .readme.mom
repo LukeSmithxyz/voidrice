@@ -13,10 +13,10 @@
 Use vim keys (\f(CWh/j/k/l\fP) to navigate this document.
 Pressing \f(CWs\fP will fit it to window width (\f(CWa\fP to revert).
 \f(CWK\fP and \f(CWJ\fP zoom in and out.
-\f(CWMod+f\fP to toggle fullscreen.
+\f(CWSuper+f\fP to toggle fullscreen.
 \f(CWf\fP will highlight links to follow which are selectable by typing the number that appears plus \f(CWEnter\fP.
 \f(CWq\fP to quit.
-(These are general zathura shortcuts.)
+(These are general shortcuts of \f(CWzathura\fP, the pdf reader.)
 .LI
 .ITEM
 \f(CWMod+F1\fP will show this document at any time.
@@ -35,8 +35,9 @@ My website:
 .PDF_WWW_LINK "https://lukesmith.xyz"
 .ITEM
 Donate:
-.PDF_WWW_LINK "https://paypal.me/LukeMSmith/20" "https://paypal.me/LukeMSmith"
+.PDF_WWW_LINK "https://lukesmith.xyz/donate" "https://lukesmith.xyz/donate"
 .LIST OFF
+FAQs are at the end of this document.
 .HEADING 1 "Welcome!"
 .HEADING 2 "Basic goals and principles of this system:"
 .LI
@@ -69,12 +70,11 @@ but you can also hold it down and it will act as another Windows/super/mod key.
 The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button.
 This is to make one-handing on laptops easier.
 .LIST OFF
-.PP
 If you'd like to change any of these keyboard changes, you need only open and change \f(CW~/.scripts/tools/remaps\fP.
 Actually, this should go without saying, but \fIeverything\fP here can easily be changed.
 .PP
 Additionally, while this isn't a part of i3, the default editing mode in the shell is using vi bindings.
-If you want to learn more of this, run \f(CWMod+Super+E\fP and type and select the option for "vi mode in shell".
+If you want to learn more of this, run \f(CWMod+Shift+E\fP and type and select the option for "vi mode in shell".
 This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.inputrc\fP.
 .HEADING 2 "The Status Bar"
 .PP
@@ -113,13 +113,17 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
  , Be sure you play around with these. Be flexible with the basic commands and the system will grow on you quick.
 .LI
 .ITEM
-\f(CWMod+Enter\fP \(en Spawn terminal
+\f(CWMod+Enter\fP \(en Spawn terminal (the default terminal is \f(CWst\fP; run \f(CWman st\fP for more.)
 .ITEM
 \f(CWMod+q/Q\fP \(en Close window
 .ITEM
 \f(CWMod+d\fP \(en dmenu (For running commands or programs without shortcuts)
 .ITEM
-\f(CWMod+t\fP \(en Toggle between spawning vertically and horizontally
+\f(CWMod+t\fP \(en Toggle between spawning vertically and horizontally\c
+.FOOTNOTE
+You may notice that one side of your window border is a different color.
+This indicates the direction that the next window will spawn.
+.FOOTNOTE END
 .ITEM
 \f(CWMod+f\fP \(en Fullscreen
 .ITEM
@@ -152,7 +156,7 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+B\fP \(en Toggle window float in bottom left corner (good for video watched intermittently)
 .ITEM
-\f(CWMod+N\fP \(en Same as above, but for the botttom right corner.
+\f(CWMod+N\fP \(en Same as above, but for the bottom right corner.
 .LIST OFF
 .HEADING 2 "Basic Programs"
 .PP
@@ -162,7 +166,7 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+r\fP \(en ranger (file browser/manager)
 .ITEM
-\f(CWMod+e\fP \(en mutt (email)
+\f(CWMod+e\fP \(en mutt (email; not installed by default, see below)
 .ITEM
 \f(CWMod+m\fP \(en ncmpcpp (music player)
 .ITEM
@@ -300,42 +304,51 @@ previous recordings as their names are based on their exact times.
 I've mapped those extra buttons that some keyboards have (play and pause
 buttons, screen brightness, email, web browsing buttons, etc.) to what you
 would expect.
-.HEADING 1 "Special traits of this system"
-.HEADING 2 "Easy config access"
+.HEADING 1 "Bookmarking Files and Directories"
 .PP
-Open a terminal and type \f(CWbf\fP. This will open a file where you will see
-customizable pairs of key shortcuts and config files and other important text
-files. Enter any of these shortcuts in bash or ranger to immediately open the
-file in vim.
+Note the files \f(CW~/.bmdirs\fP and \f(CW~/.bmfiles\fP.
+These files hold bookmarked directories and files respectively, along with shortcut keys to their left.
+LARBS, specfically the \f(CWshortcuts\fP script, will automatically read these files and autogenerate aliases and shortcuts for bash/zsh and ranger from them.
 .PP
-You may add new entries here and they will be refreshed when you save the file
-in vim. This will take effect immediately once you start a new instance of bash
-or ranger or reload your previous sessions.
-.HEADING 2 "Folder and config shortcuts"
+For example, by default, the shortcut key for \f(CW~/Documents\fP is simply \f(CWd\fP.
+Thus, if you type and run \f(CWd\fP in bash, you will automatically \f(CWcd\fP to \f(CW~/Documents\fP.
+It also generates four ranger shortcuts using the shortcut \f(CWd\fP:
+.LI
+.ITEM
+\f(CWgd\fP \(en
+Go to \f(CW~/Documents\fP
+.ITEM
+\f(CWmd\fP \(en
+Move (mv) selected file(s) to \f(CW~/Documents\fP
+.ITEM
+\f(CWtd\fP \(en
+Create a new tab in \f(CW~/Documents\fP
+.ITEM
+\f(CWYd\fP \(en
+Copy/yank (cp) a copy of the selected file(s) to \f(CWDocuments\fP
+.LIST OFF
+Shortcuts like these are generated for all key sequence/directory pairs in \f(CW~/.bmdirs\fP.
+Additionally, you may also add editable files to \f(CW~/.bmfiles\fP.
+Each key sequence you pair with a file will become an alias to edit it in either bash or ranger.
 .PP
-Open a terminal and type \f(CWbd\fP. This opens a file when you can keep and create
-directory/folder shortcuts. There are only a few here now, because I don't know
-what your folder structure is going to look like, but on my machine, I have 109
-and growing.
-.PP
-Each line has a shortcut key/keys and its target. These can be used in several
-applications. In bash, simply press \f(CWd\fP, the shortcut for \f(CW~/Documents\fP and you
-will cd there (and automatically \f(CWls -a\fP).
-.PP
-ranger works similarly.
-When in ranger, just press \f(CWg\fP then the shortcut of the folder you want to go to.
-You may also press \f(CWt\fP plus the shortcut to open a new tab there.
-\f(CWm\fP plus the shortcut moves the selected files to the folder and \f(CWY\fP copies them there.
-\fBGet good at this. It will make management of even the most complex file system easy.\fP
-.HEADING 2 "Dynamically constructed configs"
-.PP
-Each time you save changes to either the config shortcut file or the folder shortcut file in vim, vim will automatically run a bash script that updates your bash/ranger config, allowing you to use your new shortcuts in your next instance of bash/ranger or after resourcing your rc files.
+Whenever you edit and save one of the bookmark files, vim will automatically rerun the shortcut script, thus uupdating the shortcuts that will be used in new instances of bash and ranger.
+It just werks.
+Note that it is your responsibility to ensure that none of the bindings you add conflict with another necessary function or command.
 .HEADING 1 "Frequently Asked Questions (FAQs)"
+.HEADING 2 "My keyboard isn't working as expected!"
+.PP
+LARBS runs some custom keyboard settings in \f(CW~/.scripts/tools/remaps\fP.
+These settings may override your preferred settings, so you should open this file and comment out troublesome lines if you have issues.
+.HEADING 2 "My audio isn't working!"
+.PP
+Sometimes, PulseAudio can be finicky on initial installation and configuration.
+If you have no audio output, chances are your problems will be resolved by a reboot or manually killing and restarting PulseAudio.
+You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWpulsemixer\fP (\f(CWmod+A\fP).
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
-The easiest way is to use ranger, navigate to the file you want as your background, and press \f(CWbg\fP.
-To be specific, i3 will always be looking to the file in \f(CW~/.config/wall.png\fP for the wallpaper, this ranger command copies the given file there and reruns feh to update it.
-So if you want a persistent wallpaper, move/rename it to \f(CW~/.config/wall.png\fP.
+The i3 configuration will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
+The script \f(CWsetbg\fP, if run on an image will set it as the persistent background.
+When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
 .PP
 You can edit \f(CW~/.Xresources\fP to change the colorscheme.
@@ -347,10 +360,13 @@ LARBS is also compatible with pywal, but it is not installed or used by default 
 .HEADING 2 "How do I set up my email?"
 .LI
 .ITEM
-Create a GPG private/public key pair if you haven't already.
+Install \f(CWneomutt\fP, \f(CWofflineimap\fP and \f(CWmsmtp\fP if you haven't already.
+.ITEM
+Create a GPG private/public key pair if you haven't already. Type \f(CWmod+shift+e\fP and you can select a tutorial for how to do this.
 .ITEM
  Download the mutt-wizard repository to the mutt config directory:
 \f(CWgit clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt\fP
+\fBREAD THE README.\fP
 .PP
 .ITEM
 There run \f(CWmutt-wizard.sh\fP and follow the directions, specifically:
@@ -360,7 +376,7 @@ Add an account.
 .ITEM
 Run \f(CWofflineimap -o\fP in the terminal.
 .ITEM
-Select the "Autodetect mailboxes" option.
+Then select the "Autodetect mailboxes" option.
 .LIST OFF
 .LIST OFF
 .PP
@@ -379,6 +395,12 @@ By default, mpd, the music daemon assumes that \f(CW~/Music\fP is your music dir
 This can be changed in \f(CW~/.config/mpd/mpd.conf\fP.
 When you add music to your music folder, you may have to run \f(CWmpc up\fP in the terminal to update the database.
 mpd is controlled by ncmpcpp, which is accessible by \f(CWMod+m\fP.
+.HEADING 2 "How do I update LARBS?"
+.PP
+LARBS is deployed as a git repository in your home directory.
+You can use it as such to fetch, diff and merge changes from the remote repository.
+If you don't want to do that or don't know how to use git, you can actually just rerun the script (as root) and reinstall LARBS and it will automatically update an existing install if you select the same username.
+This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
 .HEADING 1 "Contact"
 .LI
 .ITEM
@@ -388,15 +410,12 @@ mpd is controlled by ncmpcpp, which is accessible by \f(CWMod+m\fP.
 .PDF_WWW_LINK "http://lukesmith.xyz" "https://lukesmith.xyz"
 \(en For stalking!
 .ITEM
-.PDF_WWW_LINK "https://paypal.me/LukeMSmith" "PayPal"
-\(en For gratitude!
-.ITEM
-.PDF_WWW_LINK "https://patreon.com/lukesmith" "Patreon"
-\(en For support!
+.PDF_WWW_LINK "https://lukesmith.xyz/donate" "https://lukesmith.xyz/donate"
+\(en To incentivize more development of LARBS!
 .ITEM
 .PDF_WWW_LINK "https://github.com/LukeSmithxyz" "My Github Page"
 \(en For the code behind it!
 .ITEM
 .PDF_WWW_LINK "http://lukesmith.xyz/rss.xml" "RSS"
-\(en For even better updates!
+\(en For updates!
 .LIST OFF
