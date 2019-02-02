@@ -28,7 +28,7 @@ set clipboard=unnamedplus
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set linebreak<CR>
+	map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
@@ -104,7 +104,7 @@ set clipboard=unnamedplus
 
 """LATEX
 	" Word count:
-	autocmd FileType tex map <leader><leader>o :w !detex \| wc -w<CR>
+	autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 	" Code snippets
 	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
