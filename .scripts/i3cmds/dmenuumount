@@ -13,7 +13,7 @@ unmountusb() {
 unmountandroid() { \
 	chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | dmenu -i -p "Unmount which device?")
 	[ -z "$chosen" ] && exit
-	fusermount -u "$chosen" && pgrep -x dunst && notify-send -i "$PIX/android.svg" "$chosen unmounted."
+	sudo -A umount -l "$chosen" && pgrep -x dunst && notify-send -i "$PIX/android.svg" "$chosen unmounted."
 	}
 
 asktype() { \
