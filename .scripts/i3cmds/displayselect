@@ -34,8 +34,13 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
 
         primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
         secondary=$(echo "$screens" | grep -v "$primary")
-        direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
-        xrandr --output "$primary" --auto --scale 1.0x1.0 --output "$secondary" --"$direction"-of "$primary" --auto --scale 1.0x1.0
+        direction=$(printf "left\\nright\\nabove\\nbelow" | dmenu -i -p "What side of $primary should $secondary be on?")
+
+	# xrandr uses -of as ending for left and right
+	if [ "$direction" = "left" ] || [ "$direction" = "right"]; then
+		$direction=$(printf "%s-of" "$direction")
+	fi
+        xrandr --output "$primary" --auto --scale 1.0x1.0 --output "$secondary" --"$direction" "$primary" --auto --scale 1.0x1.0
     fi
     }
 
