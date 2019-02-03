@@ -415,4 +415,4 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 bindsym XF86WLAN		exec $netrefresh
 
 # more?
-bindsym $mod+Shift+v layout toggle all
+bindsym $mod+Shift+V layout toggle all
