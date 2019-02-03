@@ -44,6 +44,8 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
+# mpd startup
+exec --no-startup-id mpd
 # Setting the background:
 exec --no-startup-id setbg
 # Starts dunst for notifications:
@@ -56,8 +58,6 @@ exec --no-startup-id remaps
 exec --no-startup-id unclutter
 # Run the script to update the mpd i3block on change.
 exec_always --no-startup-id mpdupdate
-# mpd startup
-exec --no-startup-id mpd
 # Podboat automatic queue and download
 exec_always --no-startup-id podentr
 

@@ -172,7 +172,7 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+w\fP \(en nmtui (for connecting to wireless internet)
 .ITEM
-\f(CWMod+a\fP \(en R/Python calculator (hide with \f(CWmod+a\fP)
+\f(CWMod+a\fP \(en Dropdown calculator (hide with \f(CWmod+a\fP)
 .ITEM
 \f(CWMod+i\fP \(en htop (system info)
 .ITEM
@@ -258,7 +258,7 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 .ITEM
 \f(CWMod+]\fP \(en Forward 10 seconds (holding shift increases amount)
 .ITEM
-\f(CWMod+A\fP \(en ncpamixer (general volume sink/source control)
+\f(CWMod+A\fP \(en pulsemixer (general volume sink/source control)
 .LIST OFF
 .HEADING 2 "Workspaces"
 .PP
@@ -287,9 +287,9 @@ All of these recording shortcuts will output into \f(CW~\fP, and will not overwr
 previous recordings as their names are based on their exact times.
 .LI
 .ITEM
-\f(CWPrintScreen\fP \(en Take a scrot screenshot
+\f(CWPrintScreen\fP \(en Take a screenshot
 .ITEM
-\f(CWShift+PrintScreen\fP \(en Take a scrot screenshot of only selected window
+\f(CWShift+PrintScreen\fP \(en Select area to screenshot
 .ITEM
 \f(CWMod+PrintScreen\fP \(en Opens dmenu menu to select kind of audio/video recording
 .ITEM
