@@ -1,9 +1,0 @@
-#!/bin/sh
-# Pause mpd and send the pause key to all mpv videos:
-mpc pause >/dev/null 2>&1
-pauseallmpv >/dev/null 2>&1
-
-i3lock -e -f -c 1d2021
-
-# In five seconds, turn off display unless key press in last 4 seconds.
-sleep 5 && [ 4000 -lt "$(xssstate -i)" ] &&  pgrep -x i3lock && xset dpms force off
