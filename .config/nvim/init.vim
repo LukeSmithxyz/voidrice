@@ -92,7 +92,7 @@ set clipboard=unnamedplus
 	autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost ~/.bmdirs,~/.bmfiles !shortcuts
+	autocmd BufWritePost ~/.config/larbs/bmdirs,~/.config/larbs/bmfiles !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %

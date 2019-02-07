@@ -1,7 +1,7 @@
-bf	~/.bmfiles
-bd	~/.bmdirs
+bf	~/.config/larbs/bmfiles
+bd	~/.config/larbs/bmdirs
 cfb	~/.bashrc
-cfa	~/.aliasrc
+cfa	~/.config/larbs/aliasrc
 cfz	~/.zshrc
 cfv	~/.config/nvim/init.vim
 cfr	~/.config/ranger/rc.conf
