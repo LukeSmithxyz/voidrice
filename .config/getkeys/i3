@@ -13,7 +13,7 @@ This is a partial key list.
 	=	+ vol		++ vol
 	+	+ vol		++ vol
 	q	kill win	kill win
-	w	browser		browser
+	w	nmtui (wlan)	browser
 	e	neomutt		tutorials
 	r	ranger		winresize
 	t	toggle hor/vert	gaps=15px
@@ -39,12 +39,11 @@ This is a partial key list.
 	z	+ outer gaps	- outer gaps
 	x	lock screen	shutdown
 	c			webcam
-	v
-	b	bar on/off	stick/float win
-	n	newsboat
+	v	open Vimwiki
+	b	bar on/off	stick/float win (left)
+	n	newsboat	stick/float win (right)
 	m	ncmpcpp		mute audio
 	,	previous song	restart song
 	<	previous song	restart song
-	.	next song
 	>	next song
 	/,?	fast win below	kill win
