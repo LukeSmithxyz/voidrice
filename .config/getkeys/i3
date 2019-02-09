@@ -43,7 +43,6 @@ This is a partial key list.
 	b	bar on/off	stick/float win (left)
 	n	newsboat	stick/float win (right)
 	m	ncmpcpp		mute audio
-	,	previous song	restart song
-	<	previous song	restart song
-	>	next song
-	/,?	fast win below	kill win
+	, <	previous song	restart song
+	. >	next song
+	/ ?	fast win below	kill win
