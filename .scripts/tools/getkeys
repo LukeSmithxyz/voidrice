@@ -1,4 +1,14 @@
 #!/bin/sh
-cat ~/.config/getkeys/"$1" 2>/dev/null && exit
+# Shows keyboard shortcuts for programs.
+# Program is chosen either by parameter or dmenu.
+
+keys_folder=~/.config/getkeys
+
+# use parameter:
+cat $keys_folder/"$1" 2>/dev/null && exit
 echo "Run command with one of the following arguments for info about that program:"
-ls ~/.config/getkeys
+ls $keys_folder
+
+# use dmenu:
+printf "\n\t---> or choose right now in dmenu\n"
+cat $keys_folder/$(ls $keys_folder | dmenu -i -l 20 -p "Show keybindings for:") 2>/dev/null
