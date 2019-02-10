@@ -18,7 +18,7 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-#lyrics_directory = ~/.lyrics
+lyrics_directory = ~/config/lyrics
 #
 ##### connection settings #####
 #
@@ -292,7 +292,7 @@ current_item_inactive_column_suffix = $/r$(end)
 ##
 ## Note: Possible display modes: classic, columns.
 ##
-#playlist_display_mode = columns
+playlist_display_mode = columns
 #
 browser_display_mode = columns
 #
@@ -521,7 +521,7 @@ empty_tag_color = magenta
 #
 #state_flags_color = default:b
 #
-#main_window_color = white
+main_window_color = white
 #
 #color1 = white
 #
