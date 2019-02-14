@@ -3,18 +3,16 @@
 # If given an argument with -u flag, will download file from given url and set the file as background. 
 # Without -u flag, will set local file as backgound. 
 
-if [ ! -z "$1" ]; then
-	if [ "$1" == "-u" ]; then
-		curl -o ~/.config/wall-temp.png "$2"
-		type="$(file -b ~/.config/wall-temp.png --mime-type | sed s/[/].*$//)"
-		if [ "$type" == "image" ]; then
-			mv ~/.config/wall-temp.png ~/.config/wall.png
-			xwallpaper --maximize ~/.config/wall.png
-		else
-			rm ~/.config/wall-temp.png
-		fi
-	else
-		[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+if [ "$1" == "-u" ]; then
+	curl -o ~/.config/wall-temp.png "$2"
+	type="$(file -b ~/.config/wall-temp.png --mime-type | sed s/[/].*$//)"
+	if [ "$type" == "image" ]; then
+		mv ~/.config/wall-temp.png ~/.config/wall.png
 		xwallpaper --maximize ~/.config/wall.png
+	else
+		rm ~/.config/wall-temp.png
 	fi
+else
+	[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+	xwallpaper --maximize ~/.config/wall.png
 fi
