@@ -1,16 +1,15 @@
 #!/bin/sh
 # Sets the background. 
-# If given an argument with -u flag, will download file from given url and set the file as background. 
+# If given an argument with -u flag, will check the file from given url whether it is an image or not. If the file is an image then it sets the file as background. 
 # Without -u flag, will set local file as backgound. 
 
 if [ "$1" == "-u" ]; then
-	curl -o ~/.config/wall-temp.png "$2"
-	type="$(file -b ~/.config/wall-temp.png --mime-type | sed s/[/].*$//)"
+	type="$(curl -sI $2 | sed -En 's/^Content-Type: (.*)\/(.*)/\1/p')"
 	if [ "$type" == "image" ]; then
-		mv ~/.config/wall-temp.png ~/.config/wall.png
+		curl -o ~/.config/wall.png "$2"
 		xwallpaper --maximize ~/.config/wall.png
 	else
-		rm ~/.config/wall-temp.png
+		echo "Not an image!"
 	fi
 else
 	[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
