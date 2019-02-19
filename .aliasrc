@@ -21,7 +21,7 @@ alias ka="killall" \
 	YT="youtube-viewer" \
 	ref="shortcuts >/dev/null; source ~/.shortcuts" \
 	upc="sudo pacman -Syu; pkill -RTMIN+8 i3blocks" \
-	lsp="pacman -Qett --color=always | less"
+	lsp="pacman -Qett --color=always | less" \
 	ffmpeg="ffmpeg -hide_banner"
 
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
