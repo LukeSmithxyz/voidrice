@@ -305,7 +305,7 @@ buttons, screen brightness, email, web browsing buttons, etc.) to what you
 would expect.
 .HEADING 1 "Bookmarking Files and Directories"
 .PP
-Note the files \f(CW~/.bmdirs\fP and \f(CW~/.bmfiles\fP.
+Note the files \f(CW~/.config/bmdirs\fP and \f(CW~/.config/bmfiles\fP.
 These files hold bookmarked directories and files respectively, along with shortcut keys to their left.
 LARBS, specfically the \f(CWshortcuts\fP script, will automatically read these files and autogenerate aliases and shortcuts for bash/zsh and ranger from them.
 .PP
@@ -326,11 +326,11 @@ Create a new tab in \f(CW~/Documents\fP
 \f(CWYd\fP \(en
 Copy/yank (cp) a copy of the selected file(s) to \f(CWDocuments\fP
 .LIST OFF
-Shortcuts like these are generated for all key sequence/directory pairs in \f(CW~/.bmdirs\fP.
-Additionally, you may also add editable files to \f(CW~/.bmfiles\fP.
+Shortcuts like these are generated for all key sequence/directory pairs in \f(CW~/.config/bmdirs\fP.
+Additionally, you may also add editable files to \f(CW~/.config/bmfiles\fP.
 Each key sequence you pair with a file will become an alias to edit it in either bash or ranger.
 .PP
-Whenever you edit and save one of the bookmark files, vim will automatically rerun the shortcut script, thus uupdating the shortcuts that will be used in new instances of bash and ranger.
+Whenever you edit and save one of the bookmark files, vim will automatically rerun the shortcut script, thus updating the shortcuts that will be used in new instances of bash and ranger.
 It just werks.
 Note that it is your responsibility to ensure that none of the bindings you add conflict with another necessary function or command.
 .HEADING 1 "Frequently Asked Questions (FAQs)"
@@ -366,7 +366,7 @@ Install \f(CWneomutt\fP, \f(CWofflineimap\fP and \f(CWmsmtp\fP if you haven't al
 Create a GPG private/public key pair if you haven't already. Type \f(CWmod+shift+e\fP and you can select a tutorial for how to do this.
 .ITEM
  Download the mutt-wizard repository to the mutt config directory:
-\f(CWgit clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt\fP
+\f(CWgit clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt\fP.
 \fBREAD THE README.\fP
 .PP
 .ITEM
