@@ -1,5 +1,5 @@
 " vim: filetype=vim
-source ~/.vifmshortcuts
+source ~/.config/vifm/vifmshortcuts
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
