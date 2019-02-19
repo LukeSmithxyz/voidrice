@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Sets the background. 
 # If given an argument with -u flag, will check the file from given url whether it is an image or not. If the file is an image then it sets the file as background. 
 # Without -u flag, will set local file as backgound. 

@@ -85,8 +85,7 @@ I'm sure you can figure it out.
 Several modules will be click-sensitive, although if you're using my system as indented, you probably won't be doing much clicking.
 Still, you can right click on a module to get some information about what exactly it means.\c
 .FOOTNOTE
-Some people think the icons I use in the status bar are a little gaudy.
-Obviously I like them, but these are actually just unicode characters, meaning you can just change your default font in the status bar to change them.
+The statusbar icons are merely emojis and you can change them by changing your emoji font.
 If you just want black and white icons, you should actually just be able to uninstall \f(CWttf-emojione\fP and the font will fall back on a black and white font.
 .FOOTNOTE END
 .PP
@@ -357,6 +356,8 @@ Check
 .PDF_WWW_LINK "https://wiki.archlinux.org/index.php/X_resources" "the Arch Wiki's article"
 for more information.
 LARBS is also compatible with pywal, but it is not installed or used by default anymore.
+.PP
+Do not remove \f(CW~/.Xresources\fP or the color settings specifically because some programs, especially the i3 bar read them and will display as blank if they are deleted.
 .HEADING 2 "How do I set up my email?"
 .LI
 .ITEM
