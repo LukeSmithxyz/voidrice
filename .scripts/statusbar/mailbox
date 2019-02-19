@@ -14,5 +14,4 @@ case $BLOCK_BUTTON in
 - Middle click syncs mail" ;;
 esac
 
-echo "$(du -a ~/.mail/*/INBOX/new/* 2>/dev/null | sed -n '$=')$(cat ~/.config/mutt/.dl 2>/dev/null)"
-
+echo "$(du -a ~/.mail/*/INBOX/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon 2>/dev/null)"
