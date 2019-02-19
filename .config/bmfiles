@@ -1,7 +1,7 @@
-bf	~/.bmfiles
-bd	~/.bmdirs
+bf	~/.config/bmfiles
+bd	~/.config/bmdirs
 cfb	~/.bashrc
-cfa	~/.aliasrc
+cfa	~/.config/aliasrc
 cfz	~/.zshrc
 cfv	~/.config/nvim/init.vim
 cfr	~/.config/ranger/rc.conf
@@ -14,4 +14,4 @@ cfu	~/.config/newsboat/urls
 cfn	~/.config/newsboat/config
 cfmb	~/.config/ncmpcpp/bindings
 cfmc	~/.config/ncmpcpp/config
-er	~/.referbib
+er	~/Documents/referbib
