@@ -61,43 +61,8 @@ exec_always --no-startup-id mpdupdate
 # Podboat automatic queue and download
 exec_always --no-startup-id podentr
 
-# Set Xresources colors:
-set_from_resource $darkblack	color0  #000000
-set_from_resource $black	color8  #000000
-set_from_resource $darkred	color1  #000000
-set_from_resource $red		color9  #000000
-set_from_resource $darkgreen	color2  #000000
-set_from_resource $green	color10 #000000
-set_from_resource $darkyellow	color3  #000000
-set_from_resource $yellow	color11 #000000
-set_from_resource $darkblue	color4  #000000
-set_from_resource $blue		color12 #000000
-set_from_resource $darkmagenta	color5  #000000
-set_from_resource $magenta	color13 #000000
-set_from_resource $darkcyan	color6  #000000
-set_from_resource $cyan		color14 #000000
-set_from_resource $darkwhite	color7  #000000
-set_from_resource $white	color15 #000000
-set $transparent		#00000000
-
-#                       BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
-client.focused		$red		$red		$magenta	$darkmagenta		$darkblue
-client.unfocused	$transparent	$blue		$white		$darkblue		$darkblack
-client.focused_inactive	$transparent	$blue		$white		$darkblue		$darkblack
-client.urgent		$darkred	$darkred	$black		$darkred		$darkred
-client.background $black
-
 bar {
 	font pango:mono 10
-	colors {
-			background $darkblack
-			statusline $darkwhite
-			separator $cyan
-			focused_workspace  $blue $darkblue $darkblack
-        		active_workspace   $blue $blue $darkwhite
-      			inactive_workspace $darkblack $darkblack $white
-        		urgent_workspace   $darkblack $darkblack $white
-		}
 	status_command i3blocks
 	position top
 	mode dock
@@ -344,7 +309,7 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdow
 ##bindsym XF86Paste		exec
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
-bindsym XF86Calculator		exec $term -e R -q --no-save
+bindsym XF86Calculator		exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
 bindsym XF86Explorer		exec $term -e $FILE
