@@ -19,9 +19,11 @@
 
 # #---Basic Definitions---# #
 # Needed for i3-gaps
-for_window [class="^.*"] border pixel 2
-gaps inner 15
-gaps outer 15
+#new_window normal
+for_window [class="^.*"] border pixel 3
+for_window [class="mpv"] floating enable
+gaps inner 5
+gaps outer 5
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $stoprec --no-startup-id dmenurecord kill
@@ -29,6 +31,7 @@ set $shutdown sudo -A shutdown -h now
 set $reboot sudo -A reboot
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
+floating_modifier $mod
 
 # #---Dropdown Windows---# #
 
@@ -44,6 +47,9 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
+#lock
+exec --no-startup-id lockr
+#-e -f -c 1d2021
 # mpd startup
 exec --no-startup-id mpd
 # Setting the background:
@@ -51,7 +57,8 @@ exec --no-startup-id setbg
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager:
-exec --no-startup-id xcompmgr
+exec --no-startup-id compton --config ~/.config/compton.conf -b
+#exec --no-startup-id xcompmgr
 # Runs the key remapping scripts
 exec --no-startup-id remaps
 # Unclutter makes the mouse invisible after a brief period
@@ -60,9 +67,50 @@ exec --no-startup-id unclutter
 exec_always --no-startup-id mpdupdate
 # Podboat automatic queue and download
 exec_always --no-startup-id podentr
+# project to HDMI
+exec_always --no-startup-id /usr/bin/project2HDMI &
+# start bluetooth
+#exec_always --no-startup-id /usr/bin/blueman-manager &
+#set bilang
+exec_always --no-startup-id setxkbmap -layout fi,ara &
+
+# Set Xresources colors:
+set_from_resource $darkblack	color0  #000000
+set_from_resource $black	color8  #000000
+set_from_resource $darkred	color1  #000000
+set_from_resource $red		color9  #000000
+set_from_resource $darkgreen	color2  #000000
+set_from_resource $green	color10 #000000
+set_from_resource $darkyellow	color3  #000000
+set_from_resource $yellow	color11 #000000
+set_from_resource $darkblue	color4  #000000
+set_from_resource $blue		color12 #000000
+set_from_resource $darkmagenta	color5  #000000
+set_from_resource $magenta	color13 #000000
+set_from_resource $darkcyan	color6  #000000
+set_from_resource $cyan		color14 #000000
+set_from_resource $darkwhite	color7  #000000
+set_from_resource $white	color15 #000000
+set $transparent		#00000000
+
+#                       BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
+client.focused		$red		$red		$magenta	$darkmagenta		$darkblue
+client.unfocused	$transparent	$blue		$white		$darkblue		$darkblack
+client.focused_inactive	$transparent	$blue		$white		$darkblue		$darkblack
+client.urgent		$darkred	$darkred	$black		$darkred		$darkred
+client.background $black
 
 bar {
-	font pango:mono 10
+	font pango:Ubuntu 9
+	colors {
+			background $darkblack
+			statusline $darkwhite
+			separator $cyan
+			focused_workspace  $blue $darkblue $darkblack
+        		active_workspace   $blue $blue $darkwhite
+      			inactive_workspace $darkblack $darkblack $white
+        		urgent_workspace   $darkblack $darkblack $white
+		}
 	status_command i3blocks
 	position top
 	mode dock
@@ -72,46 +120,53 @@ bar {
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
+#bindsym $mod+section 		exec $term
+
+
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
-bindsym $mod+Escape		workspace prev
-bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
+#bindsym $mod+Escape		workspace prev
+#bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
+bindsym $mod+Shift+Escape exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+
 
 # bindsym $mod+BackSpace
 bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
 
-bindsym $mod+grave		exec --no-startup-id dmenuunicode
+bindsym $mod+u		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
 bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
 # Show selection:
-bindsym $mod+Insert		exec --no-startup-id showclip
-bindsym $mod+Pause		exec --no-startup-id xcqr
+bindsym $mod+Shift+Home		exec --no-startup-id showclip
+bindsym $mod+Shift+End		exec --no-startup-id xcqr
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 
-bindsym $mod+w			exec $term -e nmtui
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w			exec $term -e nmtui
+bindsym $mod+w		exec --no-startup-id $BROWSER
+bindsym $mod+Ctrl+w	exec --no-startup-id tor-browser-en
 
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
 bindsym $mod+r 			exec $term -e $FILE
-bindsym $mod+Shift+r		exec --no-startup-id winresize
+bindsym $mod+Ctrl+r		exec --no-startup-id winresize
+bindsym $mod+Shift+r		exec $term -e vifmrun
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+y			exec $term -e calcurse -D ~/.config/calcurse
+bindsym $mod+y			exec $term -e calcurse
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
 
-bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
+#bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
 bindsym $mod+i 			exec $term -e htop
@@ -157,7 +212,8 @@ bindsym $mod+Shift+l		move right 30
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
-bindsym $mod+x			exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id i3lock -e -f -c 1d2021
+bindsym $mod+x			exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr
+#-e -f -c 1d2021
 bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 
 bindsym $mod+c			exec --no-startup-id freealf
@@ -177,9 +233,9 @@ bindsym $mod+Shift+m		exec --no-startup-id lmc mute
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
-bindsym $mod+Shift+Home		move container to workspace $ws1
+#bindsym $mod+Shift+Home		move container to workspace $ws1
 bindsym $mod+End		workspace $ws10
-bindsym $mod+Shift+End		move container to workspace $ws10
+#bindsym $mod+Shift+End		move container to workspace $ws10
 bindsym $mod+Prior		workspace prev
 bindsym $mod+Shift+Prior	move container to workspace prev
 bindsym $mod+Next		workspace next
@@ -256,7 +312,9 @@ bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
-bindsym $mod+F12	exec $term -e nmtui
+#bindsym $mod+F12	exec $term -e nmtui
+bindsym $mod+F12	exec --no-startup-id clipmenu -i -fn Ubuntu:size=10 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
+bindsym $mod+Shift+F9   exec --no-startup-id myCloud  && pkill -RTMIN+17 i3blocks
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
@@ -292,7 +350,7 @@ bindsym Shift+Print 		exec --no-startup-id maimpick
 bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
-bindsym XF86Launch1		exec --no-startup-id xset dpms force off
+bindsym $mod+BackSpace		exec --no-startup-id xset dpms force off
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
@@ -303,13 +361,13 @@ bindsym Control+XF86AudioLowerVolume	exec --no-startup-id lmc down 1
 bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
 bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id lmc up 10
 bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id lmc up 1
-bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+#bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
 ##bindsym XF86Paste		exec
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
-bindsym XF86Calculator		exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
+bindsym XF86Calculator		exec $term -e R -q --no-save
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
 bindsym XF86Explorer		exec $term -e $FILE
@@ -363,8 +421,8 @@ bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 ##bindsym XF86Finance		exec
 ##bindsym XF86Game		exec
 bindsym XF86Shop		exec $BROWSER https://ebay.com
-bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
-bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
+bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 5 && pkill -RTMIN+16 i3blocks
+bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 5 && pkill -RTMIN+16 i3blocks
 bindsym XF86AudioMedia		exec --no-startup-id $term -e ncmpcpp
 bindsym XF86Display		exec --no-startup-id displayselect
 #bindsym XF86KbdLightOnOff	exec
@@ -377,3 +435,11 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
+bindsym $mod+period		exec /usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86' --startvm '{196d2f4b-8a17-44fb-b05f-4a20cc87a212}'
+
+#/usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86' --startvm '{196d2f4b-8a17-44fb-b05f-4a20cc87a212}'"
+
+exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
+
+
+bindsym $mod+section		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+17 i3blocks

@@ -1,0 +1,8 @@
+#!/bin/bash 
+if [ $(mount | grep -c ~/MyCloud) == 1 ]
+then
+        echo 💾
+else
+        echo ""
+fi
+

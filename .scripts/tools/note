@@ -1,0 +1,8 @@
+#!/bin/sh
+# This is a general notification command for my own ease.
+#	$1 should be a message
+#	$2 is an optional image for notify-send
+# Echos content on terminal and if dunst is running, shows notification.
+
+[ -z "$2" ] || img="-i $2"
+echo "$1" && pgrep -x dunst >/dev/null && notify-send $img "$1"

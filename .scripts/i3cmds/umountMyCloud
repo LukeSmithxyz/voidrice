@@ -1,0 +1,2 @@
+#!/bin/bash
+fusermount -u  ~/MyCloud && notify-send "MyCloudDisk was unmounted successfuly" || notify-send "Unmount Failed"

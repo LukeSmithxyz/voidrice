@@ -1,0 +1,10 @@
+#!/bin/sh
+
+icon="🔆"
+
+case $BLOCK_BUTTON in
+	4) xbacklight -inc 4 ;;
+	5) xbacklight -dec 4 ;;
+esac
+
+printf "%s %s%%\\n" "$icon" "$(echo "$(xbacklight -get)*100/100" | bc)"
