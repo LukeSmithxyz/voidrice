@@ -120,23 +120,14 @@ bar {
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
-#bindsym $mod+section 		exec $term
-
-
+bindsym $mod+Escape 		exec --no-startup-id $term
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
-#bindsym $mod+Escape		workspace prev
-#bindsym $mod+Shift+Escape 	exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
-bindsym $mod+Shift+Escape exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+#bindsym $mod+BackSpace
 
-
-# bindsym $mod+BackSpace
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-
-bindsym $mod+u		exec --no-startup-id dmenuunicode
-##bindsym $mod+asciitilde
+bindsym $mod+u			exec --no-startup-id dmenuunicode
 
 #STOP/HIDE EVERYTHING:
 bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
@@ -149,9 +140,9 @@ bindsym $mod+Shift+End		exec --no-startup-id xcqr
 bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 
-bindsym $mod+Shift+w			exec $term -e nmtui
-bindsym $mod+w		exec --no-startup-id $BROWSER
-bindsym $mod+Ctrl+w	exec --no-startup-id tor-browser-en
+bindsym $mod+Shift+w		exec $term -e nmtui
+bindsym $mod+w			exec --no-startup-id $BROWSER
+bindsym $mod+Ctrl+w		exec --no-startup-id tor-browser-en
 
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
@@ -213,8 +204,9 @@ bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
 bindsym $mod+x			exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr
-#-e -f -c 1d2021
 bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+bindsym $mod+Ctrl+x		exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+Mod1+x		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 
 bindsym $mod+c			exec --no-startup-id freealf
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
@@ -246,8 +238,8 @@ bindsym $mod+Shift+XF86Back	move container to workspace prev
 bindsym $mod+XF86Forward	workspace next
 bindsym $mod+Shift+XF86Forward	move container to workspace next
 bindsym $mod+semicolon		workspace next
-bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		split vertical ;; exec $term
+#bindsym $mod+apostrophe	split horizontal ;; exec $term
+#bindsym $mod+slash		split vertical ;; exec $term
 bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
 
@@ -301,10 +293,11 @@ for_window [title="mpvfloat"] border pixel 0
 no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id groff -kejpt -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura -
+#bindsym $mod+F1		exec --no-startup-id groff -kejpt -mom ~/.readme.mom -Tpdf | zathura -
+bindsym $mod+F1         exec --no-startup-id groff -kejpt -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura -
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
-bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
+bindsym $mod+F4		exec --no-startup-id clipmenu -i -fn Ubuntu:size=10 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id torwrap
 bindsym $mod+F7		exec --no-startup-id td-toggle
@@ -312,9 +305,8 @@ bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
-#bindsym $mod+F12	exec $term -e nmtui
-bindsym $mod+F12	exec --no-startup-id clipmenu -i -fn Ubuntu:size=10 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
-bindsym $mod+Shift+F9   exec --no-startup-id myCloud  && pkill -RTMIN+17 i3blocks
+bindsym $mod+F12	exec --no-startup-id myCloud  && pkill -RTMIN+17 i3blocks
+
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
@@ -367,7 +359,8 @@ bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id lmc up 1
 ##bindsym XF86Paste		exec
 ##bindsym XF86Cut		exec
 ##bindsym XF86MenuKB		exec
-bindsym XF86Calculator		exec $term -e R -q --no-save
+#bindsym XF86Calculator		exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
+#$term -e R -q --no-save
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
 bindsym XF86Explorer		exec $term -e $FILE
@@ -437,9 +430,7 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 bindsym XF86WLAN		exec $netrefresh
 bindsym $mod+period		exec /usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86' --startvm '{196d2f4b-8a17-44fb-b05f-4a20cc87a212}'
 
-#/usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86' --startvm '{196d2f4b-8a17-44fb-b05f-4a20cc87a212}'"
 
 exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
-
 
 bindsym $mod+section		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+17 i3blocks
