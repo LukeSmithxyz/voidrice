@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+[ -z "$FIFO_UEBERZUG" ] && exit
+
+readonly ID_PREVIEW="preview"
+
+if [ "$1" = "draw" ]; then
+	declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW" [x]="$2" [y]="$3" [max_width]="$4" [max_height]="$5" [path]="${PWD}/$6") > "$FIFO_UEBERZUG"
+elif [ "$1" = "videopreview" ]; then
+ 	[ ! -f "/tmp/$6.png" ] && ffmpegthumbnailer -i "${PWD}/$6" -o "/tmp/$6.png" -s 0 -q 10 &&
+	declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW" [x]="$2" [y]="$3" [max_width]="$4" [max_height]="$5" [path]="/tmp/$6.png") > "$FIFO_UEBERZUG"
+else
+	declare -p -A cmd=([action]=remove [identifier]="$ID_PREVIEW") > "$FIFO_UEBERZUG"
+fi
