@@ -9,6 +9,7 @@ map <C-o> <C-w>o
 map <C-s> <C-w>s
 map <C-v> <C-w>v
 
+map R :restart<CR>
 map x :!sxiv -ft * 2>/dev/null &<CR>
 nnoremap o :file &<cr>l
 map E :!$EDITOR %f<CR>
@@ -17,30 +18,22 @@ map bg :!setbg %f &<CR>
 
 nmap <space> tj
 nmap q ZQ
-fileviewer *.html,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex highlight -O ansi %c
+fileviewer *.html,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex,*.md highlight -O ansi %c
 fileview */ tree %c -L 1 --dirsfirst
 fileview ../ tree %c -L 1 --dirsfirst
 
 set vicmd=$EDITOR
 
+fileviewer *.docx docx2txt %c -
+
+filetype *.csv,*.xlsx sc-im %c
+
 set syscalls
-
 set nofollowlinks
-
-" Natural sort of (version) numbers within text.
-
 set sortnumbers
-
-" Maximum number of changes that can be undone.
-
 set undolevels=100
-
-colorscheme Default
-
+colorscheme luke
 set wildmenu
-
-" Display completions in a form of popup with descriptions of the matches
-
 set wildstyle=popup
 
 " Display suggestions in normal, visual and view modes for keys, marks and
@@ -78,13 +71,18 @@ endif
 " %m run the command in a menu window
 
 filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu zathura %f 2>/dev/null &,
-fileviewer *.pdf pdftotext -nopgbrk %c -
+fileviewer *.pdf pdftotext -l 1 -nopgbrk %c -
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) %c
+filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mpv --no-audio-display --input-ipc-server=/tmp/mpvsoc$(date +%%s) %c
+fileviewer *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mediainfo %c
 
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx] mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) %f 2>/dev/null &,
-fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx],*mp3,*.flac mediainfo %c 2>&1 &
+"fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx],*mp3,*.flac echo %c is a video file.
+
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob, *.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx  vifmimg videopreview %px %py %pw %ph %c %pc vifmimg clear
+
+fileview *.zip,*.rar,*.tar.gz atool -l %f
 
 filextype *.html,*.htm firefox %f 2>/dev/null &
 
@@ -94,7 +92,11 @@ filetype *.[1-8] man ./%c
 fileviewer *.[1-8] man ./%c | col -b
 
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm  rotdir %f 2>/dev/null | sxiv -ia 2>/dev/null &
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm file %f
+"fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm file %f
+fileviewer *.jpg,*.jpeg,*.png
+           \ vifmimg draw %px %py %pw %ph %c
+           \ %pc
+           \ vifmimg clear
 filextype *.svg inkscape %f 2>/dev/null &
 filextype *.xcf gimp %f 2>/dev/null &
 
