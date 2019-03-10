@@ -8,9 +8,9 @@ ping -q -t 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exi
 
 pgrep -x newsboat >/dev/null && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
 
-echo 🔃 > ~/.config/newsboat/.update
+echo 🔃 > /tmp/newsupdate
 pkill -RTMIN+6 i3blocks
 /usr/bin/newsboat -x reload
-rm -f ~/.config/newsboat/.update
+rm -f /tmp/newsupdate
 pkill -RTMIN+6 i3blocks
 /usr/bin/notify-send -i "$PIX/rss.svg" "RSS feed update complete."
