@@ -1,0 +1,4 @@
+#!/bin/bash
+#i3lock-fancy -f Comic-Sans-MS -- scrot -z
+#i3lock-fancy -b=25x5
+betterlockscreen -l dimblur

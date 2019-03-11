@@ -60,7 +60,7 @@ exec --no-startup-id dunst
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 #exec --no-startup-id xcompmgr
 # Runs the key remapping scripts
-exec --no-startup-id remaps
+#exec --no-startup-id remaps
 # Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 # Run the script to update the mpd i3block on change.
@@ -101,7 +101,7 @@ client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
-	font pango:UbuntuMono Nerd Font Mono 10
+	font pango:Ubuntu Nerd Font 8
 	colors {
 			background $darkblack
 			statusline $darkwhite

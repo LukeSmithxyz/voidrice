@@ -15,7 +15,7 @@ nnoremap o :file &<cr>l
 map E :!$EDITOR %f<CR>
 map mkd :mkdir<space>
 map bg :!setbg %f &<CR>
-
+map bs :!betterlockscreen -u ~/.config/wall.png & <CR>
 nmap <space> tj
 nmap q ZQ
 fileviewer *.html,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex,*.md highlight -O ansi %c
