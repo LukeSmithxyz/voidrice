@@ -54,7 +54,7 @@ signal=16
 [disk]
 interval=60
 command=disk /
-
+label=🐧
 #[disk]
 #interval=60
 #command=disk /home 🏠

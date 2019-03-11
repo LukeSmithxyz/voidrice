@@ -101,7 +101,7 @@ client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
-	font pango:Ubuntu Nerd Font 8
+	font pango:Ubuntu Nerd Font 10
 	colors {
 			background $darkblack
 			statusline $darkwhite
