@@ -1,7 +1,10 @@
 #!/bin/sh
 # Give a battery name (e.g. BAT0) as an argument.
 
+battery="$(acpi -i)"
+
 case $BLOCK_BUTTON in
+    1) pgrep -x dunst >/dev/null && notify-send "${battery}";;
     3) pgrep -x dunst >/dev/null && notify-send "<b>🔋 Battery module:</b>
 🔋: discharging
 🛑: not charging

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+case $BLOCK_BUTTON in
+	1) xkblayout-state set +1 ;;
+esac
+
+LNG=$(xkblayout-state print %s | awk '{print toupper($0)}')
+
+case $LNG in
+  "FI")
+    #CLR=\#00FF00 ;; # green
+    LNG=🇫🇮;;
+  "ARA")
+    #CLR=\#FF0000 ;; # red
+    LNG=🇪🇬;;
+  *)
+    CLR=\#FFFFFF ;; # all others default-white
+esac
+
+echo "$LNG"
+echo "$LNG"
+#echo "$CLR"

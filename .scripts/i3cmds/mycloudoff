@@ -1,0 +1,10 @@
+#!/bin/sh
+ask() { \
+	case $(printf "Yes\\nNo" | dmenu -i -p "Are you sure?") in
+		Yes) sshpass -p 12345 ssh root@192.168.1.3 PowerOff;;
+		No) echo "!";;
+	esac
+	}
+
+ask
+

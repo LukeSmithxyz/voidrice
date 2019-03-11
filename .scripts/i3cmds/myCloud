@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $(mount | grep -c ~/MyCloud) != 1 ]
+then
+	echo "12345" | sshfs root@192.168.1.3:/opt/MyCloud ~/MyCloud -o idmap=user,uid=1000,gid=1000,password_stdin,reconnect,allow_other,default_permissions,cache=yes,kernel_cache,no_readahead,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,compression=no && notify-send "MyCloudDisk was mounted successfuly" || notify-send "MyCloudDisk was not mounted"
+
+else
+	fusermount -u  ~/MyCloud && notify-send "MyCloudDisk was unmounted successfuly" || notify-send "Unmount Failed"
+fi
+
+if [ $(mount | grep -c ~/MyCloud) == 1 ]
+then
+	echo 😄
+else
+	echo 😞
+fi

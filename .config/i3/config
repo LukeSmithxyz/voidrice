@@ -437,4 +437,4 @@ bindsym $mod+period		exec /usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86'
 
 exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
 
-bindsym $mod+section		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+17 i3blocks
+bindsym $mod+section		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+18 i3blocks

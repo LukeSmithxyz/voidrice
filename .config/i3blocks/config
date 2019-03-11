@@ -61,7 +61,7 @@ command=disk /
 
 [layswitch]
 interval=once
-signal=17
+signal=18
 
 
 [battery]
@@ -81,5 +81,8 @@ interval=30
 [internet]
 interval=10
 
+[mycloud]
+interval=once
+signal=17
 [help]
 interval=once
