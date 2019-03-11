@@ -37,7 +37,7 @@ set clipboard=unnamedplus
 	set splitbelow splitright
 
 " Nerd tree
-	map <C-n> :NERDTreeToggle<CR>
+	map <leader>n :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " vimling:
@@ -92,10 +92,10 @@ set clipboard=unnamedplus
 	autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost ~/.bmdirs,~/.bmfiles !shortcuts
+	autocmd BufWritePost ~/.config/bmdirs,~/.config/bmfiles !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
+	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 
 " Navigating with guides
 	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
