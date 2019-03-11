@@ -35,29 +35,44 @@ label=📬
 interval=180
 signal=12
 
-#[memory]
-#interval=30
-#label=🧠
+[memory]
+interval=30
+label=🧠
 
-#[cpu]
-#interval=15
-#label=💻
+[cpu]
+interval=15
+label=💻
 
 [volume]
 interval=once
 signal=10
 
-#[disk]
-#interval=60
-#command=disk /
+[brightness]
+interval=once
+signal=16
+
+[disk]
+interval=60
+command=disk /
 
 #[disk]
 #interval=60
 #command=disk /home 🏠
 
+[layswitch]
+interval=once
+signal=17
+
+
 [battery]
 command=battery BAT0
 interval=5
+
+
+[battery]
+command=battery BAT1
+interval=5
+
 
 [clock]
 label=📅
