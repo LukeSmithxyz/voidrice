@@ -1,4 +1,4 @@
-" vim: filetype=vim
+" vim: filetype=vifm
 source ~/.config/vifm/vifmshortcuts
 
 map <C-h> <C-w>h
