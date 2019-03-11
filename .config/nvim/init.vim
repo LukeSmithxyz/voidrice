@@ -10,12 +10,14 @@ Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-commentary'
+Plug 'vifm/vifm.vim'
 call plug#end()
 
 set bg=light
 set mouse=a
 set nohlsearch
 set clipboard=unnamedplus
+
 " Some basics:
 	set nocompatible
 	filetype plugin on
