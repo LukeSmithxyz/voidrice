@@ -19,6 +19,7 @@ set nohlsearch
 set clipboard=unnamedplus
 
 " Some basics:
+	nnoremap c "_c
 	set nocompatible
 	filetype plugin on
 	syntax on
