@@ -1,8 +1,10 @@
 [Default Applications]
-x-scheme-handler/magnet=transmission-remote.desktop;
-x-scheme-handler/mailto=mutt.desktop;
-text/plain=vim.desktop;
-application/pdf=zathura.desktop;
-image/png=sxiv.desktop;
-image/jpeg=sxiv.desktop;
-image/gif=sxiv.desktop;
+x-scheme-handler/magnet=torrent.desktop;
+x-scheme-handler/mailto=mail.desktop;
+text/plain=text.desktop;
+text/x-shellscript=text.desktop;
+application/pdf=pdf.desktop;
+image/png=img.desktop;
+image/jpeg=img.desktop;
+image/gif=img.desktop;
+application/rss+xml=rss.desktop
