@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if pgrep xflux > /dev/null
+then
+    kill -9 $(pidof xflux) && notify-send "xflux" "xflux was killed"
+else
+    auto-xflux && notify-send "xflux" "xflux is running"
+fi

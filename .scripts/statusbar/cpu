@@ -9,4 +9,4 @@ $(ps axch -o cmd:15,%cpu --sort=-%cpu | head)" ;;
 - % is of single core." ;;
 esac
 
-sensors | awk '/Core 0/ {print $3}'
+sensors | awk '/Package id 0/ {print $4}'

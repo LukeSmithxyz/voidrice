@@ -101,7 +101,8 @@ client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
-	font pango:Ubuntu Nerd Font 10
+	#font pango: SFNS Display:style=Regular 10
+	font pango:Ubuntu 8
 	colors {
 			background $darkblack
 			statusline $darkwhite
@@ -121,17 +122,22 @@ bar {
 bindsym $mod+Return 		exec $term
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
 
+# Custom Modes
+mode "Leave" {
+	bindsym l	exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr
+	bindsym s	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+	bindsym r	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+	bindsym h	exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
+        bindsym e 	exit
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
-bindsym $mod+Escape		exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr
-bindsym $mod+Shift+Escape	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
-bindsym $mod+Ctrl+Escape	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-bindsym $mod+Mod1+Escape	exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
-
+bindsym $mod+Escape mode "Leave"
 
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
-
-#bindsym $mod+BackSpace
 
 bindsym $mod+u			exec --no-startup-id dmenuunicode
 
@@ -155,7 +161,7 @@ bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
 bindsym $mod+r 			exec $term -e $FILE
 bindsym $mod+Ctrl+r		exec --no-startup-id winresize
-bindsym $mod+Shift+r		exec $term -e vifmrun
+bindsym $mod+Shift+r		exec $term -e ranger
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
@@ -183,6 +189,7 @@ bindsym $mod+Shift+s		gaps inner current minus 5
 
 bindsym $mod+d			exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
+bindsym $mod+Ctrl+d		exec --no-startup-id "rofi -show run"
 
 set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
 mode "$freeze" { bindsym $mod+Shift+f mode "default"
@@ -216,7 +223,8 @@ bindsym $mod+c			exec --no-startup-id cabl
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
 
 bindsym $mod+v			exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
-#bindsym $mod+Shift+v
+bindsym $mod+Shift+v		exec --no-startup-id mflux
+
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
@@ -236,7 +244,8 @@ bindsym $mod+Prior		workspace prev
 bindsym $mod+Shift+Prior	move container to workspace prev
 bindsym $mod+Next		workspace next
 bindsym $mod+Shift+Next		move container to workspace next
-bindsym $mod+Tab		workspace back_and_forth
+bindsym $mod+Tab		exec --no-startup-id rofi -show window
+#workspace back_and_forth
 bindsym $mod+XF86Back		workspace prev
 bindsym $mod+Shift+XF86Back	move container to workspace prev
 bindsym $mod+XF86Forward	workspace next
@@ -244,8 +253,8 @@ bindsym $mod+Shift+XF86Forward	move container to workspace next
 bindsym $mod+semicolon		workspace next
 #bindsym $mod+apostrophe	split horizontal ;; exec $term
 #bindsym $mod+slash		split vertical ;; exec $term
-bindsym $mod+Shift+slash	kill
-bindsym $mod+backslash		workspace back_and_forth
+#bindsym $mod+Shift+slash	kill
+#bindsym $mod+backslash		workspace back_and_forth
 
 set $ws1 "1"
 set $ws2 "2"
@@ -347,6 +356,8 @@ bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
 bindsym $mod+BackSpace		exec --no-startup-id xset dpms force off
+bindsym $mod+Shift+BackSpace 		exec --no-startup-id systemctl suspend
+
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.

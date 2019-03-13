@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# hack to launch bicon if not launched
+#if ! [[ "$(ps -p $(ps -p $(echo $$) -o ppid=) -o comm=)" =~ 'bicon'* ]]; then
+#  bicon.bin
+#fi
+
 stty -ixon # Disable ctrl-s and ctrl-q.
 shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
 HISTSIZE= HISTFILESIZE= # Infinite history.
@@ -6,3 +12,11 @@ export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput se
 
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc" # Load shortcut aliases
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+
+export GREP_COLOR="1;32"
+
+alias grep='grep --color=auto'
+alias lsdla='lsd -la'
+alias lsla='ls -la'
+alias ulswp='betterlockscreen -u ~/.config/wall.png'
+alias dmenu='rofi -dmenu'
