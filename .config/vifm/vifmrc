@@ -25,6 +25,9 @@ set vicmd=vim
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
 " solution, it's also much slower when processing large amounts of files and
 " doesn't support progress measuring.
+" vim: filetype=vifm
+
+source ~/.config/vifm/vifmshortcuts
 
 set syscalls
 
