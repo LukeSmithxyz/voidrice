@@ -62,7 +62,7 @@ exec_always --no-startup-id /usr/bin/project2HDMI &
 # start bluetooth
 #exec_always --no-startup-id /usr/bin/blueman-manager &
 #set bilang
-exec_always --no-startup-id setxkbmap -layout fi,ara &
+exec_always --no-startup-id setxkbmap fi,ara&
 
 # Set Xresources colors:
 set_from_resource $darkblack	color0  #000000
@@ -179,7 +179,7 @@ bindsym $mod+Shift+s		gaps inner current minus 5
 
 bindsym $mod+d			exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
-bindsym $mod+Ctrl+d		exec --no-startup-id "rofi -show run"
+bindsym $mod+Ctrl+d		exec --no-startup-id "rofi -show drun"
 
 set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
 mode "$freeze" { bindsym $mod+Shift+f mode "default"
@@ -437,3 +437,7 @@ bindsym $mod+period		exec /usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86'
 exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
 
 bindsym $mod+section		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+18 i3blocks
+bindsym $mod+grave		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+18 i3blocks
+
+bindsym $mod+Shift+section	exec --no-startup-id "setxkbmap us,ara && pkill -RTMIN+18 i3blocks"
+bindsym $mod+Shift+grave	exec --no-startup-id "setxkbmap fi,ara && pkill -RTMIN+18 i3blocks"

@@ -12,6 +12,9 @@ case $LNG in
   "ARA")
     #CLR=\#FF0000 ;; # red
     LNG=🇪🇬;;
+  "US")
+    #CLR=\#FF0000 ;; # red
+    LNG=🇺🇸;;
   *)
     CLR=\#FFFFFF ;; # all others default-white
 esac
