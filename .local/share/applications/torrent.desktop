@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
-Name=Transmission Addition
+Name=Torrent
 Exec=/usr/bin/env transadd %U
