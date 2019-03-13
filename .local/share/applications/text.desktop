@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
-Name=Neovim
+Name=Text editor
 Exec=/usr/local/bin/st -e nvim %u
