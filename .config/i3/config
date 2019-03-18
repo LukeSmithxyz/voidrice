@@ -12,6 +12,7 @@
 #new_window normal
 for_window [class="^.*"] border pixel 3
 for_window [class="mpv"] floating enable
+for_window [class="^Pavucontrol$"] floating enable
 gaps inner 5
 gaps outer 5
 
@@ -116,8 +117,9 @@ bindsym $mod+Shift+Return	exec --no-startup-id samedir
 mode "Leave" {
 	bindsym l	exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr
 	bindsym s	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+	bindsym z	exec --no-startup-id prompt "Suspend computer?" "systemctl suspend";mode default
 	bindsym r	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-	bindsym h	exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
+	bindsym h	exec --no-startup-id prompt "Hibernate computer?" "$hibernate";mode default
         bindsym e 	exit
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -294,6 +296,7 @@ for_window [title="mpvfloat"] floating enable
 for_window [title="mpvfloat"] sticky enable
 for_window [title="mpvfloat"] border pixel 0
 no_focus [title="mpvfloat"]
+
 
 # #---Function Buttons---# #
 #bindsym $mod+F1		exec --no-startup-id groff -kejpt -mom ~/.readme.mom -Tpdf | zathura -

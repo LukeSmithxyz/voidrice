@@ -1,7 +1,8 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e pulsemixer & ;;
+	#1) setsid "$TERMINAL" -e pulsemixer & ;;
+	1) pavucontrol ;;
 	2) pulsemixer --toggle-mute ;;
 	4) pulsemixer --change-volume +5 ;;
 	5) pulsemixer --change-volume -5 ;;
