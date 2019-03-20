@@ -1,9 +1,9 @@
 #!/bin/sh
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
 
-ping -q -w 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
+ping -q -c 1 1.1.1.1 > /dev/null || exit
 
-notify-send -i "$PIX/larbs.svg" "Checking for package updates..."
+notify-send "📦 Checking for package updates..."
 
 sudo pacman -Syyuw --noconfirm || notify-send "Error downloading updates.
 
@@ -12,7 +12,7 @@ pkill -RTMIN+8 i3blocks
 
 if pacman -Qu | grep -v "\[ignored\]"
 then
-	notify-send -i "$PIX/larbs.gif" "Package updates available. Click statusbar icon (📦) for update."
+	notify-send "🎁 Package updates available. Click statusbar icon (📦) for update."
 else
-	notify-send -i "$PIX/larbs.gif" "Repository sync complete. No new packages for update."
+	notify-send "📦 Repository sync complete. No new packages for update."
 fi
