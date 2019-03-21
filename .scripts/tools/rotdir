@@ -1,16 +1,8 @@
 #!/bin/sh
-if [ -z "$1" ]; then
-	echo usage: rotdir regex 2>&1
-	exit 1;
-fi
-
+[ -z "$1" ] && echo "usage: rotdir regex 2>&1" && exit 1
 ed -s <<EOF
-# Read in all files in the current dir
 r !find "$PWD" -maxdepth 1
-# Search all lines for regex, move to top
 g/$1/m0
-# Print all lines
 ,p
-# Force quit
 Q
 EOF
