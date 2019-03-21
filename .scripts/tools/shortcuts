@@ -5,12 +5,14 @@ ranger_shortcuts="$HOME/.config/ranger/shortcuts.conf"
 qute_shortcuts="/dev/null"
 fish_shortcuts="/dev/null"
 vifm_shortcuts="$HOME/.config/vifm/vifmshortcuts"
+filename="$(basename "$0")"
+file_overwrite_warning="# Warning! This file is automatically formatted & overwritten by \"$(pwd)/$filename\" script"
 
 # Remove, prepare files
 rm -f "$ranger_shortcuts" "$qute_shortcuts" 2>/dev/null
-printf "# vim: filetype=sh\\n" > "$fish_shortcuts"
-printf "# vim: filetype=sh\\nalias " > "$shell_shortcuts"
-printf "\" vim: filetype=vim\\n" > "$vifm_shortcuts"
+printf "# vim: filetype=sh\\n$file_overwrite_warning\\n" > "$fish_shortcuts"
+printf "# vim: filetype=sh\\n$file_overwrite_warning\\nalias " > "$shell_shortcuts"
+printf "\" vim: filetype=vim\\n$file_overwrite_warning\\n" > "$vifm_shortcuts"
 
 # Format the `bmdirs` file in the correct syntax and sent it to all three configs.
 sed "s/\s*#.*$//;/^\s*$/d" "$HOME/.config/bmdirs" | tee >(awk '{print $1"=\"cd "$2" && ls -a\" \\"}' >> "$shell_shortcuts") \
