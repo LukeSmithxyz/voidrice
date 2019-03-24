@@ -45,7 +45,7 @@ nmap q ZQ
 
 fileview */ tree %c -L 1 --dirsfirst
 fileview ../ tree %c -L 1 --dirsfirst
-fileviewer *md,*xml,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex,*.md,*.bib,*.sty,*.desktop highlight -O ansi %c
+fileviewer *.md,*.xml,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex,*.md,*.bib,*.sty,*.desktop highlight -O ansi %c
 fileviewer *.html w3m -dump %c
 filextype *.html,*.htm firefox %f 2>/dev/null &
 
