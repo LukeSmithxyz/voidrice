@@ -2,7 +2,7 @@
 [ "$(stat -c %y /tmp/weatherreport | awk '{print $1}')" != "$(date '+%Y-%m-%d')" ] && getforecast
 
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e less -S /tmp/weatherreport ;;
+    1) $TERMINAL -e less -S -R /tmp/weatherreport ;;
     3) pgrep -x dunst >/dev/null && notify-send "<b>🌈 Weather module:</b>
 - Click for wttr.in forecast.
 ☔: Chance of rain/snow
