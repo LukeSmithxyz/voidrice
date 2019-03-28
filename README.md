@@ -8,7 +8,8 @@ These are my dotfiles! The name of the repo, "voidrice", came from the fact they
 + Xresourses info used by [my st build](https://github.com/lukesmithxyz/st) as a terminal
 + vim
 + bash
-+ ranger (see full documentation [here](.config/ranger/luke_ranger_readme.md))
++ vifm
++ ranger
 + ~~mutt/msmtp/offlineimap~~ Now moved to [LukeSmithxyz/mutt-wizard](https://github.com/LukeSmithxyz/mutt-wizard)
 + calcurse
 + ncmpcpp and mpd (my main music player)
