@@ -90,7 +90,7 @@ If you just want black and white icons, you should actually just be able to unin
 .FOOTNOTE END
 .PP
 The i3blocks config is \f(CW~/.config/i3blocks/config\fP, which you can access by the
-terminal shortcut \f(CWcfib\fP. Notice that the config file refers to several module
+terminal shortcut \f(CWcfB\fP. Notice that the config file refers to several module
 scripts in the \f(CW~/.scripts/\fP directory. You can read a summary of all of these
 scripts in the file \f(CW~/.scripts/SCRIPTS.md\fP.
 .HEADING 2 "Deeper Tutorials"
