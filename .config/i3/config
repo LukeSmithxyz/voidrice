@@ -123,6 +123,7 @@ mode "Leave" {
 	bindsym z	exec --no-startup-id prompt "Suspend computer?" "systemctl suspend";mode default
 	bindsym r	exec --no-startup-id prompt "Reboot computer?" "$reboot"
 	bindsym h	exec --no-startup-id prompt "Hibernate computer?" "$hibernate";mode default
+	bindsym o	exec --no-startup-id xset dpms force off;mode default
         bindsym e 	exit
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -350,7 +351,6 @@ bindsym Shift+Print 		exec --no-startup-id maimpick
 bindsym $mod+Print		exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete		exec $stoprec
-bindsym $mod+BackSpace		exec --no-startup-id xset dpms force off
 bindsym $mod+Shift+BackSpace 		exec --no-startup-id systemctl suspend
 
 
