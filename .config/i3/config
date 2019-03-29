@@ -12,7 +12,10 @@
 #new_window normal
 for_window [class="^.*"] border pixel 3
 for_window [class="mpv"] floating enable
+for_window [title="^nmtui$"] floating enable
 for_window [class="^Pavucontrol$"] floating enable
+for_window [title="stfloat"] floating enable
+for_window [title="htopfloat"] floating enable
 gaps inner 5
 gaps outer 5
 
@@ -93,7 +96,7 @@ client.background $black
 
 bar {
 	#font pango: SFNS Display:style=Regular 10
-	font pango:Ubuntu 8
+	font pango:Ubuntu 10
 	colors {
 			background $darkblack
 			statusline $darkwhite
@@ -111,7 +114,7 @@ bar {
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
-bindsym $mod+Shift+Return	exec --no-startup-id samedir
+bindsym $mod+Shift+Return	exec $term -T "stfloat"
 
 # Custom Modes
 mode "Leave" {
@@ -164,7 +167,7 @@ bindsym $mod+Shift+y		exec --no-startup-id i3resize left
 #bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
-bindsym $mod+i 			exec $term -e htop
+bindsym $mod+i 			exec $term -T "htopfloat" -e htop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 
 bindsym $mod+o			sticky toggle

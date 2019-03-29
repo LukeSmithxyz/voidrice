@@ -1,5 +1,5 @@
 command=~/.scripts/statusbar/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=10
 markup=pango
 
 #[focused window]
@@ -39,9 +39,9 @@ label=📬
 interval=180
 signal=12
 
-[memory]
-interval=30
-label=🧠
+#[memory]
+#interval=30
+#label=🧠
 
 [cpu]
 interval=15
@@ -55,10 +55,10 @@ signal=10
 interval=once
 signal=16
 
-[disk]
-interval=60
-command=disk /
-label=🐧
+#[disk]
+#interval=60
+#command=disk /
+#label=🐧
 #[disk]
 #interval=60
 #command=disk /home 🏠
@@ -88,5 +88,6 @@ interval=10
 [mycloud]
 interval=once
 signal=17
-[help]
-interval=once
+
+#[help]
+#interval=once
