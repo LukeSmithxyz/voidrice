@@ -4,7 +4,6 @@ cfb	~/.bashrc
 cfa	~/.config/aliasrc
 cfz	~/.zshrc
 cfv	~/.config/nvim/init.vim
-cfr	~/.config/ranger/rc.conf
 cfi	~/.config/i3/config
 cfm	~/.config/mutt/muttrc
 eb	~/Documents/LaTeX/uni.bib
