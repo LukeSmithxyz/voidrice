@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Toggle touchpad. Requires xf86-input-synaptics.
-(synclient | grep TouchpadOff.*1 && synclient TouchpadOff=0)>/dev/null && echo "TouchPad reactivated." && exit
+(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0)>/dev/null && echo "TouchPad reactivated." && exit
 synclient TouchpadOff=1 && echo "TouchPad deactivated."
