@@ -1,11 +1,12 @@
 #!/bin/sh
 alias ka="killall" \
+	mkd="mkdir -pv" \
 	mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \
 	calcurse="calcurse -D ~/.config/calcurse" \
-	magit="nvim -c Magit" \
+	magit="nvim -c MagitOnly" \
 	p="sudo pacman" \
 	SS="sudo systemctl" \
-	f="vifm" \
+	f="$FILE" \
 	g="git" \
 	trem="transmission-remote" \
 	e="$EDITOR" \
