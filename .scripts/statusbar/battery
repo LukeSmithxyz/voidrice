@@ -4,8 +4,8 @@
 battery="$(acpi -i)"
 
 case $BLOCK_BUTTON in
-    1) pgrep -x dunst >/dev/null && notify-send "${battery}";;
-    3) pgrep -x dunst >/dev/null && notify-send "<b>🔋 Battery module:</b>
+    1) pgrep -x dunst >/dev/null && notify-send " " "${battery}";;
+    3) pgrep -x dunst >/dev/null && notify-send " " "<b>🔋 Battery module:</b>
 🔋: discharging
 🛑: not charging
 ♻: stagnant charge
