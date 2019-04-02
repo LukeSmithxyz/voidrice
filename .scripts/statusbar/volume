@@ -5,8 +5,7 @@ case $BLOCK_BUTTON in
 	2) pulsemixer --toggle-mute ;;
 	4) pulsemixer --change-volume +5 ;;
 	5) pulsemixer --change-volume -5 ;;
-	3) pgrep -x dunst >/dev/null && notify-send "<b>📢 Volume module:</b>
-- Shows volume 🔊, 🔇 if muted.
+	3) pgrep -x dunst >/dev/null && notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted.
 - Middle click to mute.
 - Scroll to change."
 esac

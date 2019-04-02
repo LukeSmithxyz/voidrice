@@ -10,10 +10,8 @@ icon="$2"
 [ -z "$2" ] && icon="$1"
 
 case $BLOCK_BUTTON in
-	1) pgrep -x dunst >/dev/null && notify-send "<b>💽 Disk space:</b>
-$(df -h --output=target,used,size)" ;;
-	3) pgrep -x dunst >/dev/null && notify-send "<b>💽 Hard drive space remaining:</b>
-- Shows used hard drive space.
+	1) pgrep -x dunst >/dev/null && notify-send "💽 Disk space" "$(df -h --output=target,used,size)" ;;
+	3) pgrep -x dunst >/dev/null && notify-send "💽 Disk module" "\- Shows used hard drive space.
 - Click to show all disk info." ;;
 esac
 
