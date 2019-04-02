@@ -10,8 +10,7 @@ sed '13q;d' "$HOME/.local/share/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | s
 case $BLOCK_BUTTON in
     1) $TERMINAL -e less -S "$HOME/.local/share/weatherreport" ;;
     2) getforecast && showweather ;;
-    3) pgrep -x dunst >/dev/null && notify-send "<b>🌈 Weather module:</b>
-- Left click for full forecast.
+    3) pgrep -x dunst >/dev/null && notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
 ☔: Chance of rain/snow
 ❄: Daily low
