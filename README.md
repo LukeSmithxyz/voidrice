@@ -5,16 +5,14 @@ These are my dotfiles! The name of the repo, "voidrice", came from the fact they
 ## Programs whose configs can be found here
 
 + i3 (i3-gaps)
-+ Xresourses info used by [my st build](https://github.com/lukesmithxyz/st) as a terminal
++ ~~Xresourses/Xdefaults settings~~ Now moved to [my terminal (st) build](https://github.com/lukesmithxyz/st) which uses them
 + vim
 + bash
 + vifm
-+ ranger
 + ~~mutt/msmtp/offlineimap~~ Now moved to [LukeSmithxyz/mutt-wizard](https://github.com/LukeSmithxyz/mutt-wizard)
 + calcurse
 + ncmpcpp and mpd (my main music player)
 + mpv
-+ neofetch
 + And many little scripts I use filed in the `~/.scripts/` directory
 
 ## More documentation
