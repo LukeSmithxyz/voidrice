@@ -157,7 +157,7 @@ bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
 bindsym $mod+r 			exec $term -e $FILE
 bindsym $mod+Ctrl+r		exec --no-startup-id winresize
-bindsym $mod+Shift+r		exec $term -e ranger
+bindsym $mod+Shift+r		exec $term -e thunar
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
