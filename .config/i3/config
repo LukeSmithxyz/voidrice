@@ -125,7 +125,7 @@ mode "$freeze" { bindsym $mod+Shift+f mode "default"
 }
 
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f		mode "$freeze" ;; exec --no-startup-id notify-send "<b>Distraction-free mode activated.</b> Press Super+Shift+f to return."
+bindsym $mod+Shift+f		mode "$freeze" ;; exec --no-startup-id notify-send "Distraction-free mode activated." "Press Super+Shift+f to return."
 
 bindsym $mod+g			workspace prev
 bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
