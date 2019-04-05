@@ -10,5 +10,4 @@
 #
 ifinstalled "geoiplookup" || exit
 addr="$(curl ifconfig.me 2>/dev/null)"
-country="$(geoiplookup $addr | awk '{print $5}')"
-printf "%s" "$(sed -n /$country/p ~/.local/share/larbs/flag-emojis)"
+grep "$(geoiplookup $addr | sed 's/.*, //')" ~/.local/share/flag-emojis
