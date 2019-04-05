@@ -17,6 +17,9 @@ label=📰
 interval=once
 signal=6
 
+[locate]
+interval=30
+
 [pacpackages]
 label=📦
 interval=once
