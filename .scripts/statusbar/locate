@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Gets your public ip address checks which country you are in and
 # displays that information in the statusbar
@@ -8,7 +8,7 @@
 #
 # 	curl https://samerickson.me/files/flag-emojis > ~/.local/share/flag-emojis
 #
-ifinstalled "$geoiplookup" || exit
+ifinstalled "geoiplookup" || exit
 addr="$(curl ifconfig.me 2>/dev/null)"
 country="$(geoiplookup $addr | awk '{print $5}')"
 printf "%s" "$(sed -n /$country/p ~/.local/share/larbs/flag-emojis)"
