@@ -18,8 +18,8 @@
 !! Transparency (0-255):
 st.alpha: 230
 !! Set a default font and font size as below:
-*.font:UbuntuMono Nerd font Mono-12
-Xft.*font:UbuntuMono Nerd Font Mono:pixelsize=12
+*.font:Ubuntu Mono-12
+Xft.*font:Ubuntu Mono:pixelsize=12
 
 Xft.dpi: 96
 Xft.antialias: true
