@@ -1,0 +1,13 @@
+#!/bin/sh
+# This script will turn on numlock if it's off.
+# This script is meant to be executed by i3 config, but it will also work when you write in terminal.
+
+# This variable greps numlock value (on/off)
+onoff=$(xset -q | grep Num | rev | cut -c 24- | rev | cut -c 46-)
+
+# Then there's if statement, which checks if numlock is off/on
+if [ $onoff == on ] ; then
+	exit # numlock is on; exit
+else
+	xdotool key Num_Lock # numlock is off; turn it on
+fi
