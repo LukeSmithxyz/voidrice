@@ -37,7 +37,7 @@ qutebrowser and fish.
 
 ## Like my rice?
 
-Feel free to add other suggestions and I may implement them.
+
 
 I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing.
 You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith).
@@ -49,4 +49,4 @@ The programs I use here are always changing, but luckily you can just look at th
 
 + [List of programs installed by LARBS, including optional packages](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv)
 
-`A` marks programs in the AUR, `G` marks git repositories.
+this is just tesitng 
