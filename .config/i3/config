@@ -50,7 +50,7 @@ exec_always --no-startup-id mpdupdate
 exec_always --no-startup-id podentr
 
 bar {
-	font pango:mono 10
+	font pango:mono 12
 	status_command i3blocks
 	position top
 	mode dock
