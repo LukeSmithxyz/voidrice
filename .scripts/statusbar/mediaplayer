@@ -22,7 +22,7 @@
 # (playerctl will attempt to connect to org.mpris.MediaPlayer2.[NAME] on your
 # DBus session).
 
-use Time::HiRes qw(usleep);
+use Time::HiRes qw(usleep); l
 use Env qw(BLOCK_INSTANCE);
 
 use constant DELAY => 50; # Delay in ms to let network-based players (spotify) reflect new data.
