@@ -89,158 +89,8 @@ fileviewer *.md,*.xml,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex,*.md,*.bib,*.sty,*.de
 fileviewer *.html w3m -dump %c
 filextype *.html,*.htm firefox %f 2>/dev/null &
 
-set history=100
-
-" Automatically resolve symbolic links on l or Enter.
-
-set nofollowlinks
-
-" With this option turned on you can run partially entered commands with
-" unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>).
-
-" set fastrun
-
-" Natural sort of (version) numbers within text.
-
-set sortnumbers
-
-" Maximum number of changes that can be undone.
-
-set undolevels=100
-
-" If you installed the vim.txt help file set vimhelp.
-" If would rather use a plain text help file set novimhelp.
-
-set novimhelp
-
-" If you would like to run an executable file when you
-" press return on the file name set this.
-
-set norunexec
-
-" Selected color scheme
-
-colorscheme Default
-
-" Format for displaying time in file list. For example:
-" TIME_STAMP_FORMAT=%m/%d-%H:%M
-" See man date or man strftime for details.
-
-set timefmt=%m/%d\ %H:%M
-
-" Show list of matches on tab completion in command-line mode
-
-set wildmenu
-
-" Display completions in a form of popup with descriptions of the matches
-
-set wildstyle=popup
-
-" Display suggestions in normal, visual and view modes for keys, marks and
-" registers (at most 5 files).  In other view, when available.
-
-set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
-
-" Ignore case in search patterns unless it contains at least one uppercase
-" letter
-
-set ignorecase
-set smartcase
-
-" Don't highlight search results automatically
-
-set nohlsearch
-
-" Use increment searching (search while typing)
-set incsearch
-
-" Try to leave some space from cursor to upper/lower border in lists
-
-set scrolloff=4
-
-" Don't do too many requests to slow file systems
-
-if !has('win')
-    set slowfs=curlftpfs
-endif
-
-" Set custom status line look
-
-set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
-
-" Set line numbers to show
-
-" ------------------------------------------------------------------------------
-
-" :mark mark /full/directory/path [filename]
-
-mark h ~/
-
-" ------------------------------------------------------------------------------
-
-" :com[mand][!] command_name action
-" The following macros can be used in a command
-" %a is replaced with the user arguments.
-" %c the current file under the cursor.
-" %C the current file under the cursor in the other directory.
-" %f the current selected file, or files.
-" %F the current selected file, or files in the other directory.
-" %b same as %f %F.
-" %d the current directory name.
-" %D the other window directory name.
-" %m run the command in a menu window
-
-command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
-command! zip zip -r %f.zip %f
-command! run !! ./%f
-command! make !!make %a
-command! mkcd :mkdir %a | cd %a
-command! vgrep vim "+grep %a"
-command! reload :write | restart
-
-" ------------------------------------------------------------------------------
-
-" The file type is for the default programs to be used with
-" a file extension.
-" :filetype pattern1,pattern2 defaultprogram,program2
-" :fileviewer pattern1,pattern2 consoleviewer
-" The other programs for the file type can be accessed with the :file command
-" The command macros %f, %F, %d, %F may be used in the commands.
-" The %a macro is ignored.  To use a % you must put %%.
-
-" For automated FUSE mounts, you must register an extension with :file[x]type
-" in one of following formats:
-"
-" :filetype extensions FUSE_MOUNT|some_mount_command using %SOURCE_FILE and %DESTINATION_DIR variables
-" %SOURCE_FILE and %DESTINATION_DIR are filled in by vifm at runtime.
-" A sample line might look like this:
-" :filetype *.zip,*.jar,*.war,*.ear FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR
-"
-" :filetype extensions FUSE_MOUNT2|some_mount_command using %PARAM and %DESTINATION_DIR variables
-" %PARAM and %DESTINATION_DIR are filled in by vifm at runtime.
-" A sample line might look like this:
-" :filetype *.ssh FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR
-" %PARAM value is filled from the first line of file (whole line).
-" Example first line for SshMount filetype: root@127.0.0.1:/
-"
-" You can also add %CLEAR if you want to clear screen before running FUSE
-" program.
-
-" Pdf
-filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
-fileviewer *.pdf
-        \ vifmimg pdfpreview %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-        " \ pdftotext -nopgbrk %c -
-
-" PostScript
-filextype *.ps,*.eps,*.ps.gz
-        \ {View in zathura}
-        \ zathura %f,
-        \ {View in gv}
-        \ gv %c %i &,
+fileviewer *.docx docx2txt %c -
+fileviewer *.odt odt2txt %c -
 
 " Djvu
 filextype *.djvu
@@ -295,7 +145,7 @@ filetype *.csv,*.xlsx sc-im %c
 fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mpv --no-audio-display --input-ipc-server=/tmp/mpvsoc$(date +%%s) %c
-filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu zathura %f 2>/dev/null &,
+filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu,*.epub zathura %f 2>/dev/null &,
 fileviewer *.pdf pdftotext -l 1 -nopgbrk %c -
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.qt,*.divx,*.as[fx],*mp3,*.flac mediafile %c
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx] mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) %f 2>/dev/null &,
