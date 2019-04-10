@@ -7,6 +7,11 @@ command=cat /tmp/recordingicon
 interval=once
 signal=9
 
+[spotify.py
+label=
+color=#81b71a
+interval=5
+
 [music]
 label=🎼
 interval=once
