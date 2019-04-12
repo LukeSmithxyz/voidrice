@@ -107,7 +107,7 @@ bar {
         		urgent_workspace   $darkblack $darkblack $white
 		}
 	status_command i3blocks
-	position bottom
+	position top
 	mode dock
 	modifier None
 }
