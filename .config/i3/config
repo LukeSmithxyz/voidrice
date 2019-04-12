@@ -10,7 +10,7 @@
 # #---Basic Definitions---# #
 # Needed for i3-gaps
 #new_window normal
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 1
 for_window [class="mpv"] floating enable
 for_window [title="^nmtui$"] floating enable
 for_window [class="^Pavucontrol$"] floating enable
@@ -107,7 +107,7 @@ bar {
         		urgent_workspace   $darkblack $darkblack $white
 		}
 	status_command i3blocks
-	position top
+	position bottom
 	mode dock
 	modifier None
 }
