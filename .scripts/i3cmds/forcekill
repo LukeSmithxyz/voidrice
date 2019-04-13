@@ -1,0 +1,4 @@
+#!/bin
+# force kills any focused window, handy in case if a window hangs
+focusid="$(xdotool getwindowfocus getwindowpid)"
+kill -9 $focusid
