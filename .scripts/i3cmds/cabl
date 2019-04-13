@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Dependencies are xclip and xorg-xprop.
 # qrencode required for qrcode generation.
 # groff/zathura required for man pages.
@@ -10,17 +10,17 @@ cd "$(readlink /proc/"$PID"/cwd)"
 [ -f "$prim" ] && xdg-open "$prim" && exit
 [ -d "$prim" ] && "$TERMINAL" "$prim" && exit
 
-websearch() { "$BROWSER" "https://duckduckgo.com/?q=$@" ;}
-wikipedia() { "$BROWSER" "https://en.wikipedia.org/wiki/$@" ;}
-wiktionary() { "$BROWSER" "https://en.wiktionary.org/wiki/$@" ;}
-maps() { "$BROWSER" "https://www.openstreetmap.org/search?query=$@" ;}
-ebay() { "$BROWSER" "https://www.ebay.com/sch/$@" ;}
+x="websearch" && funcs="$funcs\n$x" && eval "${x}() { \"$BROWSER\" \"https://duckduckgo.com/?q=\$@\" ;}"
+x="wikipedia" && funcs="$funcs\n$x" && eval "${x}() { \"$BROWSER\" \"https://en.wikipedia.org/wiki/\$@\" ;}"
+x="wiktionary" && funcs="$funcs\n$x" && eval "${x}() { \"$BROWSER\" \"https://en.wiktionary.org/wiki/\$@\" ;}"
+x="maps" && funcs="$funcs\n$x" && eval "${x}() { \"$BROWSER\" \"https://www.openstreetmap.org/search?query=\$@\" ;}"
+x="ebay" && funcs="$funcs\n$x" && eval "${x}() { \"$BROWSER\" \"https://www.ebay.com/sch/\$@\" ;}"
 
-echo "$prim" | grep "^.*\.[A-Za-z]\+.*" >/dev/null && gotourl() { "$BROWSER" "$@" ;}
-echo "$prim" | grep "^.*@.*\.[A-Za-z]\+$" >/dev/null && email() { xdg-email "$@" ;}
-command -v qrencode >/dev/null && qrcode() { qrencode "$@" -s 10 -o /tmp/qr.png && xdg-open /tmp/qr.png ;}
-man -k "^$prim$" >/dev/null && manual() { man -Tpdf "$prim" | zathura - ;}
+echo "$prim" | grep "^.*\.[A-Za-z]\+.*" >/dev/null && x="gotourl" && funcs="$funcs\n$x" && eval "${x}() { \"$BROWSER\" \"\$@\" ;}"
+echo "$prim" | grep "^.*@.*\.[A-Za-z]\+$" >/dev/null && x="email" && funcs="$funcs\n$x" && eval "${x}() { xdg-email \"\$@\" ;}"
+command -v qrencode >/dev/null && x="qrcode" && funcs="$funcs\n$x" && eval "${x}() { qrencode \"\$@\" -s 10 -o /tmp/qr.png && xdg-open /tmp/qr.png ;}"
+man -k "^$prim$" >/dev/null && x="manual" && funcs="$funcs\n$x" && eval "${x}() { man -Tpdf \"\$prim\" | zathura - ;}"
 
-func="$(declare -F | awk '{print $3}' | dmenu -p "Plumb \"$(echo "$prim" | cut -c -30)\" to?" -i -l 15)"
+func="$(echo -e $funcs | tail -n +2 | dmenu -p "Plumb \"$(echo "$prim" | cut -c -30)\" to?" -i -l 15)"
 
 [ -z "$func" ] || "$func" "$prim"
