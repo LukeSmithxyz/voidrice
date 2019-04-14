@@ -114,7 +114,9 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+Enter\fP \(en Spawn terminal (the default terminal is \f(CWst\fP; run \f(CWman st\fP for more.)
 .ITEM
-\f(CWMod+q/Q\fP \(en Close window
+\f(CWMod+q\fP \(en Close window
+.ITEM
+\f(CWMod+Q\fP \(en Force close window
 .ITEM
 \f(CWMod+d\fP \(en dmenu (For running commands or programs without shortcuts)
 .ITEM
