@@ -345,6 +345,13 @@ These settings may override your preferred settings, so you should open this fil
 Sometimes, PulseAudio can be finicky on initial installation and configuration.
 If you have no audio output, chances are your problems will be resolved by a reboot or manually killing and restarting PulseAudio.
 You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWpulsemixer\fP (\f(CWmod+A\fP).
+.HEADING 2 "How do I copy and paste?"
+.PP
+Copying and pasting is always program-specific on any system.
+In most graphical programs, copy and paste will be the same as they are on Windows: \f(CWctrl-c\fP and \f(CWctrl-v\fP.
+In the Linux terminal, those binds have other more important purposes, so you can run \f(CWman st\fP to see how to copy and paste in my terminal build.
+.PP
+Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your Firefox instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
 The i3 configuration will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
