@@ -359,14 +359,9 @@ The script \f(CWsetbg\fP, if run on an image will set it as the persistent backg
 When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
 .PP
-You can edit \f(CW~/.Xresources\fP to change the colorscheme.
-The terminal, status bar and other programs will automatically read the Xresources colors.
-Check
+LARBS no longer uses Xresource by default, but you can still add an \f(CW~/.Xdefaults\fP file and add color settings to change the theme of numerous programs, including the terminal. See
 .PDF_WWW_LINK "https://wiki.archlinux.org/index.php/X_resources" "the Arch Wiki's article"
 for more information.
-LARBS is also compatible with pywal, but it is not installed or used by default anymore.
-.PP
-Do not remove \f(CW~/.Xresources\fP or the color settings specifically because some programs, especially the i3 bar read them and will display as blank if they are deleted.
 .HEADING 2 "How do I set up my email?"
 .LI
 .ITEM
