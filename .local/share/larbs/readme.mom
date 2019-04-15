@@ -406,6 +406,10 @@ LARBS is deployed as a git repository in your home directory.
 You can use it as such to fetch, diff and merge changes from the remote repository.
 If you don't want to do that or don't know how to use git, you can actually just rerun the script (as root) and reinstall LARBS and it will automatically update an existing install if you select the same username.
 This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
+.HEADING 2 "Where are the build files for st or AUR programs?"
+.PP
+They are only created in \f(CW/tmp/\fP and thus are likely deleted after installation as they are not necessary.
+If you want to recompile a program, you will have to clone again.
 .HEADING 1 "Contact"
 .LI
 .ITEM
