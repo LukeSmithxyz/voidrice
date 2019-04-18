@@ -56,7 +56,7 @@ signal=10
 #command=disk /home 🏠
 
 [battery]
-command=battery BAT0
+command=battery BAT1
 interval=5
 
 [clock]
