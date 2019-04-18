@@ -10,7 +10,7 @@
 # #---Basic Definitions---# #
 # Needed for i3-gaps
 #new_window normal
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 1
 for_window [class="mpv"] floating enable
 for_window [title="^nmtui$"] floating enable
 for_window [class="^Pavucontrol$"] floating enable
@@ -96,7 +96,7 @@ client.background $black
 
 bar {
 	#font pango: SFNS Display:style=Regular 10
-	font pango:Source Sans Pro 10
+	font pango:Ubuntu 10
 	colors {
 			background $darkblack
 			statusline $darkwhite
@@ -439,7 +439,7 @@ bindsym XF86WLAN		exec $netrefresh
 bindsym $mod+period		exec /usr/lib/virtualbox/VirtualBoxVM --comment 'w7litex86' --startvm '{196d2f4b-8a17-44fb-b05f-4a20cc87a212}'
 
 
-exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
+exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png "Welcome to LARBS:" "Press Super+F1 for the manual." -t 10000
 
 bindsym $mod+section		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+18 i3blocks
 bindsym $mod+grave		exec --no-startup-id xkblayout-state set +1 && pkill -RTMIN+18 i3blocks

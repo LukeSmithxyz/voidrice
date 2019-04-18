@@ -89,6 +89,7 @@ fileviewer *.md,*.xml,*.css,*.py,*.c,*.h,*.sh,*.diff,*.tex,*.md,*.bib,*.sty,*.de
 fileviewer *.html w3m -dump %c
 filextype *.html,*.htm firefox %f 2>/dev/null &
 
+<<<<<<< HEAD
 set history=100
 
 " Automatically resolve symbolic links on l or Enter.
@@ -241,6 +242,10 @@ filextype *.ps,*.eps,*.ps.gz
         \ zathura %f,
         \ {View in gv}
         \ gv %c %i &,
+=======
+fileviewer *.docx docx2txt %c -
+fileviewer *.odt odt2txt %c -
+>>>>>>> x250
 
 " Djvu
 filextype *.djvu

@@ -24,7 +24,7 @@
     sort = yes
 
     idle_threshold = 120
-    font = UbuntuMono Nerd Font 10
+    font = Ubuntu Mono 10
     line_height = 0
     markup = full
 
