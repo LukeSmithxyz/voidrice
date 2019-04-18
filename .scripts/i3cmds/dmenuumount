@@ -7,17 +7,17 @@ unmountusb() {
 	[ -z "$drives" ] && exit
 	chosen=$(echo "$drives" | dmenu -i -p "Unmount which drive?" | awk '{print $1}')
 	[ -z "$chosen" ] && exit
-	sudo -A umount "$chosen" && pgrep -x dunst && notify-send "$chosen unmounted."
+	sudo -A umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted."
 	}
 
 unmountandroid() { \
 	chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | dmenu -i -p "Unmount which device?")
 	[ -z "$chosen" ] && exit
-	sudo -A umount -l "$chosen" && pgrep -x dunst && notify-send "$chosen unmounted."
+	sudo -A umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted."
 	}
 
 asktype() { \
-	case $(printf "USB\\nAndroid" | dmenu -i -p "Unmount a USB drive or Android device?") in
+	case "$(printf "USB\\nAndroid" | dmenu -i -p "Unmount a USB drive or Android device?")" in
 		USB) unmountusb ;;
 		Android) unmountandroid ;;
 	esac

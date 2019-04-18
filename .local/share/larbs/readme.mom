@@ -114,7 +114,9 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+Enter\fP \(en Spawn terminal (the default terminal is \f(CWst\fP; run \f(CWman st\fP for more.)
 .ITEM
-\f(CWMod+q/Q\fP \(en Close window
+\f(CWMod+q\fP \(en Close window
+.ITEM
+\f(CWMod+Q\fP \(en Force close window
 .ITEM
 \f(CWMod+d\fP \(en dmenu (For running commands or programs without shortcuts)
 .ITEM
@@ -343,6 +345,13 @@ These settings may override your preferred settings, so you should open this fil
 Sometimes, PulseAudio can be finicky on initial installation and configuration.
 If you have no audio output, chances are your problems will be resolved by a reboot or manually killing and restarting PulseAudio.
 You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWpulsemixer\fP (\f(CWmod+A\fP).
+.HEADING 2 "How do I copy and paste?"
+.PP
+Copying and pasting is always program-specific on any system.
+In most graphical programs, copy and paste will be the same as they are on Windows: \f(CWctrl-c\fP and \f(CWctrl-v\fP.
+In the Linux terminal, those binds have other more important purposes, so you can run \f(CWman st\fP to see how to copy and paste in my terminal build.
+.PP
+Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your Firefox instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
 The i3 configuration will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
@@ -350,14 +359,9 @@ The script \f(CWsetbg\fP, if run on an image will set it as the persistent backg
 When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
 .PP
-You can edit \f(CW~/.Xresources\fP to change the colorscheme.
-The terminal, status bar and other programs will automatically read the Xresources colors.
-Check
+LARBS no longer uses Xresource by default, but you can still add an \f(CW~/.Xdefaults\fP file and add color settings to change the theme of numerous programs, including the terminal. See
 .PDF_WWW_LINK "https://wiki.archlinux.org/index.php/X_resources" "the Arch Wiki's article"
 for more information.
-LARBS is also compatible with pywal, but it is not installed or used by default anymore.
-.PP
-Do not remove \f(CW~/.Xresources\fP or the color settings specifically because some programs, especially the i3 bar read them and will display as blank if they are deleted.
 .HEADING 2 "How do I set up my email?"
 .LI
 .ITEM
@@ -402,6 +406,10 @@ LARBS is deployed as a git repository in your home directory.
 You can use it as such to fetch, diff and merge changes from the remote repository.
 If you don't want to do that or don't know how to use git, you can actually just rerun the script (as root) and reinstall LARBS and it will automatically update an existing install if you select the same username.
 This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
+.HEADING 2 "Where are the build files for st or AUR programs?"
+.PP
+They are only created in \f(CW/tmp/\fP and thus are likely deleted after installation as they are not necessary.
+If you want to recompile a program, you will have to clone again.
 .HEADING 1 "Contact"
 .LI
 .ITEM
