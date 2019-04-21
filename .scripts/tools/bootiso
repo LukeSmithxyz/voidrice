@@ -31,7 +31,7 @@ echo "$drives"
 
 echo -e "\n\nWhich one do you want to use? (/dev/sdb)"
 read chosen
-[ "$chosen" = "" ] && echo lol || check2
+[ "$chosen" = "" ] && chosen="/dev/sdb" && check2 || check2
 }
 
 check2() {
@@ -59,6 +59,7 @@ fi
 
 burn() {
 clear
+echo "$image is $(du -bsh $image | awk '{print $1}')s"
 sudo dd bs=4M if=$image of=$chosen status=progress oflag=sync
 }
 
