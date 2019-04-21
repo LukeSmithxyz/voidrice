@@ -1,0 +1,67 @@
+#!/bin/bash
+# This script will make a bootable
+# USB/drive/SD, etc.. from given ISO.
+
+[ -z "$1" ] && echo "Usage: $0 <path to iso/img>" && exit
+
+if [ ! -f "$1" ]
+then
+	echo "File $1 doesn't exist."
+	exit
+fi
+
+echo "$1" > /tmp/image
+image=$(cat /tmp/image)
+prepare() {
+for dev in $(ls /sys/block|grep -E '^([sv]|xv)d|mmcblk|nvme'); do
+echo $dev
+done
+
+
+clear
+lsblk |grep sd*|egrep -v "sr|├─|└" >/tmp/drives
+awk '{print "/dev/" $0}' /tmp/drives >/tmp/newdrives
+
+drives=$(cat /tmp/newdrives)
+}
+
+selection() {
+echo -e "DRIVES\n======"
+echo "$drives"
+
+echo -e "\n\nWhich one do you want to use? (/dev/sdb)"
+read chosen
+[ "$chosen" = "" ] && echo lol || check2
+}
+
+check2() {
+if ls $chosen ; then
+	pressy
+else
+	clear
+	echo "Drive $chosen doesn't exist."
+	selection
+fi
+}
+
+pressy() {
+read -n1 -p "WARNING!! By pressing [y] your selected drive will be wiped (Press [n] to abort.)" sure
+if [[ "$sure" = "y" ]] ; then
+	burn
+elif [[ "$sure" = "n" ]] ; then
+	clear
+	echo "Aborting."
+	exit
+else
+	pressy
+fi
+}
+
+burn() {
+clear
+sudo dd bs=4M if=$image of=$chosen status=progress oflag=sync
+}
+
+check
+prepare
+selection
