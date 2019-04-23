@@ -9,5 +9,5 @@
 # 	curl https://samerickson.me/files/flag-emojis > ~/.local/share/flag-emojis
 #
 ifinstalled "geoiplookup" || exit
-addr="$(curl ifconfig.me 2>/dev/null)"
-grep "$(geoiplookup $addr | sed 's/.*, //')" ~/.local/share/flag-emojis
+addr="$(curl ifconfig.me 2>/dev/null)" || exit
+grep "$(geoiplookup "$addr" | sed 's/.*, //')" ~/.local/share/flag-emojis
