@@ -283,7 +283,7 @@ additions.
 .LIST OFF
 .HEADING 2 "Recording"
 .PP
-I use scrot and ffmpeg to make different recordings of the desktop and audio.
+I use maim and ffmpeg to make different recordings of the desktop and audio.
 All of these recording shortcuts will output into \f(CW~\fP, and will not overwrite
 previous recordings as their names are based on their exact times.
 .LI
