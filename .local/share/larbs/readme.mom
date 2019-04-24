@@ -363,37 +363,12 @@ LARBS no longer uses Xresource by default, but you can still add an \f(CW~/.Xdef
 .PDF_WWW_LINK "https://wiki.archlinux.org/index.php/X_resources" "the Arch Wiki's article"
 for more information.
 .HEADING 2 "How do I set up my email?"
-.LI
-.ITEM
-Install \f(CWneomutt\fP, \f(CWofflineimap\fP and \f(CWmsmtp\fP if you haven't already.
-.ITEM
-Create a GPG private/public key pair if you haven't already. Type \f(CWmod+shift+e\fP and you can select a tutorial for how to do this.
-.ITEM
- Download the mutt-wizard repository to the mutt config directory:
-\f(CWgit clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt\fP.
-\fBREAD THE README.\fP
 .PP
-.ITEM
-There run \f(CWmutt-wizard.sh\fP and follow the directions, specifically:
-.LI
-.ITEM
-Add an account.
-.ITEM
-Run \f(CWofflineimap -o\fP in the terminal.
-.ITEM
-Then select the "Autodetect mailboxes" option.
-.LIST OFF
-.LIST OFF
+LARBS is automatically set up to be compatible with \f(CWmutt-wizard\fP, which is now in the AUR and can be installed by running \f(CWyay -S mutt-wizard-git\fP.
+You can then add email accounts by running \f(CWmw add\fP.
 .PP
-You should then be able to open your mail in mutt with Mod+e.
-And this is somewhat of a miracle considering all of the moving pieces that have come together to make this happen.
-Honestly, people give me all this credit for making LARBS, but the mutt-wizard is probably my favorite work.
-.PP
-You can, through the mutt-wizard, schedule automatic mail checks every several minutes.
-You can also press \f(CWMod-F8\fP at any time to check for new mail in your accounts.
-You might also want to run \f(CWnotmuch setup\fP to set \f(CWnotmuch\fP up as a mail indexer.
-This will allow quick searches of your mail in mutt with \f(CWctrl+f\fP.
-The mailsync script will update the notmuch database once you do this.
+Once you have successfully added your email address(es), you can open your mail with \f(CWneomutt\fP which is also bound to \f(CWMod+e\fP.
+You can sync your mail by pressing \f(CWMod+F8\fP and you can set a cronjob to sync mail every several minutes by running \f(CWmw cron\fP.
 .HEADING 2 "How do I set up my music?"
 .PP
 By default, mpd, the music daemon assumes that \f(CW~/Music\fP is your music directory.
