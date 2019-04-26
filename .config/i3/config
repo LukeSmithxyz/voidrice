@@ -118,7 +118,8 @@ bindsym $mod+Shift+Return	exec $term -T "stfloat"
 
 # Custom Modes
 mode "Leave" {
-	bindsym l	exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr
+	bindsym l	exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id lockr; exec --no-startup-id xset dpms force off
+
 	bindsym s	exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 	bindsym z	exec --no-startup-id prompt "Suspend computer?" "systemctl suspend";mode default
 	bindsym r	exec --no-startup-id prompt "Reboot computer?" "$reboot"
@@ -212,9 +213,7 @@ bindsym $mod+Shift+l		move right 30
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
-
 bindsym $mod+x			exec --no-startup-id clipmenu -i -fn Ubuntu:size=10 -nb '#002b36' -nf '#839496' -sb '#073642' -sf '#93a1a1'
-
 bindsym $mod+c			exec --no-startup-id cabl
 bindsym $mod+Shift+c		exec --no-startup-id camtoggle
 
@@ -310,7 +309,7 @@ bindsym $mod+F4		exec --no-startup-id $term
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id torwrap
 bindsym $mod+F7		exec --no-startup-id td-toggle
-bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
+bindsym $mod+F8		exec --no-startup-id mailsync
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
