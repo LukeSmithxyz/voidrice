@@ -17,3 +17,4 @@ gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba="rgb"
+include "/home/michael/.gtkrc-2.0.mine"
