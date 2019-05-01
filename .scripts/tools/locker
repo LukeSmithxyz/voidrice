@@ -1,0 +1,12 @@
+#!/bin/sh
+# option to use suckless slock as well - just put "slock" for both variables below
+lockprogram="i3lock"
+lockcmd="i3lock -e -f -c 120201"
+$lockcmd && xset dpms force off
+batterystatus=$(cat /sys/class/power_supply/BAT?/status)
+if [[ ! -z $(pgrep $lockprogram)  && $batterystatus=="Discharging" ]];then
+  sleep 10m
+  if [[ ! -z $(pgrep $lockprogram)  && $batterystatus=="Discharging" ]];then
+    systemctl suspend
+  fi
+fi
