@@ -6,11 +6,11 @@
 
 case $BLOCK_BUTTON in
 	1) "$TERMINAL" -e neomutt ;;
-	2) setsid $HOME/.config/mutt/etc/mailsync.sh >/dev/null & ;;
+	2) setsid mailsync >/dev/null & ;;
 	3) pgrep -x dunst >/dev/null && notify-send "📬 Mail module" "\- Shows unread mail
 - Shows 🔃 if syncing mail
 - Left click opens neomutt
 - Middle click syncs mail" ;;
 esac
 
-echo "$(du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon 2>/dev/null)"
+echo "$(du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon_$USER 2>/dev/null)"
