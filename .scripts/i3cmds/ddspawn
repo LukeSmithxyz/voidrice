@@ -13,5 +13,5 @@ then
 	i3 "[instance=\"dropdown_$1\"] scratchpad show; [instance=\"dropdown_$1\"] move position center"
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINAL -n dropdown_$1 $(echo "$@" | cut -d ' ' -f2-) -e $1"
+	i3 "exec --no-startup-id $TERMINAL -n dropdown_$1 ${@:2} -e $1"
 fi
