@@ -25,6 +25,17 @@ set mouse=a
 set nohlsearch
 set clipboard=unnamedplus
 
+highlight LineNr ctermfg=DarkGrey
+
+" more convenient keys
+noremap h ;
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
+
+
+
 " Some basics:
 	nnoremap c "_c
 	set nocompatible
@@ -45,7 +56,8 @@ set clipboard=unnamedplus
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
-
+" Open script in vim
+	map <leader>g yiw: ! "$TERMINAL" -e vim "$(which <C-r>")" & <CR><CR>
 " Nerd tree
 	map <leader>n :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
