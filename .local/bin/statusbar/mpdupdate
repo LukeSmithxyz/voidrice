@@ -1,8 +1,0 @@
-#!/bin/sh
-# Whenever the mpd state changes, update the mpd i3 module.
-kill -0 "$(cat /tmp/mpdupdate)" 2>/dev/null && exit || echo $$ > /tmp/mpdupdate
-
-sleep 5 && while : ; do
-	pkill -RTMIN+11 i3blocks
-	mpc idle >/dev/null || exit
-done
