@@ -1,11 +1,11 @@
 # Directory of Scripts
 
-I keep all my user-created scripts here in `~/.scripts/`.  Scripts are sorted
+I keep all my user-created scripts here in `~/.local/bin/`.  Scripts are sorted
 into sub-directories for easy management, and all are seamlessly added to
 `$PATH` with the command below in `~/.profile`:
 
 ```
-export PATH="$(du $HOME/.scripts/ | cut -f2 | tr '\n' ':')$PATH"
+export PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
 ```
 
 ## `statusbar/`
