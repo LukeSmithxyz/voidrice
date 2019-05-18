@@ -1,2 +1,14 @@
 #!/bin/sh
+
+setbg &		# Set the background
+sxhkd &	# Bind keys
+# Switch to US international with Caps as Mod/Escape
+setxkbmap -option caps:super -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
+# Properties button extra Mod/Escape
+xmodmap -e 'keycode 135 = Super_R' &
+xset r rate 300 50 &	# Speed xrate up
+unclutter &		# Remove mouse when idle
+xcompmgr &		# xcompmgr for transparency
+dunst &			# dunst for notifications
+
 exec i3

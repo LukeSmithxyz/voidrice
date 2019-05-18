@@ -1,0 +1,119 @@
+# Basic binds
+super + Return
+	$TERMINAL
+super + d
+	dmenu_run
+super + r
+	$TERMINAL -e lf
+super + e
+	$TERMINAL -e neomutt
+super + m
+	$TERMINAL -e ncmpcpp
+super + n
+	$TERMINAL -e newsboat
+super + i
+	$TERMINAL -e htop
+super + y
+	$TERMINAL -e calcurse
+super + shift + a
+	$TERMINAL -e pulsemixer
+super + shift + c
+	camtoggle
+super + shift + e
+	tutorialvids
+super + w
+	webby | xargs -r $BROWSER
+super + shift + w
+	$BROWSER
+super + shift + g
+	gimp
+
+# Et cetera...
+super + grave
+	dmenuunicode
+super + Scroll_Lock
+	killall screenkey || screenkey
+super + Insert
+	showclip
+super + shift + x
+	prompt "Shutdown computer?" "sudo -A shutdown -h now"
+super + shift + BackSpace
+	prompt "Reboot computer?" "sudo -A shutdown -h now"
+super + x
+	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
+XF86Launch1
+	xset dpms force off
+
+# Recording
+# Take screenshot
+Print
+	maim pic-full-$(date '+%y%m%d-%H%M-%S').png
+# Pick screenshot type
+shift + Print
+	maimpick
+# Record audio or video
+super + Print
+	dmenurecord
+# kill active recording
+super + Delete
+	dmenurecord kill
+
+# Pause audio
+super + {_,shift +} p
+	lmc {toggle,pause}
+# Changes to next/previous tracks
+super + {comma,period}
+	lmc {prev,next}
+# Restart track
+super + shift + less
+	lmc replay
+# Increase volume
+super + {equal,plus}
+	lmc up {5,15}
+# Decrease volume
+super {_,shift +} + minus
+	lmc down {5,15}
+# Seek foward in song
+super + {_,shift +} bracketright
+	lmc forward {10,120}
+# Seek backward in song
+super + {_,shift +} bracketleft
+	lmc back {10,120}
+
+# Function keys
+# Show readme
+super + F1
+	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
+# F2 is restart in i3 right now.
+# Change display
+super + F3
+	displayselect
+# Hibernate
+super + F4
+	prompt 'Hibernate computer?' 'sudo systemctl suspend'
+# Restart/rescan wifi/eth networks
+super + F5
+	sudo -A systemctl restart NetworkManager
+# Start torrent daemon/open interface
+super + F6
+	torwrap
+# toggle torrent daemon
+super + F7
+	td-togggle
+# sync email
+super + F8
+	mailsync
+# Mount a USB drive or Android device
+super + F9
+	dmenumount
+# Unmount a USB drive or Android device
+super + F10
+	dmenuumount
+# Search with Duckduckgo
+super + F11
+	ducksearch
+# Network Manager interface
+super + F12
+	$TERMINAL -e sudo -A nmtui
+
+
