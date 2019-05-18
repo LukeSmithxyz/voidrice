@@ -11,4 +11,6 @@ unclutter &		# Remove mouse when idle
 xcompmgr &		# xcompmgr for transparency
 dunst &			# dunst for notifications
 
-exec i3
+while :; do
+	ssh-agent dwm
+done
