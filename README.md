@@ -13,7 +13,7 @@ These are my dotfiles! The name of the repo, "voidrice", came from the fact they
 + calcurse
 + ncmpcpp and mpd (my main music player)
 + mpv
-+ And many little scripts I use filed in the `~/.scripts/` directory
++ And many little scripts I use filed in the `~/.local/bin/` directory
 
 ## More documentation
 
