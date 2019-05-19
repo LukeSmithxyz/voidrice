@@ -91,9 +91,6 @@ super + F3
 # Hibernate
 super + F4
 	prompt 'Hibernate computer?' 'sudo systemctl suspend'
-# Restart/rescan wifi/eth networks
-super + F5
-	sudo -A systemctl restart NetworkManager
 # Start torrent daemon/open interface
 super + F6
 	torwrap
@@ -109,11 +106,3 @@ super + F9
 # Unmount a USB drive or Android device
 super + F10
 	dmenuumount
-# Search with Duckduckgo
-super + F11
-	ducksearch
-# Network Manager interface
-super + F12
-	$TERMINAL -e sudo -A nmtui
-
-
