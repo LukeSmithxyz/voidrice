@@ -1,7 +1,0 @@
-#!/bin/sh
-
-kill -9 "$(cat ~/.recordingpid)"
-
-# Update i3bar.
-echo "" > ~/.recordingicon
-pkill -RTMIN+9 i3blocks
