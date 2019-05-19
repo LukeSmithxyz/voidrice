@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while :; do
+	xsetroot -name "$(sed 's/^/🔋:/' /sys/class/power_supply/BAT?/capacity 2>/dev/null | tr '\n' ' ') $(date '+%Y %b %d (%a) %I:%M%p')"
+	sleep 30
+done
