@@ -33,7 +33,7 @@ bar {
 	mode dock
 	modifier None
 }
-# #---start dmenu ---# #
+# #---start dmenu---# #
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # #---Basic Bindings---# #
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
