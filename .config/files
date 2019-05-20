@@ -1,5 +1,6 @@
-bf	~/.config/bmfiles
-bd	~/.config/bmdirs
+bf	~/.config/files
+bd	~/.config/directories
+bw	~/.config/bookmarks
 cfb	~/.bashrc
 cfa	~/.config/aliasrc
 cfz	~/.zshrc
