@@ -1,52 +1,39 @@
-# Luke's GNU/Linux Dotfiles
+# The Voidrice (Luke Smith <https://lukesmith.xyz>'s dotfiles)
 
-These are my dotfiles! The name of the repo, "voidrice", came from the fact they were originally on my Void Linux machine, but these files are distro-independent. In fact, I now push changes from my X200 running Parabola or my X220 running Arch.
+These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [my YouTube channel](https://youtube.com/c/lukesmithxyz).
 
-## Programs whose configs can be found here
+- Very useful scripts are in `~/.local/bin/`
+- Settings for:
+	- vim/nvim (text editor)
+	- lf (file browser)
+	- mpd/ncmpcpp (music)
+	- sxiv (image/gif viewer)
+	- mpv (video player)
+- I try to minimize what's directly in `~` so:
+	- All configs that can be in `~/.config/` are.
+	- Some environmental variables have been set in `~/.profile` to move configs into `~/.config/`
+- Bookmarks in text files used by various scripts
+	- Web bookmarks in `~/.config/bookmarks`
+	- File bookmarks in `~/.config/files`
+	- Directory bookmarks in `~/.config/directories`
 
-+ i3 (i3-gaps)
-+ ~~Xresourses/Xdefaults settings~~ Now moved to [my terminal (st) build](https://github.com/lukesmithxyz/st) which uses them
-+ vim
-+ bash
-+ vifm
-+ ~~mutt/msmtp/offlineimap~~ Now moved to [LukeSmithxyz/mutt-wizard](https://github.com/LukeSmithxyz/mutt-wizard)
-+ calcurse
-+ ncmpcpp and mpd (my main music player)
-+ mpv
-+ And many little scripts I use filed in the `~/.local/bin/` directory
+## What's not here
 
-## More documentation
+My setup is pretty modular nowadays.
+I use several suckless program that are meant to be configured and compiled by the user and I also have separate repos for some other things.
+Check out their links:
 
-There's a full .pdf write-up of the repository [here: https://larbs.xyz/larbs_readme.pdf](https://larbs.xyz/larbs_readme.pdf).
+- [dwm](https://github.com/lukesmithxyz/dwm) (the window manager)
+- [st](https://github.com/lukesmithxyz/st) (the terminal emulator)
+- [mutt-wizard (`mw`)](https://github.com/lukesmithxyz/mutt-wizard) - (a terminal-based email system that can store your mail offline without effort)
 
-Or, if you actually installed my dotfiles, you can just press `Super+F1` to
-show the same document offline.
+## What is sort of here
 
-In the system, you can also press `Super+Shift+e` to watch tutorial videos on
-different programs used. See [my YouTube channel](https://youtube.com/c/LukeSmithxyz) for more.
+**If you want the i3 configs, they are in this repo, but in the `archi3` branch.** I don't really update it nowadays, but they're still here. Some other programs I no longer use, like vifm are there too.
 
-The command `getkeys` will also show basic key binds for different programs.
+You might've come here from a review I've done on a program and want my configuration files for that program.
+I tend to remove configs for programs I don't use to keep LARBS small. For those programs, they will be in the git history if you want to go searching. Please don't email me for configs. I tend to delete old stuff on my local machines so it's no easier for me.
 
-## Dynamic Configuration Files
+## Install these dotfiles
 
-Store your favorite or high-traffic directories in `~/.config/bmdirs` or your most
-important config files in `~/.config/bmfiles` with keyboard shortcuts. When you add
-things to theses files my vimrc will automatically run `shortcuts` which will
-dynamically generate shortcuts for these in bash, ranger and optionally
-qutebrowser and fish.
-
-## Like my rice?
-
-Feel free to add other suggestions and I may implement them.
-
-I have a job, but every penny I get from followers or subscribers is more incentive to perfect what I'm doing.
-You can donate to me at [https://paypal.me/LukeMSmith](https://paypal.me/LukeMSmith).
-Donations are earmarked for whatever the donator wants, usually to go to funds for buying new equipment for the [YouTube channel](https://youtube.com/c/LukeSmithxyz).
-
-# "Dependencies" and programs used
-
-The programs I use here are always changing, but luckily you can just look at the installation list for [LARBS](http://larbs.xyz) here:
-
-+ [List of programs installed by LARBS, including optional packages](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv)
-
-`A` marks programs in the AUR, `G` marks git repositories.
+Use [LARBS](https://larbs.xyz) or clone the repo files directly to your home directory and install [the prerequisite programs](https://github.com/LukeSmithxyz/LARBS/blob/master/voiddwm/vprogs.csv).
