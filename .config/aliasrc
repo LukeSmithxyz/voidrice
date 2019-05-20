@@ -4,8 +4,9 @@ alias ka="killall" \
 	mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \
 	calcurse="calcurse -D ~/.config/calcurse" \
 	magit="nvim -c MagitOnly" \
-	p="sudo pacman" \
-	SS="sudo systemctl" \
+	xi="sudo xbps-install" \
+	xr="sudo xbps-remove -R" \
+	xu="sudo xbps-install -Su" \
 	f="$FILE" \
 	g="git" \
 	trem="transmission-remote" \
@@ -22,8 +23,6 @@ alias ka="killall" \
 	yta="yt -x -f bestaudio/best" \
 	YT="youtube-viewer" \
 	ref="shortcuts >/dev/null; source ~/.config/shortcutrc" \
-	upc="sudo pacman -Syu; pkill -RTMIN+8 i3blocks" \
-	lsp="pacman -Qett --color=always | less" \
 	ffmpeg="ffmpeg -hide_banner"
 
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
