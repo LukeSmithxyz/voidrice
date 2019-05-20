@@ -43,6 +43,12 @@ super + x
 	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
 XF86Launch1
 	xset dpms force off
+XF86TouchpadToggle
+	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0)>/dev/null || synclient TouchpadOff=1
+XF86TouchpadOff
+	synclient TouchpadOff=1
+XF86TouchpadOn
+	synclient TouchpadOff=0
 
 # Recording
 # Take screenshot
