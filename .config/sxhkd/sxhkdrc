@@ -68,25 +68,25 @@ super + Delete
 
 # Pause audio
 super + {_,shift +} p
-	lmc {toggle,pause}
+	mpc {toggle,pause}
 # Changes to next/previous tracks
 super + {comma,period}
-	lmc {prev,next}
+	mpc {prev,next}
 # Restart track
 super + shift + less
-	lmc replay
-# Increase volume
-super + {equal,plus}
-	lmc up {5,15}
-# Decrease volume
-super {_,shift +} + minus
-	lmc down {5,15}
+	mpc seek 0%
 # Seek foward in song
 super + {_,shift +} bracketright
-	lmc forward {10,120}
+	mpc seek +{10,120}
 # Seek backward in song
 super + {_,shift +} bracketleft
-	lmc back {10,120}
+	mpc seek -{10,120}
+# Increase volume
+super + {equal,plus}
+	amixer sset Master {5,15}%+
+# Decrease volume
+super {_,shift +} + minus
+	amixer sset Master {5,15}%-
 
 # Function keys
 # Show readme
