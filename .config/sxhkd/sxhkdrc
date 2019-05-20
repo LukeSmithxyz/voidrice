@@ -18,6 +18,8 @@ super + y
 super + shift + a
 	$TERMINAL -e pulsemixer
 super + shift + c
+	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=640x480-0-0 --title='mpvfloat' /dev/video0
+super + shift + c
 	camtoggle
 super + shift + e
 	tutorialvids
