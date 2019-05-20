@@ -3,14 +3,6 @@
 ## or $XDG_CONFIG_HOME/ncmpcpp/config and set up your preferences.          ##
 ##############################################################################
 #
-##### directories ######
-##
-## Directory for storing ncmpcpp related files.  Changing it is useful if you
-## want to store everything somewhere else and provide command line setting for
-## alternative location to config file which defines that while launching
-## ncmpcpp.
-##
-#
 ncmpcpp_directory = ~/.config/ncmpcpp
 #
 ##
