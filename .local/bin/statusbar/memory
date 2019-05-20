@@ -6,4 +6,7 @@ case $BLOCK_BUTTON in
 - Click to show memory hogs." ;;
 esac
 
-free -h | awk '/^Mem:/ {print $3 "/" $2}'
+# Set language to international or otherwise 'free' will output in the current
+# system language
+LC_ALL=C free -h | awk '/^Mem:/ {print $3 "/" $2}'
+
