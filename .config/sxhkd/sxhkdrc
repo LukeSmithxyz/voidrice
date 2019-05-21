@@ -14,17 +14,15 @@ super + n
 super + i
 	$TERMINAL -e htop
 super + y
-	$TERMINAL -e calcurse
+	$TERMINAL -e calcurse -D ~/.config/calcurse
 super + shift + a
-	$TERMINAL -e pulsemixer
+	$TERMINAL -e alsamixer
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=640x480-0-0 --title='mpvfloat' /dev/video0
 super + shift + c
 	camtoggle
 super + shift + e
 	tutorialvids
-super + w
-	webby | xargs -r $BROWSER
 super + shift + w
 	$BROWSER
 super + shift + g
@@ -109,8 +107,5 @@ super + F7
 super + F8
 	mailsync
 # Mount a USB drive or Android device
-super + F9
-	dmenumount
-# Unmount a USB drive or Android device
-super + F10
-	dmenuumount
+super + {F9,F10}
+	{dmenumount,dmenuumount}
