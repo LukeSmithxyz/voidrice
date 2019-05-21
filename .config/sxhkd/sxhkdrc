@@ -16,7 +16,7 @@ super + i
 super + y
 	$TERMINAL -e calcurse
 super + shift + a
-	$TERMINAL -e pulsemixer
+	$TERMINAL -e pulsemixer; pkill -RTMIN+10 i3blocks
 super + shift + c
 	camtoggle
 super + shift + e
