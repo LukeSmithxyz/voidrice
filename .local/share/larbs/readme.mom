@@ -132,6 +132,8 @@ This indicates the direction that the next window will spawn.
 .ITEM
 \f(CWMod+H/J/K/L\fP \(en Move a window around
 .ITEM
+\f(CWMod+Ctrl+h/j/k/l\fP \(en Move a workspace around screens
+.ITEM
 \f(CWMod+Y/U/I/O\fP \(en Resize windows
 .ITEM
 \f(CWMod+/\fP \(en Spawn vertical terminal
