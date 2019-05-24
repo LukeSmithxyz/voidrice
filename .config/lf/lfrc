@@ -1,0 +1,65 @@
+# Luke's lf settings
+
+# Basic vars
+set shell sh
+set previewer ~/.config/lf/scope
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+
+# cmds/functions
+cmd open ${{
+    case $(file --mime-type $f -b) in
+    	text/troff) man ./ $f;;
+        text/*) $EDITOR $fx;;
+	image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
+	image/*) rotdir $f | setsid sxiv -ai >/dev/null 2>&1 & ;;
+	audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
+	video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
+	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
+        *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
+    esac
+}}
+
+cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+
+cmd delete ${{
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete?[y/n]"
+	read ans
+	[ $ans = "y" ] && rm -rf $fx
+}}
+
+cmd moveto ${{
+	set -f
+	clear; echo "Move to where?"
+	dest="$(cut -d'	' -f2- ~/.config/directories | fzf)" &&
+	eval mv -iv $fx $dest &&
+	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+}}
+
+cmd copyto ${{
+	set -f
+	clear; echo "Copy to where?"
+	dest="$(cut -d'	' -f2- ~/.config/directories | fzf)" &&
+	eval cp -ivr $fx $dest &&
+	notify-send "📋 File(s) copied." "File(s) copies to $dest."
+}}
+
+# Bindings
+map c $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
+map J $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
+map gh
+map g top
+map D delete
+map C copyto
+map M moveto
+map a push %mkdir<space>
+map r push :rename<space>
+map <enter> shell
+map R reload
+map x $$f
+map X !$f
+map o &mimeopen $f
+map O $mimeopen --ask $f
