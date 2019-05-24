@@ -1,10 +1,14 @@
+# The Simple X Hotkey Daemon is the program used by LARBS to map most of the
+# dwm-independent commands.  This file is pretty readable, so I'll let you read
+# it.
+
 # Basic binds
 super + Return
 	$TERMINAL
 super + d
 	dmenu_run
 super + r
-	$TERMINAL -e lf
+	$TERMINAL -e $FILE
 super + e
 	$TERMINAL -e neomutt
 super + m
