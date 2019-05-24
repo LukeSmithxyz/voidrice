@@ -54,6 +54,17 @@ multimon() { # Multi-monitor handler.
 		*) morescreen ;;
 	esac ;}
 
+loadconf() { # Load an existing configuration file saved from arandr
+	scripts=$(ls ~/.screenlayout/)
+	if [ -z "$scripts" ]; then
+		scripts="None"
+	fi
+	chosen=$(for s in $scripts; do echo $s; done | dmenu -i -p "Select configuration file:") &&
+	case "$chosen" in
+		*sh) ~/.screenlayout/$chosen ;;
+		*) exit ;;
+	esac ;}
+
 # Get all possible displays
 allposs=$(xrandr -q | grep "connected")
 
@@ -61,10 +72,11 @@ allposs=$(xrandr -q | grep "connected")
 screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
 
 # Get user choice including multi-monitor and manual selection:
-chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
+chosen=$(printf "%s\\nmulti-monitor\\nexisting conf\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
+	"existing conf") loadconf ;;
 	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 
