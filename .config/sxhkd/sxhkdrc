@@ -20,9 +20,9 @@ super + i
 super + y
 	$TERMINAL -e calcurse -D ~/.config/calcurse
 super + shift + a
-	$TERMINAL -e alsamixer
+	$TERMINAL -e alsamixer; refbar
 super + shift + c
-	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=640x480-0-0 --title='mpvfloat' /dev/video0
+	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 super + shift + e
 	tutorialvids
 super + shift + w
@@ -85,22 +85,59 @@ super + {_,shift +} bracketleft
 	mpc seek -{10,120}
 # Increase volume
 super + {equal,plus}
-	amixer sset Master {5,15}%+
+	amixer sset Master {5,15}%+; refbar
 # Decrease volume
 super {_,shift +} + minus
-	amixer sset Master {5,15}%-
+	amixer sset Master {5,15}%-; refbar
+super + shift + m
+	amixer sset Master toggle; refbar
+
+# Audiokeys
+XF86AudioMute
+	amixer sset Master toggle; refbar
+XF86Audio{Raise,Lower}Volume
+	amixer sset Master 5%{+,-}; refbar
+XF86Audio{Next,Prev}
+	mpc {next,prev}
+XF86Audio{Pause,Play,Stop}
+	mpc {pause,play,stop}
+XF86Audio{Rewind,Forward}
+	mpc seek {-,+}10
+XF86AudioRecord
+	dmenurecord
+XF86AudioMedia
+	$TERMINAL -e ncmpcpp
+
+XF86PowerOff
+	prompt "Shutdown computer?" "sudo -A shutdown -h now"
+XF86Calculator
+	$TERMINAL -e bc
+XF86Sleep
+	prompt 'Hibernate computer?' 'sudo -A zzz'
+XF86WWW
+	$BROWSER
+XF86DOS
+	$TERMINAL
+XF86ScreenSaver
+	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
+XF86TaskPane
+	$TERMINAL -e htop
+XF86Mail
+	$TERMINAL -e neomutt
+XF86MyComputer
+	$TERMINAL -e $FILE /
 
 # Function keys
 # Show readme
 super + F1
 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
-# F2 is restart in i3 right now.
+# super + F2 is mapped to restart dwm.
 # Change display
 super + F3
 	displayselect
 # Hibernate
 super + F4
-	prompt 'Hibernate computer?' 'sudo systemctl suspend'
+	prompt 'Hibernate computer?' 'sudo -A zzz'
 # Start torrent daemon/open interface
 super + F6
 	torwrap
