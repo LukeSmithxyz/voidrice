@@ -113,3 +113,6 @@ super + F8
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
+
+super + F12
+	$TERMINAL -e wpa_cli
