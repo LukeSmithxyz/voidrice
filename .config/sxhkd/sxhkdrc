@@ -40,7 +40,9 @@ super + Insert
 super + shift + x
 	prompt "Shutdown computer?" "sudo -A shutdown -h now"
 super + shift + BackSpace
-	prompt "Reboot computer?" "sudo -A shutdown -h now"
+	prompt "Reboot computer?" "sudo -A shutdown -r now"
+super + shift + Escape
+	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
 	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
 XF86Launch1
