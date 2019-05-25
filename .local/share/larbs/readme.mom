@@ -207,7 +207,8 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+F2\fP \(en Refresh i3
 .ITEM
-\f(CWMod+F3\fP \(en Select screen/display to use
+\f(CWMod+F3\fP \(en Select screen/display to use.
+You can save ARandR configurations in \f(CW~/.config/screenlayout\fP and load them here
 .ITEM
 \f(CWMod+F4\fP \(en Hibernate (will ask to confirm)
 .ITEM

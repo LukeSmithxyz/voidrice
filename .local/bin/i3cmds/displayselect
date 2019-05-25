@@ -55,13 +55,13 @@ multimon() { # Multi-monitor handler.
 	esac ;}
 
 loadconf() { # Load an existing configuration file saved from arandr
-	scripts=$(ls ~/.screenlayout/)
+	scripts=$(ls ~/.config/screenlayout/)
 	if [ -z "$scripts" ]; then
 		scripts="None"
 	fi
 	chosen=$(for s in $scripts; do echo $s; done | dmenu -i -p "Select configuration file:") &&
 	case "$chosen" in
-		*sh) ~/.screenlayout/$chosen ;;
+		*sh) ~/.config/screenlayout/"$chosen" ;;
 		*) exit ;;
 	esac ;}
 
