@@ -102,7 +102,7 @@ super + F7
 	td-togggle
 # sync email
 super + F8
-	mailsync
+	.config/mutt/etc/mailsync.sh
 # Mount a USB drive or Android device
 super + F9
 	dmenumount
