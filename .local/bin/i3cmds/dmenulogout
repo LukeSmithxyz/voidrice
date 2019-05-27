@@ -1,0 +1,13 @@
+#!/bin/sh
+
+MESSAGE="lock\\nexit\\nsuspend\\nhibernate\\nreboot\\nshutdown"
+ACTION="$(printf "$MESSAGE" | dmenu -l 6 -i -p "Do what now?")"
+
+case "$ACTION" in
+    "lock") i3lock -n -c 222222 ;;
+    "exit") i3-msg exit ;;
+    "suspend") systemctl suspend ;;
+    "hibernate") systemctl hibernate ;;
+    "reboot") systemctl reboot ;;
+    "shutdown") systemctl poweroff -i ;;
+esac
