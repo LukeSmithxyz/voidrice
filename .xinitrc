@@ -1,17 +1,19 @@
 #!/bin/sh
 
-setbg &		# Set the background
-sxhkd &		# Bind keys
-# Switch to US international with Caps as Mod/Escape
-setxkbmap -option caps:super -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
-# Properties button extra Mod/Escape
-xmodmap -e 'keycode 135 = Super_R' &
-xset r rate 300 50 &	# Speed xrate up
-unclutter &		# Remove mouse when idle
-xcompmgr &		# xcompmgr for transparency
-dunst &			# dunst for notifications
+# xinitrc runs automatically when you run startx.
+
+# There are some small but important commands that need to be run when we start
+# the graphical environment. I keep those commands in ~/.xprofile because that
+# file is run automatically if someone uses a display manager (login screen)
+# and so they are needed there. To prevent doubling up commands, I source them
+# here with the line below.
+
+[ -f ~/.xprofile ] && . ~/.xprofile
+
+
+# Here we start dwm.
+# The loop is just to enable dwm's "restart" feature (mod+F2).
 
 while :; do
-	dwmbar &
 	ssh-agent dwm || break
 done

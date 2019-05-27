@@ -1,1 +1,26 @@
-.profile
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+setbg &			# set the background with the `setbg` script
+xcompmgr &		# xcompmgr for transparency
+dwmbar &		# script for updating the status bar
+dunst &			# dunst for notifications
+sxhkd &			# Bind keys with sxhkd
+xset r rate 300 50 &	# Speed xrate up
+unclutter &		# Remove mouse when idle
+
+# Switch to US international with Caps as Mod/Escape
+setxkbmap -option caps:super -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
+# Properties button extra Mod/Escape
+xmodmap -e 'keycode 135 = Super_R' &
+
+xrandr -q | grep "DP2 con" >/dev/null 2>&1 && xrandr --output DP1 --auto --output LVDS1 --off
+
+# This loop will run the `refbar` script to refresh the statusbar whenever a
+# command changes the music player's status.
+while : ; do
+	mpc idle >/dev/null 2>&1
+	refbar
+done &
