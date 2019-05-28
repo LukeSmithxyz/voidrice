@@ -5,14 +5,10 @@ cfb	~/.bashrc
 cfa	~/.config/aliasrc
 cfz	~/.zshrc
 cfv	~/.config/nvim/init.vim
-cfi	~/.config/i3/config
 cfm	~/.config/mutt/muttrc
-eb	~/Documents/LaTeX/uni.bib
-cv	~/Documents/LaTeX/cv.tex
 cfd	~/.Xdefaults
 cfu	~/.config/newsboat/urls
 cfn	~/.config/newsboat/config
 cfmb	~/.config/ncmpcpp/bindings
 cfmc	~/.config/ncmpcpp/config
-er	~/Documents/referbib
-cfB	~/.config/i3blocks/config
+cfk	~/.config/sxhkd/sxhkdrc
