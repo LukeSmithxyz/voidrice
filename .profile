@@ -2,7 +2,7 @@
 
 # Profile file. Runs on login. Environmental variables are set here.
 
-# Adds `~/.local/bin` and all subdirectories to $PATH
+# Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$HOME/.local/bin/"
 
 # Default programs:
