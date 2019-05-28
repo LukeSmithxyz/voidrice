@@ -2,9 +2,16 @@
 # dwm-independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
+# The keys NOT bound here by sxhkd, but by dwm or i3 are:
+# The t thru p keys on the top row
+# The f thru ; keys on the home row
+# The b key on the bottom row
+
 # Basic binds
 super + Return
 	$TERMINAL
+super + shift + q
+	kill -9 `xdotool getwindowfocus getwindowpid`
 super + d
 	dmenu_run
 super + r
@@ -15,9 +22,9 @@ super + m
 	$TERMINAL -e ncmpcpp
 super + n
 	$TERMINAL -e newsboat
-super + i
+super + s
 	$TERMINAL -e htop
-super + y
+super + c
 	$TERMINAL -e calcurse -D ~/.config/calcurse
 super + shift + a
 	$TERMINAL -e alsamixer; refbar
