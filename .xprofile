@@ -20,7 +20,7 @@ xrandr -q | grep "DP2 con" >/dev/null 2>&1 && xrandr --output DP1 --auto --outpu
 
 # This loop will run the `refbar` script to refresh the statusbar whenever a
 # command changes the music player's status.
-while : ; do
+while pgrep -x mpd; do
 	mpc idle >/dev/null 2>&1
 	refbar
 done &
