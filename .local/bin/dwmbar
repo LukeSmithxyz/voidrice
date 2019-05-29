@@ -20,15 +20,15 @@ testweather() { \
 status() { \
 
 	# Get current mpd track filename or artist - title if possible.
-	printf "%s" "$(mpc -f "[[%artist% - ]%title%]|[%file%]" 2>/dev/null | grep -v "volume:[0-9]*%" | head -n 1)"
+	printf "%s" "$(mpc -f "[[%artist% - ]%title%]|[%file%]" 2>/dev/null | grep -v "volume:" | head -n 1)"
 
 	# If the weather report is current, show daily precipitation chance,
 	# low and high.  Don't even bother to understand this one unless you
 	# have all day. Takes the weather report format from wttr.in and makes
 	# it look like how I want it for the status bar.
 	[ "$(stat -c %y "$HOME/.local/share/weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] &&
-		printf "| %s" "$(sed '16q;d' "$HOME/.local/share/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')" &&
-		sed '13q;d' "$HOME/.local/share/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "° |"}'
+		printf "| %s" "$(sed '16q;d' "$HOME/.local/share/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ /g" | tr -d '\n')" &&
+		sed '13q;d' "$HOME/.local/share/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ",$1 "°","",$2 "° |"}'
 
 	# The newsboat module is noticeably slower than all others.
 	# Especially if you don't use newsboat, you will want to comment it out.
