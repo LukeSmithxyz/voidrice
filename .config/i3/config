@@ -83,15 +83,19 @@ bindsym $mod+g			workspace prev
 
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
+bindsym $mod+Ctrl+h		move workspace to output left
 
 bindsym $mod+j			focus down
 bindsym $mod+Shift+j		move down 30
+bindsym $mod+Ctrl+j		move workspace to output down
 
 bindsym $mod+k			focus up
 bindsym $mod+Shift+k		move up 30
+bindsym $mod+Ctrl+k		move workspace to output up
 
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l		move right 30
+bindsym $mod+Ctrl+l		move workspace to output right
 
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
@@ -179,9 +183,13 @@ bindsym $mod+F2		restart
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
+bindsym $mod+Ctrl+Left		move workspace to output left
 bindsym $mod+Down		focus down
+bindsym $mod+Ctrl+Down		move workspace to output down
 bindsym $mod+Up			focus up
+bindsym $mod+Ctrl+Up		move workspace to output up
 bindsym $mod+Right 		focus right
+bindsym $mod+Ctrl+Right		move workspace to output right
 bindsym $mod+Shift+Left		move left
 bindsym $mod+Shift+Down		move down
 bindsym $mod+Shift+Up		move up
