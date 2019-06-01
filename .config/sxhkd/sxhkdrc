@@ -130,6 +130,9 @@ XF86MyComputer
 	$TERMINAL -e $FILE /
 
 # Function keys
+super + shift + F1
+	grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send \"Welcome to LARBS on Void with dwm\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
+#notify-send "LARBS" "The LARBS welcome message has been disabled."; sed -i "/LARBSWELCOME/d" ~/.xprofile
 # Show readme
 super + F1
 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -

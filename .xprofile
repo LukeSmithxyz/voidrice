@@ -22,3 +22,4 @@ while pgrep -x mpd; do
 	mpc idle >/dev/null 2>&1
 	refbar
 done &
+notify-send "Welcome to LARBS on Void with dwm" "Press super+F1 for the help menu." # LARBSWELCOME
