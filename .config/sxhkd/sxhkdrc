@@ -148,7 +148,7 @@ super + F6
 	torwrap
 # toggle torrent daemon
 super + F7
-	td-togggle
+	td-toggle
 # sync email
 super + F8
 	mailsync
