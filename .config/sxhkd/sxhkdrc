@@ -56,10 +56,8 @@ XF86Launch1
 	xset dpms force off
 XF86TouchpadToggle
 	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0)>/dev/null || synclient TouchpadOff=1
-XF86TouchpadOff
-	synclient TouchpadOff=1
-XF86TouchpadOn
-	synclient TouchpadOff=0
+XF86Touchpad{Off,On}
+	synclient TouchpadOff={1,0}
 
 # Recording
 # Take screenshot
@@ -68,12 +66,9 @@ Print
 # Pick screenshot type
 shift + Print
 	maimpick
-# Record audio or video
-super + Print
-	dmenurecord
-# kill active recording
-super + Delete
-	dmenurecord kill
+# Print: Record audio or video; Del: kill recording
+super + {Print,Delete}
+	dmenurecord {,kill}
 
 # Pause audio
 super + {_,shift +} p
