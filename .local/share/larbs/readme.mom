@@ -36,6 +36,7 @@ My website:
 .ITEM
 Donate:
 .PDF_WWW_LINK "https://lukesmith.xyz/donate" "https://lukesmith.xyz/donate"
+(It makes a difference!)
 .LIST OFF
 FAQs are at the end of this document.
 .HEADING 1 "Welcome!"
@@ -70,39 +71,32 @@ but you can also hold it down and it will act as another Windows/super/mod key.
 The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button.
 This is to make one-handing on laptops easier.
 .LIST OFF
-If you'd like to change any of these keyboard changes, you need only open and change \f(CW~/.local/bin/tools/remaps\fP.
+If you'd like to change any of these keyboard changes, you need only open and change \f(CW~/.xprofile\fP.
 Actually, this should go without saying, but \fIeverything\fP here can easily be changed.
+Below in this document, there is information about where to change programs/components.
 .PP
-Additionally, while this isn't a part of i3, the default editing mode in the shell is using vi bindings.
+Additionally, while this isn't a part of the desktop environment, the default editing mode in the shell is using vi bindings.
 If you want to learn more of this, run \f(CWMod+Shift+E\fP and type and select the option for "vi mode in shell".
-This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.inputrc\fP.
+This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.config/inputrc\fP.
 .HEADING 2 "The Status Bar"
 .PP
-If you're new to i3, notice the status bar on the top of the screen.
-To the left side, you'll see the numbers of your current workspace(s).
+If you're new to dwm, notice the status bar on the top of the screen.
+To the left side, you'll see the numbers of your current workspace/tag(s).
 On the right side, you'll see various system status notifiers, the date, volume, even music and local weather if possible, etc.
 I'm sure you can figure it out.
-Several modules will be click-sensitive, although if you're using my system as indented, you probably won't be doing much clicking.
-Still, you can right click on a module to get some information about what exactly it means.\c
-.FOOTNOTE
-The statusbar icons are merely emojis and you can change them by changing your emoji font.
-If you just want black and white icons, you should actually just be able to uninstall \f(CWttf-emojione\fP and the font will fall back on a black and white font.
-.FOOTNOTE END
-.PP
-The i3blocks config is \f(CW~/.config/i3blocks/config\fP, which you can access by the
-terminal shortcut \f(CWcfB\fP. Notice that the config file refers to several module
-scripts in the \f(CW~/.local/bin/\fP directory. You can read a summary of all of these
-scripts in the file \f(CW~/.local/bin/SCRIPTS.md\fP.
+The script that sets the bar is \f(CW~/.local/bin/dwmbar\fP.
+You can read the specifics there or change it if you want.
+If you edit and save changes to that file in vim, vim will automatically kill and update it.
 .HEADING 2 "Deeper Tutorials"
 .PP
-In addition to this guide and reading the dotfiles of programs manually, you
-can also get program-specific information by running the \f(CWgetkeys\fP command.
-This will give you the bindings of what program you want. You can also press
-\f(CWMod+E\fP (that's a capital \f(CWE\fP) to get be able to watch tutorial videos on
-specific programs or concepts directly from YouTube.
+Press \f(CWmod+shift+e\fP at any time to get a menu of programs to watch videos about streaming directly from YouTube.
+You can also check the config files for programs which detail a lot of the specific bindings.
 .HEADING 1 "Key Bindings"
 .PP
-All of the bindings below are in the file \f(CW~/.config/i3/config\fP (easily accessible by typing \f(CWcfi\fP in the terminal) and can all be easily changed.
+First, the key bindings.
+Key bindings are stored in two places.
+The file \f(CW~/.config/sxhkd/sxhkdrc\fP contains most of them, which you can see and edit there if you like.
+dwm-specific binds are compiled into dwm itself, but can be found in \f(CW~/repos/dwm/config.h\fP. You'll have to recompile dwm to change them.
 .HEADING 2 "Window basics"
 .PP
 Notice the case sensitivity of the shortcuts\c
@@ -120,13 +114,11 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+d\fP \(en dmenu (For running commands or programs without shortcuts)
 .ITEM
-\f(CWMod+t\fP \(en Toggle between spawning vertically and horizontally\c
-.FOOTNOTE
-You may notice that one side of your window border is a different color.
-This indicates the direction that the next window will spawn.
-.FOOTNOTE END
+\f(CWMod+t\fP \(en Tiling mode (active by default)
 .ITEM
-\f(CWMod+f\fP \(en Fullscreen
+\f(CWMod+f\fP \(en Monocle mode (cycle through windows fullscreen)
+.ITEM
+\f(CWMod+F\fP \(en Fibbonacci mode (similar to tiling mode)
 .ITEM
 \f(CWMod+h/j/k/l\fP \(en Move to different windows
 .ITEM
@@ -200,9 +192,11 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+Shift+Backspace\fP \(en reboot (will ask to confirm)
 .ITEM
-\f(CWMod+Shift+Escape\fP \(en exit i3 (will ask to confirm)
+\f(CWMod+Shift+Escape\fP \(en exit the graphical environment (will ask to confirm)
 .ITEM
 \f(CWMod+F1\fP \(en Shows this document
+.ITEM
+\f(CWMod+Shift+F1\fP \(en Permanently disable the LARBS welcome message
 .ITEM
 \f(CWMod+F2\fP \(en Refresh i3
 .ITEM
@@ -261,25 +255,20 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 .ITEM
 \f(CWMod+A\fP \(en pulsemixer (general volume sink/source control)
 .LIST OFF
-.HEADING 2 "Workspaces"
+.HEADING 2 "Tags/Workspaces"
 .PP
-There are ten workspaces. They work just like those in vanilla i3 with some
-additions.
+There are nine tags, active tags are highlighted in the top left.
 .LI
 .ITEM
-\f(CWMod+(Number)\fP \(en Go to that number workspace
+\f(CWMod+(Number)\fP \(en Go to that number tag
 .ITEM
-\f(CWMod+Shift+(Number)\fP \(en Send window to that workspace
+\f(CWMod+Shift+(Number)\fP \(en Send window to that tag
 .ITEM
-\f(CWMod+Tab\fP \(en Go to previous workspace
+\f(CWMod+Tab\fP \(en Go to previous tag
 .ITEM
 \f(CWMod+g\fP \(en Go to left workspace
 .ITEM
 \f(CWMod+;\fP \(en Go to right workspace
-.ITEM
-\f(CWMod+Shift+Delete\fP \(en "Porno-mode" Press this key sequence if you want to hide
-  what you have on your screen. Moves to a totally new workspace, mutes sound,
-  pauses music and brings up distraction windows.
 .LIST OFF
 .HEADING 2 "Recording"
 .PP
@@ -305,11 +294,24 @@ previous recordings as their names are based on their exact times.
 I've mapped those extra buttons that some keyboards have (play and pause
 buttons, screen brightness, email, web browsing buttons, etc.) to what you
 would expect.
+.HEADING 1 "Configuration"
+.PP
+Here's a brief reference as to what program does what and where you can modify them.
+Some of the programs marked as "suckless" programs must be recompiled after being reconfigured.
+That means you should go to their directory in \f(CW~/repos/\fP and run \f(CWmake && sudo make install\fP after making changes.
+.LI
+.ITEM
+dwm: the window manager itself \(en \f(CW~/repos/dwm/\fP (suckless)
+.ITEM
+sxhkd: key bindings \(en \f(CW~/.config/sxhkd/sxhkdrc\fP, while some dwm-related commands are configured in dwm, the rest, most of them, are set by sxhkd.
+.ITEM
+lf: the file manager, \f(CW~/.config/lfrc\fP for the main config, \f(CW~/.config/scope\fP for file previews.
+.LIST OFF
 .HEADING 1 "Bookmarking Files and Directories"
 .PP
-Note the files \f(CW~/.config/bmdirs\fP and \f(CW~/.config/bmfiles\fP.
+Note the files \f(CW~/.config/directories\fP and \f(CW~/.config/files\fP.
 These files hold bookmarked directories and files respectively, along with shortcut keys to their left.
-LARBS, specfically the \f(CWshortcuts\fP script, will automatically read these files and autogenerate aliases and shortcuts for bash/zsh and vifm from them.
+LARBS, specfically the \f(CWshortcuts\fP script, will automatically read these files and autogenerate aliases and shortcuts for bash and other programs.
 .PP
 For example, by default, the shortcut key for \f(CW~/Documents\fP is simply \f(CWd\fP.
 Thus, if you type and run \f(CWd\fP in bash, you will automatically \f(CWcd\fP to \f(CW~/Documents\fP.
@@ -328,23 +330,27 @@ Create a new tab in \f(CW~/Documents\fP
 \f(CWYd\fP \(en
 Copy/yank (cp) a copy of the selected file(s) to \f(CWDocuments\fP
 .LIST OFF
-Shortcuts like these are generated for all key sequence/directory pairs in \f(CW~/.config/bmdirs\fP.
-Additionally, you may also add editable files to \f(CW~/.config/bmfiles\fP.
+Shortcuts like these are generated for all key sequence/directory pairs in \f(CW~/.config/directories\fP.
+Additionally, you may also add editable files to \f(CW~/.config/files\fP.
 Each key sequence you pair with a file will become an alias to edit it in either bash or vifm.
 .PP
 Whenever you edit and save one of the bookmark files, vim will automatically rerun the shortcut script, thus updating the shortcuts that will be used in new instances of bash and vifm.
 It just werks.
 Note that it is your responsibility to ensure that none of the bindings you add conflict with another necessary function or command.
+.PP
+In addition to
 .HEADING 1 "Frequently Asked Questions (FAQs)"
 .HEADING 2 "My keyboard isn't working as expected!"
 .PP
-LARBS runs some custom keyboard settings in \f(CW~/.local/bin/tools/remaps\fP.
+LARBS runs some custom keyboard settings in \f(CW~/.xinitrc\fP.
 These settings may override your preferred settings, so you should open this file and comment out troublesome lines if you have issues.
 .HEADING 2 "My audio isn't working!"
 .PP
-Sometimes, PulseAudio can be finicky on initial installation and configuration.
-If you have no audio output, chances are your problems will be resolved by a reboot or manually killing and restarting PulseAudio.
+On fresh install, the Linux audio system (ALSA) often mutes outputs.
+You may want to unbind
 You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWpulsemixer\fP (\f(CWmod+A\fP).
+
+If you have a more complex audio setup and can't be bothered to figure out ALSA, you might want to install and enable PulseAudio, which general "just werks".
 .HEADING 2 "How do I copy and paste?"
 .PP
 Copying and pasting is always program-specific on any system.
@@ -359,7 +365,7 @@ The script \f(CWsetbg\fP, if run on an image will set it as the persistent backg
 When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
 .PP
-LARBS no longer uses Xresource by default, but you can still add an \f(CW~/.Xdefaults\fP file and add color settings to change the theme of numerous programs, including the terminal. See
+LARBS no longer deploys Xresource by default, but you can still add an \f(CW~/.Xdefaults\fP file and add color settings to change the theme of numerous programs, including the terminal. See
 .PDF_WWW_LINK "https://wiki.archlinux.org/index.php/X_resources" "the Arch Wiki's article"
 for more information.
 .HEADING 2 "How do I set up my email?"
@@ -381,10 +387,6 @@ LARBS is deployed as a git repository in your home directory.
 You can use it as such to fetch, diff and merge changes from the remote repository.
 If you don't want to do that or don't know how to use git, you can actually just rerun the script (as root) and reinstall LARBS and it will automatically update an existing install if you select the same username.
 This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
-.HEADING 2 "Where are the build files for st or AUR programs?"
-.PP
-They are only created in \f(CW/tmp/\fP and thus are likely deleted after installation as they are not necessary.
-If you want to recompile a program, you will have to clone again.
 .HEADING 1 "Contact"
 .LI
 .ITEM
