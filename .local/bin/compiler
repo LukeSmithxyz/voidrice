@@ -23,8 +23,8 @@ textype() { \
 	}
 
 case "$file" in
-	*\.ms) refer -PS -e "$file" | groff -me -ms -kejpt -T pdf > "$base".pdf ;;
-	*\.mom) refer -PS -e "$file" | groff -mom -kejpt -T pdf > "$base".pdf ;;
+	*\.ms) refer -PS -e "$file" | groff -me -ms -kept -T pdf > "$base".pdf ;;
+	*\.mom) refer -PS -e "$file" | groff -mom -kept -T pdf > "$base".pdf ;;
 	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
 	*\.tex) textype "$file" ;;
