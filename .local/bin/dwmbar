@@ -1,6 +1,10 @@
 #!/bin/sh
 
-# This script sets the statusbar with the xsetroot command at the end.
+# This script sets the statusbar with the xsetroot command at the end. Have it
+# started by ~/.xinitrc or ~/.xprofile.
+
+# Set the deliminter character.
+delim="|"
 
 # testweather checks to see if the most recent forecast is up to date.  If it
 # isn't, it downloads a new weather forecast, then signals to update the
@@ -15,59 +19,61 @@ testweather() { \
 
 # Here is the (big) function that outputs the appearance of the statusbar. It
 # can really be broken down into many submodules which I've commented and
-# explained.  Note that I use printf "%s" to format everything without line
-# breaks. I try to put | as delimiters between modules.
+# explained.
 status() { \
 
 	# Get current mpd track filename or artist - title if possible.
-	printf "%s" "$(mpc -f "[[%artist% - ]%title%]|[%file%]" 2>/dev/null | grep -v "volume:" | head -n 1)"
+	mpc -f "[[%artist% - ]%title%]|[%file%]" 2>/dev/null | grep -v "volume:" | head -n 1 && echo "$delim"
 
 	# If the weather report is current, show daily precipitation chance,
 	# low and high.  Don't even bother to understand this one unless you
 	# have all day. Takes the weather report format from wttr.in and makes
 	# it look like how I want it for the status bar.
 	[ "$(stat -c %y "$HOME/.local/share/weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] &&
-		printf "| %s" "$(sed '16q;d' "$HOME/.local/share/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ /g" | tr -d '\n')" &&
-		sed '13q;d' "$HOME/.local/share/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ",$1 "°","",$2 "° |"}'
-
-	# The newsboat module is noticeably slower than all others.
-	# Especially if you don't use newsboat, you will want to comment it out.
-	# printf ":%s |" "$(newsboat -x print-unread | cut -d' ' -f1)"
+		sed '16q;d' "$HOME/.local/share/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ /g" | tr -d '\n' &&
+		sed '13q;d' "$HOME/.local/share/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ",$1 "°","",$2 "°"}' &&
+		echo "$delim"
 
 	# Get the volume of ALSA's master volume output.  Show an icon if or
 	# not muted.
-	printf "%s |" "$(amixer get Master | grep -o "[0-9]*%\|\[on\]\|\[off\]" | sed "s/\[on\]//;s/\[off\]//")"
+	amixer get Master | grep -o "[0-9]*%\|\[on\]\|\[off\]" | sed "s/\[on\]//;s/\[off\]//"
+
+	echo "$delim"
 
 	# Wifi quality percentage and  icon if ethernet is connected.
-	printf " %s%s " \
-		"$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')" \
-		"$(sed "s/down//;s/up/ /" /sys/class/net/e*/operstate)"
+	grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }'
+	sed "s/down//;s/up//" /sys/class/net/e*/operstate
 
 	# Show unread mail if mutt-wizard is installed.
 	command -v mw >/dev/null 2>&1 &&
-		printf "| :%s | " "$(du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l)"
+		echo "$delim" &&
+		du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l | sed 's/^/:/'
+		echo "$delim"
 
 	# Will show all batteries with approximate icon for remaining power.
 	for x in /sys/class/power_supply/BAT?/capacity;
 	do
 	case "$(cat $x)" in
-		100|9[0-9])	printf "" ;;
-		8[0-9]|7[0-9])	printf "" ;;
-		6[0-9]|5[0-9])	printf "" ;;
-		4[0-9]|3[0-9])	printf "" ;;
-		*)		printf "" ;;
-	esac; printf " "
-	done
+		100|9[0-9])	echo "" ;;
+		8[0-9]|7[0-9])	echo "" ;;
+		6[0-9]|5[0-9])	echo "" ;;
+		4[0-9]|3[0-9])	echo "" ;;
+		*)		echo "" ;;
+	esac
+	done && echo "$delim"
 
 	# Date and time.
-	printf "| %s" "$(date '+%Y %b %d (%a) %I:%M%p')"
+	date '+%Y %b %d (%a) %I:%M%p'
 	}
 
 while :; do
 	# So all that big status function was just a command that quicking gets
 	# what we want to be the statusbar. This xsetroot command is what sets
-	# it.
-	xsetroot -name "$(status)"
+	# it. Note that the tr command replaces newlines with spaces. This is
+	# to prevent some weird issues that cause significant slowing of
+	# everything in dwm. Note entirely sure of the cause, but again, the tr
+	# command easily avoids it.
+	xsetroot -name "$(status | tr '\n' ' ')"
 
 	# Check to see if new weather report is needed.
 	testweather &
