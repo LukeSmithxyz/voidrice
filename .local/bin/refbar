@@ -3,4 +3,4 @@
 # Refresh the dwmbar.
 # Right now, now this is done is by killing the sleep in the bar script.
 
-kill "$(pstree -lp | grep -- -dwmbar\([0-9] | sed "s/.*sleep(\([0-9]\+\)).*/\1/")"
+pkill -P "$(pgrep -ox dwmbar)" sleep
