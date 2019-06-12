@@ -86,6 +86,7 @@ update() { \
 
 
 while :; do
+    update
 	# Sleep for a minute after changing the status bar before updating it
 	# again. We run sleep in the background and use wait until it finishes,
     # because traps can interrupt wait immediately, but they can't do that
