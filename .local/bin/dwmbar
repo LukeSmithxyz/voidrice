@@ -3,7 +3,7 @@
 # This script sets the statusbar with the xsetroot command at the end. Have it
 # started by ~/.xinitrc or ~/.xprofile.
 
-# Handle SIGCONT signals sent by refbar to update the status bar immediately.
+# Handle SIGTRAP signals sent by refbar to update the status bar immediately.
 trap 'update' 5
 
 # Set the deliminter character.
