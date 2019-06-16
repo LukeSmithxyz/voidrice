@@ -102,7 +102,7 @@ This will give you the bindings of what program you want. You can also press
 specific programs or concepts directly from YouTube.
 .HEADING 1 "Key Bindings"
 .PP
-All of the bindings below are in either r\f(CW~/.config/sxhkd/sxhkdrrc\fP (for general bindings) or in \f(CW~/.config/i3/config\fP (for i3-specific commands).
+All of the bindings below are in either r\f(CW~/.config/sxhkd/sxhkdrc\fP (for general bindings) or in \f(CW~/.config/i3/config\fP (for i3-specific commands).
 You can change them in either of these files to what you want and both files can be accessed respectively by running \f(CWcfk\fP or \f(CWcfi\fP respectively in the terminal.
 .HEADING 2 "Window basics"
 .PP
