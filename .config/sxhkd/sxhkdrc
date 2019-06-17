@@ -5,7 +5,7 @@
 # The keys NOT bound here by sxhkd, but by dwm or i3 are:
 # The t thru p keys on the top row
 # The f thru ; keys on the home row
-# The b key on the bottom row
+# The b key on the bottom row (hides the bar in either case)
 
 # Basic binds
 super + Return
@@ -134,7 +134,6 @@ XF86MyComputer
 # Function keys
 super + shift + F1
 	grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send \"Welcome to LARBS on Void with dwm\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
-#notify-send "LARBS" "The LARBS welcome message has been disabled."; sed -i "/LARBSWELCOME/d" ~/.xprofile
 # Show readme
 super + F1
 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
@@ -157,6 +156,5 @@ super + F8
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
-
 super + F12
 	$TERMINAL -e wpa_cli
