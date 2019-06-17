@@ -69,12 +69,16 @@ Print
 shift + Print
 	maimpick
 # Print: Record audio or video; Del: kill recording
-super + {Print,Delete}
-	dmenurecord {,kill}
+super + Print
+	dmenurecord
+super + Delete
+	dmenurecord kill
 
 # Pause audio
-super + {_,shift +} p
-	mpc {toggle,pause}
+super + p
+	mpc toggle
+super + shift + p
+	mpc pause; pauseallmpv
 # Changes to next/previous tracks
 super + {comma,period}
 	mpc {prev,next}
