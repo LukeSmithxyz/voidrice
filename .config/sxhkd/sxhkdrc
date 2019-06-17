@@ -148,6 +148,8 @@ super + F3
 # Hibernate
 super + F4
 	prompt 'Hibernate computer?' 'sudo -A zzz'
+super + F5
+	sudo sv restart wpa_supplicant
 # Start torrent daemon/open interface
 super + F6
 	torwrap
