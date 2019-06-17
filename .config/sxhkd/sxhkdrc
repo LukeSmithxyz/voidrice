@@ -53,7 +53,7 @@ super + shift + BackSpace
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
-	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
+	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
 XF86Launch1
 	xset dpms force off
 XF86TouchpadToggle
