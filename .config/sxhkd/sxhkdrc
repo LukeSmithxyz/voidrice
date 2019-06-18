@@ -43,6 +43,33 @@ super + x
 	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
 XF86Launch1
 	xset dpms force off
+XF86AudioMute
+	lmc mute
+XF86AudioLowerVolume
+	lmc down 5
+shift+XF86AudioLowerVolume
+	lmc down 10
+control+XF86AudioLowerVolume
+	lmc down 1
+XF86AudioRaiseVolume
+	lmc up 5
+shift+XF86AudioRaiseVolume
+	lmc up 10
+control+XF86AudioRaiseVolume
+	lmc up 1
+XF86AudioNext
+	lmc next
+XF86AudioPlay
+	lmc toggle
+XF86AudioPrev
+	lmc prev
+XF86AudioStop
+	lmc toggle
+XF86MonBrightnessDown
+	xbacklight -dec 15
+XF86MonBrightnessUp
+	xbacklight -inc 15
+
 
 # Recording
 # Take screenshot
