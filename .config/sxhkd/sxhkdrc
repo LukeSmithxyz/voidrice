@@ -107,18 +107,6 @@ super + {_,shift +} bracketright
 super + {_,shift +} bracketleft
 	lmc back {10,120}
 
-# General bindings for audio control buttons. You might also want
-# to specify your @DEFAULT_SINK@ in /etc/pulse/default.pa
-# Mute volume
-XF86AudioMute
-	pactl set-sink-mute @DEFAULT_SINK@ toggle
-# Decrease volume
-XF86AudioLowerVolume
-	pactl set-sink-volume @DEFAULT_SINK@ -5%
-# Increase volume
-XF86AudioRaiseVolume
-	pactl set-sink-volume @DEFAULT_SINK@ +5%
-
 # Function keys
 # Show readme
 super + F1
