@@ -231,6 +231,8 @@ is installed.
 .ITEM
 \f(CWMod+F12\fP \(en \f(CWnmtui\fP for selecting the wireless internet source.
 .ITEM
+\f(CWMod+Shift+F1\fP \(en Copy a password stored in Pass in the clipboard for 45 s
+.ITEM
 \f(CWMod+`\fP \(en Select an emoji to copy to clipboard
 .ITEM
 \f(CWMod+Insert\fP \(en Show contents of clipboard/primary selection
