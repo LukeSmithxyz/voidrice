@@ -5,6 +5,8 @@
 # User may also select "manual selection" which opens arandr.
 # I plan on adding a routine from multi-monitor setups later.
 
+layoutloc=$HOME/.screenlayout
+
 twoscreen() { # If multi-monitor is selected and there are two screens.
 
     mirror=$(printf "no\\nyes" | dmenu -i -p "Mirror displays?")
@@ -59,12 +61,14 @@ allposs=$(xrandr -q | grep "connected")
 
 # Get all connected screens.
 screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
+layouts=$(ls $layoutloc | awk '{print $1}')
 
 # Get user choice including multi-monitor and manual selection:
 chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
+	*.sh) $layoutloc/$chosen ;;
 	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 
