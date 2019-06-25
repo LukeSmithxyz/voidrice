@@ -61,7 +61,7 @@ allposs=$(xrandr -q | grep "connected")
 
 # Get all connected screens.
 screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
-layouts=$(ls $layoutloc | awk '{print $1}')
+layouts=$(find $layoutloc -type f -name "*.sh" -printf "%f\n")
 
 # Get user choice including multi-monitor and manual selection:
 chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
