@@ -1,7 +1,7 @@
 #!/bin/sh
 
 setbg &		# Set the background
-sxhkd &	# Bind keys
+sxhkd -m 1 &	# Bind keys
 # Switch to US international with Caps as Mod/Escape
 setxkbmap -option caps:super -variant altgr-intl && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
 # Properties button extra Mod/Escape
