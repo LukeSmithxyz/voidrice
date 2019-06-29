@@ -1,5 +1,5 @@
 highlight clear
-highlight Win cterm=none ctermfg=white ctermbg=black
+highlight Win cterm=none ctermfg=white ctermbg=default
 highlight Directory cterm=bold ctermfg=cyan ctermbg=default
 highlight Link cterm=bold ctermfg=blue ctermbg=default
 highlight BrokenLink cterm=bold ctermfg=red ctermbg=default
