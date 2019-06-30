@@ -24,7 +24,7 @@ set bg=light
 set go=a
 set mouse=a
 set nohlsearch
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " Some basics:
 	nnoremap c "_c
@@ -89,10 +89,6 @@ set clipboard=unnamedplus
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
-
-" Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
-	vnoremap <C-c> "+y
-	map <C-p> "+P
 
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
