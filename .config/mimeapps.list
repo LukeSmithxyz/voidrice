@@ -1,10 +1,13 @@
 [Default Applications]
 x-scheme-handler/magnet=torrent.desktop;
+application/x-bittorrent=torrent.desktop;
 x-scheme-handler/mailto=mail.desktop;
 text/plain=text.desktop;
 text/x-shellscript=text.desktop;
+application/postscript=pdf.desktop;
 application/pdf=pdf.desktop;
 image/png=img.desktop;
 image/jpeg=img.desktop;
 image/gif=img.desktop;
 application/rss+xml=rss.desktop
+text/html=surf.desktop
