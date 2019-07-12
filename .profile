@@ -2,7 +2,7 @@
 # Profile file. Runs on login.
 
 # Adds `~/.local/bin/` and all subdirectories to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd: )"
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"

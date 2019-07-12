@@ -5,7 +5,7 @@ into sub-directories for easy management, and all are seamlessly added to
 `$PATH` with the command below in `~/.profile`:
 
 ```
-export PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
+export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
 ```
 
 ## `statusbar/`
