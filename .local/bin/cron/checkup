@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
 
 ping -q -c 1 1.1.1.1 > /dev/null || exit

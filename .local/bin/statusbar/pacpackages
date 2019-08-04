@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # i3blocks module for pacman upgrades.
 # Displays number of upgradeable packages.

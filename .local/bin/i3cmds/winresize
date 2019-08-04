@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/usr/bin/env sh
 echo "📐" | dmenu -p "Give width and height:" | xargs xdotool windowsize "$(xdotool getwindowfocus)"

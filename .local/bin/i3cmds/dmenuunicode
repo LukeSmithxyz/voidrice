@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Give dmenu list of all unicode characters to copy.
 # Shows the selected character in dunst if running.
 

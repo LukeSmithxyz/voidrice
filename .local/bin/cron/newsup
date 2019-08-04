@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Set as a cron job to check for new RSS entries for newsboat.
 # If newsboat is open, sends it an "R" key to refresh.
 

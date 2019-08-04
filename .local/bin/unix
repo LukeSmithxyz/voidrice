@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #original artwork by http://www.sanderfocus.nl/#/portfolio/tech-heroes
 #converted to shell by #nixers @ irc.unix.chat
 

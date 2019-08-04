@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # This script will compile or run another finishing operation on a document. I
 # have this script run via vim.

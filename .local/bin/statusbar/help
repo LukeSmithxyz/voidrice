@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 case $BLOCK_BUTTON in
     1) groff -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura - ;;
     2) i3 restart ;;

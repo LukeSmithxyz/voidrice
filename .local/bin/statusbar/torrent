@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 transmission-remote -l | grep % |
 	sed " # This first sed command is to ensure a desirable order with sort

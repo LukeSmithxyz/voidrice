@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # i3blocks newsboat module.
 # Displays number of unread news items and an loading icon if updating.
