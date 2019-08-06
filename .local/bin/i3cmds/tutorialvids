@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 vidlist="
 status bar	https://www.youtube.com/watch?v=gKumet6b-WY
 sxiv (image viewer)	https://www.youtube.com/watch?v=GYW9i_u5PYs

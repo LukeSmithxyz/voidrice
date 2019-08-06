@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Output locations. Unactivated progs should go to /dev/null.
 shell_shortcuts="$HOME/.config/shortcutrc"
 ranger_shortcuts="/dev/null"

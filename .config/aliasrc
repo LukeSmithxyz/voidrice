@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 alias ka="killall" \
 	mkd="mkdir -pv" \
 	mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \

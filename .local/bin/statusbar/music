@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 filter() {
 	sed "/^volume:/d" | tac | sed -e "s/\\&/&amp;/g;s/\\[paused\\].*/<span color=\"gray\" font_style=\"italic\">/g;s/\\[playing\\].*/<span>/g" | tr -d '\n' | sed -e "s/$/<\\/span>/g"
