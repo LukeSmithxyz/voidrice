@@ -14,7 +14,7 @@ super + n
 super + i
 	$TERMINAL -e htop
 super + y
-	$TERMINAL -e calcurse
+	$TERMINAL -e calcurse -D ~/.config/calcurse
 super + shift + a
 	$TERMINAL -e pulsemixer; pkill -RTMIN+10 i3blocks
 super + shift + c
