@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # A general, all-purpose extraction script. Not all extraction programs here
 # are installed by LARBS automatically.
