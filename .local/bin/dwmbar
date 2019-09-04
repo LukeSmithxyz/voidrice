@@ -50,7 +50,7 @@ status() { \
 	# Show unread mail if mutt-wizard is installed.
 	command -v mw >/dev/null 2>&1 &&
 		echo "$delim" &&
-		du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l | sed 's/^/:/'
+		du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l | sed 's/^/ /'
 		echo "$delim"
 
 	# Will show all batteries with approximate icon for remaining power.
