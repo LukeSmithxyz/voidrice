@@ -24,7 +24,7 @@ set bg=light
 set go=a
 set mouse=a
 set nohlsearch
-set clipboard+=unnamedplus
+set clipboard=unnamed,unnamedplus
 
 " Some basics:
 	nnoremap c "_c
