@@ -15,4 +15,4 @@ case $BLOCK_BUTTON in
 - Click to show all disk info." ;;
 esac
 
-printf "%s: %s" "$icon" "$(df -h "$1" | awk ' /[0-9]/ {print $3 "/" $2}')"
+printf "%s: %s\n" "$icon" "$(df -h "$1" | awk ' /[0-9]/ {print $3 "/" $2}')"
