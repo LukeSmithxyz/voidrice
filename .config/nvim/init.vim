@@ -4,6 +4,7 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -111,6 +112,9 @@ set clipboard+=unnamedplus
 	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 	vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 	map <leader><leader> <Esc>/<++><Enter>"_c4l
+
+" Save file as sudo on files that require root permission
+	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 """LATEX
 	" Word count:
