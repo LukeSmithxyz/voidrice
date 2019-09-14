@@ -113,6 +113,9 @@ set clipboard+=unnamedplus
 	vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 	map <leader><leader> <Esc>/<++><Enter>"_c4l
 
+" Save file as sudo on files that require root permission
+	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 """LATEX
 	" Word count:
 	autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
