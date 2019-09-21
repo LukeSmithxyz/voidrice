@@ -51,7 +51,7 @@ super + Insert
 super + shift + x
 	prompt "Shutdown computer?" "sudo -A shutdown -h now"
 super + shift + BackSpace
-	prompt "Reboot computer?" "sudo -A shutdown -r now"
+	prompt "Reboot computer?" "sudo -A reboot"
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
@@ -59,7 +59,7 @@ super + x
 XF86Launch1
 	xset dpms force off
 XF86TouchpadToggle
-	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0)>/dev/null || synclient TouchpadOff=1
+	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
 XF86Touchpad{Off,On}
 	synclient TouchpadOff={1,0}
 
@@ -149,9 +149,9 @@ super + F3
 	displayselect
 # Hibernate
 super + F4
-	prompt 'Hibernate computer?' 'sudo -A zzz'
+	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
 super + F5
-	sudo sv restart wpa_supplicant
+	sudo sv restart NetworkManager
 # Start torrent daemon/open interface
 super + F6
 	torwrap
