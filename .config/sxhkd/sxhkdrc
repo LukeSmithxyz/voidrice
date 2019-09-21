@@ -17,7 +17,7 @@ super + d
 super + r
 	$TERMINAL -e $FILE
 super + e
-	$TERMINAL -e neomutt
+	$TERMINAL -e neomutt; pkill -RTMIN+13 dwmblocks
 super + m
 	$TERMINAL -e ncmpcpp
 super + n
@@ -29,11 +29,13 @@ super + c
 super + v
 	$TERMINAL -e nvim -c VimwikiIndex
 super + shift + a
-	$TERMINAL -e alsamixer; refbar
+	$TERMINAL -e alsamixer; pkill -RTMIN+10 dwmblocks
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 super + shift + e
 	tutorialvids
+super + w
+	$BROWSER
 super + shift + w
 	$BROWSER
 super + shift + g
@@ -93,18 +95,18 @@ super + {_,shift +} bracketleft
 	mpc seek -{10,120}
 # Increase volume
 super + {equal,plus}
-	amixer sset Master {5,15}%+; refbar
+	amixer sset Master {5,15}%+; pkill -RTMIN+10 dwmblocks
 # Decrease volume
 super {_,shift +} + minus
-	amixer sset Master {5,15}%-; refbar
+	amixer sset Master {5,15}%-; pkill -RTMIN+10 dwmblocks
 super + shift + m
-	amixer sset Master toggle; refbar
+	amixer sset Master toggle; pkill -RTMIN+10 dwmblocks
 
 # Audiokeys
 XF86AudioMute
-	amixer sset Master toggle; refbar
+	amixer sset Master toggle; pkill -RTMIN+10 dwmblocks
 XF86Audio{Raise,Lower}Volume
-	amixer sset Master 5%{+,-}; refbar
+	amixer sset Master 5%{+,-}; pkill -RTMIN+10 dwmblocks
 XF86Audio{Next,Prev}
 	mpc {next,prev}
 XF86Audio{Pause,Play,Stop}
