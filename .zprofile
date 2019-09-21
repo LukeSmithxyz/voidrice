@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Profile file. Runs on login. Environmental variables are set here.
 
 # Adds `~/.local/bin` to $PATH
