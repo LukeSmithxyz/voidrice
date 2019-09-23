@@ -114,42 +114,43 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+d\fP \(en dmenu (For running commands or programs without shortcuts)
 .ITEM
-\f(CWMod+t\fP \(en Tiling mode (active by default)
-.ITEM
-\f(CWMod+f\fP \(en Monocle mode (cycle through windows fullscreen)
-.ITEM
-\f(CWMod+F\fP \(en Fibbonacci mode (similar to tiling mode)
-.ITEM
 \f(CWMod+h/j/k/l\fP \(en Move to different windows
 .ITEM
 \f(CWMod+H/J/K/L\fP \(en Move a window around
 .ITEM
 \f(CWMod+Y/U/I/O\fP \(en Resize windows
 .ITEM
-\f(CWMod+/\fP \(en Spawn vertical terminal
-.ITEM
-\f(CWMod+'\fP \(en Spawn horizontal terminal
-.ITEM
 \f(CWMod+s/S\fP \(en Increase/decrease inner gaps
 .ITEM
 \f(CWMod+z/Z\fP \(en Increase/decrease outer gaps
 .ITEM
-\f(CWMod+D\fP \(en Reduce gaps to 0 pixels
+\f(CWMod+D\fP \(en Toggle gaps
 .ITEM
-\f(CWMod+T\fP \(en Restore gaps to default (15 pixels)
+\f(CWMod+T\fP \(en Restore gaps to default
 .ITEM
 \f(CWMod+Shift+Space\fP \(en Make a window float (it will still be resizeable)
 .ITEM
 \f(CWMod+Space\fP \(en Switch focus from a floating window to a non-floating one (or
   vice versa)
 .ITEM
-\f(CWMod+o\fP \(en Make floating window sticky (will stay on active workspace)
-.ITEM
 \f(CWMod+b\fP \(en Toggle status bar
 .ITEM
 \f(CWMod+B\fP \(en Toggle window float in bottom left corner (good for video watched intermittently)
 .ITEM
 \f(CWMod+N\fP \(en Same as above, but for the bottom right corner.
+.LIST OFF
+.HEADING 2 "Window layouts"
+.LI
+.ITEM
+\f(CWMod+t\fP \(en Tiling mode (active by default)
+.ITEM
+\f(CWMod+f\fP \(en Monocle mode (cycle through windows fullscreen)
+.ITEM
+\f(CWMod+y\fP \(en Fibbonacci mode (similar to tiling mode)
+.ITEM
+\f(CWMod+u\fP \(en Center the master window
+.ITEM
+\f(CWMod+o\fP \(en Center and float the master window
 .LIST OFF
 .HEADING 2 "Basic Programs"
 .PP
@@ -167,26 +168,20 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+a\fP \(en Dropdown calculator (hide with \f(CWmod+a\fP)
 .ITEM
-\f(CWMod+i\fP \(en htop (system info)
+\f(CWMod+a\fP \(en htop (system info)
 .ITEM
 \f(CWMod+n\fP \(en newsboat (RSS feed reader)
 .ITEM
-\f(CWMod+y\fP \(en calcurse (calendar and schedule)
+\f(CWMod+A\fP \(en alsa (audio system control)
 .ITEM
-\f(CWMod+u\fP \(en "Dropdown" terminal (hide with \f(CWmod+u\fP)
+\f(CWMod+W\fP \(en Web Browser (Brave)
 .ITEM
-\f(CWMod+A\fP \(en pulsemixer (audio system control)
-.ITEM
-\f(CWMod+W\fP \(en Web Browser
-.ITEM
-\f(CWMod+G\fP \(en GIMP (for general image manipulation; starts on workspace 5)
+\f(CWMod+G\fP \(en GIMP (for general image manipulation)
 .LIST OFF
 .HEADING 2 "System"
 .LI
 .ITEM
-\f(CWMod+R\fP \(en resize a floating window to give size (width height)
-.ITEM
-\f(CWMod+x\fP \(en i3lock (Enter password to return)
+\f(CWMod+x\fP \(en lock screen (Enter password to return)
 .ITEM
 \f(CWMod+X\fP \(en shutdown (will ask to confirm)
 .ITEM
@@ -196,9 +191,9 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+F1\fP \(en Shows this document
 .ITEM
-\f(CWMod+Shift+F1\fP \(en Permanently disable the LARBS welcome message
+\f(CWMod+Shift+F1\fP \(en Toggle the LARBS welcome message
 .ITEM
-\f(CWMod+F2\fP \(en Refresh i3
+\f(CWMod+F2\fP \(en Refresh dwm
 .ITEM
 \f(CWMod+F3\fP \(en Select screen/display to use
 .ITEM
@@ -218,15 +213,9 @@ is installed.
 .ITEM
 \f(CWMod+F10\fP \(en Unmount a non-essential drive or Android
 .ITEM
-\f(CWMod+F11\fP \(en Search term on DuckDuckGo
-.ITEM
-\f(CWMod+F12\fP \(en \f(CWnmtui\fP for selecting the wireless internet source.
-.ITEM
 \f(CWMod+`\fP \(en Select an emoji to copy to clipboard
 .ITEM
 \f(CWMod+Insert\fP \(en Show contents of clipboard/primary selection
-.ITEM
-\f(CWMod+Pause\fP \(en Show QR code from clipboard contents (requires \f(CWqrencode\fP)
 .LIST OFF
 .HEADING 2 "Audio"
 .PP
@@ -253,7 +242,7 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 .ITEM
 \f(CWMod+]\fP \(en Forward 10 seconds (holding shift increases amount)
 .ITEM
-\f(CWMod+A\fP \(en pulsemixer (general volume sink/source control)
+\f(CWMod+A\fP \(en alsamixer (general volume sink/source control)
 .LIST OFF
 .HEADING 2 "Tags/Workspaces"
 .PP
@@ -360,7 +349,7 @@ In the Linux terminal, those binds have other more important purposes, so you ca
 Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your Firefox instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
-The i3 configuration will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
+The system will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
 The script \f(CWsetbg\fP, if run on an image will set it as the persistent background.
 When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
