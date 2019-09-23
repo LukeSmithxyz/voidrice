@@ -35,7 +35,7 @@ super + shift + c
 super + shift + e
 	tutorialvids
 super + w
-	$BROWSER
+	$TERMINAL -e sudo nmtui
 super + shift + w
 	$BROWSER
 super + shift + g
