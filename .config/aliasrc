@@ -36,13 +36,6 @@ alias \
 	xr="sudo xbps-remove -R" \
 	xq="xbps-query"
 
-# Clean up the home directory by using alternate config locations for programs
-# not automatically XDG comliant.
-alias \
-	calcurse="calcurse -D ~/.config/calcurse" \
-	abook="abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook" \
-	tmux="tmux -f ~/.config/tmux.conf"
-
 # This alias is important. It enables the `pauseallmpv` command.
 alias mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)"
 
