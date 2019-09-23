@@ -6,6 +6,8 @@ set previewer ~/.config/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
+set color256
+set icons		# Enable icons. Requires nerd fonts and LF_ICONS variable.
 
 # cmds/functions
 cmd open ${{
@@ -13,7 +15,7 @@ cmd open ${{
     	text/troff) man ./ $f;;
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-	image/*) rotdir $f | setsid sxiv -ai >/dev/null 2>&1 & ;;
+	image/*) rotdir $f | setsid sxiv -aio 2>&1 | lf-select & ;;
 	audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
 	video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
 	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
@@ -26,7 +28,7 @@ cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 cmd delete ${{
 	set -f
 	printf "%s\n\t" "$fx"
-	printf "delete?[y/n]"
+	printf "delete?[y/N]"
 	read ans
 	[ $ans = "y" ] && rm -rf $fx
 }}
@@ -49,6 +51,7 @@ cmd copyto ${{
 
 # Bindings
 map c $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
+map <c-f> $lf -remote "send $id select '$(fzf)'"
 map J $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
 map gh
 map g top
@@ -57,8 +60,9 @@ map C copyto
 map M moveto
 map a push %mkdir<space>
 map r push :rename<space>
+map R $lf -remote "send $id push :rename<space>$f"
+map <c-r> reload
 map <enter> shell
-map R reload
 map x $$f
 map X !$f
 map o &mimeopen $f
