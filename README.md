@@ -13,7 +13,6 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [my
 	- All configs that can be in `~/.config/` are.
 	- Some environmental variables have been set in `~/.profile` to move configs into `~/.config/`
 - Bookmarks in text files used by various scripts
-	- Web bookmarks in `~/.config/bookmarks`
 	- File bookmarks in `~/.config/files`
 	- Directory bookmarks in `~/.config/directories`
 
