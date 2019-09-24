@@ -5,6 +5,7 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [my
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
 	- vim/nvim (text editor)
+	- sxhkd (general key binder)
 	- lf (file browser)
 	- mpd/ncmpcpp (music)
 	- sxiv (image/gif viewer)
@@ -26,12 +27,13 @@ Check out their links:
 - [st](https://github.com/lukesmithxyz/st) (the terminal emulator)
 - [mutt-wizard (`mw`)](https://github.com/lukesmithxyz/mutt-wizard) - (a terminal-based email system that can store your mail offline without effort)
 
-## What is sort of here
-
-**If you want the i3 configs, they are in this repo, but in the `archi3` branch.** I don't really update it nowadays, but they're still here. Some other programs I no longer use, like vifm are there too.
+If you want my old i3 config, you can get it [here](https://gist.github.com/LukeSmithxyz/a7f790309ae17e00a5635dc5def05424).
+I don't use i3 anymore so I don't maintain it or make changes to it.
 
 You might've come here from a review I've done on a program and want my configuration files for that program.
 I tend to remove configs for programs I don't use to keep LARBS small. For those programs, they will be in the git history if you want to go searching. Please don't email me for configs. I tend to delete old stuff on my local machines so it's no easier for me.
+
+For videos on programs nowadays, I prefer to make gists for config files, so they won't clutter up this very Spartan repository.
 
 ## Install these dotfiles
 
