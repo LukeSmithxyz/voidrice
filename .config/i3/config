@@ -69,6 +69,8 @@ bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
+#launch dmenu ssh menu
+bindsym $mod+Ctrl+s		exec --no-startup-id sshmenu
 
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
