@@ -11,17 +11,17 @@ mac=$1
 
 unix() {
 # Unix Format
-	var=$( echo $mac | sed 's![-.]!!g;s!\(..\)!\1:!g;s!:$!!') ;
+	var=$( echo $mac | sed 's![-.:]!!g;s!\(..\)!\1:!g;s!:$!!') ;
 }
 
 cisco() {
 # Cisco Format
-	var=$( echo $mac | sed 's![-.]!!g;s!\(....\)!\1.!g;s!.$!!') ;
+	var=$( echo $mac | sed 's![-.:]!!g;s!\(....\)!\1.!g;s!.$!!') ;
 }
 
 windows() {
 # Windows Format
-	var=$( echo $mac | sed 's![-.]!!g;s!\(..\)!\1-!g;s!-$!!') ;
+	var=$( echo $mac | sed 's![-.:]!!g;s!\(..\)!\1-!g;s!-$!!') ;
 }
 
 	choice=$(printf "Unix\\nCisco\\nWindows" | dmenu -i -p "Select required MAC format:")
