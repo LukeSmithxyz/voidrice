@@ -18,6 +18,9 @@ ebay() { "$BROWSER" "https://www.ebay.com/sch/$@" ;}
 
 echo "$prim" | grep "^.*\.[A-Za-z]\+.*" >/dev/null && gotourl() { "$BROWSER" "$@" ;}
 echo "$prim" | grep "^.*@.*\.[A-Za-z]\+$" >/dev/null && email() { xdg-email "$@" ;}
+echo "$prim" | grep "[0-9A-F]\{2\}\(:[0-9A-F]\{2\}\)\{5\}" >/dev/null && mac-converter() { "maconv" "$@" ;}
+echo "$prim" | grep "[0-9A-F]\{2\}\(-[0-9A-F]\{2\}\)\{5\}" >/dev/null && mac-converter() { "maconv" "$@" ;}
+echo "$prim" | grep "[0-9A-F]\{4\}\(.[0-9A-F]\{4\}\)\{2\}" >/dev/null && mac-converter() { "maconv" "$@" ;}
 command -v qrencode >/dev/null && qrcode() { qrencode "$@" -s 10 -o /tmp/qr.png && xdg-open /tmp/qr.png ;}
 man -k "^$prim$" >/dev/null && manual() { man -Tpdf "$prim" | zathura - ;}
 
