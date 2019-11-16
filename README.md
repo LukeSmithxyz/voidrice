@@ -1,13 +1,10 @@
 # ETH GNU/Linux Dotfiles
-Forked from Luke's Smith , currently running on T460S 
+Forked from Luke's Smith , currently running on T460S Arch
 im trying to make changes that will fit to my regular day usage (Mostly Sysadmin task's)
 # new scriptes added :
 + Dmenu - SSH selector (super + CTRL + s)
 + Dmenu - Mac address convertor (super + c select mac-convert)
 
-
-
-These are my dotfiles! The name of the repo, "voidrice", came from the fact they were originally on my Void Linux machine, but these files are distro-independent. In fact, I now push changes from my X200 running Parabola or my X220 running Arch.
 
 ## Programs whose configs can be found here
 
