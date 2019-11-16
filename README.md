@@ -1,9 +1,9 @@
 # ETH GNU/Linux Dotfiles
 Forked from Luke's Smith , currently running on T460S 
 im trying to make changes that will fit to my regular day usage (Mostly Sysadmin task's)
-new scriptes added :
-Dmenu - SSH selector (super + CTRL + s)
-Dmenu - Mac address convertor (super + c select mac-convert)
+# new scriptes added :
++ Dmenu - SSH selector (super + CTRL + s)
++ Dmenu - Mac address convertor (super + c select mac-convert)
 
 
 
