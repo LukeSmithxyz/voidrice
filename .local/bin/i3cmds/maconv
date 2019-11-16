@@ -1,0 +1,39 @@
+#!/usr/bin/env sh
+# Script created to convert Between MAC address.
+## Available MAC address Notational conventions :
+#	0123.4567.89AB		(Cisco)
+#	01-23-45-67-89-AB	(Windows)
+#	01:23:45:67:89:AB	(Unix)
+mac=$1
+
+
+# Convert to
+
+unix() {
+# Unix Format
+	var=$( echo $mac | sed 's![-.]!!g;s!\(..\)!\1:!g;s!:$!!') ;
+}
+
+cisco() {
+# Cisco Format
+	var=$( echo $mac | sed 's![-.]!!g;s!\(....\)!\1.!g;s!.$!!') ;
+}
+
+windows() {
+# Windows Format
+	var=$( echo $mac | sed 's![-.]!!g;s!\(..\)!\1-!g;s!-$!!') ;
+}
+
+	choice=$(printf "Unix\\nCisco\\nWindows" | dmenu -i -p "Select required MAC format:")
+	case "$choice" in
+	Unix) unix;;
+	Cisco) cisco;;
+	Windows) windows;;
+	esac
+
+	echo $var |  tr -d '\n' | xclip -selection primary
+	echo $var |  tr -d '\n' | xclip -selection clipboard
+
+
+# Send Notification to GUI
+[ -n "$var" ] && notify-send "The Converted MAC has been copied to Clipboard:" "$var" ;
