@@ -18,9 +18,6 @@ export INPUTRC="$HOME/.config/inputrc"
 export ZDOTDIR="$HOME/.config/zsh"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 
-export IP="155.138.195.222"
-export CAB="207.246.120.93"
-
 # Other program settings:
 export BIB="$HOME/dox/latex/uni.bib"
 export REFER="$HOME/dox/referbib"
