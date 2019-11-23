@@ -17,19 +17,17 @@ super + d
 super + r
 	$TERMINAL -e $FILE
 super + e
-	$TERMINAL -e neomutt; pkill -RTMIN+13 dwmblocks
+	$TERMINAL -e neomutt; pkill -RTMIN+12 $STATUSBAR
 super + m
 	$TERMINAL -e ncmpcpp
 super + n
 	$TERMINAL -e newsboat
-super + a
- 	$TERMINAL -e htop
 super + c
 	$TERMINAL -e calcurse -D ~/.config/calcurse
 super + v
 	$TERMINAL -e nvim -c VimwikiIndex
 super + shift + a
-	$TERMINAL -e alsamixer; pkill -RTMIN+10 dwmblocks
+	$TERMINAL -e alsamixer || pulsemixer; pkill -RTMIN+10 $STATUSBAR
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 super + shift + e
@@ -38,8 +36,6 @@ super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
 	$BROWSER
-super + shift + g
-	gimp
 
 # Et cetera...
 super + grave
@@ -62,6 +58,10 @@ XF86TouchpadToggle
 	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
 XF86Touchpad{Off,On}
 	synclient TouchpadOff={1,0}
+XF86MonBrightnessDown
+	xbacklight -dec 15
+XF86MonBrightnessUp
+	xbacklight -inc 15
 
 # Recording
 # Take screenshot
@@ -143,15 +143,14 @@ super + shift + F1
 # Show readme
 super + F1
 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
-# super + F2 is mapped to restart dwm.
+# F2 restarts either dwm or i3 and is bound in each.
 # Change display
 super + F3
 	displayselect
 # Hibernate
 super + F4
 	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
-super + F5
-	sudo sv restart NetworkManager
+super + F5 is unbound.
 # Start torrent daemon/open interface
 super + F6
 	torwrap
@@ -164,5 +163,3 @@ super + F8
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
-super + F12
-	$TERMINAL -e wpa_cli
