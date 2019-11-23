@@ -5,30 +5,33 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [my
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
 	- vim/nvim (text editor)
+	- zsh (shell)
+	- i3wm/i3-gaps (window manager)
+	- i3blocks (status bar)
 	- sxhkd (general key binder)
-	- lf (file browser)
+	- ranger (file manager)
+	- lf (file manager)
 	- mpd/ncmpcpp (music)
 	- sxiv (image/gif viewer)
 	- mpv (video player)
+	- calcurse (calendar program)
+	- tmux
+	- other stuff like xdg default programs, inputrc and more, etc.
 - I try to minimize what's directly in `~` so:
 	- All configs that can be in `~/.config/` are.
 	- Some environmental variables have been set in `~/.profile` to move configs into `~/.config/`
-- Bookmarks in text files used by various scripts
+- Bookmarks in text files used by various scripts (like `~/.local/bin/shortcuts`)
 	- File bookmarks in `~/.config/files`
 	- Directory bookmarks in `~/.config/directories`
 
-## I'm looking for i3, ranger, etc. Where are they?
-
-There are two branches in this repository, `master`, which I use myself and regularly update (using dwm as a window manager), and `archi3` which is an older an more-or-less constant branch that contains older dotfiles, including those for programs I no longer use (like ranger) and which runs i3 as a window manager.
-If problems arise with my i3 configuration here, you'll have to bring them up to me since I no longer use it.
-I'd estimate that more of my subscribers use i3 rather than dwm, so I keep it here for them.
+## Want even more?
 
 My setup is pretty modular nowadays.
 I use several suckless program that are meant to be configured and compiled by the user and I also have separate repos for some other things.
 Check out their links:
 
-- [dwm](https://github.com/lukesmithxyz/dwm) (the window manager)
-- [st](https://github.com/lukesmithxyz/st) (the terminal emulator)
+- [dwm](https://github.com/lukesmithxyz/dwm) (the window manager I usually use now which is fully compatible with this repo)
+- [st](https://github.com/lukesmithxyz/st) (the terminal emulator assumed to be used by these dotfiles)
 - [mutt-wizard (`mw`)](https://github.com/lukesmithxyz/mutt-wizard) - (a terminal-based email system that can store your mail offline without effort)
 
 ## Install these dotfiles
