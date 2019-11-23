@@ -158,7 +158,7 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .LI
 .ITEM
-\f(CWMod+r\fP \(en vifm (file browser/manager)
+\f(CWMod+r\fP \(en lf (file browser/manager)
 .ITEM
 \f(CWMod+e\fP \(en mutt (email; not installed by default, see below)
 .ITEM
@@ -296,38 +296,6 @@ sxhkd: key bindings \(en \f(CW~/.config/sxhkd/sxhkdrc\fP, while some dwm-related
 .ITEM
 lf: the file manager, \f(CW~/.config/lfrc\fP for the main config, \f(CW~/.config/scope\fP for file previews.
 .LIST OFF
-.HEADING 1 "Bookmarking Files and Directories"
-.PP
-Note the files \f(CW~/.config/directories\fP and \f(CW~/.config/files\fP.
-These files hold bookmarked directories and files respectively, along with shortcut keys to their left.
-LARBS, specfically the \f(CWshortcuts\fP script, will automatically read these files and autogenerate aliases and shortcuts for bash and other programs.
-.PP
-For example, by default, the shortcut key for \f(CW~/Documents\fP is simply \f(CWd\fP.
-Thus, if you type and run \f(CWd\fP in bash, you will automatically \f(CWcd\fP to \f(CW~/Documents\fP.
-It also generates four vifm shortcuts using the shortcut \f(CWd\fP:
-.LI
-.ITEM
-\f(CWgd\fP \(en
-Go to \f(CW~/Documents\fP
-.ITEM
-\f(CWMd\fP \(en
-Move (mv) selected file(s) to \f(CW~/Documents\fP
-.ITEM
-\f(CWtd\fP \(en
-Create a new tab in \f(CW~/Documents\fP
-.ITEM
-\f(CWYd\fP \(en
-Copy/yank (cp) a copy of the selected file(s) to \f(CWDocuments\fP
-.LIST OFF
-Shortcuts like these are generated for all key sequence/directory pairs in \f(CW~/.config/directories\fP.
-Additionally, you may also add editable files to \f(CW~/.config/files\fP.
-Each key sequence you pair with a file will become an alias to edit it in either bash or vifm.
-.PP
-Whenever you edit and save one of the bookmark files, vim will automatically rerun the shortcut script, thus updating the shortcuts that will be used in new instances of bash and vifm.
-It just werks.
-Note that it is your responsibility to ensure that none of the bindings you add conflict with another necessary function or command.
-.PP
-In addition to
 .HEADING 1 "Frequently Asked Questions (FAQs)"
 .HEADING 2 "My keyboard isn't working as expected!"
 .PP
