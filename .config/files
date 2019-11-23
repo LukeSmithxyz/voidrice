@@ -1,9 +1,8 @@
 bf	~/.config/files
 bd	~/.config/directories
 bw	~/.config/bookmarks
-cfb	~/.bashrc
 cfa	~/.config/aliasrc
-cfz	~/.zshrc
+cfz	~/$ZDOTDIR/.zshrc
 cfv	~/.config/nvim/init.vim
 cfm	~/.config/mutt/muttrc
 cfd	~/.Xdefaults
@@ -12,3 +11,5 @@ cfn	~/.config/newsboat/config
 cfmb	~/.config/ncmpcpp/bindings
 cfmc	~/.config/ncmpcpp/config
 cfk	~/.config/sxhkd/sxhkdrc
+cfi	~/.config/i3/config
+cfb	~/.config/i3blocks/config
