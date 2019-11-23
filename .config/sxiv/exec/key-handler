@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 while read file
 do
         case "$1" in
@@ -23,7 +23,7 @@ do
 		echo -n "$file" | xclip -selection clipboard &&
 		notify-send "$file copied to clipboard" & ;;
 	"Y")
-		echo -n "$(readlink -f "$file")" | xclip -selection clipboard &&
+		readlink -f "$file" | xclip -selection clipboard &&
 			notify-send "$(readlink -f "$file") copied to clipboard" & ;;
 	"d")
 		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
