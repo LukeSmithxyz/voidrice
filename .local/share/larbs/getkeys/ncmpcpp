@@ -1,0 +1,21 @@
+
+ _ __   ___ _ __ ___  _ __   ___ _ __  _ __
+| '_ \ / __| '_ ` _ \| '_ \ / __| '_ \| '_ \
+| | | | (__| | | | | | |_) | (__| |_) | |_) |
+|_| |_|\___|_| |_| |_| .__/ \___| .__/| .__/
+                     |_|        |_|   |_|
+
+ncmpcpp is the music player.
+	h/j/k/l - Move left/down/up/right
+	d/u - Down/up page
+	a - Add song(s) to playlist
+	c - Clear playlist
+	g - Go to top
+	G - Go to bottom
+	p - Pause
+	m - Media library
+	f - Music sorted by directory structure
+	t - Tag editor
+	s - Search
+	v - Visualizer
+	P - Playlist
