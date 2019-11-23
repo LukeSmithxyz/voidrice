@@ -1,0 +1,19 @@
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+
+include "/home/luke/.gtkrc-2.0.mine"
+gtk-theme-name="Arc-Gruvbox"
+gtk-icon-theme-name="Adwaita"
+gtk-font-name="Sans 10"
+gtk-cursor-theme-name="Adwaita"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_TEXT
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=0
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"
