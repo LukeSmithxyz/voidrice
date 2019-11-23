@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Output locations. Unactivated progs should go to /dev/null.
 shell_shortcuts="$HOME/.config/shortcutrc"
-ranger_shortcuts="/dev/null"
+ranger_shortcuts="$HOME/.config/ranger/shortcuts.conf"
 qute_shortcuts="/dev/null"
 fish_shortcuts="/dev/null"
 vifm_shortcuts="$HOME/.config/vifm/vifmshortcuts"
