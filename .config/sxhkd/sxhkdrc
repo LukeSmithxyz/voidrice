@@ -27,7 +27,7 @@ super + c
 super + v
 	$TERMINAL -e nvim -c VimwikiIndex
 super + shift + a
-	$TERMINAL -e alsamixer || pulsemixer; pkill -RTMIN+10 $STATUSBAR
+	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 super + shift + e
