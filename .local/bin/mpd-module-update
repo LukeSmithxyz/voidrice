@@ -3,5 +3,5 @@
 # This loop will update the mpd statusbar module whenever a command changes the
 # music player's status. mpd must be running on X's start for this to work.
 while : ; do
-	mpc idle >/dev/null && pkill -RTMIN+11 dwmblocks || break
+	mpc idle >/dev/null && pkill -RTMIN+11 "${STATUSBAR:?}" || break
 done

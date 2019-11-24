@@ -8,7 +8,7 @@ notify-send "📦 Repository Sync" "Checking for package updates..."
 sudo pacman -Syyuw --noconfirm || notify-send "Error downloading updates.
 
 Check your internet connection, if pacman is already running, or run update manually to see errors."
-pkill -RTMIN+8 i3blocks
+pkill -RTMIN+8 "${STATUSBAR:?}"
 
 if pacman -Qu | grep -v "\[ignored\]"
 then
