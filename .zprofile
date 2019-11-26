@@ -6,7 +6,7 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="brave"
+export BROWSER="google-chrome-stable"
 export READER="zathura"
 
 # ~/ Clean-up:
