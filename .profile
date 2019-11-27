@@ -7,6 +7,9 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$
 export LARBSWM="$(cat ~/.local/share/larbs/wm 2>/dev/null)" &&
 	[ "$LARBSWM" = "dwm" ] || export LARBSWM="i3"
 
+# Make tmux work
+export TERM="xterm-256color"
+
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
