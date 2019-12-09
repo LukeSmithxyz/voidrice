@@ -27,7 +27,7 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [my
 ## Want even more?
 
 My setup is pretty modular nowadays.
-I use several suckless program that are meant to be configured and compiled by the user and I also have separate repos for some other things.
+I use several suckless programs that are meant to be configured and compiled by the user and I also have separate repos for some other things.
 Check out their links:
 
 - [dwm](https://github.com/lukesmithxyz/dwm) (the window manager I usually use now which is fully compatible with this repo)
