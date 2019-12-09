@@ -15,7 +15,7 @@ cmd open ${{
     	text/troff) man ./ $f;;
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-	image/*) rotdir $f | setsid sxiv -aio 2>&1 | lf-select & ;;
+	image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
 	audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
 	video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
 	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
