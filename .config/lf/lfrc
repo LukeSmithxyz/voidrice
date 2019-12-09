@@ -49,6 +49,10 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd bulkrename ${{
+    vidir
+}}
+
 # Bindings
 map c $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
 map <c-f> $lf -remote "send $id select '$(fzf)'"
@@ -61,6 +65,7 @@ map M moveto
 map a push %mkdir<space>
 map r push :rename<space>
 map R $lf -remote "send $id push :rename<space>$f"
+map b bulkrename
 map <c-r> reload
 map <enter> shell
 map x $$f
