@@ -6,6 +6,7 @@
 
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import *
+from ranger.core.loader import CommandLoader
 
 # A simple command for demonstration purposes follows.
 #------------------------------------------------------------------------------
@@ -88,6 +89,8 @@ class fzf_select(Command):
                 self.fm.cd(fzf_file)
             else:
                 self.fm.select_file(fzf_file)
+
+
 # fzf_locate
 class fzf_locate(Command):
     """
@@ -114,6 +117,7 @@ class fzf_locate(Command):
             else:
                 self.fm.select_file(fzf_file)
 
+
 class fzf_bring(Command):
     """
     :fzf_bring
@@ -124,6 +128,7 @@ class fzf_bring(Command):
     """
     def execute(self):
         import subprocess
+        import shutil
         if self.quantifier:
             # match only directories
             command="find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
@@ -136,14 +141,8 @@ class fzf_bring(Command):
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
             fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
-            if os.path.isdir(fzf_file):
-                self.fm.cd(fzf_file)
-            else:
-                self.fm.select_file(fzf_file)
+            shutil.move(fzf_file, self.fm.thisdir.path)
 
-
-import os
-from ranger.core.loader import CommandLoader
 
 class compress(Command):
     def execute(self):
@@ -176,11 +175,6 @@ class compress(Command):
         return ['compress ' + os.path.basename(self.fm.thisdir.path) + ext for ext in extension]
 
 
-
-
-import os
-from ranger.core.loader import CommandLoader
-
 class extracthere(Command):
     def execute(self):
         """ Extract copied files to current directory """
@@ -211,6 +205,4 @@ class extracthere(Command):
 
         obj.signal_bind('after', refresh)
         self.fm.loader.add(obj)
-
-
 
