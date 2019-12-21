@@ -3,6 +3,8 @@
 .local/lib/python3.8/
 .local/share/jupyter/
 .local/share/Trash/
+.nv/
+.PyCharm20[0-9][0-9].[0-9]/
 Code - OSS/
 discord/
 GitKraken/
