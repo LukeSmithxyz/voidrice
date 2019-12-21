@@ -1,5 +1,6 @@
 .cache/
 .local/lib/python3.7/
+.local/lib/python3.8/
 Code - OSS/
 discord/
 GitKraken/
