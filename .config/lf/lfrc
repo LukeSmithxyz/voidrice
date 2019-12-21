@@ -15,7 +15,7 @@ cmd open ${{
     	text/troff) man ./ $f;;
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-	image/*) rotdir $f | setsid sxiv -aio 2>&1 | lf-select & ;;
+	image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
 	audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
 	video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
 	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
@@ -49,6 +49,10 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd bulkrename ${{
+    vidir
+}}
+
 # Bindings
 map c $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
 map <c-f> $lf -remote "send $id select '$(fzf)'"
@@ -61,6 +65,7 @@ map M moveto
 map a push %mkdir<space>
 map r push :rename<space>
 map R $lf -remote "send $id push :rename<space>$f"
+map b bulkrename
 map <c-r> reload
 map <enter> shell
 map x $$f

@@ -2,7 +2,7 @@ bf	~/.config/files
 bd	~/.config/directories
 bw	~/.config/bookmarks
 cfa	~/.config/aliasrc
-cfz	~/$ZDOTDIR/.zshrc
+cfz	$ZDOTDIR/.zshrc
 cfv	~/.config/nvim/init.vim
 cfm	~/.config/mutt/muttrc
 cfd	~/.Xdefaults
