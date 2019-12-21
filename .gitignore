@@ -2,6 +2,7 @@
 .local/lib/python3.7/
 .local/lib/python3.8/
 .local/share/jupyter/
+.local/share/Trash/
 Code - OSS/
 discord/
 GitKraken/
