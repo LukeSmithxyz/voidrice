@@ -1,10 +1,10 @@
 # You can add comments to these files with #
 h	~/
-d	~/Documents
-D	~/Downloads
-m	~/Music
-pp	~/Pictures
-vv	~/Videos
+d	~/downloads
+gh	~/github
+m	~/music
+pp	~/pictures
+vv	~/videos
 cf	~/.config
 sc	~/.local/bin
 mn	/mnt
