@@ -1,4 +1,4 @@
-# Config based upon (Luke Smith <https://lukesmith.xyz>'s dotfiles)
+## Config based upon (Luke Smith <https://lukesmith.xyz>'s dotfiles)
 
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
