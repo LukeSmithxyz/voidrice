@@ -8,7 +8,6 @@
 	- i3blocks (status bar)
 	- sxhkd (general key binder)
 	- ranger (file manager)
-	- lf (file manager)
 	- mpd/ncmpcpp (music)
 	- sxiv (image/gif viewer)
 	- mpv (video player)
