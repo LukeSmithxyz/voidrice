@@ -15,7 +15,7 @@ export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="google-chrome-stable"
 export READER="zathura"
-export FILE="vifm"
+export FILE="ranger"
 export STATUSBAR="${LARBSWM}blocks"
 
 # ~/ Clean-up:
