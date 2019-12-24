@@ -20,7 +20,7 @@ super + r
 super + e
 	$TERMINAL -e neomutt; pkill -RTMIN+12 $STATUSBAR
 super + m
-	spotify
+	$TERMINAL -e spt
 super + n
 	nautilus
 super + c
