@@ -2,7 +2,7 @@
 
 # xinitrc runs automatically when you run startx.
 #!/bin/sh
-exec i3
+exec bspwm
 # There are some small but important commands that need to be run when we start
 # the graphical environment. I keep those commands in ~/.xprofile because that
 # file is run automatically if someone uses a display manager (login screen)
