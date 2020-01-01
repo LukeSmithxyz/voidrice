@@ -47,7 +47,7 @@ mpd >/dev/null 2>&1 &
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
 
 #Polybar
-~/.local/bin/launch_polybar
+~/.local/bin/launch_polybar &
 
 # Switch escape and caps if tty and no passwd required:
 sudo -n loadkeys ~/.local/share/larbs/ttymaps.kmap 2>/dev/null
