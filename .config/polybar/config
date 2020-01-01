@@ -54,7 +54,7 @@ font-3 = Symbola:pixelsize=9;1
 wm-restack = i3
 
 modules-left = i3 
-modules-center = xworkspaces
+modules-center = ewmh
 modules-right = cpu memory volume wlan eth battery date
 
 tray-position = right
