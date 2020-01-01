@@ -18,15 +18,15 @@ darkmagenta = #b16286
 darkcyan = #689d6a
 lightgray = #a89984
 gray = #928374
-red = ${xrdb:color9:#fb4934}
-green = ${xrdb:color10:#b8bb26}
-yellow = ${xrdb:color11:#fabd2f}
-blue = ${xrdb:color12:#83a598}
-magenta = ${xrdb:color13:#d3869b}
-cyan = ${xrdb:color14:#8ec07c}
-white = ${xrdb:color15:#ebdbb2}
-background = ${xrdb:color256:#1d2021}
-foreground = ${xrdb:color257:#ebdbb2}
+red = #fb4934
+green = #b8bb26
+yellow = #fabd2f
+blue = #83a598
+magenta = #d3869b
+cyan = #8ec07c
+white = #ebdbb2
+background = #1d2021
+foreground = #ebdbb2
 
 [bar/default]
 ;monitor = ${env:MONITOR:LVDS-1}
@@ -136,11 +136,11 @@ label-mode-background = ${colors.darkyellow}
 label-focused = %index%
 label-focused-background = #3f3f3f
 label-focused-underline = #fba922
-label-focused-padding = 4
+label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-padding = 4
+label-unfocused-padding = 2
 
 ; visible = ctive workspace on unfocused monitor
 label-visible = %index%
@@ -152,7 +152,7 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %index%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
-label-urgent-padding = 4
+label-urgent-padding = 2
 
 [module/mpd]
 type = internal/mpd
