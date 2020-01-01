@@ -55,7 +55,7 @@ wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = cpu memory volume wlan ethernet battery date
+modules-right = cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
@@ -184,17 +184,17 @@ bar-volume-empty = =
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.gray}
 
-[module/wlan]
+[module/wifi]
 type = internal/network
 interface = wlp2s0
 interval = 3.0
 
-format-connected = 直 <label-connected>
-label-connected = %essid%
+format-connected = <label-connected>
+label-connected = Wifi: %essid%
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected = 睊 no wifi
+label-disconnected = No wifi
 label-disconnected-foreground = ${colors.gray}
 
 [global/wm]
