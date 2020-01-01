@@ -1,12 +1,4 @@
 ; vim:ft=dosini
-;=====================================================
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;=====================================================
 
 [colors]
 black = #1d2021
@@ -38,7 +30,7 @@ fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 2
 line-color = ${colors.red}
 
 border-size = 0
@@ -57,7 +49,6 @@ font-3 = Symbola:pixelsize=9;1
 
 wm-restack = i3
 
-; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
 modules-left = i3
 modules-center = xwindow
 modules-right = cpu memory volume wlan eth battery date
@@ -76,7 +67,7 @@ click-left = st -e neomutt
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:45:...%
+label = %title:0:100:...%
 format-foreground = ${colors.blue}
 
 [module/i3]
