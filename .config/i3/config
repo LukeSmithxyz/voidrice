@@ -4,8 +4,8 @@
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 
-# Start polybar
-exec_always $HOME/.local/bin/launch_polybar
+#Polybar
+exec_always --no-startup-id ~/.local/bin/launch_polybar &
 
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
