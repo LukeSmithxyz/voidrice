@@ -92,18 +92,18 @@ super + {_,shift +} bracketleft
 	mpc seek -{10,120}
 # Increase volume
 super {_,shift +} + plus
-	amixer sset Master {5,15}%+; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master {5,15}%+
 # Decrease volume
 super {_,shift +} + minus
-	amixer sset Master {5,15}%-; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master {5,15}%-
 super + shift + m
-	amixer sset Master toggle; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master toggle
 
 # Audiokeys
 XF86AudioMute
-	amixer sset Master toggle; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master toggle
 XF86Audio{Raise,Lower}Volume
-	amixer sset Master 5%{+,-}; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master 5%{+,-}
 XF86Audio{Next,Prev}
 	mpc {next,prev}
 XF86Audio{Pause,Play,Stop}
@@ -135,8 +135,6 @@ XF86MyComputer
 	$TERMINAL -e $FILE /
 
 # Function keys
-super + shift + F1
-	grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send -i "$HOME/.local/share/larbs/larbs.png" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
 # Show readme
 super + F1
 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
