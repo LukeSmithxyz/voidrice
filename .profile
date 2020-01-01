@@ -16,7 +16,7 @@ export TERMINAL="st"
 export BROWSER="google-chrome-stable"
 export READER="zathura"
 export FILE="ranger"
-export STATUSBAR="${LARBSWM}blocks"
+export STATUSBAR="polybar"
 
 # ~/ Clean-up:
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
