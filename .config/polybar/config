@@ -59,8 +59,8 @@ wm-restack = i3
 
 ; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
 modules-left = i3
-;modules-center =
-modules-right = weather filesystem cpu memory temperature volume mutt-wizard wlan eth battery date
+;modules-center = xwindow
+modules-right = powermenu weather filesystem cpu memory temperature volume wlan eth battery date
 
 tray-position = right
 tray-padding = 0
@@ -76,7 +76,6 @@ click-left = st -e neomutt
 
 
 [module/weather]
-
 type = custom/script
 exec = weather
 interval = 5000
@@ -85,22 +84,6 @@ interval = 5000
 type = internal/xwindow
 label = %title:0:45:...%
 format-foreground = ${colors.blue}
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.gray}
-format-prefix-underline = ${colors.darkmagenta}
-
-label-layout = %layout%
-label-layout-underline = ${colors.darkmagenta}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.darkmagenta}
-label-indicator-underline = ${colors.darkmagenta}
 
 [module/filesystem]
 type = internal/fs
@@ -188,7 +171,6 @@ type = internal/cpu
 interval = 2
 format-prefix = "🌡 "
 format-prefix-foreground = ${colors.gray}
-format-underline = ${colors.red}
 label = %percentage%%
 
 [module/memory]
@@ -196,7 +178,6 @@ type = internal/memory
 interval = 2
 format-prefix = "🧠 "
 format-prefix-foreground = ${colors.gray}
-format-underline = ${colors.darkcyan}
 label = %percentage_used%%
 
 [module/wlan]
@@ -205,11 +186,11 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = 直 <label-connected>
-format-connected-underline = ${colors.darkmagenta}
+format-connected-underline = ${colors.green}
 label-connected = %essid%
 
 format-disconnected = <label-disconnected>
-format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-underline = ${colors.red}
 label-disconnected = 睊no wifi
 label-disconnected-foreground = ${colors.gray}
 
@@ -225,13 +206,13 @@ type = internal/network
 interface = enp0s25
 interval = 3.0
 
-format-connected-underline = ${colors.darkgreen}
+format-connected-underline = ${colors.green}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.gray}
 label-connected = %local_ip%
 
 format-disconnected = <label-disconnected>
-format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-underline = ${colors.ref}
 label-disconnected =  %ifname%
 label-disconnected-foreground = ${colors.gray}
 
@@ -244,8 +225,6 @@ time = "%I:%M%p"
 
 format-prefix = " "
 format-prefix-foreground = ${colors.gray}
-format-underline = ${colors.blue}
-
 label = %date% %time%
 
 [module/volume]
