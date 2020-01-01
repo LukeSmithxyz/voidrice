@@ -29,20 +29,17 @@ background = #1d2021
 foreground = #ebdbb2
 
 [bar/default]
-;monitor = ${env:MONITOR:LVDS-1}
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:eDP-1-1}
 enable-ipc = true
 width = 100%
 height = 20
 fixed-center = false
 
-pin-workspaces = true
-
 background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3
-line-color = {$xrdb:red}
+line-color = ${colors.red}
 
 border-size = 0
 border-color = ${colors.white}
@@ -59,8 +56,6 @@ font-2 = Noto Color Emoji:scale=10:style=Regular;2
 font-3 = Symbola:pixelsize=9;1
 
 wm-restack = i3
-ws-icon-[0-9]+ = label
-;override-redirect = true
 
 ; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
 modules-left = i3
@@ -76,7 +71,6 @@ type = custom/script
 exec = mailbox
 interval = 5
 format-prefix = " "
-format-underline = ${colors.red}
 
 click-left = st -e neomutt
 
@@ -86,7 +80,6 @@ click-left = st -e neomutt
 type = custom/script
 exec = weather
 interval = 5000
-;format-underline =
 
 [module/xwindow]
 type = internal/xwindow
@@ -114,7 +107,6 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /home
 
 label-mounted-underline = ${colors.cyan}
 label-mounted = /: %percentage_used%%
@@ -128,7 +120,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = ${colors.white}
@@ -290,11 +282,9 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
-;format-charging = Charging... <label-charging>
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${colors.darkyellow}
 
-;format-discharging = <label-discharging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
@@ -367,10 +357,6 @@ menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
 
 [global/wm]
 margin-top = 5
