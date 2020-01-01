@@ -13,10 +13,4 @@
 # Your default LARBS WM is determined in your `~/.profile` on login.  Here we
 # run the proper command to run when the graphical environment starts.
 
-case "$LARBSWM" in
-	dwm) while :; do
-		ssh-agent dwm || break
-		done ;;
-	i3) exec i3 ;;
-	*) echo "No valid LARBS window manager detected." ;;
-esac
+exec i3
