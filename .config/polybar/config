@@ -58,17 +58,17 @@ font-1 = Inconsolata Nerd Font:size=8;1
 font-2 = Noto Color Emoji:scale=10:style=Regular;2
 font-3 = Symbola:pixelsize=9;1
 
+wm-restack = i3
+ws-icon-[0-9]+ = label
+;override-redirect = true
 
 ; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
 modules-left = i3
 ;modules-center =
-modules-right = mpd volume mutt-wizard wlan eth battery date
+modules-right = weather filesystem cpu memory temperature volume mutt-wizard wlan eth battery date
 
 tray-position = right
 tray-padding = 0
-
-wm-restack = i3
-;override-redirect = true
 
 [module/mutt-wizard]
 
