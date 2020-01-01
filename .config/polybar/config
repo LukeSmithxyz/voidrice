@@ -33,8 +33,10 @@ foreground = #ebdbb2
 ;monitor = ${env:MONITOR:HDMI-1}
 enable-ipc = true
 width = 100%
-height = 24
+height = 20
 fixed-center = false
+
+pin-workspaces = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
