@@ -53,15 +53,14 @@ font-3 = Symbola:pixelsize=9;1
 
 wm-restack = i3
 
-modules-left = i3 
+modules-left = i3
 modules-center = xwindow
-modules-right = cpu memory volume wlan eth battery date
+modules-right = cpu memory volume wlan eth battery date powermenu
 
 tray-position = right
 tray-padding = 0
 
 [module/mutt-wizard]
-
 type = custom/script
 exec = mailbox
 interval = 5
@@ -78,9 +77,6 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-pin-workspaces = true
 
 label-mode-padding = 1
 label-mode-foreground = ${colors.white}
@@ -110,17 +106,18 @@ label-urgent-padding = 1
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix = "🌡 "
+; Seconds to sleep between updates
+interval = 0.5
+format = <label>
+; %percentage% (default) - total cpu load averaged over all cores
 format-prefix-foreground = ${colors.gray}
-label = %percentage%%
+label = CPU: %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "🧠 "
 format-prefix-foreground = ${colors.gray}
-label = %percentage_used%%
+label = RAM: %gb_used%/%gb_free%
 
 [module/wlan]
 type = internal/network
@@ -174,7 +171,7 @@ type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
 label-volume = 
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.gray}
@@ -202,40 +199,22 @@ type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
+time-format = %H:%M
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.darkyellow}
+format-charging = <label-charging>
+label-charging = BAT: %percentage%%
 
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.gray}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.gray}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-foreground = ${colors.gray}
-animation-charging-framerate = 500
+format-discharging = <label-discharging>
+label-discharging = BAT: %percentage%%
 
 [module/powermenu]
 type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+label-open = PM
 label-open-foreground = ${colors.darkmagenta}
-label-close =  cancel
+label-close = close
 label-close-foreground = ${colors.darkmagenta}
 label-separator = |
 label-separator-foreground = ${colors.gray}
