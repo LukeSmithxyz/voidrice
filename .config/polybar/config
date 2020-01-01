@@ -134,14 +134,13 @@ label-mode-background = ${colors.darkyellow}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors:black}
-;label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 4
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-padding = 4
 
 ; visible = ctive workspace on unfocused monitor
 label-visible = %index%
@@ -151,8 +150,9 @@ label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 4
 
 [module/mpd]
 type = internal/mpd
