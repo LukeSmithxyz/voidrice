@@ -9,15 +9,15 @@
 ;=====================================================
 
 [colors]
-black = ${xrdb:color0:#1d2021}
-darkred = ${xrdb:color1:#cc241d}
-darkgreen = ${xrdb:color2:#98971a}
-darkyellow = ${xrdb:color3:#d79921}
-darkblue = ${xrdb:color4:#458588}
-darkmagenta = ${xrdb:color5:#b16286}
-darkcyan = ${xrdb:color6:#689d6a}
-lightgray = ${xrdb:color7:#a89984}
-gray = ${xrdb:color8:#928374}
+black = #1d2021
+darkred = #cc241d
+darkgreen = #98971a
+darkyellow = #d79921
+darkblue = #458588
+darkmagenta = #b16286
+darkcyan = #689d6a
+lightgray = #a89984
+gray = #928374
 red = ${xrdb:color9:#fb4934}
 green = ${xrdb:color10:#b8bb26}
 yellow = ${xrdb:color11:#fabd2f}
