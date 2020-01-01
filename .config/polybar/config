@@ -62,6 +62,7 @@ tray-padding = 0
 
 [module/ewmh]
 type = internal/xworkspaces
+pin-workspaces = true
 
 ; Create click handler used to focus desktop
 ; Default: true
