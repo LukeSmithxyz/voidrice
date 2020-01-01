@@ -34,7 +34,7 @@ for_window [instance="dropdown_*"] move position center
 #	modifier None
 #}
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.local/bin/launch_polybar
 
 # #---Basic Bindings---# #
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
@@ -194,4 +194,3 @@ bindsym $mod+Shift+Left		move left
 bindsym $mod+Shift+Down		move down
 bindsym $mod+Shift+Up		move up
 bindsym $mod+Shift+Right 	move right
-exec_always --no-startup-id notify-send -i ~/.local/share/larbs/larbs.png 'Welcome to LARBS:' 'Press Super+F1 for the manual.' -t 10000
