@@ -89,7 +89,6 @@ interval = 60
 date = "%Y %b %d (%a)"
 time = "%I:%M%p"
 
-format-prefix = " "
 format-prefix-foreground = ${colors.gray}
 label = %date% %time%
 
@@ -106,13 +105,12 @@ interface = enp0s25
 interval = 3.0
 
 format-connected-underline = ${colors.green}
-format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.gray}
 label-connected = %local_ip%
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected =  %ifname%
+label-disconnected = %ifname%
 label-disconnected-foreground = ${colors.gray}
 
 [module/i3]
@@ -160,10 +158,8 @@ screenchange-reload = true
 type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
-label-volume = 
 label-volume-foreground = ${colors.foreground}
 
-format-muted-prefix = " "
 format-muted-foreground = ${colors.gray}
 label-muted = muted
 
