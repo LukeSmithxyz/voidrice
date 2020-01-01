@@ -110,3 +110,19 @@ set clipboard+=unnamedplus
 	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Update binds when sxhkdrc is updated.
 	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+" coc stuff
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" Autocomplete with control space, similiar to Pycharm
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
