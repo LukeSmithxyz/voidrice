@@ -3,9 +3,9 @@
 
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
-#
-# export FILE="ranger"
-# export TERMINAL="st"
+
+# Start polybar
+exec_always $HOME/.local/bin/launch_polybar
 
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
@@ -25,16 +25,6 @@ for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
-
-#bar {
-#	font pango:mono 15
-#	status_command i3blocks
-#	position top
-#	mode dock
-#	modifier None
-#}
-
-exec_always --no-startup-id $HOME/.local/bin/launch_polybar
 
 # #---Basic Bindings---# #
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
