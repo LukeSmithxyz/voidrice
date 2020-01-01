@@ -72,13 +72,6 @@ format-foreground = ${colors.blue}
 
 [module/i3]
 type = internal/i3
-ws-num = 6 ; Number of workspaces to display
-show-all = true; Display all workspaces (even when there isn't a window open)
-
-; use a different color to distinguish empty workspaces from unactive workspaces:
-label-empty-foreground = ${colors.foreground-alt}
-label-empty = %icon%
-
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
