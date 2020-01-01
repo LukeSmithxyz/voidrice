@@ -27,6 +27,10 @@ width = 100%
 height = 20
 fixed-center = false
 
+; allow scrolling workspaces
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -49,12 +53,23 @@ font-3 = Symbola:pixelsize=9;1
 
 wm-restack = i3
 
-modules-left = i3
+modules-left = i3 xworkspaces
 modules-center = xwindow
 modules-right = cpu memory volume wlan eth battery date
 
 tray-position = right
 tray-padding = 0
+
+[module/ewmh]
+type = internal/xworkspaces
+
+; Create click handler used to focus desktop
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle desktops
+; Default: true
+enable-scroll = false
 
 [module/mutt-wizard]
 
