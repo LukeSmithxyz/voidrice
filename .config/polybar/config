@@ -54,23 +54,11 @@ font-3 = Symbola:pixelsize=9;1
 wm-restack = i3
 
 modules-left = i3 
-modules-center = ewmh
+modules-center = xwindow
 modules-right = cpu memory volume wlan eth battery date
 
 tray-position = right
 tray-padding = 0
-
-[module/ewmh]
-type = internal/xworkspaces
-pin-workspaces = true
-
-; Create click handler used to focus desktop
-; Default: true
-enable-click = false
-
-; Create scroll handlers used to cycle desktops
-; Default: true
-enable-scroll = false
 
 [module/mutt-wizard]
 
@@ -78,7 +66,6 @@ type = custom/script
 exec = mailbox
 interval = 5
 format-prefix = " "
-
 click-left = st -e neomutt
 
 [module/xwindow]
