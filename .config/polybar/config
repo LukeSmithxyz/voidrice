@@ -47,30 +47,73 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = mono:pixelsize=9;1
-font-1 = Inconsolata Nerd Font:size=8;1
-font-2 = Noto Color Emoji:scale=10:style=Regular;2
-font-3 = Symbola:pixelsize=9;1
+font-1 = Source Code Pro:size=8;1
+font-2 = Source Code Pro:scale=10:style=Regular;2
+font-3 = Source Code Pro:pixelsize=9;1
 
 wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = cpu memory volume wlan eth battery date powermenu
+modules-right = cpu memory volume wlan ethernet battery date
 
 tray-position = right
 tray-padding = 0
 
-[module/mutt-wizard]
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+time-format = %H:%M
+
+format-charging = <label-charging>
+label-charging = BAT: %percentage%%
+
+format-discharging = <label-discharging>
+label-discharging = BAT: %percentage%%
+
+[module/cpu]
+type = internal/cpu
+; Seconds to sleep between updates
+interval = 0.5
+format = <label>
+; %percentage% (default) - total cpu load averaged over all cores
+format-prefix-foreground = ${colors.gray}
+label = CPU: %percentage%%
+
+[module/date]
+type = internal/date
+interval = 60
+
+date = "%Y %b %d (%a)"
+time = "%I:%M%p"
+
+format-prefix = " "
+format-prefix-foreground = ${colors.gray}
+label = %date% %time%
+
+[module/email]
 type = custom/script
 exec = mailbox
 interval = 5
 format-prefix = " "
 click-left = st -e neomutt
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:100:...%
-format-foreground = ${colors.blue}
+[module/ethernet]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+format-connected-underline = ${colors.green}
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.gray}
+label-connected = %local_ip%
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.red}
+label-disconnected =  %ifname%
+label-disconnected-foreground = ${colors.gray}
 
 [module/i3]
 type = internal/i3
@@ -104,67 +147,14 @@ label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-padding = 1
 
-[module/cpu]
-type = internal/cpu
-; Seconds to sleep between updates
-interval = 0.5
-format = <label>
-; %percentage% (default) - total cpu load averaged over all cores
-format-prefix-foreground = ${colors.gray}
-label = CPU: %percentage%%
-
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix-foreground = ${colors.gray}
 label = RAM: %gb_used%/%gb_free%
 
-[module/wlan]
-type = internal/network
-interface = wlp2s0
-interval = 3.0
-
-format-connected = 直 <label-connected>
-format-connected-underline = ${colors.green}
-label-connected = %essid%
-
-format-disconnected = <label-disconnected>
-format-disconnected-underline = ${colors.red}
-label-disconnected = 睊no wifi
-label-disconnected-foreground = ${colors.gray}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.gray}
-
-[module/eth]
-type = internal/network
-interface = enp0s25
-interval = 3.0
-
-format-connected-underline = ${colors.green}
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.gray}
-label-connected = %local_ip%
-
-format-disconnected = <label-disconnected>
-format-disconnected-underline = ${colors.red}
-label-disconnected =  %ifname%
-label-disconnected-foreground = ${colors.gray}
-
-[module/date]
-type = internal/date
-interval = 60
-
-date = "%Y %b %d (%a)"
-time = "%I:%M%p"
-
-format-prefix = " "
-format-prefix-foreground = ${colors.gray}
-label = %date% %time%
+[settings]
+screenchange-reload = true
 
 [module/volume]
 type = internal/alsa
@@ -194,49 +184,24 @@ bar-volume-empty = =
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.gray}
 
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = ADP1
-full-at = 98
-time-format = %H:%M
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
 
-format-charging = <label-charging>
-label-charging = BAT: %percentage%%
+format-connected = 直 <label-connected>
+label-connected = %essid%
 
-format-discharging = <label-discharging>
-label-discharging = BAT: %percentage%%
-
-[module/powermenu]
-type = custom/menu
-
-format-spacing = 1
-
-label-open = PM
-label-open-foreground = ${colors.darkmagenta}
-label-close = close
-label-close-foreground = ${colors.darkmagenta}
-label-separator = |
-label-separator-foreground = ${colors.gray}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-[settings]
-screenchange-reload = true
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.red}
+label-disconnected = 睊 no wifi
+label-disconnected-foreground = ${colors.gray}
 
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:100:...%
+format-foreground = ${colors.blue}
