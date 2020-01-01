@@ -34,9 +34,6 @@ foreground = ${xrdb:color257:#ebdbb2}
 enable-ipc = true
 width = 100%
 height = 24
-;offset-x = 1%
-;offset-y = 1%
-;radius = 6.0
 fixed-center = false
 
 background = ${colors.background}
@@ -61,19 +58,15 @@ font-3 = Symbola:pixelsize=9;1
 
 
 ; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
-modules-left = i3 xwindow
+modules-left = i3
 ;modules-center =
 modules-right = mpd volume mutt-wizard wlan eth battery date
 
 tray-position = right
 tray-padding = 0
 
-wm-restack = bspwm
-
-;override-redirect = true
-
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
+wm-restack = i3
+override-redirect = true
 
 [module/mutt-wizard]
 
@@ -221,14 +214,11 @@ format-connected = 直 <label-connected>
 format-connected-underline = ${colors.darkmagenta}
 label-connected = %essid%
 
-;format-disconnected =
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
 label-disconnected = 睊no wifi
 label-disconnected-foreground = ${colors.gray}
 
-; <ramp-signal>
 ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
@@ -242,12 +232,10 @@ interface = enp0s25
 interval = 3.0
 
 format-connected-underline = ${colors.darkgreen}
-;format-connected-underline = ${colors.green}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.gray}
 label-connected = %local_ip%
 
-;format-disconnected =
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected =  %ifname%
@@ -259,11 +247,6 @@ interval = 60
 
 date = "%Y %b %d (%a)"
 time = "%I:%M%p"
-
-# If you're not living in a country where AM and PM is used you can add -alt to the time above this line and comment it using ;, then you can remove the -alt to the time under this line and uncomment it.
-;time-alt = " at %H:%M"
-;time-alt = %H:%M:%S
-;time-alt = %H:%M:%S
 
 format-prefix = " "
 format-prefix-foreground = ${colors.gray}
