@@ -59,8 +59,8 @@ wm-restack = i3
 
 ; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
 modules-left = i3
-;modules-center = xwindow
-modules-right = powermenu weather filesystem cpu memory temperature volume wlan eth battery date
+modules-center = xwindow
+modules-right = weather filesystem cpu memory temperature volume wlan eth battery date
 
 tray-position = right
 tray-padding = 0
@@ -105,7 +105,7 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 1
 label-mode-foreground = ${colors.white}
 label-mode-background = ${colors.darkyellow}
 
@@ -113,11 +113,11 @@ label-mode-background = ${colors.darkyellow}
 label-focused = %index%
 label-focused-background = #3f3f3f
 label-focused-underline = #fba922
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused-padding = 1
 
 ; visible = ctive workspace on unfocused monitor
 label-visible = %index%
@@ -129,7 +129,7 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %index%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 [module/mpd]
 type = internal/mpd
