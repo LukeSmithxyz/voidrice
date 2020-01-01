@@ -60,7 +60,7 @@ wm-restack = i3
 ; Other modules: xkeyboard filesystem xbacklight backlight-acpi cpu memory temperature powermenu weather
 modules-left = i3
 modules-center = xwindow
-modules-right = weather filesystem cpu memory temperature volume wlan eth battery date
+modules-right = cpu memory volume wlan eth battery date
 
 tray-position = right
 tray-padding = 0
@@ -74,27 +74,10 @@ format-prefix = " "
 
 click-left = st -e neomutt
 
-
-[module/weather]
-type = custom/script
-exec = weather
-interval = 5000
-
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:45:...%
 format-foreground = ${colors.blue}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted-underline = ${colors.cyan}
-label-mounted = /: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.gray}
 
 [module/i3]
 type = internal/i3
@@ -130,41 +113,6 @@ label-urgent = %index%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-padding = 1
-
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <label-time>
-
-click-left = st -e ncmpcpp
-click-right = mpc toggle
-
-label-song =  %artist% - %title%
-label-song-maxlen = 70
-label-song-ellipsis = true
-
-format-paused-foreground = ${colors.gray}
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = ﯧ
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.gray}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
@@ -212,7 +160,7 @@ format-connected-prefix-foreground = ${colors.gray}
 label-connected = %local_ip%
 
 format-disconnected = <label-disconnected>
-format-disconnected-underline = ${colors.ref}
+format-disconnected-underline = ${colors.red}
 label-disconnected =  %ifname%
 label-disconnected-foreground = ${colors.gray}
 
@@ -285,27 +233,6 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-foreground = ${colors.gray}
 animation-charging-framerate = 500
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = ${colors.red}
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.darkmagenta}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
-ramp-foreground = ${colors.gray}
 
 [module/powermenu]
 type = custom/menu
