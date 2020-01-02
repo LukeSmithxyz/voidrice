@@ -66,15 +66,21 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
-format-charging = <label-charging>
+; orange denotes charging
+format-charging =%{u#ffa500}%{+u}<label-charging>
 label-charging = Batt: %percentage%%
 
-format-discharging = <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = Batt: %percentage%%
+
+; changes color for which third battery is in
+; red=0-33, yellow=34-66, green=67-100
+ramp-capacity-0 = %{u#ff0000}
+ramp-capacity-1 = %{u#ffea00}
+ramp-capacity-2 = %{u#20c723}
 
 [module/cpu]
 type = internal/cpu
-; Seconds to sleep between updates
 interval = 0.5
 format = <label>
 format-prefix-foreground = ${colors.gray}
