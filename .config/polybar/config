@@ -68,10 +68,10 @@ full-at = 98
 time-format = %H:%M
 
 format-charging = <label-charging>
-label-charging = BAT: %percentage%%
+label-charging = BAT: %percentage%
 
 format-discharging = <label-discharging>
-label-discharging = BAT: %percentage%%
+label-discharging = BAT: %percentage%
 
 [module/cpu]
 type = internal/cpu
@@ -80,7 +80,7 @@ interval = 0.5
 format = <label>
 ; %percentage% (default) - total cpu load averaged over all cores
 format-prefix-foreground = ${colors.gray}
-label = CPU:
+label = CPU: %percentage%
 
 [module/date]
 type = internal/date
