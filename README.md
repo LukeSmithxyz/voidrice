@@ -5,7 +5,7 @@
 	- vim/nvim (text editor)
 	- zsh (shell)
 	- i3wm/i3-gaps (window manager)
-	- i3blocks (status bar)
+	- polybar (status bar)
 	- sxhkd (general key binder)
 	- ranger (file manager)
 	- mpd/ncmpcpp (music)
@@ -16,7 +16,8 @@
 	- other stuff like xdg default programs, inputrc and more, etc.
 - I try to minimize what's directly in `~` so:
 	- All configs that can be in `~/.config/` are.
-	- Some environmental variables have been set in `~/.zprofile` to move configs into `~/.config/`
-- Bookmarks in text files used by various scripts (like `~/.local/bin/shortcuts`)
+	- Some environmental variables have been set in `~/.zprofile` to move configs into `~/.config/`	
+	- Aliases in `~/.config/aliasrc`
 	- File bookmarks in `~/.config/files`
 	- Directory bookmarks in `~/.config/directories`
+	
