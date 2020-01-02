@@ -3,7 +3,7 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 # Don't be a bash chad XD
-autorandr -c &
+autorandr -c
 remaps &              # run the remaps script, switching caps/esc and more; check it for more info
 setbg &               # set the background with the `setbg` script
 xcompmgr &            # xcompmgr for transparency
