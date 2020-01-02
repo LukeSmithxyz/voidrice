@@ -14,8 +14,7 @@
   diff = auto
   branch = auto
 [alias]
-  st = status
-  st = status
+  st = status -uno
   co = checkout
   ci = commit
   br = branch

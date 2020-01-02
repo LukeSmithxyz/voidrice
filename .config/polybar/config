@@ -80,7 +80,7 @@ interval = 0.5
 format = <label>
 ; %percentage% (default) - total cpu load averaged over all cores
 format-prefix-foreground = ${colors.gray}
-label = CPU: %percentage%
+label = %{A1:$TERMINAL -e htop:}CPU: %percentage%%{A}
 
 [module/date]
 type = internal/date
@@ -90,7 +90,7 @@ date = "%Y %b %d (%a)"
 time = "%I:%M%p"
 
 format-prefix-foreground = ${colors.gray}
-label = %date% %time%
+label = %{A1:google-chrome-stable https\://calendar.google.com:}%date% %time%%{A}
 
 [module/email]
 type = custom/script
