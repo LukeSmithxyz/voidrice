@@ -65,13 +65,12 @@ type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
-time-format = %H:%M
 
 format-charging = <label-charging>
-label-charging = BAT: %percentage%
+label-charging = Batt: %percentage%%
 
 format-discharging = <label-discharging>
-label-discharging = BAT: %percentage%
+label-discharging = Batt: %percentage%%
 
 [module/cpu]
 type = internal/cpu
@@ -79,7 +78,7 @@ type = internal/cpu
 interval = 0.5
 format = <label>
 format-prefix-foreground = ${colors.gray}
-label = %{A1:$TERMINAL -e htop >/dev/null 2>&1 &:}CPU: %percentage%%{A}
+label = %{A1:$TERMINAL -e htop >/dev/null 2>&1 &:}CPU: %percentage%%%{A}
 
 [module/date]
 type = internal/date
@@ -100,7 +99,7 @@ click-left = st -e neomutt
 
 [module/ethernet]
 type = internal/network
-interface = enp0s25
+interface = eth1
 interval = 3.0
 
 format-connected-underline = ${colors.green}
@@ -109,7 +108,7 @@ label-connected = %local_ip%
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected = %ifname%
+label-disconnected = No Eth
 label-disconnected-foreground = ${colors.gray}
 
 [module/i3]
@@ -186,11 +185,11 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <label-connected>
-label-connected = Wifi: %essid%
+label-connected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}Wifi: %essid%%{A}
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected = No wifi
+label-disconnected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}No wifi%{A}
 label-disconnected-foreground = ${colors.gray}
 
 [global/wm]
