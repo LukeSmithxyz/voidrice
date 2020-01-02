@@ -83,7 +83,7 @@ interval = 5
 format-prefix = " "
 format-underline = ${colors.red}
 
-click-left = st -e neomutt
+click-left = $TERMINAL -e neomutt
 
 
 [module/weather]
@@ -186,7 +186,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = internal/mpd
 format-online = <label-song>  <label-time>
 
-click-left = st -e ncmpcpp
+click-left = $TERMINAL -e ncmpcpp
 click-right = mpc toggle
 
 label-song =  %artist% - %title%
