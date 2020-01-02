@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+autorandr -c
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 remaps &              # run the remaps script, switching caps/esc and more; check it for more info

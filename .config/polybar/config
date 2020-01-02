@@ -46,10 +46,10 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = mono:pixelsize=9;1
-font-1 = Source Code Pro:size=8;1
-font-2 = Source Code Pro:scale=10:style=Regular;2
-font-3 = Source Code Pro:pixelsize=9;1
+font-0 = "Sauce Code Pro:size=9;1"
+font-1 = "Sauce Code Pro:size=8;1"
+font-2 = "Sauce Code Pro:scale=10:style=Regular;2"
+font-3 = "Sauce Code Pro:size=9;1"
 
 wm-restack = i3
 
@@ -161,7 +161,7 @@ format-volume = <label-volume> <bar-volume>
 label-volume-foreground = ${colors.foreground}
 
 format-muted-foreground = ${colors.gray}
-label-muted = muted
+label-muted = Muted
 
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.blue}
