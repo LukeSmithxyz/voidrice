@@ -1,3 +1,4 @@
+
 bd      ~/.config/directories
 bf      ~/.config/files
 bw      ~/.config/bookmarks
@@ -11,7 +12,7 @@ cfmb    ~/.config/ncmpcpp/bindings
 cfmc    ~/.config/ncmpcpp/config
 cfn     ~/.config/newsboat/config
 cfp 	~/.config/polybar/config
+cfs     ~/.config/sxhkd/sxhkdrc
 cfu     ~/.config/newsboat/urls
 cfv     ~/.config/nvim/init.vim
 cfz     $ZDOTDIR/.zshrc
-

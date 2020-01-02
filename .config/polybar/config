@@ -80,7 +80,7 @@ interval = 0.5
 format = <label>
 ; %percentage% (default) - total cpu load averaged over all cores
 format-prefix-foreground = ${colors.gray}
-label = CPU: %percentage%%
+label = CPU:
 
 [module/date]
 type = internal/date
