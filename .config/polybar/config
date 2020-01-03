@@ -55,10 +55,17 @@ wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = cpu memory volume wifi ethernet battery date
+modules-right = arch-updates cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
+
+[module/arch-updates]
+type = custom/script
+exec = ~/.local/bin/polybar_scripts/aur_updates
+format = <label>
+label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
+interval = 600
 
 [module/battery]
 type = internal/battery
@@ -151,7 +158,7 @@ label-urgent-padding = 1
 
 [module/memory]
 type = internal/memory
-interval = 2
+interval = 1
 format-prefix-foreground = ${colors.gray}
 label = RAM: %gb_used%/%gb_free%
 
@@ -161,8 +168,8 @@ screenchange-reload = true
 [module/volume]
 type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
-label-volume = %{A3:$TERMINAL -e alsamixer >/dev/null 2>&1 &:}%percentage% %{A}
+format-volume = [<label-volume> <bar-volume>]
+label-volume = %{A3:$TERMINAL -e alsamixer >/dev/null 2>&1 &:}%percentage%%%{A}
 label-volume-foreground = ${colors.foreground}
 
 format-muted-foreground = ${colors.gray}

@@ -145,13 +145,8 @@ super + F3
 # Hibernate
 super + F4
 	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
-super + F5 is unbound.
-# Start torrent daemon/open interface
-super + F6
-	torwrap
-# toggle torrent daemon
-super + F7
-	td-toggle
+super + F5
+	killall screenkey || screenkey
 # sync email
 super + F8
 	mailsync
