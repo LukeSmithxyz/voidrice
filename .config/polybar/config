@@ -63,7 +63,7 @@ tray-padding = 0
 [module/arch-updates]
 type = custom/script
 exec = ~/.local/bin/polybar_scripts/aur_updates
-format = <label>
+format = %{u#ff0000}%{+u}<<label>
 label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
 interval = 600
 
@@ -160,7 +160,7 @@ label-urgent-padding = 1
 type = internal/memory
 interval = 1
 format-prefix-foreground = ${colors.gray}
-label = RAM: %gb_used%/%gb_free%
+label = RAM: %gb_used%/%gb_total%
 
 [settings]
 screenchange-reload = true
