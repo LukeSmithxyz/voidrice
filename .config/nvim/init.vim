@@ -109,3 +109,8 @@ set clipboard+=unnamedplus
 	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 " Update binds when sxhkdrc is updated.
 	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
+" Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
+if &diff
+    highlight! link DiffText MatchParen
+endif
