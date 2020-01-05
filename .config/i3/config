@@ -100,8 +100,6 @@ bindsym $mod+Ctrl+l		move workspace to output right
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
-bindsym $mod+c			exec --no-startup-id cabl
-
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 
