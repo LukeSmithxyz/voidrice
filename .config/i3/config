@@ -35,8 +35,6 @@ bar {
 }
 
 # #---Basic Bindings---# #
-bindsym $mod+Shift+Return	exec --no-startup-id samedir
-
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
