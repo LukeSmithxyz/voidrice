@@ -10,6 +10,8 @@
 # Basic binds
 super + Return
 	$TERMINAL
+super + shift + Return
+	samedir
 super + shift + q
 	kill -9 `xdotool getwindowfocus getwindowpid`
 super + d
