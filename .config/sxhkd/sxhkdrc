@@ -32,8 +32,8 @@ super + shift + a
 	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
-super + shift + e
-	tutorialvids
+super + alt + {k, o, g, b, e, f, v}
+	{kdenlive, obs, gimp, firefox, brave, vifm, virtualbox}
 super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
