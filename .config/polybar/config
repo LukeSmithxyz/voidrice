@@ -130,6 +130,8 @@ format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
+pin-workspaces = true
+
 label-mode-padding = 1
 label-mode-foreground = ${colors.white}
 label-mode-background = ${colors.darkyellow}
