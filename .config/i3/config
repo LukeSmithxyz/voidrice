@@ -27,8 +27,6 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
 # #---Basic Bindings---# #
-bindsym $mod+Shift+Return	exec --no-startup-id samedir
-
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
@@ -91,8 +89,6 @@ bindsym $mod+Ctrl+l		move workspace to output right
 
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
-
-bindsym $mod+c			exec --no-startup-id cabl
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
