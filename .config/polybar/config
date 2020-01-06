@@ -21,7 +21,7 @@ background = #1d2021
 foreground = #ebdbb2
 
 [bar/main]
-monitor = ${env:MONITOR:eDP-1-1}
+monitor = ${env:MONITOR:}
 enable-ipc = true
 width = 100%
 height = 20
@@ -129,6 +129,8 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+
+pin-workspaces = true
 
 label-mode-padding = 1
 label-mode-foreground = ${colors.white}
