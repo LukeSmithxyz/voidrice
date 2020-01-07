@@ -21,3 +21,6 @@
 	- File bookmarks in `~/.config/files`
 	- Directory bookmarks in `~/.config/directories`
 	
+### Things to add
+- show/hide polybar using IPC (polybar-msg)
+- Launch pycharm without Jetbrains toolbox (command will look like ``` ./`find .local -name pycharm.sh` ```
