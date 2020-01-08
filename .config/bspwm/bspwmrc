@@ -2,7 +2,8 @@
 
 # If refreshing bspwm, remove all previous rules to prevent doubling up.
 bspc rule -r "*"
-
+# Launch polybar scritp
+launch_polybar &
 # We look for a non-laptop monitor to use for default, but use the laptop
 # screen (LVDS) if there's nothing else. This is because I assume that if you
 # have an extra screen attached to a laptop, you want to use that.
