@@ -4,16 +4,17 @@
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
 # Get default LARBS WM from ~/.local/share/larbs/wm
-export LARBSWM="$(cat ~/.local/share/larbs/wm 2>/dev/null)" &&
-	[ "$LARBSWM" = "dwm" ] || export LARBSWM="i3"
-
+##	export LARBSWM="$(cat ~/.local/share/larbs/wm 2>/dev/null)" &&
+##		[ "$LARBSWM" = "dwm" ] || export LARBSWM="i3"
+export WM="bspwm"
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="brave"
 export READER="zathura"
-export FILE="ranger"
-export STATUSBAR="${LARBSWM}blocks"
+export FILE="vifm"
+export PAGER="less"
+##	export STATUSBAR="${LARBSWM}blocks"
 
 # ~/ Clean-up:
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
