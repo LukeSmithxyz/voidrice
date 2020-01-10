@@ -74,8 +74,10 @@ adapter = ADP1
 full-at = 98
 
 ; orange denotes charging
-format-charging =%{u#ffa500}%{+u}<label-charging>
+format-charging =<label-charging>
 label-charging = Batt: %percentage%%
+label-charging-overline=#ffa500
+label-charging-underline=#ffa500
 
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = Batt: %percentage%%
@@ -102,13 +104,6 @@ time = "%I:%M%p"
 
 format-prefix-foreground = ${colors.gray}
 label = %{A1:google-chrome-stable https\://calendar.google.com >/dev/null 2>&1 &:}%date% %time%%{A}
-
-[module/email]
-type = custom/script
-exec = mailbox
-interval = 5
-format-prefix = " "
-click-left = st -e neomutt
 
 [module/ethernet]
 type = internal/network

@@ -17,6 +17,8 @@ super + shift + q
 	kill -9 `xdotool getwindowfocus getwindowpid`
 super + d
 	dmenu_run
+super + b
+	polybar-msg cmd toggle
 super + r
 	$TERMINAL -e $FILE
 super + e
@@ -74,24 +76,10 @@ super + Print
 	dmenurecord
 super + Delete
 	dmenurecord kill
+alt + shift + escape
+	pkill -USR1 -x sxhkd
 
-# Pause audio
-super + p
-	mpc toggle
-super + shift + p
-	mpc pause; pauseallmpv
-# Changes to next/previous tracks
-super + {comma,period}
-	mpc {prev,next}
-# Restart track
-super + shift + less
-	mpc seek 0%
-# Seek foward in song
-super + {_,shift +} bracketright
-	mpc seek +{10,120}
-# Seek backward in song
-super + {_,shift +} bracketleft
-	mpc seek -{10,120}
+# Volume
 # Increase volume
 super {_,shift +} + plus
 	amixer sset Master {5,15}%+
@@ -100,41 +88,6 @@ super {_,shift +} + minus
 	amixer sset Master {5,15}%-
 super + shift + m
 	amixer sset Master toggle
-
-# Audiokeys
-XF86AudioMute
-	amixer sset Master toggle
-XF86Audio{Raise,Lower}Volume
-	amixer sset Master 5%{+,-}
-XF86Audio{Next,Prev}
-	mpc {next,prev}
-XF86Audio{Pause,Play,Stop}
-	mpc {pause,play,stop}
-XF86Audio{Rewind,Forward}
-	mpc seek {-,+}10
-XF86AudioRecord
-	dmenurecord
-XF86AudioMedia
-	$TERMINAL -e ncmpcpp
-
-XF86PowerOff
-	prompt "Shutdown computer?" "sudo -A shutdown -h now"
-XF86Calculator
-	$TERMINAL -e bc
-XF86Sleep
-	prompt 'Hibernate computer?' 'sudo -A zzz'
-XF86WWW
-	$BROWSER
-XF86DOS
-	$TERMINAL
-XF86ScreenSaver
-	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
-XF86TaskPane
-	$TERMINAL -e htop
-XF86Mail
-	$TERMINAL -e neomutt
-XF86MyComputer
-	$TERMINAL -e $FILE /
 
 # Function keys
 # Show readme
@@ -149,9 +102,6 @@ super + F4
 	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
 super + F5
 	killall screenkey || screenkey
-# sync email
-super + F8
-	mailsync
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
