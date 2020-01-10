@@ -1,31 +1,24 @@
 ; vim:ft=dosini
 
 [colors]
-black = #1d2021
-darkred = #cc241d
-darkgreen = #98971a
-darkyellow = #d79921
-darkblue = #458588
-darkmagenta = #b16286
-darkcyan = #689d6a
-lightgray = #a89984
-gray = #928374
-red = #fb4934
-green = #b8bb26
-yellow = #fabd2f
-blue = #83a598
-magenta = #d3869b
-cyan = #8ec07c
-white = #ebdbb2
 background = #1d2021
+black = #1d2021
+blue = #83a598
+darkyellow = #d79921
 foreground = #ebdbb2
+gray = #928374
+green = #b8bb26
+orange = #ffa500
+red = #ff0000
+white = #ebdbb2
+yellow = #fabd2f
 
 [bar/main]
-monitor = ${env:MONITOR:}
 enable-ipc = true
-width = 100%
-height = 20
 fixed-center = false
+height = 20
+monitor = ${env:MONITOR:}
+width = 100%
 
 ; allow scrolling workspaces
 scroll-up = i3wm-wsnext
@@ -61,13 +54,13 @@ tray-position = right
 tray-padding = 0
 
 [module/sys_updates]
-type = custom/script
 exec = ~/.local/bin/polybar_scripts/aur_updates
 format = <label>
-label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
-label-underline=#ff0000
-label-overline=#ff0000
 interval = 1000
+label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
+label-overline=${colors.red}
+label-underline=${colors.red}
+type = custom/script
 
 [module/battery]
 type = internal/battery
@@ -78,24 +71,24 @@ full-at = 98
 ; orange denotes charging
 format-charging =<label-charging>
 label-charging = Batt: %percentage%%
-label-charging-overline=#ffa500
-label-charging-underline=#ffa500
+label-charging-overline=${colors.orange}
+label-charging-underline=${colors.orange}
 
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = Batt: %percentage%%
 
 ; changes color for which third battery is in
 ; red=0-33, yellow=34-66, green=67-100
-ramp-capacity-0 = %{u#ff0000}
+ramp-capacity-0 = %{u${colors.red}}
 ramp-capacity-1 = %{u#ffea00}
 ramp-capacity-2 = %{u#20c723}
 
 [module/cpu]
-type = internal/cpu
-interval = 0.5
 format = <label>
 format-prefix-foreground = ${colors.gray}
+interval = 0.5
 label = %{A1:$TERMINAL -e htop >/dev/null 2>&1 &:}CPU: %percentage%%%{A}
+type = internal/cpu
 
 [module/date]
 type = internal/date
@@ -156,10 +149,10 @@ label-urgent-background = #bd2c40
 label-urgent-padding = 1
 
 [module/memory]
-type = internal/memory
-interval = 1
 format-prefix-foreground = ${colors.gray}
+interval = 1
 label = RAM: %gb_used%/%gb_total%
+type = internal/memory
 
 [settings]
 screenchange-reload = true
@@ -205,10 +198,10 @@ label-disconnected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}No wifi%{A}
 label-disconnected-foreground = ${colors.gray}
 
 [global/wm]
-margin-top = 5
 margin-bottom = 5
+margin-top = 5
 
 [module/xwindow]
-type = internal/xwindow
-label = %title:0:100:...%
 format-foreground = ${colors.blue}
+label = %title:0:100:...%
+type = internal/xwindow
