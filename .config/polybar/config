@@ -66,7 +66,8 @@ exec = ~/.local/bin/polybar_scripts/aur_updates
 format = <label>
 label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
 label-underline=#ff0000
-interval = 100
+label-overline=#ff0000
+interval = 1000
 
 [module/battery]
 type = internal/battery
