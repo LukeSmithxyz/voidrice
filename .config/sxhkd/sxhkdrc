@@ -1,38 +1,36 @@
 # The Simple X Hotkey Daemon is the program used by LARBS to map most of the
-# dwm-independent commands.  This file is pretty readable, so I'll let you read
+# i3 independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
-# The keys NOT bound here by sxhkd, but by dwm or i3 are:
+# The keys NOT bound here by sxhkd, but by i3 are:
 # The t thru p keys on the top row
 # The f thru ; keys on the home row
 # The b key on the bottom row (hides the bar in either case)
 
 # Basic binds
-
 super + Return
 	$TERMINAL
 super + shift + Return
 	samedir
-super + shift + q
-	kill -9 `xdotool getwindowfocus getwindowpid`
-super + d
-	dmenu_run
+
+super + shift + a
+	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 super + b
 	polybar-msg cmd toggle
-super + r
-	$TERMINAL -e $FILE
-super + e
-	$TERMINAL -e neomutt; pkill -RTMIN+12 $STATUSBAR
+super + c
+	code
+super + shift + c
+	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
+super + d
+	dmenu_run
 super + m
 	spotify #$TERMINAL -e spt
 super + n
 	nautilus
-super + c
-	code
-super + shift + a
-	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
-super + shift + c
-	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
+super + shift + q
+	kill -9 `xdotool getwindowfocus getwindowpid`
+super + r
+	$TERMINAL -e $FILE
 super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
@@ -42,7 +40,7 @@ super + shift + w
 super + grave
 	dmenuunicode
 super + Scroll_Lock
-	killall screenkey || screenkey
+	ifinstall screenkey && (killall screenkey || screenkey)
 super + Insert
 	showclip
 super + shift + x
@@ -52,17 +50,7 @@ super + shift + BackSpace
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
-	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
-XF86Launch1
-	xset dpms force off
-XF86TouchpadToggle
-	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
-XF86Touchpad{Off,On}
-	synclient TouchpadOff={1,0}
-XF86MonBrightnessDown
-	xbacklight -dec 15
-XF86MonBrightnessUp
-	xbacklight -inc 15
+	ifinstalled i3lock && i3lock --clock --indicator
 
 # Recording
 # Take screenshot
