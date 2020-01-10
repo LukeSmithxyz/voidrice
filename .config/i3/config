@@ -9,7 +9,7 @@ exec_always --no-startup-id launch_polybar
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
 gaps inner 5
-gaps outer 5
+gaps outer 0
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 
