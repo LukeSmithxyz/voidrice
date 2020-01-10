@@ -55,17 +55,18 @@ wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = arch-updates cpu memory volume wifi ethernet battery date
+modules-right = sys_updates cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
 
-[module/arch-updates]
+[module/sys_updates]
 type = custom/script
 exec = ~/.local/bin/polybar_scripts/aur_updates
-format = %{u#ff0000}%{+u}<<label>
+format = <label>
 label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
-interval = 600
+label-underline=#ff0000
+interval = 100
 
 [module/battery]
 type = internal/battery
