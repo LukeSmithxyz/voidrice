@@ -1,5 +1,4 @@
 # vim: filetype=i3
-# File originally by Luke Smith <https://lukesmith.xyz>
 
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
@@ -9,8 +8,8 @@ exec_always --no-startup-id launch_polybar
 
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
-gaps inner 5
-gaps outer 5
+gaps inner 2
+gaps outer 2
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 
@@ -90,7 +89,6 @@ bindsym $mod+Ctrl+l		move workspace to output right
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
-bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 
 bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right

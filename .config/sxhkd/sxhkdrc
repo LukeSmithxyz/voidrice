@@ -1,36 +1,36 @@
 # The Simple X Hotkey Daemon is the program used by LARBS to map most of the
-# dwm-independent commands.  This file is pretty readable, so I'll let you read
+# i3 independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
-# The keys NOT bound here by sxhkd, but by dwm or i3 are:
+# The keys NOT bound here by sxhkd, but by i3 are:
 # The t thru p keys on the top row
 # The f thru ; keys on the home row
 # The b key on the bottom row (hides the bar in either case)
 
 # Basic binds
-
 super + Return
 	$TERMINAL
 super + shift + Return
 	samedir
-super + shift + q
-	kill -9 `xdotool getwindowfocus getwindowpid`
+
+super + shift + a
+	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
+super + b
+	polybar-msg cmd toggle
+super + c
+	code
+super + shift + c
+	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 super + d
 	dmenu_run
-super + r
-	$TERMINAL -e $FILE
-super + e
-	$TERMINAL -e neomutt; pkill -RTMIN+12 $STATUSBAR
 super + m
 	spotify #$TERMINAL -e spt
 super + n
 	nautilus
-super + c
-	code
-super + shift + a
-	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
-super + shift + c
-	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
+super + shift + q
+	kill -9 `xdotool getwindowfocus getwindowpid`
+super + r
+	$TERMINAL -e $FILE
 super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
@@ -40,7 +40,7 @@ super + shift + w
 super + grave
 	dmenuunicode
 super + Scroll_Lock
-	killall screenkey || screenkey
+	ifinstall screenkey && (killall screenkey || screenkey)
 super + Insert
 	showclip
 super + shift + x
@@ -50,17 +50,7 @@ super + shift + BackSpace
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
-	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
-XF86Launch1
-	xset dpms force off
-XF86TouchpadToggle
-	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
-XF86Touchpad{Off,On}
-	synclient TouchpadOff={1,0}
-XF86MonBrightnessDown
-	xbacklight -dec 15
-XF86MonBrightnessUp
-	xbacklight -inc 15
+	ifinstalled i3lock && i3lock --color 000000 --indicator --radius 120 --ring-width 10.0
 
 # Recording
 # Take screenshot
@@ -74,24 +64,10 @@ super + Print
 	dmenurecord
 super + Delete
 	dmenurecord kill
+alt + shift + escape
+	pkill -USR1 -x sxhkd
 
-# Pause audio
-super + p
-	mpc toggle
-super + shift + p
-	mpc pause; pauseallmpv
-# Changes to next/previous tracks
-super + {comma,period}
-	mpc {prev,next}
-# Restart track
-super + shift + less
-	mpc seek 0%
-# Seek foward in song
-super + {_,shift +} bracketright
-	mpc seek +{10,120}
-# Seek backward in song
-super + {_,shift +} bracketleft
-	mpc seek -{10,120}
+# Volume
 # Increase volume
 super {_,shift +} + plus
 	amixer sset Master {5,15}%+
@@ -100,41 +76,6 @@ super {_,shift +} + minus
 	amixer sset Master {5,15}%-
 super + shift + m
 	amixer sset Master toggle
-
-# Audiokeys
-XF86AudioMute
-	amixer sset Master toggle
-XF86Audio{Raise,Lower}Volume
-	amixer sset Master 5%{+,-}
-XF86Audio{Next,Prev}
-	mpc {next,prev}
-XF86Audio{Pause,Play,Stop}
-	mpc {pause,play,stop}
-XF86Audio{Rewind,Forward}
-	mpc seek {-,+}10
-XF86AudioRecord
-	dmenurecord
-XF86AudioMedia
-	$TERMINAL -e ncmpcpp
-
-XF86PowerOff
-	prompt "Shutdown computer?" "sudo -A shutdown -h now"
-XF86Calculator
-	$TERMINAL -e bc
-XF86Sleep
-	prompt 'Hibernate computer?' 'sudo -A zzz'
-XF86WWW
-	$BROWSER
-XF86DOS
-	$TERMINAL
-XF86ScreenSaver
-	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
-XF86TaskPane
-	$TERMINAL -e htop
-XF86Mail
-	$TERMINAL -e neomutt
-XF86MyComputer
-	$TERMINAL -e $FILE /
 
 # Function keys
 # Show readme
@@ -149,9 +90,6 @@ super + F4
 	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
 super + F5
 	killall screenkey || screenkey
-# sync email
-super + F8
-	mailsync
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
