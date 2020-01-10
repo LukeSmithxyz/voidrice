@@ -1,11 +1,5 @@
 # The Simple X Hotkey Daemon is the program used by LARBS to map most of the
-# dwm-independent commands.  This file is pretty readable, so I'll let you read
-# it.
-
-# The keys NOT bound here by sxhkd, but by dwm or i3 are:
-# The t thru p keys on the top row
-# The f thru ; keys on the home row
-# The b key on the bottom row (hides the bar in either case)
+# dwm-independent commands.  This file is pretty readable, 
 
 # Basic binds
 super + Return
@@ -32,13 +26,50 @@ super + shift + a
 	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
-super + alt + {k, o, g, b, e, f, v}
-	{kdenlive, obs, gimp, firefox, brave, vifm, virtualbox}
+super + shift + e
+	tutorialvids
 super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
 	$BROWSER
 
+# Focus on window in direction
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+#	Send window to desktop
+super + shift + {0-9}
+  bspc node -d {0-9} && bspunhide
+
+# Send window to desktop and swap to desktop
+super + control + {0-9}
+  bspc node -d {0-9} && bspunhide && bspc desktop -f {0-9}
+
+# Toggle fullscreen on and off
+super + f
+  bspfullscreen
+
+# Toggle floating on and off
+super + o
+  bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+
+# Swap window with direction
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# Focus on desktop
+super + {0-9}
+	bspc desktop -f {0-9}
+	
+	
+#---System Control---#
+# Restart hotkey damon
+super + shift + x
+  killandnotify "sxhkd" "Config reloaded" && sxhkd &
+
+super + shift + o
+  reloadpolybar
+	
 # Et cetera...
 super + grave
 	dmenuunicode
@@ -54,16 +85,16 @@ super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
 	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
-XF86Launch1
-	xset dpms force off
-XF86TouchpadToggle
-	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
-XF86Touchpad{Off,On}
-	synclient TouchpadOff={1,0}
-XF86MonBrightnessDown
-	xbacklight -dec 15
-XF86MonBrightnessUp
-	xbacklight -inc 15
+ ##   XF86Launch1
+ ##       xset dpms force off
+ ##   XF86TouchpadToggle
+ ##       (synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
+ ##   XF86Touchpad{Off,On}
+ ##       synclient TouchpadOff={1,0}
+ ##   XF86MonBrightnessDown
+ ##       xbacklight -dec 15
+ ##   XF86MonBrightnessUp
+ ##       xbacklight -inc 15
 
 # Recording
 # Take screenshot
@@ -130,8 +161,7 @@ XF86WWW
 	$BROWSER
 XF86DOS
 	$TERMINAL
-XF86ScreenSaver
-	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
+
 XF86TaskPane
 	$TERMINAL -e htop
 XF86Mail
@@ -140,12 +170,7 @@ XF86MyComputer
 	$TERMINAL -e $FILE /
 
 # Function keys
-super + shift + F1
-	grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send -i "$HOME/.local/share/larbs/larbs.png" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
-# Show readme
-super + F1
-	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
-# F2 restarts either dwm or i3 and is bound in each.
+
 # Change display
 super + F3
 	displayselect
@@ -165,3 +190,4 @@ super + F8
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
+
