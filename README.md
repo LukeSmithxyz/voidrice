@@ -2,13 +2,12 @@
 
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
-	- vim/nvim (text editor)
+	- neovim/vim (text editor)
 	- zsh (shell)
-	- i3wm/i3-gaps (window manager)
+	- i3wm/i3-gaps/i3-lock (window manager)
 	- polybar (status bar)
 	- sxhkd (general key binder)
 	- ranger (file manager)
-	- mpd/ncmpcpp (music)
 	- sxiv (image/gif viewer)
 	- mpv (video player)
 	- calcurse (calendar program)
