@@ -50,7 +50,7 @@ super + shift + BackSpace
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
 super + x
-	ifinstalled i3lock && i3lock --clock --indicator
+	ifinstalled i3lock && i3lock --color 000000 --indicator --radius 120 --ring-width 10.0
 
 # Recording
 # Take screenshot
