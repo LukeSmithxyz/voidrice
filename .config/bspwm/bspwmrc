@@ -4,6 +4,17 @@
 bspc rule -r "*"
 # Launch polybar scritp
 launch_polybar &
+
+## Autostart at login:
+remaps &		# run the remaps script, switching caps/esc and more; check it for more info
+setbg &			# set the background with the `setbg` script
+xcompmgr &		# xcompmgr for transparency
+$STATUSBAR &		# script for updating the status bar
+dunst &			# dunst for notifications
+sxhkd -m 1 &		# Bind keys with sxhkd
+xset r rate 300 50 &	# Speed xrate up
+unclutter &		# Remove mouse when idle
+mpd-module-update &	# Check for when to update the mpd module
 # We look for a non-laptop monitor to use for default, but use the laptop
 # screen (LVDS) if there's nothing else. This is because I assume that if you
 # have an extra screen attached to a laptop, you want to use that.
