@@ -22,5 +22,5 @@
 	- Directory bookmarks in `~/.config/directories`
 	
 ### Things to add
-- show/hide polybar using IPC (polybar-msg)
+[x] show/hide polybar using IPC (polybar-msg) fixed by `polybar-msg cmd toggle`
 - Launch pycharm without Jetbrains toolbox (command will look like ``` ./`find .local -name pycharm.sh` ```
