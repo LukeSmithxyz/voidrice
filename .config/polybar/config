@@ -48,7 +48,7 @@ wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = sys_updates cpu memory volume wifi ethernet battery date
+modules-right = sys_updates sys_temp cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
@@ -60,6 +60,13 @@ interval = 1000
 label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
 label-overline=${colors.red}
 label-underline=${colors.red}
+type = custom/script
+°
+[module/sys_temp]
+exec = ~/.local/bin/polybar_scripts/sys_temp
+format = <label>
+interval = 5
+label = Temp: %output%°F
 type = custom/script
 
 [module/battery]
