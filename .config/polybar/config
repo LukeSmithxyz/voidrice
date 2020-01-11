@@ -74,7 +74,7 @@ label-charging = Batt: %percentage%%
 label-charging-overline=${colors.orange}
 label-charging-underline=${colors.orange}
 
-format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = <ramp-capacity><label-discharging>
 label-discharging = Batt: %percentage%%
 
 ; changes color for which third battery is in
