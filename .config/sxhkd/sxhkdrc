@@ -27,7 +27,7 @@ super + n
 super + c
 	$TERMINAL -e calcurse -D ~/.config/calcurse
 super + v
-	$TERMINAL -c VimwikiIndex -e nvim
+	$TERMINAL -e nvim -c VimwikiIndex
 super + shift + a
 	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 super + shift + c
