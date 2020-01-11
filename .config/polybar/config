@@ -79,9 +79,9 @@ label-discharging = Batt: %percentage%%
 
 ; changes color for which third battery is in
 ; red=0-33, yellow=34-66, green=67-100
-ramp-capacity-0 = %{u${colors.red}}
-ramp-capacity-1 = %{u#ffea00}
-ramp-capacity-2 = %{u#20c723}
+ramp-capacity-0 = %{u#ff0000}%{+u}
+ramp-capacity-1 = %{u#ffea00}%{+u}
+ramp-capacity-2 = %{u#20c723}%{+u}
 
 [module/cpu]
 format = <label>
