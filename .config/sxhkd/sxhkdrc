@@ -12,7 +12,6 @@ super + Return
 	$TERMINAL
 super + shift + Return
 	samedir
-
 super + shift + a
 	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 super + b
@@ -24,7 +23,7 @@ super + shift + c
 super + d
 	dmenu_run
 super + m
-	spotify #$TERMINAL -e spt
+	spotify
 super + n
 	nautilus
 super + shift + q
@@ -35,22 +34,20 @@ super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
 	$BROWSER
-
-# Et cetera...
 super + grave
 	dmenuunicode
 super + Scroll_Lock
-	ifinstall screenkey && (killall screenkey || screenkey)
+	ifinstalled screenkey && (killall screenkey || screenkey)
 super + Insert
 	showclip
+super + x
+	ifinstalled i3lock && i3lock --color 000000 --show-failed-attempts --radius 120 --ring-width 10.0
 super + shift + x
 	prompt "Shutdown computer?" "sudo -A shutdown -h now"
 super + shift + BackSpace
 	prompt "Reboot computer?" "sudo -A reboot"
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
-super + x
-	ifinstalled i3lock && i3lock --color 000000 --indicator --radius 120 --ring-width 10.0
 
 # Recording
 # Take screenshot
