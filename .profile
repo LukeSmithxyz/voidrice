@@ -23,7 +23,6 @@ export LESSHISTFILE="-"
 export WGETRC="$HOME/.config/wget/wgetrc"
 export INPUTRC="$HOME/.config/inputrc"
 export ZDOTDIR="$HOME/.config/zsh"
-export GNUPGHOME="$HOME/.local/share/gnupg"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export ALSA_CONFIG_PATH="$HOME/.config/alsa/asoundrc"
 
