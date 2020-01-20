@@ -31,24 +31,6 @@ for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
-# #---Starting External Scripts---# #
-# mpd startup
-exec --no-startup-id mpd
-# Setting the background:
-exec --no-startup-id setbg
-# Starts dunst for notifications:
-exec --no-startup-id dunst
-# Composite manager:
-exec --no-startup-id xcompmgr
-# Runs the key remapping scripts
-exec --no-startup-id remaps
-# Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id unclutter
-# Run the script to update the mpd i3block on change.
-exec_always --no-startup-id mpdupdate
-# Podboat automatic queue and download
-exec_always --no-startup-id podentr
-
 bar {
 	font pango:mono 10
 	status_command i3blocks
@@ -132,15 +114,19 @@ bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
 
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
+bindsym $mod+Ctrl+h		move workspace to output left
 
 bindsym $mod+j			focus down
 bindsym $mod+Shift+j		move down 30
+bindsym $mod+Ctrl+j		move workspace to output down
 
 bindsym $mod+k			focus up
 bindsym $mod+Shift+k		move up 30
+bindsym $mod+Ctrl+k		move workspace to output up
 
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l		move right 30
+bindsym $mod+Ctrl+l		move workspace to output right
 
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
@@ -248,13 +234,17 @@ bindsym $mod+F12	exec $term -e nmtui
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
-bindsym $mod+Down		focus down
-bindsym $mod+Up			focus up
-bindsym $mod+Right 		focus right
 bindsym $mod+Shift+Left		move left
+bindsym $mod+Ctrl+Left		move workspace to output left
+bindsym $mod+Down		focus down
 bindsym $mod+Shift+Down		move down
+bindsym $mod+Ctrl+Down		move workspace to output down
+bindsym $mod+Up			focus up
 bindsym $mod+Shift+Up		move up
+bindsym $mod+Ctrl+Up		move workspace to output up
+bindsym $mod+Right 		focus right
 bindsym $mod+Shift+Right 	move right
+bindsym $mod+Ctrl+Right		move workspace to output right
 
 # #---Media Keys---# #
 # Volume keys
