@@ -22,6 +22,7 @@ export LESSHISTFILE="-"
 export INPUTRC="$HOME/.config/inputrc"
 export ZDOTDIR="$HOME/.config/zsh"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+export ALSA_CONFIG_PATH="$HOME/.config/alsa/asoundrc"
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
