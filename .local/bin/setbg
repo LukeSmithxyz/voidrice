@@ -5,5 +5,5 @@
 # argument sets ~/.config/wall.png as the wallpaper, which is required on login
 # if you don't want a blakc screen.
 
-[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
-xwallpaper --zoom ~/.config/wall.png
+[ ! -z "$1" ] && cp "$1" ~/.config/assets/wallpaper.png && notify-send -i "$HOME/.config/assets/wallpaper.png" "Wallpaper changed."
+xwallpaper --zoom ~/.config/assets/wallpaper.png

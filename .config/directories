@@ -3,8 +3,7 @@ cf	~/.config
 d	~/downloads
 gh	~/github
 h	~/
-m	~/music
 mn	/mnt
+psc     ~/.local/bin/polybar_scripts
 pp	~/pictures
 sc	~/.local/bin
-vv	~/videos

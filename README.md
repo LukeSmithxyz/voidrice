@@ -1,14 +1,13 @@
-## Config based upon (Luke Smith <https://lukesmith.xyz>'s dotfiles)
+## Config based upon (Luke Smith <https://lukesmith.xyz>'s dotfiles), but heavily modified to fit my needs.
 
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
-	- vim/nvim (text editor)
+	- neovim/vim (text editor)
 	- zsh (shell)
-	- i3wm/i3-gaps (window manager)
+	- i3wm/i3-gaps/i3-lock (window manager)
 	- polybar (status bar)
 	- sxhkd (general key binder)
 	- ranger (file manager)
-	- mpd/ncmpcpp (music)
 	- sxiv (image/gif viewer)
 	- mpv (video player)
 	- calcurse (calendar program)
@@ -21,3 +20,6 @@
 	- File bookmarks in `~/.config/files`
 	- Directory bookmarks in `~/.config/directories`
 	
+### Things to add
+[x] show/hide polybar using IPC (polybar-msg) fixed by `polybar-msg cmd toggle`
+- Launch pycharm without Jetbrains toolbox (command will look like ``` ./`find .local -name pycharm.sh` ```
