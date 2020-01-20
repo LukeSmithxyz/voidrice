@@ -26,7 +26,7 @@ case "$file" in
 	*\.ms) refer -PS -e "$file" | groff -me -ms -kept -T pdf > "$base".pdf ;;
 	*\.mom) refer -PS -e "$file" | groff -mom -kept -T pdf > "$base".pdf ;;
 	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
-	*\.rmd) echo "require(rmarkdown); rmarkdown::render('$file', quiet=TRUE)" | R -q --vanilla ;;
+	*\.[rR]md) Rscript -e "require(rmarkdown); rmarkdown::render('$file', quiet=TRUE)" ;;
 	*\.tex) textype "$file" ;;
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 	*config.h) sudo make install ;;
