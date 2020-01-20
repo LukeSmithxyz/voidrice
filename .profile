@@ -16,12 +16,16 @@ export FILE="ranger"
 export STATUSBAR="${LARBSWM}blocks"
 
 # ~/ Clean-up:
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
+export WGETRC="$HOME/.config/wget/wgetrc"
 export INPUTRC="$HOME/.config/inputrc"
 export ZDOTDIR="$HOME/.config/zsh"
+export GNUPGHOME="$HOME/.local/share/gnupg"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+export ALSA_CONFIG_PATH="$HOME/.config/alsa/asoundrc"
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
