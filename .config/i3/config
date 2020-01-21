@@ -55,7 +55,7 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id amixer sset Master mute ; exec --no-startup-id mpc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
+bindsym $mod+Shift+Delete	exec --no-startup-id amixer sset Master mute ; exec --no-startup-id mpc pause ; pkill -RTMIN+10 i3blocks ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
@@ -146,7 +146,7 @@ bindsym $mod+n			exec $term -e newsboat && pkill -RTMIN+6 i3blocks
 bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
 
 bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
-bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle
+bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle; pkill -RTMIN+10 i3blocks
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
@@ -247,10 +247,10 @@ bindsym $mod+Ctrl+Right		move workspace to output right
 
 # #---Media Keys---# #
 # Volume keys
-bindsym $mod+plus		exec --no-startup-id amixer sset Master 5%+
-bindsym $mod+Shift+plus		exec --no-startup-id amixer sset Master 15%+
-bindsym $mod+minus 		exec --no-startup-id amixer sset Master 5%-
-bindsym $mod+Shift+minus	exec --no-startup-id amixer sset Master 15%-
+bindsym $mod+plus		exec --no-startup-id amixer sset Master 5%+; pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+plus		exec --no-startup-id amixer sset Master 15%+; pkill -RTMIN+10 i3blocks
+bindsym $mod+minus 		exec --no-startup-id amixer sset Master 5%-; pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+minus	exec --no-startup-id amixer sset Master 15%-; pkill -RTMIN+10 i3blocks
 bindsym $mod+less 		exec --no-startup-id mpc prev
 bindsym $mod+Shift+less		exec --no-startup-id mpc seek 0%
 bindsym $mod+greater		exec --no-startup-id mpc next
@@ -271,13 +271,13 @@ bindsym $mod+Delete		exec $stoprec
 bindsym XF86Launch1		exec --no-startup-id xset dpms force off
 
 # #---Extra XF86 Keys---# #
-bindsym XF86AudioMute		exec --no-startup-id amixer sset Master toggle
-bindsym XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 5%-
-bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 10%-
-bindsym Control+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 1%-
-bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+
-bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 10%+
-bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 1%+
+bindsym XF86AudioMute		exec --no-startup-id amixer sset Master toggle; pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 5%-; pkill -RTMIN+10 i3blocks
+bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 10%-; pkill -RTMIN+10 i3blocks
+bindsym Control+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 1%-; pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+; pkill -RTMIN+10 i3blocks
+bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 10%+; pkill -RTMIN+10 i3blocks
+bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 1%+; pkill -RTMIN+10 i3blocks
 bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
