@@ -4,7 +4,7 @@
   bare = false
   logallrefupdates = true
   editor = vim
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore
 [user]
   name = Vlad Doster
   email = mvdoster@gmail.com
