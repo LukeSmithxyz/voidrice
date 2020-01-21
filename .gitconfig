@@ -4,7 +4,7 @@
   bare = false
   logallrefupdates = true
   editor = vim
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore
 [user]
   name = Vlad Doster
   email = mvdoster@gmail.com
@@ -14,8 +14,7 @@
   diff = auto
   branch = auto
 [alias]
-  st = status
-  st = status
+  st = status -uno
   co = checkout
   ci = commit
   br = branch

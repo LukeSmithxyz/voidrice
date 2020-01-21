@@ -1,31 +1,24 @@
 ; vim:ft=dosini
 
 [colors]
-black = #1d2021
-darkred = #cc241d
-darkgreen = #98971a
-darkyellow = #d79921
-darkblue = #458588
-darkmagenta = #b16286
-darkcyan = #689d6a
-lightgray = #a89984
-gray = #928374
-red = #fb4934
-green = #b8bb26
-yellow = #fabd2f
-blue = #83a598
-magenta = #d3869b
-cyan = #8ec07c
-white = #ebdbb2
 background = #1d2021
+black = #1d2021
+blue = #83a598
+darkyellow = #d79921
 foreground = #ebdbb2
+gray = #928374
+green = #b8bb26
+orange = #ffa500
+red = #ff0000
+white = #ebdbb2
+yellow = #fabd2f
 
 [bar/main]
-monitor = ${env:MONITOR:eDP-1-1}
 enable-ipc = true
-width = 100%
-height = 20
 fixed-center = false
+height = 20
+monitor = ${env:MONITOR:}
+width = 100%
 
 ; allow scrolling workspaces
 scroll-up = i3wm-wsnext
@@ -46,41 +39,63 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = mono:pixelsize=9;1
-font-1 = Source Code Pro:size=8;1
-font-2 = Source Code Pro:scale=10:style=Regular;2
-font-3 = Source Code Pro:pixelsize=9;1
+font-0 = "Sauce Code Pro:size=9;1"
+font-1 = "Sauce Code Pro:size=8;1"
+font-2 = "Sauce Code Pro:scale=10:style=Regular;2"
+font-3 = "Sauce Code Pro:size=9;1"
 
 wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = cpu memory volume wifi ethernet battery date
+modules-right = sys_updates sys_temp cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
+
+[module/sys_updates]
+exec = ~/.local/bin/polybar_scripts/aur_updates
+format = <label>
+interval = 1000
+label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
+label-overline=${colors.red}
+label-underline=${colors.red}
+type = custom/script
+°
+[module/sys_temp]
+exec = ~/.local/bin/polybar_scripts/sys_temp
+format = <label>
+interval = 5
+label = Temp: %output%°F
+type = custom/script
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
-time-format = %H:%M
 
-format-charging = <label-charging>
-label-charging = BAT: %percentage%%
+; orange denotes charging
+format-charging =<label-charging>
+label-charging = Batt: %percentage%%
+label-charging-overline=${colors.orange}
+label-charging-underline=${colors.orange}
 
-format-discharging = <label-discharging>
-label-discharging = BAT: %percentage%%
+format-discharging = <ramp-capacity><label-discharging>
+label-discharging = Batt: %percentage%%
+
+; changes color for which third battery is in
+; red=0-33, yellow=34-66, green=67-100
+ramp-capacity-0 = %{u#ff0000}%{+u}
+ramp-capacity-1 = %{u#ffea00}%{+u}
+ramp-capacity-2 = %{u#20c723}%{+u}
 
 [module/cpu]
-type = internal/cpu
-; Seconds to sleep between updates
-interval = 0.5
 format = <label>
-; %percentage% (default) - total cpu load averaged over all cores
 format-prefix-foreground = ${colors.gray}
-label = CPU: %percentage%%
+interval = 0.5
+label = %{A1:$TERMINAL -e htop >/dev/null 2>&1 &:}CPU: %percentage%%%{A}
+type = internal/cpu
 
 [module/date]
 type = internal/date
@@ -90,18 +105,11 @@ date = "%Y %b %d (%a)"
 time = "%I:%M%p"
 
 format-prefix-foreground = ${colors.gray}
-label = %date% %time%
-
-[module/email]
-type = custom/script
-exec = mailbox
-interval = 5
-format-prefix = " "
-click-left = st -e neomutt
+label = %{A1:google-chrome-stable https\://calendar.google.com >/dev/null 2>&1 &:}%date% %time%%{A}
 
 [module/ethernet]
 type = internal/network
-interface = enp0s25
+interface = eth1
 interval = 3.0
 
 format-connected-underline = ${colors.green}
@@ -110,7 +118,7 @@ label-connected = %local_ip%
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected = %ifname%
+label-disconnected = No Eth
 label-disconnected-foreground = ${colors.gray}
 
 [module/i3]
@@ -118,6 +126,8 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+
+pin-workspaces = true
 
 label-mode-padding = 1
 label-mode-foreground = ${colors.white}
@@ -146,10 +156,10 @@ label-urgent-background = #bd2c40
 label-urgent-padding = 1
 
 [module/memory]
-type = internal/memory
-interval = 2
 format-prefix-foreground = ${colors.gray}
-label = RAM: %gb_used%/%gb_free%
+interval = 1
+label = RAM: %gb_used%/%gb_total%
+type = internal/memory
 
 [settings]
 screenchange-reload = true
@@ -157,11 +167,12 @@ screenchange-reload = true
 [module/volume]
 type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
+format-volume = [<label-volume> <bar-volume>]
+label-volume = %{A3:$TERMINAL -e alsamixer >/dev/null 2>&1 &:}%percentage%%%{A}
 label-volume-foreground = ${colors.foreground}
 
 format-muted-foreground = ${colors.gray}
-label-muted = muted
+label-muted = Muted
 
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.blue}
@@ -186,18 +197,18 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <label-connected>
-label-connected = Wifi: %essid%
+label-connected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}Wifi: %essid%%{A}
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected = No wifi
+label-disconnected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}No wifi%{A}
 label-disconnected-foreground = ${colors.gray}
 
 [global/wm]
-margin-top = 5
 margin-bottom = 5
+margin-top = 5
 
 [module/xwindow]
-type = internal/xwindow
-label = %title:0:100:...%
 format-foreground = ${colors.blue}
+label = %title:0:100:...%
+type = internal/xwindow

@@ -1,13 +1,15 @@
 # vim: filetype=i3
-# File originally by Luke Smith <https://lukesmith.xyz>
 
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 
+# Polybar
+exec_always --no-startup-id launch_polybar
+
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
-gaps inner 5
-gaps outer 5
+gaps inner 2
+gaps outer 2
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $stoprec --no-startup-id dmenurecord kill
@@ -119,13 +121,6 @@ bindsym $mod+Ctrl+l		move workspace to output right
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
-bindsym $mod+x			exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id i3lock -e -f -c 1d2021 ; exec --no-startup-id xset dpms force off
-bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
-
-bindsym $mod+c			exec --no-startup-id cabl
-bindsym $mod+Shift+c		exec --no-startup-id camtoggle
-
-bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 
 bindsym $mod+n			exec $term -e newsboat && pkill -RTMIN+6 i3blocks

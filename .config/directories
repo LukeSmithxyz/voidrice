@@ -1,10 +1,9 @@
 # You can add comments to these files with #
-h	~/
+cf	~/.config
 d	~/downloads
 gh	~/github
-m	~/music
-pp	~/pictures
-vv	~/videos
-cf	~/.config
-sc	~/.local/bin
+h	~/
 mn	/mnt
+psc     ~/.local/bin/polybar_scripts
+pp	~/pictures
+sc	~/.local/bin
