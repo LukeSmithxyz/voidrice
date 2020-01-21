@@ -55,7 +55,7 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
+bindsym $mod+Shift+Delete	exec --no-startup-id amixer sset Master mute ; exec --no-startup-id mpc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
@@ -89,8 +89,8 @@ bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 
-bindsym $mod+p			exec --no-startup-id lmc toggle
-bindsym $mod+Shift+p		exec --no-startup-id lmc pause
+bindsym $mod+p			exec --no-startup-id mpc toggle
+bindsym $mod+Shift+p		exec --no-startup-id mpc pause
 
 bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a		exec $term -e pulsemixer
@@ -146,7 +146,7 @@ bindsym $mod+n			exec $term -e newsboat && pkill -RTMIN+6 i3blocks
 bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
 
 bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
-bindsym $mod+Shift+m		exec --no-startup-id lmc mute
+bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
@@ -247,20 +247,20 @@ bindsym $mod+Ctrl+Right		move workspace to output right
 
 # #---Media Keys---# #
 # Volume keys
-bindsym $mod+plus		exec --no-startup-id lmc up 5
-bindsym $mod+Shift+plus		exec --no-startup-id lmc up 15
-bindsym $mod+minus 		exec --no-startup-id lmc down 5
-bindsym $mod+Shift+minus	exec --no-startup-id lmc down 15
-bindsym $mod+less 		exec --no-startup-id lmc prev
-bindsym $mod+Shift+less		exec --no-startup-id lmc replay
-bindsym $mod+greater		exec --no-startup-id lmc next
-bindsym $mod+Shift+greater	exec --no-startup-id lmc next
+bindsym $mod+plus		exec --no-startup-id amixer sset Master 5%+
+bindsym $mod+Shift+plus		exec --no-startup-id amixer sset Master 15%+
+bindsym $mod+minus 		exec --no-startup-id amixer sset Master 5%-
+bindsym $mod+Shift+minus	exec --no-startup-id amixer sset Master 15%-
+bindsym $mod+less 		exec --no-startup-id mpc prev
+bindsym $mod+Shift+less		exec --no-startup-id mpc seek 0%
+bindsym $mod+greater		exec --no-startup-id mpc next
+bindsym $mod+Shift+greater	exec --no-startup-id mpc next
 
 # For advancing forward/backward in an mpd song
-bindsym $mod+bracketleft 	exec --no-startup-id lmc back 10
-bindsym $mod+Shift+bracketleft 	exec --no-startup-id lmc back 120
-bindsym $mod+bracketright 	exec --no-startup-id lmc forward 10
-bindsym $mod+Shift+bracketright exec --no-startup-id lmc forward 120
+bindsym $mod+bracketleft 	exec --no-startup-id mpc seek -10
+bindsym $mod+Shift+bracketleft 	exec --no-startup-id mpc seek -120
+bindsym $mod+bracketright 	exec --no-startup-id mpc seek +10
+bindsym $mod+Shift+bracketright exec --no-startup-id mpc seek +120
 
 # For screenshots and recording
 bindsym Print 			exec --no-startup-id maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
@@ -271,13 +271,13 @@ bindsym $mod+Delete		exec $stoprec
 bindsym XF86Launch1		exec --no-startup-id xset dpms force off
 
 # #---Extra XF86 Keys---# #
-bindsym XF86AudioMute		exec --no-startup-id lmc mute
-bindsym XF86AudioLowerVolume	exec --no-startup-id lmc down 5
-bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id lmc down 10
-bindsym Control+XF86AudioLowerVolume	exec --no-startup-id lmc down 1
-bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
-bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id lmc up 10
-bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id lmc up 1
+bindsym XF86AudioMute		exec --no-startup-id amixer sset Master toggle
+bindsym XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 5%-
+bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 10%-
+bindsym Control+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 1%-
+bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+
+bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 10%+
+bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 1%+
 bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
@@ -300,13 +300,13 @@ bindsym XF86MyComputer		exec $term -e $FILE
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec --no-startup-id dmenuumount
-bindsym XF86AudioNext		exec --no-startup-id lmc next
-bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
-bindsym XF86AudioPrev		exec --no-startup-id lmc prev
-bindsym XF86AudioStop		exec --no-startup-id lmc toggle
+bindsym XF86AudioNext		exec --no-startup-id mpc next
+bindsym XF86AudioPlay		exec --no-startup-id mpc toggle
+bindsym XF86AudioPrev		exec --no-startup-id mpc prev
+bindsym XF86AudioStop		exec --no-startup-id mpc toggle
 ##bindsym XF86AudioRecord
-bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
-bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
+bindsym XF86AudioRewind		exec --no-startup-id mpc seek -10
+bindsym XF86AudioForward	exec --no-startup-id mpc seek +10
 ##bindsym XF86Phone		exec
 ##bindsym XF86Tools		exec
 bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
