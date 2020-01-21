@@ -65,7 +65,6 @@ bindsym $mod+Insert		exec --no-startup-id showclip
 bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
-bindsym $mod+w			exec $term -e nmtui
 bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
@@ -229,7 +228,6 @@ bindsym $mod+F8		exec --no-startup-id mailsync
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
-bindsym $mod+F12	exec $term -e nmtui
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
