@@ -125,7 +125,7 @@ XF86PowerOff
 XF86Calculator
 	$TERMINAL -e bc
 XF86Sleep
-	prompt 'Hibernate computer?' 'sudo -A zzz'
+	prompt 'Hibernate computer?' 'sudo -A systemctl suspend'
 XF86WWW
 	$BROWSER
 XF86DOS
@@ -151,7 +151,7 @@ super + F3
 	displayselect
 # Hibernate
 super + F4
-	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
+	prompt 'Hibernate computer?' 'sudo -A systemctl suspend'
 super + F5 is unbound.
 # Start torrent daemon/open interface
 super + F6
