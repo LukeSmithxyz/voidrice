@@ -1,0 +1,9 @@
+#!/bin/bash
+
+s3_bucket=
+s3_path_img=path/to/images
+s3_path_vid=path/to/videos
+s3_path_paste=path/to/pastes
+s3_http_img=http://S3_DOMAIN/path/to/images
+s3_http_vid=http://S3_DOMAIN/path/to/videos
+s3_http_paste=http://S3_DOMAIN/path/to/pastes

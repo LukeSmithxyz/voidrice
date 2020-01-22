@@ -1,0 +1,9 @@
+#!/bin/bash
+
+scp_host=HOSTNAME
+scp_path_img=/path/to/images
+scp_path_vid=/path/to/videos
+scp_path_paste=/path/to/pastes
+http_img=https://YOUR_DOMAIN/path/to/images
+http_vid=https://YOUR_DOMAIN/path/to/videos
+http_paste=https://YOUR_DOMAIN/path/to/pastes

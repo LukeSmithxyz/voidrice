@@ -1,0 +1,74 @@
+##### teiler configuration file ######
+
+# rofi command. Make sure to have "$@" as last argument
+_rofi () {
+  rofi -kb-accept-entry "!Return" "$@"
+}
+
+# general variables
+
+# the path where images, videos and pastes should be saved
+img_path=$HOME/Pictures/Screenshots
+vid_path=$HOME/Videos/Screencasts
+paste_path=$HOME/Pictures/Paste
+
+# set viewer for images and videos plus editor for images
+viewer=eog
+editor=pinta
+player=mpv
+
+# Hitting Enter will upload
+always_ul=1
+
+# Uploading options
+# Possible Choices for img_ul: fb, scp, s3, imgur
+# Possible Choices for vid_ul: fb, scp, s3
+# Possible Choices for paste_ul: fb, scp, ix
+img_ul=imgur
+vid_ul=fb
+paste_ul=ix
+
+# Screencast options
+# Resolution to change to when recording in fullscreen
+#res=800x600
+
+# If you use a custom rate for X, set it here. 
+# rate=120
+
+# Profile to use for screencasts
+# profiles are stored in $HOME/.config/teiler/profiles
+# teiler ships with 3 profiles atm. mp4-pulse, mp4-noaudio
+# and webm-noaudio
+# You can create your own profiles, but changes to existing profiles
+# will be overwritten on startup
+profile="mp4-pulse"
+
+# hotkeys
+upload="Alt+1"
+noupload="Alt+2"
+delayup="Alt+3"
+delaysave="Alt+4"
+
+view="Alt+1"
+historyupload="Alt+2"
+edit="Alt+3"
+clip="Alt+4"
+
+
+# Normally you don't want to change anything here!
+SCREENCAST_PIDFILE=/tmp/$USER-teiler-screencast.pid
+namekey=teiler
+random_string=$(date +'%Y-%m-%d-%H%M%S')
+img_filemask=img-$random_string.png
+paste_filemask=txt-$random_string.txt
+
+# video filemask is without extension, since it gets the extension
+# from set profile
+vid_filemask=vid-$random_string
+
+help_color="#0C73C2"
+hidecursor=yes
+# slop options
+slop_border=1
+slop_color="255,0,0"
+hidecursor=yes
