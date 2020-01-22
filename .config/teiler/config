@@ -8,7 +8,7 @@ _rofi () {
 # general variables
 
 # the path where images, videos and pastes should be saved
-img_path=$HOME/Pictures/Screenshots
+img_path=$HOME/
 vid_path=$HOME/Videos/Screencasts
 paste_path=$HOME/Pictures/Paste
 
