@@ -105,7 +105,7 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
 
-bindsym $mod+Shift+m		exec --no-startup-id lmc mute
+bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle; pkill -RTMIN+10 i3blocks
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
