@@ -1,5 +1,0 @@
-rofi.theme:       /usr/share/rofi/themes/arthur.rasi
-rofi.font:        "Source Code Pro" 20
-rofi.modi:        combi
-rofi.combi-modi:  window,run
-
