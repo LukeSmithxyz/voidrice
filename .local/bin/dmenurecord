@@ -24,6 +24,7 @@ killrecording() {
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
 	sleep 3
 	kill -9 "$recpid"
+	pkill swcursor
 	exit
 	}
 
@@ -41,12 +42,50 @@ screencast() { \
 	updateicon "⏺️🎙️"
        	}
 
+vaapicast() { \
+	#Relies on https://github.com/andykitchen/swcursor for showing a readable cursor. (Assuming that you put the swcursor and cursor.png in $HOME/.local/bin) So if you need the cussor uncomment these lines or you can use the x11grab:
+#	cd $HOME/.local/bin/
+#	swcursor & 
+	ffmpeg -y \
+	-f alsa -i default \
+	-f kmsgrab \
+	-i - \
+	-vaapi_device /dev/dri/renderD128 \
+	-video_size $(xdpyinfo | grep dimensions | awk '{print $2;}') \
+	-filter:v hwmap,scale_vaapi=format=nv12 \
+	-framerate 60 \
+	-r 30 \
+	-c:a aac -crtc_id 48 -c:v h264_vaapi \
+	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mp4" & 
+#	If you need the cursor you can use this command:
+#	ffmpeg -y -vaapi_device /dev/dri/renderD128 -f x11grab -video_size $(xdpyinfo | grep dimensions | awk '{print $2;}') -framerate 60 -r 30 -i $DISPLAY -f alsa -i default -vf 'hwupload,scale_vaapi=format=nv12' -c:v h264_vaapi -qp 24 -c:a aac -f mp4 "$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
+	echo $! > /tmp/recordingpid
+	updateicon "⏺️🎙️"
+}
+
 video() { ffmpeg \
 	-f x11grab \
 	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
 	-i $DISPLAY \
  	-c:v libx264 -qp 0 -r 30 \
 	"$HOME/video-$(date '+%y%m%d-%H%M-%S').mkv" &
+	echo $! > /tmp/recordingpid
+	updateicon "⏺️"
+	}
+
+vaapivideo() { \
+	ffmpeg -y \
+	-f kmsgrab \
+	-i - \
+	-vaapi_device /dev/dri/renderD128 \
+	-video_size $(xdpyinfo | grep dimensions | awk '{print $2;}') \
+	-filter:v hwmap,scale_vaapi=format=nv12 \
+	-framerate 60 \
+	-r 30 \
+	-c:v h264_vaapi \
+	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mp4" & 
+#	If you need the cursor you can use this command:
+#	ffmpeg -y -vaapi_device /dev/dri/renderD128 -f x11grab -video_size $(xdpyinfo | grep dimensions | awk '{print $2;}') -framerate 60 -i $DISPLAY -vf 'hwupload,scale_vaapi=format=nv12' -c:v h264_vaapi -qp 24 -f matroska "$HOME/video-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
 	updateicon "⏺️"
 	}
@@ -69,7 +108,6 @@ webcam() { ffmpeg \
 	updateicon "🎥"
 	}
 
-
 audio() { \
 	ffmpeg \
 	-f alsa -i default \
@@ -80,13 +118,15 @@ audio() { \
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nvideo\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nvideo\\naudio\\nwebcam\\nwebcam (hi-def)\\nvaapicast\\nvaapivideo\\nwindow" | dmenu -i -p "Select recording style:")
 	case "$choice" in
 		screencast) screencast;;
 		audio) audio;;
 		video) video;;
 		webcam) webcam;;
 		"webcam (hi-def)") webcamhidef;;
+		vaapicast) vaapicast;;
+		vaapivideo) vaapivideo;;
 	esac
 	}
 
