@@ -9,7 +9,7 @@
 
 # Basic binds
 super + Return
-	$TERMINAL tmuxdd
+	$TERMINAL
 super + shift + Return
 	samedir
 super + shift + a
