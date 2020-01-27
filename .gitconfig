@@ -1,0 +1,30 @@
+[core]
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+  editor = vim
+  excludesfile = ~/.gitignore
+[user]
+  name = Vlad Doster
+  email = mvdoster@gmail.com
+[color]
+  status = auto
+  commit = auto
+  diff = auto
+  branch = auto
+[alias]
+  st = status -uno
+  co = checkout
+  ci = commit
+  br = branch
+  ff = merge origin
+  diff = diff --ignore-space-change
+  dst = diff --staged
+[apply]
+  whitespace = strip
+  whitespace = nowarn
+[push]
+  default = simple
+[credential]
+  helper = cache --timeout=28800

@@ -1,69 +1,53 @@
 # The Simple X Hotkey Daemon is the program used by LARBS to map most of the
-# dwm-independent commands.  This file is pretty readable, so I'll let you read
+# i3 independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
-# The keys NOT bound here by sxhkd, but by dwm or i3 are:
+# The keys NOT bound here by sxhkd, but by i3 are:
 # The t thru p keys on the top row
 # The f thru ; keys on the home row
 # The b key on the bottom row (hides the bar in either case)
 
 # Basic binds
 super + Return
-	$TERMINAL
+	$TERMINAL tmuxdd
 super + shift + Return
 	samedir
-super + shift + q
-	kill -9 `xdotool getwindowfocus getwindowpid`
-super + d
-	dmenu_run
-super + r
-	$TERMINAL -e $FILE
-super + e
-	$TERMINAL -e neomutt; pkill -RTMIN+12 $STATUSBAR
-super + m
-	$TERMINAL -e ncmpcpp
-super + n
-	$TERMINAL -e newsboat
-super + c
-	$TERMINAL -e calcurse -D ~/.config/calcurse
-super + v
-	$TERMINAL -e nvim -c VimwikiIndex
 super + shift + a
 	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
+super + b
+	polybar-msg cmd toggle
+super + c
+	code
 super + shift + c
 	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
-super + shift + e
-	tutorialvids
+super + d
+	dmenu_run
+super + m
+	spotify
+super + n
+	nautilus
+super + shift + q
+	kill -9 `xdotool getwindowfocus getwindowpid`
+super + r
+	$TERMINAL -e $FILE
 super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
 	$BROWSER
-
-# Et cetera...
 super + grave
 	dmenuunicode
 super + Scroll_Lock
-	killall screenkey || screenkey
+	ifinstalled screenkey && (killall screenkey || screenkey)
 super + Insert
 	showclip
+super + x
+	ifinstalled i3lock && i3lock --color 000000 --show-failed-attempts --radius 120 --ring-width 10.0
 super + shift + x
 	prompt "Shutdown computer?" "sudo -A shutdown -h now"
 super + shift + BackSpace
 	prompt "Reboot computer?" "sudo -A reboot"
 super + shift + Escape
 	prompt 'Leave Xorg?' 'killall Xorg'
-super + x
-	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
-XF86Launch1
-	xset dpms force off
-XF86TouchpadToggle
-	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
-XF86Touchpad{Off,On}
-	synclient TouchpadOff={1,0}
-XF86MonBrightnessDown
-	xbacklight -dec 15
-XF86MonBrightnessUp
-	xbacklight -inc 15
 
 # Recording
 # Take screenshot
@@ -77,71 +61,20 @@ super + Print
 	dmenurecord
 super + Delete
 	dmenurecord kill
+alt + shift + escape
+	pkill -USR1 -x sxhkd
 
-# Pause audio
-super + p
-	mpc toggle
-super + shift + p
-	mpc pause; pauseallmpv
-# Changes to next/previous tracks
-super + {comma,period}
-	mpc {prev,next}
-# Restart track
-super + shift + less
-	mpc seek 0%
-# Seek foward in song
-super + {_,shift +} bracketright
-	mpc seek +{10,120}
-# Seek backward in song
-super + {_,shift +} bracketleft
-	mpc seek -{10,120}
+# Volume
 # Increase volume
 super {_,shift +} + plus
-	amixer sset Master {5,15}%+; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master {5,15}%+
 # Decrease volume
 super {_,shift +} + minus
-	amixer sset Master {5,15}%-; pkill -RTMIN+10 $STATUSBAR
+	amixer sset Master {5,15}%-
 super + shift + m
-	amixer sset Master toggle; pkill -RTMIN+10 $STATUSBAR
-
-# Audiokeys
-XF86AudioMute
-	amixer sset Master toggle; pkill -RTMIN+10 $STATUSBAR
-XF86Audio{Raise,Lower}Volume
-	amixer sset Master 5%{+,-}; pkill -RTMIN+10 $STATUSBAR
-XF86Audio{Next,Prev}
-	mpc {next,prev}
-XF86Audio{Pause,Play,Stop}
-	mpc {pause,play,stop}
-XF86Audio{Rewind,Forward}
-	mpc seek {-,+}10
-XF86AudioRecord
-	dmenurecord
-XF86AudioMedia
-	$TERMINAL -e ncmpcpp
-
-XF86PowerOff
-	prompt "Shutdown computer?" "sudo -A shutdown -h now"
-XF86Calculator
-	$TERMINAL -e bc
-XF86Sleep
-	prompt 'Hibernate computer?' 'sudo -A zzz'
-XF86WWW
-	$BROWSER
-XF86DOS
-	$TERMINAL
-XF86ScreenSaver
-	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
-XF86TaskPane
-	$TERMINAL -e htop
-XF86Mail
-	$TERMINAL -e neomutt
-XF86MyComputer
-	$TERMINAL -e $FILE /
+	amixer sset Master toggle
 
 # Function keys
-super + shift + F1
-	grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send -i "$HOME/.local/share/larbs/larbs.png" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
 # Show readme
 super + F1
 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
@@ -152,16 +85,8 @@ super + F3
 # Hibernate
 super + F4
 	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
-super + F5 is unbound.
-# Start torrent daemon/open interface
-super + F6
-	torwrap
-# toggle torrent daemon
-super + F7
-	td-toggle
-# sync email
-super + F8
-	mailsync
+super + F5
+	killall screenkey || screenkey
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
