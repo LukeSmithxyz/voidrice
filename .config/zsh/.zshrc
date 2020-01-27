@@ -7,6 +7,11 @@ PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magent
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
+# History
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=$ZDOTDIR/.history
+
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
