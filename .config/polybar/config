@@ -168,7 +168,7 @@ screenchange-reload = true
 type = internal/alsa
 
 format-volume = [<label-volume> <bar-volume>]
-label-volume = %{A3:$TERMINAL -e alsamixer >/dev/null 2>&1 &:}%percentage%%%{A}
+label-volume = %{A2:$TERMINAL -e alsamixer >/dev/null 2>&1 &:}%percentage%%%{A}
 label-volume-foreground = ${colors.foreground}
 
 format-muted-foreground = ${colors.gray}
