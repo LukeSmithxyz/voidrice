@@ -10,4 +10,4 @@ cfp 	~/.config/polybar/config
 cfs     ~/.config/sxhkd/sxhkdrc
 cft     ~/.tmux.conf
 cfv     ~/.config/nvim/init.vim
-cfz     $ZDOTDIR/.zshrc
+cfz     ~/.config/zsh/.zshrc
