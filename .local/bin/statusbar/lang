@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# A simple module to print current KBLAYOUT
+# Works best with my script of KBLayoutManager.
+# This script sends the update signal and it is bound in i3/config.
+lang=$(setxkbmap -print | grep xkb_symbols | awk '{print $4}' | awk -F"+" '{print $2}')
+[ "$lang" = "us" ] && color="#00ff00" || color="#ff0000" # This line is added to add awareness and ease to detect the us layout in a glance to be ascertain that your shortcuts and keystrokes will remain responsive # FIXME don't be coloured for us variations
+printf "<span color='%s'>%s</span>\n" "$color" "$lang"

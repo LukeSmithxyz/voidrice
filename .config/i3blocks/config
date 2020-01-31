@@ -50,6 +50,10 @@ signal=12
 interval=once
 signal=10
 
+[lang]
+interval=once
+signal=13
+
 #[disk]
 #interval=60
 #command=disk /

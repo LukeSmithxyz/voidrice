@@ -38,6 +38,8 @@ super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
 	$BROWSER
+super + space
+	kblayoutmanager cycle $(echo $KBLAYOUTS)
 
 # Et cetera...
 super + grave

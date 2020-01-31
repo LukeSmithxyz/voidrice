@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+# An adaptation of https://github.com/porras/i3-keyboard-layout/blob/master/i3-keyboard-layout by MYDavoodeh
+set -e
+
+get_kbdlayout() { setxkbmap -query | grep -oP 'layout:\s*\K(\w+)' ;}
+
+set_kbdlayout() {
+	# FIXME what to do for variants?
+	setxkbmap "$1"
+	pgrep i3status | xargs --no-run-if-empty kill -s USR1 # to tell i3status to update
+}
+
+cycle() { #TODO: Optimize cycling time
+	current_layout=$(get_kbdlayout)
+	eval last="\$$#"
+	# If current_layout is the last one OR current_layout is not in the given layouts, set the first one in cycle as the initiator. Else find the next.
+	{ [ "$last" = "$current_layout" ] || ! echo "$*" | grep -qo "$current_layout" ;} && set_kbdlayout "$1" || set_kbdlayout "$(echo "$*" | cut -d' ' -f "$#")"
+}
+
+
+subcommand="$1"
+helpmsg="Please specify one of: get, set <layout> or cycle <layout1> <layout2> ... <layoutN>"
+
+shift || (echo "$helpmsg" && exit)
+case $subcommand in
+	"get") echo get_kbdlayout ;;
+	"set") set_kbdlayout "$1" ;;
+	"cycle") cycle "$@" ;;
+	*) echo "Fatal: Command $subcommand not found.\n$helpmsg" ;;
+esac
+
+pkill -RTMIN+13 i3blocks # for [lang] in i3blocks
