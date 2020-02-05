@@ -27,6 +27,7 @@ for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 for_window [class="Spotify"] move to workspace $ws10
+for_window [class="discord"] move to workspace $ws10
 
 
 # #---Basic Bindings---# #
