@@ -5,6 +5,8 @@
 # every single one of them with one command! This is bound to super + shift + p
 # (with other things) by default and is used in some other places.
 
-for i in $(ls /tmp/mpvsoc*); do
-	echo '{ "command": ["set_property", "pause", true] }' | socat - $i;
-done
+
+# Sends a \ key to all mpv instances pausing with the pause_toggle.lua script
+
+pstree -p | grep "$TERMINAL.*{mpv}" | sed "s/.*$TERMINAL(\([0-9]*\)).*/\1/" | xargs -I @ xdotool search --pid @ | xargs -I % xdotool key --window % backslash
+pgrep mpv | xargs -I @ xdotool search --pid @ | xargs -I % xdotool key --window % backslash
