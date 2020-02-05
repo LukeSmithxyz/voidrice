@@ -1,12 +1,8 @@
 #!/usr/bin/env sh
 
-# You might notice all mpv commands are aliased to have this input-ipc-server
-# thing. That's just for this particular command, which allows us to pause
-# every single one of them with one command! This is bound to super + shift + p
-# (with other things) by default and is used in some other places.
-
-
 # Sends a \ key to all mpv instances pausing with the pause_toggle.lua script
+
+TERMINAL="st" #hotfix for now
 
 pstree -p | grep "$TERMINAL.*{mpv}" | sed "s/.*$TERMINAL(\([0-9]*\)).*/\1/" | xargs -I @ xdotool search --pid @ | xargs -I % xdotool key --window % backslash
 pgrep mpv | xargs -I @ xdotool search --pid @ | xargs -I % xdotool key --window % backslash
