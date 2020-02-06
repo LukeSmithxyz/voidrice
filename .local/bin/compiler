@@ -24,7 +24,7 @@ textype() { \
 
 case "$file" in
 	*\.ms) refer -PS -e "$file" | groff -me -ms -kept -T pdf > "$base".pdf ;;
-	*\.mom) refer -PS -e "$file" | groff -mom -kept -T pdf > "$base".pdf ;;
+	*\.mom) refer -PS -e "$file" | pdfmom > "$base".pdf 2>/dev/null ;;
 	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
 	*\.[rR]md) Rscript -e "require(rmarkdown); rmarkdown::render('$file', quiet=TRUE)" ;;
 	*\.tex) textype "$file" ;;
