@@ -104,6 +104,10 @@ set clipboard+=unnamedplus
 set nobackup
 set nowritebackup
 
+" Use Microsoft python language server
+
+"python.jediEnabled": false
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>

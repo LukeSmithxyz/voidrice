@@ -26,6 +26,8 @@ super + m
 	spotify
 super + n
 	nautilus
+super + shift + p
+	pycharm
 super + shift + q
 	kill -9 `xdotool getwindowfocus getwindowpid`
 super + r

@@ -8,8 +8,8 @@ exec_always --no-startup-id launch_polybar
 
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
-gaps inner 2
-gaps outer 2
+gaps inner 0
+gaps outer 0
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
@@ -28,6 +28,7 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="discord"] move to workspace $ws10
+for_window [class="Slack"] move to workspace $ws10
 
 
 # #---Basic Bindings---# #
