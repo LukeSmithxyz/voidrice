@@ -14,7 +14,7 @@ transmission-remote -l | grep % |
 				s/L/🔼/g;
 				s/M/🔽/g;
 				s/N/✅/g;
-				s/Z/🌱/g" | awk '{print $2, $1}' | sed -e "s/ $//g"
+				s/Z/🌱/g" | awk '{print $2, $1}' | sed -e "s/ $//g" | tr '\n' ' '
 
 case $BLOCK_BUTTON in
     1) $TERMINAL -e transmission-remote-cli ;;
@@ -25,4 +25,3 @@ case $BLOCK_BUTTON in
 ✅: done
 🌱: done and seeding" ;;
 esac
-
