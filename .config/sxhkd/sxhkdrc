@@ -10,10 +10,6 @@
 # Basic binds
 super + Return
 	$TERMINAL
-super + shift + Return
-	samedir
-super + shift + q
-	kill -9 `xdotool getwindowfocus getwindowpid`
 super + d
 	dmenu_run
 super + r
@@ -96,7 +92,7 @@ super + {_,shift +} bracketright
 super + {_,shift +} bracketleft
 	mpc seek -{10,120}
 # Increase volume
-super {_,shift +} + plus
+super + {equal,plus}
 	amixer sset Master {5,15}%+; pkill -RTMIN+10 $STATUSBAR
 # Decrease volume
 super {_,shift +} + minus
@@ -165,3 +161,110 @@ super + F8
 # Mount a USB drive or Android device
 super + {F9,F10}
 	{dmenumount,dmenuumount}
+
+
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + {_,shift + }f
+	bspc {desktop -l next,node -t ~fullscreen}
+
+# rotate current node 90 degrees
+super + y
+	bspc node @focused:/ -R 90
+
+# swap the current node and the biggest local node
+super + space
+	bspc node -s biggest.local || bspc node -s next.local
+
+#
+# state/flags
+#
+
+# set the window state
+#super + {t,shift + t,s}
+#bspc node -t {tiled,pseudo_tiled,floating}
+
+super + shift + space
+	bspc node focused -t \~floating
+
+# focus/swap
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+super + {g,semicolon}
+	bspc desktop {prev,next}.occupied --focus
+super + {Prior,Next}
+	bspc desktop {prev,next}.occupied --focus
+super + {Tab,backslash}
+	bspc desktop last --focus
+
+# focus or swap the next node
+super + {_,shift + }c
+	bspc node -{f,s} next.local
+
+# focus the older or newer node in the focus history
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} ^{1-9,10}
+
+# preselect the direction
+#super + {u,o}
+#bspc node -p {south,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+#super + space
+#bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+# expand a window by moving one of its side outward
+super + shift + {y,u,i,o}
+	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# Toggle gaps
+super + shift + d
+	bspc config window_gap {0,15}
+# Increase/descrease gap size
+super { ,+ shift }+ z
+	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
+
+super + u
+	cat /tmp/dropdown | xargs -I win bspc node win --flag hidden;bspc node -f win
+
+# Make a windoww sticky/non-sticky
+super + o
+	bspc node -g sticky={on,off}
+
+# remove and restore polybar
+#super + b
+#\{ pgrep polybar && \{ killall polybar ; bspc config top_padding 0 \} \} || \{ launch_polybar ; bspc config top_padding 24 \}
+
+super + {i,o}
+	bspc node -f {prev,next}.local
+super + shift + n
+	bspc node focused -t \~floating ; hover right
+super + shift + b
+	bspc node focused -t \~floating ; hover left
