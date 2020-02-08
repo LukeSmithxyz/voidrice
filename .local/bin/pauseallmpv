@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # You might notice all mpv commands are aliased to have this input-ipc-server
 # thing. That's just for this particular command, which allows us to pause

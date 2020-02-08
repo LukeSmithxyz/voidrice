@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # In LARBS, ~/.config/wall.png is the location of the system wallpaper.  This
 # script, if given an argument, moves it there.  This script without an

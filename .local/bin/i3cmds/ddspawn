@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Toggle floating dropdown terminal in i3, or start if non-existing.
 # $1 is	the script run in the terminal.

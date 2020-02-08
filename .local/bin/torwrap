@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 ifinstalled transmission-remote-cli transmission-cli || exit
 
 ! pgrep -x transmission-da >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..." && sleep 3 && pkill -RTMIN+7 "${STATUSBAR:?}"

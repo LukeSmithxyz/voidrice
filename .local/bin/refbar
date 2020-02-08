@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Refresh the dwmbar.
 # Send SIGTRAP signal to dwmbar script, which will handle it with a trap.

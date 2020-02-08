@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # The famous "get a menu of emojis to copy" script.
 

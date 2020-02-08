@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 # If transmission-daemon is running, will ask to kill, else will ask to start.
 if pgrep -x transmission-da >/dev/null ;
 then

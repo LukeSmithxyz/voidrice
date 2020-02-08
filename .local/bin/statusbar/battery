@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 # Give a battery name (e.g. BAT0) as an argument.
 
 case $BLOCK_BUTTON in

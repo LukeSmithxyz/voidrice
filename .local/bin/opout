@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # opout: "open output": A general handler for opening a file's intended output,
 # usually the pdf of a compiled document.  I find this useful especially

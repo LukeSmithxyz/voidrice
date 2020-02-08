@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Gets your public ip address checks which country you are in and
 # displays that information in the statusbar

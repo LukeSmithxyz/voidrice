@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Status bar module for disk space
 # $1 should be drive mountpoint

@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 # This script is called on startup to remap keys.
 # Increase key speed via a rate change
 xset r rate 300 50

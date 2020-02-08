@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # i3blocks mail module.
 # Displays number of unread mail and an loading icon if updating.

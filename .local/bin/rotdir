@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # When I open an image from the file manager in sxiv (the image viewer), I want
 # to be able to press the next/previous keys to key through the rest of the
