@@ -3,7 +3,15 @@
 # In LARBS, ~/.config/wall.png is the location of the system wallpaper.  This
 # script, if given an argument, moves it there.  This script without an
 # argument sets ~/.config/wall.png as the wallpaper, which is required on login
-# if you don't want a blakc screen.
+# if you don't want a black screen.
 
 [ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+
+# If pywal is installed, use it.
+type wal >/dev/null && { wal -c ;
+	wal -s -i ~/.config/wall.png -o ~/.config/wal/postrun;
+	xsetroot -name "fsignal:xrdb";
+	killall dwmblocks;
+	setsid dwmblocks >/dev/null 2>&1 & }
+
 xwallpaper --zoom ~/.config/wall.png
