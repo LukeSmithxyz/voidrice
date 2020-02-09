@@ -3,16 +3,15 @@
 # The famous "get a menu of emojis to copy" script.
 
 # Must have xclip installed to even show menu.
-xclip -h >/dev/null || exit
+xclip -h 2>/dev/null || exit 1
 
-chosen=$(grep -v "#" ~/.local/share/larbs/emoji | dmenu -i -l 20 -fn Monospace-18)
+chosen=$(cut -d ';' -f1 ~/.local/share/larbs/emoji | dmenu -i -l 20 | sed "s/ .*//")
 
 [ "$chosen" != "" ] || exit
 
-c=$(echo "$chosen" | sed "s/ .*//")
-echo "$c" | tr -d '\n' | xclip -selection clipboard
-notify-send "'$c' copied to clipboard." &
-
-s=$(echo "$chosen" | sed "s/.*; //" | awk '{print $1}')
-echo "$s" | tr -d '\n' | xclip
-notify-send "'$s' copied to primary." &
+if [ -n "$1" ]; then
+	xdotool key Shift+Insert
+else
+	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
+	notify-send "'$chosen' copied to clipboard." &
+fi
