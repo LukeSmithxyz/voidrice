@@ -9,6 +9,7 @@ chosen=$(cut -d ';' -f1 ~/.local/share/larbs/emoji | dmenu -i -l 20 | sed "s/ .*
 
 [ "$chosen" != "" ] || exit
 
+# If you run this command with an argument, it will automatically insert the character.
 if [ -n "$1" ]; then
 	xdotool key Shift+Insert
 else
