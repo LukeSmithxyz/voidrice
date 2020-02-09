@@ -1,7 +1,4 @@
-#!/usr/bin/env sh
-# Fix Gnome Apps Slow  Start due to failing services
-# Add this when you include flatpak in your system
-dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+#!/bin/sh
 
 # xinitrc runs automatically when you run startx.
 
