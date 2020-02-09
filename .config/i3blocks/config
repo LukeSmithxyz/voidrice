@@ -34,7 +34,6 @@ interval=18000
 signal=5
 
 [mailbox]
-label=📬
 interval=180
 signal=12
 
