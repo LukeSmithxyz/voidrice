@@ -1,0 +1,18 @@
+#!/bin/sh
+
+mnphs=$(pom | grep -io 'new\|waxing cresent\|first quarter\|waxing gibbous\|full\|waning gibbous\|last quarter\|waning cresent' | grep -m1 '.')
+prcnt=$(pom | grep -o '..%')
+
+case $mnphs in
+  	"New") icon="🌑" ;;
+	  "Waxing Cresent") icon="🌒" ;;
+  	"First Quarter") icon="🌓" ;;
+	  "Waxing Gibbous") icon="🌔" ;;
+	  "Full") icon="🌕" ;;
+  	"Waning Gibbous") icon="🌖" ;;
+  	"Last Quarter") icon="🌗" ;;
+  	"Waning Cresent") icon="🌘" ;;
+	  *) echo errorrrr ;;
+esac
+
+printf "%s %s\\n" "$icon" "$prcnt"
