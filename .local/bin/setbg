@@ -8,7 +8,7 @@
 [ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
 
 # If pywal is installed, use it.
-type wal >/dev/null && { wal -c ;
+type wal >/dev/null 2>&1 && { wal -c ;
 	wal -s -i ~/.config/wall.png -o ~/.config/wal/postrun;
 	xsetroot -name "fsignal:xrdb";
 	killall dwmblocks;
