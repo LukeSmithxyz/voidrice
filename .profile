@@ -3,18 +3,16 @@
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
-# Make tmux work
-#xport TERM="xterm-256color"
-
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="google-chrome-stable"
+export BROWSER="brave"
 export READER="zathura"
 export FILE="ranger"
-export STATUSBAR="polybar"
+export STATUSBAR="${LARBSWM}blocks"
 
 # ~/ Clean-up:
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
@@ -24,7 +22,6 @@ export ZDOTDIR="$HOME/.config/zsh"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 
 # Other program settings:
-#export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 export LESS=-R
