@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env sh
 
 mv ~/.config/zsh/.history ~/.config/zsh/.bad_history
 strings ~/.config/zsh/.bad_history > ~/.config/zsh/.history
