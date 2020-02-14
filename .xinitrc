@@ -13,7 +13,7 @@
 # Your default LARBS WM is determined in your `~/.profile` on login.  Here we
 # run the proper command to run when the graphical environment starts.
 
-# If you have problems
-# exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
-# But usually you wont
-exec i3
+# If you have problems, log it out:
+exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
+# But usually you dont want to clutter ~/, so use:
+# exec i3
