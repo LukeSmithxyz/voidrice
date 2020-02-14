@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
+
+reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist || error "Couldn't refresh mirrors"
