@@ -2,4 +2,4 @@
 
 error() { clear; printf "ERROR:\\n%s\\n" "$1"; exit;}
 
-reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist || error "Couldn't refresh mirrors"
+reflector --verbose --latest 1000 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>&1 || error "Couldn't refresh mirrors"
