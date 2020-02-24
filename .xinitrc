@@ -16,6 +16,6 @@
 # run the proper command to run when the graphical environment starts.
 
 # If you have problems, log it out:
-exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
+#exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
 # But usually you dont want to clutter ~/, so use:
-# exec i3
+exec i3
