@@ -4,8 +4,19 @@
 # script, if given an argument, moves it there.  This script without an
 # argument sets ~/.config/wall.png as the wallpaper, which is required on login
 # if you don't want a black screen.
+# you can set a random walpaper from your walpapers directory just set the wp_dir to the path of your wallpapers directory
 
-[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+wp_dir=~/pictures/Wallpapers
+randbg(){\
+	bg_list=($wp_dir/*)
+	n=${#bg_list[@]}
+	n=$((RANDOM%n))
+	rand_bg=$(basename ${bg_list[$n]})
+}
+
+[ -n "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+
+[ -z "$1" ] && [ -d "$wp_dir" ] && randbg && cp $wp_dir/$rand_bg ~/.config/wall.png 
 
 # If pywal is installed, use it.
 type wal >/dev/null && { wal -c ;
