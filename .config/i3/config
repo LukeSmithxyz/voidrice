@@ -29,7 +29,7 @@ for_window [instance="dropdown_*"] move position center
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="discord"] move to workspace $ws10
 for_window [class="Slack"] move to workspace $ws10
-
+for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
