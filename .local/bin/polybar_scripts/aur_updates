@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
-if ! updates=$(yay -Qum 2> /dev/null | wc -l); then
-    updates=0
-fi
+updates=$(yay -Qum | wc -l)
 
 if [ "$updates" -eq 1 ]; then
     echo "$updates update"
