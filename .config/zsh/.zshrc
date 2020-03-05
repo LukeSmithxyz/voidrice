@@ -61,7 +61,7 @@ ranger() {
     fi
 }
 
-alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
+alias clear='timeout 6 cbeams -o; clear'
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
