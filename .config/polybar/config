@@ -39,16 +39,16 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "Sauce Code Pro:size=9;1"
-font-1 = "Sauce Code Pro:size=8;1"
-font-2 = "Sauce Code Pro:scale=10:style=Regular;2"
-font-3 = "Sauce Code Pro:size=9;1"
+font-0 = "fixed:pixelsize=9;1"
+font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=8;2"
+font-3 = "Font Awesome 5 Brands:pixelsize=8;1"
 
 wm-restack = i3
 
 modules-left = i3
 modules-center = xwindow
-modules-right = sys_updates sys_temp cpu memory volume wifi ethernet battery date
+modules-right = sys_updates bluetooth sys_temp cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
@@ -57,7 +57,7 @@ tray-padding = 0
 exec = ~/.local/bin/polybar_scripts/aur_updates
 format = <label>
 interval = 1000
-label = %{A1:$TERMINAL -e yay >/dev/null 2>&1 &:}%output%%{A}
+label = %{A1:$TERMINAL -e sudo pacman -Syyu --overwrite '*' >/dev/null 2>&1 &:}%output%%{A}
 label-overline=${colors.red}
 label-underline=${colors.red}
 type = custom/script
@@ -89,6 +89,13 @@ label-discharging = Batt: %percentage%%
 ramp-capacity-0 = %{u#ff0000}%{+u}
 ramp-capacity-1 = %{u#ffea00}%{+u}
 ramp-capacity-2 = %{u#20c723}%{+u}
+
+[module/bluetooth]
+type = custom/script
+exec = ~/.local/bin/polybar_scripts/bluetooth.sh
+interval = 2
+click-left = exec blueberry
+click-right = exec ~/.local/bin/polybar_scripts/toggle_bluetooth.sh
 
 [module/cpu]
 format = <label>
