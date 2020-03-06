@@ -200,7 +200,7 @@ bar-volume-empty-foreground = ${colors.gray}
 
 [module/wifi]
 type = internal/network
-interface = wlo1
+interface = wlp2s0
 interval = 3.0
 
 format-connected = <label-connected>
