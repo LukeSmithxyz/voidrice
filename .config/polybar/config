@@ -200,6 +200,7 @@ bar-volume-empty-foreground = ${colors.gray}
 
 [module/wifi]
 type = internal/network
+; Set interface with ~/.local/bin/polybar_scripts/set_wireless_nic script
 interface = wlp2s0
 interval = 3.0
 
