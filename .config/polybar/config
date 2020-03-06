@@ -92,10 +92,10 @@ ramp-capacity-2 = %{u#20c723}%{+u}
 
 [module/bluetooth]
 type = custom/script
-exec = ~/.local/bin/polybar_scripts/bluetooth.sh
+exec = ~/.local/bin/polybar_scripts/bluetooth
 interval = 2
 click-left = exec blueberry
-click-right = exec ~/.local/bin/polybar_scripts/toggle_bluetooth.sh
+click-right = exec ~/.local/bin/polybar_scripts/toggle_bluetooth
 
 [module/cpu]
 format = <label>
