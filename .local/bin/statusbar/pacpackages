@@ -1,10 +1,21 @@
 #!/bin/sh
 
-# i3blocks module for pacman upgrades.
 # Displays number of upgradeable packages.
 # For this to work, have a `pacman -Sy` command run in the background as a
 # cronjob every so often as root. This script will then read those packages.
 # When clicked, it will run an upgrade via pacman.
+#
+# Add the following text as a file in /usr/share/libalpm/hooks/statusbar.hook:
+#
+# [Trigger]
+# Operation = Upgrade
+# Type = Package
+# Target = *
+#
+# [Action]
+# Description = Updating statusbar...
+# When = PostTransaction
+# Exec = /usr/bin/pkill -RTMIN+8 dwmblocks
 
 case $BLOCK_BUTTON in
 	1) $TERMINAL -e popupgrade ;;
@@ -14,5 +25,4 @@ case $BLOCK_BUTTON in
 - Middle click to show upgradable packages" ;;
 esac
 
-
-pacman -Qu | grep -v "\[ignored\]" | wc -l | sed -e "s/^0$//g"
+pacman -Qu | grep -v "\[ignored\]" | wc -l | sed "s/^/📦/;s/^📦0$//g"
