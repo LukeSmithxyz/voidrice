@@ -3,7 +3,7 @@
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 
-# Polybar
+# #---Polybar---# #
 exec_always --no-startup-id launch_polybar
 
 # #---Basic Definitions---# #
@@ -32,84 +32,128 @@ for_window [class="Slack"] move to workspace $ws10
 for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
-bindsym $mod+Return 		exec $term
-bindsym $mod+Shift+Return	exec --no-startup-id samedir
+# Return
+bindsym $mod+Return		exec $term
+bindsym $mod+Shift+Return		exec --no-startup-id samedir
 
+# Space
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		workspace prev
 
+# `
 bindsym $mod+grave		exec --no-startup-id dmenuunicode
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
 
+# Scroll Lock
+bindsym $mod+Scroll_Lock exec ifinstalled screenkey && (killall screenkey || screenkey)
+
 # #---Letter Key Bindings---# #
-bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
-bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
-
-bindsym $mod+w			exec $term -e nmtui
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
-
-bindsym $mod+r 			exec $term -e $FILE
-
-bindsym $mod+t			split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
-
-bindsym $mod+y			exec $term -e calcurse -D ~/.config/calcurse
-bindsym $mod+Shift+y		exec --no-startup-id i3resize left
-
-bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
-bindsym $mod+Shift+u		exec --no-startup-id i3resize down
-
-bindsym $mod+i 			exec $term -e htop
-bindsym $mod+Shift+i		exec --no-startup-id i3resize up
-
-bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o		exec --no-startup-id i3resize right
-
+# A
 bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
-bindsym $mod+Shift+a		exec $term -e pulsemixer
+bindsym $mod+shift +a		$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 
-bindsym $mod+s			gaps inner current plus 5
-bindsym $mod+Shift+s		gaps inner current minus 5
+# B
+bindsym $mod+b		exec --no-startup-id polybar_msg cmd toggle
+bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 
+# C
+bindsym $mod+c		exec code
+bindsym $mod+Shift+c		exec $TERMINAL mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
+
+# D
 bindsym $mod+d			exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
-set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
-mode "$freeze" { bindsym $mod+Shift+f mode "default"
-}
-
+# F
 bindsym $mod+f			fullscreen toggle
 
+# G
 bindsym $mod+g			workspace prev
 bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
 
+# H
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
 bindsym $mod+Ctrl+h		move workspace to output left
 
+# I
+bindsym $mod+i 			exec $term -e htop
+bindsym $mod+Shift+i		exec --no-startup-id i3resize up
+
+# J
 bindsym $mod+j			focus down
 bindsym $mod+Shift+j		move down 30
 bindsym $mod+Ctrl+j		move workspace to output down
 
+# K
 bindsym $mod+k			focus up
 bindsym $mod+Shift+k		move up 30
 bindsym $mod+Ctrl+k		move workspace to output up
 
+# L
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l		move right 30
 bindsym $mod+Ctrl+l		move workspace to output right
 
-bindsym $mod+z			gaps outer current plus 5
-bindsym $mod+Shift+z		gaps outer current minus 5
+# M
+bindsym $mod+m		exec spotify
+bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle; pkill -RTMIN+10 i3blocks
 
-bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
+# N
+bindsym $mod+n		exec nautilus
 bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
 
-bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle; pkill -RTMIN+10 i3blocks
+# O
+bindsym $mod+o			sticky toggle
+bindsym $mod+Shift+o		exec --no-startup-id i3resize right
+
+# P
+bindsym $mod+Shift+p    exec pycharm
+
+# Q
+bindsym $mod+Shift+q    exec kil -9 `xdotool getwindowfocus getwindowpid`
+
+# R
+bindsym $mod+r    exec $TERMINAL -e $FILE
+
+# S
+bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+Shift+s		gaps inner current minus 5
+
+# W
+bindsym $mod+w    exec $TERMINAL -e sudo nmtui
+bindsym $mod+Shift+w    exec $BROWSER
+
+# Q
+bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
+
+# W
+bindsym $mod+w			exec $term -e nmtui
+bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+
+# R
+bindsym $mod+r 			exec $term -e $FILE
+
+# T
+bindsym $mod+t			split toggle
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+
+# U
+bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
+bindsym $mod+Shift+u		exec --no-startup-id i3resize down
+
+# Y
+bindsym $mod+y			exec $term -e calcurse -D ~/.config/calcurse
+bindsym $mod+Shift+y		exec --no-startup-id i3resize left
+
+# Z
+bindsym $mod+z			gaps outer current plus 5
+bindsym $mod+Shift+z		gaps outer current minus 5
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
@@ -142,7 +186,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# switch to workspace
+# Switch to workspace
 bindsym $mod+1		workspace $ws1
 bindsym $mod+2		workspace $ws2
 bindsym $mod+3		workspace $ws3
@@ -154,7 +198,7 @@ bindsym $mod+8		workspace $ws8
 bindsym $mod+9		workspace $ws9
 bindsym $mod+0		workspace $ws10
 
-# move focused container to workspace
+# Move focused container to workspace
 bindsym $mod+Shift+1	move container to workspace $ws1
 bindsym $mod+Shift+2	move container to workspace $ws2
 bindsym $mod+Shift+3	move container to workspace $ws3
@@ -201,7 +245,7 @@ bindsym $mod+Right 		focus right
 bindsym $mod+Shift+Right 	move right
 bindsym $mod+Ctrl+Right		move workspace to output right
 
-# For screenshots and recording
+# Screenshots/Recording
 bindsym Print 			exec --no-startup-id maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
 bindsym Shift+Print 		exec --no-startup-id maimpick
 bindsym $mod+Print		exec --no-startup-id dmenurecord
