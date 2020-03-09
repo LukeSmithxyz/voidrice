@@ -2,12 +2,6 @@
 # i3 independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
-super + shift + p
-	pycharm
-super + shift + q
-	kill -9 `xdotool getwindowfocus getwindowpid`
-super + r
-	$TERMINAL -e $FILE
 super + w
 	$TERMINAL -e sudo nmtui
 super + shift + w
