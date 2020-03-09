@@ -48,9 +48,6 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
 
-# Scroll Lock
-bindsym $mod+Scroll_Lock exec ifinstalled screenkey && (killall screenkey || screenkey)
-
 # #---Letter Key Bindings---# #
 # A
 bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
