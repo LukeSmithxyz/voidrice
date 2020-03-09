@@ -2,7 +2,7 @@
 
 nic=`lshw 2>/dev/null | grep -A 5 'description: Wireless interface' | tail -n 1 | awk '{print $3}'`
 
-sed -i "/wifi/{N;N;s/interface =.*/interface = $nic/;}" ~/.config/polybar/config
+sed -i "/wifi/{N;N;s/interface =.*/interface = $nic/;}" /home/vlad/.config/polybar/config
 
 echo "Set wireless nic to $nic"
 
