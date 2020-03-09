@@ -2,30 +2,6 @@
 # i3 independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
-# The keys NOT bound here by sxhkd, but by i3 are:
-# The t thru p keys on the top row
-# The f thru ; keys on the home row
-# The b key on the bottom row (hides the bar in either case)
-
-# Basic binds
-super + Return
-	$TERMINAL
-super + shift + Return
-	samedir
-super + shift + a
-	$TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
-super + b
-	polybar-msg cmd toggle
-super + c
-	code
-super + shift + c
-	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
-super + d
-	dmenu_run
-super + m
-	spotify
-super + n
-	nautilus
 super + shift + p
 	pycharm
 super + shift + q
