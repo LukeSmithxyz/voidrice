@@ -59,7 +59,7 @@ bindsym $mod+Shift+d        gaps inner current set 0; gaps outer current set 0
 bindsym $mod+f              fullscreen toggle
 # G
 bindsym $mod+g              workspace prev
-bindsym $mod+Shift+g        exec $BROWSER https://github.com
+bindsym $mod+Shift+g        exec $BROWSER github.com
 # H
 bindsym $mod+h              focus left
 bindsym $mod+Shift+h        move left 30
