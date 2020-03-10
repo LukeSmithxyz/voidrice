@@ -33,18 +33,18 @@ for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
 # Return
-bindsym $mod+Return		    exec $term
-bindsym $mod+Shift+Return	exec --no-startup-id samedir
+bindsym $mod+Return             exec $term
+bindsym $mod+Shift+Return       exec --no-startup-id samedir
 # Space
-bindsym $mod+space		    focus mode_toggle
-bindsym $mod+Shift+space 	floating toggle
-bindsym $mod+Escape		    workspace prev
-bindsym $mod+grave		    exec --no-startup-id dmenuunicode
-bindsym $mod+Insert		    exec --no-startup-id showclip
+bindsym $mod+space              focus mode_toggle
+bindsym $mod+Shift+space        floating toggle
+bindsym $mod+Escape             workspace prev
+bindsym $mod+grave              exec --no-startup-id dmenuunicode
+bindsym $mod+Insert             exec --no-startup-id showclip
 
 # #---Letter Key Bindings---# #
 # A
-bindsym $mod+a               exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
+bindsym $mod+a              exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+shift +a       $TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
 # B
 bindsym $mod+b              exec --no-startup-id polybar_msg cmd toggle
