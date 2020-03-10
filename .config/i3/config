@@ -113,7 +113,6 @@ bindsym $mod+Shift+y        exec --no-startup-id i3resize left
 # X
 bindsym $mod+x              exec slack
 bindsym $mod+Shift+x        exec discord
-
 # Z
 bindsym $mod+z              gaps outer current plus 5
 bindsym $mod+Shift+z        gaps outer current minus 5
