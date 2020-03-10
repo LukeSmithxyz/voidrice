@@ -6,10 +6,13 @@
 # #---Polybar---# #
 exec_always --no-startup-id launch_polybar
 
+set $inner_gap 10
+set $outer_gap 5
+
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
-gaps inner 0
-gaps outer 0
+gaps inner $inner_gap
+gaps outer $outer_gap
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
@@ -100,7 +103,7 @@ bindsym $mod+s              gaps inner current plus 5
 bindsym $mod+Shift+s        gaps inner current minus 5
 # T
 bindsym $mod+t              split toggle
-bindsym $mod+Shift+t        gaps inner current set 15; gaps outer current set 15
+bindsym $mod+Shift+t        gaps inner current set $inner_gap; gaps outer current set $outer_gap
 # U
 bindsym $mod+u              exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u        exec --no-startup-id i3resize down
