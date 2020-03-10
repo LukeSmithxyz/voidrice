@@ -131,7 +131,7 @@ bindsym $mod+Shift+XF86Forward      move container to workspace next
 bindsym $mod+semicolon              workspace next
 bindsym $mod+apostrophe             split horizontal ;; exec $term
 bindsym $mod+slash                  split vertical ;; exec $term
-bindsym $mod+Shift+slash            xkill
+bindsym $mod+Shift+slash            exec xkill
 bindsym $mod+backslash              workspace back_and_forth
 
 set $ws1 "1"
