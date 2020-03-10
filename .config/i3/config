@@ -188,7 +188,7 @@ bindsym $mod+F3     exec --no-startup-id displayselect
 bindsym $mod+F4     exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 bindsym $mod+F5     exec --no-startup-id $netrefresh
 bindsym $mod+F9     exec --no-startup-id dmenumount
-bindsym $mod+F1     exec --no-startup-id dmenuumount
+bindsym $mod+F10    exec --no-startup-id dmenuumount
 
 # #---Arrow Keys---# #
 bindsym $mod+Left           focus left
