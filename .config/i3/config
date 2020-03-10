@@ -113,6 +113,8 @@ bindsym $mod+Shift+w        exec $BROWSER
 # Y
 bindsym $mod+y              exec $term -e calcurse -D ~/.config/calcurse
 bindsym $mod+Shift+y        exec --no-startup-id i3resize left
+# X
+bindsym $mod+x              ifinstalled i3lock && i3lock --color 000000 --show-failed-attempts --radius 120 --ring-width 10.0
 # Z
 bindsym $mod+z              gaps outer current plus 5
 bindsym $mod+Shift+z        gaps outer current minus 5
