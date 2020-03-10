@@ -201,7 +201,7 @@ bindsym $mod+Up             focus up
 bindsym $mod+Shift+Up       move up
 bindsym $mod+Ctrl+Up        move workspace to output up
 bindsym $mod+Right          focus right
-bindsym $mod+Shift+Righ     move right
+bindsym $mod+Shift+Right    move right
 bindsym $mod+Ctrl+Right     move workspace to output right
 
 # Screenshots/Recording
