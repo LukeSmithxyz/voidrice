@@ -48,7 +48,7 @@ bindsym $mod+Insert             exec --no-startup-id showclip
 # #---Letter Key Bindings---# #
 # A
 bindsym $mod+a              exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
-bindsym $mod+shift +a       $TERMINAL -e alsamixer; pkill -RTMIN+10 $STATUSBAR
+bindsym $mod+shift +a       $TERMINAL -e alsamixer
 # B
 bindsym $mod+b              exec --no-startup-id polybar_msg cmd toggle
 bindsym $mod+Shift+b        floating toggle; sticky toggle; exec --no-startup-id hover left
