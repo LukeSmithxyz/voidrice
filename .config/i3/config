@@ -84,7 +84,7 @@ bindsym $mod+Shift+l        move right 30
 bindsym $mod+Ctrl+l         move workspace to output right
 # M
 bindsym $mod+m              exec spotify
-bindsym $mod+Shift+m        exec --no-startup-id amixer sset Master toggle; pkill -RTMIN+10 $STATUSBAR
+bindsym $mod+Shift+m        exec --no-startup-id amixer sset Master toggle
 # N
 bindsym $mod+n              exec nautilus
 bindsym $mod+Shift+n        floating toggle; sticky toggle; exec --no-startup-id hover right
