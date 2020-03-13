@@ -70,5 +70,5 @@ map <c-r> reload
 map <enter> shell
 map x $$f
 map X !$f
-map o &mimeopen $f
-map O $mimeopen --ask $f
+map o &mimeopen "$f"
+map O $mimeopen --ask "$f"
