@@ -4,8 +4,13 @@
 # script, if given an argument, moves it there.  This script without an
 # argument sets ~/.config/wall.png as the wallpaper, which is required on login
 # if you don't want a black screen.
+#
+# You may also give a directory name to select a random image from that
+# directory as a wallpaper. Be careful that the directory only has images.
 
-[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+[ -f "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+
+[ -d "$1" ] && mv "$(find "$1" -type f | shuf -n 1)" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Random Wallpaper chosen."
 
 # If pywal is installed, use it.
 type wal >/dev/null 2>&1 && { wal -c ;
