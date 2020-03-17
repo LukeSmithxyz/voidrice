@@ -47,6 +47,7 @@ bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		workspace prev
+bindsym $mod+Shift+Escape	exec prompt "Log out of i3?" "i3 exit"
 
 # bindsym $mod+BackSpace
 bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
@@ -93,7 +94,7 @@ bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p		exec --no-startup-id mpc pause
 
 bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
-bindsym $mod+Shift+a		exec $term -e pulsemixer
+bindsym $mod+Shift+a		exec $term -e alsamixer
 
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
