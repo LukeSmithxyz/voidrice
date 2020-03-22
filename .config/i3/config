@@ -13,11 +13,7 @@ gaps inner 15
 gaps outer 15
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
-set $stoprec --no-startup-id dmenurecord kill
-set $shutdown sudo -A shutdown -h now
-set $reboot sudo -A reboot
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
-set $hibernate sudo -A systemctl suspend
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
@@ -50,13 +46,13 @@ bindsym $mod+Escape		workspace prev
 bindsym $mod+Shift+Escape	exec prompt "Log out of i3?" "i3 exit"
 
 # bindsym $mod+BackSpace
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "sudo -A shutdown -r now"
 
 bindsym $mod+grave		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id amixer sset Master mute ; exec --no-startup-id mpc pause && pkill -RTMIN+10 i3blocks ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
+bindsym $mod+Shift+Delete	exec --no-startup-id lmc mute ; exec --no-startup-id mpc pause && pkill -RTMIN+10 i3blocks ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
@@ -66,19 +62,19 @@ bindsym $mod+Insert		exec --no-startup-id showclip
 bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
-bindsym $mod+w			exec $term -e nmtui
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w		exec $term -e nmtui
+bindsym $mod+w			exec --no-startup-id $BROWSER
 
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
 bindsym $mod+r 			exec $term -e $FILE
-bindsym $mod+Shift+r		exec --no-startup-id winresize
+#bindsym $mod+Shift+r
 
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+y			exec $term -e calcurse -D ~/.config/calcurse
+#bindsym $mod+y
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
 
 bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
@@ -91,7 +87,7 @@ bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 
 bindsym $mod+p			exec --no-startup-id mpc toggle
-bindsym $mod+Shift+p		exec --no-startup-id mpc pause
+bindsym $mod+Shift+p		exec --no-startup-id mpc pause && pauseallmpv
 
 bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a		exec $term -e alsamixer
@@ -132,13 +128,13 @@ bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
 bindsym $mod+x			exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec --no-startup-id i3lock -e -f -c 1d2021 ; exec --no-startup-id xset dpms force off
-bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+bindsym $mod+Shift+x		exec --no-startup-id prompt "Shutdown computer?" "sudo -A shutdown -h now"
 
-bindsym $mod+c			exec --no-startup-id cabl
-bindsym $mod+Shift+c		exec --no-startup-id camtoggle
+bindsym $mod+c			exec $term -e calcurse -D ~/.config/calcurse
+bindsym $mod+Shift+c		exec --no-startup-id mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 
 bindsym $mod+v			exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
-#bindsym $mod+Shift+v
+bindsym $mod+Shift+v		exec --no-startup-id clipmenu
 
 bindsym $mod+b			bar mode toggle
 bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
@@ -147,7 +143,7 @@ bindsym $mod+n			exec $term -e newsboat && pkill -RTMIN+6 i3blocks
 bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
 
 bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
-bindsym $mod+Shift+m		exec --no-startup-id amixer sset Master toggle && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+m		exec --no-startup-id lmc toggle && pkill -RTMIN+10 i3blocks
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1
@@ -219,10 +215,13 @@ for_window [title="mpvfloat"] border pixel 0
 no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
+bindsym $mod+Shift+F1	exec --no-startup-id grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send -i "$HOME/.local/share/larbs/larbs.png" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
+
 bindsym $mod+F1		exec --no-startup-id groff -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura -
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
-bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
+bindsym $mod+F4		exec --no-startup-id prompt "Suspend computer?" "sudo -A systemctl suspend"
+bindsym $mod+Shift+F4	exec --no-startup-id prompt "Hibernate computer?" "sudo -A systemctl hibernate"
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id torwrap
 bindsym $mod+F7		exec --no-startup-id td-toggle
@@ -248,10 +247,10 @@ bindsym $mod+Ctrl+Right		move workspace to output right
 
 # #---Media Keys---# #
 # Volume keys
-bindsym $mod+plus		exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+plus		exec --no-startup-id amixer sset Master 15%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+minus 		exec --no-startup-id amixer sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+minus	exec --no-startup-id amixer sset Master 15%- && pkill -RTMIN+10 i3blocks
+bindsym $mod+plus		exec --no-startup-id lmc up 5 && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+plus		exec --no-startup-id lmc up 15 && pkill -RTMIN+10 i3blocks
+bindsym $mod+minus 		exec --no-startup-id lmc down 5 && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+minus	exec --no-startup-id lmc down 15 && pkill -RTMIN+10 i3blocks
 bindsym $mod+less 		exec --no-startup-id mpc prev
 bindsym $mod+Shift+less		exec --no-startup-id mpc seek 0%
 bindsym $mod+greater		exec --no-startup-id mpc next
@@ -259,27 +258,27 @@ bindsym $mod+Shift+greater	exec --no-startup-id mpc next
 
 # For advancing forward/backward in an mpd song
 bindsym $mod+bracketleft 	exec --no-startup-id mpc seek -10
-bindsym $mod+Shift+bracketleft 	exec --no-startup-id mpc seek -120
+bindsym $mod+Shift+bracketleft 	exec --no-startup-id mpc seek -60
 bindsym $mod+bracketright 	exec --no-startup-id mpc seek +10
-bindsym $mod+Shift+bracketright exec --no-startup-id mpc seek +120
+bindsym $mod+Shift+bracketright exec --no-startup-id mpc seek +60
 
 # For screenshots and recording
 bindsym Print 			exec --no-startup-id maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
 bindsym Shift+Print 		exec --no-startup-id maimpick
 bindsym $mod+Print		exec --no-startup-id dmenurecord
+bindsym $mod+Delete		exec --no-startup-id dmenurecord kill
 bindsym $mod+Scroll_Lock	exec --no-startup-id "killall screenkey || screenkey"
-bindsym $mod+Delete		exec $stoprec
 bindsym XF86Launch1		exec --no-startup-id xset dpms force off
 
 # #---Extra XF86 Keys---# #
-bindsym XF86AudioMute		exec --no-startup-id amixer sset Master toggle && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 10%- && pkill -RTMIN+10 i3blocks
-bindsym Control+XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 1%- && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 10%+ && pkill -RTMIN+10 i3blocks
-bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 1%+ && pkill -RTMIN+10 i3blocks
-bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+bindsym XF86AudioMute			exec --no-startup-id lmc toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume		exec --no-startup-id lmc down 5 && pkill -RTMIN+10 i3blocks
+bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id lmc down 10 && pkill -RTMIN+10 i3blocks
+bindsym Control+XF86AudioLowerVolume	exec --no-startup-id lmc down 1 && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume		exec --no-startup-id lmc up 5 && pkill -RTMIN+10 i3blocks
+bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id lmc up 10 && pkill -RTMIN+10 i3blocks
+bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id lmc up 1 && pkill -RTMIN+10 i3blocks
+bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "sudo -A shutdown -h now"
 ##bindsym XF86Copy		exec
 ##bindsym XF86Open		exec
 ##bindsym XF86Paste		exec
@@ -331,7 +330,7 @@ bindsym XF86TouchpadOn		exec --no-startup-id synclient TouchpadOff=0
 bindsym XF86TouchpadOff		exec --no-startup-id synclient TouchpadOff=1
 bindsym XF86Suspend		exec --no-startup-id lockscreen
 bindsym XF86Close		kill
-bindsym XF86WebCam		exec --no-startup-id camtoggle
+bindsym XF86WebCam		exec --no-startup-id mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
 bindsym XF86Mail		exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym XF86Messenger		exec $term -e weechat
 bindsym XF86Search		exec $BROWSER https://duckduckgo.com

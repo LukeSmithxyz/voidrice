@@ -1,0 +1,26 @@
+#!/bin/sh
+
+NUM="${2:-5}"
+
+PULSE=true
+
+if [ "$PULSE" = true ]; then
+	toggle() { pulsemixer --toggle-mute ;}
+	mute() { pulsemixer --mute ;}
+	up() { pulsemixer --change-volume +"$NUM" ;}
+	down() { pulsemixer --change-volume -"$NUM" ;}
+else
+	toggle() { amixer sset Maser toggle ;}
+        mute() { amixer sset Maser mute ;}
+        up() { amixer sset Maser "$NUM"%+ ;}
+	down() { amixer sset Maser "$NUM"%- ;}
+fi
+
+case "$1" in
+	toggle) toggle;;
+	mute) mute ;;
+	up) up ;;
+	down) down ;;
+esac >/dev/null
+
+pkill -RTMIN+10 i3blocks

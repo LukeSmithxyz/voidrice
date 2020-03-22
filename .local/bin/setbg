@@ -15,7 +15,7 @@
 # If pywal is installed, use it.
 type wal >/dev/null 2>&1 && { wal -c ;
 	wal -s -i ~/.config/wall.png -o ~/.config/wal/postrun;
-	xsetroot -name "fsignal:xrdb";
+	xsetroot -name "fsignal:xrdb" >/dev/null 2>&1;
 	killall dwmblocks;
 	setsid dwmblocks >/dev/null 2>&1 & }
 
