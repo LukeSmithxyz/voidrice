@@ -230,7 +230,7 @@ bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
 bindsym $mod+F12	exec $term -e nmtui
-bindsym $mod+Shift+F1	exec --no-startup-id grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send -i \"$HOME/.local/share/larbs/larbs.png\" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
+bindsym $mod+Shift+F1	exec --no-startup-id toggle-welcome
 
 # #---Arrow Keys---# #
 bindsym $mod+Left		focus left
