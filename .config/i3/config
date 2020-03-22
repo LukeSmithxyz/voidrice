@@ -4,7 +4,6 @@
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 #
-# export FILE="ranger"
 # export TERMINAL="st"
 
 # #---Basic Definitions---# #
@@ -56,7 +55,7 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id amixer sset Master mute ; exec --no-startup-id mpc pause && pkill -RTMIN+10 i3blocks ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
+bindsym $mod+Shift+Delete	exec --no-startup-id lmc mute ; exec --no-startup-id mpc pause && pkill -RTMIN+10 i3blocks ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e lf
 
 # Show selection:
 bindsym $mod+Insert		exec --no-startup-id showclip
@@ -72,7 +71,7 @@ bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
-bindsym $mod+r 			exec $term -e $FILE
+bindsym $mod+r 			exec $term -e lf
 bindsym $mod+Shift+r		exec --no-startup-id winresize
 
 bindsym $mod+t			split toggle
@@ -288,7 +287,7 @@ bindsym XF86PowerOff		exec --no-startup-id prompt "Shutdown computer?" "$shutdow
 bindsym XF86Calculator		exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 ##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
 ##bindsym XF86WakeUp		exec
-bindsym XF86Explorer		exec $term -e $FILE
+bindsym XF86Explorer		exec $term -e lf
 ##bindsym XF86Send		exec
 ##bindsym XF86Xfer		exec
 bindsym XF86WWW			exec --no-startup-id $BROWSER
@@ -297,7 +296,7 @@ bindsym XF86ScreenSaver		exec exec --no-startup-id lockscreen
 ##bindsym XF86RotateWindows	exec
 ##bindsym XF86TaskPane		exec
 ##bindsym XF86Favorites		exec
-bindsym XF86MyComputer		exec $term -e $FILE
+bindsym XF86MyComputer		exec $term -e lf
 ##bindsym XF86Back		exec
 ##bindsym XF86Forward		exec
 bindsym XF86Eject		exec --no-startup-id dmenuumount
@@ -349,7 +348,7 @@ bindsym XF86Display		exec --no-startup-id displayselect
 ##bindsym XF86Reply		exec
 ##bindsym XF86MailForward	exec
 ##bindsym XF86Save		exec
-bindsym XF86Documents		exec $term -e $FILE ~/Documents
+bindsym XF86Documents		exec $term -e lf ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
