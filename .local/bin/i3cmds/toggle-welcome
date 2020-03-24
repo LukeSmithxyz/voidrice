@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Toggles the LARBS welcome message.
+
+PIC="$HOME/.local/share/larbs/larbs.png"
+
+grep LARBSWELCOME "$HOME/.xprofile" &&
+	( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send -i "$PIC" "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) ||
+	( echo "notify-send -i \"$PIC\" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile &&
+		notify-send -i "$PIC" "LARBS welcome message" "Welcome message re-enabled." )

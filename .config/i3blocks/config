@@ -20,7 +20,6 @@ signal=6
 #interval=30
 
 [pacpackages]
-label=📦
 interval=once
 signal=8
 
