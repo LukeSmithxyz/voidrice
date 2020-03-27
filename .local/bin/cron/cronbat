@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 # Notify me with notify-send if my battery is below 25%.
 # You can set this to run via cron.
 

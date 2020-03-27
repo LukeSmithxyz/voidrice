@@ -18,6 +18,11 @@ set $mod Mod4
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 set $stoprec --no-startup-id dmenurecord kill
 
+# #---Gaps---# #
+for_window [class="^.*"] border pixel 2
+gaps inner $inner_gaps
+gaps outer $outer_gaps
+
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable

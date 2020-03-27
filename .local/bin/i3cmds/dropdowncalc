@@ -1,2 +1,3 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 ifinstalled bc && echo "Welcome to the Calculator." && bc -lq
