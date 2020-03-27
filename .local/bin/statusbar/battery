@@ -19,8 +19,8 @@ do
 	capacity=$(cat "$battery"/capacity) || exit
 	status=$(cat "$battery"/status)
 
-	# If it is discharging and 20% or less, we will add a ❗ as a warning.
-	[ "$status" = "Discharging" ] && echo "$capacity" | grep -q "^[12][0-9]$" && warn="❗"
+	# If it is discharging and 25% or less, we will add a ❗ as a warning.
+	[ "$status" = "Discharging" ] && [ "$capacity" -le 25 ] && warn="❗"
 
 	# Print the battery status (replaced by a cooresponding emoji with
 	# sed), the percentage left and the warning if there is one.
