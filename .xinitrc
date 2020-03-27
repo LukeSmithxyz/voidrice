@@ -12,7 +12,7 @@
 
 [ -f ~/.profile ] && . ~/.profile
 
-# If you have problems, log it out:
+# if problems occur, log to file for debugging:
 #exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
 # else:
 exec i3
