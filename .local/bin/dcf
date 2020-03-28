@@ -1,0 +1,31 @@
+#!/bin/sh
+# IT CAN TAKE ONLY ONE FLAG
+# example:  " dcf h -33 <command> " or " dcf c -n <command>"
+
+one="$1" ; two="$2" ; three="$3" ; four="$4"
+
+#If no function is used, work as "which"
+[ -z "$two" ] && which $one && break && exit
+
+#Shift values, if there is no flag
+[ -z "$three" ] && three="$two" && two=""
+
+# Tells you which package owns that command,
+p() { pacman "${two:--Qo}" $( which "$three" ) ; }
+# or give it a file directly (for lib or share, which aren't executable)
+pl() { pacman "${two:--Qo}" $( echo "$three" ) ; }
+
+# Print || read || modify that script
+c() { cat  $two $( which "$three" ) ; }
+l() { less $two $( which "$three" ) ; }
+v() { nvim $two $( which "$three" ) ; }
+h() { head $two $( which "$three" ) ; }
+t() { tail $two $( which "$three" ) ; }
+
+#grep has 1 argument more, shift again.
+g() { [ -z "$four" ] && four="$three" && three="$two" && two="" ;
+	grep --color=auto $two "$three" $( which "$four" ) ; }
+
+$1
+
+#pro-tip: alias "dcf v" to "dcfv" to immediately open a script in vim.
