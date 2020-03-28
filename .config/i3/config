@@ -81,7 +81,7 @@ bindsym $mod+Shift+r		exec --no-startup-id winresize
 bindsym $mod+t			split toggle
 bindsym $mod+Shift+t		gaps inner current set $inner_gaps; gaps outer current set $outer_gaps
 
-bindsym $mod+y			exec $term -e calcurse -D ~/.config/calcurse
+bindsym $mod+y			exec $term -e calcurse
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
 
 bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
