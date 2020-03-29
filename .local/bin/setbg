@@ -9,7 +9,7 @@
 # Location of link to wallpaper.
 bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}bg"
 
-[ ! -L "$bgloc" ] && [ ! -e "$1" ] && echo 'Please provide a valid image or directory.' && exit 1
+[ ! -L "$bgloc" ] && [ ! -e "$1" ] && printf 'Please provide a valid image or directory.\n' && exit 1
 
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc"
 
