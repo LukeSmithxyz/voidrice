@@ -1,19 +1,25 @@
 #!/bin/sh
 
 # This script does the following:
-#	Run by itself, set the wallpaper (at X start).
-#	If given a file, set that as the new wallpaper.
-#	If given a directory, choose random file in it.
-#	If wal is installed, also generate a colorscheme.
+#   - Run by itself, set the wallpaper (at X start).
+#   - If given a file, set that as the new wallpaper.
+#   - If given a directory, choose random file in it.
+#   - If wal is installed, also generate a colorscheme.
 
-# Location of link to wallpaper link.
-bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
+# Location of link to wallpaper.
+bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}bg"
 
-[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..."
+[ ! -L "$bgloc" ] && [ ! -e "$1" ] && echo 'Please provide a valid image or directory.' && exit 1
 
-[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
+[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc"
+
+[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\)' -type f | shuf -n 1)" "$bgloc"
 
 # If pywal is installed, use it.
-wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
+[ $(command -v wal) ] && wal -qsi "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun"
 
-xwallpaper --zoom "$bgloc"
+# Kill notification daemon (it should restart automatically).
+pkill dunst
+
+xwallpaper --zoom "$bgloc" &
+notify-send -u low -i "$bgloc" 'Wallpaper updated' "$(basename "$(readlink -f "$bgloc")")"
