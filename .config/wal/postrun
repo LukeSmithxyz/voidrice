@@ -24,5 +24,6 @@ done
 
 fix_sequences <"${HOME}/.cache/wal/sequences"
 
+xsetroot -name "fsignal:xrdb"
 pkill dunst
 dunst &

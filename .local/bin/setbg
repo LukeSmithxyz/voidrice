@@ -1,22 +1,19 @@
 #!/bin/sh
 
-# In LARBS, ~/.config/wall.png is the location of the system wallpaper.  This
-# script, if given an argument, moves it there.  This script without an
-# argument sets ~/.config/wall.png as the wallpaper, which is required on login
-# if you don't want a black screen.
-#
-# You may also give a directory name to select a random image from that
-# directory as a wallpaper. Be careful that the directory only has images.
+# This script does the following:
+#	Run by itself, set the wallpaper (at X start).
+#	If given a file, set that as the new wallpaper.
+#	If given a directory, choose random file in it.
+#	If wal is installed, also generate a colorscheme.
 
-[ -f "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
+# Location of link to wallpaper link.
+bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
 
-[ -d "$1" ] && cp "$(find "$1" -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -type f | shuf -n 1)" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Random Wallpaper chosen."
+[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..."
+
+[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
 
 # If pywal is installed, use it.
-type wal >/dev/null 2>&1 && { wal -c
-	wal -s -i ~/.config/wall.png -o ~/.config/wal/postrun
-	xsetroot -name "fsignal:xrdb"
-	killall dwmblocks
-	setsid dwmblocks >/dev/null & } >/dev/null 2>&1
+wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
 
-xwallpaper --zoom ~/.config/wall.png
+xwallpaper --zoom "$bgloc"
