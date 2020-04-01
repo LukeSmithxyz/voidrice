@@ -7,4 +7,4 @@ case $BLOCK_BUTTON in
 - % is of single core." ;;
 esac
 
-sensors | awk '/Core 0/ {print $3}'
+sensors | awk '/Core 0/ {print "🌡", $3}'
