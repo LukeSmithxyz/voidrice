@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tz=$(date "+"%Z")
+tz=$(date "+%Z")
 
 if (( $EUID != 0 )); then
     echo "Please run as root"
