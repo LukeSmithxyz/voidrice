@@ -15,5 +15,5 @@ fi
 
 # Update system clock
 echo "Updating system clock"
-ntpd -gq
+ntpd -gq >/dev/null 2>&1
 
