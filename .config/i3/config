@@ -151,6 +151,12 @@ bindsym $mod+slash                  split vertical ;; exec $term
 bindsym $mod+Shift+slash            exec --no-startup-id xkill
 bindsym $mod+backslash              workspace back_and_forth
 
+# #---Volume Bindings---# #
+bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+plus   exec --no-startup-id amixer sset Master 15%+ && pkill -RTMIN+10 i3blocks
+bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+minus  exec --no-startup-id amixer sset Master 15%- && pkill -RTMIN+10 i3blocks
+
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -191,13 +197,6 @@ for_window [class="sent"] border pixel 0px
 for_window [window_role="GtkFileChooserDialog"] resize set 800 600
 for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [title="Default - Wine desktop"] floating enable
-
-# #---Media Keys---# #
-# Volume keys
-bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+plus		exec --no-startup-id amixer sset Master 15%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+minus	exec --no-startup-id amixer sset Master 15%- && pkill -RTMIN+10 i3blocks
 
 # #---Function Buttons---# #
 bindsym $mod+F2     restart
