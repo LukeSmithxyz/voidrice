@@ -3,11 +3,12 @@
 # This config file will use environmental variables such as $BROWSER and $TERMINAL.
 # You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
 
-# #---Polybar---# #
-exec_always --no-startup-id launch_polybar
-
+# #---Variables---# #
 set $inner_gap 10
 set $outer_gap 5
+
+# #---Polybar---# #
+exec_always --no-startup-id launch_polybar
 
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
@@ -20,8 +21,8 @@ set $stoprec --no-startup-id dmenurecord kill
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 2
-gaps inner $inner_gaps
-gaps outer $outer_gaps
+gaps inner $inner_gap
+gaps outer $outer_gap
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
@@ -40,15 +41,18 @@ for_window [class="Slack"] move to workspace $ws10
 for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
-# Return
 bindsym $mod+Return             exec $term
 bindsym $mod+Shift+Return       exec --no-startup-id samedir
-# Space
 bindsym $mod+space              focus mode_toggle
 bindsym $mod+Shift+space        floating toggle
 bindsym $mod+Escape             workspace prev
 bindsym $mod+grave              exec --no-startup-id dmenuunicode
 bindsym $mod+Insert             exec --no-startup-id showclip
+
+# #---Power Bindings---# #
+bindsym $mod+Shift+Escape	exec --no-startup-id prompt "Exit Xorg Session?" "i3 exit"
+bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+Ctrl+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 
 # #---Letter Key Bindings---# #
 # A
@@ -188,12 +192,6 @@ for_window [window_role="GtkFileChooserDialog"] resize set 800 600
 for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [title="Default - Wine desktop"] floating enable
 
-# Bindings to make the webcam float and stick.
-for_window [title="mpvfloat"] floating enable
-for_window [title="mpvfloat"] sticky enable
-for_window [title="mpvfloat"] border pixel 0
-no_focus [title="mpvfloat"]
-
 # #---Media Keys---# #
 # Volume keys
 bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
@@ -202,10 +200,8 @@ bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%- && pkill -
 bindsym $mod+Shift+minus	exec --no-startup-id amixer sset Master 15%- && pkill -RTMIN+10 i3blocks
 
 # #---Function Buttons---# #
-bindsym $mod+F1     exec --no-startup-id groff -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura -
 bindsym $mod+F2     restart
 bindsym $mod+F3     exec --no-startup-id displayselect
-bindsym $mod+F4     exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 bindsym $mod+F5     exec --no-startup-id $netrefresh
 bindsym $mod+F9     exec --no-startup-id dmenumount
 bindsym $mod+F10    exec --no-startup-id dmenuumount
@@ -224,9 +220,15 @@ bindsym $mod+Right          focus right
 bindsym $mod+Shift+Right    move right
 bindsym $mod+Ctrl+Right     move workspace to output right
 
-# Screenshots/Recording
+# #---Screenshots/Recording---# #
 bindsym Print                   exec --no-startup-id maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
 bindsym Shift+Print             exec --no-startup-id maimpick
 bindsym $mod+Print              exec --no-startup-id dmenurecord
 bindsym $mod+Scroll_Lock        exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete             exec $stoprec
+
+# #---Bindings to make the webcam float and stick---# #
+for_window [title="mpvfloat"] floating enable
+for_window [title="mpvfloat"] sticky enable
+for_window [title="mpvfloat"] border pixel 0
+no_focus [title="mpvfloat"]
