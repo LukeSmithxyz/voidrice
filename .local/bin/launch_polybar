@@ -4,7 +4,7 @@
 #killall -q polybar
 
 # Wait until the processes have been shut down
-while pgrep -x polybar >/dev/null; killall -q polybar; done
+while pgrep -x polybar >/dev/null; do killall -q polybar; done
 
 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     $m polybar --reload main &
