@@ -14,5 +14,6 @@ elif [[ "$tz" == "EDT" ]]; then
 fi
 
 # Update system clock
+echo "Updating system clock"
 ntpd -gq
 
