@@ -13,3 +13,6 @@ elif [[ "$tz" == "EDT" ]]; then
   echo "Changed to Central timezone"
 fi
 
+# Update system clock
+ntpd -gq
+
