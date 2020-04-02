@@ -6,10 +6,10 @@ if (( $EUID != 0 )); then
     echo "Please run as root"
     exit
 elif [[ "$tz" == "CDT" ]]; then
-  echo "Changing to Eastern Daylight Time timezone"
   ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+  echo "Changed to Eastern Daylight Time timezone"
 elif [[ "$tz" == "EDT" ]]; then
-  echo "Changing to Central timezone"
   ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
+  echo "Changed to Central timezone"
 fi
 
