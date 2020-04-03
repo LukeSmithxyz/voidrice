@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Allow you to choose which music source you want to launch
+
+chosen=$(printf "%s\\nGoogle Music\\Spotify| dmenu -i -p "Select music provider:") &&
+case "$chosen" in
+	"nGoogle Music") google-chrome-stable https://music.google.com  ;;
+	"Spotify") spotify & ;;
+esac

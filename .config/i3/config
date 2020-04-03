@@ -92,7 +92,7 @@ bindsym $mod+l              focus right
 bindsym $mod+Shift+l        move right 30
 bindsym $mod+Ctrl+l         move workspace to output right
 # M
-bindsym $mod+m              exec spotify
+bindsym $mod+m              exec open_music_source
 bindsym $mod+Shift+m        exec --no-startup-id amixer sset Master toggle
 # N
 bindsym $mod+n              exec nautilus
