@@ -57,7 +57,7 @@ bindsym $mod+Ctrl+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown
 bindsym $mod+a              exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+shift+a       exec $term -e alsamixer
 # B
-bindsym $mod+b              exec --no-startup-id polybar_msg cmd toggle
+bindsym $mod+b              exec --no-startup-id polybar-msg cmd toggle
 bindsym $mod+Shift+b        floating toggle; sticky toggle; exec --no-startup-id hover left
 # C
 bindsym $mod+c              exec code

@@ -4,8 +4,8 @@
 
 music_service=$(printf "Google Music\nSpotify" | dmenu -i -p "Select music service: ")
 case "$music_service" in
-	"Google Music") notify-send "Opened $music_service" && google-chrome-stable https://music.google.com 2>/dev/null & ;;
-	"Spotify") notify-send "Opened $music_service" && firefox https://open.spotify.com/browse/ 2>/dev/null & ;;
+	"Google Music") notify-send "Opened $music_service" && google-chrome-stable https://play.google.com/music/listen\#/artists 2>/dev/null & ;;
+	"Spotify") notify-send "Opened $music_service" && google-chrome-stable https://open.spotify.com/browse/ 2>/dev/null & ;;
 esac
 
 
