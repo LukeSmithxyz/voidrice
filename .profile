@@ -25,6 +25,7 @@ export ZDOTDIR="$HOME/.config/zsh"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
