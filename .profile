@@ -3,8 +3,8 @@
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
-# Get default LARBS WM from ~/.local/share/larbs/wm
-export LARBSWM="$(cat ~/.local/share/larbs/wm 2>/dev/null)" &&
+# Get default LARBS WM from $XDG_DATA_HOME/larbs/wm
+export LARBSWM="$(cat $XDG_DATA_HOME/larbs/wm 2>/dev/null)" &&
 	[ "$LARBSWM" = "dwm" ] || export LARBSWM="i3"
 
 # Default programs:
@@ -46,4 +46,4 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
 
 # Switch escape and caps if tty and no passwd required:
-sudo -n loadkeys ~/.local/share/larbs/ttymaps.kmap 2>/dev/null
+sudo -n loadkeys $XDG_DATA_HOME/larbs/ttymaps.kmap 2>/dev/null
