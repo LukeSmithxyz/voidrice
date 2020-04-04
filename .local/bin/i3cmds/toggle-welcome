@@ -2,7 +2,7 @@
 
 # Toggles the LARBS welcome message.
 
-PIC="$HOME/.local/share/larbs/larbs.png"
+PIC="$XDG_DATA_HOME/larbs/larbs.png"
 
 grep LARBSWELCOME "$HOME/.xprofile" &&
 	( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send -i "$PIC" "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) ||
