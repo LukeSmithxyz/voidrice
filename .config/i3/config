@@ -35,9 +35,7 @@ for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
-for_window [class="Spotify"] move to workspace $ws10
 for_window [class="discord"] move to workspace $ws10
-for_window [class="Slack"] move to workspace $ws10
 for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
@@ -57,7 +55,7 @@ bindsym $mod+Ctrl+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown
 # #---Letter Key Bindings---# #
 # A
 bindsym $mod+a              exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
-bindsym $mod+shift +a       exec $term -e alsamixer
+bindsym $mod+shift+a       exec $term -e alsamixer
 # B
 bindsym $mod+b              exec --no-startup-id polybar_msg cmd toggle
 bindsym $mod+Shift+b        floating toggle; sticky toggle; exec --no-startup-id hover left
@@ -92,7 +90,7 @@ bindsym $mod+l              focus right
 bindsym $mod+Shift+l        move right 30
 bindsym $mod+Ctrl+l         move workspace to output right
 # M
-bindsym $mod+m              exec open_music_source
+bindsym $mod+m              exec dmenu_openmusic
 bindsym $mod+Shift+m        exec --no-startup-id amixer sset Master toggle
 # N
 bindsym $mod+n              exec nautilus
@@ -152,10 +150,10 @@ bindsym $mod+Shift+slash            exec --no-startup-id xkill
 bindsym $mod+backslash              workspace back_and_forth
 
 # #---Volume Bindings---# #
-bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+plus   exec --no-startup-id amixer sset Master 15%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+minus  exec --no-startup-id amixer sset Master 15%- && pkill -RTMIN+10 i3blocks
+bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+
+bindsym $mod+Shift+plus   exec --no-startup-id amixer sset Master 15%+
+bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%-
+bindsym $mod+Shift+minus  exec --no-startup-id amixer sset Master 15%-
 
 set $ws1 "1"
 set $ws2 "2"

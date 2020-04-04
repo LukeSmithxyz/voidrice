@@ -2,8 +2,10 @@
 
 # Allow you to choose which music source you want to launch
 
-chosen=$(printf "%s\\nGoogle Music\\Spotify| dmenu -i -p "Select music provider:") &&
-case "$chosen" in
-	"nGoogle Music") google-chrome-stable https://music.google.com  ;;
-	"Spotify") spotify & ;;
+music_service=$(printf "Google Music\nSpotify" | dmenu -i -p "Select music service: ")
+case "$music_service" in
+	"Google Music") notify-send "Opened $music_service" && google-chrome-stable https://music.google.com 2>/dev/null & ;;
+	"Spotify") notify-send "Opened $music_service" && firefox https://open.spotify.com/browse/ 2>/dev/null & ;;
 esac
+
+

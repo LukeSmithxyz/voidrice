@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+. ~/.profile
 
-notify-send "Added ~/.local/bin/ to $PATH"
+notify-send "Added ~/.local/bin/ to \$PATH"
 
