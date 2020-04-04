@@ -3,7 +3,7 @@
 ## or $XDG_CONFIG_HOME/ncmpcpp/config and set up your preferences.          ##
 ##############################################################################
 #
-ncmpcpp_directory = ~/.config/ncmpcpp
+ncmpcpp_directory = $XDG_CONFIG_HOME/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
