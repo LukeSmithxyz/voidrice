@@ -1,8 +1,6 @@
-# Luke's ranger setup
-
 ## Basic Ranger shortcuts
 
-These are the basic key binds in ranger, even outside of my configs. Note that they are mostly vim-based.
+These are the basic key binds in ranger. Note that they are mostly vim-based.
 
 + h/j/k/l -- Move left/down/up/right (where left moves up in the directory structure, right moves into a folder)
 + Space -- select/highlight file
@@ -18,10 +16,7 @@ These are the basic key binds in ranger, even outside of my configs. Note that t
 	+ I -- rename file adding at the beginning
 
 ## Shortcuts
-
-As I say in the main readme, there are shortcut commands generated for ranger
-based on what bookmarked directories and files you give it. For directory
-shortcuts, here are the "verbs":
+For directory shortcuts, here are the "verbs":
 
 + g -- "go or cd"
 + t -- "new tab"
@@ -30,12 +25,12 @@ shortcuts, here are the "verbs":
 
 These "verbs" take "nouns" or "arguments," like these:
 
-+ d -- "~/Documents"
-+ D -- "~/Downloads"
++ d -- "~/documents"
++ D -- "~/ownloads"
 + cf -- "~/.config"
-+ And many others, including those you add to `~/.bmdirs`.
++ And many others, including those you add to `~/.directories`.
 
-Press any "verb" followed by any "argument" to perform a folder operation. "gd" will cd to ~/Documents, for example. "mD" will move the selected file(s) to ~/Downloads. "tcf" will create a new tab in ~/.config, etc. etc.
+Press any "verb" followed by any "argument" to perform a folder operation. "gd" will cd to ~/documents, for example. "mD" will move the selected file(s) to ~/downloads. "tcf" will create a new tab in ~/.config, etc. etc.
 
 ## Many little additions!
 
@@ -60,26 +55,11 @@ Press any "verb" followed by any "argument" to perform a folder operation. "gd" 
 	+ Txs -- copy slideshow/beamer template to new file
 	+ Txh -- copy handout template to new file
 + Image commands:
-	+ bg -- (for i3 users) makes an image your background (assuming i3 is looking at ~/.config/wall.png for your background)
+	+ bg -- makes an image your background (assuming i3 is looking at ~/.config/assets/wallpaper.png for your background)
 	+ bw -- runs Pywal on the selected image, making it your background and generating a color scheme based off of it.
 	+ C -- rotates an image (requires imagemagick)
 	+ F -- flips an image (requires imagemagick)
 	+ TR -- add transparency to image file
-+ mpd/mpc shortcuts
-	+ MS -- Start mpd
-	+ MK -- kill mpd
-	+ MN -- Start playing selected song/folder now
-	+ Ma -- Enqueue selected song/folder
-	+ Mp -- Pause
-	+ Mn -- Next track
-	+ Mb -- Previous track
-	+ Mo -- Restart track
-+ Audio tagging with eye3D:
-	+ Ta -- change artist name
-	+ TA -- change album name
-	+ Tb -- change album artist
-	+ Tt -- change title
-	+ Tn -- change track number
 + Downloading:
 	+ ytv -- Download online video (paste in url) (requires youtube-dl)
 	+ yta -- Download audio of online video (paste in url) (requires youtube-dl)
