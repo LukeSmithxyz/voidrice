@@ -16,12 +16,12 @@ export STATUSBAR="${LARBSWM}blocks"
 
 # ~/ Clean-up:
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
-export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
-export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
-export WGETRC="$HOME/.config/wget/wgetrc"
-export INPUTRC="$HOME/.config/inputrc"
-export ZDOTDIR="$HOME/.config/zsh"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
