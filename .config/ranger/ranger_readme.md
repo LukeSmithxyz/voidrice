@@ -26,7 +26,7 @@ For directory shortcuts, here are the "verbs":
 These "verbs" take "nouns" or "arguments," like these:
 
 + d -- "~/documents"
-+ D -- "~/ownloads"
++ D -- "~/downloads"
 + cf -- "~/.config"
 + And many others, including those you add to `~/.directories`.
 
