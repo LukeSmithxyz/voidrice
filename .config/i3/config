@@ -198,7 +198,7 @@ for_window [title="Default - Wine desktop"] floating enable
 
 # #---Function Buttons---# #
 bindsym $mod+F2     restart
-bindsym $mod+F3     exec --no-startup-id displayselect
+bindsym $mod+F3     exec --no-startup-id dmenu_displayselect
 bindsym $mod+F5     exec --no-startup-id $netrefresh
 bindsym $mod+F9     exec --no-startup-id dmenu_mount
 bindsym $mod+F10    exec --no-startup-id dmenu_umount
