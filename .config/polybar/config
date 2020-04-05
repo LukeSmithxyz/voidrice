@@ -16,7 +16,7 @@ yellow = #fabd2f
 [bar/main]
 ; polybar settings
 enable-ipc = true
-height = 18
+height = 20
 monitor = ${env:MONITOR:}
 width = 100%
 background = ${colors.background}
