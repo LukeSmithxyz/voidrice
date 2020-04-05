@@ -19,6 +19,7 @@ fixed-center = false
 height = 20
 monitor = ${env:MONITOR:}
 width = 100%
+radius= 0.0
 
 ; allow scrolling workspaces
 scroll-up = i3wm-wsnext
@@ -27,31 +28,32 @@ scroll-down = i3wm-wsprev
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 2
+line-size = 3
 line-color = ${colors.red}
 
 border-size = 0
 border-color = ${colors.white}
 
 padding-left = 0
-padding-right = 0
+padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "fixed:pixelsize=9;1"
-font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=8;2"
-font-3 = "Font Awesome 5 Brands:pixelsize=8;1"
+font-0 = "Source Code Pro:pixelsize=8;1"
+font-1 = "Source Code Pro:style=Regular:pixelsize=8;1"
+; Enable emojis
+font-2 = NotoColorEmoji:pixelsize=8;1:fontformat=truetype:scale=10:antialias=true;
 
 wm-restack = i3
 
 modules-left = i3
-modules-center = xwindow
 modules-right = sys_updates bluetooth sys_temp cpu memory volume wifi ethernet battery date
 
 tray-position = right
 tray-padding = 0
+tray-scale = 1.0
+
 
 [module/sys_updates]
 exec = ~/.local/bin/polybar_scripts/aur_updates
@@ -77,18 +79,12 @@ full-at = 98
 
 ; orange denotes charging
 format-charging =<label-charging>
-label-charging = Batt: %percentage%%
-label-charging-overline=${colors.orange}
-label-charging-underline=${colors.orange}
+label-charging = %percentage%%
+format-charging-prefix = "Batt: "
 
-format-discharging = <ramp-capacity><label-discharging>
-label-discharging = Batt: %percentage%%
-
-; changes color for which third battery is in
-; red=0-33, yellow=34-66, green=67-100
-ramp-capacity-0 = %{u#ff0000}%{+u}
-ramp-capacity-1 = %{u#ffea00}%{+u}
-ramp-capacity-2 = %{u#20c723}%{+u}
+format-discharging-prefix = "Batt: "
+format-discharging = <label-discharging>
+label-discharging = %percentage%%
 
 [module/bluetooth]
 type = custom/script
@@ -215,9 +211,9 @@ label-disconnected-foreground = ${colors.gray}
 margin-bottom = 5
 margin-top = 5
 
-#[module/xwindow]
-#format-foreground = ${colors.blue}
-#label = %title:0:100:...%
-#type = internal/xwindow
-#label-maxlen = 20
+[module/xwindow]
+format-foreground = ${colors.blue}
+label = %title%
+type = internal/xwindow
+label-maxlen = 20
 
