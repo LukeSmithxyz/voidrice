@@ -2,10 +2,10 @@
 
 [colors]
 background = #1d2021
+foreground = #ebdbb2
 black = #1d2021
 blue = #83a598
 darkyellow = #d79921
-foreground = #ebdbb2
 gray = #928374
 green = #20c723
 orange = #ffa500
@@ -14,75 +14,48 @@ white = #ebdbb2
 yellow = #fabd2f
 
 [bar/main]
+; polybar settings
 enable-ipc = true
-fixed-center = false
-height = 20
+height = 18
 monitor = ${env:MONITOR:}
 width = 100%
-radius= 0.0
-
-; allow scrolling workspaces
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
-
 background = ${colors.background}
 foreground = ${colors.foreground}
-
 line-size = 3
 line-color = ${colors.red}
-
+; Module formatting
 border-size = 0
 border-color = ${colors.white}
-
 padding-left = 0
 padding-right = 1
-
 module-margin-left = 1
 module-margin-right = 1
-
+; Fonts
 font-0 = "Source Code Pro:pixelsize=8;1"
 font-1 = "Source Code Pro:style=Regular:pixelsize=8;1"
-; Enable emojis
-font-2 = NotoColorEmoji:pixelsize=8;1:fontformat=truetype:scale=10:antialias=true;
-
+; enable emojis
+font-2 = NotoColorEmoji:pixelsize=5;0:fontformat=truetype:scale=12:antialias=true;
+; wm related
 wm-restack = i3
-
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
 modules-left = i3
 modules-right = sys_updates bluetooth sys_temp cpu memory volume wifi ethernet battery date
-
+; Where to display programs that put something system tray
 tray-position = right
-tray-padding = 0
-tray-scale = 1.0
-
-
-[module/sys_updates]
-exec = ~/.local/bin/polybar_scripts/aur_updates
-format = <label>
-interval = 1000
-label = %{A1:$TERMINAL -e sudo pacman -Syyu --overwrite '*' >/dev/null 2>&1 &:}%output%%{A}
-label-overline=${colors.red}
-label-underline=${colors.red}
-type = custom/script
-°
-[module/sys_temp]
-exec = ~/.local/bin/polybar_scripts/sys_temp
-format = <label>
-interval = 5
-label = Temp: %output%°F
-type = custom/script
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
-
-; orange denotes charging
+; Charging
 format-charging =<label-charging>
 label-charging = %percentage%%
 format-charging-prefix = "Batt: "
-
+; Not charging
 format-discharging-prefix = "Batt: "
+;format-discharging-prefix = "🔋: "
 format-discharging = <label-discharging>
 label-discharging = %percentage%%
 
@@ -94,31 +67,29 @@ click-left = exec blueberry
 click-right = exec ~/.local/bin/polybar_scripts/toggle_bluetooth
 
 [module/cpu]
+type = internal/cpu
 format = <label>
 format-prefix-foreground = ${colors.gray}
 interval = 0.5
 label = %{A1:$TERMINAL -e htop >/dev/null 2>&1 &:}CPU: %percentage%%%{A}
-type = internal/cpu
 
 [module/date]
 type = internal/date
-interval = 60
-
-date = "%Y %b %d (%a)"
-time = "%I:%M%p"
-
+interval = 1
+date = "(%a) %b %d %Y"
+time = "%I:%M:%S%p"
 format-prefix-foreground = ${colors.gray}
-label = %{A1:google-chrome-stable https\://calendar.google.com >/dev/null 2>&1 &:}%date% %time%%{A}
+label = %{A1:$BROWSER https\://calendar.google.com :}%date% %time%%{A}
 
 [module/ethernet]
 type = internal/network
-interface = ens4u1u2
+interface = net0
 interval = 3.0
-
+; Ethernet
 format-connected-underline = ${colors.green}
 format-connected-prefix-foreground = ${colors.gray}
 label-connected = %local_ip% %upspeed% %downspeed%
-
+; No Ethernet
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
 label-disconnected = No Eth
@@ -129,29 +100,24 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
-
 pin-workspaces = true
-
+; Formatting
 label-mode-padding = 1
 label-mode-foreground = ${colors.white}
 label-mode-background = ${colors.darkyellow}
-
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = #3f3f3f
 label-focused-underline = #fba922
 label-focused-padding = 1
-
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 1
-
-; visible = ctive workspace on unfocused monitor
+; visible = Active workspace on unfocused monitor
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
-
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
 label-urgent-foreground = #000000
@@ -159,24 +125,43 @@ label-urgent-background = #bd2c40
 label-urgent-padding = 1
 
 [module/memory]
+type = internal/memory
 format-prefix-foreground = ${colors.gray}
 interval = 1
 label = RAM: %gb_used%/%gb_total%
-type = internal/memory
 
 [settings]
 screenchange-reload = true
+pseudo-transparency = true
+
+[module/sys_updates]
+type = custom/script
+exec = ~/.local/bin/polybar_scripts/aur_updates
+format = <label>
+interval = 1000
+label = %{A1:$TERMINAL -e sudo pacman -Syyu --overwrite '*' >/dev/null 2>&1 &:}%output%%{A}
+label-overline=${colors.red}
+label-underline=${colors.red}
+
+[module/sys_temp]
+type = custom/script
+exec = ~/.local/bin/polybar_scripts/sys_temp
+format = <label>
+interval = 5
+label = Temp: %output%°F
 
 [module/volume]
+; sound utility
 type = internal/alsa
 
-format-volume = [<label-volume> <bar-volume>]
-label-volume = %{A2:$TERMINAL -e alsamixer >/dev/null 2>&1 &:}%percentage%%%{A}
+; Display volume
+format-volume = %{A3:$TERMINAL -e alsamixer &:}[<label-volume> <bar-volume>]%{A}
 label-volume-foreground = ${colors.foreground}
-
-format-muted-foreground = ${colors.gray}
+label-volume = %percentage%%
+; Display when muted
 label-muted = Muted
-
+format-muted-foreground = ${colors.gray}
+; Display volume bar
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.blue}
 bar-volume-foreground-1 = ${colors.blue}
@@ -187,33 +172,32 @@ bar-volume-foreground-5 = ${colors.yellow}
 bar-volume-foreground-6 = ${colors.red}
 bar-volume-gradient = false
 bar-volume-indicator = |
-bar-volume-indicator-font = 2
+bar-volume-indicator-font = 0
 bar-volume-fill = =
-bar-volume-fill-font = 2
+bar-volume-fill-font = 0
 bar-volume-empty = =
-bar-volume-empty-font = 2
+bar-volume-empty-font = 0
 bar-volume-empty-foreground = ${colors.gray}
 
 [module/wifi]
 type = internal/network
 interface = wlo1
 interval = 3.0
-
+; Wifi
 format-connected = <label-connected>
 label-connected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}Wifi: %essid%%{A}
-
+; No Wifi
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.red}
-label-disconnected = %{A1:$TERMINAL -e nmtui >/dev/null 2>&1 &:}No wifi%{A}
+label-disconnected = %{A1:$TERMINAL -e nmtui &:}No wifi%{A}
 label-disconnected-foreground = ${colors.gray}
 
 [global/wm]
-margin-bottom = 5
-margin-top = 5
+;margin-bottom = 5
+;margin-top = 5
 
 [module/xwindow]
+type = internal/xwindow
 format-foreground = ${colors.blue}
 label = %title%
-type = internal/xwindow
 label-maxlen = 20
-
