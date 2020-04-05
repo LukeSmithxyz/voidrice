@@ -18,11 +18,11 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [my
 	- tmux
 	- other stuff like xdg default programs, inputrc and more, etc.
 - I try to minimize what's directly in `~` so:
-	- All configs that can be in `$XDG_CONFIG_HOME/` are.
-	- Some environmental variables have been set in `~/.zprofile` to move configs into `$XDG_CONFIG_HOME/`
+	- All configs that can be in `~/.config/` are.
+	- Some environmental variables have been set in `~/.zprofile` to move configs into `~/.config/`
 - Bookmarks in text files used by various scripts (like `~/.local/bin/shortcuts`)
-	- File bookmarks in `$XDG_CONFIG_HOME/files`
-	- Directory bookmarks in `$XDG_CONFIG_HOME/directories`
+	- File bookmarks in `~/.config/files`
+	- Directory bookmarks in `~/.config/directories`
 
 ## Want even more?
 
