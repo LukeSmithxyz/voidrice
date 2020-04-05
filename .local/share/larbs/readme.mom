@@ -64,7 +64,7 @@ Below in this document, there is information about where to change programs/comp
 .PP
 Additionally, while this isn't a part of the desktop environment, the default editing mode in the shell is using vi bindings.
 If you want to learn more of this, run \f(CWMod+Shift+E\fP and type and select the option for "vi mode in shell".
-This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW$XDG_CONFIG_HOME/inputrc\fP.
+This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.config/inputrc\fP.
 .HEADING 2 "The Status Bar"
 .PP
 To the left, you'll see the numbers of your current workspace/tag(s).
@@ -73,7 +73,7 @@ Each module on the right of the status bar is a script located in \f(CW~/.local/
 You can see what they do and modify them from there.
 I'm sure you can figure it out.
 .PP
-In i3, the program i3blocks controls what modules appear in the statusbar; its config file is in \f(CW$XDG_CONFIG_HOME/i3blocks/config\fP.
+In i3, the program i3blocks controls what modules appear in the statusbar; its config file is in \f(CW~/.config/i3blocks/config\fP.
 .HEADING 2 "Deeper Tutorials"
 .PP
 Press \f(CWmod+shift+e\fP at any time to get a menu of programs to watch videos about streaming directly from YouTube.
@@ -252,7 +252,7 @@ buttons, screen brightness, email, web browsing buttons, etc.) to what you
 would expect.
 .HEADING 1 "Configuration"
 .PP
-Dotfiles/settings files are located in \f(CW$XDG_CONFIG_HOME/\fP, note that dotfiles to programs not included in LARBS are there as well by requests of users. I do not necessarily maintain all these dotfiles, but they remain as legacy.
+Dotfiles/settings files are located in \f(CW~/.config/\fP, note that dotfiles to programs not included in LARBS are there as well by requests of users. I do not necessarily maintain all these dotfiles, but they remain as legacy.
 .PP
 Suckless programs, st (the terminal) and dmenu among others do not have traditional config files, but have their source code location in \f(CW~/.local/src/\fP.
 There you can modify their \f(CWconfig.h\fP files, then \f(CWsudo make install\fP to reinstall.
@@ -278,7 +278,7 @@ In the Linux terminal, those binds have other more important purposes, so you ca
 Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your browser instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
-The system will always read the file \f(CW$XDG_CONFIG_HOME/wall.png\fP as the wallpaper.
+The system will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
 The script \f(CWsetbg\fP, if run on an image will set it as the persistent background.
 When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
@@ -296,7 +296,7 @@ You can sync your mail by pressing \f(CWMod+F8\fP and you can set a cronjob to s
 .HEADING 2 "How do I set up my music?"
 .PP
 By default, mpd, the music daemon assumes that \f(CW~/Music\fP is your music directory.
-This can be changed in \f(CW$XDG_CONFIG_HOME/mpd/mpd.conf\fP.
+This can be changed in \f(CW~/.config/mpd/mpd.conf\fP.
 When you add music to your music folder, you may have to run \f(CWmpc up\fP in the terminal to update the database.
 mpd is controlled by ncmpcpp, which is accessible by \f(CWMod+m\fP.
 .HEADING 2 "How do I update LARBS?"
