@@ -5,19 +5,14 @@
 
 # #---Variables---# #
 set $inner_gap 10
-set $outer_gap 5
-
-# #---Polybar---# #
-exec_always --no-startup-id launch_polybar
-
-# #---Basic Definitions---# #
-for_window [class="^.*"] border pixel 2
-gaps inner $inner_gap
-gaps outer $outer_gap
+set $outer_gap 2
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 set $stoprec --no-startup-id dmenu_record kill
+
+# #---Polybar---# #
+exec_always --no-startup-id launch_polybar
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 2
@@ -35,7 +30,6 @@ for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
-for_window [class="discord"] move to workspace $ws10
 for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
@@ -47,10 +41,8 @@ bindsym $mod+Escape             workspace prev
 bindsym $mod+grave              exec --no-startup-id dmenu_unicode
 bindsym $mod+Insert             exec --no-startup-id showclip
 
-# #---Power Bindings---# #
-bindsym $mod+Shift+Escape	exec --no-startup-id prompt "Exit Xorg Session?" "i3 exit"
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-bindsym $mod+Ctrl+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+# #---User Session Bindings---# #
+bindsym $mod+Shift+Escape	exec --no-startup-id dmenu_systempoweroptions
 
 # #---Letter Key Bindings---# #
 # A
