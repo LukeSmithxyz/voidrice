@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Gives a dmenu prompt to mount unmounted drives and Android phones. If
 # they're in /etc/fstab, they'll be mounted automatically. Otherwise, you'll
@@ -31,6 +31,8 @@ mountusb() { \
 mountandroid() { \
 	chosen=$(echo "$anddrives" | dmenu -i -p "Which Android device?" | cut -d : -f 1)
 	getmount "$HOME -maxdepth 3 -type d"
+        simple-mtpfs --device "$chosen" "$mp"
+	echo "OK" | dmenu -i -p "Tap Allow on your phone if it asks for permission and then press enter"
 	simple-mtpfs --device "$chosen" "$mp"
 	notify-send "🤖 Android Mounting" "Android device mounted to $mp."
 	}

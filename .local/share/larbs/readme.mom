@@ -8,7 +8,7 @@
 .DOCTYPE    DEFAULT
 .COPYSTYLE  FINAL
 .PRINTSTYLE TYPESET
-.PT_SIZE 10
+.PT_SIZE 12
 .START
 Use vim keys (\f(CWh/j/k/l\fP) to navigate this document.
 Pressing \f(CWs\fP will fit it to window width (\f(CWa\fP to revert).
@@ -16,7 +16,7 @@ Pressing \f(CWs\fP will fit it to window width (\f(CWa\fP to revert).
 \f(CWSuper+f\fP to toggle fullscreen.
 \f(CWf\fP will highlight links to follow which are selectable by typing the number that appears plus \f(CWEnter\fP.
 \f(CWq\fP to quit.
-(These are general shortcuts of \f(CWzathura\fP, the pdf reader.)
+(These are general binds set for \fBzathura\fP, the pdf reader.)
 .LI
 .ITEM
 \f(CWMod+F1\fP will show this document at any time.
@@ -24,20 +24,6 @@ Pressing \f(CWs\fP will fit it to window width (\f(CWa\fP to revert).
 By \f(CWMod\fP I mean the Super Key, usually known as "the Windows Key."
 .LIST OFF
 .PP
-Questions or suggestions? Email me at
-.PDF_WWW_LINK "mailto:luke@lukesmith.xyz" "luke@lukesmith.xyz"
-.LI
-.ITEM
-LARBS website:
-.PDF_WWW_LINK "https://larbs.xyz"
-.ITEM
-My website:
-.PDF_WWW_LINK "https://lukesmith.xyz"
-.ITEM
-Donate:
-.PDF_WWW_LINK "https://lukesmith.xyz/donate" "https://lukesmith.xyz/donate"
-(It makes a difference!)
-.LIST OFF
 FAQs are at the end of this document.
 .HEADING 1 "Welcome!"
 .HEADING 2 "Basic goals and principles of this system:"
@@ -71,7 +57,8 @@ but you can also hold it down and it will act as another Windows/super/mod key.
 The menu button (usually between the right Alt and Ctrl) is an alternative Super/Mod button.
 This is to make one-handing on laptops easier.
 .LIST OFF
-If you'd like to change any of these keyboard changes, you need only open and change \f(CW~/.xprofile\fP.
+If you'd like to change any of these keyboard changes, you need only open and change the \f(CWremaps\fP script.
+All custom scripts in LARBS are located in \f(CW~/.local/bin/\fP.
 Actually, this should go without saying, but \fIeverything\fP here can easily be changed.
 Below in this document, there is information about where to change programs/components.
 .PP
@@ -80,23 +67,18 @@ If you want to learn more of this, run \f(CWMod+Shift+E\fP and type and select t
 This setting can be changed if you don't like it by deleting or commenting out the contents of \f(CW~/.config/inputrc\fP.
 .HEADING 2 "The Status Bar"
 .PP
-If you're new to dwm, notice the status bar on the top of the screen.
-To the left side, you'll see the numbers of your current workspace/tag(s).
-On the right side, you'll see various system status notifiers, the date, volume, even music and local weather if possible, etc.
+To the left, you'll see the numbers of your current workspace/tag(s).
+On the right, you'll see various system status notifiers, the date, volume, even music and local weather if possible, etc.
+Each module on the right of the status bar is a script located in \f(CW~/.local/bin/statusbar/\fP.
+You can see what they do and modify them from there.
 I'm sure you can figure it out.
-The script that sets the bar is \f(CW~/.local/bin/dwmbar\fP.
-You can read the specifics there or change it if you want.
-If you edit and save changes to that file in vim, vim will automatically kill and update it.
+.PP
+In i3, the program i3blocks controls what modules appear in the statusbar; its config file is in \f(CW~/.config/i3blocks/config\fP.
 .HEADING 2 "Deeper Tutorials"
 .PP
 Press \f(CWmod+shift+e\fP at any time to get a menu of programs to watch videos about streaming directly from YouTube.
 You can also check the config files for programs which detail a lot of the specific bindings.
 .HEADING 1 "Key Bindings"
-.PP
-First, the key bindings.
-Key bindings are stored in two places.
-The file \f(CW~/.config/sxhkd/sxhkdrc\fP contains most of them, which you can see and edit there if you like.
-dwm-specific binds are compiled into dwm itself, but can be found in \f(CW~/repos/dwm/config.h\fP. You'll have to recompile dwm to change them.
 .HEADING 2 "Window basics"
 .PP
 Notice the case sensitivity of the shortcuts\c
@@ -108,9 +90,7 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+Enter\fP \(en Spawn terminal (the default terminal is \f(CWst\fP; run \f(CWman st\fP for more.)
 .ITEM
-\f(CWMod+q\fP \(en Close window
-.ITEM
-\f(CWMod+Q\fP \(en Force close window
+\f(CWMod+q\fP \(en Close window (Hold down shift to force kill.)
 .ITEM
 \f(CWMod+d\fP \(en dmenu (For running commands or programs without shortcuts)
 .ITEM
@@ -139,19 +119,6 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+N\fP \(en Same as above, but for the bottom right corner.
 .LIST OFF
-.HEADING 2 "Window layouts"
-.LI
-.ITEM
-\f(CWMod+t\fP \(en Tiling mode (active by default)
-.ITEM
-\f(CWMod+f\fP \(en Monocle mode (cycle through windows fullscreen)
-.ITEM
-\f(CWMod+y\fP \(en Fibbonacci mode (similar to tiling mode)
-.ITEM
-\f(CWMod+u\fP \(en Center the master window
-.ITEM
-\f(CWMod+o\fP \(en Center and float the master window
-.LIST OFF
 .HEADING 2 "Basic Programs"
 .PP
 \fINote:\fP LARBS will install nearly all of these programs by default, but some only come if you chose an extra option.
@@ -160,23 +127,23 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+r\fP \(en lf (file browser/manager)
 .ITEM
-\f(CWMod+e\fP \(en mutt (email; not installed by default, see below)
+\f(CWMod+e\fP \(en neomutt (email) \(en Must be first configured by running \f(CWmw add\fP.
 .ITEM
 \f(CWMod+m\fP \(en ncmpcpp (music player)
 .ITEM
-\f(CWMod+w\fP \(en nmtui (for connecting to wireless internet)
-.ITEM
 \f(CWMod+a\fP \(en Dropdown calculator (hide with \f(CWmod+a\fP)
 .ITEM
-\f(CWMod+a\fP \(en htop (system info)
+\f(CWMod+i\fP \(en htop (system info)
 .ITEM
 \f(CWMod+n\fP \(en newsboat (RSS feed reader)
 .ITEM
 \f(CWMod+A\fP \(en alsa (audio system control)
 .ITEM
-\f(CWMod+W\fP \(en Web Browser (Brave)
+\f(CWMod+w\fP \(en Web Browser (Brave)
 .ITEM
-\f(CWMod+G\fP \(en GIMP (for general image manipulation)
+\f(CWMod+W\fP \(en nmtui (for connecting to wireless internet)
+.ITEM
+\f(CWMod+G\fP \(en GIMP (for general image manipulation) \(en Not installed by default.
 .LIST OFF
 .HEADING 2 "System"
 .LI
@@ -187,13 +154,13 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+Shift+Backspace\fP \(en reboot (will ask to confirm)
 .ITEM
-\f(CWMod+Shift+Escape\fP \(en exit the graphical environment (will ask to confirm)
+\f(CWMod+Shift+Escape\fP \(en log out of the graphical environment (will ask to confirm)
 .ITEM
 \f(CWMod+F1\fP \(en Shows this document
 .ITEM
 \f(CWMod+Shift+F1\fP \(en Toggle the LARBS welcome message
 .ITEM
-\f(CWMod+F2\fP \(en Refresh dwm
+\f(CWMod+F2\fP \(en Refresh/reload i3
 .ITEM
 \f(CWMod+F3\fP \(en Select screen/display to use
 .ITEM
@@ -244,16 +211,16 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 .ITEM
 \f(CWMod+A\fP \(en alsamixer (general volume sink/source control)
 .LIST OFF
-.HEADING 2 "Tags/Workspaces"
+.HEADING 2 "Workspaces"
 .PP
-There are nine tags, active tags are highlighted in the top left.
+There are ten workspaces, active workspaces are highlighted in the top left.
 .LI
 .ITEM
-\f(CWMod+(Number)\fP \(en Go to that number tag
+\f(CWMod+(Number)\fP \(en Go to that number workspace
 .ITEM
-\f(CWMod+Shift+(Number)\fP \(en Send window to that tag
+\f(CWMod+Shift+(Number)\fP \(en Send window to that workspace
 .ITEM
-\f(CWMod+Tab\fP \(en Go to previous tag
+\f(CWMod+Tab\fP \(en Go to previous workspace (may also use \f(CW\\\fP for Tab)
 .ITEM
 \f(CWMod+g\fP \(en Go to left workspace
 .ITEM
@@ -274,9 +241,9 @@ previous recordings as their names are based on their exact times.
 .ITEM
 \f(CWMod+Delete\fP \(en Kills any recording started in the above way.
 .ITEM
-\f(CWMod+ScrollLock\fP \(en Turn on and off screenkey (if installed) for visual typing display
-.ITEM
 \f(CWMod+Shift+c\fP \(en Toggles a webcam in the bottom right for screencasting.
+.ITEM
+\f(CWMod+ScrollLock\fP \(en Toggle screenkey (if installed) to show keypresses
 .LIST OFF
 .HEADING 2 "Other buttons"
 .PP
@@ -285,17 +252,11 @@ buttons, screen brightness, email, web browsing buttons, etc.) to what you
 would expect.
 .HEADING 1 "Configuration"
 .PP
-Here's a brief reference as to what program does what and where you can modify them.
-Some of the programs marked as "suckless" programs must be recompiled after being reconfigured.
-That means you should go to their directory in \f(CW~/repos/\fP and run \f(CWmake && sudo make install\fP after making changes.
-.LI
-.ITEM
-dwm: the window manager itself \(en \f(CW~/repos/dwm/\fP (suckless)
-.ITEM
-sxhkd: key bindings \(en \f(CW~/.config/sxhkd/sxhkdrc\fP, while some dwm-related commands are configured in dwm, the rest, most of them, are set by sxhkd.
-.ITEM
-lf: the file manager, \f(CW~/.config/lfrc\fP for the main config, \f(CW~/.config/scope\fP for file previews.
-.LIST OFF
+Dotfiles/settings files are located in \f(CW~/.config/\fP, note that dotfiles to programs not included in LARBS are there as well by requests of users. I do not necessarily maintain all these dotfiles, but they remain as legacy.
+.PP
+Suckless programs, st (the terminal) and dmenu among others do not have traditional config files, but have their source code location in \f(CW~/.local/src/\fP.
+There you can modify their \f(CWconfig.h\fP files, then \f(CWsudo make install\fP to reinstall.
+(You'll have to restart the program to see its effects obviously.)
 .HEADING 1 "Frequently Asked Questions (FAQs)"
 .HEADING 2 "My keyboard isn't working as expected!"
 .PP
@@ -305,7 +266,7 @@ These settings may override your preferred settings, so you should open this fil
 .PP
 On fresh install, the Linux audio system (ALSA) often mutes outputs.
 You may want to unbind
-You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWpulsemixer\fP (\f(CWmod+A\fP).
+You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWalsamixer\fP (\f(CWmod+A\fP).
 
 If you have a more complex audio setup and can't be bothered to figure out ALSA, you might want to install and enable PulseAudio, which general "just werks".
 .HEADING 2 "How do I copy and paste?"
@@ -314,7 +275,7 @@ Copying and pasting is always program-specific on any system.
 In most graphical programs, copy and paste will be the same as they are on Windows: \f(CWctrl-c\fP and \f(CWctrl-v\fP.
 In the Linux terminal, those binds have other more important purposes, so you can run \f(CWman st\fP to see how to copy and paste in my terminal build.
 .PP
-Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your Firefox instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
+Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your browser instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
 The system will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.

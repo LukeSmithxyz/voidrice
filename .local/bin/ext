@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # A general, all-purpose extraction script. Not all extraction programs here
 # are installed by LARBS automatically.
@@ -24,7 +24,8 @@ fi
 
 if [ -f "$archive" ] ; then
 	case "$archive" in
-		*.tar.bz2|*.tar.xz|*.tbz2) tar xvjf "$archive" ;;
+		*.tar.bz2|*.tbz2) tar xvjf "$archive" ;;
+		*.tar.xz) tar -xf "$archive" ;;
 		*.tar.gz|*.tgz) tar xvzf "$archive" ;;
 		*.lzma) unlzma "$archive" ;;
 		*.bz2) bunzip2 "$archive" ;;

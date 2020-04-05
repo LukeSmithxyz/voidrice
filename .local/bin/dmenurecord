@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Usage:
 # `$0`: Ask for recording type via dmenu

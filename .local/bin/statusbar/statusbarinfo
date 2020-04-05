@@ -1,0 +1,33 @@
+#!/bin/sh
+
+echo "
+ ____  _        _             _
+/ ___|| |_ __ _| |_ _   _ ___| |__   __ _ _ __
+\___ \| __/ _\` | __| | | / __| '_ \ / _\` | '__|
+ ___) | || (_| | |_| |_| \__ \ |_) | (_| | |
+|____/ \__\__,_|\__|\__,_|___/_.__/ \__,_|_|
+
+This is a list of the statusbar modules.
+
+📦5			pacpackages: updatable packages (must have pacman -Sy run in root cronjob to check).
+📰 41			news: unread RSS entries in newsboat.
+☔ 83% ❄️ 69° 🌞 80°	weather: ☔ for precipitation, 🌞 and ❄  for daily high and low.
+📬 20			mailbox: number of unread mail if mutt-wizard is active.
+🔉 62%			volume: master sink volume.
+🔌83%			battery: 🔌 for charging, 🔋 for discharging, ⚡ for full.
+📶 80% ❎		internet: 📶 for wifi with % (📡 if none), 🌐 for ethernet. (❎ if none).
+
+Obviously the time and date are displayed as well.
+
+Optional script modules:
+
+Edit ~/.local/src/dwmblocks/config.h to add these or your own if you'd like (and recompile and restart dwmblocks).
+
+'memory'	🧠 559Mi/3.7Gi		Current used memory/total memory.
+'cpu'		🌡 +46.0°C		CPU temperature.
+'disk' 		🖥 : 28G/30G		Remaining disk space...
+'disk ~'	🏠: 641G/850G		...can be given directory argument.
+'moonphase'	🌕 39%			Phase of the moon (requires \`pom-perl\`).
+'iplocate'	🇺🇸 United States	Your own or VPN location (requires \`geoiplookup\`).
+
+" | less

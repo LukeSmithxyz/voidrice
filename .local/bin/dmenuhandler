@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 # Feed this script a link and it will give dmenu
 # some choice programs to use to open it.
 

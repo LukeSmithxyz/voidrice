@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 printf "Beginning upgrade.\\n"
 

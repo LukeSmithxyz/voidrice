@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 # Toggles all cronjobs off/on.
 # Stores disabled crontabs in ~/.consaved until restored.
 

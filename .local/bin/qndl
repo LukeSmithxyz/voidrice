@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 # $1 is a url; $2 is a command
 [ -z "$1" ] && exit
 base="$(basename "$1")"
