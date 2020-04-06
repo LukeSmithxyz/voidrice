@@ -49,15 +49,21 @@ type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
-; Charging
+
+; orange denotes charging
 format-charging =<label-charging>
-label-charging = %percentage%%
-format-charging-prefix = "Batt: "
-; Not charging
-format-discharging-prefix = "Batt: "
-;format-discharging-prefix = "🔋: "
-format-discharging = <label-discharging>
-label-discharging = %percentage%%
+label-charging = Batt: %percentage%%
+label-charging-overline=${colors.orange}
+label-charging-underline=${colors.orange}
+
+format-discharging = <ramp-capacity><label-discharging>
+label-discharging = Batt: %percentage%%
+
+; changes color for which % battery is in
+; red=0-33, yellow=34-66, green=67-100
+ramp-capacity-0 = %{u#ff0000}%{+u}
+ramp-capacity-1 = %{u#ffea00}%{+u}
+ramp-capacity-2 = %{u#20c723}%{+u}
 
 [module/bluetooth]
 type = custom/script
