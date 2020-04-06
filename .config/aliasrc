@@ -42,5 +42,5 @@ alias mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)"
 # Some other stuff
 alias \
 	magit="nvim -c MagitOnly" \
-	ref="shortcuts >/dev/null; source ~/.config/shortcutrc" \
+	ref="shortcuts >/dev/null; source ~/.config/shortcutrc; source ~/.config/zshnameddirrc" \
 	weath="less -S ~/.local/share/weatherreport" \
