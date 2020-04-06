@@ -72,7 +72,7 @@ cursor:
 # Live config reload (changes require restart)
 live_config_reload: true
 shell:
-  program: $SHELL
+  program: /bin/zsh
 
 mouse:
   hide_when_typing: false
