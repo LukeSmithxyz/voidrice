@@ -12,4 +12,4 @@ sxiv is the image viewer.
 	r - Reload image if changed
 	m - Mark/unmark image
 	w - Zoom to fit window
-	ctrl-x - Run external command (see $XDG_CONFIG_HOME/sxiv/exec/key-handler for options)
+	ctrl-x - Run external command (see ~/.config/sxiv/exec/key-handler for options)
