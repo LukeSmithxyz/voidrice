@@ -14,10 +14,8 @@ window:
     general: Alacritty
   gtk_theme_variant: None
 scrolling:
-  # Maximum number of lines in the scrollback buffer.
   history: 30000
-  # Number of lines the viewport will move for every line scrolled when
-  #multiplier: 3
+  multiplier: 1
 font:
   # Normal font face
   normal:
