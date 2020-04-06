@@ -1,1 +1,99 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+env:
+  TERM: alacritty
+window:  
+  dimensions:
+   columns: 100
+   lines: 80
+  decorations: none
+  startup_mode: Windowed
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+  gtk_theme_variant: None
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  history: 30000
+  # Number of lines the viewport will move for every line scrolled when
+  #multiplier: 3
+font:
+  # Normal font face
+  normal:
+    family: "Source Code Pro"
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+  # Bold font face
+  bold:
+    family: "Source Code Pro"
+    style: Bold
+  # Italic font face
+  italic:
+    family: "Source Code Pro"
+    style: Italic
+  # Point size
+  size: 14.0
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  offset:
+    x: -1
+    y: -1
+  glyph_offset:
+   x: 0
+   y: 0
+# Colors
+colors:
+  Default colors
+  primary:
+   background: '#000000'
+   foreground: '#eaeaea'
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xc62828'
+    green:   '0x558b2f'
+    yellow:  '0xf9a825'
+    blue:    '0x1565c0'
+    magenta: '0x6a1e9a'
+    cyan:    '0x00838f'
+    white:   '0xf2f2f2'
+background_opacity: 0.5
+selection:
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+  
+cursor:
+#   Values for `style`:
+#     - ▇ Block
+#     - _ Underline
+#     - | Beam
+  style: Block
+# Live config reload (changes require restart)
+live_config_reload: true
+shell:
+  program: $SHELL
 
+mouse:
+  hide_when_typing: false
+  url:
+    launcher:
+      program: xdg-open
+# Mouse bindings
+key_bindings:
+  - { key: V,        mods: Control, action: Paste            }
+  - { key: C,        mods: Control, action: Copy             }
+  - { key: Insert,   mods: Shift,         action: PasteSelection   }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: Paste,                    action: Paste                            }
+  - { key: Copy,                     action: Copy                             }
+  - { key: L,         mods: Control, action: ClearLogNotice                   }
+  - { key: L,         mods: Control, chars: "\x0c"                            }
+  - { key: PageUp,    mods: Shift,   action: ScrollPageUp,   mode: ~Alt       }
+  - { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
+  - { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
+  - { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
