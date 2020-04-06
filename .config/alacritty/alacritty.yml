@@ -15,7 +15,8 @@ window:
   gtk_theme_variant: None
 scrolling:
   history: 30000
-  multiplier: 1
+  multiplier: 0
+  faux_multiplier: 0
 font:
   # Normal font face
   normal:
