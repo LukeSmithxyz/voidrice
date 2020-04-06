@@ -44,7 +44,7 @@ font:
    y: 0
 # Colors
 colors:
-  Default colors
+  # Default colors
   primary:
    background: '#000000'
    foreground: '#eaeaea'
