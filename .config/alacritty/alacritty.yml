@@ -46,8 +46,8 @@ font:
 colors:
   # Default colors
   primary:
-   background: '#000000'
-   foreground: '#eaeaea'
+   background: "#282828"
+   foreground: "#ebdbb2"
   # Normal colors
   normal:
     black:   '0x000000'
@@ -58,7 +58,7 @@ colors:
     magenta: '0x6a1e9a'
     cyan:    '0x00838f'
     white:   '0xf2f2f2'
-background_opacity: 0.5
+background_opacity: 0.9
 selection:
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: true
