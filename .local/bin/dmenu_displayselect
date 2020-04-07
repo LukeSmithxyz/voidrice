@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e 
 
 # A UI for detecting and selecting all displays. Probes xrandr for connected
 # displays and lets user select one to use. User may also select "manual
@@ -48,22 +49,36 @@ morescreen() { # If multi-monitor is selected and there are more than two screen
 
 multimon() { # Multi-monitor handler.
 	case "$(echo "$screens" | wc -l)" in
-		1) xrandr $(echo "$allposs" | grep -v "$screens" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
-		2) twoscreen ;;
-		*) morescreen ;;
+		*) xrandr $(echo "$allposs" | grep -v "$screens" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 	esac ;}
+
+load_screen_layout() { # ~/.screenlayout loader
+	# Get all screen configurations in ~.screenlayout/
+    if [[ $(echo $screen_layouts | wc -l) -eq 2 ]]; then
+    notify-send --urgency=critical "~/.screenlayout seems to be empty"
+    else
+    layout_name=$(echo "$screen_layouts" | dmenu -i -p "Screen layouts:")
+    chosen_layout=$(find ~/.screenlayout -type f | grep $layout_name)
+    echo "$chosen_layout"
+    arandr $chosen_layout 2>/dev/null || notify-send --urgency=critical "Error loading screen layout: ~/.screenlayout/$layout_name" && exit
+    fi
+    }
 
 # Get all possible displays
 allposs=$(xrandr -q | grep "connected")
 
-# Get all connected screens.
+# Get all connected screens
 screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
 
+# Get all screen layouts
+screen_layouts=$(find ~/.screenlayout -type f -exec basename {} \;)
+
 # Get user choice including multi-monitor and manual selection:
-chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
+chosen=$(printf "%s\\nlayouts\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
+    "layouts") load_screen_layout;;
 	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 esac
 

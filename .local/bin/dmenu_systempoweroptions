@@ -1,0 +1,11 @@
+#!/bin/sh
+
+user_choice=$(printf "Logout\nPoweroff\nReboot\nCancel" | dmenu -i -p "What should the computer do?: ")
+case "$user_choice" in
+	"Logout") i3 exit ;;
+	"Poweroff") notify-send "Shutting down in 10 seconds" && sleep 10 && shutdown ;;
+	"Reboot")  notify-send "Rebooting!" && sleep 5 && reboot ;;
+	*) notify-send "No system power option selected" && return ;;
+esac
+
+

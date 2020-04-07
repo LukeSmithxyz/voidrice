@@ -5,19 +5,14 @@
 
 # #---Variables---# #
 set $inner_gap 10
-set $outer_gap 5
-
-# #---Polybar---# #
-exec_always --no-startup-id launch_polybar
-
-# #---Basic Definitions---# #
-for_window [class="^.*"] border pixel 2
-gaps inner $inner_gap
-gaps outer $outer_gap
+set $outer_gap 2
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
-set $stoprec --no-startup-id dmenurecord kill
+set $stoprec --no-startup-id dmenu_record kill
+
+# #---Polybar---# #
+exec_always --no-startup-id launch_polybar
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 2
@@ -35,9 +30,6 @@ for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
-for_window [class="Spotify"] move to workspace $ws10
-for_window [class="discord"] move to workspace $ws10
-for_window [class="Slack"] move to workspace $ws10
 for_window [class="Pulse"] move to workspace $ws9
 
 # #---Basic Bindings---# #
@@ -46,20 +38,18 @@ bindsym $mod+Shift+Return       exec --no-startup-id samedir
 bindsym $mod+space              focus mode_toggle
 bindsym $mod+Shift+space        floating toggle
 bindsym $mod+Escape             workspace prev
-bindsym $mod+grave              exec --no-startup-id dmenuunicode
+bindsym $mod+grave              exec --no-startup-id dmenu_unicode
 bindsym $mod+Insert             exec --no-startup-id showclip
 
-# #---Power Bindings---# #
-bindsym $mod+Shift+Escape	exec --no-startup-id prompt "Exit Xorg Session?" "i3 exit"
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-bindsym $mod+Ctrl+x		exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+# #---User Session Bindings---# #
+bindsym $mod+Shift+Escape	exec --no-startup-id dmenu_systempoweroptions
 
 # #---Letter Key Bindings---# #
 # A
 bindsym $mod+a              exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
-bindsym $mod+shift +a       exec $term -e alsamixer
+bindsym $mod+shift+a       exec $term -e alsamixer
 # B
-bindsym $mod+b              exec --no-startup-id polybar_msg cmd toggle
+bindsym $mod+b              exec --no-startup-id polybar-msg cmd toggle
 bindsym $mod+Shift+b        floating toggle; sticky toggle; exec --no-startup-id hover left
 # C
 bindsym $mod+c              exec code
@@ -92,7 +82,7 @@ bindsym $mod+l              focus right
 bindsym $mod+Shift+l        move right 30
 bindsym $mod+Ctrl+l         move workspace to output right
 # M
-bindsym $mod+m              exec spotify
+bindsym $mod+m              exec dmenu_openmusic
 bindsym $mod+Shift+m        exec --no-startup-id amixer sset Master toggle
 # N
 bindsym $mod+n              exec nautilus
@@ -126,7 +116,7 @@ bindsym $mod+Shift+w        exec $BROWSER
 bindsym $mod+y              exec $term -e calcurse -D ~/.config/calcurse
 bindsym $mod+Shift+y        exec --no-startup-id i3resize left
 # X
-bindsym $mod+x              ifinstalled i3lock && i3lock --color 000000 --show-failed-attempts --radius 120 --ring-width 10.0
+bindsym $mod+x              exec ifinstalled i3lock && i3lock --color 000000 --show-failed-attempts --radius 120 --ring-width 10.0
 # Z
 bindsym $mod+z              gaps outer current plus 5
 bindsym $mod+Shift+z        gaps outer current minus 5
@@ -152,10 +142,10 @@ bindsym $mod+Shift+slash            exec --no-startup-id xkill
 bindsym $mod+backslash              workspace back_and_forth
 
 # #---Volume Bindings---# #
-bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+plus   exec --no-startup-id amixer sset Master 15%+ && pkill -RTMIN+10 i3blocks
-bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+minus  exec --no-startup-id amixer sset Master 15%- && pkill -RTMIN+10 i3blocks
+bindsym $mod+plus         exec --no-startup-id amixer sset Master 5%+
+bindsym $mod+Shift+plus   exec --no-startup-id amixer sset Master 15%+
+bindsym $mod+minus        exec --no-startup-id amixer sset Master 5%-
+bindsym $mod+Shift+minus  exec --no-startup-id amixer sset Master 15%-
 
 set $ws1 "1"
 set $ws2 "2"
@@ -200,10 +190,10 @@ for_window [title="Default - Wine desktop"] floating enable
 
 # #---Function Buttons---# #
 bindsym $mod+F2     restart
-bindsym $mod+F3     exec --no-startup-id displayselect
+bindsym $mod+F3     exec --no-startup-id dmenu_displayselect
 bindsym $mod+F5     exec --no-startup-id $netrefresh
-bindsym $mod+F9     exec --no-startup-id dmenumount
-bindsym $mod+F10    exec --no-startup-id dmenuumount
+bindsym $mod+F9     exec --no-startup-id dmenu_mount
+bindsym $mod+F10    exec --no-startup-id dmenu_umount
 
 # #---Arrow Keys---# #
 bindsym $mod+Left           focus left
@@ -222,7 +212,7 @@ bindsym $mod+Ctrl+Right     move workspace to output right
 # #---Screenshots/Recording---# #
 bindsym Print                   exec --no-startup-id maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
 bindsym Shift+Print             exec --no-startup-id maimpick
-bindsym $mod+Print              exec --no-startup-id dmenurecord
+bindsym $mod+Print              exec --no-startup-id dmenu_record
 bindsym $mod+Scroll_Lock        exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+Delete             exec $stoprec
 
