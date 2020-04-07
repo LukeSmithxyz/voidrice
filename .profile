@@ -11,8 +11,10 @@ export READER="zathura"
 export FILE="ranger"
 export STATUSBAR="polybar"
 
+# Export XDG environmental variables from '~/.config/user-dirs.dirs'
+eval "$(sed 's/^[^#].*/export &/g;t;d' ~/.config/user-dirs.dirs)"
+
 # ~/ Clean-up:
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
