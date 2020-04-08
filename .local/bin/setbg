@@ -7,7 +7,7 @@
 #	If wal is installed, also generate a colorscheme.
 
 # Location of link to wallpaper link.
-bgloc="${XDG_CACHE_HOME:-$HOME/.cache/}/bg"
+bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
 
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..."
 
