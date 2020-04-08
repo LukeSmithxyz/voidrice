@@ -1,0 +1,8 @@
+#!/bin/sh
+
+user_choice=$(printf "Yes\nNo" | dmenu -i -p "Refresh mirrors? (It might speed up package downloads): ")
+case "$user_choice" in
+	"Yes") notify-send "Refreshing mirrors" && (reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>&1; notify-send "Mirrors refreshed") & ;;
+	"No") notify-send "Did not refresh mirrors" && return ;;
+	*) notify-send "No option selected" && return ;;
+esac
