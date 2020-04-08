@@ -3,14 +3,14 @@
 ## or $XDG_CONFIG_HOME/ncmpcpp/config and set up your preferences.          ##
 ##############################################################################
 #
-ncmpcpp_directory = ~/.config/ncmpcpp
+ncmpcpp_directory = $XDG_CONFIG_HOME/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-lyrics_directory = ~/.local/share/lyrics
+lyrics_directory = $XDG_DATA_HOME/lyrics
 #
 ##### connection settings #####
 #
