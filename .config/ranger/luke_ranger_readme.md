@@ -32,10 +32,10 @@ These "verbs" take "nouns" or "arguments," like these:
 
 + d -- "~/Documents"
 + D -- "~/Downloads"
-+ cf -- "$XDG_CONFIG_HOME"
++ cf -- "~/.config"
 + And many others, including those you add to `~/.bmdirs`.
 
-Press any "verb" followed by any "argument" to perform a folder operation. "gd" will cd to ~/Documents, for example. "mD" will move the selected file(s) to ~/Downloads. "tcf" will create a new tab in $XDG_CONFIG_HOME, etc. etc.
+Press any "verb" followed by any "argument" to perform a folder operation. "gd" will cd to ~/Documents, for example. "mD" will move the selected file(s) to ~/Downloads. "tcf" will create a new tab in ~/.config, etc. etc.
 
 ## Many little additions!
 
@@ -60,7 +60,7 @@ Press any "verb" followed by any "argument" to perform a folder operation. "gd" 
 	+ Txs -- copy slideshow/beamer template to new file
 	+ Txh -- copy handout template to new file
 + Image commands:
-	+ bg -- (for i3 users) makes an image your background (assuming i3 is looking at $XDG_CONFIG_HOME/wall.png for your background)
+	+ bg --  makes an image your background (assuming i3 is looking at ~/.local/share/bg for your background)
 	+ bw -- runs Pywal on the selected image, making it your background and generating a color scheme based off of it.
 	+ C -- rotates an image (requires imagemagick)
 	+ F -- flips an image (requires imagemagick)

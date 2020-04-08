@@ -1,5 +1,5 @@
 " vim: filetype=vifm
-source $XDG_CONFIG_HOME/vifm/vifmshortcuts
+source ${XDG_CONFIG_HOME:$HOME/.config}/vifm/vifmshortcuts
 
 set vicmd=$EDITOR
 set syscalls

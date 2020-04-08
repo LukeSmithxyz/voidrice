@@ -4,4 +4,4 @@
 
 [ "$(pgrep -x $(basename $0) | wc -l)" -gt 2 ] && exit
 
-echo $XDG_DATA_HOME/newsboat/queue | entr -p queueandnotify 2>/dev/null
+echo ${XDG_DATA_HOME:$HOME/.local/share}/newsboat/queue | entr -p queueandnotify 2>/dev/null

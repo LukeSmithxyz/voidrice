@@ -2,7 +2,7 @@
 
 # Basic vars
 set shell sh
-set previewer $XDG_CONFIG_HOME/lf/scope
+set previewer ${XDG_CONFIG_HOME:$HOME/.config}/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
@@ -36,7 +36,7 @@ cmd delete ${{
 cmd moveto ${{
 	set -f
 	clear; echo "Move to where?"
-	dest="$(cut -d'	' -f2- $XDG_CONFIG_HOME/directories | fzf)" &&
+	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:$HOME/.config}/directories | fzf)" &&
 	eval mv -iv $fx $dest &&
 	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
 }}
@@ -44,7 +44,7 @@ cmd moveto ${{
 cmd copyto ${{
 	set -f
 	clear; echo "Copy to where?"
-	dest="$(cut -d'	' -f2- $XDG_CONFIG_HOME/directories | fzf)" &&
+	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:$HOME/.config}/directories | fzf)" &&
 	eval cp -ivr $fx $dest &&
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
@@ -54,9 +54,9 @@ cmd bulkrename ${{
 }}
 
 # Bindings
-map c $lf -remote "send $id cd $(cut -d'	' -f2 $XDG_CONFIG_HOME/directories | fzf)"
+map c $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:$HOME/.config}/directories | fzf)"
 map <c-f> $lf -remote "send $id select '$(fzf)'"
-map J $lf -remote "send $id cd $(cut -d'	' -f2 $XDG_CONFIG_HOME/directories | fzf)"
+map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:$HOME/.config}/directories | fzf)"
 map gh
 map g top
 map D delete
