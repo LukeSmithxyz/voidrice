@@ -10,7 +10,7 @@ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XA
 mpd &			# music player daemon-you might prefer it as a service though
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 setbg &			# set the background with the `setbg` script
-#xrdb ~/.config/Xresources &	# Uncomment to use Xresources colors/settings on startup
+#xrdb ${XDG_CONFIG_HOME:$HOME/.config}/Xresources &	# Uncomment to use Xresources colors/settings on startup
 xcompmgr &		# xcompmgr for transparency
 $STATUSBAR &		# start the statusbar
 dunst &			# dunst for notifications

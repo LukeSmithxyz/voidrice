@@ -5,6 +5,6 @@ D	~/Downloads
 m	~/Music
 pp	~/Pictures
 vv	~/Videos
-cf	~/.config
+cf	${XDG_CONFIG_HOME:$HOME/.config}
 sc	~/.local/bin
 mn	/mnt
