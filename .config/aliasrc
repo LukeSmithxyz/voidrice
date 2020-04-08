@@ -44,4 +44,3 @@ alias \
 	magit="nvim -c MagitOnly" \
 	ref="shortcuts >/dev/null; source $XDG_CONFIG_HOME/shortcutrc" \
 	weath="less -S $XDG_DATA_HOME/weatherreport" \
-	mbsync="mbsync -c $XDG_CONFIG_HOME/isync/mbsyncrc"
