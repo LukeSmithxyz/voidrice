@@ -4,11 +4,10 @@ run_reflector(){
 dialog --title "Refresh mirrors" --yesno "Run reflector? It might speed up package downloads." 7 60
 response=$?
 case $response in
-   0) (reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist &> /dev/null; notify-send "Mirrors refreshed") & ;;
-   1) notify-send "Mirrors not refreshed ;;
+   0) (reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>&1; notify-send "Mirrors refreshed") & ;;
+   1) notify-send "Mirrors not refreshed" ;;
 esac
 }
-
 run_reflector
 clear
 exit 0
