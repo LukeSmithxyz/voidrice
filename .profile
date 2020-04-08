@@ -14,6 +14,9 @@ export BROWSER="brave"
 export READER="zathura"
 export STATUSBAR="${LARBSWM}blocks"
 
+# Export XDG environmental variables from '~/.config/user-dirs.dirs'
+eval "$(sed 's/^[^#].*/export &/g;t;d' ~/.config/user-dirs.dirs)"
+
 # ~/ Clean-up:
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
