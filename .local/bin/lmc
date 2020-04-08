@@ -26,5 +26,3 @@ case "$1" in
 	down) down ;;
 	control) control ;;
 esac
-
-pkill -RTMIN+10 "${STATUSBAR:?}" &
