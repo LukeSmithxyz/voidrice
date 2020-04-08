@@ -5,7 +5,7 @@ cfa	$XDG_CONFIG_HOME/aliasrc
 cfz	$ZDOTDIR/.zshrc
 cfv	$XDG_CONFIG_HOME/nvim/init.vim
 cfm	$XDG_CONFIG_HOME/mutt/muttrc
-cfd	~/.Xdefaults
+cfx	$XDG_CONFIG_HOME/Xresources
 cfu	$XDG_CONFIG_HOME/newsboat/urls
 cfn	$XDG_CONFIG_HOME/newsboat/config
 cfmb	$XDG_CONFIG_HOME/ncmpcpp/bindings
