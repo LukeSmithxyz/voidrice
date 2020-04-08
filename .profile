@@ -3,8 +3,8 @@
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
-# Get default LARBS WM from ${XDG_DATA_HOME:$HOME/.local/share}/larbs/wm
-export LARBSWM="$(cat ${XDG_DATA_HOME:$HOME/.local/share}/larbs/wm 2>/dev/null)" &&
+# Get default LARBS WM from ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/wm
+export LARBSWM="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/wm 2>/dev/null)" &&
 	[ "$LARBSWM" = "dwm" ] || export LARBSWM="i3"
 
 # Default programs:
@@ -25,10 +25,10 @@ export LESSHISTFILE="-"
 export WGETRC="${XDG_CONFIG_HOME:$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:$HOME/.config}/inputrc"
 export ZDOTDIR="${XDG_CONFIG_HOME:$HOME/.config}/zsh"
-export PASSWORD_STORE_DIR="${XDG_DATA_HOME:$HOME/.local/share}/password-store"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:$HOME/.config}/android"
-export CARGO_HOME="${XDG_DATA_HOME:$HOME/.local/share}/cargo"
+export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
@@ -49,4 +49,4 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
 
 # Switch escape and caps if tty and no passwd required:
-sudo -n loadkeys ${XDG_DATA_HOME:$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null
+sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null

@@ -5,7 +5,7 @@ ncmpcpp_directory = ${XDG_CONFIG_HOME:$HOME/.config}/ncmpcpp
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-lyrics_directory = ${XDG_DATA_HOME:$HOME/.local/share}/lyrics
+lyrics_directory = ${XDG_DATA_HOME:-$HOME/.local/share}/lyrics
 #
 ##### connection settings #####
 #

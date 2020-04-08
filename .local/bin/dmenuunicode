@@ -5,7 +5,7 @@
 # Must have xclip installed to even show menu.
 xclip -h 2>/dev/null || exit 1
 
-chosen=$(cut -d ';' -f1 ${XDG_DATA_HOME:$HOME/.local/share}/larbs/emoji | dmenu -i -l 20 | sed "s/ .*//")
+chosen=$(cut -d ';' -f1 ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji | dmenu -i -l 20 | sed "s/ .*//")
 
 [ "$chosen" != "" ] || exit
 

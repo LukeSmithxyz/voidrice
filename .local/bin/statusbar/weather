@@ -7,18 +7,18 @@
 # You could set up a shell alias to view the full file in a pager in the
 # terminal if desired. This function will only be run once a day when needed.
 getforecast() { ping -q -c 1 1.1.1.1 >/dev/null &&
-curl -sf "wttr.in/$LOCATION" > "${XDG_DATA_HOME:$HOME/.local/share}/weatherreport" || exit 1 ;}
+curl -sf "wttr.in/$LOCATION" > "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" || exit 1 ;}
 
 # Some very particular and terse stream manipulation. We get the maximum
 # precipication chance and the daily high and low from the downloaded file and
 # display them with coresponding emojis.
-showweather() { printf "%s" "$(sed '16q;d' "${XDG_DATA_HOME:$HOME/.local/share}/weatherreport" |
+showweather() { printf "%s" "$(sed '16q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" |
 	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔ /g;1q" | tr -d '\n')"
-sed '13q;d' "${XDG_DATA_HOME:$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "°"}' ;}
+sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "°"}' ;}
 
 # The BLOCK_BUTTON bloat for clicking in i3.
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e less -Srf "${XDG_DATA_HOME:$HOME/.local/share}/weatherreport" ;;
+    1) $TERMINAL -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" ;;
     2) getforecast && showweather ;;
     3) pgrep -x dunst >/dev/null && notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
@@ -29,7 +29,7 @@ esac
 
 # The test if our forcecast is updated to the day. If it isn't download a new
 # weather report from wttr.in with the above function.
-[ "$(stat -c %y "${XDG_DATA_HOME:$HOME/.local/share}/weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
+[ "$(stat -c %y "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
 	getforecast
 
 showweather
