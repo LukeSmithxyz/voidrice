@@ -52,8 +52,7 @@ full-at = 98
 
 ; orange denotes charging
 format-charging =<label-charging>
-format-charging-prefix = "Batt: "
-label-charging = %percentage%%
+label-charging = Batt: %percentage%%
 label-charging-overline=${colors.orange}
 label-charging-underline=${colors.orange}
 
