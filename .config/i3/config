@@ -8,7 +8,7 @@ set $inner_gap 10
 set $outer_gap 2
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
-set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
+set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager && notify-send "Refreshed Network Manager"
 set $stoprec --no-startup-id dmenu_record kill
 
 # #---Polybar---# #
@@ -47,7 +47,7 @@ bindsym $mod+Shift+Escape	exec --no-startup-id dmenu_systempoweroptions
 # #---Letter Key Bindings---# #
 # A
 bindsym $mod+a              exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
-bindsym $mod+shift+a       exec $term -e alsamixer
+bindsym $mod+shift+a        exec $term -e alsamixer
 # B
 bindsym $mod+b              exec --no-startup-id polybar-msg cmd toggle
 bindsym $mod+Shift+b        floating toggle; sticky toggle; exec --no-startup-id hover left
@@ -106,9 +106,9 @@ bindsym $mod+Shift+t        gaps inner current set $inner_gap; gaps outer curren
 # U
 bindsym $mod+u              exec --no-startup-id ddspawn tmuxdd
 bindsym $mod+Shift+u        exec --no-startup-id i3resize down
-# X
-bindsym $mod+v              exec discord
-bindsym $mod+Shift+v        exec slack
+# V
+bindsym $mod+v              exec keybinding_not_assigned
+bindsym $mod+Shift+v        exec keybinding_not_assigned
 # W
 bindsym $mod+w              exec $term -e sudo nmtui
 bindsym $mod+Shift+w        exec $BROWSER
