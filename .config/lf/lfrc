@@ -2,7 +2,7 @@
 
 # Basic vars
 set shell sh
-set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope
+set previewer ~/.config/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
