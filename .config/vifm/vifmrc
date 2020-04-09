@@ -54,11 +54,11 @@ fileviewer *.odt odt2txt %c -
 filetype *.csv,*.xlsx sc-im %c
 fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
-filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mpv --no-audio-display --input-ipc-server=/tmp/mpvsoc$(date +%%s) %c
+filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus mpv --no-audio-display %c
 filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu,*.epub,*.cbz,*.cbr,*.cb7 zathura %f 2>/dev/null &,
 fileviewer *.pdf pdftotext -l 1 -nopgbrk %c -
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.qt,*.divx,*.as[fx],*mp3,*.flac file
-filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx] mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) %f 2>/dev/null &,
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx] mpv %f 2>/dev/null &,
 
 fileview *.tar.gz atool -l --format=tar %f 2>/dev/null | awk '{$1=$2=$3=$4=$5=""; print $0}'
 fileview *.zip,*.cbz    atool -l --format=zip %f 2>/dev/null | tail +4 | awk '{$1=$2=$3=""; print $0}'
