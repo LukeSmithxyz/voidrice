@@ -1,10 +1,10 @@
 # You can add comments to these files with #
-cf	~/.config
+cf	${XDG_CONFIG_HOME:-$HOME/.config}
 d	~/downloads
 gh	~/github
 h	~/
-lb       ~/.local/bin
+lb  ~/.local/bin
 mn	/mnt
-psc     ~/.local/bin/polybar_scripts
+psc ~/.local/bin/polybar_scripts
 pp	~/pictures
 sc	~/.local/bin

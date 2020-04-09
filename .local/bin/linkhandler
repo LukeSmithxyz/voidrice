@@ -11,7 +11,7 @@
 
 case "$1" in
 	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*)
-		setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 & ;;
+		setsid mpv -quiet "$1" >/dev/null 2>&1 & ;;
 	*png|*jpg|*jpe|*jpeg|*gif)
 		curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && sxiv -a "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 & ;;
 	*mp3|*flac|*opus|*mp3?source*)
