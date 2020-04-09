@@ -7,6 +7,6 @@
 
 License: GNU GPLv3
 
-![Image of Arch user](https://github.com/vladdoster/dotfiles/blob/master/.config/assets/arch-user.png)
+![Image of Arch user](https://github.com/vladdoster/dotfiles/blob/master/.config/assets/arch-user.png =100x100)
 
 </div>
