@@ -9,6 +9,6 @@
 
 
 ### Screenshot
-<img src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png" data-canonical-src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png" width="200" height="200" />
+<img src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png" data-canonical-src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png"/>
 
 </div>
