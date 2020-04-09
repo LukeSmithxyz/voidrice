@@ -34,7 +34,7 @@ module-margin-right = 1
 font-0 = "Source Code Pro:pixelsize=8;1"
 font-1 = "Source Code Pro:style=Regular:pixelsize=8;1"
 ; enable emojis
-font-2 = NotoColorEmoji:pixelsize=5;0:fontformat=truetype:scale=12:antialias=true;
+font-2 = NotoColorEmoji:pixelsize=8;1:fontformat=truetype:scale=10:antialias=true;3
 ; wm related
 wm-restack = i3
 scroll-up = i3wm-wsnext
@@ -52,7 +52,8 @@ full-at = 98
 
 ; orange denotes charging
 format-charging =<label-charging>
-label-charging = Batt: %percentage%%
+format-charging-prefix = "Batt: "
+label-charging = %percentage%%
 label-charging-overline=${colors.orange}
 label-charging-underline=${colors.orange}
 
@@ -154,7 +155,7 @@ type = custom/script
 exec = ~/.local/bin/polybar_scripts/sys_temp
 format = <label>
 interval = 5
-label = Temp: %output%°F
+label = Sys Temp: %output%°F
 
 [module/volume]
 ; sound utility
