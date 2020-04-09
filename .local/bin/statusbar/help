@@ -3,6 +3,6 @@
 case $BLOCK_BUTTON in
     1) groff -mom ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom -Tpdf | zathura - ;;
     2) i3 restart ;;
-    3) pgrep -x dunst >/dev/null && notify-send "❓ Help module" "\- Left click to open LARBS guide.
+    3) notify-send "❓ Help module" "\- Left click to open LARBS guide.
 - Middle click to refresh i3.";;
 esac; echo "❓"

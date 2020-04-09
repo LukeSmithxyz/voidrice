@@ -20,7 +20,7 @@ sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\(
 case $BLOCK_BUTTON in
     1) $TERMINAL -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" ;;
     2) getforecast && showweather ;;
-    3) pgrep -x dunst >/dev/null && notify-send "🌈 Weather module" "\- Left click for full forecast.
+    3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
 ☔: Chance of rain/snow
 ❄: Daily low
