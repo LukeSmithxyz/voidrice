@@ -2,13 +2,15 @@
 
 # Basic vars
 set shell bash
-set previewer ~/.config/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
 set color256
 set icons
 set period 1
+
+# Vars that depend on environmental variables
+$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 
 # cmds/functions
 cmd open ${{
