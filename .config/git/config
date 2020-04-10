@@ -14,6 +14,8 @@
   diff = auto
   branch = auto
 [alias]
+  a  = add
+  au = add -u
   p  = push
   pu = pull
   st = status -uno

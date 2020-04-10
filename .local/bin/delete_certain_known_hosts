@@ -1,4 +1,5 @@
 #!/bin/bash
+# Works on all GNU systems and tested on MacOS 10.15.13
 # Deletes certain lines of ~/.ssh/known_hosts
 # Check if any args passed
 if [ $# -eq 0 ]; then
