@@ -1,20 +1,20 @@
 #!/bin/bash
 # Deletes certain lines of ~/.ssh/known_hosts
-
 # Check if any args passed
 if [ $# -eq 0 ]; then
     echo "Usage: ./delete_certain_known_hosts 3 5 7 23"
     echo "Will catch duplicate line numbers"
     exit 1
 fi
-
-# Set loop variables
+# Set variables
 known_hosts_path=~/.ssh/known_hosts
 lines_in_known_hosts=$(wc -l "$known_hosts_path" | awk '{print $1}')
+lines_to_delete=""
+# Dedupe, sort numerically, and create array from args string
 IFS=' '
 deduped_args=$(echo "$@" | xargs -n1 | sort -nu | xargs)
 read -r -a delete_these_lines <<< "$deduped_args"
-lines_to_delete=""
+# Loop through creating sed expression
 for var in "${delete_these_lines[@]}"; do
 if [[ "$var" -gt "$lines_in_known_hosts" ]]; then
 	echo "$var is invalid line in $lines_in_known_hosts line $known_hosts_path"
@@ -22,7 +22,6 @@ else
 	lines_to_delete+="${var}d;"
 fi
 done
-
 # Output information to user about what happened
 if [[ -z "$lines_to_delete" ]]; then
   echo "All arguments passed were invalid lines in $known_hosts_path"
