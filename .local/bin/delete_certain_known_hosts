@@ -1,5 +1,10 @@
 #!/bin/bash
 # Deletes certain lines of ~/.ssh/known_hosts
+if [ $# -eq 0 ]; then
+    echo "Usage: ./delete_certain_known_hosts 3 5 7 23"
+    echo "Will catch duplicate line numbers"
+    exit 1
+fi
 known_hosts_path=~/.ssh/known_hosts
 lines_in_known_hosts=$(wc -l "$known_hosts_path" | awk '{print $1}')
 IFS=' '
