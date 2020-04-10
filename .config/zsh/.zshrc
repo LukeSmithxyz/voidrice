@@ -1,4 +1,4 @@
-# Config for the Zoomer Shell
+#Config for the Zoomer Shell
 
 # Enable colors and change prompt:
 autoload -U colors && colors	# Load colors
@@ -9,7 +9,7 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=${XDG_CONFIG_HOME:-$HOME/.config}/zsh/history
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
