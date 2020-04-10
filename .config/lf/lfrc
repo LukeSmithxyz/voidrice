@@ -1,21 +1,23 @@
 # Luke's lf settings
 
 # Basic vars
-set shell sh
+set shell bash
 set previewer ~/.config/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
 set color256
-set icons		# Enable icons. Requires nerd fonts and LF_ICONS variable.
+set icons
+set period 1
 
 # cmds/functions
 cmd open ${{
     case $(file --mime-type $f -b) in
+	image/vnd.djvu|application/pdf|application/octet-stream) setsid zathura $fx >/dev/null 2>&1 & ;;
     	text/troff) man ./ $f;;
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-	image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
+	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\)\(_large\)*$" | setsid sxiv -aio 2>/dev/null | lf-select & ;;
 	audio/*) mpv $f ;;
 	video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
 	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
@@ -23,9 +25,10 @@ cmd open ${{
     esac
 }}
 
-cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	printf "%s\n\t" "$fx"
 	printf "delete?[y/N]"
@@ -34,6 +37,7 @@ cmd delete ${{
 }}
 
 cmd moveto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	clear; echo "Move to where?"
 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)" &&
@@ -42,6 +46,7 @@ cmd moveto ${{
 }}
 
 cmd copyto ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	clear; echo "Copy to where?"
 	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)" &&
@@ -61,13 +66,21 @@ map g top
 map D delete
 map C copyto
 map M moveto
-map a push %mkdir<space>
-map r push :rename<space>
-map R $lf -remote "send $id push :rename<space>$f"
-map b bulkrename
+map <c-n> push :mkdir<space>
 map <c-r> reload
 map <enter> shell
 map x $$f
 map X !$f
-map o &mimeopen "$f"
-map O $mimeopen --ask "$f"
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+map A rename # at the very end
+map c push A<c-u> # new rename
+map I push A<c-a> # at the very beginning
+map i push A<a-b><a-b><a-f> # before extention
+map a push A<a-b> # after extention
+map b bulkrename
+
+map <c-e> down
+map <c-y> up
+map V push :!nvim<space>
