@@ -3,9 +3,40 @@
 # This script is called on startup to remap keys.
 # Increase key speed via a rate change
 xset r rate 300 50
-# Map the caps lock key to super...
-setxkbmap -option caps:super
-# But when it is pressed only once, treat it as escape.
-killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
-# Map the menu button to right super as well.
-xmodmap -e 'keycode 135 = Super_R'
+# Map the caps lock key to control...
+setxkbmap -option ctrl:nocaps
+
+# Meke the Return key Control key too
+spare_modifier="Hyper_L"
+target_key="Return"
+target_code=36
+xmodmap -e "keycode $target_code = $spare_modifier"  # Make 36(Return) Hyper_L
+xmodmap -e "remove mod4 = $spare_modifier"  # Remove the default function of Hyper_L
+# hyper_l is mod4 by default
+xmodmap -e "add Control = $spare_modifier"  # Make Hyper_L(Now return) into Control
+
+xmodmap -e "keycode any = $target_key"  # Add this key to empty place, assign no physical key to it
+
+
+# Make Space key Mod4 key too
+spare_modifier2="ISO_Level3_Shift"
+spare_modifier2_sym="mod5"
+xmodmap -e "keycode 65 = $spare_modifier2"
+xmodmap -e "remove $spare_modifier2_sym = $spare_modifier2"
+xmodmap -e "add mod4 = $spare_modifier2"
+
+#Next, map space to an unused keycode (to keep it around for xcape to use).
+
+xmodmap -e "keycode any = space"  # Add this key to empty place, assign no physical key to it
+
+
+killall xcape 2>/dev/null; xcape -e "Shift_L=Shift_R|minus;Shift_R=minus;Control_L=Escape;$spare_modifier=$target_key;$spare_modifier2=space"  # second last Hyper_L = Return
+
+
+#Not working: Removing redundant control keys for rehabilitating purpose
+#xmodmap -e 'remove control = Control_L'  # These two lines remove Capslock control too, so bad
+#xmodmap -e 'add mod5 = Control_L'
+
+# Reusing redundant control keys
+xmodmap -e "keycode 37 = plus"  # Disable and reuse left control key
+xmodmap -e "keycode 105 = space"  # Disable and reuse right control key
