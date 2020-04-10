@@ -25,8 +25,7 @@ done
 # Output information to user about what happened
 if [[ -z "$lines_to_delete" ]]; then
   echo "All arguments passed were invalid lines in $known_hosts_path"
-elif [[ -n "$string" ]]; then
+else
   sed -i "$lines_to_delete" "$known_hosts_path"
-  echo "Deleted lines $(echo $(echo $lines_to_delete | sed 's/d;/, /g') | sed 's/.$//' )"
+  echo "Deleted lines $(echo $(echo "$lines_to_delete" | sed 's/d;/, /g') | sed 's/.$//' )"
 fi
-
