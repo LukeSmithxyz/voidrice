@@ -8,7 +8,7 @@
 
 
 
-### Screenshot
+### _Screenshot_
 <img src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png" data-canonical-src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png"/>
 
 </div>
