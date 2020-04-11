@@ -3,6 +3,10 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
+# This file's true location is in ~/.config/xprofile and a link exists to it in
+# ~/.xprofile. If you do not use a DM, you may remove the link to it to have a
+# cleaner home.
+
 # Fix Gnome Apps Slow  Start due to failing services
 # Add this when you include flatpak in your system
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
