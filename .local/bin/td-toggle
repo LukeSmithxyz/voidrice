@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # If transmission-daemon is running, will ask to kill, else will ask to start.
-if pgrep -x transmission-da >/dev/null ;
+if ps ax | grep -q "\stransmission-daemon$" ;
 then
 	[ "$(printf "No\\nYes" | dmenu -i -p "Kill transmission-daemon?")" = "Yes" ] && killall transmission-da && notify-send "transmission-daemon killed."
 else
