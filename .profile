@@ -41,6 +41,7 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+export QT_QPA_PLATFORMTHEME="gtk2"
 
 # This is the list for lf icons:
 export LF_ICONS="di=📁:\
