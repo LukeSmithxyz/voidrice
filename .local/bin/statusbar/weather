@@ -18,7 +18,7 @@ sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\(
 
 # The BLOCK_BUTTON bloat for clicking in i3.
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" ;;
+    1) setsid "$TERMINAL" -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" & ;;
     2) getforecast && showweather ;;
     3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
