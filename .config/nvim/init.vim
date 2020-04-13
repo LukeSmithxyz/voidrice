@@ -103,8 +103,9 @@ set clipboard+=unnamedplus
 	autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
 	autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
-" Automatically deletes all trailing whitespace on save.
+" Automatically deletes all trailing whitespace and newlines at end of file on save.
 	autocmd BufWritePre * %s/\s\+$//e
+	autocmd BufWritepre * %s/\n\+\%$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
 	autocmd BufWritePost files,directories !shortcuts
