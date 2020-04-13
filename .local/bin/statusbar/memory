@@ -2,8 +2,10 @@
 
 case $BLOCK_BUTTON in
 	1) notify-send "🧠 Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
+	2) setsid "$TERMINAL" -e htop & ;;
 	3) notify-send "🧠 Memory module" "\- Shows Memory Used/Total.
-- Click to show memory hogs." ;;
+- Click to show memory hogs.
+- Middle click to open htop." ;;
 esac
 
 free -h | sed -n '2{p;q}' | awk '{print "🧠", $3 "/" $2}'

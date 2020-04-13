@@ -22,6 +22,6 @@ do
 	# If it is discharging and 25% or less, we will add a ❗ as a warning.
 	 [ "$capacity" -le 25 ] && [ "$status" = "🔋" ] && warn="❗"
 
-	printf "%s%s%s%%\n" "$status" "$warn" "$capacity"
+	printf "%s%s%s%% " "$status" "$warn" "$capacity"
 	unset warn
-done
+done | sed s/\ $/\\n/
