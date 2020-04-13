@@ -16,6 +16,7 @@ yellow = #fabd2f
 [bar/main]
 ; polybar settings
 enable-ipc = true
+override-redirect = false
 height = 20
 monitor = ${env:MONITOR:}
 width = 100%
@@ -40,7 +41,7 @@ wm-restack = i3
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 modules-left = i3
-modules-right = sys_updates bluetooth sys_temp cpu memory volume wifi ethernet battery date
+modules-right = sys_updates bluetooth sys_temp cpu memory volume wifi battery date
 ; Where to display programs that put something system tray
 tray-position = right
 
@@ -81,7 +82,7 @@ label = %{A1:$TERMINAL -e htop >/dev/null 2>&1 &:}CPU: %percentage%%%{A}
 
 [module/date]
 type = internal/date
-interval = 1
+interval = 5
 date = "(%a) %b %d %Y"
 time = "%I:%M:%S%p"
 format-prefix-foreground = ${colors.gray}
