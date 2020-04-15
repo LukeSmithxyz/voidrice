@@ -16,4 +16,5 @@ bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
 # If pywal is installed, use it.
 wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
 
+pidof dwm >/dev/null && xdotool key super+F5
 xwallpaper --zoom "$bgloc"
