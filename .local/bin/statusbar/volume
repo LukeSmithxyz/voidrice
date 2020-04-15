@@ -23,7 +23,7 @@ volstat="$(pactl list sinks)"
 echo "$volstat" | grep -q "Mute: yes" && printf "🔇\\n" && exit
 # echo "$volstat" | grep "\[off\]" >/dev/null && printf "🔇\\n" && exit # ALSA
 
-vol="$(echo "$volstat" | grep '^[[:space:]]Volume:' | sed "s,.* \([0-9]\+\)%.*,\1,;1q")"
+vol="$(echo "$volstat" | grep '[0-9]\+%' | sed "s,.* \([0-9]\+\)%.*,\1,;1q")"
 # vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q") # ALSA
 
 if [ "$vol" -gt "70" ]; then
