@@ -48,25 +48,36 @@ morescreen() { # If multi-monitor is selected and there are more than two screen
 
 multimon() { # Multi-monitor handler.
 	case "$(echo "$screens" | wc -l)" in
-		1) xrandr $(echo "$allposs" | grep -v "$screens" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
 		2) twoscreen ;;
 		*) morescreen ;;
 	esac ;}
+
+onescreen() { # If only one output available or chosen.
+	xrandr --output "$1" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$1" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ')
+	}
+
+postrun() { # Stuff to run to clean up.
+	setbg		# Fix background if screen size/arangement has changed.
+	remaps		# Re-remap keys if keyboard added (for laptop bases)
+	{ killall dunst ; setsid dunst & } >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
+	}
 
 # Get all possible displays
 allposs=$(xrandr -q | grep "connected")
 
 # Get all connected screens.
-screens=$(echo "$allposs" | grep " connected" | awk '{print $1}')
+screens=$(echo "$allposs" | awk '/ connected/ {print $1}')
+
+# If there's only one screen
+[ "$(echo "$screens" | wc -l)" -lt 2 ] &&
+	{ onescreen "$screens"; postrun; notify-send "💻 Only one screen detected." "Using it in its optimal settings...";  exit ;}
 
 # Get user choice including multi-monitor and manual selection:
 chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&
 case "$chosen" in
 	"manual selection") arandr ; exit ;;
 	"multi-monitor") multimon ;;
-	*) xrandr --output "$chosen" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$chosen" | awk '{print "--output", $1, "--off"}' | tr '\n' ' ') ;;
+	*) onescreen "$chosen" ;;
 esac
 
-setbg		# Fix background if screen size/arangement has changed.
-remaps		# Re-remap keys if keyboard added (for laptop bases)
-{ killall dunst ; setsid dunst & } >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
+postrun
