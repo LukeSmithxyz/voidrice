@@ -25,4 +25,4 @@ case $BLOCK_BUTTON in
 - Middle click to show upgradable packages" ;;
 esac
 
-pacman -Qu | grep -cv "\[ignored\]" | sed "s/^/📦/;s/^📦0$//g"
+pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/📦/;s/^📦0$//g"
