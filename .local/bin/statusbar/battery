@@ -24,4 +24,4 @@ do
 
 	printf "%s%s%s%% " "$status" "$warn" "$capacity"
 	unset warn
-done | sed s/\ $/\\n/
+done | sed 's/* $//'
