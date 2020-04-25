@@ -26,7 +26,7 @@ case $BLOCK_BUTTON in
 - Middle click opens calcurse if installed" ;;
 esac
 
-echo "$(date '+%Y %b %d (%a) %I:%M%p') $icon $(date '+%I:%M%p')"
+printf '%s %s%s\n' "$(date '+%Y %b %d (%a)')" "$icon" "$(date '+%I:%M%p')"
 
 #for europeans, use this
-#echo "$(date '+%a %d/%m') $icon $(date '+%I:%M%p')"
+#printf '%s %s%s\n' "$(date '+%a %d/%m')" "$icon" "$(date '+%I:%M%p')"
