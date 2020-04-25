@@ -18,6 +18,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'kovetskiy/sxhkd-vim'
+Plug 'ap/vim-css-color'
 call plug#end()
 
 set bg=light
