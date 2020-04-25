@@ -34,7 +34,8 @@ alias \
 	p="sudo pacman" \
 	xi="sudo xbps-install" \
 	xr="sudo xbps-remove -R" \
-	xq="xbps-query"
+	xq="xbps-query" \
+	z="zathura"
 
 # Some other stuff
 alias \
