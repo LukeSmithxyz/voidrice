@@ -7,9 +7,8 @@ lock screen	slock
 leave dwm	kill -TERM $(pidof -s dwm)
 refresh dwm	kill -HUP $(pidof -s dwm)
 reboot		sudo -A reboot
-shutdown	sudo -A shutdown -h now
-"
+shutdown	sudo -A shutdown -h now"
 
-choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)"
+choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
-`echo "$cmds" | grep "^$choice	" | cut -d '	' -f2`
+`echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-`
