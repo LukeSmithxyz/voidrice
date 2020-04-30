@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Displays todays precipication chance (☔) and daily low (❄) and high (🌞).
+# Displays todays precipication chance (☔) and daily low (🥶) and high (🌞).
 # Usually intended for the statusbar.
 
 # If we have internet, get a weather report from wttr.in and store it locally.
@@ -14,7 +14,7 @@ curl -sf "wttr.in/$LOCATION" > "${XDG_DATA_HOME:-$HOME/.local/share}/weatherrepo
 # display them with coresponding emojis.
 showweather() { printf "%s" "$(sed '16q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" |
 	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔ /g;1q" | tr -d '\n')"
-sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "°"}' ;}
+sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " 🥶",$1 "°","🌞",$2 "°"}' ;}
 
 # The BLOCK_BUTTON bloat for clicking in i3.
 case $BLOCK_BUTTON in
@@ -23,7 +23,7 @@ case $BLOCK_BUTTON in
     3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
 ☔: Chance of rain/snow
-❄: Daily low
+🥶: Daily low
 🌞: Daily high" ;;
 esac
 
