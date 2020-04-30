@@ -8,8 +8,7 @@
 coins="Bitcoin;btc;💰
 Etherium;eth;🍸
 Basic Attention Token;bat;🦁
-LBC;lbc;📚
-"
+LBC;lbc;📚"
 
 # Directory where currency info is stored.
 dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
@@ -33,7 +32,7 @@ printprices() { # Print/format all prices
 	done | sed 's/ $//'
 	}
 
-mkdir -p "$dir"
+[ ! -d "$dir" ] && mkdir -p "$dir" && { getprices; exit ;}
 
 # If currencies haven't been updated today, try to update them.
 [ "$(stat -c %x "$HOME/.local/share/crypto-prices" | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
