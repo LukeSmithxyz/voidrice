@@ -4,7 +4,7 @@
 
 PIC="${XDG_DATA_HOME:-$HOME/.local/share}/larbs/larbs.png"
 
-grep LARBSWELCOME "$HOME/.xprofile" &&
-	( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send -i "$PIC" "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) ||
-	( echo "notify-send -i \"$PIC\" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile &&
+grep LARBSWELCOME "$XDG_CONFIG_HOME/xprofile" &&
+	( sed -i "/LARBSWELCOME/d" "$XDG_CONFIG_HOME/xprofile" && notify-send -i "$PIC" "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) ||
+	( echo "notify-send -i \"$PIC\" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> "$XDG_CONFIG_HOME/xprofile" &&
 		notify-send -i "$PIC" "LARBS welcome message" "Welcome message re-enabled." )
