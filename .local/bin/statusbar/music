@@ -1,9 +1,6 @@
 #!/bin/sh
 
-filter() {
-	[ "$(pidof dwmblocks)" ] && sed "/^volume:/d" | tac | sed -e "s/\\&/&amp;/g;s/\\[paused\\].*/\\[paused\\] /g;s/\\[playing\\].*//" | tr -d '\n' | sed -e "s/\..*$//g" \
-	|| sed "/^volume:/d" | tac | sed -e "s/\\&/&amp;/g;s/\\[paused\\].*/<span color=\"gray\" font_style=\"italic\">/g;s/\\[playing\\].*/<span>/g" | tr -d '\n' | sed -e "s/$/<\\/span>\n/g"
-	}
+filter() { mpc | sed "/^volume:/d;s/\\&/&amp;/g;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d" | tr '\n' ' ' | sed 's/ $//' ;}
 
 case $BLOCK_BUTTON in
     1) mpc status | filter && setsid "$TERMINAL" -e ncmpcpp & ;;  # right click, pause/unpause
@@ -16,4 +13,4 @@ case $BLOCK_BUTTON in
     4) mpc prev   | filter ;;  # scroll up, previous
     5) mpc next   | filter ;;  # scroll down, next
     *) mpc status | filter ;;
-esac; exit
+esac
