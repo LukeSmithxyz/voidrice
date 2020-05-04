@@ -12,12 +12,15 @@ case $BLOCK_BUTTON in
 ❗: battery very low!" ;;
 esac
 
+# acpi alternative
+# acpi | sed "s/Battery [0-9]: //;s/[Dd]ischarging, /🔋/;s/[Nn]ot charging, /🛑/;s/[Cc]harging, /🔌/;s/[Uu]nknown, /♻️/;s/[Ff]ull, /⚡/;s/ \(remaining\|until charged\)//"; exit
+
 # Loop through all attached batteries.
 for battery in /sys/class/power_supply/BAT?
 do
 	# Get its remaining capacity and charge status.
 	capacity=$(cat "$battery"/capacity) || break
-	status=$(sed "s/Discharging/🔋/;s/Not charging/🛑/;s/Charging/🔌/;s/Unknown/♻️/;s/Full/⚡/" "$battery"/status)
+	status=$(sed "s/[Dd]ischarging/🔋/;s/[Nn]ot charging/🛑/;s/[Cc]harging/🔌/;s/[Uu]nknown/♻️/;s/[Ff]ull/⚡/" "$battery"/status)
 
 	# If it is discharging and 25% or less, we will add a ❗ as a warning.
 	 [ "$capacity" -le 25 ] && [ "$status" = "🔋" ] && warn="❗"
