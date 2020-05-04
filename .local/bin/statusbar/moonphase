@@ -2,7 +2,7 @@
 
 # Shows the current moon phase. Requires `pom-perl`.
 
-mnphs=$(pom $1 | grep -o 'New\|Waxing Crescent\|First Quarter\|Waxing Gibbous\|Full\|Waning Gibbous\|Last Quarter\|Waning Crescent' | grep -m1 '.')
+mnphs=$(pom $1 | grep -o 'New\|Waxing Crescent\|First Quarter\|Waxing Gibbous\|Full\|Waning Gibbous\|Last Quarter\|Waning Crescent' | grep -m1 '.') || exit 1
 prcnt=$(pom $1 | grep -o '[[:digit:]]*%' | grep -o '[[:digit:]]*' )
 case "$mnphs" in
 	"New") icon="🌑" prcnt="0" ;;
@@ -13,13 +13,12 @@ case "$mnphs" in
 	"Waning Gibbous") icon="🌖" ;;
 	"Last Quarter") icon="🌗" prcnt="50" ;;
 	"Waning Crescent") icon="🌘" ;;
-	*) echo errorrrr ;;
 esac
 
-case $BLOCK_BUTTON in
+case ${BUTTON:-$BLOCK_BUTTON} in
     1) $mnphs ;;
     2) $mnphs ;;
     3) notify-send "	🌜$(pom)" ;;
 esac
 
-echo "$icon" "$prcnt"%
+echo "${icon:?}" "$prcnt"%
