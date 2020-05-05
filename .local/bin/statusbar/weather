@@ -6,8 +6,7 @@
 # If we have internet, get a weather report from wttr.in and store it locally.
 # You could set up a shell alias to view the full file in a pager in the
 # terminal if desired. This function will only be run once a day when needed.
-getforecast() { ping -q -c 1 1.1.1.1 >/dev/null &&
-curl -sf "wttr.in/$LOCATION" > "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" || exit 1 ;}
+getforecast() { curl -sf "wttr.in/$LOCATION" > "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" || exit 1 ;}
 
 # Some very particular and terse stream manipulation. We get the maximum
 # precipication chance and the daily high and low from the downloaded file and
@@ -18,7 +17,7 @@ sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\(
 
 # The BLOCK_BUTTON bloat for clicking in i3.
 case $BLOCK_BUTTON in
-    1) setsid "$TERMINAL" -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" & ;;
+    1) setsid "$TERMINAL" -e less -Sf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" & ;;
     2) getforecast && showweather ;;
     3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
