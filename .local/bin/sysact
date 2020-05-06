@@ -2,11 +2,15 @@
 
 # A dmenu wrapper script for system functions.
 
+case "$(readlink -f /sbin/init)" in
+	*runit-init) hib="sudo -A zzz" ;;
+esac
+
 cmds="\
 🔒 lock		slock
 🚪 leave dwm	kill -TERM $(pidof -s dwm)
 ♻ renew dwm	kill -HUP $(pidof -s dwm)
-🐻 hibernate	sudo -A zzz
+🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
 🔃 reboot	sudo -A reboot
 🖥 shutdown	sudo -A shutdown -h now"
 
