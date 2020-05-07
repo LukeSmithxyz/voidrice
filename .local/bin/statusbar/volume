@@ -14,7 +14,8 @@ case $BLOCK_BUTTON in
 	5) pamixer --allow-boost -d 1 ;;
 	3) notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted.
 - Middle click to mute.
-- Scroll to change."
+- Scroll to change." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 volstat="$(pactl list sinks)"

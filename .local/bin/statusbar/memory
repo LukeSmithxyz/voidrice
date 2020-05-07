@@ -6,6 +6,7 @@ case $BLOCK_BUTTON in
 	3) notify-send "🧠 Memory module" "\- Shows Memory Used/Total.
 - Click to show memory hogs.
 - Middle click to open htop." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 free -h | sed -n '2{p;q}' | awk '{print "🧠", $3 "/" $2}'

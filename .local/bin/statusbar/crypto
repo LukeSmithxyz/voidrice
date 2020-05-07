@@ -48,6 +48,7 @@ case $BLOCK_BUTTON in
 - Middle click to update.
 - Shows 🔃 if updating prices.
 - Manually add/remove currencies to list in the script." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 printprices

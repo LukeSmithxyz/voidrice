@@ -23,6 +23,7 @@ case $BLOCK_BUTTON in
 	2) setsid "$TERMINAL" -e calcurse -D ~/.config/calcurse & ;;
 	3) notify-send "📅 Time/date module" "\- Left click to show upcoming appointments for the next three days via \`calcurse -d3\` and show the month via \`cal\`
 - Middle click opens calcurse if installed" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 printf '%s %s%s\n' "$(date '+%Y %b %d (%a)')" "$icon" "$(date '+%I:%M%p')"

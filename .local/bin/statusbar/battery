@@ -4,12 +4,13 @@
 # to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
 
 case $BLOCK_BUTTON in
-    3) notify-send "🔋 Battery module" "🔋: discharging
+	3) notify-send "🔋 Battery module" "🔋: discharging
 🛑: not charging
 ♻: stagnant charge
 🔌: charging
 ⚡: charged
 ❗: battery very low!" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 # acpi alternative

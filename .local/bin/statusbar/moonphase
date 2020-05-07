@@ -15,10 +15,11 @@ case "$mnphs" in
 	"Waning Crescent") icon="🌘" ;;
 esac
 
-case ${BUTTON:-$BLOCK_BUTTON} in
-    1) $mnphs ;;
-    2) $mnphs ;;
-    3) notify-send "	🌜$(pom)" ;;
+case $BLOCK_BUTTON in
+	1) $mnphs ;;
+	2) $mnphs ;;
+	3) notify-send "	🌜$(pom)" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 echo "${icon:?}" "$prcnt"%

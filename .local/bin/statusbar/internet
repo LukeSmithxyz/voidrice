@@ -11,6 +11,7 @@ case $BLOCK_BUTTON in
 ❎: no ethernet
 🌐: ethernet working
 " ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
