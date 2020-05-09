@@ -14,9 +14,13 @@
   diff = auto
   branch = auto
 [alias]
+  a  = add
+  au = add -u
+  p  = push
+  pu = pull
   st = status -uno
   co = checkout
-  ci = commit
+  cm = commit -m
   br = branch
   ff = merge origin
   diff = diff --ignore-space-change

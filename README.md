@@ -3,11 +3,11 @@
 <div align=center>
   
 # dotfiles
-### personal system dotfiles for arch systems
-Vlad Doster - <vlad_doster@hms.harvard.edu>
+### personal system dotfiles for arch systems (License: GNU GPLv3) 
+<img src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/arch-user.png?raw=true" data-canonical-src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/arch-user.png?raw=true" width="200" height="200" />
 
-License: GNU GPLv3
 
-![Image of Arch user](https://github.com/vladdoster/dotfiles/blob/master/.config/assets/arch-user.png)
-
+---
+### Screenshot
+<img src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png" data-canonical-src="https://github.com/vladdoster/dotfiles/blob/master/.config/assets/system_screenshot.png"/>
 </div>

@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e 
+set -e
 
 # A UI for detecting and selecting all displays. Probes xrandr for connected
 # displays and lets user select one to use. User may also select "manual
@@ -53,14 +53,14 @@ multimon() { # Multi-monitor handler.
 	esac ;}
 
 load_screen_layout() { # ~/.screenlayout loader
-	# Get all screen configurations in ~.screenlayout/
+    # Get all screen configurations in ~.screenlayout/
     if [[ $(echo $screen_layouts | wc -l) -eq 2 ]]; then
     notify-send --urgency=critical "~/.screenlayout seems to be empty"
     else
     layout_name=$(echo "$screen_layouts" | dmenu -i -p "Screen layouts:")
     chosen_layout=$(find ~/.screenlayout -type f | grep $layout_name)
     echo "$chosen_layout"
-    arandr $chosen_layout 2>/dev/null || notify-send --urgency=critical "Error loading screen layout: ~/.screenlayout/$layout_name" && exit
+    arandr $chosen_layout 2>/dev/null || notify-send --urgency=critical "Error loading screen layout: ~/.screenlayout/$layout_name"
     fi
     }
 
