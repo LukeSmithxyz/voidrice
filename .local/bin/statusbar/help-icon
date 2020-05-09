@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# The clickable help menu. Middle click to restart wm.
+
+# If dwm is running, use dwm's readme and restart.
+ps ax | grep -q "\sdwm$" &&
+	READMEFILE=/usr/local/share/dwm/larbs.mom
+	restartwm() { pkill -HUP dwm ;} ||
+		restartwm() { i3 restart ;}
+
+case $BLOCK_BUTTON in
+	1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
+	2) restartwm ;;
+	3) notify-send "❓ Help module" "\- Left click to open LARBS guide.
+- Middle click to refresh window manager." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac; echo "❓"

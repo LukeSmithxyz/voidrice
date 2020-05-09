@@ -1,5 +1,6 @@
 # You can add comments to these files with #
 cf	${XDG_CONFIG_HOME:-$HOME/.config}
+cac      ${XDG_CACHE_HOME:-$HOME/.cache}
 d	~/downloads
 gh	~/github
 h	~/
