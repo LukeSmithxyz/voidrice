@@ -1,6 +1,6 @@
 #!/bin/sh
 
-filter() { mpc | sed "/^volume:/d;s/\\&/&amp;/g;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d" | tr '\n' ' ' | sed 's/ $//' ;}
+filter() { mpc | sed "/^volume:/d;s/\\&/&amp;/g;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d" | paste -sd ' ';}
 
 case $BLOCK_BUTTON in
 	1) mpc status | filter ; setsid "$TERMINAL" -e ncmpcpp & ;;  # right click, pause/unpause
