@@ -24,6 +24,7 @@ sed "s/\s*#.*$//;/^\s*$/d" "${XDG_CONFIG_HOME:-$HOME/.config}/directories" | tee
 
 # Format the `files` file in the correct syntax and sent it to both configs.
 sed "s/\s*#.*$//;/^\s*$/d"  "${XDG_CONFIG_HOME:-$HOME/.config}/files" | tee >(awk '{print $1"=\"$EDITOR "$2"\" \\"}' >> "$shell_shortcuts") \
+	>(awk '{print "hash -d "$1"="$2}' >> "$zsh_named_dirs") \
 	>(awk '{print "abbr", $1, "\"$EDITOR "$2"\""}' >> "$fish_shortcuts") \
 	>(awk '{print "map", $1, ":e", $2 "<CR>" }' >> "$vifm_shortcuts") \
 	| awk '{print "map "$1" shell $EDITOR "$2}' >> "$ranger_shortcuts"
