@@ -13,8 +13,8 @@ esac
 rxfile="${XDG_CACHE_HOME:-$HOME/.cache}/rxlog"
 txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
 
-rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
-txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
+rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+' | bc)"
+txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+' | bc)"
 
 printf "🔻%skB 🔺%skB\\n" \
 	"$(printf -- "(%s-%s)/1024\\n" "$rxcurrent" "$(cat "$rxfile")" | bc)" \
