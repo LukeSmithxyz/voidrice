@@ -8,4 +8,4 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-printf '%s %s%s\n' "$(date '+%Y %b %d (%a)') $(date '+%I:%M%p')"
+printf ' %s %s%s\n' "$(date '+%Y %b %d (%a)') $(date '+%I:%M%p')"
