@@ -16,9 +16,9 @@ txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
 rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
 txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
 
-printf " 🔻%04dKiB 🔺%04dKiB " \
-	"$(printf -- "(%s-%s)\\n" "$rxcurrent" "$(cat "$rxfile")" | bc )" \
-	"$(printf -- "(%s-%s)\\n" "$txcurrent" "$(cat "$txfile")" | bc )"
+printf "🔻%04dKiB 🔺%04dKiB\\n" \
+	"$(printf -- "(%s-%s)/1024\\n" "$rxcurrent" "$(cat "$rxfile")" | bc)" \
+	"$(printf -- "(%s-%s)/1024\\n" "$txcurrent" "$(cat "$txfile")" | bc)"
 
 # Log the current values for next run.
 echo "$rxcurrent" > "$rxfile"
