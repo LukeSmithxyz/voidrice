@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-sensors -f | awk '/Core / { gsub(/+|°|C/,""); {sum+=$3; n++} print sum/n; }' | tail -1
-
