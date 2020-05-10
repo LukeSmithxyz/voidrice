@@ -16,7 +16,7 @@ esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 	down) wifiicon="No Wifi" ;;
-	up) wifiicon=" $(nmcli connection show | awk '{ if ($5=="wlo1" ) {print "Wifi:"$1}}'
+	up) wifiicon=" $(nmcli connection show | awk '{ if ($5=="wlo1" ) {print "Wifi: "$1" - "}}'
 ): $(awk '/^\s*w/ { print int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
 esac
 
