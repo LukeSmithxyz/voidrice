@@ -16,8 +16,8 @@ esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 	down) wifiicon="📡 " ;;
-	up) wifiicon="$(nmcli connection show | awk '{ if ($5=="wlo1" ) {print $1}}'
-): $(awk '/^\s*w/ { print int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
+	up) wifiicon=" $(nmcli connection show | awk '{ if ($5=="wlo1" ) {print $1}}'
+): $(awk '/^\s*w/ { print int($3 * 100 / 70) "% " }' /proc/net/wireless) " ;;
 esac
 
 printf "%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)"
