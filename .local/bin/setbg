@@ -1,20 +1,9 @@
 #!/bin/sh
 
-# This script does the following:
-#	Run by itself, set the wallpaper (at X start).
-#	If given a file, set that as the new wallpaper.
-#	If given a directory, choose random file in it.
-#	If wal is installed, also generates a colorscheme.
+# ~/.config/assets/wallpaper.png is the location of the system wallpaper.  This
+# script, if given an argument, moves it there.  This script without an
+# argument sets ~/.config/assets/wallpaper.png as the wallpaper, which is required on login
+# if you don't want a black screen.
 
-# Location of link to wallpaper link.
-bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
-
-[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..."
-
-[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
-
-# If pywal is installed, use it.
-wal -s -i "$(readlink -f "$bgloc")" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
-
-pidof dwm >/dev/null && xdotool key super+F12
-xwallpaper --zoom "$bgloc"
+[ ! -z "$1" ] && cp "$1" ~/.config/assets/wallpaper.png && notify-send -i "$HOME/.config/assets/wallpaper.png" "Wallpaper changed."
+xwallpaper --focus ~/.config/assets/wallpaper.png

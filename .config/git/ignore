@@ -1,0 +1,19 @@
+.cache/
+.local/lib/python3.7/
+.local/lib/python3.8/
+.local/share/jupyter/
+.local/share/Trash/
+.nv/
+.PyCharm20[0-9][0-9].[0-9]/
+.rstudio-desktop/
+Code - OSS/
+downloads/
+discord/
+GitKraken/
+github/
+google-chrome/
+libreoffice/
+pulse/
+Slack/
+LICENSE
+README.md

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. ~/.profile
+
+notify-send "Added ~/.local/bin/ to \$PATH"
+

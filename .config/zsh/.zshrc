@@ -1,4 +1,4 @@
-# Luke's config for the Zoomer Shell
+#Config for the Zoomer Shell
 
 # Enable colors and change prompt:
 autoload -U colors && colors	# Load colors
@@ -9,7 +9,7 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=${XDG_CONFIG_HOME:-$HOME/.config}/zsh/history
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
@@ -55,27 +55,12 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-bindkey -s '^o' 'lfcd\n'
+# Use beam shape cursor on startup.
+echo -ne '\e[5 q'
+# Use beam shape cursor for each new prompt.
+preexec() { echo -ne '\e[5 q' ;}
 
-bindkey -s '^a' 'bc -l\n'
-
-bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
-
-bindkey '^[[P' delete-char
-
-# Edit line in vim with ctrl-e:
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
+alias clear='timeout 6 cbeams -o; clear'
 
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

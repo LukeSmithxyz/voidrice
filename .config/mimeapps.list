@@ -17,3 +17,7 @@ application/rss+xml=rss.desktop
 video/x-matroska=video.desktop
 x-scheme-handler/lbry=lbry.desktop
 inode/directory=file.desktop
+
+[Added Associations]
+text/plain=code-oss.desktop;
+application/x-shellscript=code-oss.desktop;

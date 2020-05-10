@@ -1,12 +1,13 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) notify-send "🧠 Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
+	1) notify-send "RAM hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
 	2) setsid "$TERMINAL" -e htop & ;;
-	3) notify-send "🧠 Memory module" "\- Shows Memory Used/Total.
-- Click to show memory hogs.
+	3) notify-send "RAM module" "\- Shows RAM Used/Total.
+- Click to show RAM hogs.
 - Middle click to open htop." ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-free --mebi | sed -n '2{p;q}' | awk '{printf ("%2.2f/%2.2f\n", ( $3 / 1024), ($2 / 1024))}'
+free --mebi | sed -n '2{p;q}' | awk '{printf ("RAM: %2.2fGiB/%2.2f\nGiB", ( $3 / 1024), ($2 / 1024))}'
+

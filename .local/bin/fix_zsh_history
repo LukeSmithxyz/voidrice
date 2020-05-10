@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+mv ~/.config/zsh/.history ~/.config/zsh/.bad_history
+strings ~/.config/zsh/.bad_history > ~/.config/zsh/.history
+fc -R ~/.config/zsh/.history
+rm ~/.config/zsh/.bad_history
