@@ -16,7 +16,7 @@ txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
 rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
 txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
 
-printf "🔻%04dKiB 🔺%04dKiB\\n" \
+printf " 🔻%04dKiB 🔺%04dKiB " \
 	"$(printf -- "(%s-%s)/1024\\n" "$rxcurrent" "$(cat "$rxfile")" | bc)" \
 	"$(printf -- "(%s-%s)/1024\\n" "$txcurrent" "$(cat "$txfile")" | bc)"
 
