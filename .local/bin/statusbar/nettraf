@@ -10,15 +10,27 @@ case "$BLOCK_BUTTON" in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
+function bytes_for_humans {
+    local -i current_speed="($1-$2)/1024"
+    echo $current_speed;
+    if [[ $bytes -lt 1024 ]]; then
+        echo "${bytes}B"
+    elif [[ $bytes -lt 1048576 ]]; then
+        echo "$(( (bytes + 1023)/1024 ))KiB"
+    else
+        echo "$(( (bytes + 1048575)/1048576 ))MiB"
+    fi
+}
+
 rxfile="${XDG_CACHE_HOME:-$HOME/.cache}/rxlog"
 txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
 
 rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
 txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | tr '\n' '+' | sed 's/+$/\n/' | bc)"
 
-printf " 🔻%skB 🔺%skB " \
-	"$(printf -- "(%s-%s)/1024\\n" "$rxcurrent" "$(cat "$rxfile")" | bc)" \
-	"$(printf -- "(%s-%s)/1024\\n" "$txcurrent" "$(cat "$txfile")" | bc)"
+printf " 🔻%s 🔺%s " \
+	"$(printf -- "(%s-%s)\\n" "$rxcurrent" "$(cat "$rxfile")" | bytes_for_humans)" \
+	"$(printf -- "(%s-%s)\\n" "$txcurrent" "$(cat "$txfile")" | bytes_for_humans)"
 
 # Log the current values for next run.
 echo "$rxcurrent" > "$rxfile"
