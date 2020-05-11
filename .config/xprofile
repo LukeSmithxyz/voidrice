@@ -11,6 +11,11 @@
 # Add this when you include flatpak in your system
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
+# Fix Java applications in DWM
+# Without this, some Java applications will not display correctly
+# Check dwm.1 in the man pages for more info on this.
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 mpd &			# music player daemon-you might prefer it as a service though
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 setbg &			# set the background with the `setbg` script
