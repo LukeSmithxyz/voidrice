@@ -4,6 +4,7 @@ bw	${XDG_CONFIG_HOME:-$HOME/.config}/bookmarks
 cfa	${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc
 cfz	$ZDOTDIR/.zshrc
 cfv	${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
+cft	${XDG_CONFIG_HOME:-$HOME/.config}/tmux/.tmux.conf
 cfm	${XDG_CONFIG_HOME:-$HOME/.config}/mutt/muttrc
 cfx	${XDG_CONFIG_HOME:-$HOME/.config}/Xresources
 cfu	${XDG_CONFIG_HOME:-$HOME/.config}/newsboat/urls
