@@ -36,6 +36,8 @@ super + shift + w
 	$BROWSER
 
 # Et cetera...
+super + alt + space
+	kblayoutmanager cycle $(echo $KBLAYOUTS)
 super + grave
 	dmenuunicode
 super + Scroll_Lock

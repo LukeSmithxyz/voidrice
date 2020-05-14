@@ -1,0 +1,10 @@
+#!/bin/sh
+# A simple module to print current keyboard layout
+
+lang="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')"
+
+# Since shortcuts are unlikely to work with non-latin/US keyboard layouts,
+# the line below makes US layout green to help you recognize anything else easier
+[ "$lang" = "us" ] && color="#00ff00" || color="#ff0000"
+
+printf "<span color='%s'>%s</span>\n" "$color" "$lang"

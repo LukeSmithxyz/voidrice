@@ -46,6 +46,7 @@ bar {
 bindsym $mod+Return 		exec $term
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
 
+bindsym $mod+Mod1+space 	exec --no-startup-id kblayoutmanager cycle $(echo $KBLAYOUTS)
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
