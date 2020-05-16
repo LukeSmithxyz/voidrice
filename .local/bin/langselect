@@ -1,0 +1,7 @@
+#!/bin/sh
+# requirements: dmenu, xorg-setxkbmap
+choices="us\\nfr\\nua\\nru"
+chosen=$(echo -e "$choices" | dmenu -i )
+s=$(echo "$chosen" | sed "s/.*; //")
+setxkbmap $s
+notify-send "Keyboard layout:" "$(setxkbmap -query | grep "layout" | awk '{print $2}')"
