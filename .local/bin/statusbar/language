@@ -1,0 +1,16 @@
+#!/bin/sh
+#requirements: dmenu, xorg-setxkbmap
+# quick language switch:
+lang1="us" #for English (US)
+lang2="fr" #for French (CA)
+#French can be replaced by any other language, for example:
+# lang2="ua" #for Ukrainian (UA)
+
+setxkbmap -query | grep "layout" | awk '{print $2}'
+
+case $BLOCK_BUTTON in
+	1) [ $(setxkbmap -query | grep "layout" | awk '{print $2}') == $lang1 ] && setxkbmap $lang2 || setxkbmap $lang1 ;;
+	2) langselect ;;
+	3) notify-send "Language module" "\- Left click to quickly change between the $lang1 and $lang2 layouts
+- Middle click opens dmenu for more language options" ;;
+esac
