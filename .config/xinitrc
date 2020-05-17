@@ -10,7 +10,7 @@
 
 # export STATUSBAR="i3blocks" # Uncomment this line when using i3.
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/xprofile" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/xprofile"
+. ~/.xprofile
 
 # Your default LARBS WM is determined in your `~/.profile` on login.  Here we
 # run the proper command to run when the graphical environment starts.
