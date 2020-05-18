@@ -20,13 +20,13 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 ## configs
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
-export ANDROID_SDK_HOME="${XDG_CONFIG_HOME}/android"
 export ALSA_CONFIG_PATH="${XDG_CONFIG_HOME}/alsa/asoundrc"
+export ANDROID_SDK_HOME="${XDG_CONFIG_HOME}/android"
 export ANSIBLE_CONFIG="${XDG_CONFIG_HOME}/ansible/ansible.cfg"
-export NOTMUCH_CONFIG="${XDG_CONFIG_HOME}/notmuch-config"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0"
-export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+export NOTMUCH_CONFIG="${XDG_CONFIG_HOME}/notmuch-config"
+export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 ## program data
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
