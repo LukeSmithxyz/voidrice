@@ -19,7 +19,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
-## configs
 export ANDROID_SDK_HOME="${XDG_CONFIG_HOME}/android"
 export ALSA_CONFIG_PATH="${XDG_CONFIG_HOME}/alsa/asoundrc"
 export ANSIBLE_CONFIG="${XDG_CONFIG_HOME}/ansible/ansible.cfg"
@@ -28,15 +27,13 @@ export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-## data
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 #export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GOPATH="${XDG_DATA_HOME}/go"
 export KODI_DATA="${XDG_DATA_HOME}/kodi"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
 export WINEPREFIX="${XDG_DATA_HOME}/wineprefixes/default"
-## runtime 
-export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
 
 # Misc. program settings:
 export DICS="/usr/share/stardict/dic/"
