@@ -18,6 +18,7 @@ export READER="zathura"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+## configs
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export ANDROID_SDK_HOME="${XDG_CONFIG_HOME}/android"
 export ALSA_CONFIG_PATH="${XDG_CONFIG_HOME}/alsa/asoundrc"
@@ -27,6 +28,7 @@ export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+## program data
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 #export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GOPATH="${XDG_DATA_HOME}/go"
@@ -120,7 +122,7 @@ ex=🎯:\
 [ ! -f ${XDG_CONFIG_HOME}/shortcutrc ] && shortcuts >/dev/null 2>&1 &
 
 # Start graphical server on tty1 if not already running.
-[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
+[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "$XDG_CONFIG_HOME/X11/xinitrc"
 
 # Switch escape and caps if tty and no passwd required:
 sudo -n loadkeys ${XDG_DATA_HOME}/larbs/ttymaps.kmap 2>/dev/null
