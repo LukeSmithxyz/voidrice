@@ -2,7 +2,7 @@
 h       ~/
 D       ~/Downloads
 cac     ${XDG_CACHE_HOME}
-cf	${XDG_CONFIG_HOME}
+cf      ${XDG_CONFIG_HOME}
 d       ~/Documents
 m       ~/Music
 mn      /mnt
