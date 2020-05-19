@@ -34,7 +34,7 @@ export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export GOPATH="${XDG_DATA_HOME}/go"
 export KODI_DATA="${XDG_DATA_HOME}/kodi"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
-export TMUX_TMPDIR="${XDG_RUNTIME_DIR}"
+export TMUX_TMPDIR="$HOME"
 export WINEPREFIX="${XDG_DATA_HOME}/wineprefixes/default"
 
 # Misc. program settings:
