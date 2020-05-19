@@ -119,10 +119,10 @@ ex=🎯:\
 *.zip=📦:\
 "
 
-[ ! -f "${XDG_CONFIG_HOME}"/shortcutrc ] && shortcuts >/dev/null 2>&1 &
+[ ! -f "${XDG_CONFIG_HOME}/shortcutrc" ] && shortcuts >/dev/null 2>&1 &
 
 # Start graphical server on tty1 if not already running.
-[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XDG_CONFIG_HOME}"/X11/xinitrc
+[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx "${XDG_CONFIG_HOME}/X11/xinitrc"
 
 # Switch escape and caps if tty and no passwd required:
-sudo -n loadkeys "${XDG_DATA_HOME}"/larbs/ttymaps.kmap 2>/dev/null
+sudo -n loadkeys "${XDG_DATA_HOME}/larbs/ttymaps.kmap" 2>/dev/null
