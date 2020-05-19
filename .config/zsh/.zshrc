@@ -9,12 +9,12 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE="${XDG_CACHE_HOME}"/zsh/zsh/history
+HISTFILE="${XDG_CACHE_HOME}/zsh/zsh/history"
 
 # Load aliases and shortcuts if existent.
-[ -f "${XDG_CONFIG_HOME}"/shortcutrc ] && source "${XDG_CONFIG_HOME}"/shortcutrc
-[ -f "${XDG_CONFIG_HOME}"/aliasrc ] && source "${XDG_CONFIG_HOME}"/aliasrc
-[ -f "${XDG_CONFIG_HOME}"/zshnameddirrc ] && source "${XDG_CONFIG_HOME}"/zshnameddirrc
+[ -f "${XDG_CONFIG_HOME}/shortcutrc" ] && source "${XDG_CONFIG_HOME}/shortcutrc"
+[ -f "${XDG_CONFIG_HOME}/aliasrc" ] && source "${XDG_CONFIG_HOME}/aliasrc"
+[ -f "${XDG_CONFIG_HOME}/zshnameddirrcv ] && source "${XDG_CONFIG_HOME}/zshnameddirrc"
 
 # Basic auto/tab complete:
 autoload -U compinit
