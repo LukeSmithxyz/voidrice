@@ -10,8 +10,8 @@ case "$BLOCK_BUTTON" in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-rxfile="${XDG_CACHE_HOME:-$HOME/.cache}/rxlog"
-txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
+rxfile="${XDG_CACHE_HOME}/rxlog"
+txfile="${XDG_CACHE_HOME}/txlog"
 
 rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+' | bc)"
 txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+' | bc)"

@@ -11,7 +11,7 @@ Basic Attention Token;bat;🦁
 LBC;lbc;📚"
 
 # Directory where currency info is stored.
-dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
+dir="${XDG_DATA_HOME}/crypto-prices"
 
 getprices() { # The command to get the desired prices
 	printf "🔃 "; printprices

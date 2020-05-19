@@ -7,4 +7,4 @@
 
 ifinstalled "geoip" || exit
 addr="$(curl ifconfig.me 2>/dev/null)" || exit
-grep "flag: " "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji" | grep "$(geoiplookup "$addr" | sed 's/.*, //')" | sed "s/flag: //;s/;.*//"
+grep "flag: " "${XDG_DATA_HOME}/larbs/emoji" | grep "$(geoiplookup "$addr" | sed 's/.*, //')" | sed "s/flag: //;s/;.*//"
