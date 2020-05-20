@@ -30,11 +30,20 @@ alias \
 	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-	p="sudo pacman" \
-	xi="sudo xbps-install" \
-	xr="sudo xbps-remove -R" \
-	xq="xbps-query" \
 	z="zathura"
+
+# distro-specific aliases
+# arch
+[ -x "$(command -v pacman)" ] &&
+    alias \
+        p="sudo pacman"
+
+# void
+[ -x "$(command -v xbps)" ] &&
+    alias \
+        xi="sudo xbps-install" \
+        xr="sudo xbps-remove -R" \
+        xq="xbps-query"
 
 alias \
 	magit="nvim -c MagitOnly" \
