@@ -12,8 +12,8 @@ getforecast() { curl -sf "wttr.in/$LOCATION" > "${XDG_DATA_HOME:-$HOME/.local/sh
 # precipication chance and the daily high and low from the downloaded file and
 # display them with coresponding emojis.
 showweather() { printf "%s" "$(sed '16q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" |
-	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔ /g;1q" | tr -d '\n')"
-sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " 🥶",$1 "°","🌞",$2 "°"}' ;}
+	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')"
+sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " 🥶" $1 "°","🌞" $2 "°"}' ;}
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" & ;;
