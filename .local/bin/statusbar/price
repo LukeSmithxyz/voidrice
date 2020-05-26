@@ -23,8 +23,8 @@ printf "$3$%0.2f" "$(cat "$pricefile")"
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Sf "$chartfile" ;;
-	3) uptime="$(date -d "$(stat -c %x "$dir")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
-		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$price")</b>
+	3) uptime="$(date -d "$(stat -c %x "$pricefile")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
+		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
 - Middle click to update.
 - Shows 🔃 if updating prices.
