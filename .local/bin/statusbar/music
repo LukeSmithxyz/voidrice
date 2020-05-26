@@ -2,6 +2,8 @@
 
 filter() { mpc | sed "/^volume:/d;s/\\&/&amp;/g;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d" | paste -sd ' ';}
 
+pidof -x mpdup >/dev/null 2>&1 || mpdup &
+
 case $BLOCK_BUTTON in
 	1) mpc status | filter ; setsid "$TERMINAL" -e ncmpcpp & ;;  # right click, pause/unpause
 	2) mpc toggle | filter ;;  # right click, pause/unpause
