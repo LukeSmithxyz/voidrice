@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Usage:
+#	price <url> <Name of currency> <icon>
+#	price bat "Basic Attention Token" 🦁
+# When the name of the currency is multi-word, put it in quotes.
+
+[ -z "$3" ] && exit 1
+interval="@7d"	# History contained in chart preceded by '@' (7d = 7 days)
+
+# Directory where currency info is stored.
+dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
+pricefile="$dir/$1"
+chartfile="$dir/$1-chart"
+
+[ "$(stat -c %x "$pricefile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
+	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && curl -s "rate.sx/1$1" > "$pricefile" || exit ;}
+
+[ "$(stat -c %x "$chartfile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
+	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && curl -s "rate.sx/$1$interval" > "$chartfile" || exit ;}
+
+case $BLOCK_BUTTON in
+	1) setsid "$TERMINAL" -e less -Sf "$chartfile" ;;
+	3) uptime="$(date -d "$(stat -c %x "$dir")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
+		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$price")</b>
+- Left click for chart of changes.
+- Middle click to update.
+- Shows 🔃 if updating prices.
+- <b>Last updated:
+	$uptime</b>" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+printf "$3$%0.2f" "$(cat "$pricefile")"
