@@ -7,14 +7,16 @@
 
 [ -z "$3" ] && exit 1
 interval="@7d"	# History contained in chart preceded by '@' (7d = 7 days)
-
-# Directory where currency info is stored.
 dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
 pricefile="$dir/$1"
 chartfile="$dir/$1-chart"
 
+[ -d "$dir" ] || mkdir -p "$dir"
+
 [ "$(stat -c %x "$pricefile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
 	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && curl -s "rate.sx/1$1" > "$pricefile" || exit ;}
+
+printf "$3$%0.2f" "$(cat "$pricefile")"
 
 [ "$(stat -c %x "$chartfile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
 	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && curl -s "rate.sx/$1$interval" > "$chartfile" || exit ;}
@@ -30,5 +32,3 @@ case $BLOCK_BUTTON in
 	$uptime</b>" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
-
-printf "$3$%0.2f" "$(cat "$pricefile")"
