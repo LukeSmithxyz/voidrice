@@ -10,11 +10,13 @@ if [ "$PULSE" ]; then
 	mute() { pulsemixer --mute ;}
 	up() { pulsemixer --change-volume +"$NUM" ;}
 	down() { pulsemixer --change-volume -"$NUM" ;}
+	control() { pulsemixer ;}
 else
 	toggle() { amixer sset Master toggle ;}
 	mute() { amixer sset Master mute ;}
 	up() { amixer sset Master "$NUM"%+ ;}
 	down() { amixer sset Master "$NUM"%- ;}
+	control() { alsamixer ;}
 fi
 
 case "$1" in
@@ -22,6 +24,5 @@ case "$1" in
 	mute) mute ;;
 	up) up ;;
 	down) down ;;
-esac >/dev/null
-
-pkill -RTMIN+10 "${STATUSBAR:?}" &
+	control) control ;;
+esac

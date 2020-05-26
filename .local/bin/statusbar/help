@@ -1,8 +1,0 @@
-#!/bin/sh
-
-case $BLOCK_BUTTON in
-    1) groff -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura - ;;
-    2) i3 restart ;;
-    3) pgrep -x dunst >/dev/null && notify-send "❓ Help module" "\- Left click to open LARBS guide.
-- Middle click to refresh i3.";;
-esac; echo "❓"

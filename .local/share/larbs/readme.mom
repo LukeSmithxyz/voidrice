@@ -137,7 +137,7 @@ Naturally, you can use \f(CWyay\fP to look for and install any you want to add.
 .ITEM
 \f(CWMod+n\fP \(en newsboat (RSS feed reader)
 .ITEM
-\f(CWMod+A\fP \(en alsa (audio system control)
+\f(CWMod+A\fP \(en pulsemixer (audio system control)
 .ITEM
 \f(CWMod+w\fP \(en Web Browser (Brave)
 .ITEM
@@ -209,7 +209,7 @@ I use ncmpcpp as a music player, which is a front end for mpd.
 .ITEM
 \f(CWMod+]\fP \(en Forward 10 seconds (holding shift increases amount)
 .ITEM
-\f(CWMod+A\fP \(en alsamixer (general volume sink/source control)
+\f(CWMod+A\fP \(en pulsemixer (general volume sink/source control)
 .LIST OFF
 .HEADING 2 "Workspaces"
 .PP
@@ -266,9 +266,7 @@ These settings may override your preferred settings, so you should open this fil
 .PP
 On fresh install, the Linux audio system (ALSA) often mutes outputs.
 You may want to unbind
-You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWalsamixer\fP (\f(CWmod+A\fP).
-
-If you have a more complex audio setup and can't be bothered to figure out ALSA, you might want to install and enable PulseAudio, which general "just werks".
+You may also need to set your preferred default output sink which you can do by the command line, or by selecting one with \f(CWpulsemixer\fP (\f(CWmod+A\fP).
 .HEADING 2 "How do I copy and paste?"
 .PP
 Copying and pasting is always program-specific on any system.
