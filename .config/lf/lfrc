@@ -22,6 +22,9 @@ cmd open ${{
 	audio/*) mpv --audio-display=no $f ;;
 	video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
 	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
+	application/epub+zip) setsid zathura $fx >/dev/null 2>&1 & ;;
+	application/vnd.comicbook+zip) setsid zathura $fx >/dev/null 2>&1 & ;;
+	application/vnd.comicbook-rar) setsid zathura $fx >/dev/null 2>&1 & ;;
         *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
     esac
 }}
