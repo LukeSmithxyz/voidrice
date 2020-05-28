@@ -18,8 +18,8 @@ escbook="$(echo "$booktitle" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:pun
 ! mkdir -p "$escbook" && echo "Do you have write access in this directory?" && exit 1
 
 # As long as the extension is in the tag script, it'll work.
-ext="opus"
-#ext="${1#*.}"
+#ext="opus"
+ext="${1##*.}"
 
 # Get the total number of tracks from the number of lines.
 total="$(wc -l < "$2")"
@@ -30,8 +30,7 @@ do
 	[ -n "$start" ] &&
 	echo "From $start to $end; $track $title"
 	file="$escbook/$(printf "%.2d" "$track")-$esctitle.$ext"
-	[ -n "$start" ] && echo "Splitting \"$title\"..." && ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$start" -to "$end" -vn "$file" &&
-		echo "Tagging \"$title\"..." && tag -a "$author" -A "$booktitle" -t "$title" -n "$track" -N "$total" -d "$year" "$file"
+	[ -n "$start" ] && echo "Splitting/Tagging \"$title\"..." && ffmpeg -nostdin -y -loglevel -1 -i "$inputaudio" -metadata title="$title" -metadata artist="$author" -metadata album="$booktitle" -metadata track="$track" -metadata date="$year" -ss "$start" -to "$end" -acodec copy -vn "$file"
 	title="$(echo "$x" | cut -d' ' -f 2-)"
 	esctitle="$(echo "$title" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
 	track="$((track+1))"
@@ -40,5 +39,5 @@ done < "$2"
 # The last track must be done outside the loop.
 echo "From $start to the end: $title"
 file="$escbook/$track-$esctitle.$ext"
-echo "Splitting \"$title\"..." && ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$start" -vn "$file" &&
-		echo "Tagging \"$title\"..." && tag -a "$author" -A "$booktitle" -t "$title" -n "$track" -N "$total" -d "$year" "$file"
+echo "Splitting/Tagging \"$title\"..." && ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -metadata title="$title" -metadata artist="$author" -metadata album="$booktitle" -metadata track="$track" -metadata date="$year" -ss "$start" -acodec copy -vn "$file" &&
+		echo "Done."
