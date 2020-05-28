@@ -34,7 +34,7 @@ do
 		echo "Tagging \"$title\"..." && tag -a "$author" -A "$booktitle" -t "$title" -n "$track" -N "$total" -d "$year" "$file"
 	title="$(echo "$x" | cut -d' ' -f 2-)"
 	esctitle="$(echo "$title" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
-	track="$((track+1))"
+	track="$(echo "1+$track" | bc)"
 	start="$end"
 done < "$2"
 # The last track must be done outside the loop.
