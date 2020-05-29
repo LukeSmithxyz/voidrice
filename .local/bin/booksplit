@@ -39,6 +39,6 @@ do
 done < "$2"
 # The last track must be done outside the loop.
 echo "From $start to the end: $title"
-file="$escbook/$track-$esctitle.$ext"
+file="$escbook/$(printf "%.2d" "$track")-$esctitle.$ext"
 echo "Splitting \"$title\"..." && ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$start" -vn "$file" &&
 		echo "Tagging \"$title\"..." && tag -a "$author" -A "$booktitle" -t "$title" -n "$track" -N "$total" -d "$year" "$file"
