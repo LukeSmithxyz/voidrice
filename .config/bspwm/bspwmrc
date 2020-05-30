@@ -26,7 +26,7 @@ bspc config top_padding 24	# top_padding I set equal to polybar's height
 bspc config focus_follows_pointer true
 
 dropdownname="dropdown"
-bspc query -N -n .hidden >/dev/null || setsid $TERMINAL -n "$dropdownname" -e dropdown >/dev/null 2>&1 &
+bspc query -N -n .hidden >/dev/null || setsid -f $TERMINAL -n "$dropdownname" -e dropdown >/dev/null 2>&1
 bspc rule -a St:$dropdownname hidden=on
 bspc rule -a St:$dropdownname sticky=on
 bspc rule -a St:$dropdownname state=floating
