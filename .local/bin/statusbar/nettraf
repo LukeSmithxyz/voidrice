@@ -11,13 +11,11 @@ case "$BLOCK_BUTTON" in
 esac
 
 logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
-prevdata="$(cat "$logfile")" || echo "0 0" > "$logfile"
+read -r rxprev txprev < "$logfile"
 
 rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
 txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
 
-printf "🔻%sKiB 🔺%sKiB\\n" \
-	"$(((rxcurrent-${prevdata%% *})/1024))" \
-	"$(((txcurrent-${prevdata##* })/1024))"
+printf "🔻%sKiB 🔺%sKiB\\n" "$(((rxcurrent-rxprev)/1024))" "$(((txcurrent-txprev)/1024))"
 
 echo "$rxcurrent $txcurrent" > "$logfile"
