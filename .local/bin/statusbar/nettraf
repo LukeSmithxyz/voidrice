@@ -13,8 +13,8 @@ esac
 logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
 prevdata="$(cat "$logfile")"
 
-rxcurrent="$(($(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+')))"
-txcurrent="$(($(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+')))"
+rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
+txcurrent="$(($(paste -d '+' /sys/class/net/[^lo]*/statistics/tx_bytes)))"
 
 printf "🔻%sKiB 🔺%sKiB\\n" \
 	"$(((rxcurrent-${prevdata%% *})/1024))" \
