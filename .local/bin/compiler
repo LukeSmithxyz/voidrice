@@ -5,6 +5,9 @@
 #
 # Compiles .tex. groff (.mom, .ms), .rmd, .md.  Opens .sent files as sent
 # presentations.  Runs scripts based on extention or shebang
+#
+# Note that .tex files which you wish to compile with XeLaTeX should have the
+# string "xelatex" somewhere in a comment/command in the first 5 lines.
 
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
@@ -28,7 +31,13 @@ case "$file" in
 	*\.[0-9]) preconv "$file" | refer -PS -e | groff -mandoc -T pdf > "$base".pdf ;;
 	*\.[rR]md) Rscript -e "rmarkdown::render('$file', quiet=TRUE)" ;;
 	*\.tex) textype "$file" ;;
-	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
+	*\.md)	if  command -v lowdown >/dev/null; then
+			lowdown -d nointem -e super "$file" -Tms | groff -mpdfmark -ms -kept > "$base".pdf
+		elif command -v groffdown >/dev/null; then
+			groffdown -i "$file" | groff > "$base.pdf"
+		else
+			pandoc "$file" --pdf-engine=xelatex -o "$base".pdf
+		fi ; ;;
 	*config.h) sudo make install ;;
 	*\.c) cc "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;
