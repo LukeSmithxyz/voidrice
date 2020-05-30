@@ -14,7 +14,7 @@ logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
 prevdata="$(cat "$logfile")" || echo "0 0" > "$logfile"
 
 rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
-txcurrent="$(($(paste -d '+' /sys/class/net/[^lo]*/statistics/tx_bytes)))"
+txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
 
 printf "🔻%sKiB 🔺%sKiB\\n" \
 	"$(((rxcurrent-${prevdata%% *})/1024))" \
