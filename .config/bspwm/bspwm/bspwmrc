@@ -32,7 +32,7 @@ bspc config focus_follows_pointer true
 bspc rule -a Zathura state=tiled
 
 dropdownname="dropdown"
-bspc query -N -n .hidden >/dev/null || setsid $TERMINAL -n "$dropdownname" -e dropdown >/dev/null 2>&1 &
+bspc query -N -n .hidden >/dev/null || setsid -f $TERMINAL -n "$dropdownname" -e dropdown >/dev/null 2>&1
 bspc rule -a St:$dropdownname hidden=on
 bspc rule -a St:$dropdownname sticky=on
 bspc rule -a St:$dropdownname state=floating
