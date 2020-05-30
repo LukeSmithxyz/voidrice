@@ -1,5 +1,6 @@
 #!/bin/sh
 
+COMMAND="${1:-help}"
 NUM="${2:-5}"
 
 # Uncomment the following line to use Pulseaudio.
@@ -19,10 +20,12 @@ else
 	control() { alsamixer ;}
 fi
 
-case "$1" in
-	toggle) toggle ;;
-	mute) mute ;;
-	up) up ;;
-	down) down ;;
-	control) control ;;
-esac
+help() {
+	echo "usage: lmc <command> [<num>]"
+	echo "commands:"
+	sed -n 's/^\s*\(\S*\)().*/- \1/p' "$0" | sort -u
+}
+
+type "$COMMAND" | grep function >/dev/null && "$COMMAND" \
+	|| echo "lmc: command not defined: $COMMAND" >&2
+
