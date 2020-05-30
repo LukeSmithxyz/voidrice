@@ -16,6 +16,6 @@ read -r rxprev txprev < "$logfile"
 rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
 txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
 
-printf "🔻%sKiB 🔺%sKiB\\n" "$(((rxcurrent-rxprev)/1024))" "$(((txcurrent-txprev)/1024))"
+printf "🔻%dKiB 🔺%dKiB\\n" "$(((rxcurrent-rxprev)/1024))" "$(((txcurrent-txprev)/1024))"
 
 echo "$rxcurrent $txcurrent" > "$logfile"
