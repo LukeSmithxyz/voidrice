@@ -10,16 +10,14 @@ case "$BLOCK_BUTTON" in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-rxfile="${XDG_CACHE_HOME:-$HOME/.cache}/rxlog"
-txfile="${XDG_CACHE_HOME:-$HOME/.cache}/txlog"
+logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
+prevdata="$(cat "$logfile")" || echo "0 0" > "$logfile"
 
-rxcurrent="$(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+' | bc)"
-txcurrent="$(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+' | bc)"
+rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
+txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
 
 printf "🔻%sKiB 🔺%sKiB\\n" \
-	"$(printf -- "(%s-%s)/1024\\n" "$rxcurrent" "$(cat "$rxfile")" | bc)" \
-	"$(printf -- "(%s-%s)/1024\\n" "$txcurrent" "$(cat "$txfile")" | bc)"
+	"$(((rxcurrent-${prevdata%% *})/1024))" \
+	"$(((txcurrent-${prevdata##* })/1024))"
 
-# Log the current values for next run.
-echo "$rxcurrent" > "$rxfile"
-echo "$txcurrent" > "$txfile"
+echo "$rxcurrent $txcurrent" > "$logfile"
