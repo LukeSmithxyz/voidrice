@@ -16,7 +16,7 @@ showweather() { printf "%s" "$(sed '16q;d' "${XDG_DATA_HOME:-$HOME/.local/share}
 sed '13q;d' "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " 🥶" $1 "°","🌞" $2 "°"}' ;}
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" & ;;
+	1) setsid -f "$TERMINAL" -e less -Srf "${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" ;;
 	2) getforecast && showweather ;;
 	3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
