@@ -11,6 +11,7 @@ case "$BLOCK_BUTTON" in
 esac
 
 logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
+[ -f "$logfile" ] || echo "0 0" > "$logfile"
 read -r rxprev txprev < "$logfile"
 
 rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
