@@ -62,7 +62,7 @@ bindsym $mod+grave		exec --no-startup-id dmenuunicode
 bindsym $mod+Shift+Delete	exec --no-startup-id pulsemixer --mute ; exec --no-startup-id mpc pause && pkill -RTMIN+10 i3blocks ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e lf
 
 # Show selection:
-bindsym $mod+Insert		exec --no-startup-id showclip
+bindsym $mod+Insert		exec --no-startup-id notify-send "📋 Clipboard contents:" "$(xclip -o -selection clipboard)"
 ##bindsym $mod+Pause
 
 # #---Letter Key Bindings---# #
