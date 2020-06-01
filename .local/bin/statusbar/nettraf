@@ -4,19 +4,25 @@
 # transmitted (TX) since the previous time this script ran. So if run every
 # second, gives network traffic per second.
 
-case "$BLOCK_BUTTON" in
+case $BLOCK_BUTTON in
 	3) notify-send "🌐 Network traffic module" "🔻: Traffic received
 🔺: Traffic transmitted" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-logfile="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
-[ -f "$logfile" ] || echo "0 0" > "$logfile"
-read -r rxprev txprev < "$logfile"
+update() {
+    sum=0
+    for arg; do
+        read -r i < "$arg"
+        sum=$(( $sum + $i ))
+    done
+    cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
+    [ -f "$cache" ] && read -r old < "$cache" || old=0
+    printf %d\\n "$sum" > "$cache"
+    printf %d\\n $(( ($sum - $old) / 1024 ))
+}
 
-rxcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/rx_bytes)))"
-txcurrent="$(($(paste -d '+' /sys/class/net/[ew]*/statistics/tx_bytes)))"
+rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
+tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
 
-printf "🔻%dKiB 🔺%dKiB\\n" "$(((rxcurrent-rxprev)/1024))" "$(((txcurrent-txprev)/1024))"
-
-echo "$rxcurrent $txcurrent" > "$logfile"
+printf "🔻%dKiB 🔺%dKiB\\n" "$rx" "$tx"
