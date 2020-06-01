@@ -7,7 +7,7 @@ ping -q -c 1 1.1.1.1 > /dev/null || exit
 
 /usr/bin/notify-send "📰 Updating RSS feeds..."
 
-ps ax | grep -q newsboat$ && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
+pgrep -f newsboat$ && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
 
 echo 🔃 > /tmp/newsupdate
 pkill -RTMIN+6 "${STATUSBAR:-dwmblocks}"
