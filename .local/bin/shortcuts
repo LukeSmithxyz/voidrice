@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-Output locations. Unactivated progs should go to /dev/null.
+# Output locations. Unactivated progs should go to /dev/null.
 shell_shortcuts="${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
 zsh_named_dirs="${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc"
 ranger_shortcuts="${XDG_CONFIG_HOME:-$HOME/.config}/ranger/shortcuts.conf"
