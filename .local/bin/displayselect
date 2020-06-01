@@ -18,10 +18,10 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
         res_internal=$(xrandr --query | sed -n "/^$internal/,/\+/p" | \
             tail -n 1 | awk '{print $1}')
 
-        res_ext_x=$(echo $res_external | sed 's/x.*//')
-        res_ext_y=$(echo $res_external | sed 's/.*x//')
-        res_int_x=$(echo $res_internal | sed 's/x.*//')
-        res_int_y=$(echo $res_internal | sed 's/.*x//')
+        res_ext_x=$(echo "$res_external" | sed 's/x.*//')
+        res_ext_y=$(echo "$res_external" | sed 's/.*x//')
+        res_int_x=$(echo "$res_internal" | sed 's/x.*//')
+        res_int_y=$(echo "$res_internal" | sed 's/.*x//')
 
         scale_x=$(echo "$res_ext_x / $res_int_x" | bc -l)
         scale_y=$(echo "$res_ext_y / $res_int_y" | bc -l)
@@ -53,7 +53,7 @@ multimon() { # Multi-monitor handler.
 	esac ;}
 
 onescreen() { # If only one output available or chosen.
-	xrandr --output "$1" --auto --scale 1.0x1.0 $(echo "$allposs" | grep -v "$1" | awk '{print "--output", $1, "--off"}' | paste -sd ' ')
+	xrandr --output "$1" --auto --scale 1.0x1.0 "$(echo "$allposs" | grep -v "$1" | awk '{print "--output", $1, "--off"}' | paste -sd ' ')"
 	}
 
 postrun() { # Stuff to run to clean up.

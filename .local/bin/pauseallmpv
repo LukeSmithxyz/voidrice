@@ -6,5 +6,5 @@
 # (with other things) by default and is used in some other places.
 
 for i in $(ls /tmp/mpvSockets/*); do
-	echo '{ "command": ["set_property", "pause", true] }' | socat - $i;
+	echo '{ "command": ["set_property", "pause", true] }' | socat - "$i";
 done
