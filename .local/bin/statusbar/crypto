@@ -28,7 +28,7 @@ printprices() { # Print/format all prices
 	for x in "$dir"/*; do
 		[ -f "$x" ] || break
 		info="$(cut -d';' -f-2 --output-delimiter=' ' "$x")"
-		printf "%s$%0.2f " $info
+		printf "%s$%0.2f " "$info"
 	done | sed 's/ $/\n/'
 	}
 
