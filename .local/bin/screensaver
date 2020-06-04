@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+[ "$INACTIVITY" ] || export INACTIVITY=900
+
+# Duration ( in minutes )
+dur=$(( INACTIVITY / 60  ))
+
+# Suspends after completion
+timeout "$dur"m ffplay -volume 0 -exitonkeydown -exitonmousedown -loop "$dur" -fs ~/.config/screensaver.mp4 >/dev/null 2>&1 || systemctl suspend
+
