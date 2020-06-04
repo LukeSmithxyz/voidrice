@@ -10,7 +10,7 @@
 # string "xelatex" somewhere in a comment/command in the first 5 lines.
 
 file=$(readlink -f "$1")
-dir=$(dirname "$file")
+dir=${file%/*}
 base="${file%.*}"
 
 cd "$dir" || exit
