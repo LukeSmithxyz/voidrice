@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+pidof dunst &&
+   notify-send -t 1000 '🔕 Do not disturb' &&
+   sleep 1 &&
+   killall dunst &&
+   exit
+
+dunst &
+sleep 0.5
+notify-send -t 1000 '🔔 Disturb all you want'
