@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+# Sets the correct DPI for your monitor instead of the generic '100'
+# ❗ Make sure there is no DPI entry in your Xresources already!
+
+file=~/.config/Xresources
+
+grep 'Xft.dpi' "$file" && xrdb -merge "$file" && exit
+
+info=$(xrandr | grep ' connected')
+
+width=$(echo "$info" | rev | cut -d ' ' -f 3 | rev)
+width_in=$(echo "${width%mm}" | awk '{print $1 * 0.039370}')
+
+height=$(echo "$info" | rev | cut -d ' ' -f 1 | rev)
+height_in=$(echo "${height%mm}" | awk '{print $1 * 0.039370}')
+
+px=$(echo "$info" | cut -d ' ' -f 4)
+
+width_px=${px%x*}
+
+height_px=${px#*x}
+height_px=${height_px%%+*}
+
+diagonal_px=$(awk -v w="$width_px" -v h="$height_px" \
+   'BEGIN{print sqrt(w*w+h*h)}')
+
+diagonal_in=$(awk -v w="$width_in" -v h="$height_in" \
+   'BEGIN{print sqrt(w*w + h*h)}')
+
+dpi=$(awk -v dp="$diagonal_px" -v di="$diagonal_in" \
+   'BEGIN{print dp / di}')
+
+echo "Xft.dpi: $dpi" >> "$file"
+xrdb -merge "$file"
+
