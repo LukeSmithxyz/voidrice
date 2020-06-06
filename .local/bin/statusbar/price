@@ -6,23 +6,25 @@
 # When the name of the currency is multi-word, put it in quotes.
 
 [ -z "$3" ] && exit 1
-interval="@7d"	# History contained in chart preceded by '@' (7d = 7 days)
+interval="@14d"	# History contained in chart preceded by '@' (7d = 7 days)
 dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
 pricefile="$dir/$1"
 chartfile="$dir/$1-chart"
 
+updateprice() { ping -q -c 1 1.1.1.1 >/dev/null 2>&1 &&
+	curl -s "rate.sx/1$1" > "$pricefile" &&
+	curl -s "rate.sx/$1$interval" > "$chartfile" ;}
+
 [ -d "$dir" ] || mkdir -p "$dir"
 
 [ "$(stat -c %x "$pricefile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
-	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && curl -s "rate.sx/1$1" > "$pricefile" || exit ;}
-
-printf "$3$%0.2f" "$(cat "$pricefile")"
-
-[ "$(stat -c %x "$chartfile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
-	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && curl -s "rate.sx/$1$interval" > "$chartfile" || exit ;}
+	updateprice
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Sf "$chartfile" ;;
+	2) notify-send -u low "$3 Updating..." "Updating $2 price..." &&
+		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now
+\$$(cat "$pricefile")" ;;
 	3) uptime="$(date -d "$(stat -c %x "$pricefile")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
 		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
@@ -32,3 +34,5 @@ case $BLOCK_BUTTON in
 	$uptime</b>" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
+
+printf "$3$%0.2f" "$(cat "$pricefile")"
