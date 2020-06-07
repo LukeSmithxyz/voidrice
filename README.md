@@ -42,4 +42,4 @@ Use [LARBS](https://larbs.xyz) to autoinstall everything:
 curl -LO larbs.xyz/larbs.sh
 ```
 
-or clone the repo files directly to your home directory and install [the prerequisite programs](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv) or [those required for the i3 setup](https://github.com/LukeSmithxyz/LARBS/blob/master/legacy.csv).
+or clone the repo files directly to your home directory and install [the prerequisite programs](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv).
