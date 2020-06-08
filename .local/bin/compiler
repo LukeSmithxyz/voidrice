@@ -27,11 +27,11 @@ textype() { \
 }
 
 case "$ext" in
-	ms) preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf > "$base".pdf ;;
-	mom) preconv "$file" | refer -PS -e | groff -mom -kept -T pdf > "$base".pdf ;;
 	[0-9]) preconv "$file" | refer -PS -e | groff -mandoc -T pdf > "$base".pdf ;;
-	[rR]md) Rscript -e "rmarkdown::render('$file', quiet=TRUE)" ;;
-	tex) textype "$file" ;;
+	c) cc "$file" -o "$base" && "$base" ;;
+	go) go run "$file" ;;
+	h) sudo make install ;;
+	m) octave "$file" ;;
 	md)	if  command -v lowdown >/dev/null; then
 			lowdown -d nointem -e super "$file" -Tms | groff -mpdfmark -ms -kept > "$base".pdf
 		elif command -v groffdown >/dev/null; then
@@ -39,13 +39,14 @@ case "$ext" in
 		else
 			pandoc "$file" --pdf-engine=xelatex -o "$base".pdf
 		fi ; ;;
-	h) sudo make install ;;
-	c) cc "$file" -o "$base" && "$base" ;;
+	mom) preconv "$file" | refer -PS -e | groff -mom -kept -T pdf > "$base".pdf ;;
+	ms) preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf > "$base".pdf ;;
 	py) python "$file" ;;
+	[rR]md) Rscript -e "rmarkdown::render('$file', quiet=TRUE)" ;;
 	rs) cargo build ;;
-	m) octave "$file" ;;
+   sass) sassc -a "$file" "$base.css" ;;
 	scad) openscad -o "$base".stl "$file" ;;
-	go) go run "$file" ;;
 	sent) setsid -f sent "$file" 2>/dev/null ;;
+	tex) textype "$file" ;;
 	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac
