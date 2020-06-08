@@ -42,6 +42,7 @@ case "$ext" in
 	h) sudo make install ;;
 	c) cc "$file" -o "$base" && "$base" ;;
 	py) python "$file" ;;
+	rs) cargo build ;;
 	m) octave "$file" ;;
 	scad) openscad -o "$base".stl "$file" ;;
 	go) go run "$file" ;;
