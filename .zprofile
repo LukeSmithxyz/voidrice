@@ -122,7 +122,8 @@ ex=🎯:\
 
 if pacman -Qs libxft-bgra >/dev/null 2>&1; then
 	# Start graphical server on tty1 if not already running.
-	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1  && exec startx
+	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1  &&
+      exec startx -- vt1 > /dev/null 2>&1
 else
 	echo "\033[31mIMPORTANT\033[0m: Note that \033[32m\`libxft-bgra\`\033[0m must be installed for this build of dwm.
 Please run:
