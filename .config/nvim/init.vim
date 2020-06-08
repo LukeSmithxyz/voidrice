@@ -74,7 +74,7 @@ set clipboard+=unnamedplus
 	map Q gq
 
 " Check file in shellcheck:
-	map <leader>s :!clear && shellcheck %<CR>
+	map <leader>s :!clear && shellcheck --shell=sh %<CR>
 
 " Open my bibliography file in split
 	map <leader>b :vsp<space>$BIB<CR>
