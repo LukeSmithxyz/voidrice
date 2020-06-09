@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Output locations. Unactivated progs should go to /dev/null.
 shell_shortcuts="${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
