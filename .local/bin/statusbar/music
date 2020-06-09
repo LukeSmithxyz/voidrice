@@ -8,7 +8,7 @@ case $BLOCK_BUTTON in
 	1) mpc status | filter ; setsid -f "$TERMINAL" -e ncmpcpp ;;  # right click, pause/unpause
 	2) mpc toggle | filter ;;  # right click, pause/unpause
 	3) mpc status | filter ; notify-send "🎵 Music module" "\- Shows mpd song playing.
-- Italic when paused.
+- ⏸ when paused.
 - Left click opens ncmpcpp.
 - Middle click pauses.
 - Scroll changes track.";;  # right click, pause/unpause
