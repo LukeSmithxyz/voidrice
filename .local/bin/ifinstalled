@@ -5,4 +5,4 @@
 # it informs the user that they need that command to continue. This is used in
 # various other scripts for clarity's sake.
 
-pacman -Qq "$1" >/dev/null || { notify-send "📦 $1" "must be installed for this function." && exit 1 ;}
+pacman -Qq "$1" 2>/dev/null || { notify-send "📦 $1" "must be installed for this function." && exit 1 ;}
