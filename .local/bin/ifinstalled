@@ -5,4 +5,7 @@
 # it informs the user that they need that command to continue. This is used in
 # various other scripts for clarity's sake.
 
-pacman -Qq "$1" 2>/dev/null || { notify-send "📦 $1" "must be installed for this function." && exit 1 ;}
+for x in "$@";do
+	pacman -Qq "$x" 2>/dev/null ||
+		{ notify-send "📦 $x" "must be installed for this function." && exit 1 ;}
+done
