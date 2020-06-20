@@ -1,4 +1,7 @@
-http://lukesmith.xyz/rss.xml
-https://notrelated.libsyn.com/rss
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke Smith (YouTube)"
+"query:UNREAD:unread = \"yes\""
+"query:TECH:tags # \"tech\" and unread = \"yes\""
+"query:░░░░Luke Smith░░░░:tags # \"luke\""
+http://lukesmith.xyz/rss.xml "luke" "tech"
+https://notrelated.libsyn.com/rss "luke"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke Smith (YouTube)"  "luke" "tech"
 https://www.archlinux.org/feeds/news/ "tech"
