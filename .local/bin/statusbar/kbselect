@@ -1,0 +1,16 @@
+#!/bin/sh
+# works on any init system
+# requirements: dmenu, xorg-setxkbmap, xkblayout-state (https://github.com/nonpop/xkblayout-state)
+kb="$(xkblayout-state print "%s")" || exit 1
+
+case $BLOCK_BUTTON in
+	1) kb_choice="$(awk '/! layout/{flag=1; next} /! variant/{flag=0} flag {print $2, "- " $1}' /usr/share/X11/xkb/rules/base.lst | dmenu -l 15)"
+	kb="$(echo "$kb_choice" | awk '{print $3}')"
+	setxkbmap "$kb"
+	pkill -RTMIN+30 "${STATUSBAR:-dwmblocks}";;
+	3) notify-send "⌨  Keyboard/language module" "$(xkblayout-state print "\- Current layout: %s (%n)")
+- Left click to change keyboard.";;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+echo "$kb"
