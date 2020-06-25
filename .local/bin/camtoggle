@@ -1,2 +1,2 @@
 #!/bin/sh
-pkill -f /dev/video || mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-0-0 --autofit=30%  --title="mpvfloat" /dev/video0
+pkill -f /dev/video || ffplay -f v4l2 -fflags nobuffer -flags low_delay -video_size 720x1280 -framerate 30 -i /dev/video0
