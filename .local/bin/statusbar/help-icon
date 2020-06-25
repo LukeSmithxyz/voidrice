@@ -3,7 +3,7 @@
 # The clickable help menu. Middle click to restart wm.
 
 # If dwm is running, use dwm's readme and restart.
-pgrep -f "\sdwm$" &&
+pidof dwm >/dev/null &&
 	READMEFILE=/usr/local/share/dwm/larbs.mom
 	restartwm() { pkill -HUP dwm ;} ||
 		restartwm() { i3 restart ;}
