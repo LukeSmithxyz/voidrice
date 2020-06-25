@@ -1,11 +1,11 @@
 # You can add comments to these files with #
-d	  ${XDG_DOCUMENTS_DIR:-$HOME/Documents}
-D	  ${XDG_DOWNLOAD_DIR:-$HOME/Downloads}
-h	  ${XDG_CONFIG_HOME:-$HOME}
-m	  ${XDG_MUSIC_DIR:-$HOME/Music}
-pp	${XDG_PICTURES_DIR:-$HOME/Pictures
-vv	${XDG_VIDEOS_DIR:-$HOME/Videos
-cf	${XDG_CONFIG_HOME:-$HOME/.config}
+d   ${XDG_DOCUMENTS_DIR:-$HOME/Documents}
+D   ${XDG_DOWNLOAD_DIR:-$HOME/Downloads}
+h   ${XDG_CONFIG_HOME:-$HOME}
+m   ${XDG_MUSIC_DIR:-$HOME/Music}
+pp  ${XDG_PICTURES_DIR:-$HOME/Pictures
+vv  ${XDG_VIDEOS_DIR:-$HOME/Videos
+cf  ${XDG_CONFIG_HOME:-$HOME/.config}
 cac ${XDG_CACHE_HOME:-$HOME/.cache}
-mn	/mnt
-sc 	${XDG_CONFIG_HOME:-$HOME/.local/bin}
+mn  /mnt
+sc  ${XDG_CONFIG_HOME:-$HOME/.local/bin}
