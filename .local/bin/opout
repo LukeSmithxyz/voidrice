@@ -4,9 +4,9 @@
 # usually the pdf of a compiled document.  I find this useful especially
 # running from vim.
 
-basename="$(echo "$1" | sed 's/\.[^\/.]*$//')"
+basename="$(echo "${*}" | sed 's/\.[^\/.]*$//')"
 
-case "$1" in
+case "${*}" in
 	*.tex|*.m[dse]|*.[rR]md|*.mom|*.[0-9]) setsid -f xdg-open "$basename".pdf >/dev/null 2>&1 ;;
 	*.html) setsid -f "$BROWSER" "$basename".html >/dev/null 2>&1 ;;
 	*.sent) setsid -f sent "$1" >/dev/null 2>&1 ;;
