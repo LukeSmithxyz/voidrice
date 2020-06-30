@@ -1,0 +1,35 @@
+#!/bin/sh
+# Get the sunrise and sunset time, and additional info in notification
+# Remember to change the url, to your city of choice
+
+city="https://www.timeanddate.com/sun/italy/rome"
+sundata="${XDG_CACHE_HOME:-$HOME/.cache}/sundata"
+sunfile="${XDG_CACHE_HOME:-$HOME/.cache}/sunfile"
+
+getsun() {
+curl -sf "$city" | \
+	grep -o -e "Sunrise\ Today.\{124\}" \
+		-e "Sunset\ Today.\{122\}" > $sundata
+
+echo "🌄 Sunrise" > $sunfile
+echo "$( grep Sunrise $sundata | grep -o "[[:digit:]]""[[:digit:]]":"[[:digit:]]""[[:digit:]]" )" >> $sunfile
+echo "$( grep Sunrise $sundata | grep -o direction.......... | sed 's/direction //' )" >> $sunfile
+echo "$( grep Sunrise $sundata | grep -o "[0-9]*°" )" >> $sunfile
+
+echo "\n🌇 Sunset" >> $sunfile
+echo "$( grep Sunset $sundata | grep -o "[[:digit:]]""[[:digit:]]":"[[:digit:]]""[[:digit:]]" )" >> $sunfile
+echo "$( grep Sunset $sundata | grep -o direction.......... | sed 's/direction //' )" >> $sunfile
+echo "$( grep Sunset $sundata | grep -o "[0-9]*°" )" >> $sunfile
+}
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e less -Sf "$sunfile" ;;
+	2) getsun && showsun ;;
+	3) notify-send "$(cat $sunfile)" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+[ "$(stat -c %y "$sunfile" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
+	{ getsun || exit 1 ;}
+
+printf "%s %s\n" "🌄$(sed -n '2p' $sunfile)" "🌇$(sed -n '7p' $sunfile)"
