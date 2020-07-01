@@ -5,7 +5,7 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [Lu
 I added some of my custom scripts for my need exclusively.
 
 	- Fireplaces (auto mounting drives in particular location)
-	- Myprograms ( fetches the dmenu list of programs located in isolated places of hard drives)
+	- Myprograms [Meta + D ] ( fetches the dmenu list of programs located in isolated places of hard drives)
 	- fibonacchi mode is default in dwm
 	- added $FM env variable for File manager and updated in dwm build. (Saves the hassle to recompile it in dwm build)
 	- vifm is default here instead of lf
