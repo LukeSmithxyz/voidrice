@@ -2,7 +2,7 @@
 
 These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on [Luke's YouTube channel](https://youtube.com/c/lukesmithxyz).
 
-- I added some of my custom scripts for my need exclusively.
+I added some of my custom scripts for my need exclusively.
         - Fireplaces (auto mounting drives in particular location)
 	- Myprograms ( fetches the dmenu list of programs located in isolated places of hard drives)
 	- fibonacchi mode is default in dwm
