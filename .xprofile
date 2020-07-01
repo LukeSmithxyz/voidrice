@@ -9,7 +9,7 @@ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XA
 
 mpd &			# music player daemon-you might prefer it as a service though
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
-fireplaces floo         # Mounting Drives
+fireplaces floo &       # Mounting Drives
 #xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/Xresources &	# Uncomment to use Xresources colors/settings on startup
 xcompmgr &		# xcompmgr for transparency
 dunst &			# dunst for notifications

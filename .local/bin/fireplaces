@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+case "$1" in
+	floo)
+	     sudo mount /dev/sda3 ~/tent/durmstrang &&
+	     sudo mount /dev/sda4 ~/tent/ilvermony &&
+             sudo mount /dev/sdb1 ~/tent/hogsmead &&
+             sudo mount /dev/sdb2 ~/tent/muzix &&
+	     sudo mount /dev/sdb3 ~/tent/castelobruxo &&
+	     sudo mount /dev/sdb4 ~/tent/hogwarts &&
+	     notify-send "You got Access in:
+🚢 Durmstrang
+🌲 Ilvermony
+🏘  Hogsmead
+🎼 Muzix
+🏯 Castelobruxo
+🧙 Hogwarts"
+	;;
+	flew)
+	     sudo umount /dev/sda3 &&
+	     sudo umount /dev/sda4 &&
+             sudo umount /dev/sdb1 &&
+             sudo umount /dev/sdb2 &&
+	     sudo umount /dev/sdb3 &&
+	     sudo umount /dev/sdb4 &&
+	     notify-send "(Enjoy Holidays) Regards-
+🚢 Durmstrang
+🌲 Ilvermony
+🏘  Hogsmed
+🎼 Muzix
+🏯 Castelobruxo
+🧙 Hogwarts"
+	;;
+         *)
+	   notify-send "Do you want to floo in or flew out from portals" ;;
+esac
