@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+readonly ID_PREVIEW="preview"
+
+if [ -e "$FIFO_UEBERZUG" ]; then
+	if [[ "$1" == "draw" ]]; then
+            declare -p -A cmd=([action]=add [identifier]="$ID_PREVIEW"
+	     		       [x]="$2" [y]="$3" [width]="$4" [height]="$5" \
+			       [path]="${PWD}/$6") \
+		> "$FIFO_UEBERZUG"
+	else
+	     declare -p -A cmd=([action]=remove [identifier]="$ID_PREVIEW") \
+		> "$FIFO_UEBERZUG"
+	fi
+fi

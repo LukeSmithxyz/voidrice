@@ -1,21 +1,28 @@
 highlight clear
-highlight Win cterm=none ctermfg=white ctermbg=black
-highlight Directory cterm=bold ctermfg=cyan ctermbg=default
-highlight Link cterm=bold ctermfg=blue ctermbg=default
-highlight BrokenLink cterm=bold ctermfg=red ctermbg=default
+
+" Highlight Borders That you may want to set to defalt to get complete transparency
+
+highlight TopLine cterm=none ctermfg=white ctermbg=default			" Top borders line
+highlight TopLineSel cterm=bold ctermfg=white ctermbg=default                   " Top line Selected Directory
+highlight CmdLine cterm=none ctermfg=white ctermbg=default			" Bottom border line
+highlight Border cterm=none ctermfg=white ctermbg=default			" Middle border lines
+highlight StatusLine cterm=bold ctermfg=white ctermbg=default			" status bar line
+
+highlight Win cterm=none ctermfg=white ctermbg=default				" mostly inside background
+highlight Directory cterm=bold ctermfg=cyan ctermbg=default			" highlight directories
+highlight Link cterm=bold ctermfg=blue ctermbg=default				" highlight symbolic link
+highlight BrokenLink cterm=bold ctermfg=red ctermbg=default			" highlight broken symbolic link
+
+" most other highlights are obvious so need to comment out
+
 highlight Socket cterm=bold ctermfg=magenta ctermbg=default
 highlight Device cterm=bold ctermfg=red ctermbg=default
 highlight Fifo cterm=bold ctermfg=cyan ctermbg=default
 highlight Executable cterm=bold ctermfg=green ctermbg=default
 highlight Selected cterm=bold ctermfg=magenta ctermbg=default
 highlight CurrLine cterm=bold,reverse ctermfg=default ctermbg=default
-highlight TopLine cterm=none ctermfg=black ctermbg=white
-highlight TopLineSel cterm=bold ctermfg=black ctermbg=default
-highlight StatusLine cterm=bold ctermfg=black ctermbg=blue
 highlight WildMenu cterm=underline,reverse ctermfg=white ctermbg=black
-highlight CmdLine cterm=none ctermfg=white ctermbg=black
 highlight ErrorMsg cterm=none ctermfg=red ctermbg=black
-highlight Border cterm=none ctermfg=white ctermbg=black
 highlight JobLine cterm=bold,reverse ctermfg=black ctermbg=white
 highlight SuggestBox cterm=bold ctermfg=default ctermbg=default
 highlight CmpMismatch cterm=bold ctermfg=white ctermbg=red
