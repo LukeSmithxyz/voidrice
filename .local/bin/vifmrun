@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# Huge thanks to DT (DistroTube) for this script
+
 export FIFO_UEBERZUG="/tmp/vifm-ueberzug-${PPID}"
 
 function cleanup {
