@@ -26,6 +26,7 @@ _comp_options+=(globdots)		# Include hidden files.
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+export LC_CTYPE="en_GB.utf8"
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char

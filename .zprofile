@@ -11,8 +11,9 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="brave"
+export BROWSER="vimb"
 export READER="zathura"
+export FM="vifmrun"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
