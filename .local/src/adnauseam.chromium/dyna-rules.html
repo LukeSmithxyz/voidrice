@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>uBlock — Dynamic filtering rules</title>
+<link rel="stylesheet" type="text/css" href="lib/codemirror/lib/codemirror.css">
+<link rel="stylesheet" type="text/css" href="lib/codemirror/lib/pastel-on-dark.css">
+<link rel="stylesheet" type="text/css" href="lib/codemirror/addon/merge/merge.css">
+
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/dashboard-common.css">
+<link rel="stylesheet" type="text/css" href="css/cloud-ui.css">
+<link rel="stylesheet" type="text/css" href="css/dyna-rules.css">
+<link rel="stylesheet" type="text/css" href="css/codemirror.css">
+</head>
+
+<body class="custom-check">
+
+<div class="body">
+    <div id="cloudWidget" class="hide" data-cloud-entry="myRulesPane"></div>
+    <p class="vverbose"><span data-i18n="rulesHint"></span> <a class="fa info" href="https://github.com/gorhill/uBlock/wiki/Dynamic-filtering:-rule-syntax" target="_blank">&#xf05a;</a></p>
+    <div id="diff">
+        <div class="tools">
+            <div class="ruleActions">
+                <h3 data-i18n="rulesPermanentHeader"></h3>
+                <button type="button" class="custom iconifiable" id="exportButton"><span class="fa">&#xf093;</span><span data-i18n="rulesExport"></span></button>
+                <button type="button" class="custom iconifiable" id="revertButton"><span class="fa">&#xf061;</span><span data-i18n="rulesRevert"></span></button>
+            </div>
+            <div class="ruleActions">
+                <h3 data-i18n="rulesTemporaryHeader"></h3>
+                <button type="button" class="custom iconifiable" id="commitButton"><span class="fa">&#xf060;</span><span data-i18n="rulesCommit"></span></button>
+                <button type="button" class="custom iconifiable" id="importButton"><span class="fa">&#xf019;</span><span data-i18n="rulesImport"></span></button>
+                <button type="button" class="custom iconifiable important disabled" id="editSaveButton"><span class="fa">&#xf0c7;</span><span data-i18n="rulesEditSave"></span></button>
+            </div>
+            <div id="ruleFilter"><span class="fa">&#xf0b0;</span>&ensp;<input type="search" size="20"></div>
+        </div>
+    </div>
+</div>
+<div class="codeMirrorContainer codeMirrorMergeContainer codeMirrorFillVertical"></div>
+
+<div id="templates" style="display: none;">
+    <input class="hidden" id="importFilePicker" type="file" accept="text/plain">
+    <span class="hidden" data-i18n="rulesDefaultFileName"></span>
+</div>
+
+<script src="lib/diff/swatinem_diff.js"></script>
+<script src="lib/codemirror/lib/codemirror.js"></script>
+<script src="lib/codemirror/addon/merge/merge.js"></script>
+<script src="lib/codemirror/addon/selection/active-line.js"></script>
+
+<script src="js/codemirror/ubo-dynamic-filtering.js"></script>
+
+<script src="js/vapi.js"></script>
+<script src="js/vapi-common.js"></script>
+<script src="js/vapi-client.js"></script>
+<script src="js/udom.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/dashboard-common.js"></script>
+<script src="js/cloud-ui.js"></script>
+<script src="js/dyna-rules.js"></script>
+
+</body>
+</html>

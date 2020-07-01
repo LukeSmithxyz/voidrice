@@ -1,0 +1,93 @@
+diff --git a/dwmblocks.c b/dwmblocks.c
+index 88bdfb0..7bd14df 100644
+--- a/dwmblocks.c
++++ b/dwmblocks.c
+@@ -14,6 +14,7 @@ typedef struct {
+ 	unsigned int signal;
+ } Block;
+ void sighandler(int num);
++void buttonhandler(int sig, siginfo_t *si, void *ucontext);
+ void replace(char *str, char old, char new);
+ void getcmds(int time);
+ #ifndef __OpenBSD__
+@@ -34,6 +35,8 @@ static int screen;
+ static Window root;
+ static char statusbar[LENGTH(blocks)][CMDLENGTH] = {0};
+ static char statusstr[2][256];
++static char exportstring[CMDLENGTH + 16] = "export BUTTON=-;";
++static int button = 0;
+ static int statusContinue = 1;
+ static void (*writestatus) () = setroot;
+
+@@ -48,16 +51,34 @@ void replace(char *str, char old, char new)
+ //opens process *cmd and stores output in *output
+ void getcmd(const Block *block, char *output)
+ {
++	if (block->signal)
++	{
++		output[0] = block->signal;
++		output++;
++	}
+ 	strcpy(output, block->icon);
+-	char *cmd = block->command;
+-	FILE *cmdf = popen(cmd,"r");
++	char* cmd;
++	FILE *cmdf;
++	if (button)
++	{
++		cmd = strcat(exportstring, block->command);
++		cmd[14] = '0' + button;
++		button = 0;
++		cmdf = popen(cmd,"r");
++		cmd[16] = '\0';
++	}
++	else
++	{
++		cmd = block->command;
++		cmdf = popen(cmd,"r");
++	}
+ 	if (!cmdf)
+ 		return;
+ 	char c;
+ 	int i = strlen(block->icon);
+ 	fgets(output+i, CMDLENGTH-i, cmdf);
+ 	i = strlen(output);
+-	if (delim != '\0' && --i)
++	if (delim != '\0' && i)
+ 		output[i++] = delim;
+ 	output[i++] = '\0';
+ 	pclose(cmdf);
+@@ -88,11 +106,18 @@ void getsigcmds(int signal)
+
+ void setupsignals()
+ {
++	struct sigaction sa;
+ 	for(int i = 0; i < LENGTH(blocks); i++)
+ 	{
+ 		if (blocks[i].signal > 0)
++		{
+ 			signal(SIGRTMIN+blocks[i].signal, sighandler);
++			sigaddset(&sa.sa_mask, SIGRTMIN+blocks[i].signal);
++		}
+ 	}
++	sa.sa_sigaction = buttonhandler;
++	sa.sa_flags = SA_SIGINFO;
++	sigaction(SIGUSR1, &sa, NULL);
+
+ }
+ #endif
+@@ -152,6 +177,14 @@ void sighandler(int signum)
+ 	getsigcmds(signum-SIGRTMIN);
+ 	writestatus();
+ }
++
++void buttonhandler(int sig, siginfo_t *si, void *ucontext)
++{
++	button = si->si_value.sival_int & 0xff;
++	getsigcmds(si->si_value.sival_int >> 8);
++	writestatus();
++}
++
+ #endif
+
+ void termhandler(int signum)

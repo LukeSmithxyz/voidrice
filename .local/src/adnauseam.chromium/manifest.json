@@ -1,0 +1,93 @@
+{
+  "author": "Daniel C. Howe",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon_16.png",
+      "32": "img/icon-32.png"
+    },
+    "default_popup": "menu.html",
+    "default_title": "AdNauseam"
+  },
+  "commands": {
+    "launch-element-picker": {
+      "description": "__MSG_popupTipPicker__"
+    },
+    "launch-element-zapper": {
+      "description": "__MSG_popupTipZapper__"
+    },
+    "launch-logger": {
+      "description": "__MSG_popupTipLog__"
+    },
+    "relax-blocking-mode": {
+      "description": "__MSG_relaxBlockingMode__"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/vapi.js",
+        "js/vapi-client.js",
+        "js/adn/textads.js",
+        "js/adn/parser.js",
+        "js/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/scriptlets/subscriber.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "default_locale": "en",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "128": "img/icon_128.png",
+    "16": "img/icon_16.png"
+  },
+  "incognito": "split",
+  "manifest_version": 2,
+  "minimum_chrome_version": "51.0",
+  "name": "AdNauseam",
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "management"
+  ],
+  "short_name": "AdNauseam",
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  },
+  "update_url": "https://rednoise.org/adnauseam/updates.xml",
+  "version": "3.9.107",
+  "web_accessible_resources": [
+    "/web_accessible_resources/*"
+  ]
+}

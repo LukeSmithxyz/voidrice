@@ -1,0 +1,1426 @@
+{
+  "extName": {
+    "message": "AdNauseam",
+    "description": "extension name"
+  },
+  "extShortDesc": {
+    "message": "一款被設計為對抗來自廣告網絡追蹤的擴展",
+    "description": "for the chrome web store: must be 132 characters or less"
+  },
+  "dashboardName": {
+    "message": "AdNauseam — 控制台",
+    "description": "English: AdNauseam — Dashboard"
+  },
+  "dashboardUnsavedWarning": {
+    "message": "警告！變更尚未儲存。",
+    "description": "A warning in the dashboard when navigating away from unsaved changes"
+  },
+  "dashboardUnsavedWarningStay": {
+    "message": "不離開",
+    "description": "Label for button to prevent navigating away from unsaved changes"
+  },
+  "dashboardUnsavedWarningIgnore": {
+    "message": "忽略變更",
+    "description": "Label for button to ignore unsaved changes"
+  },
+  "settingsPageName": {
+    "message": "設定",
+    "description": "appears as tab name in dashboard"
+  },
+  "3pPageName": {
+    "message": "過濾規則清單",
+    "description": "appears as tab name in dashboard"
+  },
+  "1pPageName": {
+    "message": "自訂靜態過濾規則",
+    "description": "appears as tab name in dashboard"
+  },
+  "rulesPageName": {
+    "message": "自訂動態過濾規則",
+    "description": "appears as tab name in dashboard"
+  },
+  "whitelistPageName": {
+    "message": "白名單",
+    "description": "appears as tab name in dashboard"
+  },
+  "shortcutsPageName": {
+    "message": "快捷鍵",
+    "description": "appears as tab name in dashboard"
+  },
+  "statsPageName": {
+    "message": "AdNauseam — 記錄器",
+    "description": "Title for the logger window"
+  },
+  "aboutPageName": {
+    "message": "關於",
+    "description": "appears as tab name in dashboard"
+  },
+  "assetViewerPageName": {
+    "message": "AdNauseam — 資源檢視器",
+    "description": "Title for the asset viewer page"
+  },
+  "advancedSettingsPageName": {
+    "message": "進階設定",
+    "description": "Title for the advanced settings page"
+  },
+  "popupPowerSwitchInfo": {
+    "message": "點擊：對此網站 停用/啟用 AdNauseam 。\n\nCtrl + 點擊：僅在此頁面停用 AdNauseam 。",
+    "description": "English: Click: disable/enable AdNauseam for this site.\n\nAlt+click: disable AdNauseam only on this page."
+  },
+  "popupPowerSwitchInfo1": {
+    "message": "點擊：對此網站停用 AdNauseam 。\n\nCtrl + 點擊：僅在此頁面停用 AdNauseam 。",
+    "description": "Message to be read by screen readers"
+  },
+  "popupPowerSwitchInfo2": {
+    "message": "點擊以在此網站啟用 AdNauseam 。",
+    "description": "Message to be read by screen readers"
+  },
+  "popupBlockedRequestPrompt": {
+    "message": "已阻擋的連線請求",
+    "description": "English: requests blocked"
+  },
+  "popupBlockedOnThisPagePrompt": {
+    "message": "在此頁面",
+    "description": "English: on this page"
+  },
+  "popupBlockedStats": {
+    "message": "{{count}} 或 {{percent}}%",
+    "description": "Example: 15 or 13%"
+  },
+  "popupBlockedSinceInstallPrompt": {
+    "message": "自安裝後",
+    "description": "English: since install"
+  },
+  "popupOr": {
+    "message": "或",
+    "description": "English: or"
+  },
+  "popupBlockedOnThisPage_v2": {
+    "message": "此頁面已阻擋",
+    "description": "For the new mobile-friendly popup design"
+  },
+  "popupBlockedSinceInstall_v2": {
+    "message": "安裝後已阻擋",
+    "description": "For the new mobile-friendly popup design"
+  },
+  "popupDomainsConnected_v2": {
+    "message": "已連結的網域",
+    "description": "For the new mobile-friendly popup design"
+  },
+  "popupTipDashboard": {
+    "message": "開啟控制台",
+    "description": "English: Click to open the dashboard"
+  },
+  "popupTipZapper": {
+    "message": "進入元素臨時移除模式",
+    "description": "Tooltip for the element-zapper icon in the popup panel"
+  },
+  "popupTipPicker": {
+    "message": "進入元素選擇器模式",
+    "description": "English: Enter element picker mode"
+  },
+  "popupTipLog": {
+    "message": "開啟記錄器",
+    "description": "Tooltip used for the logger icon in the panel"
+  },
+  "popupTipNoPopups": {
+    "message": "切換是否阻擋此網站的所有彈出型視窗",
+    "description": "Tooltip for the no-popups per-site switch"
+  },
+  "popupTipNoPopups1": {
+    "message": "點擊以封鎖此網站的所有彈出型視窗",
+    "description": "Tooltip for the no-popups per-site switch"
+  },
+  "popupTipNoPopups2": {
+    "message": "點擊以停止封鎖此網站的所有彈出型視窗",
+    "description": "Tooltip for the no-popups per-site switch"
+  },
+  "popupTipNoLargeMedia": {
+    "message": "切換是否封鎖此網站的大型媒體元素",
+    "description": "Tooltip for the no-large-media per-site switch"
+  },
+  "popupTipNoLargeMedia1": {
+    "message": "點擊以封鎖此網站的大型媒體元素",
+    "description": "Tooltip for the no-large-media per-site switch"
+  },
+  "popupTipNoLargeMedia2": {
+    "message": "點擊以停止封鎖此網站的大型媒體元素",
+    "description": "Tooltip for the no-large-media per-site switch"
+  },
+  "popupTipNoCosmeticFiltering": {
+    "message": "切換是否在此網站過濾網頁元素",
+    "description": "Tooltip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupTipNoCosmeticFiltering1": {
+    "message": "點擊以停用此網站的網頁元素過濾",
+    "description": "Tooltip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupTipNoCosmeticFiltering2": {
+    "message": "點擊以啟用此網站的網頁元素過濾",
+    "description": "Tooltip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupTipNoRemoteFonts": {
+    "message": "切換是否封鎖此網站的遠端字體",
+    "description": "Tooltip for the no-remote-fonts per-site switch"
+  },
+  "popupTipNoRemoteFonts1": {
+    "message": "點擊以封鎖此網站的遠端字體",
+    "description": "Tooltip for the no-remote-fonts per-site switch"
+  },
+  "popupTipNoRemoteFonts2": {
+    "message": "點擊以停止封鎖此網站的遠端字體",
+    "description": "Tooltip for the no-remote-fonts per-site switch"
+  },
+  "popupTipNoScripting1": {
+    "message": "點擊以禁用此網站的所有腳本",
+    "description": "Tooltip for the no-scripting per-site switch"
+  },
+  "popupTipNoScripting2": {
+    "message": "點擊以停止禁用此網站的所有腳本",
+    "description": "Tooltip for the no-scripting per-site switch"
+  },
+  "popupNoLargeMedia_v2": {
+    "message": "大型媒體元素",
+    "description": "Tip for the no-large-media per-site switch"
+  },
+  "popupNoCosmeticFiltering_v2": {
+    "message": "網頁元素過濾",
+    "description": "Tip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupNoRemoteFonts_v2": {
+    "message": "遠端字體",
+    "description": "Tip for the no-remote-fonts per-site switch"
+  },
+  "popupNoScripting_v2": {
+    "message": "JavaScript",
+    "description": "Tip for the no-scripting per-site switch"
+  },
+  "popupMoreButton_v2": {
+    "message": "更多",
+    "description": "Label to be used to toggle overview panel"
+  },
+  "popupTipGlobalRules": {
+    "message": "全域規則：此欄位的規則會套用至所有網站。",
+    "description": "Tooltip when hovering the top-most cell of the global-rules column."
+  },
+  "popupTipLocalRules": {
+    "message": "區域規則：此欄位的規則僅會套用至目前網站。\n區域規則會覆蓋過全域規則。",
+    "description": "Tooltip when hovering the top-most cell of the local-rules column."
+  },
+  "popupTipSaveRules": {
+    "message": "點擊此處讓變更永久生效。",
+    "description": "Tooltip when hovering over the padlock in the dynamic filtering pane."
+  },
+  "popupTipRevertRules": {
+    "message": "點擊以撤銷變更。",
+    "description": "Tooltip when hovering over the eraser in the dynamic filtering pane."
+  },
+  "popupAnyRulePrompt": {
+    "message": "全部",
+    "description": ""
+  },
+  "popupImageRulePrompt": {
+    "message": "圖片",
+    "description": ""
+  },
+  "popup3pAnyRulePrompt": {
+    "message": "第三方",
+    "description": ""
+  },
+  "popup3pPassiveRulePrompt": {
+    "message": "第三方階層式樣式表 (CSS)／圖片",
+    "description": ""
+  },
+  "popupInlineScriptRulePrompt": {
+    "message": "內聯腳本",
+    "description": ""
+  },
+  "popup1pScriptRulePrompt": {
+    "message": "第一方腳本",
+    "description": ""
+  },
+  "popup3pScriptRulePrompt": {
+    "message": "第三方腳本",
+    "description": ""
+  },
+  "popup3pFrameRulePrompt": {
+    "message": "第三方框架",
+    "description": ""
+  },
+  "popupHitDomainCountPrompt": {
+    "message": "已連結的網域",
+    "description": "appears in popup"
+  },
+  "popupHitDomainCount": {
+    "message": "{{count}} / {{total}}",
+    "description": "appears in popup"
+  },
+  "pickerCreate": {
+    "message": "建立",
+    "description": "English: Create"
+  },
+  "pickerPick": {
+    "message": "選擇",
+    "description": "English: Pick"
+  },
+  "pickerQuit": {
+    "message": "放棄",
+    "description": "English: Quit"
+  },
+  "pickerPreview": {
+    "message": "預覽",
+    "description": "Element picker preview mode: will cause the elements matching the current filter to be removed from the page"
+  },
+  "pickerNetFilters": {
+    "message": "網址過濾規則",
+    "description": "English: header for a type of filter in the element picker dialog"
+  },
+  "pickerCosmeticFilters": {
+    "message": "元素隱藏過濾規則",
+    "description": "English: Cosmetic filters"
+  },
+  "pickerCosmeticFiltersHint": {
+    "message": "點擊，按住 Ctrl 鍵點擊",
+    "description": "English: Click, Ctrl-click"
+  },
+  "pickerContextMenuEntry": {
+    "message": "阻擋元素",
+    "description": "An entry in the browser's contextual menu"
+  },
+  "settingsCollapseBlockedPrompt": {
+    "message": "隱藏已阻擋元素的佔位元素",
+    "description": "English: Hide placeholders of blocked elements"
+  },
+  "settingsIconBadgePrompt": {
+    "message": "在圖標上顯示已找到的廣告數目",
+    "description": "English: Show the number of found Ads on the icon"
+  },
+  "settingsTooltipsPrompt": {
+    "message": "關閉提示文字功能",
+    "description": "A checkbox in the Settings pane"
+  },
+  "settingsContextMenuPrompt": {
+    "message": "使用階層式內容功能表",
+    "description": "English: Make use of context menu where appropriate"
+  },
+  "settingsColorBlindPrompt": {
+    "message": "使用對色盲友善的色彩",
+    "description": "English: Color-blind friendly"
+  },
+  "settingsCloudStorageEnabledPrompt": {
+    "message": "啟用雲端儲存空間的支援",
+    "description": ""
+  },
+  "settingsAdvancedUserPrompt": {
+    "message": "我是進階使用者（<a href='https://github.com/gorhill/uBlock/wiki/Advanced-user-features'>必讀資訊</a>）",
+    "description": ""
+  },
+  "settingsAdvancedUserSettings": {
+    "message": "進階設定",
+    "description": "For the tooltip of a link which gives access to advanced settings"
+  },
+  "settingsPrefetchingDisabledPrompt": {
+    "message": "關閉預讀功能（避免連線至被阻擋的網域）",
+    "description": "English: "
+  },
+  "settingsHyperlinkAuditingDisabledPrompt": {
+    "message": "停用超連結監測",
+    "description": "English: "
+  },
+  "settingsWebRTCIPAddressHiddenPrompt": {
+    "message": "預防 WebRTC 洩漏本地 IP 地址",
+    "description": "English: "
+  },
+  "settingPerSiteSwitchGroup": {
+    "message": "預設行為",
+    "description": ""
+  },
+  "settingPerSiteSwitchGroupSynopsis": {
+    "message": "這些預設行為可再依各網站調整",
+    "description": ""
+  },
+  "settingsNoCosmeticFilteringPrompt": {
+    "message": "停用網頁元素過濾",
+    "description": ""
+  },
+  "settingsNoLargeMediaPrompt": {
+    "message": "封鎖超過 {{input}} KB 的媒體元素",
+    "description": ""
+  },
+  "settingsNoRemoteFontsPrompt": {
+    "message": "封鎖遠端字體",
+    "description": ""
+  },
+  "settingsNoScriptingPrompt": {
+    "message": "禁用網頁腳本",
+    "description": "The default state for the per-site no-scripting switch"
+  },
+  "settingsNoCSPReportsPrompt": {
+    "message": "封鎖 CSP 報告",
+    "description": "background information: https://github.com/gorhill/uBlock/issues/3150"
+  },
+  "settingsStorageUsed": {
+    "message": "儲存空間：已使用 {{value}} 位元組",
+    "description": "English: Storage used: {{}} bytes"
+  },
+  "settingsLastRestorePrompt": {
+    "message": "上次還原：",
+    "description": "English: Last restore:"
+  },
+  "settingsLastBackupPrompt": {
+    "message": "上次備份：",
+    "description": "English: Last backup:"
+  },
+  "3pListsOfBlockedHostsPrompt": {
+    "message": "目前已使用 {{netFilterCount}} 個網址過濾規則 / {{cosmeticFilterCount}} 個元素隱藏過濾規則：",
+    "description": "Appears at the top of the _3rd-party filters_ pane"
+  },
+  "3pListsOfBlockedHostsPerListStats": {
+    "message": "在 {{total}} 個中，已使用 {{used}} 個",
+    "description": "Appears aside each filter list in the _3rd-party filters_ pane"
+  },
+  "3pAutoUpdatePrompt1": {
+    "message": "自動更新過濾規則",
+    "description": "A checkbox in the _3rd-party filters_ pane"
+  },
+  "3pUpdateNow": {
+    "message": "立即更新",
+    "description": "A button in the in the _3rd-party filters_ pane"
+  },
+  "3pPurgeAll": {
+    "message": "清除所有快取",
+    "description": "A button in the in the _3rd-party filters_ pane"
+  },
+  "3pParseAllABPHideFiltersPrompt1": {
+    "message": "解析並套用元素隱藏過濾規則",
+    "description": "English: Parse and enforce Adblock+ element hiding filters."
+  },
+  "3pParseAllABPHideFiltersInfo": {
+    "message": "<p>啟用此選項後，您就可以使用 <a href=\"https://adblockplus.org/zh_TW/faq_internal#elemhide\">與 Adblock Plus 相容的「元素隱藏」過濾規則</a>。這些過濾規則可用來隱藏網頁中礙眼，卻又不能被以網路請求為主的過濾引擎所阻擋的元素。</p><p>啟用此功能將增加 <i>AdNauseam </i> 的記憶體使用量。</p>",
+    "description": "Describes the purpose of the 'Parse and enforce cosmetic filters' feature."
+  },
+  "3pIgnoreGenericCosmeticFilters": {
+    "message": "忽略一般元素隱藏過濾規則",
+    "description": "This will cause uBO to ignore all generic cosmetic filters."
+  },
+  "3pIgnoreGenericCosmeticFiltersInfo": {
+    "message": "<p>一般元素過濾規則是指會套用於所有網站的規則。<p>雖然 AdNauseam 會有效率地處理這些規則，但還是可能會在某些網頁中造成許多多餘的記憶體與 CPU 使用率，尤其是在較大又較舊的網頁中。<p>開啟此選項可避免在處理一般元素過濾規則時，造成多餘的記憶體與 CPU 使用率，也能降低 AdNauseam 本身的記憶體用量。<p>建議您在效能較差的裝置中開啟此選項。",
+    "description": "Describes the purpose of the 'Ignore generic cosmetic filters' feature."
+  },
+  "3pListsOfBlockedHostsHeader": {
+    "message": "被阻擋網域的列表",
+    "description": "English: Lists of blocked hosts"
+  },
+  "3pApplyChanges": {
+    "message": "套用變更",
+    "description": "English: Apply changes"
+  },
+  "3pGroupDefault": {
+    "message": "內建",
+    "description": "Header for the uBlock filters section in 'Filter lists pane'"
+  },
+  "3pGroupAds": {
+    "message": "廣告",
+    "description": "English: Ads"
+  },
+  "3pGroupPrivacy": {
+    "message": "隱私",
+    "description": "English: Privacy"
+  },
+  "3pGroupMalware": {
+    "message": "惡意軟體",
+    "description": "English: Malware"
+  },
+  "3pGroupAnnoyances": {
+    "message": "惱人的",
+    "description": "The header identifying the filter lists in the category 'annoyances'"
+  },
+  "3pGroupMultipurpose": {
+    "message": "多用途",
+    "description": "English: Multipurpose"
+  },
+  "3pGroupRegions": {
+    "message": "語言",
+    "description": "English: Languages"
+  },
+  "3pGroupCustom": {
+    "message": "自訂",
+    "description": "English: Custom"
+  },
+  "3pImport": {
+    "message": "匯入⋯",
+    "description": "The label for the checkbox used to import external filter lists"
+  },
+  "3pExternalListsHint": {
+    "message": "每行一個網址。無效網址將被忽略。",
+    "description": "Short information about how to use the textarea to import external filter lists by URL"
+  },
+  "3pExternalListObsolete": {
+    "message": "过久未更新。",
+    "description": "used as a tooltip for the out-of-date icon beside a list"
+  },
+  "3pLastUpdate": {
+    "message": "最後更新：{{ago}}。\n點擊此處以要求更新。",
+    "description": "used as a tooltip for the clock icon beside a list"
+  },
+  "3pUpdating": {
+    "message": "更新中…",
+    "description": "used as a tooltip for the spinner icon beside a list"
+  },
+  "3pNetworkError": {
+    "message": "因網路錯誤無法更新資源。",
+    "description": "used as a tooltip for error icon beside a list"
+  },
+  "1pFormatHint": {
+    "message": "每行一個過濾規則。規則可以單純是主機名稱，或是與 Adblock Plus 相容的過濾規則。以 <code>!</code> 開頭的行將被忽略。",
+    "description": "Short information about how to create custom filters"
+  },
+  "1pImport": {
+    "message": "匯入並加入",
+    "description": "English: Import and append"
+  },
+  "1pExport": {
+    "message": "匯出",
+    "description": "English: Export"
+  },
+  "1pExportFilename": {
+    "message": "my-AdNauseam-static-filters_{{datetime}}.txt",
+    "description": "English: my-AdNauseam-static-filters_{{datetime}}.txt"
+  },
+  "1pApplyChanges": {
+    "message": "套用變更",
+    "description": "English: Apply changes"
+  },
+  "rulesPermanentHeader": {
+    "message": "永久規則",
+    "description": "header"
+  },
+  "rulesTemporaryHeader": {
+    "message": "臨時規則",
+    "description": "header"
+  },
+  "rulesRevert": {
+    "message": "還原",
+    "description": "This will remove all temporary rules"
+  },
+  "rulesCommit": {
+    "message": "提交",
+    "description": "This will persist temporary rules"
+  },
+  "rulesEdit": {
+    "message": "編輯",
+    "description": "Will enable manual-edit mode (textarea)"
+  },
+  "rulesEditSave": {
+    "message": "儲存",
+    "description": "Will save manually-edited content and exit manual-edit mode"
+  },
+  "rulesEditDiscard": {
+    "message": "捨棄",
+    "description": "Will discard manually-edited content and exit manual-edit mode"
+  },
+  "rulesImport": {
+    "message": "從檔案匯入…",
+    "description": ""
+  },
+  "rulesExport": {
+    "message": "匯出至檔案…",
+    "description": ""
+  },
+  "rulesDefaultFileName": {
+    "message": "my-AdNauseam-dynamic-rules_{{datetime}}.txt",
+    "description": "default file name to use"
+  },
+  "rulesHint": {
+    "message": "您的動態過濾規則清單。",
+    "description": "English: List of your dynamic filtering rules."
+  },
+  "rulesFormatHint": {
+    "message": "規則語法：<code>來源主機名稱 目標主機名稱 連線請求類型 操作</code>（<a href='https://github.com/gorhill/uBlock/wiki/Dynamic-filtering:-rule-syntax'>完整說明</a>）。",
+    "description": "English: dynamic rule syntax and full documentation."
+  },
+  "whitelistPrompt": {
+    "message": "白名單中的規則適用的頁面不會被 AdNauseam 過濾或阻擋。每行一個規則。無效的規則將被忽略。",
+    "description": "English: An overview of the content of the dashboard's Whitelist pane."
+  },
+  "whitelistImport": {
+    "message": "匯入並加入",
+    "description": "English: Import and append"
+  },
+  "whitelistExport": {
+    "message": "匯出",
+    "description": "English: Export"
+  },
+  "whitelistExportFilename": {
+    "message": "my-AdNauseam-whitelist_{{datetime}}.txt",
+    "description": "English: my-AdNauseam-whitelist_{{datetime}}.txt"
+  },
+  "whitelistApply": {
+    "message": "套用變更",
+    "description": "English: Apply changes"
+  },
+  "logRequestsHeaderType": {
+    "message": "類型",
+    "description": "English: Type"
+  },
+  "logRequestsHeaderDomain": {
+    "message": "網域",
+    "description": "English: Domain"
+  },
+  "logRequestsHeaderURL": {
+    "message": "網址",
+    "description": "English: URL"
+  },
+  "logRequestsHeaderFilter": {
+    "message": "過濾規則",
+    "description": "English: Filter"
+  },
+  "logAll": {
+    "message": "全部",
+    "description": "Appears in the logger's tab selector"
+  },
+  "logBehindTheScene": {
+    "message": "背景網路連線請求",
+    "description": "Pretty name for behind-the-scene network requests"
+  },
+  "loggerCurrentTab": {
+    "message": "目前分頁",
+    "description": "Appears in the logger's tab selector"
+  },
+  "loggerReloadTip": {
+    "message": "重新載入分頁內容",
+    "description": "Tooltip for the reload button in the logger page"
+  },
+  "loggerDomInspectorTip": {
+    "message": "切換 DOM 檢測器",
+    "description": "Tooltip for the DOM inspector button in the logger page"
+  },
+  "loggerPopupPanelTip": {
+    "message": "開閉彈出式面板",
+    "description": "Tooltip for the popup panel button in the logger page"
+  },
+  "loggerInfoTip": {
+    "message": "AdNauseam wiki：記錄器",
+    "description": "Tooltip for the top-right info label in the logger page"
+  },
+  "loggerClearTip": {
+    "message": "清除記錄",
+    "description": "Tooltip for the eraser in the logger page; used to blank the content of the logger"
+  },
+  "loggerPauseTip": {
+    "message": "暫停記錄（丟棄所有傳入資料）",
+    "description": "Tooltip for the pause button in the logger page"
+  },
+  "loggerUnpauseTip": {
+    "message": "取消暫停記錄",
+    "description": "Tooltip for the play button in the logger page"
+  },
+  "loggerRowFiltererButtonTip": {
+    "message": "開閉記錄篩選",
+    "description": "Tooltip for the row filterer button in the logger page"
+  },
+  "logFilterPrompt": {
+    "message": "篩選記錄條目",
+    "description": "Placeholder string for logger output filtering input field"
+  },
+  "loggerRowFiltererBuiltinTip": {
+    "message": "記錄器篩選設定",
+    "description": "Tooltip for the button to bring up logger output filtering options"
+  },
+  "loggerRowFiltererBuiltinNot": {
+    "message": "非",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltinEventful": {
+    "message": "已套用規則",
+    "description": "A keyword in the built-in row filtering expression: all items corresponding to uBO doing something (blocked, allowed, redirected, etc.)"
+  },
+  "loggerRowFiltererBuiltinBlocked": {
+    "message": "已封鎖",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltinAllowed": {
+    "message": "已允許",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltin1p": {
+    "message": "第一方",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltin3p": {
+    "message": "第三方",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerEntryDetailsHeader": {
+    "message": "詳細資料",
+    "description": "Small header to identify the 'Details' pane for a specific logger entry"
+  },
+  "loggerEntryDetailsFilter": {
+    "message": "過濾規則",
+    "description": "Label to identify a filter field"
+  },
+  "loggerEntryDetailsFilterList": {
+    "message": "過濾規則清單",
+    "description": "Label to identify a filter list field"
+  },
+  "loggerEntryDetailsRule": {
+    "message": "規則",
+    "description": "Label to identify a rule field"
+  },
+  "loggerEntryDetailsContext": {
+    "message": "上下文",
+    "description": "Label to identify a context field (typically a hostname)"
+  },
+  "loggerEntryDetailsRootContext": {
+    "message": "根上下文",
+    "description": "Label to identify a root context field (typically a hostname)"
+  },
+  "loggerEntryDetailsPartyness": {
+    "message": "第一方/第三方",
+    "description": "Label to identify a field providing partyness information"
+  },
+  "loggerEntryDetailsType": {
+    "message": "類型",
+    "description": "Label to identify the type of an entry"
+  },
+  "loggerEntryDetailsURL": {
+    "message": "網址",
+    "description": "Label to identify the URL of an entry"
+  },
+  "loggerURLFilteringHeader": {
+    "message": "網址規則",
+    "description": "Small header to identify the dynamic URL filtering section"
+  },
+  "loggerURLFilteringContextLabel": {
+    "message": "上下文：",
+    "description": "Label for the context selector"
+  },
+  "loggerURLFilteringTypeLabel": {
+    "message": "類型：",
+    "description": "Label for the type selector"
+  },
+  "loggerStaticFilteringHeader": {
+    "message": "靜態過濾規則",
+    "description": "Small header to identify the static filtering section"
+  },
+  "loggerStaticFilteringSentence": {
+    "message": "當網址符合 {{url}}，{{br}}並且來自 {{origin}} 時，{{br}}{{action}} {{type}} 的網路請求，{{br}}{{importance}} 已有符合的過濾例外規則。",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartBlock": {
+    "message": "封鎖",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartAllow": {
+    "message": "允許",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartType": {
+    "message": "{{type}} 類型",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartAnyType": {
+    "message": "任何類型",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartOrigin": {
+    "message": "來自「{{origin}}」",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartAnyOrigin": {
+    "message": "來自任何地方",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartNotImportant": {
+    "message": "除非",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartImportant": {
+    "message": "就算",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringFinderSentence1": {
+    "message": "在下列清單中找到靜態過濾規則 <code>{{filter}}</code>：",
+    "description": "Below this sentence, the filter list(s) in which the filter was found"
+  },
+  "loggerStaticFilteringFinderSentence2": {
+    "message": "無法在當前啟用的任何過濾清單中找到靜態過濾規則",
+    "description": "Message to show when a filter cannot be found in any filter lists"
+  },
+  "loggerSettingDiscardPrompt": {
+    "message": "不符合以下任一狀況的記錄將會被自動清除：",
+    "description": "Logger setting: A sentence to describe the purpose of the settings below"
+  },
+  "loggerSettingPerEntryMaxAge": {
+    "message": "最多保留 {{input}} 分鐘以內的記錄",
+    "description": "A logger setting"
+  },
+  "loggerSettingPerTabMaxLoads": {
+    "message": "每個分頁最多保留 {{input}} 次內容加載產生的記錄",
+    "description": "A logger setting"
+  },
+  "loggerSettingPerTabMaxEntries": {
+    "message": "每個分頁最多保留 {{input}} 條記錄",
+    "description": "A logger setting"
+  },
+  "loggerSettingPerEntryLineCount": {
+    "message": "在垂直延展模式中每條記錄顯示 {{input}} 行",
+    "description": "A logger setting"
+  },
+  "loggerSettingHideColumnsPrompt": {
+    "message": "隱藏欄位：",
+    "description": "Logger settings: a sentence to describe the purpose of the checkboxes below"
+  },
+  "loggerSettingHideColumnTime": {
+    "message": "{{input}} 時間",
+    "description": "A label for the time column"
+  },
+  "loggerSettingHideColumnFilter": {
+    "message": "{{input}} 過濾規則",
+    "description": "A label for the filter or rule column"
+  },
+  "loggerSettingHideColumnContext": {
+    "message": "{{input}} 上下文",
+    "description": "A label for the context column"
+  },
+  "loggerSettingHideColumnPartyness": {
+    "message": "{{input}} 第一方/第三方",
+    "description": "A label for the partyness column"
+  },
+  "loggerExportFormatList": {
+    "message": "清單",
+    "description": "Label for radio-button to pick export format"
+  },
+  "loggerExportFormatTable": {
+    "message": "表格",
+    "description": "Label for radio-button to pick export format"
+  },
+  "loggerExportEncodePlain": {
+    "message": "純文字",
+    "description": "Label for radio-button to pick export text format"
+  },
+  "loggerExportEncodeMarkdown": {
+    "message": "Markdown",
+    "description": "Label for radio-button to pick export text format"
+  },
+  "aboutChangelog": {
+    "message": "更新日誌",
+    "description": ""
+  },
+  "aboutWiki": {
+    "message": "Wiki",
+    "description": "English: project' wiki on GitHub"
+  },
+  "aboutSupport": {
+    "message": "支援",
+    "description": "English: links.html Support"
+  },
+  "aboutIssues": {
+    "message": "問題報告",
+    "description": "Text for a link to official issue tracker"
+  },
+  "aboutCode": {
+    "message": "程式原始碼（GPLv3）",
+    "description": "English: Source code (GPLv3)"
+  },
+  "aboutContributors": {
+    "message": "貢獻者",
+    "description": "English: Contributors"
+  },
+  "aboutDependencies": {
+    "message": "外部相依套件（與 GPLv3 相容）：",
+    "description": "Shown in the About pane"
+  },
+  "aboutBackupDataButton": {
+    "message": "備份到檔案…",
+    "description": "Text for button to create a backup of all settings"
+  },
+  "aboutBackupFilename": {
+    "message": "my-AdNauseam-backup_{{datetime}}.txt",
+    "description": "English: my-AdNauseam-backup_{{datetime}}.txt"
+  },
+  "aboutRestoreDataButton": {
+    "message": "從檔案還原…",
+    "description": "English: Restore from file..."
+  },
+  "aboutResetDataButton": {
+    "message": "重設為預設設定…",
+    "description": "English: Reset to default settings..."
+  },
+  "aboutRestoreDataConfirm": {
+    "message": "您所有的設定將會被 {{time}} 的備份資料覆蓋，並將重新啟動 AdNauseam。\n\n您確定要用備份資料蓋過目前的所有設定嗎？",
+    "description": "Message asking user to confirm restore"
+  },
+  "aboutRestoreDataError": {
+    "message": "無法讀取資料，或資料無效",
+    "description": "Message to display when an error occurred during restore"
+  },
+  "aboutResetDataConfirm": {
+    "message": "您所有的設定都將被移除，並將重新啟動 AdNauseam。\n\n您確定要將 AdNauseam 回復為原廠設定？",
+    "description": "Message asking user to confirm reset"
+  },
+  "errorCantConnectTo": {
+    "message": "網路錯誤：{{msg}}",
+    "description": "English: Network error: {{msg}}"
+  },
+  "subscriberConfirm": {
+    "message": "AdNauseam：確定要新增下列網址至自訂過濾規則清單？\n\n標題：「{{title}}」\n網址：{{url}}",
+    "description": "English: The message seen by the user to confirm subscription to a ABP filter list"
+  },
+  "elapsedOneMinuteAgo": {
+    "message": "1 分鐘前",
+    "description": "English: a minute ago"
+  },
+  "elapsedManyMinutesAgo": {
+    "message": "{{value}} 分鐘前",
+    "description": "English: {{value}} minutes ago"
+  },
+  "elapsedOneHourAgo": {
+    "message": "1 小時前",
+    "description": "English: an hour ago"
+  },
+  "elapsedManyHoursAgo": {
+    "message": "{{value}} 小時前",
+    "description": "English: {{value}} hours ago"
+  },
+  "elapsedOneDayAgo": {
+    "message": "1 天前",
+    "description": "English: a day ago"
+  },
+  "elapsedManyDaysAgo": {
+    "message": "{{value}} 天前",
+    "description": "English: {{value}} days ago"
+  },
+  "showDashboardButton": {
+    "message": "顯示控制台",
+    "description": "Firefox/Fennec-specific: Show Dashboard"
+  },
+  "showNetworkLogButton": {
+    "message": "顯示記錄器",
+    "description": "Firefox/Fennec-specific: Show Logger"
+  },
+  "fennecMenuItemBlockingOff": {
+    "message": "關閉",
+    "description": "Firefox-specific: appears as 'AdNauseam (off)'"
+  },
+  "docblockedPrompt1": {
+    "message": "AdNauseam 已防止下列的頁面載入：",
+    "description": "English: AdNauseam has prevented the following page from loading:"
+  },
+  "docblockedPrompt2": {
+    "message": "因為下列過濾規則",
+    "description": "English: Because of the following filter"
+  },
+  "docblockedNoParamsPrompt": {
+    "message": "不帶參數",
+    "description": "label to be used for the parameter-less URL: https://cloud.githubusercontent.com/assets/585534/9832014/bfb1b8f0-593b-11e5-8a27-fba472a5529a.png"
+  },
+  "docblockedFoundIn": {
+    "message": "在下列清單找到：",
+    "description": "English: List of filter list names follows"
+  },
+  "docblockedBack": {
+    "message": "返回",
+    "description": "English: Go back"
+  },
+  "docblockedClose": {
+    "message": "關閉此視窗",
+    "description": "English: Close this window"
+  },
+  "docblockedProceed": {
+    "message": "停止針對 {{hostname}} 的嚴格封鎖",
+    "description": "English: Disable strict blocking for {{hostname}} ..."
+  },
+  "docblockedDisableTemporary": {
+    "message": "暫時",
+    "description": "English: Temporarily"
+  },
+  "docblockedDisablePermanent": {
+    "message": "永久",
+    "description": "English: Permanently"
+  },
+  "cloudPush": {
+    "message": "匯出至雲端儲存空間",
+    "description": "tooltip"
+  },
+  "cloudPull": {
+    "message": "從雲端儲存空間匯入",
+    "description": "tooltip"
+  },
+  "cloudPullAndMerge": {
+    "message": "自雲端匯入，並與目前設定合併",
+    "description": "tooltip"
+  },
+  "cloudNoData": {
+    "message": "…\n…",
+    "description": ""
+  },
+  "cloudDeviceNamePrompt": {
+    "message": "此裝置的名稱：",
+    "description": "used as a prompt for the user to provide a custom device name"
+  },
+  "advancedSettingsWarning": {
+    "message": "警告！修改進階設定時請自負風險。",
+    "description": "A warning to users at the top of 'Advanced settings' page"
+  },
+  "genericSubmit": {
+    "message": "送出",
+    "description": "for generic 'Submit' buttons"
+  },
+  "genericApplyChanges": {
+    "message": "套用變更",
+    "description": "for generic 'Apply changes' buttons"
+  },
+  "genericRevert": {
+    "message": "還原",
+    "description": "for generic 'Revert' buttons"
+  },
+  "genericBytes": {
+    "message": "位元組",
+    "description": ""
+  },
+  "contextMenuTemporarilyAllowLargeMediaElements": {
+    "message": "暫時允許大型媒體元素",
+    "description": "A context menu entry, present when large media elements have been blocked on the current site"
+  },
+  "shortcutCapturePlaceholder": {
+    "message": "輸入捷徑",
+    "description": "Placeholder string for input field used to capture a keyboard shortcut"
+  },
+  "genericMergeViewScrollLock": {
+    "message": "切換是否啟用同步捲動",
+    "description": "Tooltip for the button used to lock scrolling between the views in the 'My rules' pane"
+  },
+  "genericCopyToClipboard": {
+    "message": "複製到剪貼簿",
+    "description": "Label for buttons used to copy something to the clipboard"
+  },
+  "toggleBlockingProfile": {
+    "message": "切換封鎖設定檔",
+    "description": "Label for keyboard shortcut used to toggle blocking profile"
+  },
+  "relaxBlockingMode": {
+    "message": "放寬封鎖量模式",
+    "description": "Label for keyboard shortcut used to relax blocking mode (meant to replace 'Toggle blocking profile')"
+  },
+  "dummy": {
+    "message": "此條目須為最後一個",
+    "description": "so we dont need to deal with comma for last entry"
+  },
+  "adnAboutPageName": {
+    "message": "AdNauseam — 關於",
+    "description": "English: Firstrun.html page title"
+  },
+  "aboutBuiltOn": {
+    "message": "基於",
+    "description": "English: links.html Built on"
+  },
+  "aboutFaq": {
+    "message": "常見問題",
+    "description": "English: links.html -> Frequently asked questions"
+  },
+  "adnFirstRunPlease": {
+    "message": "請:",
+    "description": "English: Firstrun.html -> Please:"
+  },
+  "adnFirstRunHideAllAds": {
+    "message": "隱藏廣告",
+    "description": "English: Firstrun.html -> Hide Ads:"
+  },
+  "adnFirstRunClickingAds": {
+    "message": "點擊廣告",
+    "description": "English: Firstrun.html -> Click Ads"
+  },
+  "adnFirstRunBlockingMalware": {
+    "message": "遮蔽惡意軟體",
+    "description": "English: Firstrun.html -> Block Malware"
+  },
+  "adnAboutResetDataConfirm": {
+    "message": "您所有的設定與廣告都將被移除，並將重新啟動 AdNauseam。\\n\\n您確定要將 AdNauseam 回復為原廠設定？",
+    "description": "Message asking user to confirm reset"
+  },
+  "adnFirstRunHideAllAdsDescription": {
+    "message": "隱藏由你的<span>篩選器列表</span>標記的廣告",
+    "description": "English: Firstrun.html -> Hide Ads in your selected filter lists"
+  },
+  "adnFirstRunClickingAdsDescription": {
+    "message": "訪問由你的<span>篩選器列表</span>標記的廣告",
+    "description": "English: Firstrun.html -> Register visits on Ads found via your filter lists"
+  },
+  "adnFirstRunBlockingMalwareDescription": {
+    "message": "阻止追蹤器和其他惡意軟體 （<span>自訂</span>）",
+    "description": "English: Firstrun.html -> Block trackers and other malware (customize)"
+  },
+  "adnNotificationReactivate": {
+    "message": "啟用",
+    "description": "English: Notifications -> Reactivate"
+  },
+  "adnNotificationDisable": {
+    "message": "禁用",
+    "description": "English: Notifications -> Disable"
+  },
+  "adnNotificationActivateHiding": {
+    "message": "請啟用“隱藏廣告“功能",
+    "description": "English: Notifications -> Activate Ad hiding"
+  },
+  "adnNotificationActivateClicking": {
+    "message": "請啟用“點擊廣告“功能",
+    "description": "English: Notifications -> Activate Ad clicking"
+  },
+  "adnNotificationActivateBlocking": {
+    "message": "啟用“遮蔽惡意軟體“功能",
+    "description": "English: Notifications -> Activate malware blocking"
+  },
+  "adnNotificationActivateEasyList": {
+    "message": "啟用 Easy List 篩選列表",
+    "description": "English: Notifications -> Activate the EasyList filter"
+  },
+  "adnNotificationActivateAdNauseamList": {
+    "message": "請啟用 AdNauseam 篩選列表",
+    "description": "English: Notifications -> Activate the AdNauseam filter"
+  },
+  "adnNotificationDisableAdBlocker": {
+    "message": "廣告攔截擴充套件和 AdNauseam 可能會發生衝突 ！",
+    "description": "English: Notifications -> Your ad blocker and AdNauseam may conflict!"
+  },
+  "adnNotificationDisableUBlock": {
+    "message": "uBlock 同 AdNauseam 可能會衝突！",
+    "description": "English: Notifications -> uBlock and AdNauseam may conflict!"
+  },
+  "adnNotificationOperaSetting": {
+    "message": "請允許 AdNauseam 訪問搜索結果",
+    "description": "English: Notifications -> Please allow AdNauseam to access search page results"
+  },
+  "adnNotificationBrowserSetting": {
+    "message": "瀏覽器中的 \"內容封鎖\" 設置可能會干擾 AdNauseam!",
+    "description": "English: Notifications -> The 'Content Blocking' settings in your browser may interfere with AdNauseam!"
+  },
+  "adnNotificationPrivacyMode": {
+    "message": "您已允许AdNauseam在隱私瀏覽模式時得知您的線上行為",
+    "description": "English: Notifications -> You have allowed adnauseam to have access to your online activities while private browsing."
+  },
+  "adnNotificationDNTAllowed": {
+    "message": "此頁尊重 <b>不跟蹤</b>準則，允許廣告。",
+    "description": "English: Notifications -> This page respects Do Not Track, Ads are allowed."
+  },
+  "adnNotificationDNTHidingNotClicking": {
+    "message": "此頁尊重 <b>不跟蹤</b>準則，隱藏但不點擊廣告。",
+    "description": "English: Notifications -> This page respects Do Not Track, hiding not clicking."
+  },
+  "adnNotificationDNTClickingNotHiding": {
+    "message": "此頁尊重 <b>不跟蹤</b>準則，點擊但顯示廣告。",
+    "description": "English: Notifications -> This page respects Do Not Track, clicking not hiding."
+  },
+  "adnNotificationDNTJustSoYouKnow": {
+    "message": "此頁尊重 <b>不跟蹤</b>準則。",
+    "description": "English: Notifications -> This page respects Do Not Track, just so you know."
+  },
+  "adnTarget": {
+    "message": "目標",
+    "description": "English: Vault.html -> inspected Ad -> TARGET"
+  },
+  "adnFoundOn": {
+    "message": "發現於",
+    "description": "English: Vault.html -> inspected Ad -> FOUND ON"
+  },
+  "adnNotYetVisited": {
+    "message": "尚未訪問",
+    "description": "English: Not Yet Visited"
+  },
+  "adnAllowedByDNT": {
+    "message": "允許此廣告，遵循<b>不跟蹤</b>準則",
+    "description": "English: Not Yet Visited"
+  },
+  "adnFirstRunSwitchMeOn": {
+    "message": "按下開關",
+    "description": "English: Firstrun.html -> Switch me on"
+  },
+  "adnFirstRunThatsIt": {
+    "message": "只是這樣嗎？好吧...",
+    "description": "English: Firstrun.html -> That's it? ok…"
+  },
+  "adnFirstRunBetterButStill": {
+    "message": "好一些，不過...",
+    "description": "English: Firstrun.html -> Better, but still…"
+  },
+  "adnFirstRunLetsGo": {
+    "message": "開始吧！",
+    "description": "English: Firstrun.html -> Let's go!"
+  },
+  "goToAdNauseamWebsite": {
+    "message": "前往 AdNauseam 網站",
+    "description": "English: Menu icon title -> Go to AdNauseam website"
+  },
+  "adnPausedOnPage": {
+    "message": "AdNauseam 在本頁面被暫停",
+    "description": "English: Menu->display when paused on page/site"
+  },
+  "adnNotHiding": {
+    "message": "AdNauseam 目前不隱藏廣告",
+    "description": "English: Menu->display when not hiding Ads"
+  },
+  "adnVaultName": {
+    "message": "AdNauseam — 廣告庫",
+    "description": "English: AdNauseam — Ad Vault"
+  },
+  "myStatistics": {
+    "message": "我的統計數據",
+    "description": "appears in ADN vault, above ad slider"
+  },
+  "topAdnetworks": {
+    "message": "廣告來源-常見廣告網路",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "topSites": {
+    "message": "廣告來源-常見網站",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adTypes": {
+    "message": "廣告類型",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adTypesImageAds": {
+    "message": "圖像廣告",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adTypesTextAds": {
+    "message": "文字廣告",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adnShowingRecentAds": {
+    "message": "沒有在本頁收集到廣告 (顯示最近)",
+    "description": "shown in menu when only 'recent' Ads are shown"
+  },
+  "adnExportedAdsFilename": {
+    "message": "AdNauseam-已導出的廣告_{{datetime}}.json",
+    "description": "English: AdNauseam file export"
+  },
+  "adnImportAlertFormat": {
+    "message": "該文檔內沒有廣告信息，請選擇另一個文檔",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnImportAlert": {
+    "message": "{{count}}個廣告被導入",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnClearConfirm": {
+    "message": "這操作會永久移除你全部已保存的廣告",
+    "description": "appears in ADN settings"
+  },
+  "adnAdClickingStatusPending": {
+    "message": "等待",
+    "description": "Menu & AdVault: Pending"
+  },
+  "adnAdClickingStatusVisited": {
+    "message": "已訪問",
+    "description": "Menu & AdVault: Visited"
+  },
+  "adnAdClickingStatusFailed": {
+    "message": "訪問失敗",
+    "description": "Menu & AdVault: Failed"
+  },
+  "adnAdClickingStatusSkippedDNT": {
+    "message": "跳過: DNT 原則",
+    "description": "Menu & AdVault: SKIPPED: DNT Allowed"
+  },
+  "adnAdClickingStatusSkippedUser": {
+    "message": "跳過: 已被用戶訪問",
+    "description": "Menu & AdVault: SKIPPED: Clicked by User"
+  },
+  "adnAdClickingStatusSkippedFrequency": {
+    "message": "跳過: 點擊頻率",
+    "description": "Menu & AdVault: SKIPPED: Click Frequency"
+  },
+  "adnAdClickingStatusSkippedDisabled": {
+    "message": "跳過：禁用點擊",
+    "description": "Menu & AdVault: SKIPPED: Clicking disabled"
+  },
+  "adnMenuViewLog": {
+    "message": "查看日誌",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuAdsClicked": {
+    "message": "{{number}}个已點擊",
+    "description": "appears in ADN popup menu and vault"
+  },
+  "adnMenuAdsDetected": {
+    "message": "{{count}}个已偵測廣告",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuViewVault": {
+    "message": "查看廣告庫",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuResume": {
+    "message": "恢復 Adnauseam",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuSettings": {
+    "message": "設置",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuExportOptions": {
+    "message": "導出選項",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportAdsOnly": {
+    "message": "僅限廣告",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsOnly": {
+    "message": "僅限設置",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsAndAds": {
+    "message": "設置和廣告",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuImportAds": {
+    "message": "導入廣告",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableAllLogging": {
+    "message": "關閉所有日誌紀錄",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableOutgoingReferrer": {
+    "message": "禁止發送參照位址",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAds": {
+    "message": "清除廣告與瀏覽器記錄",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuHideBadge": {
+    "message": "隱藏圖標上的廣告數目",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAdsNow": {
+    "message": "清除廣告",
+    "description": "appears in ADN popup menu"
+  },
+  "adnLogNoLog": {
+    "message": "沒有可用的日誌",
+    "description": "appears in ADN log page"
+  },
+  "adnLogViewFullLog": {
+    "message": "查看完整日誌",
+    "description": "appears in ADN log page"
+  },
+  "adnVaultSince": {
+    "message": "自從{{datetime}}",
+    "description": "appears on vault page"
+  },
+  "adnVaultExport": {
+    "message": "導出",
+    "description": "appears on vault page"
+  },
+  "adnVaultImport": {
+    "message": "導入",
+    "description": "appears on vault page"
+  },
+  "adnVaultClear": {
+    "message": "清空",
+    "description": "appears on vault page"
+  },
+  "adnVaultFound": {
+    "message": "已收集{{total}}个廣告",
+    "description": "appears on vault page"
+  },
+  "adnVaultShowing": {
+    "message": "顯示",
+    "description": "appears on vault page"
+  },
+  "adnVaultDeleteThisAd": {
+    "message": "刪除這個廣告",
+    "description": "appears on vault page"
+  },
+  "adnVaultTotalEstimated": {
+    "message": "估計總",
+    "description": "appears on vault page"
+  },
+  "adnVaultAdsCost": {
+    "message": "費用",
+    "description": "appears on vault page"
+  },
+  "hidingAdsPrompt": {
+    "message": "隱藏由你的篩選器列表標記的廣告",
+    "description": "English: Hide Ads identified by your chosen filter lists"
+  },
+  "clickingAdsPrompt": {
+    "message": "點擊由你的篩選器列表標記的廣告",
+    "description": "English: Click Ads identified by your chosen filter lists"
+  },
+  "blockingMalwarePrompt": {
+    "message": "遮蔽追蹤器和其他惡意軟體",
+    "description": "English: lock trackers and other malware"
+  },
+  "parseTextAdsPrompt": {
+    "message": "當可行時捕捉文字廣告",
+    "description": "English: Capture text-only Ads when possible"
+  },
+  "settingsExtraPrivacyPrompt": {
+    "message": "其它隱私選項",
+    "description": "English: Interface"
+  },
+  "settingsInterfacePrompt": {
+    "message": "用戶介面",
+    "description": "English: Interface"
+  },
+  "noIncomingCookiesPrompt": {
+    "message": "忽略由點擊廣告產生的 cookie",
+    "description": "English: Ignore cookies returned with clicks"
+  },
+  "noOutgoingCookiesPrompt": {
+    "message": "不要發送 cookie 訪問",
+    "description": "English: Don't send cookies on visits"
+  },
+  "noOutgoingUserAgentPrompt": {
+    "message": "當訪問廣告時隱藏瀏覽器識別符",
+    "description": "English: Hide user-agent header on visits"
+  },
+  "noOutgoingRefererPrompt": {
+    "message": "當訪問廣告時隱藏引用頁面",
+    "description": "English: Hide referring page on visits"
+  },
+  "ClickingFrequencyRarely": {
+    "message": "較少",
+    "description": "English: Click Frequency - Rarely"
+  },
+  "ClickingFrequencySometimes": {
+    "message": "偶而",
+    "description": "English: Click Frequency - Sometimes"
+  },
+  "ClickingFrequencyAlways": {
+    "message": "始終",
+    "description": "English: Click Frequency - Always"
+  },
+  "respectDNTPrompt": {
+    "message": "排除非追蹤廣告",
+    "description": "English: Make exceptions for non-tracking Ads"
+  },
+  "disableHidingForDNTPrompt": {
+    "message": "不隱藏非追蹤廣告",
+    "description": "English: Don't hide non-tracking Ads"
+  },
+  "disableClickingForDNTPrompt": {
+    "message": "不點擊非追蹤廣告",
+    "description": "English: Don't click non-tracking Ads"
+  },
+  "3pGroupEssentials": {
+    "message": "基本",
+    "description": "English: Essentials"
+  },
+  "3pGroupOther": {
+    "message": "其它",
+    "description": "English: Other"
+  },
+  "3pPageUpdate": {
+    "message": "更新",
+    "description": "English: update"
+  },
+  "eventLoggingPrompt": {
+    "message": "激活調試模式",
+    "description": "prompt for toggle"
+  }
+}

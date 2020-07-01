@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title data-i18n="adnVaultName"></title>
+    <link rel="icon" type="image/png" href="img/icon-32.png">
+    <link rel="stylesheet" href="css/fonts/stylesheet.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/vault.css">
+</head>
+
+<body class="active">
+
+    <div id="loading-img">
+        <img src="img/preloader.gif" />
+    </div>
+
+    <div id="notifications" class=""></div>
+
+    <div id="stage" class="stage">
+
+        <div class="zoom">
+            <a href="" id="z-in">&#43;</a>
+            <a href="" id="z-out">&#8211;</a>
+        </div>
+        <div id='ratio'>100%</div>
+
+        <a href="#" id="x-close-button">&#10006;</a>
+
+
+
+        <div id="bottom-text">
+           <div id="myStatistics" class="min">
+             <div class="myStatistics-label" title="toggle">
+              <span class="st-icon"> </span>
+               <span class="title" data-i18n="myStatistics"></span>
+             </div>
+
+             <div class="myStatistics-panel">
+               <div class="section">
+                 <h4 data-i18n="topAdnetworks"></h4>
+                 <ul id="topAdnetworks">
+                 </ul>
+               </div>
+               <div class="section">
+                 <h4 data-i18n="topSites"></h4>
+                 <ul id="topSites">
+                 </ul>
+               </div>
+               <div class="section">
+                 <h4 data-i18n="adTypes"></h4>
+                 <ul id="adTypes">
+                 </ul>
+               </div>
+             </div>
+
+           </div>
+            <div id="stats" class="session-sum">
+                <span class="since" data-i18n="adnVaultSince">&nbsp;</span>, &nbsp;
+                <span class="clicked" data-i18n="adnMenuAdsClicked">&nbsp;</span> /
+                <span class="total" data-i18n="adnVaultFound">&nbsp;</span>
+                <span class="showing">(<span data-i18n="adnVaultShowing"><span id="detected" class="detected">0</span>&nbsp;</span>)</span><a href="https://github.com/dhowe/AdNauseam/wiki/FAQ#why-does-the-ad-vault-not-load-all-my-ads-when-i-open-it" target="_blank" class="showing-help"></a>, &nbsp;
+                <span class="cost" data-i18n="adnVaultTotalEstimated">&nbsp;</span> <span class="cost highlighted" data-i18n="adnVaultAdsCost">&nbsp;</span> <span id="worth-estimate" class="cost highlighted"></span><a href="https://github.com/dhowe/AdNauseam/wiki/FAQ#how-does-adnauseam-estimate-the-click-cost-it-shows-in-the-menu-and-vault" target="_blank" class="cost help-mark">?</a>
+            </div>
+            <div id="actions">
+                <button class="button small" id="export" data-i18n="adnVaultExport"></button>
+                <button class="button small" id="import" data-i18n="adnVaultImport"></button>
+                <input id="importFilePicker" type="file" accept="application/json" class="hiddenFileInput">
+                <button class="button small" id="reset" data-i18n="adnVaultClear"></button>
+            </div>
+        </div>
+
+        <div id="alert" class="hide">
+            <img src="img/alert.png" alt="alert">
+            <p>Alert goes here</p>
+        </div>
+
+        <div style="position: relative; height: 5519.67px;" id="container" class="z-100">
+            <div id="overlay"></div>
+        </div>
+
+        <div id="svgcon" class="svg-container"></div>
+
+    </div>
+
+
+    <div id="logo">
+        <a href="http://adnauseam.io" target="_blank"></a>
+    </div>
+
+    <ul class='custom-menu'>
+        <li data-action="delete" data-i18n="adnVaultDeleteThisAd">&nbsp;</li>
+        <!--li data-action="delete-all">delete similar ads</li-->
+    </ul>
+
+    <div id="templates" style="display: none">
+      <div id="tooltip" class="arrow_box"></div>
+
+      <!-- for notifications -->
+      <div id='notify-template' class="notification">
+        <span id='notify-text'></span>
+        <a id="notify-link" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#how-does-adnauseam-estimate-the-click-cost-it-shows-in-the-menu-and-vault" target="_blank" class="help-mark">?</a>
+        <button id="notify-button" type="button"></button>
+      </div>
+
+      <div id="notificationText">
+          <span data-i18n="adnNotificationActivateHiding"></span>
+          <span data-i18n="adnNotificationActivateClicking"></span>
+          <span data-i18n="adnNotificationActivateBlocking"></span>
+           <!-- filters -->
+          <span data-i18n="adnNotificationActivateEasyList"></span>
+          <span data-i18n="adnNotificationActivateAdNauseamList"></span>
+           <!-- ad blockers -->
+          <span data-i18n="adnNotificationDisableAdBlocker"></span>
+          <!-- firefox settings -->
+         <span data-i18n="adnNotificationBrowserSetting"></span>
+         <!-- Privacy Mode -->
+        <span data-i18n="adnNotificationPrivacyMode"></span>
+          <!-- button -->
+          <span data-i18n="adnNotificationDisable"></span>
+          <span data-i18n="adnNotificationReactivate"></span>
+        </div>
+
+
+    </div>
+    <script src="js/vapi.js"></script>
+    <script src="js/vapi-common.js"></script>
+    <script src="js/vapi-client.js"></script>
+    <script src="js/vapi-client-extra.js"></script>
+    <script src="js/udom.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/jquery.mousewheel.min.js"></script>
+    <script src="lib/packery.js"></script>
+    <script src="lib/imagesloaded.min.js"></script>
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/yamd5.js"></script>
+    <script src="js/adn/shared.js"></script>
+    <script src="js/adn/vault.js"></script>
+
+</body>
+
+</html>

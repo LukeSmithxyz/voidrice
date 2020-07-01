@@ -1,0 +1,97 @@
+/*mobile*/
+@media only screen and (max-width: 600px) {
+    form {
+        top: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+        margin: 50px 0 0 10px !important;
+    }
+}
+
+html{
+  height:100%;
+}
+body {
+  background: url(../img/adn_clickbot_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height:100%;
+  margin:0;
+}
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 360px;
+  width: 610px;
+  margin: -180px 0 0 -205px;
+}
+form h1 {
+  font-size: 30px;
+  font-family: bebas_neue,sans-serif;
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+form h1 strong {
+  font-family: bebas_neue,sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+form a {
+  color: inherit;
+  text-decoration: underline;
+}
+.link{
+  text-decoration: underline;
+}
+.link:hover{
+ color: #3B96FF;
+}
+.option-meta span{
+  text-decoration: underline;
+}
+.option-meta span:hover{
+  color: #3B96FF;
+  cursor:pointer;
+}
+.toggled0{
+    display:none;
+}
+.toggled1,.toggled2,.toggled3{
+  color:white;
+  cursor: pointer;
+}
+.toggled1, .toggled1:hover:enabled{
+  background: linear-gradient(left, #0076FF, #0076FF 35%, transparent 35%, transparent 100%) !important;
+  background: -webkit-linear-gradient(left, #0076FF, #0076FF 35%, transparent 35%, transparent 100%) !important;
+}
+
+.toggled2, .toggled2:hover:enabled{
+  background: linear-gradient(left, #0076FF, #0076FF 70%, transparent 70%, transparent 100%) !important;
+  background: -webkit-linear-gradient(left, #0076FF, #0076FF 70%, transparent 70%, transparent 100%) !important;
+}
+.toggled3{
+  background: #0076FF;
+}
+#clicker {
+  margin-top: 50px
+}
+input[type="checkbox"]#dnt-exception + label::before {
+  margin: 26px 8px 29px 50px;
+}
+label[for="dnt-exception"] {
+  margin-top: -23px;
+  display: inline-block;
+}
+#version-div {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+#app-version {
+  color: #999;
+  font-family: bebas_neue,sans-serif;
+  font-size: 12px;
+}
+

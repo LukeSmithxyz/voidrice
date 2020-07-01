@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdNauseam</title>
+  <link rel="icon" type="image/png" href="img/icon-32.png">
+  <link rel="stylesheet" href="css/fonts/stylesheet.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+
+<body class="active">
+
+  <div class="container">
+    <div id="main" class="page">
+
+      <header>
+        <h1>
+          <a href="http://adnauseam.io" target="new">
+            <span id="toggle-button" background="" title="goToAdNauseamWebsite">ADNAUSEAM</span>
+          </a>
+        </h1>
+        <div id="stats">
+
+          <span id="visited" data-i18n="adnMenuAdsClicked">&nbsp;</span>
+           /
+          <span id="found" data-i18n="adnMenuAdsDetected">&nbsp;</span>
+          <span id="worth-estimate" class="cost highlighted"></span><a href="https://github.com/dhowe/AdNauseam/wiki/FAQ#how-does-adnauseam-estimate-the-click-cost-it-shows-in-the-menu-and-vault" target="_blank"
+              class="cost help-mark">?</a>
+          <div id="vault-btn">
+            <button id="vault-button" data-i18n="adnMenuViewVault">&nbsp;</button>
+            <span id="vault-count" class="count">(-)</span>
+          </div>
+        </div>
+      </header>
+
+      <div id="paused-menu">
+        <h2 id="paused-on-page" data-i18n="adnPausedOnPage"></h2>
+        <h2 id="paused-no-hiding" data-i18n="adnNotHiding" class='hide'></h2>
+      </div>
+
+      <div id="notifications" class=""></div>
+
+      <div id="ad-list" class="">
+
+        <div id="alert" class="hide">
+          <img src="img/alert.png" alt="alert">
+          <p data-i18n="adnShowingRecentAds"></p>
+        </div>
+
+        <ul id='ad-list-items'></ul>
+
+      </div>
+
+      <footer>
+        <div class="tooltipContainer">
+          <button id="about-button" class="about">&micro;</button>
+          <button id="pause-button" class="pause show" data-i18n="adnNotificationDisable" data-i18n-tip="popupPowerSwitchInfo">&nbsp;</button>
+          <button id="resume-button" class="resume hide" data-i18n="adnMenuResume" data-i18n-tip="popupPowerSwitchInfo">&nbsp;</button>
+          <button id="settings-open" class="settings" data-i18n="adnMenuSettings">&nbsp;</button>
+          <button id="help-button" class="help">?</button>
+        </div>
+      </footer>
+
+    </div>
+    <!-- END #main -->
+
+  </div>
+
+  <div id="templates" style="display: none">
+    <div id="tooltip" class="arrow_box"></div>
+
+    <!-- for notifications -->
+    <div id='notify-template' class="notification">
+      <span id='notify-text'></span>
+      <a id="notify-link" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#how-does-adnauseam-estimate-the-click-cost-it-shows-in-the-menu-and-vault" target ="_blank" class="help-mark">?</a>
+      <button id="notify-button" type="button"></button>
+    </div>
+
+    <div id="notificationText">
+      <span data-i18n="adnNotificationActivateHiding"></span>
+      <span data-i18n="adnNotificationActivateClicking"></span>
+      <span data-i18n="adnNotificationActivateBlocking"></span>
+      <!-- filters -->
+      <span data-i18n="adnNotificationActivateEasyList"></span>
+      <span data-i18n="adnNotificationActivateAdNauseamList"></span>
+      <!-- ad blockers -->
+      <span data-i18n="adnNotificationDisableAdBlocker"></span>
+      <!-- firefox settings -->
+     <span data-i18n="adnNotificationBrowserSetting"></span>
+
+     <!-- opera settings -->
+     <span data-i18n="adnNotificationOperaSetting"></span>
+     <!-- Incognito -->
+    <span data-i18n="adnNotificationPrivacyMode"></span>
+      <!-- dnt -->
+      <span data-i18n="adnNotificationDNTHidingNotClicking"></span>
+      <span data-i18n="adnNotificationDNTClickingNotHiding"></span>
+      <span data-i18n="adnNotificationDNTJustSoYouKnow"></span>
+      <span data-i18n="adnNotificationDNTAllowed"></span>
+
+       <!-- button -->
+      <span data-i18n="adnNotificationDisable"></span>
+      <span data-i18n="adnNotificationReactivate"></span>
+      <span data-i18n="adnMenuSettings"></span>
+
+  </div>
+
+
+
+  </div>
+  <script src="js/vapi.js"></script>
+  <script src="js/vapi-common.js"></script>
+  <script src="js/vapi-client.js"></script>
+  <script src="js/vapi-client-extra.js"></script>
+  <script src="js/udom.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/adn/shared.js"></script>
+  <script src="js/adn/menu.js"></script>
+
+</body>
+
+</html>

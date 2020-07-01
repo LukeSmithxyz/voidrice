@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="adnAboutPageName"></title>
+  <link rel="stylesheet" type="text/css" href="css/common.css">
+  <link rel="stylesheet" type="text/css" href="css/dashboard-common.css">
+  <link rel="stylesheet" type="text/css" href="css/firstrun.css">
+</head>
+
+<body>
+   <div id="notifications" class=""></div>
+  <div id="version-div">
+    <span id="app-version"></span>
+  </div>
+
+  <!-- first run content goes here -->
+  <form id="settings_form" action="index.html" method="post">
+
+    <h1><strong>Adnauseam</strong>, <span data-i18n="adnFirstRunPlease"></span></h1>
+    <div class="row">
+      <div class="question large" data-i18n="adnFirstRunHideAllAds">
+      </div>
+      <div class="switch">
+        <input type="checkbox" data-setting-name="hidingAds" data-setting-type="bool" class="cmn-toggle cmn-toggle-round-flat"
+            id="hidingAds" checked>
+        <label for="hidingAds"></label>
+      </div>
+      <p class="option-meta" data-i18n="adnFirstRunHideAllAdsDescription"></p>
+    </div>
+
+    <div class="row">
+      <div class="question large" data-i18n="adnFirstRunClickingAds">
+      </div>
+      <div class="switch">
+        <input type="checkbox" data-setting-name="clickingAds" data-setting-type="bool"
+            class="cmn-toggle cmn-toggle-round-flat" id="clickingAds" checked>
+        <label for="clickingAds"></label>
+      </div>
+      <p class="option-meta" data-i18n="adnFirstRunClickingAdsDescription"></p>
+    </div>
+
+    <div class="row">
+      <div class="question large" data-i18n="adnFirstRunBlockingMalware">
+      </div>
+      <div class="switch">
+        <input type="checkbox" data-setting-name="blockingMalware" data-setting-type="bool"
+            class="cmn-toggle cmn-toggle-round-flat" id="blockingMalware" checked>
+        <label for="blockingMalware"></label>
+      </div>
+      <p class="option-meta" data-i18n="adnFirstRunBlockingMalwareDescription"></p>
+    </div>
+
+    <div class="row custom-check">
+      <input type="checkbox" data-setting-name="respectDNT" data-setting-type="bool"
+          id="dnt-exception" checked>
+      <label for="dnt-exception" data-i18n="respectDNTPrompt"></label><a href="https://github.com/dhowe/AdNauseam/wiki/FAQ#what-is-the-effs-do-not-track-standard-and-how-it-is-supported-in-adnauseam" class="cost help-mark sml" target="_blank">?</a>
+    </div>
+
+    <div class="row">
+      <div class="btn" id='confirm-close'>
+        <button class="toggled0 button disabled" id="" >
+          <span data-i18n="adnFirstRunThatsIt"></span>
+           <span data-i18n="adnFirstRunBetterButStill"></span>
+            <span data-i18n="adnFirstRunLetsGo"></span>
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+  <div id="templates" style="display: none">
+      <!-- for notifications -->
+      <div id='notify-template' class="notification">
+        <span id='notify-text'></span>
+        <a id="notify-link" href="" target="_blank" class="help-mark">?</a>
+        <button id="notify-button" type="button"></button>
+      </div>
+
+      <!-- ad blockers -->
+      <span data-i18n="adnNotificationDisableAdBlocker"></span>
+      <span data-i18n="adnNotificationDisable"></span>
+
+  </div>
+  <script src="js/vapi.js"></script>
+  <script src="js/vapi-common.js"></script>
+  <script src="js/vapi-client.js"></script>
+  <script src="js/udom.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/dashboard-common.js"></script>
+  <script src="js/adn/shared.js"></script>
+  <script src="js/adn/firstrun.js"></script>
+
+</body>
+
+</html>

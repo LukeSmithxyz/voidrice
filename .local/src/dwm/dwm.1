@@ -1,0 +1,181 @@
+.TH DWM 1 dwm\-VERSION
+.SH NAME
+dwm \- dynamic window manager (Luke Smith <https://lukesmith.xyz>'s build)
+.SH SYNOPSIS
+.B dwm
+.RB [ \-v ]
+.SH DESCRIPTION
+dwm is a dynamic window manager for X.
+.P
+dwm "orders" windows based on recency and primacy, while dwm layouts may
+change, the most recent "master" window is shown in the most prominent
+position. There are bindings for cycling through and promoting windows to the
+master position.
+.P
+Windows are grouped by tags. Each window can be tagged with one or multiple
+tags. Selecting certain tags displays all windows with these tags.
+.P
+Each screen contains a small status bar which displays all available tags, the
+layout, the title of the focused window, and the text read from the root window
+name property, if the screen is focused. A floating window is indicated with an
+empty square and a maximised floating window is indicated with a filled square
+before the windows title.  The selected tags are indicated with a different
+color. The tags of the focused window are indicated with a filled square in the
+top left corner.  The tags which are applied to one or more windows are
+indicated with an empty square in the top left corner.
+.P
+dwm draws a small border around windows to indicate the focus state.
+.P
+.I
+libxft-bgra
+should be installed for this build of dwm. Arch users may install it via the
+AUR. Color characters and emoji are enabled, but these will cause crashes
+without the fix
+.I
+libxft-bgra
+offers.
+.SH OPTIONS
+.TP
+.B \-v
+prints version information to standard output, then exits.
+.SH USAGE
+.SS Status bar
+.TP
+.B X root window name
+is read and displayed in the status text area. It can be set with the
+.BR xsetroot (1)
+command.
+.TP
+.B Left click
+click on a tag label to display all windows with that tag, click on the layout
+label toggles between tiled and floating layout.
+.TP
+.B Right click
+click on a tag label adds/removes all windows with that tag to/from the view.
+.TP
+.B Super\-Left click
+click on a tag label applies that tag to the focused window.
+.TP
+.B Super\-Right click
+click on a tag label adds/removes that tag to/from the focused window.
+.SS Keyboard commands
+.TP
+.B Super\-Return
+Start terminal,
+.BR st(1).
+.TP
+.B Super\-d
+Spawn
+.BR dmenu(1)
+for launching other programs.
+.TP
+.B Super\-b
+Toggles bar on and off.
+.TP
+.B Super\-q
+Close focused window.
+.TP
+.B Super\-t/T
+Sets tiled/bstack layouts.
+.TP
+.B Super\-f
+Toggle fullscreen window.
+.TP
+.B Super\-F
+Toggle floating layout.
+.TP
+.B Super\-y/Y
+Sets Fibonacci spiral/dwinde layouts.
+.TP
+.B Super\-u/U
+Sets centered master layout.
+.TP
+.B Super\-i/I
+Sets centered master or floating master layouts.
+.TP
+.B Super\-space
+Zooms/cycles focused window to/from master area.
+.TP
+.B Super\-j/k
+Focus next/previous window.
+.TP
+.B Super\-Shift\-j/k
+Move selected window down/up in stack.
+.TP
+.B Super\-o/O
+Increase/decrease number of windows in master area.
+.TP
+.B Super\-l
+Increase master area size.
+.TP
+.B Super\-h
+Decrease master area size.
+.TP
+.B Super\-Shift\-space
+Toggle focused window between tiled and floating state.
+.TP
+.B Super\-Tab
+Toggles to the previously selected tags.
+.TP
+.B Super\-Shift\-[1..n]
+Apply nth tag to focused window.
+.TP
+.B Super\-Shift\-0
+Apply all tags to focused window.
+.TP
+.B Super\-Control\-Shift\-[1..n]
+Add/remove nth tag to/from focused window.
+.TP
+.B Super\-[1..n]
+View all windows with nth tag.
+.TP
+.B Super\-0
+View all windows with any tag.
+.TP
+.B Super\-Control\-[1..n]
+Add/remove all windows with nth tag to/from the view.
+.TP
+.B Super\-Shift\-q
+Quit dwm.
+.TP
+.B Mod1\-Control\-Shift\-q
+Menu to refresh/quit/reboot/shutdown.
+.SS Mouse commands
+.TP
+.B Super\-Left click
+Move focused window while dragging. Tiled windows will be toggled to the floating state.
+.TP
+.B Super\-Middle click
+Toggles focused window between floating and tiled state.
+.TP
+.B Super\-Right click
+Resize focused window while dragging. Tiled windows will be toggled to the floating state.
+.SH CUSTOMIZATION
+dwm is customized by creating a custom config.h and (re)compiling the source
+code. This keeps it fast, secure and simple.
+.SH SIGNALS
+.TP
+.B SIGHUP - 1
+Restart the dwm process.
+.TP
+.B SIGTERM - 15
+Cleanly terminate the dwm process.
+.SH SEE ALSO
+.BR dmenu (1),
+.BR st (1)
+.SH ISSUES
+Java applications which use the XToolkit/XAWT backend may draw grey windows
+only. The XToolkit/XAWT backend breaks ICCCM-compliance in recent JDK 1.5 and early
+JDK 1.6 versions, because it assumes a reparenting window manager. Possible workarounds
+are using JDK 1.4 (which doesn't contain the XToolkit/XAWT backend) or setting the
+environment variable
+.BR AWT_TOOLKIT=MToolkit
+(to use the older Motif backend instead) or running
+.B xprop -root -f _NET_WM_NAME 32a -set _NET_WM_NAME LG3D
+or
+.B wmname LG3D
+(to pretend that a non-reparenting window manager is running that the
+XToolkit/XAWT backend can recognize) or when using OpenJDK setting the environment variable
+.BR _JAVA_AWT_WM_NONREPARENTING=1 .
+.SH BUGS
+Send all bug reports with a patch to hackers@suckless.org.

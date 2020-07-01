@@ -1,0 +1,195 @@
+@keyframes spin {
+    0% { transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+    100% { transform: rotate(360deg); -webkit-transform: rotate(360deg); }
+    }
+/*ADN*/
+#options li:nth-child(3), #options li:nth-child(4){
+  display: none;
+}
+#options li:nth-child(2) {
+  margin-left:1em;
+}
+#options li:nth-child(2) input{
+  /* auto-update filter lists */
+    margin-right: 0.6em;
+}
+ul {
+    list-style-type: none;
+    padding-left: 1em;
+    padding-right: 0;
+    }
+body[dir="rtl"] ul {
+    padding-left: 0;
+    padding-right: 1em;
+    }
+ul.root {
+    padding: 0;
+    }
+#options li {
+    margin-bottom: 0.5em;
+    margin-left:0 !important;
+    }
+#listsOfBlockedHostsPrompt {
+    cursor: pointer;
+    }
+#listsOfBlockedHostsPrompt:before {
+    color: #888;
+    content: '\2212  ';
+    }
+body.hideUnused #listsOfBlockedHostsPrompt:before {
+    content: '+  ';
+    }
+#lists {
+    margin: 0.5em 0 0 0;
+    padding: 0;
+    }
+#lists > li {
+    margin: 0.5em 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    }
+.groupEntry .geDetails {
+    cursor: pointer;
+    }
+.groupEntry:not([data-groupkey="user"]) .geDetails:before {
+    color: #888;
+    content: '\2212  ';
+    }
+.groupEntry.hideUnused:not([data-groupkey="user"]) .geDetails:before {
+    content: '+  ';
+    }
+.groupEntry .geName {
+    pointer-events: none;
+    }
+.groupEntry .geCount {
+    font-size: 90%;
+    pointer-events: none;
+    }
+.groupEntry > ul {
+    margin: 0.25em 0 0 0;
+    padding-left: 1em;
+    }
+.listEntry {
+    margin: 0 auto 0 auto;
+    padding: 0.2em 0;
+    white-space: nowrap;
+    }
+.groupEntry:not([data-groupkey="user"]) .listEntry.unused {
+    display: none;
+    }
+.listEntry > * {
+    margin-right: 0.3em;
+    unicode-bidi: embed;
+    }
+.listEntry.toRemove > input[type="checkbox"] {
+    visibility: hidden;
+    }
+.listEntry.toRemove > a.content {
+    text-decoration: line-through;
+    }
+.listEntry > .fa {
+    color: inherit;
+    display: none;
+    font-size: 110%;
+    opacity: 0.6;
+    vertical-align: baseline;
+    }
+.listEntry > a.towiki {
+    display: inline-block;
+    }
+.listEntry > a.fa:hover {
+    opacity: 1;
+    }
+.listEntry.support > a.support {
+    display: inline-block;
+    }
+.listEntry > a.remove,
+.listEntry > a.remove:visited {
+    color: darkred;
+    }
+.listEntry.external > a.remove {
+    display: inline-block;
+    }
+.listEntry.mustread > a.mustread {
+    display: inline-block;
+    }
+.listEntry.mustread > a.mustread:hover {
+    color: mediumblue;
+    }
+.listEntry > .counts {
+    display: none;
+    font-size: smaller;
+}
+.listEntry > input[type="checkbox"]:checked ~ .counts {
+    display: inline;
+}
+.dim {
+    opacity: 0.6;
+    }
+#buttonApply {
+    display: initial;
+    position: fixed;
+    right: 1em;
+    z-index: 10;
+    }
+body[dir=rtl] #buttonApply {
+    right: auto;
+    left: 1em;
+    }
+#buttonApply.disabled {
+    display: none;
+    }
+li.listEntry span.status {
+    color: #AAA;
+    cursor: default;
+    display: none;
+}
+.listEntry span.status:hover {
+    opacity: 1;
+    }
+.listEntry span.unsecure {
+    color: darkred;
+    }
+.listEntry.unsecure > input[type="checkbox"]:checked ~ span.unsecure {
+    display: inline-block;
+    }
+.listEntry span.failed {
+    color: darkred;
+    }
+.listEntry.failed span.failed {
+    display: inline-block;
+    }
+.listEntry span.cache {
+    cursor: pointer;
+    }
+.listEntry.cached:not(.obsolete) > input[type="checkbox"]:checked ~ span.cache {
+    display: inline-block;
+    }
+.listEntry span.obsolete {
+    color: hsl(36, 100%, 40%);
+    }
+body:not(.updating) .listEntry.obsolete > input[type="checkbox"]:checked ~ span.obsolete {
+    display: inline-block;
+    }
+.listEntry span.updating {
+    transform-origin: 50% 46%;
+    }
+body.updating .listEntry.obsolete > input[type="checkbox"]:checked ~ span.updating {
+    animation: spin 2s linear infinite;
+    display: inline-block;
+    }
+.listEntry.toImport > input[type="checkbox"] ~ textarea {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: block;
+    font-size: smaller;
+    height: 6em;
+    margin-left: 2em;
+    resize: vertical;
+    visibility: hidden;
+    white-space: pre;
+    width: calc(100% - 4em);
+    }
+.listEntry.toImport > input[type="checkbox"]:checked ~ textarea {
+    visibility: visible;
+    }

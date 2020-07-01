@@ -1,0 +1,13 @@
+html {
+    height: 100vh;
+    overflow: hidden;
+    }
+body {
+    overflow: hidden;
+    }
+#userFilters {
+    height: 75vh;
+    text-align: left;
+    width: 100%;
+    word-wrap: normal;
+    }

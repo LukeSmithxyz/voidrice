@@ -1,0 +1,25 @@
+body {
+  padding: 0 0.5em;
+  font-size: 20px;
+  font-family: bebas_neue,sans-serif;
+}
+#aboutNameVer {
+  color: #BD10E0;
+  font-size: 22px;
+  margin-top: 70px;
+  margin-left: 3px;
+}
+#builtOn {
+  margin-left: 13px;
+  font-size: 16px;
+}
+#builtOnVersion {
+  margin-left: 5px;
+  font-size: 16px;
+}
+#uBlock {
+  font-size: 22px;
+}
+ul {
+  margin-__MSG_@@bidi_start_edge__: 1em;
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>AdNauseam — Settings</title>
+  <link rel="stylesheet" href="css/fonts/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="css/common.css">
+  <link rel="stylesheet" type="text/css" href="css/dashboard-common.css">
+  <link rel="stylesheet" type="text/css" href="css/settings.css">
+</head>
+
+<body>
+  <br>
+  <ul id="userSettings">
+    <li class="subgroup row">
+      <div class="question small" data-i18n="adnFirstRunHideAllAds">
+      </div>
+      <div class="switch">
+        <input type="checkbox" data-setting-name="hidingAds" data-setting-type="bool" class="cmn-toggle cmn-toggle-round-flat cmn-toggle-small"
+            id="hidingAds" checked>
+        <label for="hidingAds"></label>
+      </div>
+      <div class="subgroupDescription">
+          <p data-i18n="hidingAdsPrompt" for="hiding-ads"></p>
+      </div>
+      <ul class="custom-check">
+        <li class="dntOption">
+          <input id="respect-dnt-for-hiding" class="hidingAds-child" type="checkbox" data-setting-name="disableHidingForDNT"
+              data-setting-type="bool">
+          <label data-i18n="disableHidingForDNTPrompt" for="respect-dnt-for-hiding"></label>
+          <a class="fa info" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#what-is-the-effs-do-not-track-standard-and-how-it-is-supported-in-adnauseam" target="_blank">&#xf05a;</a>
+        </li>
+        <li><input id="no-large-media" class="hidingAds-child" type="checkbox" data-setting-name="noLargeMedia" data-setting-type="bool">
+          <label data-i18n="settingsNoLargeMediaPrompt" for="no-large-media">
+            <input type="number" min="0"></label> <a class="fa info" href="https://github.com/gorhill/uBlock/wiki/Per-site-switches#no-large-media-elements" target="_blank">&#xf05a;</a>
+      </li>
+        <li>
+          <input id="no-remote-fonts" class="hidingAds-child" type="checkbox" data-setting-name="noRemoteFonts" data-setting-type="bool">
+          <label data-i18n="settingsNoRemoteFontsPrompt" for="no-remote-fonts"></label> <a class="fa info" href="https://github.com/gorhill/uBlock/wiki/Per-site-switches#no-remote-fonts"
+              target="_blank">&#xf05a;</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="subgroup row">
+      <div class="question small" data-i18n="adnFirstRunClickingAds">
+      </div>
+      <div class="switch">
+        <input type="checkbox" data-setting-name="clickingAds" data-setting-type="bool"
+            class="cmn-toggle cmn-toggle-round-flat cmn-toggle-small" id="clickingAds" checked>
+        <label for="clickingAds"></label>
+      </div>
+      <div class="subgroupDescription">
+          <p data-i18n="clickingAdsPrompt" for="clicking-ads"></p>
+      </div>
+      <ul class="custom-check">
+        <!-- <li>
+          <input id="parse-text-ads" type="checkbox" data-setting-name="parseTextAds" data-setting-type="bool">
+          <label data-i18n="parseTextAdsPrompt" for="parse-text-ads"></label>
+        </li>
+        <li>
+          <input id="no-outgoing-cookies" class="clickingAds-child" type="checkbox" data-setting-name="noOutgoingCookies" data-setting-type="bool">
+          <label data-i18n="noOutgoingCookiesPrompt" for="no-outgoing-cookies"></label>
+          <a class="fa info" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#what-is-dont-send-cookies-on-visits" target="_blank">&#xf05a;</a>
+        </li-->
+        <li>
+          <ul id="clickingFrequency">
+             <input class="clickingAds-child" id="slider" type="range" min="0.1" max="1" step="0.05"/>
+<a class="fa info" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#what-is-the-click-probability-setting"
+              target="_blank">&#xf05a;</a>
+
+             <div id="choiceBorder">
+               <p class="clickingAds-child" data-i18n="ClickingFrequencyRarely" id="choiceSlider"></p>
+               <p class="clickingAds-child" data-i18n="ClickingFrequencySometimes" id="choiceSlider"></p>
+               <p class="clickingAds-child last" data-i18n="ClickingFrequencyAlways" id="choiceSlider"></p>
+             </div>
+          </ul>
+       </li>
+        <li class="dntOption">
+          <input id="respect-dnt-for-clicking" class="clickingAds-child" type="checkbox" data-setting-name="disableClickingForDNT"
+              data-setting-type="bool">
+          <label data-i18n="disableClickingForDNTPrompt" for="respect-dnt-for-clicking"></label>
+          <a class="fa info" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#what-is-the-effs-do-not-track-standard-and-how-it-is-supported-in-adnauseam" target="_blank">&#xf05a;</a>
+        </li>
+        <!--
+        <li>
+          <input id="no-outgoing-referer" class="clickingAds-child" type="checkbox" data-setting-name="noOutgoingReferer"
+              data-setting-type="bool">
+          <label data-i18n="noOutgoingRefererPrompt" for="no-outgoing-referer"></label>
+        </li>
+        <li>
+          <input id="no-outgoing-user-agent" class="clickingAds-child" type="checkbox" data-setting-name="noOutgoingUserAgent"
+              data-setting-type="bool">
+          <label data-i18n="noOutgoingUserAgentPrompt" for="no-outgoing-user-agent"></label>
+        </li> -->
+
+      </ul>
+    </li>
+
+    <li class="subgroup row">
+      <div class="question small" data-i18n="adnFirstRunBlockingMalware">
+      </div>
+      <div class="switch">
+        <input type="checkbox" data-setting-name="blockingMalware" data-setting-type="bool"
+            class="cmn-toggle cmn-toggle-round-flat cmn-toggle-small" id="blockingMalware" checked>
+        <label for="blockingMalware"></label>
+      </div>
+      <div class="subgroupDescription">
+          <p data-i18n="blockingMalwarePrompt" for="blocking-malware"></p>
+          <a class="fa info" href="https://github.com/dhowe/AdNauseam/wiki/FAQ#how-does-adnauseam-block-malicious-ads" target="_blank">&#xf05a;</a>
+      </div>
+
+    </li>
+    <!-- spacer -->
+
+    <li class="subgroup">
+      <h2 data-i18n="settingsExtraPrivacyPrompt"></h2>
+      <ul class="custom-check">
+        <li>
+          <label class="synopsis"><span data-i18n="settingPerSiteSwitchGroupSynopsis"></span> <a class="fa info"
+                href="https://github.com/gorhill/uBlock/wiki/Per-site-switches" target="_blank">&#xf05a;</a></label>
+          <!--li><input id="no-cosmetic-filtering" type="checkbox" data-setting-name="noCosmeticFiltering" data-setting-type="bool"><label data-i18n="settingsNoCosmeticFilteringPrompt" for="no-cosmetic-filtering"></label> <a class="fa info" href="https://github.com/gorhill/uBlock/wiki/Per-site-switches#no-cosmetic-filtering" target="_blank">&#xf05a;</a-->
+        </li>
+
+        <li>
+          <input id="prefetching-disabled" type="checkbox" data-setting-name="prefetchingDisabled"
+              data-setting-type="bool">
+          <label data-i18n="settingsPrefetchingDisabledPrompt" for="prefetching-disabled"></label> <a class="fa info" href="https://wikipedia.org/wiki/Link_prefetching#Issues_and_criticisms"
+              target="_blank">&#xf05a;</a>
+        </li>
+        <li>
+          <input id="hyperlink-auditing-disabled" type="checkbox" data-setting-name="hyperlinkAuditingDisabled"
+              data-setting-type="bool">
+          <label data-i18n="settingsHyperlinkAuditingDisabledPrompt" for="hyperlink-auditing-disabled"></label> <a class="fa info" href="http://www.wilderssecurity.com/threads/hyperlink-auditing-aka-a-ping-and-beacon-aka-navigator-sendbeacon.364904/"
+              target="_blank">&#xf05a;</a>
+        </li>
+        <li>
+          <input id="webrtc-ipaddress-hidden" type="checkbox" data-setting-name="webrtcIPAddressHidden"
+              data-setting-type="bool">
+          <label data-i18n="settingsWebRTCIPAddressHiddenPrompt" for="webrtc-ipaddress-hidden"></label> <a class="fa info important" href="https://github.com/gorhill/uBlock/wiki/Prevent-WebRTC-from-leaking-local-IP-address"
+              target="_blank">&#xf05a;</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="subgroup row">
+      <h2 data-i18n="settingsInterfacePrompt"></h2>
+      <ul class="custom-check">
+        <li>
+          <input id="icon-badge" type="checkbox" data-setting-name="showIconBadge" data-setting-type="bool">
+          <label data-i18n="settingsIconBadgePrompt" for="icon-badge"></label>
+        </li>
+        <li>
+          <input id="context-menu-enabled" type="checkbox" data-setting-name="contextMenuEnabled"
+              data-setting-type="bool">
+          <label data-i18n="settingsContextMenuPrompt" for="context-menu-enabled"></label>
+        </li>
+        <li>
+          <input id="tooltips-disabled" type="checkbox" data-setting-name="tooltipsDisabled"
+              data-setting-type="bool">
+          <label data-i18n="settingsTooltipsPrompt" for="tooltips-disabled"></label>
+        </li>
+        <li>
+          <input id="color-blind-friendly" type="checkbox" data-setting-name="colorBlindFriendly"
+              data-setting-type="bool">
+          <label data-i18n="settingsColorBlindPrompt" for="color-blind-friendly"></label>
+          <!--li><input id="cloud-storage-enabled" type="checkbox" data-setting-name="cloudStorageEnabled" data-setting-type="bool"><label data-i18n="settingsCloudStorageEnabledPrompt" for="cloud-storage-enabled"></label> <a class="fa info" href="https://github.com/gorhill/uBlock/wiki/Cloud-storage" target="_blank">&#xf05a;</a-->
+        </li>
+        <li>
+          <input id="event-logging" type="checkbox" data-setting-name="eventLogging"
+              data-setting-type="bool">
+          <label data-i18n="eventLoggingPrompt" for="event-logging"></label>
+        </li>
+
+      </ul>
+    </li>
+
+    <li><input id="advanced-user-enabled" type="checkbox" disabled="disabled" data-setting-name="advancedUserEnabled" data-setting-type="bool">
+      <label data-i18n="settingsAdvancedUserPrompt" for="advanced-user-enabled"></label>
+      <a class="fa info" href="advanced-settings.html" data-i18n-title="settingsAdvancedUserSettings">&#xf085;</a></li>
+  </ul>
+
+  <div id="localData" style="margin: 0 1em;">
+    <div style="margin: 2.5em 0; border-top: 1px solid #ccc;"></div>
+    <ul>
+      <li></li>
+      <li style="display: none;"><span data-i18n="settingsLastBackupPrompt"></span>
+        <ul>
+        <li></li>
+        </ul>
+    </li>
+
+    <li style="display: none;"><span data-i18n="settingsLastRestorePrompt"></span>
+      <ul>
+        <li></li>
+        <li></li>
+      </ul>
+    </li>
+
+    </ul>
+  </div>
+
+  <div style="margin: 2.5em 1em;">
+    <p>
+      <button class="custom" type="button" id="exportDialog" data-i18n="aboutBackupDataButton"></button>&ensp;
+      <button class="custom" type="button" id="import" data-i18n="aboutRestoreDataButton"></button>
+      <input id="importFilePicker" type="file" accept="application/json" class="hiddenFileInput">
+      <button class="custom pull-right" type="button" id="resetOptions" data-i18n="aboutResetDataButton"></button>
+    </p>
+  </div>
+
+<div id="export-dialog" class="hide">
+  <h5 data-i18n="adnMenuExportOptions"><span class="close"></span></h5>
+  <ul>
+    <li>
+        <label class="radioContainer" data-i18n="adnMenuExportSettingsOnly">
+            <input type="radio" id="exportSettings" checked="checked" name="radio">
+            <span class="radiobtn"></span>
+        </label>
+    </li>
+    <li>
+        <label class="radioContainer" data-i18n="adnMenuExportSettingsAndAds">
+            <input type="radio" id="backupUserData" name="radio">
+            <span class="radiobtn"></span>
+        </label>
+    </li>
+    <li>
+        <label class="radioContainer" data-i18n="adnMenuExportAdsOnly">
+            <input type="radio" id="exportAds" name="radio">
+            <span class="radiobtn"></span>
+        </label>
+    </li>
+  </ul>
+
+
+  <button class="custom" type="button" id="export" data-i18n="adnVaultExport"></button>
+</div>
+  <script src="js/vapi.js"></script>
+  <script src="js/vapi-common.js"></script>
+  <script src="js/vapi-client.js"></script>
+  <script src="js/udom.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/dashboard-common.js"></script>
+  <script src="js/adn/shared.js"></script>
+  <script src="js/adn/options.js"></script>
+
+</body>
+
+</html>

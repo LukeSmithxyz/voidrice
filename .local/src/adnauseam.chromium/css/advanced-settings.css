@@ -1,0 +1,16 @@
+html {
+    height: 100vh;
+    overflow: hidden;
+    }
+body {
+    overflow: hidden;
+    }
+#advancedSettings {
+    border-top: 1px solid #ddd;
+    height: 75vh;
+    text-align: left;
+    width: 100%;
+    }
+.CodeMirror-wrap pre {
+    word-break: break-all;
+    }

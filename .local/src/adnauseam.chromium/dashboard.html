@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="dashboardName"></title>
+<link rel="stylesheet" href="css/fonts/stylesheet.css">
+<link href="css/dashboard.css" rel="stylesheet" type="text/css">
+<link href="css/common.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/png" href="img/icon_16.png"/>
+</head>
+
+<body>
+
+<div id="notifications" class=""></div>
+
+<div id="dashboard-nav">
+    <div id="dashboard-nav-widgets">
+
+        <span class="hverbose" data-i18n="extName"></span>
+        <a class="tabButton" href="#options.html" data-i18n="settingsPageName"></a>
+        <a class="tabButton" href="#3p-filters.html" data-i18n="3pPageName"></a>
+        <a class="tabButton" href="#1p-filters.html" data-i18n="1pPageName"></a>
+        <a class="tabButton" href="#dyna-rules.html" data-i18n="rulesPageName"></a>
+        <a class="tabButton" href="#whitelist.html" data-i18n="whitelistPageName"></a>
+        <a class="tabButton" href="#links.html" data-i18n="aboutPageName"></a>
+
+    </div>
+</div>
+<div id="unsavedWarning">
+    <div>
+        <span data-i18n="dashboardUnsavedWarning"></span>&emsp;
+        <button class="custom" data-i18n="dashboardUnsavedWarningStay"></button>&emsp;
+        <button class="custom" data-i18n="dashboardUnsavedWarningIgnore"></button>
+    </div>
+    <div></div>
+</div>
+
+<iframe id="iframe" src=""></iframe>
+
+<!-- for notifications -->
+<div id='notify-template' class="notification">
+  <span id='notify-text'></span>
+  <a id="notify-link" href="#" target="_blank" class="help-mark">?</a>
+  <button id="notify-button" type="button"></button>
+</div>
+
+<div id="notificationText">
+  <span data-i18n="adnNotificationActivateHiding"></span>
+  <span data-i18n="adnNotificationActivateClicking"></span>
+  <span data-i18n="adnNotificationActivateBlocking"></span>
+   <!-- filters -->
+  <span data-i18n="adnNotificationActivateEasyList"></span>
+  <span data-i18n="adnNotificationActivateAdNauseamList"></span>
+   <!-- ad blockers -->
+  <span data-i18n="adnNotificationDisableAdBlocker"></span>
+   <!-- firefox settings -->
+  <span data-i18n="adnNotificationBrowserSetting"></span>
+  <!-- Privacy Mode -->
+ <span data-i18n="adnNotificationPrivacyMode"></span>
+  <!-- button -->
+  <span data-i18n="adnNotificationDisable"></span>
+  <span data-i18n="adnNotificationReactivate"></span>
+</div>
+<script src="js/vapi.js"></script>
+<script src="js/vapi-common.js"></script>
+<script src="js/vapi-client.js"></script>
+<script src="js/vapi-client-extra.js"></script>
+<script src="js/udom.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/adn/shared.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

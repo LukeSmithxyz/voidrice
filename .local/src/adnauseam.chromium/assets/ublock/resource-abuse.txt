@@ -1,0 +1,267 @@
+! Title: uBlock filters – Resource abuse
+! Description: To foil sites potentially abusing CPU/bandwidth resources without informed
+!              consent. Any such resource-abuse scripts MUST be opt-in, with complete
+!              informed consent from the visitor.
+! Expires: 4 days
+! Licence: https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE
+! Homepage: https://github.com/uBlockOrigin/uAssets
+!
+! GitHub issues: https://github.com/uBlockOrigin/uAssets/issues
+! GitHub pull requests: https://github.com/uBlockOrigin/uAssets/pulls
+
+! https://github.com/uBlockOrigin/uAssets/issues/659
+||edgeno.de^$script,3p,domain=~edgemesh.com
+/edgemesh.*.js$script,domain=~edgemesh.com|~edgeno.de
+! https://github.com/uBlockOrigin/uAssets/issues/5771
+||arc.io/widget.js$script,3p
+
+! https://github.com/uBlockOrigin/uAssets/issues/803
+||safelinkconverter.com^$script,3p
+
+! https://github.com/uBlockOrigin/uAssets/issues/813
+||monero-miner.net^$3p
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/59
+csgoconfigs.com##+js(acis, m, CH.Anonymous)
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/64
+||openkatalog.com^$frame
+
+! https://forums.lanik.us/viewtopic.php?p=129242#p129242
+/XMR-monero.js$script
+
+! https://forums.lanik.us/viewtopic.php?p=129545#p129545
+/adsensebase.js$script
+
+! other miners
+.cf^*.wasm$3p
+.info^$script,3p,domain=oload.info|oload.tv|openload.co|streamango.com|streamcherry.com
+.space^*.wasm$3p
+://api.*/lib/native.wasm$3p
+||darking01.tk^$3p
+||darking02.tk^$3p
+||darking03.tk^$3p
+||darking04.tk^$3p
+||darking06.tk^$3p
+||darking08.tk^$3p
+||darking09.tk^$3p
+||megabanners.cf^$websocket
+||now.sh/*.wasm$3p
+||rapidvideo.com/J5xj_2.js
+||rawgit.com/Pocketart/$script,3p
+||reactor.cc^*.wasm
+
+! https://github.com/uBlockOrigin/uAssets/issues/1106
+||theappguruz.com/vendor/composer/installed.js$script
+
+! https://github.com/uBlockOrigin/uAssets/issues/1116
+||d3ahinqqx1dy5v.cloudfront.net^
+||cloudfront.net/mmfb2.html
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/84
+||static-net.nut.cc^$3p
+||static-02.flu.cc^$3p
+
+! https://github.com/uBlockOrigin/uAssets/issues/1149
+vidzi.tv##+js(aopw, decodeURIComponent)
+||vidzi.si^$csp=worker-src 'none';
+
+! http://www.myfeed4u.net/watch/2363948/1/Mayer-Tsitsipas-ATP-Doha.html
+||myfeed4u.net^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/85#issuecomment-354672506
+||reservedoffers.club^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/87
+||skyback.ru^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/88
+||extratorrent.cd^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/90
+||thepiratebay.cr^$csp=child-src 'none';frame-src *;worker-src 'none';
+*?proxy=$script
+
+! https://github.com/uBlockOrigin/uAssets/issues/986
+||ddmix.net^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/101
+*$csp=worker-src 'none',domain=a-o.ninja|alltube.tv|biter.tv|byter.tv|centrum-dramy.pl|hentai-online.pl|lewd.ninja|love-drama.pl|milujivareni.cz|tokyodrift.ga|subswiki.com|vidfile.net|ya3ale.com
+||vidfile.net/*.wasm
+/angular8.js
+||tubetitties.com/worker.js
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/104
+||fileone.tv^$csp=child-src 'none';frame-src 'self' *;worker-src 'none';
+
+! https://github.com/easylist/easylist/commit/b750557d82c3f56b0b4ba31bbd9a21b2536a6841#commitcomment-27140868
+||300mbfilms.co^$csp=worker-src 'none';
+
+! https://github.com/easylist/easylist/issues/861
+tubettajat.net##+js(aopr, miner)
+||cryweb.github.io^
+||crywebber.github.io^
+
+! https://github.com/uBlockOrigin/uAssets/issues/1402
+||movie4k.is^$csp=worker-src 'none';
+
+! https://www.reddit.com/r/uBlockOrigin/comments/7tgjce/new_cryptocurrency_mining_website_not_blocked_by/
+tasma.ru##+js(aopw, decodeURIComponent)
+||stat0808.info^
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/115
+||dekoder.ws^$csp=worker-src 'none';
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/issues/137
+||leitor.net^$csp=worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/1503
+shrink-service.it##+js(aopr, WebAssembly)
+
+! https://www.reddit.com/r/uBlockOrigin/comments/7wwejy/cryptojackers_defeat_all_countermeasures/
+! https://github.com/NanoAdblocker/NanoFilters/issues/35#issuecomment-403137195
+! https://github.com/uBlockOrigin/uAssets/issues/3244#issuecomment-420854707
+*$csp=worker-src 'none',domain=estream.to|flashx.cc|flashx.co|flashx.pw|streamango.com|vidoza.net|vidto.me|vidto.se|vidtudu.com
+
+! https://github.com/uBlockOrigin/uAssets/pull/818#issuecomment-365770341
+djs.sk,mladipodnikatelia.sk##+js(aopr, miner)
+
+! https://forums.lanik.us/viewtopic.php?f=62&t=39991&p=132468#p132468
+||adfreetv.ch^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/1559
+||hq-porns.com^$csp=child-src 'none';frame-src *;worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/1563
+||gofile.io/js/coinGofile.min.js
+
+! https://www.reddit.com/r/uBlockOrigin/comments/7yudc2/coinhive_getting_through/
+howucan.gr##+js(aopr, miner)
+
+! https://github.com/uBlockOrigin/uAssets/issues/1602
+||thevideo.*^$csp=worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/1649
+cloudtime.to,nowvideo.sx,sickrage.ca,tomadivx.org,videoplayer2.xyz,wholecloud.net##+js(aopr, WebAssembly)
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/pull/173
+! https://github.com/uBlockOrigin/uAssets/issues/1698
+123telugu.com,netiap.com##+js(aopr, _0x7bc7)
+
+! https://github.com/uBlockOrigin/uAssets/issues/1701
+||bigspeeds.com^$csp=worker-src 'none';
+
+! https://forums.lanik.us/viewtopic.php?f=90&t=40270
+nxload.com##+js(aopr, miner)
+
+! https://github.com/uBlockOrigin/uAssets/issues/1782
+sleeptimer.org##+js(aopr, WebAssembly)
+
+! https://github.com/easylist/easylist/commit/8ef593
+*$csp=worker-src 'none',domain=kinokongo.cc
+
+! https://github.com/uBlockOrigin/uAssets/issues/1826
+! https://github.com/uBlockOrigin/uAssets/issues/1826#issuecomment-478300989
+*$csp=worker-src 'none',domain=povvideo.net|povwideo.cc|powvideo.cc|povw1deo.com|povwideo.net|powvideo.net|powvldeo.net|powv1deo.net
+powvldeo.*,powv1deo.*##+js(aopw, CoinNebula)
+
+! https://github.com/gorhill/uBlock/issues/3675
+||potomy.ru^$csp=worker-src 'none'
+
+! https://github.com/hoshsadiq/adblock-nocoin-list/pull/204
+||ianimes.co^$csp=worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/2051
+
+! miners https://github.com/uBlockOrigin/uAssets/issues/2198
+*$csp=worker-src 'none',domain=megapastes.com|peliculas-mp4.com
+
+! https://github.com/uBlockOrigin/uAssets/issues/2309#issuecomment-389725332
+||reactor.cc^$csp=worker-src 'none'
+||sickrage.ca^$csp=worker-src 'none'
+||sorteosrd.com^$csp=worker-src 'none'
+
+! edu.ro
+||upgraderservices.cf^
+
+! https://github.com/uBlockOrigin/uAssets/issues/1850#issuecomment-406864063
+hqq.watch##+js(aopr,  mscript)
+
+! https://github.com/uBlockOrigin/uAssets/issues/3139
+tomadivx.tv##+js(aopr, WebAssembly)
+
+! https://forums.lanik.us/viewtopic.php?f=62&t=41585
+./M5q5.js$script
+||jshosting.*^
+||hostingcloud.*^
+
+! https://github.com/uBlockOrigin/uAssets/issues/1962#issuecomment-420471103
+descargas2020.com##+js(acis, atob, _0x)
+
+! https://github.com/uBlockOrigin/uAssets/issues/3459
+||cinemafacil.com^$csp=worker-src 'none'
+
+! https://github.com/uBlockOrigin/uAssets/issues/3542
+||hdvid.tv^$csp=worker-src 'none'
+
+! https://github.com/uBlockOrigin/uAssets/issues/3643
+||void.cat^$csp=worker-src 'none'
+
+! https://github.com/uBlockOrigin/uAssets/issues/3653
+||wallpoper.com^$csp=worker-src 'none'
+
+! https://github.com/uBlockOrigin/uAssets/issues/3695
+||piratebay.click^$csp=worker-src 'none'
+
+! https://github.com/uBlockOrigin/uAssets/issues/4082
+*$csp=worker-src 'none',domain=123moviesgo.nl|123movieshub.asia|123movieshub.cx|7tors.com|bmovie123.me|bmoviego.me|bmovies123.me|btstors.com|cmovieshd.nl|fbmovies.org|fmoviesgo.me|gomovie123.me|gomovies123.me|idope.tv|seventorrents.cc|skytorrents.co|skytorrents.me|stream247.me|watch-free.co|watchfreemovies.tv|xmovies8.nl
+||185.165.169.108^$websocket
+
+! https://github.com/uBlockOrigin/uAssets/issues/4152
+||dragonballzpolo.*^$csp=worker-src 'none'
+
+! https://github.com/uBlockOrigin/uAssets/issues/4161
+/lib/crypta.js
+
+! https://github.com/uBlockOrigin/uAssets/issues/941#issuecomment-442634483
+onplay.tv##+js(aopr, Nimiq)
+
+! https://github.com/uBlockOrigin/uAssets/issues/4728
+||torrentrapid.com^$csp=worker-src 'none'
+||tercabilis.info^
+
+! https://github.com/uBlockOrigin/uAssets/issues/3134#issuecomment-457897773
+*$csp=worker-src 'none',domain=ahoypirate.in|ahoypiratebaai.eu|airproxyproxy.pw|airproxytpb.red|bayception.pw|baypirateproxy.pw|ikwildepiratebay.xyz|indiaproxydl.org|magnetbay.eu|noobnoob.rocks|pietpiraat.org|piratbaypirate.link|pirate.bet|piratebay.tel|piratebay.town|proxyindia.net|superbay.link|thepirate.xyz|thepiratebay.blue|thepiratebay.kiwi|tpb.one|tpb.tw|tpbproxyone.org|unblocktheship.org
+
+! https://forums.lanik.us/viewtopic.php?f=62&t=42587
+! https://github.com/uBlockOrigin/uAssets/issues/549
+||streamp1ay.me^$csp=worker-src 'none';
+steamplay.*##+js(aopw, CoinNebula)
+
+! https://github.com/uBlockOrigin/uAssets/issues/4893
+||protect-link.biz^$csp=worker-src 'none';
+
+! revdl . com avoids miners
+||revdl.com^$csp=worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/3134#issuecomment-469032528
+*$csp=worker-src 'none',domain=airproxyboat.in|bayhypertpb.be|duckingproxy.eu|hyperproxy.net|hyperbaytpb.top|pirata.pw|pirate.shiksha|piratebayproxy.tf|pirateproxy.yt|proxyproxyproxy.nl|thepirate.one|unblocktpb.com
+||thepiratebay-proxylist.se^$websocket
+
+! https://github.com/uBlockOrigin/uAssets/commit/d7a8d46e7dd4d978a395517bba5f98abcec998b8#commitcomment-33156535
+||firstonetv.*^$csp=worker-src 'none';
+||firstone.*^$csp=worker-src 'none';
+||firstonetv.*^$csp=connect-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/5612
+||homeporno.pro^$csp=worker-src 'none';
+
+! https://github.com/uBlockOrigin/uAssets/issues/6433
+||backend.dna-delivery.com^$domain=france.tv|rt.com
+
+! https://github.com/uBlockOrigin/uAssets/issues/6734
+||cloud-miner.eu^
+
+! https://github.com/NanoMeow/QuickReports/issues/2639
+shortbitsfree.net##+js(aopr, WebAssembly)
+/coinimp-cache/*

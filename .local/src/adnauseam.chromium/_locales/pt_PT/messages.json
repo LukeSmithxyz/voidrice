@@ -1,0 +1,1426 @@
+{
+  "extName": {
+    "message": "AdNauseam",
+    "description": "extension name"
+  },
+  "extShortDesc": {
+    "message": "Lute contra a vigilância publicitária",
+    "description": "for the chrome web store: must be 132 characters or less"
+  },
+  "dashboardName": {
+    "message": "AdNauseam — Painel de controlo",
+    "description": "English: AdNauseam — Dashboard"
+  },
+  "dashboardUnsavedWarning": {
+    "message": "Aviso! Tem alterações não guardadas",
+    "description": "A warning in the dashboard when navigating away from unsaved changes"
+  },
+  "dashboardUnsavedWarningStay": {
+    "message": "Ficar",
+    "description": "Label for button to prevent navigating away from unsaved changes"
+  },
+  "dashboardUnsavedWarningIgnore": {
+    "message": "Ignorar",
+    "description": "Label for button to ignore unsaved changes"
+  },
+  "settingsPageName": {
+    "message": "Definições",
+    "description": "appears as tab name in dashboard"
+  },
+  "3pPageName": {
+    "message": "Listas de filtros",
+    "description": "appears as tab name in dashboard"
+  },
+  "1pPageName": {
+    "message": "Meus filtros",
+    "description": "appears as tab name in dashboard"
+  },
+  "rulesPageName": {
+    "message": "Minhas regras",
+    "description": "appears as tab name in dashboard"
+  },
+  "whitelistPageName": {
+    "message": "Listas brancas",
+    "description": "appears as tab name in dashboard"
+  },
+  "shortcutsPageName": {
+    "message": "Atalhos",
+    "description": "appears as tab name in dashboard"
+  },
+  "statsPageName": {
+    "message": "AdNauseam — Registador",
+    "description": "Title for the logger window"
+  },
+  "aboutPageName": {
+    "message": "Acerca",
+    "description": "appears as tab name in dashboard"
+  },
+  "assetViewerPageName": {
+    "message": "AdNauseam — Visualizador de recursos",
+    "description": "Title for the asset viewer page"
+  },
+  "advancedSettingsPageName": {
+    "message": "Definições avançadas",
+    "description": "Title for the advanced settings page"
+  },
+  "popupPowerSwitchInfo": {
+    "message": "Clique: desativar/ativar o AdNauseam para este site.\n\nCtrl+clique: desativar o AdNauseam apenas nesta página.",
+    "description": "English: Click: disable/enable AdNauseam for this site.\n\nAlt+click: disable AdNauseam only on this page."
+  },
+  "popupPowerSwitchInfo1": {
+    "message": "Clique para desativar o AdNauseam para este site.\n\nCtrl+clique para desativar o AdNauseam apenas nesta página.",
+    "description": "Message to be read by screen readers"
+  },
+  "popupPowerSwitchInfo2": {
+    "message": "Clique para ativar o AdNauseam para este site.",
+    "description": "Message to be read by screen readers"
+  },
+  "popupBlockedRequestPrompt": {
+    "message": "pedidos bloqueados",
+    "description": "English: requests blocked"
+  },
+  "popupBlockedOnThisPagePrompt": {
+    "message": "nesta página",
+    "description": "English: on this page"
+  },
+  "popupBlockedStats": {
+    "message": "{{count}} ou {{percent}}%",
+    "description": "Example: 15 or 13%"
+  },
+  "popupBlockedSinceInstallPrompt": {
+    "message": "desde a instalação",
+    "description": "English: since install"
+  },
+  "popupOr": {
+    "message": "ou",
+    "description": "English: or"
+  },
+  "popupBlockedOnThisPage_v2": {
+    "message": "Bloqueado(s) nesta página",
+    "description": "For the new mobile-friendly popup design"
+  },
+  "popupBlockedSinceInstall_v2": {
+    "message": "Bloqueado(s) desde a instalação",
+    "description": "For the new mobile-friendly popup design"
+  },
+  "popupDomainsConnected_v2": {
+    "message": "Domínios ligados",
+    "description": "For the new mobile-friendly popup design"
+  },
+  "popupTipDashboard": {
+    "message": "Abrir o painel de controlo",
+    "description": "English: Click to open the dashboard"
+  },
+  "popupTipZapper": {
+    "message": "Entrar no modo \"zapper\" de elemento",
+    "description": "Tooltip for the element-zapper icon in the popup panel"
+  },
+  "popupTipPicker": {
+    "message": "Entrar no modo de seleção de elemento",
+    "description": "English: Enter element picker mode"
+  },
+  "popupTipLog": {
+    "message": "Abrir o registador",
+    "description": "Tooltip used for the logger icon in the panel"
+  },
+  "popupTipNoPopups": {
+    "message": "Alternar o bloqueio de todos os popups para este site",
+    "description": "Tooltip for the no-popups per-site switch"
+  },
+  "popupTipNoPopups1": {
+    "message": "Clique para bloquear todos os popups neste site",
+    "description": "Tooltip for the no-popups per-site switch"
+  },
+  "popupTipNoPopups2": {
+    "message": "Clique para deixar de bloquear todos os popups neste site",
+    "description": "Tooltip for the no-popups per-site switch"
+  },
+  "popupTipNoLargeMedia": {
+    "message": "Alternar o bloqueio de elementos multimédia grandes para este site",
+    "description": "Tooltip for the no-large-media per-site switch"
+  },
+  "popupTipNoLargeMedia1": {
+    "message": "Clique para bloquear elementos multimédia grandes neste site",
+    "description": "Tooltip for the no-large-media per-site switch"
+  },
+  "popupTipNoLargeMedia2": {
+    "message": "Clique para deixar de bloquear elementos multimédia grandes neste site",
+    "description": "Tooltip for the no-large-media per-site switch"
+  },
+  "popupTipNoCosmeticFiltering": {
+    "message": "Alternar a filtragem cosmética para este site",
+    "description": "Tooltip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupTipNoCosmeticFiltering1": {
+    "message": "Clique para desativar a filtragem cosmética neste site",
+    "description": "Tooltip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupTipNoCosmeticFiltering2": {
+    "message": "Clique para ativar a filtragem cosmética neste site",
+    "description": "Tooltip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupTipNoRemoteFonts": {
+    "message": "Alternar o bloqueio de tipos de letra remotos para este site",
+    "description": "Tooltip for the no-remote-fonts per-site switch"
+  },
+  "popupTipNoRemoteFonts1": {
+    "message": "Clique para bloquear os tipos de letra remotos neste site",
+    "description": "Tooltip for the no-remote-fonts per-site switch"
+  },
+  "popupTipNoRemoteFonts2": {
+    "message": "Clique para deixar de bloquear os tipos de letra remotos neste site",
+    "description": "Tooltip for the no-remote-fonts per-site switch"
+  },
+  "popupTipNoScripting1": {
+    "message": "Clique para desativar JavaScript neste site",
+    "description": "Tooltip for the no-scripting per-site switch"
+  },
+  "popupTipNoScripting2": {
+    "message": "Clique para deixar de desativar JavaScript neste site",
+    "description": "Tooltip for the no-scripting per-site switch"
+  },
+  "popupNoLargeMedia_v2": {
+    "message": "Elementos multimédia grandes",
+    "description": "Tip for the no-large-media per-site switch"
+  },
+  "popupNoCosmeticFiltering_v2": {
+    "message": "Filtragem cosmética",
+    "description": "Tip for the no-cosmetic-filtering per-site switch"
+  },
+  "popupNoRemoteFonts_v2": {
+    "message": "Tipos de letra remotos",
+    "description": "Tip for the no-remote-fonts per-site switch"
+  },
+  "popupNoScripting_v2": {
+    "message": "JavaScript",
+    "description": "Tip for the no-scripting per-site switch"
+  },
+  "popupMoreButton_v2": {
+    "message": "Mais",
+    "description": "Label to be used to toggle overview panel"
+  },
+  "popupTipGlobalRules": {
+    "message": "Regras globais: esta coluna é para as regras que se aplicam a todos os sites.",
+    "description": "Tooltip when hovering the top-most cell of the global-rules column."
+  },
+  "popupTipLocalRules": {
+    "message": "Regras locais: esta coluna é para as regras que se aplicam apenas a este site.\nAs regras locais sobrepõem-se às regras globais.",
+    "description": "Tooltip when hovering the top-most cell of the local-rules column."
+  },
+  "popupTipSaveRules": {
+    "message": "Clique para tornar as suas alterações permanentes.",
+    "description": "Tooltip when hovering over the padlock in the dynamic filtering pane."
+  },
+  "popupTipRevertRules": {
+    "message": "Clique para reverter as suas alterações.",
+    "description": "Tooltip when hovering over the eraser in the dynamic filtering pane."
+  },
+  "popupAnyRulePrompt": {
+    "message": "tudo",
+    "description": ""
+  },
+  "popupImageRulePrompt": {
+    "message": "imagens",
+    "description": ""
+  },
+  "popup3pAnyRulePrompt": {
+    "message": "terceiros",
+    "description": ""
+  },
+  "popup3pPassiveRulePrompt": {
+    "message": "CSS/imagens de terceiros",
+    "description": ""
+  },
+  "popupInlineScriptRulePrompt": {
+    "message": "scripts em linha",
+    "description": ""
+  },
+  "popup1pScriptRulePrompt": {
+    "message": "scripts de primeiros",
+    "description": ""
+  },
+  "popup3pScriptRulePrompt": {
+    "message": "scripts de terceiros",
+    "description": ""
+  },
+  "popup3pFrameRulePrompt": {
+    "message": "frames de terceiros",
+    "description": ""
+  },
+  "popupHitDomainCountPrompt": {
+    "message": "domínios ligados",
+    "description": "appears in popup"
+  },
+  "popupHitDomainCount": {
+    "message": "{{count}} de {{total}}",
+    "description": "appears in popup"
+  },
+  "pickerCreate": {
+    "message": "Criar",
+    "description": "English: Create"
+  },
+  "pickerPick": {
+    "message": "Selecionar",
+    "description": "English: Pick"
+  },
+  "pickerQuit": {
+    "message": "Sair",
+    "description": "English: Quit"
+  },
+  "pickerPreview": {
+    "message": "Pré-visualizar",
+    "description": "Element picker preview mode: will cause the elements matching the current filter to be removed from the page"
+  },
+  "pickerNetFilters": {
+    "message": "Filtros de rede",
+    "description": "English: header for a type of filter in the element picker dialog"
+  },
+  "pickerCosmeticFilters": {
+    "message": "Filtros cosméticos",
+    "description": "English: Cosmetic filters"
+  },
+  "pickerCosmeticFiltersHint": {
+    "message": "Clique, Ctrl-clique",
+    "description": "English: Click, Ctrl-click"
+  },
+  "pickerContextMenuEntry": {
+    "message": "Bloquear elemento...",
+    "description": "An entry in the browser's contextual menu"
+  },
+  "settingsCollapseBlockedPrompt": {
+    "message": "Ocultar espaços ocupados por elementos bloqueados",
+    "description": "English: Hide placeholders of blocked elements"
+  },
+  "settingsIconBadgePrompt": {
+    "message": "Mostrar o número de anúncios no ícone",
+    "description": "English: Show the number of found Ads on the icon"
+  },
+  "settingsTooltipsPrompt": {
+    "message": "Desativar dicas",
+    "description": "A checkbox in the Settings pane"
+  },
+  "settingsContextMenuPrompt": {
+    "message": "Fazer uso do menu de contexto onde apropriado",
+    "description": "English: Make use of context menu where appropriate"
+  },
+  "settingsColorBlindPrompt": {
+    "message": "Cores amigáveis para daltónicos",
+    "description": "English: Color-blind friendly"
+  },
+  "settingsCloudStorageEnabledPrompt": {
+    "message": "Ativar suporte à nuvem",
+    "description": ""
+  },
+  "settingsAdvancedUserPrompt": {
+    "message": "Sou um utilizador avançado (<a href='https://github.com/gorhill/uBlock/wiki/Advanced-user-features'>leitura necessária</a>)",
+    "description": ""
+  },
+  "settingsAdvancedUserSettings": {
+    "message": "definições avançadas",
+    "description": "For the tooltip of a link which gives access to advanced settings"
+  },
+  "settingsPrefetchingDisabledPrompt": {
+    "message": "Desativar pré-obtenção (para impedir qualquer ligação para pedidos de rede bloqueados)",
+    "description": "English: "
+  },
+  "settingsHyperlinkAuditingDisabledPrompt": {
+    "message": "Desativar auditoria de hiperligações",
+    "description": "English: "
+  },
+  "settingsWebRTCIPAddressHiddenPrompt": {
+    "message": "Impedir o WebRTC de vazar endereços IP locais",
+    "description": "English: "
+  },
+  "settingPerSiteSwitchGroup": {
+    "message": "Comportamento predefinido",
+    "description": ""
+  },
+  "settingPerSiteSwitchGroupSynopsis": {
+    "message": "Estes comportamentos predefinidos podem ser substituídos numa base por site",
+    "description": ""
+  },
+  "settingsNoCosmeticFilteringPrompt": {
+    "message": "Desativar filtragem cosmética",
+    "description": ""
+  },
+  "settingsNoLargeMediaPrompt": {
+    "message": "Bloquear elementos multimédia maiores do que {{input}} KB",
+    "description": ""
+  },
+  "settingsNoRemoteFontsPrompt": {
+    "message": "Bloquear tipos de letra remotos",
+    "description": ""
+  },
+  "settingsNoScriptingPrompt": {
+    "message": "Desativar JavaScript",
+    "description": "The default state for the per-site no-scripting switch"
+  },
+  "settingsNoCSPReportsPrompt": {
+    "message": "Bloquear relatórios CSP",
+    "description": "background information: https://github.com/gorhill/uBlock/issues/3150"
+  },
+  "settingsStorageUsed": {
+    "message": "Armazenamento utilizado: {{value}} bytes",
+    "description": "English: Storage used: {{}} bytes"
+  },
+  "settingsLastRestorePrompt": {
+    "message": "Último restauro:",
+    "description": "English: Last restore:"
+  },
+  "settingsLastBackupPrompt": {
+    "message": "Última cópia de segurança:",
+    "description": "English: Last backup:"
+  },
+  "3pListsOfBlockedHostsPrompt": {
+    "message": "{{netFilterCount}} filtros de rede / {{cosmeticFilterCount}} filtros cosméticos a partir de:",
+    "description": "Appears at the top of the _3rd-party filters_ pane"
+  },
+  "3pListsOfBlockedHostsPerListStats": {
+    "message": "{{used}} utilizados de {{total}}",
+    "description": "Appears aside each filter list in the _3rd-party filters_ pane"
+  },
+  "3pAutoUpdatePrompt1": {
+    "message": "Atualizar automaticamente as listas dos filtros.",
+    "description": "A checkbox in the _3rd-party filters_ pane"
+  },
+  "3pUpdateNow": {
+    "message": "Atualizar agora",
+    "description": "A button in the in the _3rd-party filters_ pane"
+  },
+  "3pPurgeAll": {
+    "message": "Limpar todas as caches",
+    "description": "A button in the in the _3rd-party filters_ pane"
+  },
+  "3pParseAllABPHideFiltersPrompt1": {
+    "message": "Analisar e aplicar filtros cosméticos.",
+    "description": "English: Parse and enforce Adblock+ element hiding filters."
+  },
+  "3pParseAllABPHideFiltersInfo": {
+    "message": "<p>Esta opção permite a análise e aplicação de <a href=\"https://adblockplus.org/en/faq_internal#elemhide\">filtros de &ldquo;ocultação de elementos&rdquo; compatíveis com o Adblock Plus</a>. Estes filtros são essencialmente cosméticos, servindo para ocultar elementos numa página web que sejam considerados incómodo visual, e que não podem ser bloqueados pelo motor de filtragem baseado em pedidos de rede.</p><p>Ativar esta funcionalidade aumenta o consumo de memória do <i>AdNauseam</i>.</p>",
+    "description": "Describes the purpose of the 'Parse and enforce cosmetic filters' feature."
+  },
+  "3pIgnoreGenericCosmeticFilters": {
+    "message": "Ignorar filtros cosméticos genéricos.",
+    "description": "This will cause uBO to ignore all generic cosmetic filters."
+  },
+  "3pIgnoreGenericCosmeticFiltersInfo": {
+    "message": "<p>Os filtros cosméticos genéricos são aqueles filtros cosméticos destinados a ser aplicados em todos os web sites.<p>Embora manuseados eficientemente pelo AdNauseam, os filtros cosméticos genéricos podem ainda contribuir para uma memória mensurável e overhead da CPU em algumas páginas web, especialmente os grandes e duradouros.<p>Ao ativar esta opção irá eliminar a overhead da memória e CPU adicionada a páginas web como resultado do manuseamento de filtros cosméticos genéricos, e também irá diminuir a pegada de memória do próprio AdNauseam.<p>É recomendado que ative esta opção em dispositivos menos poderosos.",
+    "description": "Describes the purpose of the 'Ignore generic cosmetic filters' feature."
+  },
+  "3pListsOfBlockedHostsHeader": {
+    "message": "Listas de servidores bloqueados",
+    "description": "English: Lists of blocked hosts"
+  },
+  "3pApplyChanges": {
+    "message": "Aplicar alterações",
+    "description": "English: Apply changes"
+  },
+  "3pGroupDefault": {
+    "message": "Integrados",
+    "description": "Header for the uBlock filters section in 'Filter lists pane'"
+  },
+  "3pGroupAds": {
+    "message": "Anúncios",
+    "description": "English: Ads"
+  },
+  "3pGroupPrivacy": {
+    "message": "Privacidade",
+    "description": "English: Privacy"
+  },
+  "3pGroupMalware": {
+    "message": "Malware",
+    "description": "English: Malware"
+  },
+  "3pGroupAnnoyances": {
+    "message": "Incómodos",
+    "description": "The header identifying the filter lists in the category 'annoyances'"
+  },
+  "3pGroupMultipurpose": {
+    "message": "Multi-uso",
+    "description": "English: Multipurpose"
+  },
+  "3pGroupRegions": {
+    "message": "Idiomas",
+    "description": "English: Languages"
+  },
+  "3pGroupCustom": {
+    "message": "Personalizado",
+    "description": "English: Custom"
+  },
+  "3pImport": {
+    "message": "Importar...",
+    "description": "The label for the checkbox used to import external filter lists"
+  },
+  "3pExternalListsHint": {
+    "message": "Um URL por linha. Os URLs inválidos serão ignorados silenciosamente.",
+    "description": "Short information about how to use the textarea to import external filter lists by URL"
+  },
+  "3pExternalListObsolete": {
+    "message": "Desatualizada.",
+    "description": "used as a tooltip for the out-of-date icon beside a list"
+  },
+  "3pLastUpdate": {
+    "message": "Última atualização: {{ago}}.\nClique para forçar uma atualização.",
+    "description": "used as a tooltip for the clock icon beside a list"
+  },
+  "3pUpdating": {
+    "message": "A atualizar...",
+    "description": "used as a tooltip for the spinner icon beside a list"
+  },
+  "3pNetworkError": {
+    "message": "Um erro de rede impediu que o recurso fosse atualizado.",
+    "description": "used as a tooltip for error icon beside a list"
+  },
+  "1pFormatHint": {
+    "message": "Um filtro por linha. Um filtro pode ser um simples nome de servidor ou um filtro compatível com o Adblock Plus. Linhas começadas por <code>!</code> serão ignoradas.",
+    "description": "Short information about how to create custom filters"
+  },
+  "1pImport": {
+    "message": "Importar e anexar",
+    "description": "English: Import and append"
+  },
+  "1pExport": {
+    "message": "Exportar",
+    "description": "English: Export"
+  },
+  "1pExportFilename": {
+    "message": "my-AdNauseam-custom-filters_{{datetime}}.txt",
+    "description": "English: my-AdNauseam-static-filters_{{datetime}}.txt"
+  },
+  "1pApplyChanges": {
+    "message": "Aplicar alterações",
+    "description": "English: Apply changes"
+  },
+  "rulesPermanentHeader": {
+    "message": "Regras permanentes",
+    "description": "header"
+  },
+  "rulesTemporaryHeader": {
+    "message": "Regras temporárias",
+    "description": "header"
+  },
+  "rulesRevert": {
+    "message": "Reverter",
+    "description": "This will remove all temporary rules"
+  },
+  "rulesCommit": {
+    "message": "Aplicar",
+    "description": "This will persist temporary rules"
+  },
+  "rulesEdit": {
+    "message": "Editar",
+    "description": "Will enable manual-edit mode (textarea)"
+  },
+  "rulesEditSave": {
+    "message": "Guardar",
+    "description": "Will save manually-edited content and exit manual-edit mode"
+  },
+  "rulesEditDiscard": {
+    "message": "Descartar",
+    "description": "Will discard manually-edited content and exit manual-edit mode"
+  },
+  "rulesImport": {
+    "message": "Importar a partir de ficheiro...",
+    "description": ""
+  },
+  "rulesExport": {
+    "message": "Exportar para ficheiro",
+    "description": ""
+  },
+  "rulesDefaultFileName": {
+    "message": "my-AdNauseam-dynamic-rules_{{datetime}}.txt",
+    "description": "default file name to use"
+  },
+  "rulesHint": {
+    "message": "Lista das suas regras de filtragem dinâmica.",
+    "description": "English: List of your dynamic filtering rules."
+  },
+  "rulesFormatHint": {
+    "message": "Regra de sintaxe: <code>origem destino tipo ação</code> (<a href='https://github.com/gorhill/uBlock/wiki/Dynamic-filtering:-rule-syntax'>documentação completa</a>).",
+    "description": "English: dynamic rule syntax and full documentation."
+  },
+  "whitelistPrompt": {
+    "message": "Lista pessoal de servidores para os quais o AdNauseam será desativado. Uma entrada por linha. Servidores inválidos serão ignorados silenciosamente.",
+    "description": "English: An overview of the content of the dashboard's Whitelist pane."
+  },
+  "whitelistImport": {
+    "message": "Importar e anexar",
+    "description": "English: Import and append"
+  },
+  "whitelistExport": {
+    "message": "Exportar",
+    "description": "English: Export"
+  },
+  "whitelistExportFilename": {
+    "message": "my-AdNauseam-whitelist_{{datetime}}.txt",
+    "description": "English: my-AdNauseam-whitelist_{{datetime}}.txt"
+  },
+  "whitelistApply": {
+    "message": "Aplicar alterações",
+    "description": "English: Apply changes"
+  },
+  "logRequestsHeaderType": {
+    "message": "Tipo",
+    "description": "English: Type"
+  },
+  "logRequestsHeaderDomain": {
+    "message": "Domínio",
+    "description": "English: Domain"
+  },
+  "logRequestsHeaderURL": {
+    "message": "URL",
+    "description": "English: URL"
+  },
+  "logRequestsHeaderFilter": {
+    "message": "Filtro",
+    "description": "English: Filter"
+  },
+  "logAll": {
+    "message": "Todos",
+    "description": "Appears in the logger's tab selector"
+  },
+  "logBehindTheScene": {
+    "message": "Sem separador",
+    "description": "Pretty name for behind-the-scene network requests"
+  },
+  "loggerCurrentTab": {
+    "message": "Separador atual",
+    "description": "Appears in the logger's tab selector"
+  },
+  "loggerReloadTip": {
+    "message": "Recarregar o conteúdo do separador",
+    "description": "Tooltip for the reload button in the logger page"
+  },
+  "loggerDomInspectorTip": {
+    "message": "Alternar o inspetor DOM",
+    "description": "Tooltip for the DOM inspector button in the logger page"
+  },
+  "loggerPopupPanelTip": {
+    "message": "Alternar o painel de popup",
+    "description": "Tooltip for the popup panel button in the logger page"
+  },
+  "loggerInfoTip": {
+    "message": "AdNauseam wiki: O registador",
+    "description": "Tooltip for the top-right info label in the logger page"
+  },
+  "loggerClearTip": {
+    "message": "Limpar registador",
+    "description": "Tooltip for the eraser in the logger page; used to blank the content of the logger"
+  },
+  "loggerPauseTip": {
+    "message": "Pausar registador (descartar todos os dados a receber)",
+    "description": "Tooltip for the pause button in the logger page"
+  },
+  "loggerUnpauseTip": {
+    "message": "Retomar registador",
+    "description": "Tooltip for the play button in the logger page"
+  },
+  "loggerRowFiltererButtonTip": {
+    "message": "Alternar filtragem do registador",
+    "description": "Tooltip for the row filterer button in the logger page"
+  },
+  "logFilterPrompt": {
+    "message": "filtrar conteúdo do registo",
+    "description": "Placeholder string for logger output filtering input field"
+  },
+  "loggerRowFiltererBuiltinTip": {
+    "message": "Opções de filtragem do registador",
+    "description": "Tooltip for the button to bring up logger output filtering options"
+  },
+  "loggerRowFiltererBuiltinNot": {
+    "message": "Não",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltinEventful": {
+    "message": "importante",
+    "description": "A keyword in the built-in row filtering expression: all items corresponding to uBO doing something (blocked, allowed, redirected, etc.)"
+  },
+  "loggerRowFiltererBuiltinBlocked": {
+    "message": "bloqueado",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltinAllowed": {
+    "message": "permitido",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltin1p": {
+    "message": "primeiro",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerRowFiltererBuiltin3p": {
+    "message": "terceiro",
+    "description": "A keyword in the built-in row filtering expression"
+  },
+  "loggerEntryDetailsHeader": {
+    "message": "Detalhes",
+    "description": "Small header to identify the 'Details' pane for a specific logger entry"
+  },
+  "loggerEntryDetailsFilter": {
+    "message": "Filtro",
+    "description": "Label to identify a filter field"
+  },
+  "loggerEntryDetailsFilterList": {
+    "message": "Lista de filtros",
+    "description": "Label to identify a filter list field"
+  },
+  "loggerEntryDetailsRule": {
+    "message": "Regra",
+    "description": "Label to identify a rule field"
+  },
+  "loggerEntryDetailsContext": {
+    "message": "Contexto",
+    "description": "Label to identify a context field (typically a hostname)"
+  },
+  "loggerEntryDetailsRootContext": {
+    "message": "Contexto raiz",
+    "description": "Label to identify a root context field (typically a hostname)"
+  },
+  "loggerEntryDetailsPartyness": {
+    "message": "Tipo de relação",
+    "description": "Label to identify a field providing partyness information"
+  },
+  "loggerEntryDetailsType": {
+    "message": "Tipo",
+    "description": "Label to identify the type of an entry"
+  },
+  "loggerEntryDetailsURL": {
+    "message": "URL",
+    "description": "Label to identify the URL of an entry"
+  },
+  "loggerURLFilteringHeader": {
+    "message": "Regra do URL",
+    "description": "Small header to identify the dynamic URL filtering section"
+  },
+  "loggerURLFilteringContextLabel": {
+    "message": "Contexto:",
+    "description": "Label for the context selector"
+  },
+  "loggerURLFilteringTypeLabel": {
+    "message": "Tipo:",
+    "description": "Label for the type selector"
+  },
+  "loggerStaticFilteringHeader": {
+    "message": "Filtro estático",
+    "description": "Small header to identify the static filtering section"
+  },
+  "loggerStaticFilteringSentence": {
+    "message": "{{action}} pedidos de rede de {{type}} {{br}}cujo endereço URL corresponde a {{url}} {{br}}e que origina {{origin}},{{br}}{{importance}} há um filtro de exceção correspondente.",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartBlock": {
+    "message": "Bloquear",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartAllow": {
+    "message": "Permitir",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartType": {
+    "message": "tipo \"{{type}}\"",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartAnyType": {
+    "message": "qualquer tipo",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartOrigin": {
+    "message": "de \"{{origin}}\"",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartAnyOrigin": {
+    "message": "de qualquer lugar",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartNotImportant": {
+    "message": "exceto quando",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringSentencePartImportant": {
+    "message": "mesmo se",
+    "description": "Used in the static filtering wizard"
+  },
+  "loggerStaticFilteringFinderSentence1": {
+    "message": "Filtro estático <code>{{filter}}</code> encontrado em:",
+    "description": "Below this sentence, the filter list(s) in which the filter was found"
+  },
+  "loggerStaticFilteringFinderSentence2": {
+    "message": "Não foi possível encontrar o filtro estático em qualquer uma das listas ativas",
+    "description": "Message to show when a filter cannot be found in any filter lists"
+  },
+  "loggerSettingDiscardPrompt": {
+    "message": "Entradas do registador que não preenchem todas as três condições abaixo irão ser automaticamente descartadas:",
+    "description": "Logger setting: A sentence to describe the purpose of the settings below"
+  },
+  "loggerSettingPerEntryMaxAge": {
+    "message": "Preservar entradas dos últimos {{input}} minutos",
+    "description": "A logger setting"
+  },
+  "loggerSettingPerTabMaxLoads": {
+    "message": "Preservar no máximo {{input}} carregamentos de página por separador",
+    "description": "A logger setting"
+  },
+  "loggerSettingPerTabMaxEntries": {
+    "message": "Preservar no máximo {{input}} entradas por separador",
+    "description": "A logger setting"
+  },
+  "loggerSettingPerEntryLineCount": {
+    "message": "Utilizar {{input}} linhas por entrada no modo verticalmente expandido",
+    "description": "A logger setting"
+  },
+  "loggerSettingHideColumnsPrompt": {
+    "message": "Ocultar colunas:",
+    "description": "Logger settings: a sentence to describe the purpose of the checkboxes below"
+  },
+  "loggerSettingHideColumnTime": {
+    "message": "{{input}} Hora",
+    "description": "A label for the time column"
+  },
+  "loggerSettingHideColumnFilter": {
+    "message": "{{input}} Filtro/regra",
+    "description": "A label for the filter or rule column"
+  },
+  "loggerSettingHideColumnContext": {
+    "message": "{{input}} Contexto",
+    "description": "A label for the context column"
+  },
+  "loggerSettingHideColumnPartyness": {
+    "message": "{{input}} Tipo de relação",
+    "description": "A label for the partyness column"
+  },
+  "loggerExportFormatList": {
+    "message": "Lista",
+    "description": "Label for radio-button to pick export format"
+  },
+  "loggerExportFormatTable": {
+    "message": "Tabela",
+    "description": "Label for radio-button to pick export format"
+  },
+  "loggerExportEncodePlain": {
+    "message": "Sem formatação",
+    "description": "Label for radio-button to pick export text format"
+  },
+  "loggerExportEncodeMarkdown": {
+    "message": "Markdown",
+    "description": "Label for radio-button to pick export text format"
+  },
+  "aboutChangelog": {
+    "message": "Registo de alterações",
+    "description": ""
+  },
+  "aboutWiki": {
+    "message": "Wiki",
+    "description": "English: project' wiki on GitHub"
+  },
+  "aboutSupport": {
+    "message": "Suporte",
+    "description": "English: links.html Support"
+  },
+  "aboutIssues": {
+    "message": "Monitorizador de problemas",
+    "description": "Text for a link to official issue tracker"
+  },
+  "aboutCode": {
+    "message": "Código fonte (GPLv3)",
+    "description": "English: Source code (GPLv3)"
+  },
+  "aboutContributors": {
+    "message": "Contribuidores",
+    "description": "English: Contributors"
+  },
+  "aboutDependencies": {
+    "message": "Dependências externas (compatíveis com GPLv3):",
+    "description": "Shown in the About pane"
+  },
+  "aboutBackupDataButton": {
+    "message": "Copiar para ficheiro",
+    "description": "Text for button to create a backup of all settings"
+  },
+  "aboutBackupFilename": {
+    "message": "my-AdNauseam-backup_{{datetime}}.txt",
+    "description": "English: my-AdNauseam-backup_{{datetime}}.txt"
+  },
+  "aboutRestoreDataButton": {
+    "message": "Restaurar a partir de ficheiro...",
+    "description": "English: Restore from file..."
+  },
+  "aboutResetDataButton": {
+    "message": "Restaurar predefinições...",
+    "description": "English: Reset to default settings..."
+  },
+  "aboutRestoreDataConfirm": {
+    "message": "Todas as suas definições serão substituídas utilizando os dados da cópia de segurança de {{time}}, e o AdNauseam irá reiniciar.\n\nSubstituir todas as definições existentes utilizando os dados da cópia de segurança?",
+    "description": "Message asking user to confirm restore"
+  },
+  "aboutRestoreDataError": {
+    "message": "Os dados não puderam ser lidos ou são inválidos",
+    "description": "Message to display when an error occurred during restore"
+  },
+  "aboutResetDataConfirm": {
+    "message": "Todas as suas definições serão removidas e o AdNauseam será reiniciado.\n\nRestaurar predefinições do AdNauseam?",
+    "description": "Message asking user to confirm reset"
+  },
+  "errorCantConnectTo": {
+    "message": "Erro de rede: {{msg}}",
+    "description": "English: Network error: {{msg}}"
+  },
+  "subscriberConfirm": {
+    "message": "AdNauseam: Adicionar o seguinte URL à sua lista de filtros personalizados?\n\nTítulo: \"{{title}}\"\nURL: {{url}}",
+    "description": "English: The message seen by the user to confirm subscription to a ABP filter list"
+  },
+  "elapsedOneMinuteAgo": {
+    "message": "há um minuto",
+    "description": "English: a minute ago"
+  },
+  "elapsedManyMinutesAgo": {
+    "message": "há {{value}} minutos",
+    "description": "English: {{value}} minutes ago"
+  },
+  "elapsedOneHourAgo": {
+    "message": "há uma hora",
+    "description": "English: an hour ago"
+  },
+  "elapsedManyHoursAgo": {
+    "message": "há {{value}} horas",
+    "description": "English: {{value}} hours ago"
+  },
+  "elapsedOneDayAgo": {
+    "message": "há um dia",
+    "description": "English: a day ago"
+  },
+  "elapsedManyDaysAgo": {
+    "message": "há {{value}} dias",
+    "description": "English: {{value}} days ago"
+  },
+  "showDashboardButton": {
+    "message": "Mostrar painel de controlo",
+    "description": "Firefox/Fennec-specific: Show Dashboard"
+  },
+  "showNetworkLogButton": {
+    "message": "Mostrar registador",
+    "description": "Firefox/Fennec-specific: Show Logger"
+  },
+  "fennecMenuItemBlockingOff": {
+    "message": "desativado",
+    "description": "Firefox-specific: appears as 'AdNauseam (off)'"
+  },
+  "docblockedPrompt1": {
+    "message": "O AdNauseam impediu que a seguinte página fosse carregada:",
+    "description": "English: AdNauseam has prevented the following page from loading:"
+  },
+  "docblockedPrompt2": {
+    "message": "Por causa do seguinte filtro",
+    "description": "English: Because of the following filter"
+  },
+  "docblockedNoParamsPrompt": {
+    "message": "sem parâmetros",
+    "description": "label to be used for the parameter-less URL: https://cloud.githubusercontent.com/assets/585534/9832014/bfb1b8f0-593b-11e5-8a27-fba472a5529a.png"
+  },
+  "docblockedFoundIn": {
+    "message": "Encontrado em:",
+    "description": "English: List of filter list names follows"
+  },
+  "docblockedBack": {
+    "message": "Retroceder",
+    "description": "English: Go back"
+  },
+  "docblockedClose": {
+    "message": "Fechar esta janela",
+    "description": "English: Close this window"
+  },
+  "docblockedProceed": {
+    "message": "Desativar bloqueio estrito para {{hostname}}",
+    "description": "English: Disable strict blocking for {{hostname}} ..."
+  },
+  "docblockedDisableTemporary": {
+    "message": "Temporariamente",
+    "description": "English: Temporarily"
+  },
+  "docblockedDisablePermanent": {
+    "message": "Permanentemente",
+    "description": "English: Permanently"
+  },
+  "cloudPush": {
+    "message": "Exportar para a nuvem",
+    "description": "tooltip"
+  },
+  "cloudPull": {
+    "message": "Importar a partir da nuvem",
+    "description": "tooltip"
+  },
+  "cloudPullAndMerge": {
+    "message": "Importar a partir da nuvem e juntar às definições atuais",
+    "description": "tooltip"
+  },
+  "cloudNoData": {
+    "message": "... ...",
+    "description": ""
+  },
+  "cloudDeviceNamePrompt": {
+    "message": "Nome deste dispositivo:",
+    "description": "used as a prompt for the user to provide a custom device name"
+  },
+  "advancedSettingsWarning": {
+    "message": "Atenção! Altere estas definições avançadas por sua conta e risco.",
+    "description": "A warning to users at the top of 'Advanced settings' page"
+  },
+  "genericSubmit": {
+    "message": "Submeter",
+    "description": "for generic 'Submit' buttons"
+  },
+  "genericApplyChanges": {
+    "message": "Aplicar alterações",
+    "description": "for generic 'Apply changes' buttons"
+  },
+  "genericRevert": {
+    "message": "Reverter",
+    "description": "for generic 'Revert' buttons"
+  },
+  "genericBytes": {
+    "message": "bytes",
+    "description": ""
+  },
+  "contextMenuTemporarilyAllowLargeMediaElements": {
+    "message": "Permitir temporariamente elementos multimédia grandes",
+    "description": "A context menu entry, present when large media elements have been blocked on the current site"
+  },
+  "shortcutCapturePlaceholder": {
+    "message": "Digitar um atalho",
+    "description": "Placeholder string for input field used to capture a keyboard shortcut"
+  },
+  "genericMergeViewScrollLock": {
+    "message": "Alternar deslocamento bloqueado",
+    "description": "Tooltip for the button used to lock scrolling between the views in the 'My rules' pane"
+  },
+  "genericCopyToClipboard": {
+    "message": "Copiar para a área de transferência",
+    "description": "Label for buttons used to copy something to the clipboard"
+  },
+  "toggleBlockingProfile": {
+    "message": "Alternar perfil de bloqueio",
+    "description": "Label for keyboard shortcut used to toggle blocking profile"
+  },
+  "relaxBlockingMode": {
+    "message": "Relaxar modo de bloqueio",
+    "description": "Label for keyboard shortcut used to relax blocking mode (meant to replace 'Toggle blocking profile')"
+  },
+  "dummy": {
+    "message": "Esta entrada deve ser a última",
+    "description": "so we dont need to deal with comma for last entry"
+  },
+  "adnAboutPageName": {
+    "message": "AdNauseam — Acerca",
+    "description": "English: Firstrun.html page title"
+  },
+  "aboutBuiltOn": {
+    "message": "Construído em cima do",
+    "description": "English: links.html Built on"
+  },
+  "aboutFaq": {
+    "message": "Perguntas frequentes",
+    "description": "English: links.html -> Frequently asked questions"
+  },
+  "adnFirstRunPlease": {
+    "message": "Por favor:",
+    "description": "English: Firstrun.html -> Please:"
+  },
+  "adnFirstRunHideAllAds": {
+    "message": "Ocultar anúncios",
+    "description": "English: Firstrun.html -> Hide Ads:"
+  },
+  "adnFirstRunClickingAds": {
+    "message": "Clicar em anúncios",
+    "description": "English: Firstrun.html -> Click Ads"
+  },
+  "adnFirstRunBlockingMalware": {
+    "message": "Bloquear malware",
+    "description": "English: Firstrun.html -> Block Malware"
+  },
+  "adnAboutResetDataConfirm": {
+    "message": "Todas as suas configurações serão removidas, os anúncios em seu cofre serão excluídos, e o AdNauseam será reiniciado.\n\nReiniciar o AdNauseam para as configurações de fábrica?",
+    "description": "Message asking user to confirm reset"
+  },
+  "adnFirstRunHideAllAdsDescription": {
+    "message": "Ocultar anúncios nas suas <span>listas de filtros</span> selecionadas",
+    "description": "English: Firstrun.html -> Hide Ads in your selected filter lists"
+  },
+  "adnFirstRunClickingAdsDescription": {
+    "message": "Registar visitas em anúncios encontrados via as suas <span>listas de filtros</span>",
+    "description": "English: Firstrun.html -> Register visits on Ads found via your filter lists"
+  },
+  "adnFirstRunBlockingMalwareDescription": {
+    "message": "Bloquear rastreadores e outro malware (<span>Personalizar</span>)",
+    "description": "English: Firstrun.html -> Block trackers and other malware (customize)"
+  },
+  "adnNotificationReactivate": {
+    "message": "Reativar",
+    "description": "English: Notifications -> Reactivate"
+  },
+  "adnNotificationDisable": {
+    "message": "Desativar",
+    "description": "English: Notifications -> Disable"
+  },
+  "adnNotificationActivateHiding": {
+    "message": "Ativar ocultação de anúncios",
+    "description": "English: Notifications -> Activate Ad hiding"
+  },
+  "adnNotificationActivateClicking": {
+    "message": "Ativar clique de anúncios",
+    "description": "English: Notifications -> Activate Ad clicking"
+  },
+  "adnNotificationActivateBlocking": {
+    "message": "Ativar bloqueio de malware",
+    "description": "English: Notifications -> Activate malware blocking"
+  },
+  "adnNotificationActivateEasyList": {
+    "message": "Ativar o filtro da EasyList",
+    "description": "English: Notifications -> Activate the EasyList filter"
+  },
+  "adnNotificationActivateAdNauseamList": {
+    "message": "Ativar o filtro da AdNauseam",
+    "description": "English: Notifications -> Activate the AdNauseam filter"
+  },
+  "adnNotificationDisableAdBlocker": {
+    "message": "Seu bloqueador de anúncios e AdNauseam podem entrar em conflito!",
+    "description": "English: Notifications -> Your ad blocker and AdNauseam may conflict!"
+  },
+  "adnNotificationDisableUBlock": {
+    "message": "O uBlock e o AdNauseam podem entrar em conflito!",
+    "description": "English: Notifications -> uBlock and AdNauseam may conflict!"
+  },
+  "adnNotificationOperaSetting": {
+    "message": "Por favor, permita que o AdNauseam acesse os resultados das páginas de busca",
+    "description": "English: Notifications -> Please allow AdNauseam to access search page results"
+  },
+  "adnNotificationBrowserSetting": {
+    "message": "As configurações de 'Bloqueio de conteúdo' no seu navegador podem interferir com AdNauseam!",
+    "description": "English: Notifications -> The 'Content Blocking' settings in your browser may interfere with AdNauseam!"
+  },
+  "adnNotificationPrivacyMode": {
+    "message": "Você permitiu o acesso às suas atividades on-line durante uma navegação privada.",
+    "description": "English: Notifications -> You have allowed adnauseam to have access to your online activities while private browsing."
+  },
+  "adnNotificationDNTAllowed": {
+    "message": "Esta página respeita o <b>Do Not Track</b>, os anúncios são permitidos.",
+    "description": "English: Notifications -> This page respects Do Not Track, Ads are allowed."
+  },
+  "adnNotificationDNTHidingNotClicking": {
+    "message": "Esta página respeita o <b>Do Not Track</b>, a ocultar e a não clicar.",
+    "description": "English: Notifications -> This page respects Do Not Track, hiding not clicking."
+  },
+  "adnNotificationDNTClickingNotHiding": {
+    "message": "Esta página respeita o <b>Do Not Track</b>, a clicar e a não ocultar.",
+    "description": "English: Notifications -> This page respects Do Not Track, clicking not hiding."
+  },
+  "adnNotificationDNTJustSoYouKnow": {
+    "message": "Esta página respeita o <b>Do Not Track</b>, só para que saiba.",
+    "description": "English: Notifications -> This page respects Do Not Track, just so you know."
+  },
+  "adnTarget": {
+    "message": "ALVO",
+    "description": "English: Vault.html -> inspected Ad -> TARGET"
+  },
+  "adnFoundOn": {
+    "message": "ENCONTRADO EM",
+    "description": "English: Vault.html -> inspected Ad -> FOUND ON"
+  },
+  "adnNotYetVisited": {
+    "message": "Ainda não visitado",
+    "description": "English: Not Yet Visited"
+  },
+  "adnAllowedByDNT": {
+    "message": "Permitido via Do Not Track",
+    "description": "English: Not Yet Visited"
+  },
+  "adnFirstRunSwitchMeOn": {
+    "message": "Ative-me",
+    "description": "English: Firstrun.html -> Switch me on"
+  },
+  "adnFirstRunThatsIt": {
+    "message": "Só isso? ok…",
+    "description": "English: Firstrun.html -> That's it? ok…"
+  },
+  "adnFirstRunBetterButStill": {
+    "message": "Melhor, mas ainda assim…",
+    "description": "English: Firstrun.html -> Better, but still…"
+  },
+  "adnFirstRunLetsGo": {
+    "message": "Vamos lá!",
+    "description": "English: Firstrun.html -> Let's go!"
+  },
+  "goToAdNauseamWebsite": {
+    "message": "Ir para o website do AdNauseam",
+    "description": "English: Menu icon title -> Go to AdNauseam website"
+  },
+  "adnPausedOnPage": {
+    "message": "O AdNauseam está em pausa nesta página",
+    "description": "English: Menu->display when paused on page/site"
+  },
+  "adnNotHiding": {
+    "message": "O AdNauseam não está atualmente a ocultar anúncios",
+    "description": "English: Menu->display when not hiding Ads"
+  },
+  "adnVaultName": {
+    "message": "AdNauseam — AdVault",
+    "description": "English: AdNauseam — Ad Vault"
+  },
+  "myStatistics": {
+    "message": "Minhas Estatísticas",
+    "description": "appears in ADN vault, above ad slider"
+  },
+  "topAdnetworks": {
+    "message": "Principais Acompanhamentos",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "topSites": {
+    "message": "Sites populares",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adTypes": {
+    "message": "Tipos de anúncio",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adTypesImageAds": {
+    "message": "Anúncios de imagem",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adTypesTextAds": {
+    "message": "Anúncios de texto",
+    "description": "appears in ADN vault/My Statistics"
+  },
+  "adnShowingRecentAds": {
+    "message": "Sem anúncios recolhidos nesta página (a mostrar recentes)",
+    "description": "shown in menu when only 'recent' Ads are shown"
+  },
+  "adnExportedAdsFilename": {
+    "message": "AdNauseam_Export_{{datetime}}.json",
+    "description": "English: AdNauseam file export"
+  },
+  "adnImportAlertFormat": {
+    "message": "O ficheiro não contém anúncios, por favor escolhe outro ficheiro.",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnImportAlert": {
+    "message": "{{count}} anúncios foram importados",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnClearConfirm": {
+    "message": "Esta ação irá remover permanentemente TODOS os seus anúncios",
+    "description": "appears in ADN settings"
+  },
+  "adnAdClickingStatusPending": {
+    "message": "Pendente",
+    "description": "Menu & AdVault: Pending"
+  },
+  "adnAdClickingStatusVisited": {
+    "message": "Visitado",
+    "description": "Menu & AdVault: Visited"
+  },
+  "adnAdClickingStatusFailed": {
+    "message": "Falhou",
+    "description": "Menu & AdVault: Failed"
+  },
+  "adnAdClickingStatusSkippedDNT": {
+    "message": "IGNORADA: DNT permitido",
+    "description": "Menu & AdVault: SKIPPED: DNT Allowed"
+  },
+  "adnAdClickingStatusSkippedUser": {
+    "message": "IGNORADO: Clicado pelo usuário",
+    "description": "Menu & AdVault: SKIPPED: Clicked by User"
+  },
+  "adnAdClickingStatusSkippedFrequency": {
+    "message": "IGNORADA: Frequência de clique",
+    "description": "Menu & AdVault: SKIPPED: Click Frequency"
+  },
+  "adnAdClickingStatusSkippedDisabled": {
+    "message": "IGNORADA: Clicando desativado",
+    "description": "Menu & AdVault: SKIPPED: Clicking disabled"
+  },
+  "adnMenuViewLog": {
+    "message": "Ver registo",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuAdsClicked": {
+    "message": "{{number}} clicados",
+    "description": "appears in ADN popup menu and vault"
+  },
+  "adnMenuAdsDetected": {
+    "message": "{{count}} anúncios detetados",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuViewVault": {
+    "message": "Ver Ad Vault",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuResume": {
+    "message": "Retomar",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuSettings": {
+    "message": "Definições",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuExportOptions": {
+    "message": "Opções de Exportação",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportAdsOnly": {
+    "message": "Só Anúncios",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsOnly": {
+    "message": "Só Configurações",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsAndAds": {
+    "message": "Configurações e Anúncios",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuImportAds": {
+    "message": "Importar anúncios",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableAllLogging": {
+    "message": "Desativar todos os registos",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableOutgoingReferrer": {
+    "message": "Desativar o referente de saída",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAds": {
+    "message": "Limpar anúncios com o histórico de navegação",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuHideBadge": {
+    "message": "Ocultar contagem de anúncios no ícone",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAdsNow": {
+    "message": "Limpar anúncios",
+    "description": "appears in ADN popup menu"
+  },
+  "adnLogNoLog": {
+    "message": "Sem registo disponível",
+    "description": "appears in ADN log page"
+  },
+  "adnLogViewFullLog": {
+    "message": "Ver registo completo",
+    "description": "appears in ADN log page"
+  },
+  "adnVaultSince": {
+    "message": " Desde {{datetime}}",
+    "description": "appears on vault page"
+  },
+  "adnVaultExport": {
+    "message": "Exportar",
+    "description": "appears on vault page"
+  },
+  "adnVaultImport": {
+    "message": "Importar",
+    "description": "appears on vault page"
+  },
+  "adnVaultClear": {
+    "message": "Limpar",
+    "description": "appears on vault page"
+  },
+  "adnVaultFound": {
+    "message": "{{total}} anúncios recolhidos",
+    "description": "appears on vault page"
+  },
+  "adnVaultShowing": {
+    "message": "apresentando",
+    "description": "appears on vault page"
+  },
+  "adnVaultDeleteThisAd": {
+    "message": "apagar este anúncio",
+    "description": "appears on vault page"
+  },
+  "adnVaultTotalEstimated": {
+    "message": "total estimado",
+    "description": "appears on vault page"
+  },
+  "adnVaultAdsCost": {
+    "message": "custo",
+    "description": "appears on vault page"
+  },
+  "hidingAdsPrompt": {
+    "message": "Ocultar anúncios identificados pelas suas listas de filtros escolhidas",
+    "description": "English: Hide Ads identified by your chosen filter lists"
+  },
+  "clickingAdsPrompt": {
+    "message": "Clicar em anúncios identificados pelas suas listas de filtros escolhidas",
+    "description": "English: Click Ads identified by your chosen filter lists"
+  },
+  "blockingMalwarePrompt": {
+    "message": "Rastreadores de bloco e outros malwares",
+    "description": "English: lock trackers and other malware"
+  },
+  "parseTextAdsPrompt": {
+    "message": "Capturar anúncios de apenas-texto quando possível",
+    "description": "English: Capture text-only Ads when possible"
+  },
+  "settingsExtraPrivacyPrompt": {
+    "message": "Privacidade extra",
+    "description": "English: Interface"
+  },
+  "settingsInterfacePrompt": {
+    "message": "Interface",
+    "description": "English: Interface"
+  },
+  "noIncomingCookiesPrompt": {
+    "message": "Ignorar cookies retornados com cliques",
+    "description": "English: Ignore cookies returned with clicks"
+  },
+  "noOutgoingCookiesPrompt": {
+    "message": "Não enviar cookies em visitas",
+    "description": "English: Don't send cookies on visits"
+  },
+  "noOutgoingUserAgentPrompt": {
+    "message": "Ocultar o cabeçalho user-agent em visitas",
+    "description": "English: Hide user-agent header on visits"
+  },
+  "noOutgoingRefererPrompt": {
+    "message": "Ocultar página referente em visitas",
+    "description": "English: Hide referring page on visits"
+  },
+  "ClickingFrequencyRarely": {
+    "message": "Raramente",
+    "description": "English: Click Frequency - Rarely"
+  },
+  "ClickingFrequencySometimes": {
+    "message": "Às vezes",
+    "description": "English: Click Frequency - Sometimes"
+  },
+  "ClickingFrequencyAlways": {
+    "message": "Sempre",
+    "description": "English: Click Frequency - Always"
+  },
+  "respectDNTPrompt": {
+    "message": "Fazer exceções para anúncios sem monitorização",
+    "description": "English: Make exceptions for non-tracking Ads"
+  },
+  "disableHidingForDNTPrompt": {
+    "message": "Não ocultar anúncios sem monitorização",
+    "description": "English: Don't hide non-tracking Ads"
+  },
+  "disableClickingForDNTPrompt": {
+    "message": "Não clicar em anúncios sem monitorização",
+    "description": "English: Don't click non-tracking Ads"
+  },
+  "3pGroupEssentials": {
+    "message": "Essenciais",
+    "description": "English: Essentials"
+  },
+  "3pGroupOther": {
+    "message": "Outros",
+    "description": "English: Other"
+  },
+  "3pPageUpdate": {
+    "message": "Atualizar",
+    "description": "English: update"
+  },
+  "eventLoggingPrompt": {
+    "message": "Ativar modo de depuração",
+    "description": "prompt for toggle"
+  }
+}

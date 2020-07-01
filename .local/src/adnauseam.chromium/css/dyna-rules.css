@@ -1,0 +1,80 @@
+html {
+    height: 100vh;
+    overflow: hidden;
+    }
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    }
+#diff {
+    border: 0;
+    border-top: 1px solid #eee;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+#diff .tools > * {
+    margin-bottom: 0.5em;
+    }
+#diff .tools .fa {
+    font-size: large;
+}
+#diff .ruleActions {
+    border: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+    vertical-align: top;
+    width: 50%;
+    white-space: nowrap;
+    }
+#diff .ruleActions h3 {
+    font-weight: normal;
+    margin: 0.5em 0;
+    }
+#ruleFilter {
+    direction: ltr;
+    text-align: center;
+    }
+#ruleFilter .fa {
+    color: #888;
+    }
+     
+#revertButton,
+#commitButton,
+#diff.editing #exportButton,
+#diff.editing #importButton {
+    opacity: 0.25;
+    pointer-events: none;
+    }
+#diff.dirty:not(.editing) #revertButton,
+#diff.dirty:not(.editing) #commitButton,
+#diff.editing {
+    opacity: 1;
+    pointer-events: auto;
+    }
+
+.codeMirrorContainer {
+    height: 60vh;
+    }
+.CodeMirror-merge, .CodeMirror-merge-pane, .CodeMirror-merge .CodeMirror {
+    box-sizing: border-box;
+    height: 100%;
+    }
+#diff.editing .CodeMirror-merge-copy,
+#diff.editing .CodeMirror-merge-copy-reverse {
+    display: none;
+    }
+#diff.editing .CodeMirror-merge-left .CodeMirror {
+    color: #888;
+    }
+#diff.editing .CodeMirror-merge-editor .CodeMirror {
+    background-color: #ffe;
+    }
+body[dir="rtl"] .CodeMirror-merge-pane-rightmost {
+    right: unset;
+    left: 0;
+}
