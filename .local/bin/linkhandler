@@ -17,6 +17,6 @@ case "$1" in
 	*mp3|*flac|*opus|*mp3?source*)
 		setsid -f tsp curl -LO "$1" >/dev/null 2>&1 ;;
 	*)
-		if [ -f "$1" ]; then "$TERMINAL" -e "$EDITOR $1"
+		if [ -f "$1" ]; then "$TERMINAL" -e "$EDITOR" "$1"
 	else setsid -f "$BROWSER" "$1" >/dev/null 2>&1; fi ;;
 esac
