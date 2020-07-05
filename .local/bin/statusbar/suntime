@@ -13,12 +13,12 @@ curl -sf "$city" | \
 
 echo "🌄 Sunrise" > $sunfile
 echo "$( grep Sunrise $sundata | grep -o "[[:digit:]]""[[:digit:]]":"[[:digit:]]""[[:digit:]]" )" >> $sunfile
-echo "$( grep Sunrise $sundata | grep -o "direction.\{10\}" | sed 's/direction //' )" >> $sunfile
+echo "$( grep Sunrise $sundata | grep -o "direction.\{10\}" | sed 's/direction // ; s|">.</||' )" >> $sunfile
 echo "$( grep Sunrise $sundata | grep -o "[0-9]*°" )" >> $sunfile
 
 echo "\n🌇 Sunset" >> $sunfile
 echo "$( grep Sunset $sundata | grep -o "[[:digit:]]""[[:digit:]]":"[[:digit:]]""[[:digit:]]" )" >> $sunfile
-echo "$( grep Sunset $sundata | grep -o "direction.\{10\}" | sed 's/direction //' )" >> $sunfile
+echo "$( grep Sunset $sundata | grep -o "direction.\{10\}" | sed 's/direction // ; s|">.</||' )" >> $sunfile
 echo "$( grep Sunset $sundata | grep -o "[0-9]*°" )" >> $sunfile
 }
 
