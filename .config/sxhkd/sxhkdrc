@@ -25,9 +25,9 @@ super + c
 super + v
 	$TERMINAL -e nvim -c VimwikiIndex
 super + shift + a
-	$TERMINAL -e alsamixer; pkill -RTMIN+10 blocks
+	$TERMINAL -e pulsemixer
 super + shift + c
-	mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --title='mpvfloat' /dev/video0
+	camtoggle
 super + shift + e
 	tutorialvids
 super + w

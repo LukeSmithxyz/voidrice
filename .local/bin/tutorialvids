@@ -1,12 +1,17 @@
 #!/bin/sh
 
+# This gives the user a list of videos they can select and watch without a
+# browser. If you want to check a tutorial video, it makes it easy. I'll
+# add/remove videos from this list as I go on.
+
 vidlist="
-status bar	https://www.youtube.com/watch?v=gKumet6b-WY
+dwm (window manager)	https://www.youtube.com/watch?v=xnREqY-oyzM
+pacman (installing/managing programs)	https://www.youtube.com/watch?v=-dEuXTMzRKs
+status bar	https://www.youtube.com/watch?v=UP2QpHmcgyk
 sxiv (image viewer)	https://www.youtube.com/watch?v=GYW9i_u5PYs
 st (terminal)	https://www.youtube.com/watch?v=9H75enWM22k
-i3 (window manager)		https://www.youtube.com/watch?v=GKviflL9XeI
-pacman (installing/managing programs)	https://www.youtube.com/watch?v=-dEuXTMzRKs
-mutt (email)		https://www.youtube.com/watch?v=2U3vRbF7v5A
+i3 (old window manager)	https://www.youtube.com/watch?v=GKviflL9XeI
+neomutt (email)		https://www.youtube.com/watch?v=2U3vRbF7v5A
 ncmpcpp (music player)		https://www.youtube.com/watch?v=sZIEdI9TS2U
 newsboat (RSS reader)	https://www.youtube.com/watch?v=dUFCRqs822w
 ranger (file manager)		https://www.youtube.com/watch?v=L6Vu7WPkoJo

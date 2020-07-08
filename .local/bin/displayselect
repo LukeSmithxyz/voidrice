@@ -18,10 +18,10 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
         res_internal=$(xrandr --query | sed -n "/^$internal/,/\+/p" | \
             tail -n 1 | awk '{print $1}')
 
-        res_ext_x=$(echo $res_external | sed 's/x.*//')
-        res_ext_y=$(echo $res_external | sed 's/.*x//')
-        res_int_x=$(echo $res_internal | sed 's/x.*//')
-        res_int_y=$(echo $res_internal | sed 's/.*x//')
+        res_ext_x=$(echo "$res_external" | sed 's/x.*//')
+        res_ext_y=$(echo "$res_external" | sed 's/.*x//')
+        res_int_x=$(echo "$res_internal" | sed 's/x.*//')
+        res_int_y=$(echo "$res_internal" | sed 's/.*x//')
 
         scale_x=$(echo "$res_ext_x / $res_int_x" | bc -l)
         scale_y=$(echo "$res_ext_y / $res_int_y" | bc -l)
@@ -59,7 +59,7 @@ onescreen() { # If only one output available or chosen.
 postrun() { # Stuff to run to clean up.
 	setbg		# Fix background if screen size/arangement has changed.
 	remaps		# Re-remap keys if keyboard added (for laptop bases)
-	{ killall dunst ; setsid dunst & } >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
+	{ killall dunst ; setsid -f dunst ;} >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
 	}
 
 # Get all possible displays
