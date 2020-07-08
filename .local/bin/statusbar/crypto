@@ -36,7 +36,7 @@ printprices() { # Print/format all prices
 
 # If currencies haven't been updated today, try to update them.
 [ "$(stat -c %x "$HOME/.local/share/crypto-prices" | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
-	{ ping -q -c 1 1.1.1.1 >/dev/null 2>&1 && getprices || exit ;}
+	{ ping -q -c 1 example.org >/dev/null 2>&1 && getprices || exit ;}
 
 case $BLOCK_BUTTON in
 	1) uptime="$(date -d "$(stat -c %x "$dir")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"

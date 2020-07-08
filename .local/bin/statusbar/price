@@ -11,18 +11,18 @@ dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
 pricefile="$dir/$1"
 chartfile="$dir/$1-chart"
 
-updateprice() { ping -q -c 1 1.1.1.1 >/dev/null 2>&1 &&
+updateprice() { ping -q -c 1 example.org >/dev/null 2>&1 &&
 	curl -s "rate.sx/1$1" > "$pricefile" &&
 	curl -s "rate.sx/$1$interval" > "$chartfile" ;}
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
 [ "$(stat -c %x "$pricefile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
-	updateprice
+	updateprice "$1"
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Sf "$chartfile" ;;
-	2) notify-send -u low "$3 Updating..." "Updating $2 price..." &&
+	2) notify-send -u low "$3 Updating..." "Updating $2 price..."
 		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now
 \$$(cat "$pricefile")" ;;
 	3) uptime="$(date -d "$(stat -c %x "$pricefile")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
