@@ -9,7 +9,10 @@ case $BLOCK_BUTTON in
 ♻: stagnant charge
 🔌: charging
 ⚡: charged
-❗: battery very low!" ;;
+❗: battery very low!
+- Scroll to change adjust xbacklight." ;;
+	4) xbacklight -inc 10 ;;
+	5) xbacklight -dec 10 ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
