@@ -60,11 +60,8 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
-cmd bulkrename ${{
-    vidir
-}}
-
-cmd setwallpaper %cp "$f" ~/.config/wall.png && xwallpaper --zoom "$f"
+cmd setbg "$1"
+cmd bulkrename $vidir
 
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
@@ -88,7 +85,7 @@ map I push A<c-a> # at the very beginning
 map i push A<a-b><a-b><a-f> # before extention
 map a push A<a-b> # after extention
 map B bulkrename
-map bg setwallpaper
+map b $setbg $f
 
 map <c-e> down
 map <c-y> up
