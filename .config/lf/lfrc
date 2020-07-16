@@ -64,6 +64,8 @@ cmd bulkrename ${{
     vidir
 }}
 
+cmd setwallpaper %cp "$f" ~/.config/wall.png && xwallpaper --zoom "$f"
+
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
@@ -85,7 +87,8 @@ map c push A<c-u> # new rename
 map I push A<c-a> # at the very beginning
 map i push A<a-b><a-b><a-f> # before extention
 map a push A<a-b> # after extention
-map b bulkrename
+map B bulkrename
+map bg setwallpaper
 
 map <c-e> down
 map <c-y> up
