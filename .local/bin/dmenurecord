@@ -72,7 +72,7 @@ webcam() { ffmpeg \
 
 audio() { \
 	ffmpeg \
-	-f alsa -i default \
+	-f pulseaudio -i default \
 	-c:a flac \
 	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > /tmp/recordingpid
