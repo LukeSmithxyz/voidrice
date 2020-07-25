@@ -33,7 +33,7 @@ screencast() { \
 	-framerate 60 \
 	-s "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
 	-i "$DISPLAY" \
-	-f alsa -i default \
+	-f pulseaudio -i default \
 	-r 30 \
  	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
@@ -72,7 +72,7 @@ webcam() { ffmpeg \
 
 audio() { \
 	ffmpeg \
-	-f alsa -i default \
+	-f pulseaudio -i default \
 	-c:a flac \
 	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > /tmp/recordingpid
