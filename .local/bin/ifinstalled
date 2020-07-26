@@ -6,6 +6,6 @@
 # various other scripts for clarity's sake.
 
 for x in "$@";do
-	pacman -Qq "$x" 2>/dev/null ||
+	pacman -Qq "$x" >/dev/null 2>&1 ||
 		{ notify-send "📦 $x" "must be installed for this function." && exit 1 ;}
 done
