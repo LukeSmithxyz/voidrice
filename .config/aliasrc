@@ -22,7 +22,7 @@ alias \
 
 # These common commands are just too long! Abbreviate them.
 alias \
-	ka="killall" \
+	ka="pkill -9" \
 	g="git" \
 	trem="transmission-remote" \
 	YT="youtube-viewer" \
