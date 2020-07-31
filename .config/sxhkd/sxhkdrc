@@ -141,7 +141,6 @@ super + shift + F1
 # Show readme
 super + F1
 	groff -mom ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom -Tpdf | zathura -
-# F2 restarts either dwm or i3 and is bound in each.
 # Change display
 super + F3
 	displayselect

@@ -8,10 +8,12 @@ case "$(readlink -f /sbin/init)" in
 	*openrc*) reb="sudo -A openrc-shutdown -r"; shut="sudo -A openrc-shutdown -p" ;;
 esac
 
+pidof i3 && renew="i3 restart" && leave="i3 exit" && wm="i3"
+
 cmds="\
 🔒 lock		slock
-🚪 leave dwm	kill -TERM $(pidof -s dwm)
-♻ renew dwm	kill -HUP $(pidof -s dwm)
+🚪 leave ${wm:-WM}	${leave:-kill -TERM $(pidof -s dwm)}
+♻ renew ${wm:-WM}	${renew:-kill -HUP $(pidof -s dwm)}
 🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
 🔃 reboot	${reb:-sudo -A reboot}
 🖥 shutdown	${shut:-sudo -A shutdown -h now}"
