@@ -331,8 +331,8 @@ bindsym XF86Reload		restart
 ##bindsym XF86Launch9		exec
 #bindsym XF86AudioMicMute	exec $micmute
 bindsym XF86TouchpadToggle	exec --no-startup-id toggletouchpad
-bindsym XF86TouchpadOn		exec --no-startup-id synclient TouchpadOff=0
-bindsym XF86TouchpadOff		exec --no-startup-id synclient TouchpadOff=1
+bindsym XF86TouchpadOn		exec --no-startup-id toggletouchpad 1
+bindsym XF86TouchpadOff		exec --no-startup-id toggletouchpad 0
 bindsym XF86Suspend		exec --no-startup-id lockscreen
 bindsym XF86Close		kill
 bindsym XF86WebCam		exec --no-startup-id camtoggle

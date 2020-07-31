@@ -1,0 +1,10 @@
+#!/bin/sh
+# Toggles touchpad status
+# 0 as input disables the touchpad and anything else enables it. In case no input is provided, simply toggles it.
+# requirements: libinput, xinput
+
+toggleto(){ [ "$1" = "0" ] && xinput disable "$device" || xinput enable "$device" ;}
+
+device="$(xinput list | grep -P '(?<= )[\w\s:]*(?i)(touchpad|synaptics)(?-i).*?(?=\s*id)' -o | head -n1)"
+# If there is an input switch to that, otherwise just toggle
+toggleto "${1:-$([ "$(xinput list-props "$device" | grep -P ".*Device Enabled.*\K.(?=$)" -o)" = "1" ] && echo 0)}"

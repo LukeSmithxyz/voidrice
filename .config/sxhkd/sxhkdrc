@@ -53,9 +53,9 @@ super + x
 XF86Launch1
 	xset dpms force off
 XF86TouchpadToggle
-	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
+	toggletouchpad
 XF86Touchpad{Off,On}
-	synclient TouchpadOff={1,0}
+	toggletouchpad {0,1}
 XF86MonBrightnessDown
 	xbacklight -dec 15
 XF86MonBrightnessUp
