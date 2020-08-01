@@ -2,268 +2,171 @@
 # dwm-independent commands.  This file is pretty readable, so I'll let you read
 # it.
 
-# The keys NOT bound here by sxhkd, but by dwm or i3 are:
-# The t thru p keys on the top row
-# The f thru ; keys on the home row
-# The b key on the bottom row (hides the bar in either case)
-
-# Basic binds
-super + Return
-	$TERMINAL
-super + d
-	dmenu_run
-super + r
-	$TERMINAL -e $FILE
-super + e
-	$TERMINAL -e neomutt; pkill -RTMIN+12 blocks
-super + m
-	$TERMINAL -e ncmpcpp
-super + n
-	$TERMINAL -e newsboat
-super + c
-	$TERMINAL -e calcurse
-super + v
-	$TERMINAL -e nvim -c VimwikiIndex
-super + shift + a
-	$TERMINAL -e pulsemixer
-super + shift + c
-	camtoggle
-super + shift + e
-	tutorialvids
-super + w
-	$TERMINAL -e sudo nmtui
-super + shift + w
-	$BROWSER
-
-# Et cetera...
 super + grave
 	dmenuunicode
+super + {_,shift +} {1-9,0}
+	bspc {desktop -f,node -d} ^{1-9,10}
+super + ctrl + {-2-9}
+	bspc node -o 0.{1-9}
+super {_,shift +} + minus
+	pamixer --allow-boost -d {5,15}; pkill -RTMIN+10 blocks
+super + {equal,plus}
+	pamixer --allow-boost -i {5,15}; pkill -RTMIN+10 blocks
+super + {_,shift +} BackSpace
+	sysact
+
+super + {Tab,backslash}
+	bspc desktop last --focus
+super + {_,shift +} q
+	bspc node --{close,kill}
+super + w
+	$BROWSER
+super + shift + w
+	$TERMINAL -e sudo nmtui
+super + e
+	$TERMINAL -e neomutt ; pkill -RTMIN+12 blocks; rmdir ~/.abook
+super + shift + e
+	st -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook
+super + {_,shift +} r
+	$TERMINAL -e {lf,htop}
+super + {_,shift +} t
+	bspc node focused -t \~floating ; hover {left,right}
+super + y
+	bspc node @focused:/ --rotate 89
+super + u
+	cat /tmp/dropdown | xargs -I win bspc node win --flag hidden; bspc node -f win
+super + {i,o}
+	bspc node -f {prev,next}.local
+super + shift + {y,u,i,o}
+	bspc node --resize {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
+super + ctrl + {y,u,i,o}
+ 	bspc node -f @{parent,brother,first,second}
+super + p
+	mpc toggle
+super + shift + p
+	mpc pause; pauseallmpv
+super + {_,shift +} bracketleft
+	mpc seek -{10,60}
+super + {_,shift +} bracketright
+	mpc seek +{10,60}
+
+super + a
+	bspc config window_gap {0,10}
+super + shift + a
+	bspc config window_gap 10
+super + s
+	bspc node -g sticky={on,off}
+super + d
+	dmenu_run
+super + {_,shift +} f
+	bspc {desktop -l next,node -t ~fullscreen}
+super + {g,semicolon}
+	bspc desktop {prev,next}.occupied --focus
+super + {_,shift +} {h,j,k,l}
+	bspc node --{focus,swap} {west,south,north,east}
+super + ctrl + {h,j,k,l}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+# super + apostrophe
+	# TODO float calculator
+super + Return
+	$TERMINAL
+# super + shift + Return
+	# TODO float terminal
+super + {z,x}
+	bspc config window_gap $(($(bspc config window_gap) {-,+} 3))
+# remove and restore polybar
+# super + b
+	# \{ pgrep polybar && \{ killall polybar ; bspc config top_padding 0 \} \} || \{ launch_polybar ; bspc config top_padding 24 \}
+super + {_,shift +} n
+	$TERMINAL -e {nvim -c VimwikiIndex,newsboat}
+super + m
+	$TERMINAL -e ncmpcpp
+super + shift + m
+	pamixeer -t; pkill -RTMIN+10 blocks
+super + {comma,period}
+	mpc {prev,next}
+super + shift + {comma,period}
+	mpc {seek 0%,repeat}
+
+super + {Left,Down,Up,Right}
+	bspc node --{focus,swap} {west,south,north,east}
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + {Prior,Next}
+	bspc desktop {prev,next}.occupied --focus
+super + Insert
+	notify-send "📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)"
+
+super + F1
+	groff -mom ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom -Tpdf | zathura -
+super + F2
+	tutorialvids
+super + F3
+	displayselect
+super + F4
+	$TERMINAL -e pulsemixer; pkill -RTMIN+10 blocks
+super + F6
+	torwrap
+super + F7
+	td-toggle
+super + F8
+	mailsync
+super + {F9,F10}
+	{dmenumount,dmenuumount}
+super + F11
+    mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)
+
+super + space
+	bspc node -s biggest.local || bspc node -s next.local
+	# bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+super + shift + space
+	bspc node focused -t \~floating
+super + ctrl + space
+	bspc node -p cancel
+
+{_,shift +}Print
+	{maim pic-full-$(date '+%y%m%d-%H%M-%S').png,maimpick}
+super + Print
+	dmenurecord
+super + Delete
+	dmenurecord kill
 super + Scroll_Lock
 	killall screenkey || screenkey
-super + Insert
-	showclip
-super + shift + x
-	prompt "Shutdown computer?" "sudo -A shutdown -h now"
-super + shift + BackSpace
-	prompt "Reboot computer?" "sudo -A reboot"
-super + shift + Escape
-	prompt 'Leave Xorg?' 'killall Xorg'
-super + x
-	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
+
+XF86AudioMute
+	pamixer -t; pkill -RTMIN+10 blocks
+XF86Audio{Raise,Lower}Volume
+	pamixer --allow-boost -{i,d} 3; pkill -RTMIN+10 blocks
+XF86Audio{Prev,Next,Pause,Play,Stop}
+	mpc {prev,next,pause,play,stop}
+XF86Audio{Rewind,Forward}
+	mpc seek {-,+}10
+XF86AudioMedia
+	$TERMINAL -e ncmpcpp
+XF86PowerOff
+	sysact
+XF86Calculator
+	$TERMINAL -e bc -l
+XF86Sleep
+	sudo -A zzz
+XF86WWW
+	$BROWSER
+XF86DOS
+	$TERMINAL
+XF86ScreenSaver
+	slock & xset dpms force off ; mpc pause ; pauseallmpv
+XF86TaskPane
+	$TERMINAL -e htop
+XF86Mail
+	$TERMINAL -e neomutt; pkill -RTMIN+12 blocks
+XF86MyComputer
+	$TERMINAL -e lf /
 XF86Launch1
 	xset dpms force off
 XF86TouchpadToggle
 	(synclient | grep "TouchpadOff.*1" && synclient TouchpadOff=0) || synclient TouchpadOff=1
 XF86Touchpad{Off,On}
 	synclient TouchpadOff={1,0}
-XF86MonBrightnessDown
-	xbacklight -dec 15
-XF86MonBrightnessUp
-	xbacklight -inc 15
-
-# Recording
-# Take screenshot
-Print
-	maim pic-full-$(date '+%y%m%d-%H%M-%S').png
-# Pick screenshot type
-shift + Print
-	maimpick
-# Print: Record audio or video; Del: kill recording
-super + Print
-	dmenurecord
-super + Delete
-	dmenurecord kill
-
-# Pause audio
-super + p
-	mpc toggle
-super + shift + p
-	mpc pause; pauseallmpv
-# Changes to next/previous tracks
-super + {comma,period}
-	mpc {prev,next}
-# Restart track
-super + shift + less
-	mpc seek 0%
-# Seek foward in song
-super + {_,shift +} bracketright
-	mpc seek +{10,120}
-# Seek backward in song
-super + {_,shift +} bracketleft
-	mpc seek -{10,120}
-# Increase volume
-super + {equal,plus}
-	amixer sset Master {5,15}%+; pkill -RTMIN+10 blocks
-# Decrease volume
-super {_,shift +} + minus
-	amixer sset Master {5,15}%-; pkill -RTMIN+10 blocks
-super + shift + m
-	amixer sset Master toggle; pkill -RTMIN+10 blocks
-
-# Audiokeys
-XF86AudioMute
-	amixer sset Master toggle; pkill -RTMIN+10 blocks
-XF86Audio{Raise,Lower}Volume
-	amixer sset Master 5%{+,-}; pkill -RTMIN+10 blocks
-XF86Audio{Next,Prev}
-	mpc {next,prev}
-XF86Audio{Pause,Play,Stop}
-	mpc {pause,play,stop}
-XF86Audio{Rewind,Forward}
-	mpc seek {-,+}10
-XF86AudioRecord
-	dmenurecord
-XF86AudioMedia
-	$TERMINAL -e ncmpcpp
-
-XF86PowerOff
-	prompt "Shutdown computer?" "sudo -A shutdown -h now"
-XF86Calculator
-	$TERMINAL -e bc
-XF86Sleep
-	prompt 'Hibernate computer?' 'sudo -A zzz'
-XF86WWW
-	$BROWSER
-XF86DOS
-	$TERMINAL
-XF86ScreenSaver
-	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
-XF86TaskPane
-	$TERMINAL -e htop
-XF86Mail
-	$TERMINAL -e neomutt
-XF86MyComputer
-	$TERMINAL -e $FILE /
-
-# Function keys
-super + shift + F1
-	grep LARBSWELCOME ~/.xprofile && ( sed -i "/LARBSWELCOME/d" ~/.xprofile && notify-send "LARBS welcome message" "Welcome message disabled. Press Super+Shift+F1 again to reverse." ) || ( echo "notify-send -i "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/larbs.png" \"Welcome to LARBS\" \"Press super+F1 for the help menu.\" # LARBSWELCOME" >> ~/.xprofile && notify-send "LARBS welcome message" "Welcome message re-enabled." )
-# Show readme
-super + F1
-	groff -mom ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom -Tpdf | zathura -
-# Change display
-super + F3
-	displayselect
-# Hibernate
-super + F4
-	prompt 'Hibernate computer?' 'sudo -A zzz -Z'
-super + F5 is unbound.
-# Start torrent daemon/open interface
-super + F6
-	torwrap
-# toggle torrent daemon
-super + F7
-	td-toggle
-# sync email
-super + F8
-	mailsync
-# Mount a USB drive or Android device
-super + {F9,F10}
-	{dmenumount,dmenuumount}
-
-
-
-# close and kill
-super + {_,shift + }q
-	bspc node -{c,k}
-
-# alternate between the tiled and monocle layout
-super + {_,shift + }f
-	bspc {desktop -l next,node -t ~fullscreen}
-
-# rotate current node 90 degrees
-super + y
-	bspc node @focused:/ -R 90
-
-# swap the current node and the biggest local node
-super + space
-	bspc node -s biggest.local || bspc node -s next.local
-
-#
-# state/flags
-#
-
-# set the window state
-#super + {t,shift + t,s}
-#bspc node -t {tiled,pseudo_tiled,floating}
-
-super + shift + space
-	bspc node focused -t \~floating
-
-# focus/swap
-
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
-
-super + {g,semicolon}
-	bspc desktop {prev,next}.occupied --focus
-super + {Prior,Next}
-	bspc desktop {prev,next}.occupied --focus
-super + {Tab,backslash}
-	bspc desktop last --focus
-
-# focus or swap the next node
-super + {_,shift + }c
-	bspc node -{f,s} next.local
-
-# focus the older or newer node in the focus history
-
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} ^{1-9,10}
-
-# preselect the direction
-#super + {u,o}
-#bspc node -p {south,east}
-
-# preselect the ratio
-super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-super + ctrl + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-#super + space
-#bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-# expand a window by moving one of its side outward
-super + shift + {y,u,i,o}
-	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-
-# move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
-
-# Toggle gaps
-super + shift + d
-	bspc config window_gap {0,15}
-# Increase/descrease gap size
-super { ,+ shift }+ z
-	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
-
-super + u
-	cat /tmp/dropdown | xargs -I win bspc node win --flag hidden;bspc node -f win
-
-# Make a windoww sticky/non-sticky
-super + o
-	bspc node -g sticky={on,off}
-
-# remove and restore polybar
-#super + b
-#\{ pgrep polybar && \{ killall polybar ; bspc config top_padding 0 \} \} || \{ launch_polybar ; bspc config top_padding 24 \}
-
-super + {i,o}
-	bspc node -f {prev,next}.local
-super + shift + n
-	bspc node focused -t \~floating ; hover right
-super + shift + b
-	bspc node focused -t \~floating ; hover left
+XF86MonBrightness{Down,Up}
+	xbacklight -{dec,inc} 15

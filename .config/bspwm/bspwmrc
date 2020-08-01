@@ -1,5 +1,7 @@
 #!/bin/sh
 
+killall sxhkd ; sxhkd &
+
 # If refreshing bspwm, remove all previous rules to prevent doubling up.
 bspc rule -r "*"
 
@@ -21,7 +23,7 @@ bspc desktop -f 1
 
 
 bspc config border_width 3
-bspc config window_gap 15
+bspc config window_gap 10
 bspc config top_padding 24	# top_padding I set equal to polybar's height
 bspc config focus_follows_pointer true
 
