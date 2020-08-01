@@ -10,7 +10,7 @@ esac
 
 pidof i3 && renew="i3 restart" && leave="i3 exit" && wm="i3"
 pidof dwm && renew="kill -HUP $(pidof -s dwm)" && leave="kill -TERM $(pidof -s dwm)" && wm="dwm"
-pidof bspwm && renew="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" && wm "bspwm"
+pidof bspwm && renew="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" && wm="bspwm"
 
 cmds="\
 🔒 lock		slock
@@ -20,7 +20,7 @@ cmds="\
 🖥 shutdown	${shut:-sudo -A shutdown -h now}"
 
 # If both wm and renew command are known add it to the menu
-[ -n "$wm" ] && [ -n "$renew" ] && cmds="$(echo "$cmds" | sed "3i♻ renew ${wm}	${renew}")"
+[ -n "$wm" ] && [ -n "$renew" ] && cmds="$(echo "$cmds" | sed "3i♻ renew $wm	$renew")"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
