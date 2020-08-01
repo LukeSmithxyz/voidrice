@@ -6,43 +6,40 @@
 i3 is the window manager.
 For a full readme, press super+F1.
 This is a partial key list.
-	esc	left workspace	exit i3
 	tab	last workspace
 	-	- vol		-- vol
 	_	- vol		-- vol
 	=	+ vol		++ vol
 	+	+ vol		++ vol
 	q	kill win	kill win
-	w	nmtui (wlan)	browser
+	w	browser		nmtui (wlan)
 	e	neomutt		tutorials
-	r	ranger		winresize
-	t	toggle hor/vert	gaps=15px
-	y	calcurse	resize left
-	u	dropdown term	resize down
-	i	htop		resize up
-	o	sticky win	resize right
+	r	lf			htop
+	t	toggle hor/vert	gaps=10px
+	y				resize left
+	u	term right	resize down
+	i	term below	resize up
+    o				resize right
+	s	sticky win
 	p	pause music	pause A/V
-	[	back 10 secs	back 2 min
-	]	forward 10 secs	forward 2 min
+	[	back 10 secs	back 1 min
+	]	forward 10 secs	forward 1 min
 	\	last workspace
-	a	calculator	audio control
-	s	+ inner gaps	- inner gaps
-	d	dmenu		remove gaps
+	a	toggle gaps		default gaps
+	x	+ outer gaps	+ inner gaps
+	d	dmenu
 	f	fullscreen	freeze mode
-	g	left workspace	GIMP
+	g	left workspace
 	h	focus left	move win left
 	j	focus down	move win down
 	k	focus up	move win up
 	l	focus right	move win right
 	;	right workspace
-	'	fast right win
-	z	+ outer gaps	- outer gaps
-	x	lock screen	shutdown
-	c			webcam
-	v	open Vimwiki
-	b	bar on/off	stick/float win (left)
-	n	newsboat	stick/float win (right)
+	z	+ outer gaps	+ inner gaps
+	n	open Vimwiki
+	b	bar on/off
+	N	newsboat
+    v	float win left	float win right
 	m	ncmpcpp		mute audio
 	, <	previous song	restart song
-	. >	next song
-	/ ?	fast win below	kill win
+	. >	next song		toggle repeat
