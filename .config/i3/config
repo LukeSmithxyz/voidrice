@@ -115,11 +115,10 @@ bindsym $mod+t			split toggle
 #bindsym $mod+Shift+t
 #bindsym $mod+y
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
-#bindsym $mod+u
+bindsym $mod+u		split vertical ;; exec $term
 bindsym $mod+Shift+u		exec --no-startup-id i3resize down
-#bindsym $mod+i
+bindsym $mod+i		split horizontal ;; exec $term
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
-bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p		exec --no-startup-id mpc pause ; pauseallmpv
@@ -132,8 +131,7 @@ bindsym $mod+backslash		workspace back_and_forth
 
 bindsym $mod+a		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+a		gaps inner current set $inner_gaps; gaps outer current set $outer_gaps
-bindsym $mod+s		split horizontal ;; exec $term
-bindsym $mod+Shift+s		split vertical ;; exec $term
+bindsym $mod+s			sticky toggle
 bindsym $mod+d			exec --no-startup-id dmenu_run
 #bindsym $mod+Shift+d
 bindsym $mod+f			fullscreen toggle
