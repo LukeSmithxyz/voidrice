@@ -9,14 +9,18 @@ case "$(readlink -f /sbin/init)" in
 esac
 
 pidof i3 && renew="i3 restart" && leave="i3 exit" && wm="i3"
+pidof dwm && renew="kill -HUP $(pidof -s dwm)" && leave="kill -TERM $(pidof -s dwm)" && wm="dwm"
+pidof bspwm && renew="${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" && wm "bspwm"
 
 cmds="\
 🔒 lock		slock
-🚪 leave ${wm:-WM}	${leave:-kill -TERM $(pidof -s dwm)}
-♻ renew ${wm:-WM}	${renew:-kill -HUP $(pidof -s dwm)}
+🚪 leave ${wm:-Xorg}	${leave:-killall Xorg}
 🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
 🔃 reboot	${reb:-sudo -A reboot}
 🖥 shutdown	${shut:-sudo -A shutdown -h now}"
+
+# If both wm and renew command are known add it to the menu
+[ -n "$wm" ] && [ -n "$renew" ] && cmds="$(echo "$cmds" | sed "3i♻ renew ${wm}	${renew}")"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
