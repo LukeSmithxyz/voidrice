@@ -130,7 +130,7 @@ ex=🎯:\
 
 [ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ] && shortcuts >/dev/null 2>&1 &
 
-if pacman -Qs libxft-bgra >/dev/null 2>&1; then
+if [ "$WM" != "dwm" ] || pacman -Qs libxft-bgra >/dev/null 2>&1 ;then
 	# Start graphical server on tty1 if not already running.
 	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1  && exec startx
 else
