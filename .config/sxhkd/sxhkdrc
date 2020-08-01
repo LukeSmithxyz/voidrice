@@ -29,8 +29,6 @@ super + shift + e
 	st -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook
 super + {_,shift +} r
 	$TERMINAL -e {lf,htop}
-super + {_,shift +} t
-	bspc node focused -t \~floating ; hover {left,right}
 super + y
 	bspc node @focused:/ --rotate 89
 super + u
@@ -74,6 +72,8 @@ super + Return
 	# TODO float terminal
 super + {z,x}
 	bspc config window_gap $(($(bspc config window_gap) {-,+} 3))
+super + {_,shift +} v
+	bspc node focused -t \~floating ; hover {right,left}
 # remove and restore polybar
 # super + b
 	# \{ pgrep polybar && \{ killall polybar ; bspc config top_padding 0 \} \} || \{ launch_polybar ; bspc config top_padding 24 \}
@@ -115,7 +115,7 @@ super + F8
 super + {F9,F10}
 	{dmenumount,dmenuumount}
 super + F11
-    mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)
+	mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)
 
 super + space
 	bspc node -s biggest.local || bspc node -s next.local
