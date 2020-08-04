@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Terminate already running bar instances
-pkill -9 -q polybar
+pkill -15 -q polybar
 
 # Wait until the processes have been shut down
 while pidof polybar >/dev/null; do sleep 1; done

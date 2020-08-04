@@ -39,7 +39,7 @@ super + shift + w
 super + grave
 	dmenuunicode
 super + Scroll_Lock
-	pkill -9 screenkey || screenkey
+	pkill -15 screenkey || screenkey
 super + Insert
 	showclip
 super + shift + x
@@ -47,7 +47,7 @@ super + shift + x
 super + shift + BackSpace
 	prompt "Reboot computer?" "sudo -A reboot"
 super + shift + Escape
-	prompt 'Leave Xorg?' 'pkill -x Xorg'
+	prompt 'Leave Xorg?' 'pkill -15 Xorg'
 super + x
 	ifinstalled slock && ( slock & xset dpms force off ; mpc pause ; pauseallmpv )
 XF86Launch1
@@ -260,7 +260,7 @@ super + o
 
 # remove and restore polybar
 #super + b
-#\{ pgrep polybar && \{ pkill -9 polybar ; bspc config top_padding 0 \} \} || \{ launch_polybar ; bspc config top_padding 24 \}
+#\{ pgrep polybar && \{ pkill -15 polybar ; bspc config top_padding 0 \} \} || \{ launch_polybar ; bspc config top_padding 24 \}
 
 super + {i,o}
 	bspc node -f {prev,next}.local
