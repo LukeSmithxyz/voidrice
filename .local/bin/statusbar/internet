@@ -10,6 +10,7 @@ case $BLOCK_BUTTON in
 📶: wifi connection with quality
 ❎: no ethernet
 🌐: ethernet working
+💻: USB interface
 " ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
@@ -19,4 +20,12 @@ case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 	up) wifiicon="$(awk '/^\s*w/ { print "📶", int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
 esac
 
-printf "%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)"
+printf "%s" "$wifiicon"
+for dev in /sys/class/net/e* ;do
+    if cat "$dev/device/uevent" | grep -q usb ;then
+        printf " %s" "💻"
+    else
+        printf " %s" "$(sed "s/down/❎/;s/up/🌐/" "$dev/operstate" 2>/dev/null)"
+    fi
+done
+printf "\n"
