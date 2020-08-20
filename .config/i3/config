@@ -122,10 +122,10 @@ bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 bindsym $mod+p			exec --no-startup-id mpc toggle
 bindsym $mod+Shift+p		exec --no-startup-id mpc pause ; pauseallmpv
-bindsym $mod+bracketleft 	exec --no-startup-id mpc seek -10
-bindsym $mod+Shift+bracketleft 	exec --no-startup-id mpc seek -60
-bindsym $mod+bracketright 	exec --no-startup-id mpc seek +10
-bindsym $mod+Shift+bracketright exec --no-startup-id mpc seek +60
+bindsym $mod+bracketleft	exec --no-startup-id mpc seek -10
+bindsym $mod+Shift+bracketleft		exec --no-startup-id mpc seek -60
+bindsym $mod+bracketright		exec --no-startup-id mpc seek +10
+bindsym $mod+Shift+bracketright	exec --no-startup-id mpc seek +60
 bindsym $mod+backslash		workspace back_and_forth
 #bindsym $mod+Shift+backslash
 
