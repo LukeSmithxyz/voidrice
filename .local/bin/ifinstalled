@@ -7,5 +7,5 @@
 
 for x in "$@";do
 	pacman -Qq "$x" >/dev/null 2>&1 ||
-		{ notify-send "📦 $x" "must be installed for this function." && exit 1 ;}
+		{ notify-send "$(ico pkg) $x" "must be installed for this function." && exit 1 ;}
 done

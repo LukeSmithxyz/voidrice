@@ -70,7 +70,7 @@ screens=$(echo "$allposs" | awk '/ connected/ {print $1}')
 
 # If there's only one screen
 [ "$(echo "$screens" | wc -l)" -lt 2 ] &&
-	{ onescreen "$screens"; postrun; notify-send "💻 Only one screen detected." "Using it in its optimal settings...";  exit ;}
+	{ onescreen "$screens"; postrun; notify-send "$(ico pc) Only one screen detected." "Using it in its optimal settings...";  exit ;}
 
 # Get user choice including multi-monitor and manual selection:
 chosen=$(printf "%s\\nmulti-monitor\\nmanual selection" "$screens" | dmenu -i -p "Select display arangement:") &&

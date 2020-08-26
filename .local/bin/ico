@@ -1,0 +1,13 @@
+#!/bin/sh
+# Use icons defined in CF_ICONS
+
+# Directories are used with disk module. Any path can take its own icon.
+# Icons like weather and crypto are used in notifications of the respective modules.
+# Special dash marks: x: crossed / no; 1: first quarter / 25%;  m: mid point / 50%; 2: second quarter / 75%; f: full / 100%;
+
+# Source your env file if you want to test new icons before rebooting your system
+# . ~/.zprofile
+
+for input in "$@" ;do
+    echo "${CF_ICONS:-defs}" | grep -Po "(:|^|\s+)$input=\K.+?(?=(:|$))" || exit $? # break if an icon is not found
+done

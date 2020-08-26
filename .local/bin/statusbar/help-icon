@@ -11,7 +11,7 @@ pidof dwm >/dev/null &&
 case $BLOCK_BUTTON in
 	1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
 	2) restartwm ;;
-	3) notify-send "❓ Help module" "\- Left click to open LARBS guide.
+	3) notify-send "$(ico help) Help module" "\- Left click to open LARBS guide.
 - Middle click to refresh window manager." ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac; echo "❓"
+esac; echo "$(ico help)"

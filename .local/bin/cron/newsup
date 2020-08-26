@@ -5,13 +5,13 @@
 
 ping -q -c 1 example.org > /dev/null || exit
 
-/usr/bin/notify-send "📰 Updating RSS feeds..."
+/usr/bin/notify-send "$(ico sheets) Updating RSS feeds..."
 
 pgrep -f newsboat$ && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
 
-echo 🔃 > /tmp/newsupdate
+echo $(ico sync) > /tmp/newsupdate
 pkill -RTMIN+6 "${STATUSBAR:-dwmblocks}"
 /usr/bin/newsboat -x reload
 rm -f /tmp/newsupdate
 pkill -RTMIN+6 "${STATUSBAR:-dwmblocks}"
-/usr/bin/notify-send "📰 RSS feed update complete."
+/usr/bin/notify-send "$(ico sheets) RSS feed update complete."

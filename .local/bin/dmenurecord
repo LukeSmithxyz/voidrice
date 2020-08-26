@@ -38,7 +38,7 @@ screencast() { \
  	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mp4" &
 	echo $! > /tmp/recordingpid
-	updateicon "⏺️🎙️"
+    updateicon "$(ico rec-screen rec-voice | tr -d '\n')"
        	}
 
 video() { ffmpeg \
@@ -48,7 +48,7 @@ video() { ffmpeg \
  	-c:v libx264 -qp 0 -r 30 \
 	"$HOME/video-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
-	updateicon "⏺️"
+    updateicon "$(ico rec-screen)"
 	}
 
 webcamhidef() { ffmpeg \
@@ -57,7 +57,7 @@ webcamhidef() { ffmpeg \
 	-video_size 1920x1080 \
 	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
-	updateicon "🎥"
+    updateicon "$(ico rec-cam)"
 	}
 
 webcam() { ffmpeg \
@@ -66,7 +66,7 @@ webcam() { ffmpeg \
 	-video_size 640x480 \
 	"$HOME/webcam-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
-	updateicon "🎥"
+    updateicon "$(ico rec-cam)"
 	}
 
 
@@ -76,7 +76,7 @@ audio() { \
 	-c:a flac \
 	"$HOME/audio-$(date '+%y%m%d-%H%M-%S').flac" &
 	echo $! > /tmp/recordingpid
-	updateicon "🎙️"
+    updateicon "$(ico rec-cam)"
 	}
 
 askrecording() { \

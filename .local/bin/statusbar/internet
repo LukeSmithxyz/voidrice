@@ -5,18 +5,18 @@
 
 case $BLOCK_BUTTON in
 	1) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
-	3) notify-send "🌐 Internet module" "\- Click to connect
-📡: no wifi connection
-📶: wifi connection with quality
-❎: no ethernet
-🌐: ethernet working
+	3) notify-send "$(ico internet) Internet module" "\- Click to connect
+$(ico wifi-x): no wifi connection
+$(ico wifi): wifi connection with quality
+$(ico lan-x): no ethernet
+$(ico lan): ethernet working
 " ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
-	down) wifiicon="📡 " ;;
-	up) wifiicon="$(awk '/^\s*w/ { print "📶", int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
+	down) wifiicon="$(ico wifi-x) " ;;
+	up) wifiicon="$(awk "/^\\s*w/ { print \"$(ico wifi)\", int(\$3 * 100 / 70) \"% \" }" /proc/net/wireless)" ;;
 esac
 
-printf "%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)"
+printf "%s%s\n" "$wifiicon" "$(sed "s/down/$(ico lan-x)/;s/up/$(ico lan)/" /sys/class/net/e*/operstate 2>/dev/null)"

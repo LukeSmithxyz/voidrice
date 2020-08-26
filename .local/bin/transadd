@@ -6,4 +6,4 @@
 
 pidof transmission-daemon >/dev/null || (transmission-daemon && notify-send "Starting transmission daemon..." && sleep 3 && pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}")
 
-transmission-remote -a "$@" && notify-send "🔽 Torrent added."
+transmission-remote -a "$@" && notify-send "$(ico torrent-add) Torrent added."

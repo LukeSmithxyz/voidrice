@@ -13,17 +13,17 @@ getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1 ;}
 # precipication chance and the daily high and low from the downloaded file and
 # display them with coresponding emojis.
 showweather() { printf "%s" "$(sed '16q;d' "$weatherreport" |
-	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')"
-sed '13q;d' "$weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " 🥶" $1 "°","🌞" $2 "°"}' ;}
+	grep -wo "[0-9]*%" | sort -rn | sed "s/^/$(ico weather-perc)/g;1q" | tr -d '\n')"
+sed '13q;d' "$weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk "{print \" $(ico weather-l)\" \$1 \"°\",\"$(ico weather-h)\" \$2 \"°\"}" ;}
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
 	2) getforecast && showweather ;;
-	3) notify-send "🌈 Weather module" "\- Left click for full forecast.
+	3) notify-send "$(ico weather) Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
-☔: Chance of rain/snow
-🥶: Daily low
-🌞: Daily high" ;;
+$(ico weather-perc): Chance of rain/snow
+$(ico weather-l): Daily low
+$(ico weather-h): Daily high" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

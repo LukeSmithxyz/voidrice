@@ -5,16 +5,16 @@
 
 # Currencies should be ;-separated:
 # human-readable name;urlname;icon
-coins="Bitcoin;btc;💰
-Etherium;eth;🍸
-Basic Attention Token;bat;🦁
-LBC;lbc;📚"
+coins="Bitcoin;btc;$(ico btc)
+Etherium;eth;$(ico eth)
+Basic Attention Token;bat;$(ico batt)
+LBC;lbc;$(ico lbc)"
 
 # Directory where currency info is stored.
 dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
 
 getprices() { # The command to get the desired prices
-	printf "🔃 "; printprices
+	printf "%s " "$(ico sync)"; printprices
 	{ rm -rf "${dir:?}/*"
 	echo "$coins" | while IFS=';' read -r human web icon; do
 		val="$(curl -s "rate.sx/1$web")" &&
@@ -44,9 +44,9 @@ case $BLOCK_BUTTON in
 <b>Last updated:</b>
 	$uptime" ;;
 	2) getprices ;;
-	3) notify-send "💸 Crypto-currency module" "\- Left click for exact prices.
+	3) notify-send "$(ico crypto) Crypto-currency module" "\- Left click for exact prices.
 - Middle click to update.
-- Shows 🔃 if updating prices.
+- Shows $(ico sync) if updating prices.
 - Manually add/remove currencies to list in the script." ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac

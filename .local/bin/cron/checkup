@@ -4,7 +4,7 @@
 
 ping -q -c example.org > /dev/null || exit
 
-notify-send "📦 Repository Sync" "Checking for package updates..."
+notify-send "$(ico pkg) Repository Sync" "Checking for package updates..."
 
 sudo pacman -Syyuw --noconfirm || notify-send "Error downloading updates.
 
@@ -13,7 +13,7 @@ pkill -RTMIN+8 "${STATUSBAR:-dwmblocks}"
 
 if pacman -Qu | grep -v "\[ignored\]"
 then
-	notify-send "🎁 Repository Sync" "Updates available. Click statusbar icon (📦) for update."
+	notify-send "$(ico pkg-down) Repository Sync" "Updates available. Click statusbar icon ($(ico pkg)) for update."
 else
-	notify-send "📦 Repository Sync"  "Sync complete. No new packages for update."
+	notify-send "$(ico pkg) Repository Sync"  "Sync complete. No new packages for update."
 fi

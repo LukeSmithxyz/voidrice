@@ -29,7 +29,7 @@ case $BLOCK_BUTTON in
 		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
 - Middle click to update.
-- Shows 🔃 if updating prices.
+- Shows $(ico sync) if updating prices.
 - <b>Last updated:
 	$uptime</b>" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
