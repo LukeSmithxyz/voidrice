@@ -241,7 +241,7 @@ previous recordings as their names are based on their exact times.
 .ITEM
 \f(CWMod+Delete\fP \(en Kills any recording started in the above way.
 .ITEM
-\f(CWMod+Shift+c\fP \(en Toggles a webcam in the bottom right for screencasting.
+\f(CWMod+F11\fP \(en Opens up a webcam window for screencasting.
 .ITEM
 \f(CWMod+ScrollLock\fP \(en Toggle screenkey (if installed) to show keypresses
 .LIST OFF
