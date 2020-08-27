@@ -136,7 +136,7 @@ if pacman -Qs libxft-bgra >/dev/null 2>&1; then
 else
 	echo "\033[31mIMPORTANT\033[0m: Note that \033[32m\`libxft-bgra\`\033[0m must be installed for this build of dwm.
 Please run:
-	\033[32myay -S libxft-bgra\033[0m
+	\033[32myay -S libxft-bgra-git\033[0m
 and replace \`libxft\`"
 fi
 
