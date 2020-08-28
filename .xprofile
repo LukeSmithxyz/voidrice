@@ -7,6 +7,12 @@
 # Add this when you include flatpak in your system
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
+# Autostart Pulseaudio if installed and not already started by init.
+# Chromium/Brave doesn't automatically start Pulse for some reason.
+[ -x /usr/bin/pulseaudio ] &&
+	! pidof pulseaudio >/dev/null &&
+	setsid -f pulseaudio --start >/dev/null 2>&1
+
 mpd &			# music player daemon-you might prefer it as a service though
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 setbg &			# set the background with the `setbg` script
