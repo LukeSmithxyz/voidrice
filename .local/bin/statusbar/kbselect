@@ -1,7 +1,8 @@
 #!/bin/sh
 # works on any init system
 # requirements: dmenu, xorg-setxkbmap
-kb="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')" || exit 1
+q="$(setxkbmap -query)"
+kb="$(echo "$q" | grep -oP 'layout:\s*\K\w+')" || exit 1
 
 case $BLOCK_BUTTON in
 	1) kb_choice="$(awk '/! layout/{flag=1; next} /! variant/{flag=0} flag {print $2, "- " $1}' /usr/share/X11/xkb/rules/base.lst | dmenu -l 15)"
@@ -13,4 +14,4 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-echo "$kb"
+variant="$(echo "$q" | grep -oP 'variant:\s*\K\w+')" && echo "$kb-$variant" || echo "$kb"
