@@ -10,7 +10,7 @@ weatherreport="${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
 getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1 ;}
 
 # Some very particular and terse stream manipulation. We get the maximum
-# precipication chance and the daily high and low from the downloaded file and
+# precipitation chance and the daily high and low from the downloaded file and
 # display them with coresponding emojis.
 showweather() { printf "%s" "$(sed '16q;d' "$weatherreport" |
 	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')"
