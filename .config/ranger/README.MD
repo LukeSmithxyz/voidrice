@@ -9,7 +9,7 @@ These are the basic key binds in ranger, even outside of my configs. Note that t
 + dd -- cut selected files
 + yy -- copy/yank selected files
 + pp -- paste/move cut/copied files
-+ / -- search, when (n/N) next/previos result
++ / -- search, when (n/N) next/previous result
 + zh or CTRL-h -- show hidden files
 + Renaming files:
 	+ cw -- rename file from scratch
