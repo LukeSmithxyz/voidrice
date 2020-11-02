@@ -10,8 +10,8 @@ esac
 
 cmds="\
 🔒 lock		slock
-🚪 leave dwm	kill -TERM $(pidof -s dwm)
-♻ renew dwm	kill -HUP $(pidof -s dwm)
+🚪 leave dwm	kill -TERM $(pgrep -u $USER "\bdwm$")
+♻ renew dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
 🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
 🔃 reboot	${reb:-sudo -A reboot}
 🖥 shutdown	${shut:-sudo -A shutdown -h now}"
