@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# Give a file with images and timecodes and creates a video slideshow of them.
+#
+# Timecodes must be in format 00:00:00.
+#
+# Imagemagick and ffmpeg required.
+
+# TODO:
+#  - add the ability to include text, using imagemagick text to image feature.
+
+
+[ -z "$1" ] && echo "Usage:
+	first arg:	file with timecodes
+	second arg:	audio file (optional)" && exit 1
+
+prepdir="$1-src"
+prepfile="$prepdir/$1.prep"
+outfile="$1.mp4"
+
+totaldur="$(ffmpeg -i "$2" 2>&1 | awk '/Duration/ {print $2}' | sed s/,//)"
+totseconds="$(date '+%s' -d "$totaldur")"
+
+mkdir -p "$prepdir"
+
+echo "Preparing images... May take a while depending on the number of files."
+{
+
+while read -r x;
+do
+	# Get the time from the first column.
+	time="${x%%	*}"
+	seconds="$(date '+%s' -d "$time")"
+	# Duration is not used on the first looped item.
+	duration="$((seconds - prevseconds))"
+
+	# Get the filename from the rest.
+	filename="${x#*	}"
+	base="$(basename "$filename")"
+	base="${base%.*}.jpg"
+
+	# Resize and read the image file, but not if already done.
+	[ ! -f "$prepdir/$base" ] &&
+		convert -size 1920x1080 canvas:black -gravity center "$filename" -resize 1920x1080 -composite "$prepdir/$base"
+
+	# If the first line, do not write yet.
+	[ "$time" = "00:00:00" ] || echo "file '$prevbase'
+duration $duration"
+
+	# Keep the information required for the next file.
+	prevbase="$base"
+	prevtime="$time"
+	prevseconds="$(date '+%s' -d "$prevtime")"
+done < "$1"
+# Do last file which must be given twice as follows
+echo "file '$base'
+duration $((totseconds-seconds))
+file '$base'"
+} > "$prepfile"
+
+if [ -f "$2" ]; then
+	ffmpeg -y -f concat -safe 0 -i "$prepfile" -i "$2" -c:a aac -vsync vfr -c:v libx264 -pix_fmt yuv420p "$outfile"
+else
+	ffmpeg -y -f concat -safe 0 -i "$prepfile" -vsync vfr -c:v libx264 -pix_fmt yuv420p "$outfile"
+fi
+
+# Might also try:
+# -vf "fps=${fps:-24},format=yuv420p" "$outfile"
+# but has given some problems.
