@@ -3,7 +3,7 @@
 # This script will compile or run another finishing operation on a document. I
 # have this script run via vim.
 #
-# Compiles .tex. groff (.mom, .ms), .rmd, .md.  Opens .sent files as sent
+# Compiles .tex. groff (.mom, .ms), .rmd, .md, .org.  Opens .sent files as sent
 # presentations.  Runs scripts based on extention or shebang
 #
 # Note that .tex files which you wish to compile with XeLaTeX should have the
@@ -49,5 +49,6 @@ case "$ext" in
 	scad) openscad -o "$base".stl "$file" ;;
 	sent) setsid -f sent "$file" 2>/dev/null ;;
 	tex) textype "$file" ;;
+	org) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac
