@@ -49,6 +49,6 @@ case "$ext" in
 	scad) openscad -o "$base".stl "$file" ;;
 	sent) setsid -f sent "$file" 2>/dev/null ;;
 	tex) textype "$file" ;;
-	org) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
+	org) emacs "$file" --batch -u "$USER" -f org-latex-export-to-pdf ;;
 	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac
