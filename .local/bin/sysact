@@ -12,7 +12,7 @@ cmds="\
 🔒 lock		slock
 🚪 leave dwm	kill -TERM $(pgrep -u $USER "\bdwm$")
 ♻ renew dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
-🐻 hibernate	${hib:-sudo -A systemctl suspend-then-hibernate}
+🐻 hibernate	slock ${hib:-systemctl suspend-then-hibernate -i}
 🔃 reboot	${reb:-sudo -A reboot}
 🖥 shutdown	${shut:-sudo -A shutdown -h now}"
 
