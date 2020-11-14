@@ -36,6 +36,7 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
@@ -131,12 +132,12 @@ ex=🎯:\
 [ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ] && shortcuts >/dev/null 2>&1 &
 
 if pacman -Qs libxft-bgra >/dev/null 2>&1; then
-	# Start graphical server on tty1 if not already running.
-	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1  && exec startx
+	# Start graphical server on user's current tty if not already running.
+	[[ -n "$(tty)" && -z $(pgrep -u $USER "\bXorg$") ]] && exec startx
 else
 	echo "\033[31mIMPORTANT\033[0m: Note that \033[32m\`libxft-bgra\`\033[0m must be installed for this build of dwm.
 Please run:
-	\033[32myay -S libxft-bgra\033[0m
+	\033[32myay -S libxft-bgra-git\033[0m
 and replace \`libxft\`"
 fi
 

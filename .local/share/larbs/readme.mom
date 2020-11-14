@@ -241,7 +241,7 @@ previous recordings as their names are based on their exact times.
 .ITEM
 \f(CWMod+Delete\fP \(en Kills any recording started in the above way.
 .ITEM
-\f(CWMod+Shift+c\fP \(en Toggles a webcam in the bottom right for screencasting.
+\f(CWMod+F11\fP \(en Opens up a webcam window for screencasting.
 .ITEM
 \f(CWMod+ScrollLock\fP \(en Toggle screenkey (if installed) to show keypresses
 .LIST OFF
@@ -276,7 +276,7 @@ In the Linux terminal, those binds have other more important purposes, so you ca
 Additionally, I've set vim to use the clipboard as the default buffer, which means when you copy or delete something in vim, it will be in your system clipboard as well, so you can \f(CWctrl-v\fP it into your browser instance, etc. You can also paste material copied from other programs into vim with the typical vim bindings.
 .HEADING 2 "How do I change the background/wallpaper?"
 .PP
-The system will always read the file \f(CW~/.config/wall.png\fP as the wallpaper.
+The system will always read the link \f(CW~/.local/share/bg\fP as the wallpaper.
 The script \f(CWsetbg\fP, if run on an image will set it as the persistent background.
 When using the file manager, you can simply hover over an image name and type \f(CWbg\fP and this will run \f(CWsetbg\fP.
 .HEADING 2 "How I change the colorscheme?"
