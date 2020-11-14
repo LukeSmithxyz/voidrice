@@ -5,5 +5,5 @@
 
 [ "$(cat /sys/class/power_supply/BAT0/status)" = "Charging" ] && exit
 [ "$(cat /sys/class/power_supply/BAT0/capacity)" -lt 25 ] &&
-export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1001/bus &&
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u $USER)/bus &&
 notify-send -u critical "Battery critically low."
