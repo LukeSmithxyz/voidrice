@@ -1,9 +1,12 @@
 #!/bin/sh
 
+bmdirs="${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs"
+bmfiles="${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-files"
+
 # Output locations. Unactivated progs should go to /dev/null.
-shell_shortcuts="${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc"
-zsh_named_dirs="${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc"
-ranger_shortcuts="${XDG_CONFIG_HOME:-$HOME/.config}/ranger/shortcuts.conf"
+shell_shortcuts="${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+zsh_named_dirs="${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+ranger_shortcuts="/dev/null"
 qute_shortcuts="/dev/null"
 fish_shortcuts="/dev/null"
 vifm_shortcuts="/dev/null"
@@ -15,7 +18,7 @@ printf "# vim: filetype=sh\\nalias " > "$shell_shortcuts"
 printf "\" vim: filetype=vim\\n" > "$vifm_shortcuts"
 
 # Format the `directories` file in the correct syntax and sent it to all three configs.
-eval "echo \"$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/directories")\"" | \
+eval "echo \"$(cat "$bmdirs")\"" | \
 awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
     printf(\"%s=\42cd %s && ls -a\42 \\\\\n\",\$1,\$2)   >> \"$shell_shortcuts\" ;
     printf(\"hash -d %s=%s \n\",\$1,\$2)                 >> \"$zsh_named_dirs\"  ;
@@ -25,7 +28,7 @@ awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
     printf(\"map g%s cd %s\nmap t%s tab_new %s\nmap m%s shell mv -v %%s %s\nmap Y%s shell cp -rv %%s %s \n\",\$1,\$2,\$1,\$2, \$1, \$2, \$1, \$2) >> \"$ranger_shortcuts\" }"
 
 # Format the `files` file in the correct syntax and sent it to both configs.
-eval "echo \"$(cat "${XDG_CONFIG_HOME:-$HOME/.config}/files")\"" | \
+eval "echo \"$(cat "$bmfiles")\"" | \
 awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
     printf(\"%s=\42\$EDITOR %s\42 \\\\\n\",\$1,\$2)  >> \"$shell_shortcuts\" ;
 	printf(\"abbr %s \42\$EDITOR %s\42 \n\",\$1,\$2) >> \"$fish_shortcuts\"  ;
