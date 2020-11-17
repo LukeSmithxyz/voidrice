@@ -1,3 +1,9 @@
 #!/bin/sh
 
-ifinstalled bc && echo "Welcome to the Calculator." && bc -lq
+NOT_BLOAT="/tmp/pystartuplmao"
+
+cat > "$NOT_BLOAT" <<EOF
+from math import *
+EOF
+
+python -i "$NOT_BLOAT"
