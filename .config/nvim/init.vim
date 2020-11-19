@@ -24,6 +24,8 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
+set path+=**
+set wildmenu
 
 " Some basics:
 	nnoremap c "_c
