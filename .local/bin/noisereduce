@@ -2,7 +2,7 @@
 
 usage ()
 {
-    printf "Usage : noisereduse <input video file> <output video file>\n"
+    printf "Usage : noisereduce <input video file> <output video file>\n"
     exit
 }
 
