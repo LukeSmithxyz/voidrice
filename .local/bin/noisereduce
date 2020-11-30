@@ -2,7 +2,7 @@
 
 usage ()
 {
-    printf "Usage : noiseclean.sh <input video file> <output video file>\n"
+    printf "Usage : noisereduse <input video file> <output video file>\n"
     exit
 }
 
