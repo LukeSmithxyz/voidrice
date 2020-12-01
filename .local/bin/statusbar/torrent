@@ -8,7 +8,7 @@ transmission-remote -l | grep % |
 	s/.*Idle.*/B 🕰️/;
 	s/.*Uploading.*/L ⬆️/;
 	s/.*%.*/M ⬇️/" |
-		sort -h | uniq -c | awk '{print $3 $1}' | paste -sd ' '
+		sort -h | uniq -c | awk '{print $3 $1}' | paste -sd ' ' -
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e tremc ;;
