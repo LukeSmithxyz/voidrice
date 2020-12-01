@@ -63,6 +63,8 @@ cmd copyto ${{
 cmd setbg "$1"
 cmd bulkrename $vidir
 
+cmd draganddrop &dragon-drag-and-drop -a -x $fx
+
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
@@ -78,6 +80,7 @@ map x $$f
 map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
+map dr draganddrop
 
 map A rename # at the very end
 map c push A<c-u> # new rename
