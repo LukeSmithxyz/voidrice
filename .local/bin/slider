@@ -96,7 +96,7 @@ do
 			convert -size "${res:-1920x1080}" canvas:"${bgc:-black}" -gravity center "$content" -resize 1920x1080 -composite "$prepdir/$base"
 	else
 		{ [ ! -f "$prepdir/$base" ] || [ -n "${redo+x}" ] ;} &&
-			convert -size "${res:-1920x1080}" -background "${bgc-black}" -fill "${fgc:-white}" -pointsize "${ppt:-150}" -gravity center label:"$content" "$prepdir/$base"
+			convert -size "${res:-1920x1080}" -background "${bgc:-black}" -fill "${fgc:-white}" -pointsize "${ppt:-150}" -gravity center label:"$content" "$prepdir/$base"
 	fi
 
 	# If the first line, do not write yet.
