@@ -21,7 +21,7 @@ getprices() { # The command to get the desired prices
 		echo "$icon;$val;$human" > "$dir/$web"
 	done; [ -d "$dir" ] && touch "$dir"
 	pkill -RTMIN+13 "${STATUSBAR:-dwmblocks}" ;} &
-	exit
+	exit 0
 	}
 
 printprices() { # Print/format all prices
@@ -32,11 +32,11 @@ printprices() { # Print/format all prices
 	done | sed 's/ $/\n/'
 	}
 
-[ ! -d "$dir" ] && mkdir -p "$dir" && { getprices; exit ;}
+[ ! -d "$dir" ] && mkdir -p "$dir" && { getprices; }
 
 # If currencies haven't been updated today, try to update them.
 [ "$(stat -c %x "$HOME/.local/share/crypto-prices" | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
-	{ ping -q -c 1 example.org >/dev/null 2>&1 && getprices || exit ;}
+	{ ping -q -c 1 example.org >/dev/null 2>&1 && getprices || exit 1 ;}
 
 case $BLOCK_BUTTON in
 	1) uptime="$(date -d "$(stat -c %x "$dir")" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
