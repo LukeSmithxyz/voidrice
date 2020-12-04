@@ -6,7 +6,7 @@
 chosen=$(cut -d ';' -f1 ~/.local/share/larbs/emoji | dmenu -i -l 30 | sed "s/ .*//")
 
 # Exit if none chosen.
-[ -z "$chosen" ] && exit
+[ -z "$chosen" ] && exit 1
 
 # If you run this command with an argument, it will automatically insert the
 # character. Otherwise, show a message that the emoji has been copied.

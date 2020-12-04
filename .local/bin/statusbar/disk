@@ -5,7 +5,7 @@
 
 location=${1:-/}
 
-[ -d "$location" ] || exit
+[ -d "$location" ] || exit 1
 
 case $BLOCK_BUTTON in
 	1) notify-send "💽 Disk space" "$(df -h --output=target,used,size)" ;;

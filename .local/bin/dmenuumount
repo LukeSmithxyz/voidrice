@@ -5,16 +5,16 @@
 # Drives mounted at /, /boot and /home will not be options to unmount.
 
 unmountusb() {
-	[ -z "$drives" ] && exit
+	[ -z "$drives" ] && exit 1
 	chosen="$(echo "$drives" | dmenu -i -p "Unmount which drive?")" || exit 1
 	chosen="$(echo "$chosen" | awk '{print $1}')"
-	[ -z "$chosen" ] && exit
+	[ -z "$chosen" ] && exit 1
 	sudo -A umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted."
 	}
 
 unmountandroid() { \
 	chosen="$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | dmenu -i -p "Unmount which device?")" || exit 1
-	[ -z "$chosen" ] && exit
+	[ -z "$chosen" ] && exit 1
 	sudo -A umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted."
 	}
 
@@ -29,7 +29,7 @@ asktype() { \
 drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
 
 if ! grep simple-mtpfs /etc/mtab; then
-	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
+	[ -z "$drives" ] && echo "No drives to unmount." &&  exit 1
 	echo "Unmountable USB drive detected."
 	unmountusb
 else

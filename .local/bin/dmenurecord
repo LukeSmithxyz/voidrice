@@ -24,7 +24,7 @@ killrecording() {
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
 	sleep 3
 	kill -9 "$recpid"
-	exit
+	exit 0
 	}
 
 screencast() { \
@@ -119,5 +119,5 @@ case "$1" in
 	video) video;;
 	*selected) videoselected;;
 	kill) killrecording;;
-	*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
+	*) ([ -f /tmp/recordingpid ] && asktoend && exit 0) || askrecording;;
 esac

@@ -2,7 +2,7 @@
 
 # Requires ffmpeg (audio splitting) and my `tag` wrapper script.
 
-[ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
+[ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit 1
 
 echo "Enter the album/book title:"; read -r booktitle
 

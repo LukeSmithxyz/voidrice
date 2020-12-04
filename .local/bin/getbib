@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "$1" ] && echo "Give either a pdf file or a DOI as an argument." && exit
+[ -z "$1" ] && echo "Give either a pdf file or a DOI as an argument." && exit 1
 
 if [ -f "$1" ]; then
 	# Try to get DOI from pdfinfo or pdftotext output.
