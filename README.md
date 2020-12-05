@@ -28,6 +28,7 @@ These dotfiles are intended to go with numerous suckless programs I use:
 
 - [dwm](https://github.com/lukesmithxyz/dwm) (window manager)
 - [dwmblocks](https://github.com/lukesmithxyz/dwmblocks) (statusbar)
+- [dmenu](https://github.com/lukesmithxyz/dmenu) (dynamic menu)
 - [st](https://github.com/lukesmithxyz/st) (terminal emulator)
 
 I also recommend trying out
