@@ -34,6 +34,7 @@ case "$ext" in
 	cs) mcs "$file" && mono "$base".exe ;;
 	go) go run "$file" ;;
 	h) sudo make install ;;
+	java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
 	m) octave "$file" ;;
 	md)	if  [ -x "$(command -v lowdown)" ]; then
 			lowdown -d nointem -e super "$file" -Tms | groff -mpdfmark -ms -kept > "$base".pdf
