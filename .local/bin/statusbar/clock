@@ -2,8 +2,8 @@
 
 # Refresh clock at exactly 00 seconds
 refresh(){
-    SCRIPT_NAME=`basename "$0"`
-    pidof -x $SCRIPT_NAME && exit 1 # exit if already running
+    PID=$(pidof -x `basename "$0"`)
+    [ "$PID" = "$BASHPID" ] || exit 1 # exit if already running
     sleep $((60-$(date "+%S")))
     kill -35 $(pidof dwmblocks)
 }
