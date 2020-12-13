@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Refresh clock at exactly 00 seconds
+refresh(){
+    SCRIPT_NAME=`basename "$0"`
+    pidof -x $SCRIPT_NAME && exit 1 # exit if already running
+    sleep $((60-$(date "+%S")))
+    kill -35 $(pidof dwmblocks)
+}
+
 clock=$(date '+%I')
 
 case "$clock" in
@@ -27,3 +35,4 @@ case $BLOCK_BUTTON in
 esac
 
 date "+%Y %b %d (%a) $icon%I:%M%p"
+refresh &
