@@ -16,40 +16,23 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-# acpi alternative
-# acpi | sed "s/Battery [0-9]: //;s/[Dd]ischarging, /🔋/;s/[Nn]ot charging, /🛑/;s/[Cc]harging, /🔌/;s/[Uu]nknown, /♻️/;s/[Ff]ull, /⚡/;s/ \(remaining\|until charged\)//"; exit
-
 # Check if battery directories are detected
 [ ! -e /sys/class/power_supply/BAT?* ] && echo "No battery found" && exit 1
-
-# Defines the formatting for the info from the battery folders
-format()
-{
-	# Sets up the status and capacity
-	status=$(cat "$1/status")
-	case "$status" in
-		"Full")
-			status="⚡ "
-			;;
-		"Discharging")
-			status="🔋 "
-			;;
-		"Not charging")
-			status="🛑 "
-			;;
-		"Unknown")
-			status="♻️/ "
-			;;
-	esac
-	capacity=$(cat "$1/capacity")
-	# Will make a warn variable if discharging and low
-	[ "$status" = "🔋 " ] && [ "$capacity" -le 25 ] && local warn="❗ "
-	# Prints the info
-	printf "%s%s%d%%\n" "$status" "$warn" "$capacity"
-}
 
 # Loop through all attached batteries and format the info
 for battery in /sys/class/power_supply/BAT?*
 do
-	format $battery
+	# Sets up the status and capacity
+	status=$(cat "$battery/status")
+	case "$status" in
+		"Full") status="⚡" ;;
+		"Discharging") status="🔋" ;;
+		"Not charging") status="🛑" ;;
+		"Unknown") status="♻️" ;;
+	esac
+	capacity=$(cat "$battery/capacity")
+	# Will make a warn variable if discharging and low
+	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && local warn="❗"
+	# Prints the info
+	printf "%s%s%d%%\n" "$status" "$warn" "$capacity"
 done && return 0
