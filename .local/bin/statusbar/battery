@@ -25,8 +25,6 @@ esac
 # Defines the formatting for the info from the battery folders
 format()
 {
-	# Will make a warn variable if discharging and low
-	[ $(cat "$1/status") = "[Dd]ischarging" ] && [ $(cat "$1/capacity") -le 25 ] && local warn="❗ "
 	# Sets up the status and capacity
 	status=$(cat "$1/status")
 	case "$status" in
@@ -44,6 +42,8 @@ format()
 			;;
 	esac
 	capacity=$(cat "$1/capacity")
+	# Will make a warn variable if discharging and low
+	[ "$status" = "🔋 " ] && [ "$capacity" -le 25 ] && local warn="❗ "
 	# Prints the info
 	printf "%s%s%d%%\n" "$status" "$warn" "$capacity"
 }
