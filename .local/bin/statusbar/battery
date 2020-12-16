@@ -27,6 +27,7 @@ do
 	case "$status" in
 		"Full") status="⚡" ;;
 		"Discharging") status="🔋" ;;
+		"Charging") status="🔌" ;;
 		"Not charging") status="🛑" ;;
 		"Unknown") status="♻️" ;;
 	esac
