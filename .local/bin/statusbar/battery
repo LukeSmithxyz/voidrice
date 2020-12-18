@@ -33,7 +33,7 @@ do
 	esac
 	capacity=$(cat "$battery/capacity")
 	# Will make a warn variable if discharging and low
-	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && local warn="❗"
+	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
 	# Prints the info
-	printf "%s%s%d%%\n" "$status" "$warn" "$capacity"
+	printf "%s%s%d%%\n" "$status" "$warn" "$capacity"; unset warn
 done && return 0
