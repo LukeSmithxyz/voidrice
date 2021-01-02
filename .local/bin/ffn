@@ -1,0 +1,110 @@
+#!/bin/sh
+# Program:
+# 	* rename file while removing [:punct:], replace [:upper:] with
+#	  [:lower:], replace "${sep}" with '_'
+# 	* while given '-d' , do not rename file, only print new
+# 	  file name
+# Dependency:
+# 	* nil
+# Author:
+# 	* Chang, Chu-Kuan <cckuan@changchukuan.name>
+
+#
+# Setting
+#
+
+# Characters which will be replaced by '_', other [:punct:] not presented here
+# will be deleted
+readonly sep='[]._-[:blank:]'
+
+process_file()
+{
+	file="$(readlink -f "$1")"
+	dir="$(dirname "${file}")"
+	base="$(basename "${file}")"
+
+	# Return if there is error parsing file name
+	if test -z "${file}" || test -z "${dir}" || test -z "${base}"; then
+		printf '%s: error parsing file: %s\n' "${progname}" "${file}" 1>&2
+		return 1
+	fi
+
+	case "${base}" in
+	# file name with extension
+	*.*)
+		# get file extension
+		extension="${base##*.}"
+		# process file name
+		new_base="$(printf '%s' "${base%.*}" \
+		    | iconv --to-code=utf-8 \
+		    | tr "${sep}" '[:space:]' \
+		    | tr -d '[:punct:]' \
+		    | tr '[:upper:]' '[:lower:]' \
+		    | tr -s '[:space:]' '_' \
+		    | sed 's/^_//; s/_$//'
+		).${extension}"
+		;;
+	# file name without extension
+	*)
+		new_base="$(printf '%s' "${base}" \
+		    | iconv --to-code=utf-8 \
+		    | tr "${sep}" '[:space:]' \
+		    | tr -d '[:punct:]' \
+		    | tr '[:upper:]' '[:lower:]' \
+		    | tr -s '[:space:]' '_' \
+		    | sed 's/^_//; s/_$//'
+		)"
+		;;
+	esac
+
+	if test "${base}" = "${new_base}"; then
+		clean_file_cnt="$((clean_file_cnt + 1))"
+		printf '%s: file %s require no rename\n' "${progname}" \
+		    "${base}"
+		return 0
+	fi
+
+	case "${dry_run}" in
+	'1')
+		# While given '-d', do not rename file, only
+		# print new file name
+		printf '%s -> %s\n' "${base}" "${new_base}"
+		;;
+	*)
+		# Rename file (prompt before overwrite)
+		mv -iv "${dir}/${base}" "${dir}/${new_base}" \
+		    && success_file_cnt="$((success_file_cnt + 1))"
+		;;
+	esac
+}
+
+readonly progname="$(basename "$0")"
+dry_run='0'
+total_file_cnt='0'
+success_file_cnt='0'
+clean_file_cnt='0'
+
+while getopts 'dh' opt; do
+	case "${opt}" in
+	'd')
+		readonly dry_run='1'
+		;;
+	'h')
+		printf 'Usage:\t./%s [-hd] <path/to/file_name>...\n' "${progname}"
+		exit 0
+		;;
+	esac
+done
+
+shift "$((OPTIND - 1))"
+
+for arg; do
+	total_file_cnt="$((total_file_cnt + 1))"
+	process_file "${arg}"
+done
+
+# Report status
+printf '\n%s: renamed %d, clean %d, total %d/%d\n' "${progname}" \
+    "${success_file_cnt}" "${clean_file_cnt}" \
+    "$((success_file_cnt + clean_file_cnt))" "${total_file_cnt}"
+
