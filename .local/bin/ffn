@@ -5,7 +5,7 @@
 # 	* while given '-d' , do not rename file, only print new
 # 	  file name
 # Dependency:
-# 	* nil
+# 	* err.sh
 # Author:
 # 	* Chang, Chu-Kuan <cckuan@changchukuan.name>
 
@@ -15,11 +15,26 @@
 
 # Characters which will be replaced by '_', other [:punct:] not presented here
 # will be deleted
-readonly sep='[]._-[:blank:]'
+readonly sep='[]()._-[:blank:]'
+
+. err.sh
+
+help_msg()
+{
+	cat << EOF
+Usage:
+  ${progname} [-hd] file... - format filename
+
+Options:
+  -d                   Perform a 'dry run'. Do not actually rename file.
+  -h                   Show this message and exit.
+
+EOF
+}
 
 process_file()
 {
-	file="$(readlink -f "$1")"
+	file="$1"
 	dir="$(dirname "${file}")"
 	base="$(basename "${file}")"
 
@@ -37,10 +52,10 @@ process_file()
 		# process file name
 		new_base="$(printf '%s' "${base%.*}" \
 		    | iconv --to-code=utf-8 \
-		    | tr "${sep}" '[:space:]' \
+		    | tr "${sep}" ' ' \
 		    | tr -d '[:punct:]' \
 		    | tr '[:upper:]' '[:lower:]' \
-		    | tr -s '[:space:]' '_' \
+		    | tr -s ' ' '_' \
 		    | sed 's/^_//; s/_$//'
 		).${extension}"
 		;;
@@ -48,10 +63,10 @@ process_file()
 	*)
 		new_base="$(printf '%s' "${base}" \
 		    | iconv --to-code=utf-8 \
-		    | tr "${sep}" '[:space:]' \
+		    | tr "${sep}" ' ' \
 		    | tr -d '[:punct:]' \
 		    | tr '[:upper:]' '[:lower:]' \
-		    | tr -s '[:space:]' '_' \
+		    | tr -s ' ' '_' \
 		    | sed 's/^_//; s/_$//'
 		)"
 		;;
@@ -64,7 +79,7 @@ process_file()
 		return 0
 	fi
 
-	case "${dry_run}" in
+	case "${d_flag}" in
 	'1')
 		# While given '-d', do not rename file, only
 		# print new file name
@@ -79,7 +94,7 @@ process_file()
 }
 
 readonly progname="$(basename "$0")"
-dry_run='0'
+d_flag='0'
 total_file_cnt='0'
 success_file_cnt='0'
 clean_file_cnt='0'
@@ -87,11 +102,14 @@ clean_file_cnt='0'
 while getopts 'dh' opt; do
 	case "${opt}" in
 	'd')
-		readonly dry_run='1'
+		readonly d_flag='1'
 		;;
 	'h')
-		printf 'Usage:\t./%s [-hd] <path/to/file_name>...\n' "${progname}"
+		help_msg
 		exit 0
+		;;
+	*)
+		err '1' 'invalid option\n'
 		;;
 	esac
 done
@@ -107,4 +125,3 @@ done
 printf '\n%s: renamed %d, clean %d, total %d/%d\n' "${progname}" \
     "${success_file_cnt}" "${clean_file_cnt}" \
     "$((success_file_cnt + clean_file_cnt))" "${total_file_cnt}"
-
