@@ -5,7 +5,7 @@
 # 	* while given '-d' , do not rename file, only print new
 # 	  file name
 # Dependency:
-# 	* err.sh
+# 	* nil
 # Author:
 # 	* Chang, Chu-Kuan <cckuan@changchukuan.name>
 
@@ -16,8 +16,6 @@
 # Characters which will be replaced by '_', other [:punct:] not presented here
 # will be deleted
 readonly sep='[]()._-[:blank:]'
-
-. err.sh
 
 help_msg()
 {
@@ -109,7 +107,8 @@ while getopts 'dh' opt; do
 		exit 0
 		;;
 	*)
-		err '1' 'invalid option\n'
+		printf '%s: invalid option\n' "${progname}"
+		exit 1
 		;;
 	esac
 done
