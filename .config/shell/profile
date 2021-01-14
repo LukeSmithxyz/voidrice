@@ -6,8 +6,10 @@
 # to clean up.
 
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+LOC=$(find ~/.local/bin -type d -printf %p:)
+export PATH="$PATH:${LOC%%:}"
 
+unset LOC
 unsetopt PROMPT_SP
 
 # Default programs:
