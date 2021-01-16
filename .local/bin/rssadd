@@ -8,8 +8,7 @@ else
 		sed -E 's_^.*href="(https?://[^"]+)".*$_\1_')"
 
 	! grep "https*://\S\+\.[A-Za-z]\+\S*" <<<"$url" &&
-		notify-send "That doesn't look like a full URL." && exit
-		exit 1
+		notify-send "That doesn't look like a full URL." && exit 1
 fi
 
 RSSFILE="${XDG_CONFIG_HOME:-$HOME/.config}/newsboat/urls"
