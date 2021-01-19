@@ -3,8 +3,7 @@
 if echo "$1" | grep "https*://\S\+\.[A-Za-z]\+\S*" >/dev/null; then
 	url="$1"
 else
-	url="$(grep 'rel="self"' "$1" |
-		grep xml |
+	url="$(grep -Eom1 '<[^>]+(rel="self"|application/[a-z]+\+xml)[^>]+>' "$1" |
 		sed -E 's_^.*href="(https?://[^"]+)".*$_\1_')"
 
 	! grep "https*://\S\+\.[A-Za-z]\+\S*" <<<"$url" &&
