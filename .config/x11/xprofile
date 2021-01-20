@@ -16,5 +16,5 @@ unclutter &		# Remove mouse when idle
 # This is "necessary" on Artix due to a current bug between PA and
 # Chromium-based browsers where they fail to start PA and use dummy output.
 pidof -s runit &&
-	pidof -s ! pidof -s pulseaudio >/dev/null 2>&1 &&
+	! pidof -s pulseaudio >/dev/null 2>&1 &&
 	setsid -f pulseaudio --start --exit-idle-time=-1 >/dev/null 2>&1
