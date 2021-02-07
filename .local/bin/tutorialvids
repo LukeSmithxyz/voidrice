@@ -21,5 +21,6 @@ calcurse (calendar)	https://www.youtube.com/watch?v=hvc-pHjbhdE
 urlview		https://www.youtube.com/watch?v=IgzpAjFgbCw
 colorschemes with pywal	https://www.youtube.com/watch?v=Es79N_9BblE
 vi mode in shell	https://www.youtube.com/watch?v=GqoJQft5R2E
+pass (password manager) 	https://www.youtube.com/watch?v=sVkURNfxPd4
 "
 echo "$vidlist" | grep -P "^$(echo "$vidlist" | grep "https:" | sed 's/\t.*//g' | dmenu -i -p "Learn about what? (ESC to cancel)" -l 20 | awk '{print $1}')\s" | sed 's/.*\t//' | xargs -r mpv
