@@ -14,4 +14,14 @@ else
 	. "$HOME/.xprofile"
 fi
 
-ssh-agent dwm
+# Flags that daemonize the gpg-agent as well as some 'reasonable' configuration for said daemon.
+# GPG keys are cached by the daemon for 2 hours but this duration is reset whenever the key is
+# used again by any means, this includes if it was used by a command in your crontab.
+# This is especially useful if you have mutt-wizrd schedule email synchronization via mailsync.
+# After 16 hours, however, a cached key is removed and the password will need to be re-entered.
+# The last flag is to prevent any third party caching of keys, especially on disk.
+# If you are paranoid about X-sniffing attacks, consider adding the '--grab' flag as (by
+# default_ the '--no-grab' flag is set.
+gpg_flags='--daemon --default-cache-ttl 7200 --max-cache-ttl 57600 --no-allow-external-cache'
+
+ssh-agent gpg-agent $gpg_flags dwm
