@@ -7,6 +7,7 @@
 case $BLOCK_BUTTON in
 	1) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
 	3) notify-send "🌐 Internet module" "\- Click to connect
+❌: wifi disabled
 📡: no wifi connection
 📶: wifi connection with quality
 ❎: no ethernet
@@ -17,7 +18,7 @@ case $BLOCK_BUTTON in
 esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
-	down) wifiicon="📡 " ;;
+	down) [ "$(cat /sys/class/net/w*/flags)" = "0x1002" ] && wifiicon="❌ " || wifiicon="📡 " ;;
 	up) wifiicon="$(awk '/^\s*w/ { print "📶", int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
 esac
 
