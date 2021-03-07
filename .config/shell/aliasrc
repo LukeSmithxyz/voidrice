@@ -6,6 +6,11 @@
 # Use $XINITRC variable if file exists.
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
+# sudo not required for some system commands
+for x in mount umount sv pacman updatedb su ; do
+	alias $x="sudo $x"
+done
+
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
 	cp="cp -iv" \
@@ -31,7 +36,6 @@ alias \
 	trem="transmission-remote" \
 	YT="youtube-viewer" \
 	sdn="sudo shutdown -h now" \
-	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
 	p="sudo pacman" \
