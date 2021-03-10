@@ -2,7 +2,12 @@
 
 printf "Beginning upgrade.\\n"
 
-yay -Syu
+if ! command -v paru &> /dev/null; then
+    yay -Syu
+else
+    paru -Syu
+fi
+
 pkill -RTMIN+8 "${STATUSBAR:-dwmblocks}"
 
 printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
