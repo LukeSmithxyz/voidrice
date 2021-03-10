@@ -11,6 +11,11 @@ for x in mount umount sv pacman updatedb su ; do
 	alias $x="sudo $x"
 done
 
+# Write minimally
+for x in $(ls -A ~/.local/bin/statusbar) ; do
+	alias "${x#*-}"=$x
+done
+
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
 	cp="cp -iv" \
