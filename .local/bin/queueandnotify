@@ -6,9 +6,9 @@
 queuefile="${XDG_DATA_HOME:-$HOME/.local/share}/newsboat/queue"
 
 while read -r line; do
-	[ -z "$line" ] && continue
-	url="$(echo "$line" | awk '{print $1}')"
-	qndl "$url" "curl -LO"
+    [ -z "$line" ] && continue
+    url="$(echo "$line" | awk '{print $1}')"
+    qndl "$url" "curl -LO"
 done < "$queuefile"
 
 echo > "$queuefile"

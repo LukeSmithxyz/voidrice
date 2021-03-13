@@ -11,20 +11,20 @@ Options:
 	-d: year of publication
 	-g: genre
 	-c: comment
-You will be prompted for title, artist, album and track if not given." && exit 1 ;}
+You will be prompted for title, artist, album and track if not given." && exit 1; }
 
 while getopts "a:t:A:n:N:d:g:c:f:" o; do case "${o}" in
-	a) artist="${OPTARG}" ;;
-	t) title="${OPTARG}" ;;
-	A) album="${OPTARG}" ;;
-	n) track="${OPTARG}" ;;
-	N) total="${OPTARG}" ;;
-	d) date="${OPTARG}" ;;
-	g) genre="${OPTARG}" ;;
-	c) comment="${OPTARG}" ;;
-	f) file="${OPTARG}" ;;
-	*) printf "Invalid option: -%s\\n" "$OPTARG" && err ;;
-esac done
+    a) artist="${OPTARG}" ;;
+    t) title="${OPTARG}" ;;
+    A) album="${OPTARG}" ;;
+    n) track="${OPTARG}" ;;
+    N) total="${OPTARG}" ;;
+    d) date="${OPTARG}" ;;
+    g) genre="${OPTARG}" ;;
+    c) comment="${OPTARG}" ;;
+    f) file="${OPTARG}" ;;
+    *) printf 'Invalid option: -%s\n' "$OPTARG" && err ;;
+esac; done
 
 shift $((OPTIND - 1))
 
@@ -38,7 +38,7 @@ file="$1"
 [ -z "$track" ] && echo "Enter a track number." && read -r track
 
 case "$file" in
-	*.ogg) echo "Title=$title
+    *.ogg) echo "Title=$title
 Artist=$artist
 Album=$album
 Track=$track
@@ -46,7 +46,7 @@ Total=$total
 Date=$date
 Genre=$genre
 Comment=$comment" | vorbiscomment -w "$file" ;;
-	*.opus) echo "Title=$title
+    *.opus) echo "Title=$title
 Artist=$artist
 Album=$album
 Track=$track
@@ -54,8 +54,8 @@ Total=$total
 Date=$date
 Genre=$genre
 Comment=$comment" | opustags -i -S "$file" ;;
-	*.mp3) eyeD3 -Q --remove-all -a "$artist" -A "$album" -t "$title" -n "$track" -N "$total" -Y "$date" "$file" ;;
-	*.flac) echo "TITLE=$title
+    *.mp3) eyeD3 -Q --remove-all -a "$artist" -A "$album" -t "$title" -n "$track" -N "$total" -Y "$date" "$file" ;;
+    *.flac) echo "TITLE=$title
 ARTIST=$artist
 ALBUM=$album
 TRACKNUMBER=$track
@@ -63,5 +63,5 @@ TOTALTRACKS=$total
 DATE=$date
 GENRE=$genre
 DESCRIPTION=$comment" | metaflac --remove-all-tags --import-tags-from=- "$file" ;;
-	*) echo "File type not implemented yet." ;;
+    *) echo "File type not implemented yet." ;;
 esac

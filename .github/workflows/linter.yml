@@ -1,0 +1,38 @@
+name: shfmt-linter
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  shellcheck:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+         ref: ${{ github.head_ref }}
+    
+    - name: update system
+      run: |
+            sudo apt-get upgrade --install-suggests --yes
+        
+    - name: install dependencies
+      run: |
+            sudo apt-get install git \
+                                 make
+
+    - name: apply shfmt fixes
+      run: |
+            docker run --volume "$PWD":/mnt \
+                       --rm \
+                       mvdan/shfmt -bn -ci -d -i 4 -p -s -sr -w /mnt
+                       
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: (maint) apply shfmt formatting
+        commit_options: '--cleanup=default --no-verify --signoff'
+        push_options: '--force'
+        skip_dirty_check: false    
