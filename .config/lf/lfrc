@@ -90,3 +90,6 @@ map b $setbg $f
 map <c-e> down
 map <c-y> up
 map V push :!nvim<space>
+
+# Source Bookmarks
+source "~/.config/lf/shortcutrc"
