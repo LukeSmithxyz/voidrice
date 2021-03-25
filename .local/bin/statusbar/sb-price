@@ -21,7 +21,7 @@ updateprice() { ping -q -c 1 example.org >/dev/null 2>&1 &&
 	updateprice "$1"
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e less -Sf "$chartfile" ;;
+	1) setsid "$TERMINAL" -e less -Srf "$chartfile" ;;
 	2) notify-send -u low "$3 Updating..." "Updating $2 price..."
 		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now
 \$$(cat "$pricefile")" ;;
