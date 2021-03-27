@@ -12,7 +12,7 @@ case $BLOCK_BUTTON in
 ❎: no ethernet
 🌐: ethernet working
 🔒: vpn is active
-直: ESSID $ESSID
+直ESSID: $ESSID
 " ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
