@@ -12,6 +12,7 @@ case $BLOCK_BUTTON in
 ❎: no ethernet
 🌐: ethernet working
 🔒: vpn is active
+直: ESSID $ESSID
 " ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
@@ -22,3 +23,4 @@ case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 esac
 
 printf "%s%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)" "$(sed "s/.*/🔒/" /sys/class/net/tun*/operstate 2>/dev/null)"
+ESSID=$(iwgetid -r)
