@@ -12,6 +12,7 @@ cache="${XDG_CACHE_HOME:-$HOME/.cache}/slider"
 while getopts "hvrpi:c:a:o:d:f:t:e:x:" o; do case "${o}" in
 	c) bgc="$OPTARG" ;;
 	t) fgc="$OPTARG" ;;
+	f) font="$OPTARG" ;;
 	i) file="$OPTARG" ;;
 	a) audio="$OPTARG" ;;
 	o) outfile="$OPTARG" ;;
@@ -34,6 +35,7 @@ while getopts "hvrpi:c:a:o:d:f:t:e:x:" o; do case "${o}" in
   -c  color of background (use html names, black is default)
   -t  text color for text slides (white is default)
   -s  text font size for text slides (150 is default)
+  -f  text font for text slides (sans serif is default)
   -o  output video file
   -e  if no audio given, the time in seconds that the last slide will be shown (5 is default)
   -x  resolution (1920x1080 is default)
@@ -96,7 +98,7 @@ do
 			convert -size "${res:-1920x1080}" canvas:"${bgc:-black}" -gravity center "$content" -resize 1920x1080 -composite "$prepdir/$base"
 	else
 		{ [ ! -f "$prepdir/$base" ] || [ -n "${redo+x}" ] ;} &&
-			convert -size "${res:-1920x1080}" -background "${bgc:-black}" -fill "${fgc:-white}" -pointsize "${ppt:-150}" -gravity center label:"$content" "$prepdir/$base"
+			convert -size "${res:-1920x1080}" -background "${bgc:-black}" -fill "${fgc:-white}" -font "${font:-Sans}" -pointsize "${ppt:-150}" -gravity center label:"$content" "$prepdir/$base"
 	fi
 
 	# If the first line, do not write yet.
