@@ -7,7 +7,7 @@
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
 # sudo not required for some system commands
-for x in mount umount sv pacman updatedb su; do
+for x in mount umount updatedb; do
 	alias $x="sudo $x"
 done
 
