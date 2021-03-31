@@ -5,8 +5,9 @@
 # If you don't plan on reverting to bash, you can remove the link in ~/.profile
 # to clean up.
 
-# Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+# Adds `~/.local/bin` to $PATH recursively
+typeset -U path
+path+=(~/.local/bin{,/**/*(N/)})
 
 unsetopt PROMPT_SP
 
