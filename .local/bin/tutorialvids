@@ -5,22 +5,22 @@
 # add/remove videos from this list as I go on.
 
 vidlist="
-dwm (window manager)	https://www.youtube.com/watch?v=xnREqY-oyzM
-pacman (installing/managing programs)	https://www.youtube.com/watch?v=-dEuXTMzRKs
-status bar	https://www.youtube.com/watch?v=UP2QpHmcgyk
-sxiv (image viewer)	https://www.youtube.com/watch?v=GYW9i_u5PYs
-st (terminal)	https://www.youtube.com/watch?v=9H75enWM22k
-i3 (old window manager)	https://www.youtube.com/watch?v=GKviflL9XeI
-neomutt (email)		https://www.youtube.com/watch?v=2U3vRbF7v5A
-ncmpcpp (music player)		https://www.youtube.com/watch?v=sZIEdI9TS2U
-newsboat (RSS reader)	https://www.youtube.com/watch?v=dUFCRqs822w
-ranger (file manager)		https://www.youtube.com/watch?v=L6Vu7WPkoJo
-zathura (pdf viewer)		https://www.youtube.com/watch?v=V_Iz4zdyRM4
-gpg keys	https://www.youtube.com/watch?v=DMGIlj7u7Eo
-calcurse (calendar)	https://www.youtube.com/watch?v=hvc-pHjbhdE
-urlview		https://www.youtube.com/watch?v=IgzpAjFgbCw
-colorschemes with pywal	https://www.youtube.com/watch?v=Es79N_9BblE
-vi mode in shell	https://www.youtube.com/watch?v=GqoJQft5R2E
-pass (password manager) 	https://www.youtube.com/watch?v=sVkURNfxPd4
+dwm (window manager)			https://videos.lukesmith.xyz/download/videos/f6b78db7-b368-4647-bc64-28c08fff1988-1080.mp4
+pacman (installing/managing programs)	https://videos.lukesmith.xyz/download/videos/8e7cadb9-0fed-47ce-a2a8-6635fa48614b-1080.mp4
+status bar				https://videos.lukesmith.xyz/download/videos/a4d5326b-0aac-496e-bfc3-5acd5cee89f0-1080.mp4
+sxiv (image viewer)			https://videos.lukesmith.xyz/download/videos/ad4c8d85-90c3-4f3d-a1f3-89129e64a3c2-1080.mp4
+st (terminal)				https://videos.lukesmith.xyz/download/videos/efddd39d-bac5-4599-b572-177beb4ce6e8-720.mp4
+i3 (old window manager)			https://videos.lukesmith.xyz/download/videos/b861525c-7ada-40ee-a2bb-b5e1ffe0f48b-720.mp4
+neomutt (email)				https://videos.lukesmith.xyz/download/videos/83122e83-52d9-4278-ae1a-7d1beeb50c8e-720.mp4
+ncmpcpp (music player)			https://videos.lukesmith.xyz/download/videos/b5ac6f0d-a220-4433-88e3-e98fc791dc0a-720.mp4
+newsboat (RSS reader)			https://videos.lukesmith.xyz/download/videos/bd2c3fff-40fa-47ea-aa98-5b1ec0c903b6-720.mp4
+ranger (file manager)			https://videos.lukesmith.xyz/download/videos/785d914f-8cbd-4a3d-a1f6-d75675fc7549-720.mp4
+zathura (pdf viewer)			https://videos.lukesmith.xyz/download/videos/c780f75a-11f6-48a9-a191-d079ebc36ea4-720.mp4
+gpg keys				https://videos.lukesmith.xyz/download/videos/040f5530-4830-4583-9ddc-2080b421531b-720.mp4
+calcurse (calendar)			https://videos.lukesmith.xyz/download/videos/4b937e8b-7654-46e3-8d01-79392ec5b3d1-720.mp4
+urlview					https://videos.lukesmith.xyz/download/videos/31a4918f-633b-4bd6-b08e-956ac75d0324-720.mp4
+colorschemes with pywal			https://videos.lukesmith.xyz/download/videos/31a4918f-633b-4bd6-b08e-956ac75d0324-720.mp4
+vi mode in shell			https://videos.lukesmith.xyz/download/videos/228aa50c-836f-456f-9f0d-a45157fe4313-720.mp4
+pass (password manager) 		https://videos.lukesmith.xyz/download/videos/432fc942-5e28-4682-9beb-f5cb237a1dd6-1080.mp4
 "
 echo "$vidlist" | grep -P "^$(echo "$vidlist" | grep "https:" | sed 's/\t.*//g' | dmenu -i -p "Learn about what? (ESC to cancel)" -l 20 | awk '{print $1}')\s" | sed 's/.*\t//' | xargs -r mpv
