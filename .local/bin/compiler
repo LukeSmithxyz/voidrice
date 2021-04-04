@@ -13,6 +13,7 @@ file=$(readlink -f "$1")
 dir=${file%/*}
 base="${file%.*}"
 ext="${file##*.}"
+cc='tcc'	# choose your prefered C compiler. Some options: tcc, gcc, clang, musl-clang, musl-gcc. `cc` is (a symlink) the system default.
 
 cd "$dir" || exit 1
 
@@ -29,11 +30,11 @@ textype() { \
 case "$ext" in
 	# Try to keep these cases in alphabetical order.
 	[0-9]) preconv "$file" | refer -PS -e | groff -mandoc -T pdf > "$base".pdf ;;
-	c) cc "$file" -o "$base" && "$base" ;;
+	c) "$cc" "$file" -o "$base" && "$base" ;;
 	cpp) g++ "$file" -o "$base" && "$base" ;;
 	cs) mcs "$file" && mono "$base".exe ;;
 	go) go run "$file" ;;
-	h) sudo make install ;;
+	h) sudo make -j"$(nproc)" CC="${cc}" install ;;
 	java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
 	m) octave "$file" ;;
 	md)	if  [ -x "$(command -v lowdown)" ]; then
