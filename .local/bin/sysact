@@ -5,6 +5,7 @@
 # For systemd-based systems.
 case "$(readlink -f /sbin/init)" in
 	*systemd*)
+	slp="systemctl suspend -i"
 	hib="systemctl suspend-then-hibernate -i"
 	shut="systemctl poweroff -i"
 	reb="systemctl reboot -i";;
@@ -14,6 +15,7 @@ cmds="\
 🔒 lock		slock
 🚪 leave dwm	kill -TERM $(pgrep -u $USER "\bdwm$")
 ♻ renew dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
+💤 sleep	slock ${slp:-loginctl suspend -i}
 🐻 hibernate	slock ${hib:-loginctl suspend-then-hibernate -i}
 🔃 reboot	${reb:-loginctl reboot -i}
 🖥 shutdow	${shut:-systemctl poweroff -i}
