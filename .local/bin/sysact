@@ -2,19 +2,21 @@
 
 # A dmenu wrapper script for system functions.
 
-# For non-systemd init systems.
+# For systemd-based systems.
 case "$(readlink -f /sbin/init)" in
-	*runit*) hib="sudo -A zzz" ;;
-	*openrc*) reb="sudo -A openrc-shutdown -r"; shut="sudo -A openrc-shutdown -p 0" ;;
+	*systemd*)
+	hib="systemctl suspend-then-hibernate -i"
+	shut="systemctl poweroff -i"
+	reb="systemctl reboot -i";;
 esac
 
 cmds="\
 🔒 lock		slock
 🚪 leave dwm	kill -TERM $(pgrep -u $USER "\bdwm$")
 ♻ renew dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
-🐻 hibernate	slock ${hib:-systemctl suspend-then-hibernate -i}
-🔃 reboot	${reb:-sudo -A reboot}
-🖥 shutdown	${shut:-sudo -A shutdown -h now}
+🐻 hibernate	slock ${hib:-loginctl suspend-then-hibernate -i}
+🔃 reboot	${reb:-loginctl reboot -i}
+🖥 shutdow	${shut:-systemctl poweroff -i}
 📺 display off 	 xset dpms force off"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
