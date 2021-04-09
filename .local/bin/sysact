@@ -5,7 +5,7 @@
 # For non-systemd init systems.
 case "$(readlink -f /sbin/init)" in
 	*runit*) slp="sudo -A zzz -z"; hib="sudo -A zzz -Z" ;;
-	*openrc*) reb="sudo -A openrc-shutdown -r"; shut="sudo -A openrc-shutdown -p 0" ;;
+	*openrc*) slp="echo mem | sudo -A tee /sys/power/state"; hib="echo disk | sudo -A tee /sys/power/state"; reb="sudo -A openrc-shutdown -r"; shut="sudo -A openrc-shutdown -p 0" ;;
 esac
 
 cmds="\
