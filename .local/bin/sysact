@@ -12,8 +12,8 @@ cmds="\
 🔒 lock		slock
 🚪 leave dwm	kill -TERM $(pgrep -u $USER "\bdwm$")
 ♻ renew dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
-💤 sleep	slock ${slp:-systemctl suspend -i}
-🐻 hibernate	slock ${hib:-systemctl hibernate -i}
+💤 sleep	${slp:-systemctl suspend -i}
+🐻 hibernate	${hib:-systemctl hibernate -i}
 🔃 reboot	${reb:-sudo -A reboot}
 🖥 shutdown	${shut:-sudo -A shutdown -h now}
 📺 display off 	 xset dpms force off"
@@ -21,3 +21,6 @@ cmds="\
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
 `echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-`
+case "$choice" in
+	*"sleep"*|*"hibernate"*) slock;;
+esac
