@@ -1,11 +1,28 @@
 #!/bin/sh
 # works on any init system
 # requirements: dmenu, xorg-setxkbmap
+# Using "," as the separator set your default layouts in $HOME/.local/share/xkb-layouts
+kbselect() {\
+	kb_choice="$(awk '/! layout/{flag=1; next} /! variant/{flag=0} flag {print $2, "- " $1}' /usr/share/X11/xkb/rules/base.lst | dmenu -l 15)"
+	kb="$(echo "$kb_choice" | awk '{print $3}')"
+	}
+
+defaults="${XDG_DATA_HOME:-$HOME/.local/share}/xkb-layouts"
 kb="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')" || exit 1
 
+[ -f "$defaults" ] || printf "us" > "$defaults"
+
+case $1 in
+	add) kbselect
+	grep "$kb" "$defaults" || sed -i "s/$/,$kb/" "$defaults" ;;
+	toggle) kb=$(grep -o "$kb.*" "$defaults" | awk -F, '{print $2}')
+	[ "$kb" = "" ] && kb=$(cut -f1 -d',' "$defaults")
+	setxkbmap "$kb" ;;
+esac
+
+
 case $BLOCK_BUTTON in
-	1) kb_choice="$(awk '/! layout/{flag=1; next} /! variant/{flag=0} flag {print $2, "- " $1}' /usr/share/X11/xkb/rules/base.lst | dmenu -l 15)"
-	kb="$(echo "$kb_choice" | awk '{print $3}')"
+	1) kbselect 
 	setxkbmap "$kb"
 	pkill -RTMIN+30 "${STATUSBAR:-dwmblocks}";;
 	3) notify-send "⌨  Keyboard/language module" "$(printf "%s" "\- Current layout: $(setxkbmap -query | grep -oP 'layout:\s*\K\w+')")
