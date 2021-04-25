@@ -4,15 +4,16 @@
 
 # For non-systemd init systems.
 case "$(readlink -f /sbin/init)" in
-	*runit*) hib="sudo -A zzz" ;;
-	*openrc*) reb="sudo -A openrc-shutdown -r"; shut="sudo -A openrc-shutdown -p 0" ;;
+	*runit*) slp="sudo -A zzz -z"; hib="sudo -A zzz -Z" ;;
+	*openrc*) slp="echo mem | sudo -A tee /sys/power/state"; hib="echo disk | sudo -A tee /sys/power/state"; reb="sudo -A openrc-shutdown -r"; shut="sudo -A openrc-shutdown -p 0" ;;
 esac
 
 cmds="\
 🔒 lock		slock
 🚪 leave dwm	kill -TERM $(pgrep -u $USER "\bdwm$")
 ♻ renew dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
-🐻 hibernate	slock ${hib:-systemctl suspend-then-hibernate -i}
+💤 sleep	${slp:-systemctl suspend -i}
+🐻 hibernate	${hib:-systemctl hibernate -i}
 🔃 reboot	${reb:-sudo -A reboot}
 🖥 shutdown	${shut:-sudo -A shutdown -h now}
 📺 display off 	 xset dpms force off"
@@ -20,3 +21,6 @@ cmds="\
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
 `echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-`
+case "$choice" in
+	*"sleep"*|*"hibernate"*) slock;;
+esac
