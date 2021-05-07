@@ -50,7 +50,11 @@ asktype() { \
 	}
 
 anddrives=$(simple-mtpfs -l 2>/dev/null)
-usbdrives="$(lsblk -rpo "name,type,size,mountpoint" | grep 'part\|rom' | awk '$4==""{printf "%s (%s)\n",$1,$3}')"
+# Get all block devices which are parents of other devices
+parentnames="$(lsblk -rpo "pkname" | awk 'NR!=1 && $0 != ""' | uniq | xargs printf '^%s$|' | sed 's/|$//')"
+# Get all `part` and `rom` devices, which aren't a parent to another device
+# This allows ommiting partitions which have i.e. crypt or lvm childs
+usbdrives="$(lsblk -rpo "name,type,size,mountpoint" | awk -v parentnames="$parentnames" '$2 ~ "part|rom" && $4=="" && $1 !~ parentnames {printf "%s (%s)\n",$1,$3}')"
 
 if [ -z "$usbdrives" ]; then
 	[ -z "$anddrives" ] && echo "No USB drive or Android device detected" && exit
