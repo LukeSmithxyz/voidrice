@@ -26,7 +26,8 @@ asktype() { \
 	esac
 	}
 
-drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
+ignores=$(echo $(grep UUID /etc/fstab | awk '$3 !~ /swap|this/ { print $2 }') | sed 's/ /$|^/g' | sed 's/\//\\\//g')
+drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$4!~/^'$ignores'$'$(which snap >/dev/null 2>&1 && echo "|\\/snap")'|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
 
 if ! grep simple-mtpfs /etc/mtab; then
 	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
