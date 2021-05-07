@@ -7,8 +7,8 @@ usage ()
 }
 
 # Tests for requirements
-ffmpeg -version >/dev/null || { echo >&2 "We require 'ffmpeg' but it's not installed. Install it by 'sudo apt-get install ffmpeg' Aborting."; exit 1; }
-sox --version >/dev/null || { echo >&2 "We require 'sox' but it's not installed. Install it by 'sudo apt-get install sox' Aborting."; exit 1; }
+ifinstalled ffmpeg || { echo >&2 "We require 'ffmpeg' but it's not installed."; exit 1; }
+ifinstalled sox || { echo >&2 "We require 'ffmpeg' but it's not installed."; exit 1; }
 
 if [ "$#" -ne 2 ]
 then
@@ -50,7 +50,7 @@ if [ -z "$sampleStart" ] ; then sampleStart="00:00:00"; fi
 printf "Sample noise end time [00:00:00.900]: "
 read -r sampleEnd
 if [ -z "$sampleEnd" ] ; then sampleEnd="00:00:00.900"; fi
-printf "Noise reduction amount [0.21]: " 
+printf "Noise reduction amount [0.21]: "
 read -r sensitivity
 if [ -z "$sensitivity" ] ; then sensitivity="0.21"; fi
 
