@@ -7,9 +7,9 @@
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
 # sudo not required for some system commands
-for x in mount umount sv pacman updatedb su ; do
-	alias $x="sudo $x"
-done
+for command in mount umount sv pacman updatedb su ; do
+	alias $command="sudo $command"
+done; unset command
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
