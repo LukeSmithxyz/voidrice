@@ -19,4 +19,4 @@ cmds="\
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
 
-`echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-`
+eval "$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
