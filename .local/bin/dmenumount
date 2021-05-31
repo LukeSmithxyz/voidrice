@@ -9,7 +9,7 @@ getmount() { \
 	[ -z "$chosen" ] && exit 1
         # shellcheck disable=SC2086
 	mp="$(find $1 2>/dev/null | dmenu -i -p "Type in mount point.")" || exit 1
-	[ "$mp" = "" ] && exit 1
+	test -z "$mp" && exit 1
 	if [ ! -d "$mp" ]; then
 		mkdiryn=$(printf "No\\nYes" | dmenu -i -p "$mp does not exist. Create it?") || exit 1
 		[ "$mkdiryn" = "Yes" ] && (mkdir -p "$mp" || sudo -A mkdir -p "$mp")
