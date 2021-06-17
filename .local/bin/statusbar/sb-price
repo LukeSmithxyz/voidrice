@@ -16,6 +16,8 @@ updateprice() { ping -q -c 1 example.org >/dev/null 2>&1 &&
 	curl -s "rate.sx/$1$interval" > "$chartfile" ;}
 
 [ -d "$dir" ] || mkdir -p "$dir"
+[ -f "$pricefile" ] || touch "$pricefile"
+[ -f "$chartfile" ] || touch "$chartfile"
 
 [ "$(stat -c %x "$pricefile" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
 	updateprice "$1"
