@@ -7,7 +7,7 @@ queuefile="${XDG_DATA_HOME:-$HOME/.local/share}/newsboat/queue"
 
 while read -r line; do
 	[ -z "$line" ] && continue
-	url="$(echo "$line" | awk '{print $1}')"
+	url="${line%%[	 ]*}"
 	qndl "$url" "curl -LO"
 done < "$queuefile"
 
