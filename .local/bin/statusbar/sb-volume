@@ -4,9 +4,9 @@
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e pulsemixer ;;
-	2) pamixer -t; kill -44 $(pidof dwmblocks) ;;
-	4) pamixer --allow-boost -i 1; kill -44 $(pidof dwmblocks) ;;
-	5) pamixer --allow-boost -d 1; kill -44 $(pidof dwmblocks) ;;
+	2) pamixer -t; kill -44 $(pidof dwmblocks) & ;;
+	4) pamixer --allow-boost -i 1; kill -44 $(pidof dwmblocks) & ;;
+	5) pamixer --allow-boost -d 1; kill -44 $(pidof dwmblocks) & ;;
 	3) notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted.
 - Middle click to mute.
 - Scroll to change." ;;
