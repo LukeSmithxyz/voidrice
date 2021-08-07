@@ -3,5 +3,5 @@
 # first argument is the video link, second is the quality (480 or 1080)
 # 13/07/20 - Arthur Bais
 
-link="$(echo "$1" | sed "s/videos\/watch/download\/torrents/")""-$2.torrent"
+link="$(echo "$1" | sed "s/w/download\/torrents/")""-$2.torrent"
 transadd "$link"
