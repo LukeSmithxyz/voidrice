@@ -85,6 +85,9 @@ set noshowcmd
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 
+" Copy to clipboard
+	map <leader>y "+y
+
 " Compile document, be it groff/LaTeX/markdown/etc.
 	map <leader>c :w! \| !compiler "<c-r>%"<CR>
 
