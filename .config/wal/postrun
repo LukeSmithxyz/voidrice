@@ -4,6 +4,8 @@ source "${HOME}/.cache/wal/colors.sh"
 
 mkdir -p  "${HOME}/.config/dunst"
 mkdir -p  "${HOME}/.config/zathura"
+mv -n     "${HOME}/.config/dunst/dunstrc"    "${HOME}/.config/dunst/dunstrc.bak"
+mv -n     "${HOME}/.config/zathura/zathurarc"    "${HOME}/.config/zathura/zathurarc.bak"
 ln -sf    "${HOME}/.cache/wal/dunstrc"    "${HOME}/.config/dunst/dunstrc"
 ln -sf    "${HOME}/.cache/wal/zathurarc"    "${HOME}/.config/zathura/zathurarc"
 

@@ -17,8 +17,13 @@ case "$(file --mime-type -b "$trueloc")" in
 esac
 
 # If pywal is installed, use it.
-command -v wal >/dev/null 2>&1 &&
-	wal -i "$trueloc" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1 &&
-	pidof dwm >/dev/null && xdotool key super+F12
+if command -v wal >/dev/null 2>&1 ; then
+        wal -i "$(readlink -f $bgloc)" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1 &&
+        pidof dwm >/dev/null && xdotool key super+F12
+# If pywal is removed, return config files to normal.
+else
+        [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc.bak" ] && unlink "${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc" && mv "${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc.bak" "${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
+        [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc.bak" ] && unlink "${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc" && mv "${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc.bak" "${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc"
+fi
 
 xwallpaper --zoom "$bgloc"
