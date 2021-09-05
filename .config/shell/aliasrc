@@ -35,7 +35,7 @@ alias \
 	g="git" \
 	trem="transmission-remote" \
 	YT="youtube-viewer" \
-	sdn="sudo shutdown -h now" \
+	sdn="shutdown -h now" \
 	e="$EDITOR" \
 	v="$EDITOR" \
 	p="pacman" \
