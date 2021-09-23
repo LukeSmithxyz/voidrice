@@ -103,5 +103,7 @@ map <c-e> down
 map <c-y> up
 map V push :!nvim<space>
 
+map W $setsid -f $TERMINAL >/dev/null 2>&1
+
 # Source Bookmarks
 source "~/.config/lf/shortcutrc"
