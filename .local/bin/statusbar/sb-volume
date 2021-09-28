@@ -28,8 +28,8 @@ else
 fi
 
 # If the first source that is not a monitor is unmuted, print 🎙️
-source="$(pamixer --list-sources | awk '!/Built/{ cnt++ ; if (cnt == 2) print $1 }')"
-[ "$(pamixer --source $source --get-mute)" = "false" ] && mic="🎙️"
+sources="$(pamixer --list-sources | awk '!/Built/{ cnt++ ; if (cnt == 2) print $1 }')"
+[ "$(pamixer --source $sources --get-mute)" = "false" ] && mic="🎙️"
 
 # If the audio is not muted, add % to vol
 [ ! -z "$vol" ] && vol="$vol%"
