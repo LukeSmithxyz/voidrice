@@ -1,6 +1,15 @@
 #!/bin/sh
 
-# Prints the current volume or 🔇 if muted.
+if [ "$(pamixer --get-mute)" = "true" ]; then
+	printf "🔇 $(pamixer --get-volume)%%"
+else
+	printf "🔊 $(pamixer --get-volume)%%"
+fi
+
+source="$(pamixer --list-sources | awk '!/Built/{ if (NR==2) {print $1} }')"
+if [ "$(pamixer --source $source --get-mute)" = "false" ]; then
+	printf " 🎙️\n"
+fi
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e pulsemixer ;;
@@ -12,17 +21,3 @@ case $BLOCK_BUTTON in
 - Scroll to change." ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
-
-[ $(pamixer --get-mute) = true ] && echo 🔇 && exit
-
-vol="$(pamixer --get-volume)"
-
-if [ "$vol" -gt "70" ]; then
-	icon="🔊"
-elif [ "$vol" -lt "30" ]; then
-	icon="🔈"
-else
-	icon="🔉"
-fi
-
-echo "$icon$vol%"
