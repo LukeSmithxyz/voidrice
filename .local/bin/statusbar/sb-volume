@@ -1,23 +1,37 @@
 #!/bin/sh
 
-if [ "$(pamixer --get-mute)" = "true" ]; then
-	printf "🔇 $(pamixer --get-volume)%%"
-else
-	printf "🔊 $(pamixer --get-volume)%%"
-fi
-
-source="$(pamixer --list-sources | awk '!/Built/{ if (NR==2) {print $1} }')"
-if [ "$(pamixer --source $source --get-mute)" = "false" ]; then
-	printf " 🎙️\n"
-fi
+# Prints the current volume or 🔇 if muted. Also shows 🎙️ if there's an unmuted microphone.
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e pulsemixer ;;
 	2) pamixer -t ;;
 	4) pamixer --allow-boost -i 1 ;;
 	5) pamixer --allow-boost -d 1 ;;
-	3) notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted.
+	3) notify-send "📢 Volume module" "\- Shows volume 🔊, 🔇 if muted. Also shows 🎙️ if there's an unmuted microphone.
 - Middle click to mute.
 - Scroll to change." ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
+
+if [ $(pamixer --get-mute) = true ]; then
+	icon="🔇"
+else
+	vol="$(pamixer --get-volume)"
+
+	if [ "$vol" -gt "70" ]; then
+		icon="🔊"
+	elif [ "$vol" -lt "30" ]; then
+		icon="🔈"
+	else
+		icon="🔉"
+	fi
+fi
+
+# If the first source that is not a monitor is unmuted, print 🎙️
+source="$(pamixer --list-sources | awk '!/Built/{ cnt++ ; if (cnt == 2) print $1 }')"
+[ "$(pamixer --source $source --get-mute)" = "false" ] && mic="🎙️"
+
+# If the audio is not muted, add % to vol
+[ ! -z "$vol" ] && vol="$vol%"
+# Prints the info
+printf "%s%s %s\n" "$icon" "$vol" "$mic"
