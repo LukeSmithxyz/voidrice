@@ -229,7 +229,7 @@ continentcode=$(echo "$chosen" | sed "s/:.*//")
 radarcode=$(echo "$chosen" | sed "s/..: // ; s/:.*//")
 
 # Sanity check of selection and ensure user did not escape.
-echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "$continentcode,$radarcode" | cut -d' ' -f1 > "$radarloc" ;}
+echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
 
 getdoppler() {
 	cont="$(cat "$radarloc" | sed "s/,.*//")"
