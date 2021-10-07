@@ -15,7 +15,7 @@ esac done
 
 [ -z "$archives" ] && printf "Give archives to extract as argument.\\n" && exit 1
 
-while IFS= read -r file ; do
+while IFS= read -r file <&3; do
 	if [ -f "$file" ] ; then
 		if [ -z "$extracthere" ]; then
 			directory="$(echo "$file" | sed 's/\.[^\/.]*$//')" &&
@@ -42,4 +42,4 @@ while IFS= read -r file ; do
 	else
 		printf "File \"%s\" not found.\\n" "$file"
 	fi
-done <<< "$archives"
+done 3<<< "$archives"
