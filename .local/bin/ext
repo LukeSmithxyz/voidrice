@@ -11,35 +11,35 @@ while getopts "hc" o; do case "${o}" in
 	*) printf "Options:\\n   -c: Extract archives into current directory rather than a new one.\\n" && exit 1 ;;
 esac done
 
-[ -z "$extracthere" ] && archive="$(realpath "$@" 2>/dev/null)" || archive="$(realpath "${@:2}" 2>/dev/null)"
+[ -z "$extracthere" ] && archives="$(realpath "$@" 2>/dev/null)" || archives="$(realpath "${@:2}" 2>/dev/null)"
 
-[ -z "$archive" ] && printf "Give archives to extract as argument.\\n" && exit 1
+[ -z "$archives" ] && printf "Give archives to extract as argument.\\n" && exit 1
 
-while IFS= read -r f ; do
-	if [ -f "$f" ] ; then
+while IFS= read -r file ; do
+	if [ -f "$file" ] ; then
 		if [ -z "$extracthere" ]; then
-			directory="$(echo "$f" | sed 's/\.[^\/.]*$//')" &&
+			directory="$(echo "$file" | sed 's/\.[^\/.]*$//')" &&
 			mkdir -p "$directory" &&
 			cd "$directory" || continue
 		fi
-		case "$f" in
-			*.tar.bz2|*.tbz2) bsdtar -xf "$f" ;;
-			*.tar.xz) bsdtar -xf "$f" ;;
-			*.tar.gz|*.tgz) bsdtar -xf "$f" ;;
-			*.tar.zst) bsdtar -xf "$f" ;;
-			*.tar) bsdtar -xf "$f" ;;
-			*.lzma) unlzma "$f" ;;
-			*.bz2) bunzip2 "$f" ;;
-			*.rar) unrar x -ad "$f" ;;
-			*.gz) gunzip "$f" ;;
-			*.zip) unzip "$f" ;;
-			*.Z) uncompress "$f" ;;
-			*.7z) 7z x "$f" ;;
-			*.xz) unxz "$f" ;;
-			*.exe) cabextract "$f" ;;
-			*) printf "extract: '%s' - unknown archive method\\n" "$f" ;;
+		case "$file" in
+			*.tar.bz2|*.tbz2) bsdtar -xf "$file" ;;
+			*.tar.xz) bsdtar -xf "$file" ;;
+			*.tar.gz|*.tgz) bsdtar -xf "$file" ;;
+			*.tar.zst) bsdtar -xf "$file" ;;
+			*.tar) bsdtar -xf "$file" ;;
+			*.lzma) unlzma "$file" ;;
+			*.bz2) bunzip2 "$file" ;;
+			*.rar) unrar x -ad "$file" ;;
+			*.gz) gunzip "$file" ;;
+			*.zip) unzip "$file" ;;
+			*.Z) uncompress "$file" ;;
+			*.7z) 7z x "$file" ;;
+			*.xz) unxz "$file" ;;
+			*.exe) cabextract "$file" ;;
+			*) printf "extract: '%s' - unknown archive method\\n" "$file" ;;
 		esac
 	else
-		printf "File \"%s\" not found.\\n" "$f"
+		printf "File \"%s\" not found.\\n" "$file"
 	fi
-done <<< "$archive"
+done <<< "$archives"
