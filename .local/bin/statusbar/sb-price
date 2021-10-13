@@ -11,12 +11,14 @@
 currency="${4:-usd}"
 interval="@14d"	# History contained in chart preceded by '@' (7d = 7 days)
 dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
-pricefile="$dir/$1"
-chartfile="$dir/$1-chart"
+pricefile="$dir/$1-$currency"
+chartfile="$dir/$1-$currency-chart"
 
-updateprice() { ping -q -c 1 example.org >/dev/null 2>&1 &&
-	curl -s "$currency.rate.sx/1$1" > "$pricefile" &&
-	curl -s "$currency.rate.sx/$1$interval" > "$chartfile" ;}
+updateprice() { temp="$(mktemp)"
+	curl -s "$currency.rate.sx/1$1" > "$temp" &&
+		mv -f "$temp" "$pricefile" &&
+		curl -s "$currency.rate.sx/$1$interval" > "$temp" &&
+		mv -f "$temp" "$chartfile" ;}
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
@@ -38,4 +40,11 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-printf "$3%0.2f$currency" "$(cat "$pricefile")"
+case "$currency" in
+	usd) symb="$" ;;
+	gbp) symb="£" ;;
+	eur) symb="€" ;;
+	btc) symb="₿" ;;
+esac
+
+printf "$3$symb%0.2f$after" "$(cat "$pricefile")"
