@@ -14,9 +14,9 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
         internal=$(echo "$screens" | grep -v "$external")
 
         res_external=$(xrandr --query | sed -n "/^$external/,/\+/p" | \
-            awk 'END {print $1}')
+            tail -n 1 | awk '{print $1}')
         res_internal=$(xrandr --query | sed -n "/^$internal/,/\+/p" | \
-            awk 'END {print $1}')
+            tail -n 1 | awk '{print $1}')
 
         res_ext_x=$(echo "$res_external" | sed 's/x.*//')
         res_ext_y=$(echo "$res_external" | sed 's/.*x//')
