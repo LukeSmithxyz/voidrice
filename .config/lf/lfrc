@@ -36,7 +36,7 @@ cmd extract ${{
 	printf "%s\n\t" "$fx"
 	printf "extract?[y/N]"
 	read ans
-	[ $ans = "y" ] && ext $fx
+	[ $ans = "y" ] && aunpack $fx
 }}
 
 cmd delete ${{
