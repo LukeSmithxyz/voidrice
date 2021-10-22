@@ -1,0 +1,1 @@
+.config/x11/xinitrc
