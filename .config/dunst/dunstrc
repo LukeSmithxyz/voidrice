@@ -11,17 +11,17 @@
     format = "<b>%s</b>\n%b"
 
 [urgency_low]
-    background = "#040509"
-    foreground = "#70896e"
+    background = "#1d2021"
+    foreground = "#928374"
     timeout = 3
 
 [urgency_normal]
-    foreground = "#a0c49e"
-    background = "#545069"
+    foreground = "#ebdbb2"
+    background = "#458588"
     timeout = 5
 
 [urgency_critical]
-    background = "#4D314E"
-    foreground = "#a0c49e"
-    frame_color = "#544858"
+    background = "#1cc24d"
+    foreground = "#ebdbb2"
+    frame_color = "#fabd2f"
     timeout = 10
