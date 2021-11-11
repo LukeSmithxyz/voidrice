@@ -5,7 +5,7 @@ zathuraconf="${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc"
 
 source "${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh"
 
-mkdir -p "${dunstconf##*/}" "${zathuraconf##*/}"
+mkdir -p "${dunstconf%/*}" "${zathuraconf%/*}"
 
 mv -n "$dunstconf" "$dunstconf.bak"
 mv -n "$zathuraconf" "$zathuraconf.bak"
