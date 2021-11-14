@@ -8,18 +8,11 @@ setbg &			# set the background with the `setbg` script
 #xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$!	# Uncomment to use Xresources colors/settings on startup
 remaps &		# run the remaps script, switching caps/esc and more; check it for more info
 
-autostart="mpd xcompmgr dunst unclutter"
+autostart="mpd xcompmgr dunst unclutter pipewire"
 
 for program in $autostart; do
 	pidof -s "$program" || setsid -f "$program"
 done >/dev/null 2>&1
-
-# This line autostarts an instance of Pulseaudio that does not exit on idle.
-# This is "necessary" on Artix due to a current bug between PA and
-# Chromium-based browsers where they fail to start PA and use dummy output.
-pidof -s runit &&
-	! pidof -s pulseaudio >/dev/null 2>&1 &&
-	setsid -f pulseaudio --start --exit-idle-time=-1 >/dev/null 2>&1
 
 # Ensure that xrdb has finished running before moving on to start the WM/DE.
 [ -n "$xrdbpid" ] && wait "$xrdbpid"
