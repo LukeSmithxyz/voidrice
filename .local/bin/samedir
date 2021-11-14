@@ -7,4 +7,4 @@ PID="$(pstree -lpA "$PID")"
 PID="${PID##*(}"
 PID="${PID%)}"
 cd "$(readlink /proc/"$PID"/cwd)" || return 1
-"$TERMINAL"
+"$TERMINAL" & disown
