@@ -11,9 +11,9 @@ export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 unsetopt PROMPT_SP
 
 # Default programs:
-export EDITOR="nvim"
-export TERMINAL="st"
-export BROWSER="brave"
+export EDITOR="micro"
+export TERMINAL="kitty"
+export BROWSER="librewolf"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"

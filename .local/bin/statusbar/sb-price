@@ -3,6 +3,7 @@
 # Usage:
 #	price <url> <Name of currency> <icon> <Price to show in>
 #	price bat "Basic Attention Token" 🦁
+
 # When the name of the currency is multi-word, put it in quotes.
 
 [ -z "$3" ] && exit 1
@@ -26,7 +27,7 @@ updateprice() { temp="$(mktemp)"
 	updateprice "$1"
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e less -Srf "$chartfile" ;;
+	1) setsid "kitty" -e less -Srf "$chartfile" ;;
 	2) notify-send -u low "$3 Updating..." "Updating $2 price..."
 		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now
 \$$(cat "$pricefile")" ;;
@@ -48,3 +49,4 @@ case "$currency" in
 esac
 
 printf "$3$symb%0.2f$after" "$(cat "$pricefile")"
+)"
