@@ -13,7 +13,6 @@ if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ]; then
 else
 	. "$HOME/.xprofile"
 fi
-picom &
-export $TERMINAL = kitty
-export $EDITOR = micro
-dwm >>/home/gabriwarx/dwm.log
+
+
+ssh-agent dwm
