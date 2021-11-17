@@ -92,9 +92,9 @@ plugins=(git)
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+#   export EDITOR='micro'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='micro'
 # fi
 
 # Compilation flags
@@ -104,7 +104,10 @@ plugins=(git)
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+
+alias ls="exa -la --icons"
+
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
