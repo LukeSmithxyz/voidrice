@@ -8,7 +8,7 @@
 #uncomment after installing
 #source ~/.config/zsh/zsh-snap/znap.zsh
 #export ZSH="/home/gabriwarx/.oh-my-zsh"
-ZSH_THEME="jonathan"
+
 
 
 
