@@ -18,6 +18,7 @@ ZSH_THEME="jonathan"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
+ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -114,3 +115,4 @@ alias ls="exa -la --icons"
 # znap source marlonrichert/zsh-autocomplete
 
 cal -3
+echo $RANDOM_THEME
