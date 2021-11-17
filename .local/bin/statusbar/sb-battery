@@ -1,4 +1,4 @@
-2#!/bin/sh
+#!/bin/sh
 
 # Prints all batteries, their percentage remaining and an emoji corresponding
 # to charge status ( for plugged up,  for discharging on battery, etc.).
