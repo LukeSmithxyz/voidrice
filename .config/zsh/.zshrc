@@ -113,6 +113,7 @@ alias ls="exa -la --icons"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # znap source marlonrichert/zsh-autocomplete
-
+clear
 cal -3
+
 echo $RANDOM_THEME
