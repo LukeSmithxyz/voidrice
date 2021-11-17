@@ -12,7 +12,7 @@ unsetopt PROMPT_SP
 
 # Default programs:
 export EDITOR="micro"
-export TERMINAL="kitty"
+export TERMINAL="st"
 export BROWSER="librewolf"
 
 # ~/ Clean-up:
