@@ -49,4 +49,3 @@ case "$currency" in
 esac
 
 printf "$3$symb%0.2f$after" "$(cat "$pricefile")"
-)"
