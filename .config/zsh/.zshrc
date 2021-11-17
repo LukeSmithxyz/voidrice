@@ -113,6 +113,7 @@ alias ls="exa -la --icons"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # znap source marlonrichert/zsh-autocomplete
+(cat ~/.cache/wal/sequences &)
 clear
 cal -3
 
