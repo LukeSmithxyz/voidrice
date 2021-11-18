@@ -31,3 +31,4 @@ else
 fi
 
 xwallpaper --zoom "$bgloc"
+pywal-discord > /dev/null
