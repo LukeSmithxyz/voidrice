@@ -19,5 +19,21 @@ case "$1" in
 	*mp3|*flac|*opus|*mp3?source*)
 		qndl "$1" 'curl -LO'  >/dev/null 2>&1 ;;
 	*)
-		[ -f "$1" ] && setsid -f "$TERMINAL" -e "$EDITOR" "$1" >/dev/null 2>&1 || setsid -f "$BROWSER" "$1" >/dev/null 2>&1
+		urlcode=$(echo "$1" | sed "s/.*\///;s/%20/ /g")
+
+		curl -sL "$1" > "/tmp/$urlcode"
+		fileinfo=$(file -ib "/tmp/$urlcode")
+
+		case "$fileinfo" in
+			video*)
+				setsid -f mpv -quiet "/tmp/$urlcode" >/dev/null 2>&1 ;;
+			image*)
+				sxiv -a "/tmp/$urlcode"  >/dev/null 2>&1 & ;;
+			application/pdf*|application/x-zip*|application/x-rar*)
+				zathura "/tmp/$urlcode"  >/dev/null 2>&1 & ;;
+			audio*)
+				mv "/tmp/$urlcode" . >/dev/null 2>&1 ;;
+			*)
+				[ -f "$1" ] && setsid -f "$TERMINAL" -e "$EDITOR" "$1" >/dev/null 2>&1 || setsid -f "$BROWSER" "$1" >/dev/null 2>&1
+		esac
 esac
