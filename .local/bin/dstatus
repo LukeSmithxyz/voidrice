@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# A hacky script that replaces 'dwmblocks' and provides a similar
+# interface in 'dmenu'.
+
+# Show basic information, but allow extra options.
+info=$(date '+🕛 %H:%M\n📅 %d-%b (%a)')'\n'$(sh ~/.local/bin/sb-battery)
+opt=$(echo -e $info'\nCrypto\nForecast' | dmenu -p "Quick info" -i)
+
+case $opt in
+	"Disk")
+		# Show all mounted partitions and their sizes, sorted so '/' is first
+		lsblk | awk '/[0-9]/ {if ($7) print $7 ":" $4}' | sort | dmenu -p "💾 Partitions";;
+
+	"Forecast")
+		# Show a summary. Pressing <ENTER> shows all content, <ESC> exists
+		pause=$(sh ~/src/sb/sb-forecast | dmenu -i -p "🌈 Forecast")
+		"$TERMINAL" -e less ~/.local/share/weatherreport ;;
+
+	"Crypto")
+		# Usage: <url> <logo>
+		prices=$(sh ~/.local/bin/sb-price BTC 💩)'\n'
+		prices+=$(sh ~/.local/bin/sb-price ETH 🚀)'\n'
+		prices+=$(sh ~/.local/bin/sb-price BAT 🦁)
+
+		# Same as 'pause' from above, but we actually use the output
+		out=$(echo -e $prices | dmenu -i -l -1 -p "🪙 Select currency")
+		chartdir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices/"
+
+		# Get coin name and open its chart.
+		"$TERMINAL" -e less $chartdir$(echo $out | awk '{print $2}')*'-chart' ;;
+esac
