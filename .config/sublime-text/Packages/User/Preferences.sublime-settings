@@ -1,0 +1,28 @@
+{
+  /* Functionality */
+  "save_on_focus_lost": true,
+  "auto_complete_commit_on_tab": true,
+  "trim_trailing_white_space_on_save": "all",
+  "vintage_use_clipboard": true,
+  "ignored_packages": [],
+
+  /* Style */
+  "margin": 0,
+  "fold_buttons": false,
+  "mini_diff": "auto",
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true,
+  "draw_centered": true,
+  "caret_extra_top": 2,
+  "caret_extra_bottom": 2,
+  "line_padding_top": 2,
+  "scroll_past_end": 0.5,
+  "tree_animation_enabled": false,
+  "animation_enabled": false,
+  "highlight_modified_tabs": true,
+  "show_tab_close_buttons": false,
+  "hide_new_tab_button": true,
+  "show_sidebar_button": false,
+  "theme": "Adaptive.sublime-theme",
+  "color_scheme": "Mariana.sublime-color-scheme",
+}
