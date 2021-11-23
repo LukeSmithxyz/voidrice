@@ -1,0 +1,12 @@
+// Documentation at https://www.sublimetext.com/docs/themes.html
+{
+  "variables":
+  {
+    "dark_bg": "color(var(--background) blend(white 55%))",
+    "medium_dark_bg": "color(var(--background) blend(black 30%))",
+  },
+  "rules":
+  [
+
+  ]
+}
