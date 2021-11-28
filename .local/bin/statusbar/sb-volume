@@ -13,8 +13,6 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-[ $(pamixer --get-mute) = true ] && echo 🔇 && exit
-
 vol="$(pamixer --get-volume)"
 
 if [ "$vol" -gt "70" ]; then
@@ -27,4 +25,11 @@ else
         echo 🔇 && exit
 fi
 
-echo "$icon$vol%"
+source="$(pamixer --list-sources | awk '!/Built/{ if (NR==2) {print $1} }')"
+if [ "$(pamixer --source $source --get-mute)" = "true" ]; then
+	mute="❌🎙️"
+else
+	mute="✔️🎙️"
+fi
+
+echo "$icon$vol% $mute"
