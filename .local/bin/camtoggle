@@ -1,0 +1,4 @@
+#!/bin/sh
+
+camera="$(ls /dev/video? | dmenu -i -p "Select Camera")"
+mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-0-0 --autofit=30% --title="mpvfloat" --profile=low-latency --untimed av://v4l2:$camera
