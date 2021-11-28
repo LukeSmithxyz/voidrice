@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# only select sources that are an actual microphone
+sources="$(pamixer --list-sources | awk '!/Built/{ cnt++ ; if (cnt == 2) print $1 }')"
+
+# check if the first source that is not a monitor is muted
+muted="$(pamixer --source "$(echo "$sources" | head -1)" --get-mute)"
+
+if [ "$muted" = "false" ]; then
+	for i in $sources; do
+		pamixer --source "$i" -m
+	done
+else
+	for i in $sources; do
+		pamixer --source "$i" -u
+	done
+fi
