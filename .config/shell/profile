@@ -15,6 +15,9 @@ export EDITOR="micro"
 export TERMINAL="st"
 export BROWSER="librewolf"
 
+#set LC_ALL
+export LC_ALL="en_US.UTF-8"
+
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
