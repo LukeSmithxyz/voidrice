@@ -1,0 +1,27 @@
+#!/bin/sh
+
+name="$(echo $1 | sed -E 's/.*\///g')"
+fileExt="$(echo $name | awk -F'.' '{print $NF}')"
+fileName="$(echo $name | sed 's/.'$fileExt'//')"
+
+# encrypt file
+enc() { \
+	tar cf $name.tar.gz $name && \
+	gpg -c --no-symkey-cache --cipher-algo AES256 $name.tar.gz && \
+	rm -rf $name && \
+	rm -rf $name.tar.gz
+}
+
+# decrypt file
+dec() { \
+	gpg $name && \
+	tar xf "$(echo $name | sed -E 's/\.[A-Za-z0-9]+$//')" && \
+	rm -rf $fileName && \
+	rm -rf $name
+}
+
+if [ "$fileExt" = "gpg" ]; then
+	dec
+else
+	enc
+fi
