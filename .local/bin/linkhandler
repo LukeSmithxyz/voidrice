@@ -32,7 +32,7 @@ case "$1" in
 			application/pdf*|application/x-zip*|application/x-rar*)
 				zathura "/tmp/$urlcode"  >/dev/null 2>&1 & ;;
 			audio*)
-				mv "/tmp/$urlcode" . >/dev/null 2>&1 ;;
+				mv "/tmp/$urlcode" "$PWD" >/dev/null 2>&1 ;;
 			*)
 				[ -f "$1" ] && setsid -f "$TERMINAL" -e "$EDITOR" "$1" >/dev/null 2>&1 || setsid -f "$BROWSER" "$1" >/dev/null 2>&1
 		esac
