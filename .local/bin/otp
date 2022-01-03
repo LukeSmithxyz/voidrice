@@ -33,7 +33,7 @@ case $choice in
 
 		if echo "$info" | pass otp insert "$otp"; then
 			while true ; do
-				export name="$(prinf | dmenu -p "Give this One Time Password a one-word name:")"
+				export name="$(dmenu -p "Give this One Time Password a one-word name:")"
 				echo "$name" | grep -q -- "^[A-z0-9-]\+$" && break
 			done
 			pass mv "$otp" "$name-otp"
