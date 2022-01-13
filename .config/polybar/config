@@ -1,0 +1,25 @@
+[bar/mybar]
+modules-right = date
+modules-left = bspwm
+background = #22000000
+radius-bottom = 15.0
+margin-left = 15.0
+padding-left  = 5
+padding-right = 5
+border-size = 2
+border-color = #55000000
+border-radius = 15.0
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+
+[module/date]
+type = internal/date
+date = %Y-%m-%d%
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+inline-mode = false
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
