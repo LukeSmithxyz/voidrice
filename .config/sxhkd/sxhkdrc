@@ -5,7 +5,7 @@ super + w
         brave
 
 super + d
-        dmenu_run
+        rofi -show run
 
 super + q
         bspc node -{c,k}
