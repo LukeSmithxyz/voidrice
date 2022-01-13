@@ -1,0 +1,30 @@
+super + Return
+        st
+
+super + w
+        brave
+
+super + d
+        dmenu_run
+
+super + q
+        bspc node -{c,k}
+
+super + {h,j,k,l}
+  bspc node -z {left -20 0 || bspc node -z right -20 0, \
+                bottom 0 20 || bspc node -z top 0 20,\
+                top 0 -20 || bspc node -z bottom 0 -20,\
+                right 20 0 || bspc node -z left 20 0}
+
+super + alt + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + t
+    if [ -z "$(bspc query -N -n focused.floating)" ]; then \
+        bspc node focused -t floating; \
+    else \
+        bspc node focused -t tiled; \
+    fi
+
+super + {_,shift + }{1-9,0}
+      bspc {desktop -f,node -d} '^{1-9,10}' --follow
