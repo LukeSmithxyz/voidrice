@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+motd="$HOME/.cache/motd"
+touch $motd
+
+toilet -f slant -F rainbow "$(uname -n)" | sed 's/^.*$/    &/' > $motd
+
+echo "    Local time:\t\t\t`date`" >> $motd
+echo "    Running\t\t\t`uname -o` `uname -mr`" >> $motd
+echo "    Disk space remaining:\t`df -h | grep '% /$' | awk '{print $4}'` (`df -h | grep '% /$' | awk '{print $5}'` used)" >> $motd
+
+echo >> $motd
+cat /opt/coloredline >> $motd
+echo >> $motd
+
+pyquotes >> $motd
+
+echo >> $motd
+cat /opt/coloredline >> $motd
+echo -e "\n    n-j0y ur stay, `whoami`\n" >> $motd
