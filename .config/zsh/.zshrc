@@ -1,10 +1,13 @@
 # Luke's config for the Zoomer Shell
 
-export ZSH="~/.config/zsh/oh-my-zsh"
+export ZSH="$HOME/.config/zsh/oh-my-zsh"
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
+
+ZSH_THEME="agnoster"
+DEFAULT_USER=$(whoami)
 
 # Load aliases and shortcuts if existent.
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
@@ -27,6 +30,8 @@ bindkey -v '^?' backward-delete-char
 
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+plugins=(git colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
