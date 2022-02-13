@@ -28,10 +28,11 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-
 plugins=(git colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
+
+motdmaker && cat ~/.cache/motd
 
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
