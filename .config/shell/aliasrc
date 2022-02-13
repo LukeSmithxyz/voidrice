@@ -3,6 +3,9 @@
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vi="nvim" vimdiff="nvim -d"
 
+# Use lfrun for lf if present.
+[ -x "$(command -v lfrun)" ] && alias lf="lfrun"
+
 # Use $XINITRC variable if file exists.
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
