@@ -37,6 +37,9 @@ set noshowcmd
 	syntax on
 	set encoding=utf-8
 	set number relativenumber
+	set expandtab
+	set tabstop=4
+	set shiftwidth=4
 " Enable autocompletion:
 	set wildmode=longest,list,full
 " Disables automatic commenting on newline:
