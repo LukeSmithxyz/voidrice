@@ -96,8 +96,8 @@ set noshowcmd
 
 " Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	map <leader>v :VimwikiIndex
-	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+	map <leader>v :VimwikiIndex<CR>
+	let g:vimwiki_list = [{'path': '~/.local/share/nvim/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
@@ -111,10 +111,12 @@ set noshowcmd
 	autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
 	autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
-" Automatically deletes all trailing whitespace and newlines at end of file on save.
+" Automatically deletes all trailing whitespace and newlines at end of file on save. & reset cursor position
+ 	autocmd BufWritePre * let currPos = getpos(".")
 	autocmd BufWritePre * %s/\s\+$//e
 	autocmd BufWritePre * %s/\n\+\%$//e
 	autocmd BufWritePre *.[ch] %s/\%$/\r/e
+  	autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
 	autocmd BufWritePost bm-files,bm-dirs !shortcuts
@@ -130,7 +132,7 @@ if &diff
 endif
 
 " Function for toggling the bottom statusbar:
-let s:hidden_all = 1
+let s:hidden_all = 0
 function! ToggleHiddenAll()
     if s:hidden_all  == 0
         let s:hidden_all = 1
