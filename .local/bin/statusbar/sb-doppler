@@ -232,14 +232,14 @@ radarcode=$(echo "$chosen" | sed "s/..: // ; s/:.*//")
 echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
 
 getdoppler() {
-	cont="$(cat "$radarloc" | sed "s/,.*//")"
-	loc="$(cat "$radarloc" | cut -c 4-)"
+	cont="$(sed "s/,.*//" "$radarloc")"
+	loc="$(cut -c 4- "$radarloc")"
 	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
-	if [ $cont == "US" ] ; then
+	if [ "$cont" = "US" ] ; then
 		curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;
-	elif [ $cont == "EU" ] ; then
+	elif [ "$cont" = "EU" ] ; then
 		curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;
-	elif [ $cont == "AF" ] ; then
+	elif [ "$cont" = "AF" ] ; then
 		curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;
 	fi
 }
