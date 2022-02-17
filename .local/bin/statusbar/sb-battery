@@ -9,6 +9,7 @@ case $BLOCK_BUTTON in
 ♻: stagnant charge
 🔌: charging
 ⚡: charged
+🪫: less than 50% remaining
 ❗: battery very low!
 - Scroll to change adjust xbacklight." ;;
 	4) xbacklight -inc 10 ;;
@@ -30,8 +31,12 @@ for battery in /sys/class/power_supply/BAT?*; do
 		*) exit 1 ;;
 	esac
 	capacity="$(cat "$battery/capacity" 2>&1)"
-	# Will make a warn variable if discharging and low
-	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
+	if [ "$status" = "🔋" ]; then
+		# Changes the icon if lower than 50% and discharging
+		[ "$capacity" -le 50 ] && status="🪫"
+		# Will make a warn variable if discharging and very low
+		[ "$capacity" -le 25 ] && warn="❗"
+	fi
 	# Prints the info
 	printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
 done && printf "\\n"
