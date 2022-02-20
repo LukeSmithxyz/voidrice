@@ -1,7 +1,6 @@
 # The Voidrice (Luke Smith <https://lukesmith.xyz>'s dotfiles)
 
-These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on
-[my YouTube channel](https://youtube.com/c/lukesmithxyz).
+These are the dotfiles deployed by [LARBS](https://github.com/quadcerebrumal/LARBS).
 
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
@@ -23,7 +22,7 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on
 
 These dotfiles are intended to go with numerous suckless programs I use:
 
-- [dwm](https://github.com/lukesmithxyz/dwm) (window manager)
+- [dwm](https://github.com/quadcerebrumal/dwm) (window manager)
 - [dwmblocks](https://github.com/lukesmithxyz/dwmblocks) (statusbar)
 - [st](https://github.com/lukesmithxyz/st) (terminal emulator)
 
@@ -35,15 +34,11 @@ as well.
 
 ## Install these dotfiles and all dependencies
 
-Use [LARBS](https://larbs.xyz) to autoinstall everything:
+Use [LARBS](https://github.com/quadcerebrumal/LARBS) to autoinstall everything:
 
 ```
-curl -LO larbs.xyz/larbs.sh
+curl -LO raw.githubusercontent.com/quadcerebrumal/LARBS/master/larbs.sh
 ```
 
 or clone the repo files directly to your home directory and install the
-[dependencies](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv).
-
-## Default Desktop Artwork
-
-Thomas Thiemeyer's *The Road to Samarkand* ([fb](https://www.facebook.com/t.thiemeyer/), [insta](https://www.instagram.com/tthiemeyer/), [shop](https://www.redbubble.com/de/people/TThiemeyer/shop))
+[dependencies](https://github.com/quadcerebrumal/LARBS/blob/master/progs.csv).
