@@ -31,9 +31,9 @@ for battery in /sys/class/power_supply/BAT?*; do
 		*) exit 1 ;;
 	esac
 	capacity="$(cat "$battery/capacity" 2>&1)"
-	test $stat = '🔋' && \
-	test $capa -le 50 && stat='🪫' && \
-	test $capa -le 25 && warn='❗'
+	test $status = '🔋' && \
+	test $capacity -le 50 && stat='🪫' && \
+	test $capacity -le 25 && warn='❗'
 	# Prints the info
 	printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
 done && printf "\\n"
