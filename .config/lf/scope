@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -C -f -u
+set -C -f
 #IFS=$'\n'
 IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
 
@@ -18,41 +18,34 @@ IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
 
 # Script arguments
 FILE_PATH="${1}"         # Full path of the highlighted file
-HEIGHT="${2}"
 
 #FILE_EXTENSION="${FILE_PATH##*.}"
 #FILE_EXTENSION_LOWER=$(echo ${FILE_EXTENSION} | tr '[:upper:]' '[:lower:]')
 
 # Settings
-HIGHLIGHT_SIZE_MAX=262143  # 256KiB
-HIGHLIGHT_TABWIDTH=8
-HIGHLIGHT_STYLE='pablo'
+export HIGHLIGHT_SIZE_MAX=262143  # 256KiB
+export HIGHLIGHT_TABWIDTH=8
+export HIGHLIGHT_STYLE='pablo'
 
+image() {
+	if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && command -V ueberzug >/dev/null 2>&1; then
+		printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$4" "$5" "$(($2-1))" "$(($3-1))" "$1" > "$FIFO_UEBERZUG"
+		exit 1
+	else
+		mediainfo "$1"
+	fi
+}
+CACHE="$HOME/.cache/lf/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
 
-handle_mime() {
-    local mimetype="${1}"
-    case "${mimetype}" in
-	text/html) w3m -dump "${FILE_PATH}" ;;
+case "$(file --dereference --brief --mime-type -- "${FILE_PATH}")" in
+	image/*) image "$FILE_PATH" "$2" "$3" "$4" "$5" ;;
+	text/html) lynx -display_charset=utf-8 -dump "${FILE_PATH}"  ;;
 	text/troff) man ./ "${FILE_PATH}" | col -b ;;
-	text/* | */xml)
-            if [ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]; then
-                exit 2
-            fi
-            if [ "$( tput colors )" -ge 256 ]; then
-                local highlight_format='xterm256'
-            else
-                local highlight_format='ansi'
-            fi
-            highlight --replace-tabs="${HIGHLIGHT_TABWIDTH}" --out-format="${highlight_format}" \
-                --style="${HIGHLIGHT_STYLE}" --force -- "${FILE_PATH}" ;;
+	text/* | */xml) bat -f "${FILE_PATH}" ;;
 	application/zip) atool --list -- "${FILE_PATH}" ;;
-        image/*) chafa --fill=block --symbols=block -c 256 -s 80x"${HEIGHT}" "${FILE_PATH}" || exit 1;;
-        video/* | audio/*|application/octet-stream) mediainfo "${FILE_PATH}" || exit 1;;
+        video/* | audio/* | application/octet-stream) mediainfo "${FILE_PATH}" || exit 1;;
         */pdf) pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - ;;
         *opendocument*) odt2txt "${FILE_PATH}" ;;
-    esac
-}
-
-MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
-handle_mime "${MIMETYPE}"
+	application/pgp-encrypted) gpg -d -- "${FILE_PATH}" ;;
+esac
 exit 1
