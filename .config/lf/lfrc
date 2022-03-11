@@ -1,18 +1,29 @@
 # Luke's lf settings
 
+
+# Note on Image Previews
+# For those wanting image previews, like this system, there are four steps to
+# set it up. These are done automatically for LARBS users, but I will state
+# them here for others doing it manually.
+#
+# 1. ueberzug must be installed.
+# 2. The scope file (~/.config/lf/scope for me), must have a command similar to
+#    mine to generate ueberzug images.
+# 3. A `set cleaner` line as below is a cleaner script.
+# 4. lf should be started through a wrapper script (~/.local/bin/lfup for me)
+#    that creates the environment for ueberzug. This command can be be aliased
+#    in your shellrc (`alias lf="lfub") or if set to a binding, should be
+#    called directly instead of normal lf.
+
 # Basic vars
-set shell bash
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
 set icons
 set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
-set ratios 1:2:3
-set cleaner ~/.local/bin/lf-cleaner
-
-# Vars that depend on environmental variables
-$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
+set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/scope'
 
 # cmds/functions
 cmd open ${{
@@ -22,7 +33,13 @@ cmd open ${{
         text/*|application/json|inode/x-empty) $EDITOR $fx;;
 	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | setsid -f sxiv -aio 2>/dev/null | lf-select & ;;
+	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
+		setsid -f sxiv -aio 2>/dev/null | while read -r file; do
+			[ -z "$file" ] && continue
+			lf -remote "send select \"$file\""
+			lf -remote "send toggle"
+		done &
+		;;
 	audio/*) mpv --audio-display=no $f ;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
