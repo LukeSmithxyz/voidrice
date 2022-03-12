@@ -10,7 +10,7 @@
 # 2. The scope file (~/.config/lf/scope for me), must have a command similar to
 #    mine to generate ueberzug images.
 # 3. A `set cleaner` line as below is a cleaner script.
-# 4. lf should be started through a wrapper script (~/.local/bin/lfup for me)
+# 4. lf should be started through a wrapper script (~/.local/bin/lfub for me)
 #    that creates the environment for ueberzug. This command can be be aliased
 #    in your shellrc (`alias lf="lfub") or if set to a binding, should be
 #    called directly instead of normal lf.
