@@ -25,7 +25,7 @@ case "$(file --dereference --brief --mime-type -- "$1")" in
 	image/*) image "$1" "$2" "$3" "$4" "$5" ;;
 	text/html) lynx -width="$4" -display_charset=utf-8 -dump "$1"  ;;
 	text/troff) man ./ "$1" | col -b ;;
-	text/* | */xml) bat --terminal-width "$4" -f "$1" ;;
+	text/* | */xml | application/json) bat --terminal-width "$4" -f "$1" ;;
 	application/zip) atool --list -- "$1" ;;
         audio/* | application/octet-stream) mediainfo "$1" || exit 1;;
 	video/* )
