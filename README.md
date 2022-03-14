@@ -43,3 +43,7 @@ curl -LO larbs.xyz/larbs.sh
 
 or clone the repo files directly to your home directory and install the
 [dependencies](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv).
+
+## Default Desktop Artwork
+
+Thomas Thiemeyer's *The Road to Samarkand* ([fb](https://www.facebook.com/t.thiemeyer/), [insta](https://www.instagram.com/tthiemeyer/), [shop](https://www.redbubble.com/de/people/TThiemeyer/shop))

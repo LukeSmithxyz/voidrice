@@ -1,0 +1,260 @@
+#!/bin/sh
+
+# Show a Doppler RADAR of a user's preferred location.
+
+secs=600 # Download a new doppler radar if one hasn't been downloaded in $secs seconds.
+radarloc="${XDG_CACHE_HOME:-$HOME/.cache}/radar"
+doppler="${XDG_CACHE_HOME:-$HOME/.cache}/doppler.gif"
+
+pickloc() { chosen="$(echo "US: Northeast
+US: Southeast
+US: PacNorthWest
+US: PacSouthWest
+US: UpperMissVly
+US: SouthMissVly
+US: SouthPlains
+US: NorthRockies
+US: SouthRockies
+US: Alaska
+US: Carib
+US: Hawaii
+US: CentGrLakes
+US: Conus-Large
+US: KABR: Aberdeen, SD
+US: KBIS: Bismarck, ND
+US: KFTG: Denver/Boulder, CO
+US: KDMX: Des Moines, IA
+US: KDTX: Detroit, MI
+US: KDDC: Dodge City, KS
+US: KDLH: Duluth, MN
+US: KCYS: Cheyenne, WY
+US: KLOT: Chicago, IL
+US: KGLD: Goodland, KS
+US: KUEX: Hastings, NE
+US: KGJX: Grand Junction, CO
+US: KGRR: Grand Rapids, MI
+US: KMVX: Fargo/Grand Forks, ND
+US: KGRB: Green Bay, WI
+US: KIND: Indianapolis, IN
+US: KJKL: Jackson, KY
+US: KARX: La Crosse, WI
+US: KILX: Lincoln/Central Illinois, IL
+US: KLVX: Louisville, KY
+US: KMQT: Marquette
+US: KMKX: Milwaukee, WI
+US: KMPX: Minneapolis, MN
+US: KAPX: Gaylord/Alpena, MI
+US: KLNX: North Platte, NE
+US: KIWX: N. Webster/Northern, IN
+US: KOAX: Omaha, NE
+US: KPAH: Paducah, KY
+US: KEAX: Pleasant Hill, MO
+US: KPUX: Pueblo, CO
+US: KDVN: Quad Cities, IA
+US: KUDX: Rapid City, SD
+US: KRIW: Riverton, WY
+US: KSGF: Springfield, MO
+US: KLSX: St. LOUIS, MO
+US: KFSD: Sioux Falls, IA
+US: KTWX: Topeka, KS
+US: KICT: Wichita, KS
+US: KVWX: Paducah, KY
+US: ICAO: Responsible Wfo
+US: KLTX: WILMINGTON, NC
+US: KCCX: State College/Central, PA
+US: KLWX: Sterling, VA
+US: KFCX: Blacksburg/Roanoke, VA
+US: KRAX: Raleigh/Durham, NC
+US: KGYX: Portland, ME
+US: KDIX: Mt Holly/Philadelphia, PA
+US: KPBZ: Pittsburgh, PA
+US: KAKQ: Wakefield, VA
+US: KMHX: Morehead City, NC
+US: KGSP: Greer/Greenville/Sprtbg, SC
+US: KILN: Wilmington/Cincinnati, OH
+US: KCLE: Cleveland, OH
+US: KCAE: Columbia, SC
+US: KBGM: Binghamton, NY
+US: KENX: Albany, NY
+US: KBUF: Buffalo, NY
+US: KCXX: Burlington, VT
+US: KCBW: Caribou, ME
+US: KBOX: Boston /Taunton, MA
+US: KOKX: New York City, NY
+US: KCLX: Charleston, SC
+US: KRLX: Charleston, WV
+US: ICAO: Responsible WFO
+US: KBRO: Brownsville, TX
+US: KABX: Albuquerque, NM
+US: KAMA: Amarillo, TX
+US: KFFC: Peachtree City/Atlanta, GA
+US: KEWX: Austin/Sanantonio, TX
+US: KBMX: Birmingham, AL
+US: KCRP: Corpus Christi, TX
+US: KFWS: Dallas / Ft. Worth, TX
+US: KEPZ: El Paso, TX
+US: KHGX: Houston/ Galveston, TX
+US: KJAX: Jacksonville, FL
+US: KBYX: Key West, FL
+US: KMRX: Morristown/knoxville, TN
+US: KLBB: Lubbock, TX
+US: KLZK: Little Rock, AR
+US: KLCH: Lake Charles, LA
+US: KOHX: Nashville, TN
+US: KMLB: Melbourne, FL
+US: KNQA: Memphis, TN
+US: KAMX: Miami, FL
+US: KMAF: Midland/odessa, TX
+US: KTLX: Norman, OK
+US: KHTX: Huntsville, AL
+US: KMOB: Mobile, AL
+US: KTLH: Tallahassee, FL
+US: KTBW: Tampa Bay Area, FL
+US: KSJT: San Angelo, TX
+US: KINX: Tulsa, OK
+US: KSRX: Tulsa, OK
+US: KLIX: New Orleans/slidell, LA
+US: KDGX: Jackson, MS
+US: KSHV: Shreveport, LA
+US: ICAO: Responsible WFO
+US: KLGX: Seattle / Tacoma, WA
+US: KOTX: Spokane, WA
+US: KEMX: Tucson, AZ
+US: KYUX: Phoenix, AZ
+US: KNKX: San Diego, CA
+US: KMUX: Monterey/san Francisco, CA
+US: KHNX: San Joaquin/hanford, CA
+US: KSOX: San Diego, CA
+US: KATX: Seattle / Tacoma, WA
+US: KIWA: Phoenix, AZ
+US: KRTX: Portland, OR
+US: KSFX: Pocatello, ID
+US: KRGX: Reno, NV
+US: KDAX: Sacramento, CA
+US: KMTX: Salt Lake City, UT
+US: KPDT: Pendleton, OR
+US: KMSX: Missoula, MT
+US: KESX: Las Vegas, NV
+US: KVTX: Los Angeles, CA
+US: KMAX: Medford, OR
+US: KFSX: Flagstaff, AZ
+US: KGGW: Glasgow, MT
+US: KLRX: Elko, NV
+US: KBHX: Eureka, CA
+US: KTFX: Great Falls, MT
+US: KCBX: Boise, ID
+US: KBLX: Billings, MT
+US: KICX: Salt Lake City, UT
+US: ICAO: Responsible Wfo W/ MSCF
+US: PABC: Anchorage, AK
+US: PAPD: Fairbanks, AK
+US: PHKM: Honolulu, HI
+US: PAHG: Anchorage, AK
+US: PAKC: Anchorage, AK
+US: PAIH: Anchorage, AK
+US: PHMO: Honolulu, HI
+US: PAEC: Fairbanks, AK
+US: TJUA: San Juan, PR
+US: PACG: Juneau, AK
+US: PHKI: Honolulu, HI
+US: PHWA: Honolulu, HI
+US: ICAO: Responsible Wfo W/ MSCF
+US: KFDR: Norman, OK
+US: PGUA: Guam
+US: KBBX: Sacramento, CA
+US: KFDX: Albuquerque, NM
+US: KGWX: Jackson, MS
+US: KDOX: Wakefield, VA
+US: KDYX: San Angelo, TX
+US: KEYX: Las Vegas, NV
+US: KEVX: Mobile, AL
+US: KHPX: Paducah, KY
+US: KTYX: Burlington, VT
+US: KGRK: Dallas / Ft. Worth, TX
+US: KPOE: Lake Charles, LA
+US: KEOX: Tallahassee, FL
+US: KHDX: El Paso, TX
+US: KDFX: San Antonio, TX
+US: KMXX: Birmingham, AL
+US: KMBX: Bismarck, ND
+US: KVAX: Jacksonville, FL
+US: KJGX: Peachtree City/atlanta, GA
+US: KVNX: Norman, OK
+US: KVBX: Vandenberg Afb: Orcutt, CA
+EU: Europe
+EU: GB: Great Brittain
+EU: SCAN: Scandinavia
+EU: ALPS: The Alps
+EU: NL: The Netherlands
+EU: DE: Germany
+EU: SP: Spain
+EU: FR: France
+EU: IT: Italy
+EU: PL: Poland
+EU: GR: Greece
+EU: TU: Turkey
+EU: RU: Russia
+EU: BA: Bahrain
+EU: BC: Botswana
+EU: SE: Republic of Seychelles
+EU: HU: Hungary
+EU: UK: Ukraine
+AF: AF: Africa
+AF: WA: West Africa
+AF: ZA: South Africa
+AF: DZ: Algeria
+AF: CE: Canary Islands
+AF: NG: Nigeria
+AF: TD: Chad
+AF: CG: Democratic Republic of Congo
+AF: EG: Egypt
+AF: ET: Ethiopia
+AF: CM: Cameroon
+AF: IS: Israel
+AF: LY: Libya
+AF: MG: Madagascar
+AF: MO: Morocco
+AF: BW: Namibia
+AF: SA: Saudi Arabia
+AF: SO: Somalia
+AF: SD: Sudan
+AF: TZ: Tanzania
+AF: TN: Tunisia
+AF: ZM: Zambia
+AF: KE: Kenya
+AF: AO: Angola" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
+
+# Set continent code and radar code.
+continentcode=$(echo "$chosen" | sed "s/:.*//")
+radarcode=$(echo "$chosen" | sed "s/..: // ; s/:.*//")
+
+# Sanity check of selection and ensure user did not escape.
+echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
+
+getdoppler() {
+	cont="$(sed "s/,.*//" "$radarloc")"
+	loc="$(cut -c 4- "$radarloc")"
+	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
+	if [ "$cont" = "US" ] ; then
+		curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;
+	elif [ "$cont" = "EU" ] ; then
+		curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;
+	elif [ "$cont" = "AF" ] ; then
+		curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;
+	fi
+}
+
+showdoppler() { setsid -f mpv --no-osc --loop=inf --no-terminal "$doppler" ;}
+
+case $BLOCK_BUTTON in
+	1) [ ! -f "$radarloc" ] && pickloc && getdoppler
+	[ $(($(date '+%s') - $(stat -c %Y "$doppler"))) -gt "$secs" ] && getdoppler
+	showdoppler ;;
+	2) pickloc && getdoppler && showdoppler ;;
+	3) notify-send "🗺️ Doppler RADAR module" "\- Left click for local Doppler RADAR.
+- Middle click to update RADAR location.
+After $secs seconds, new clicks will also automatically update the doppler RADAR."  ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+echo 🗺️

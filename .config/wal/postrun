@@ -1,11 +1,17 @@
 #!/bin/bash
 
-source "${HOME}/.cache/wal/colors.sh"
+dunstconf="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
+zathuraconf="${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc"
 
-mkdir -p  "${HOME}/.config/dunst"
-mkdir -p  "${HOME}/.config/zathura"
-ln -sf    "${HOME}/.cache/wal/dunstrc"    "${HOME}/.config/dunst/dunstrc"
-ln -sf    "${HOME}/.cache/wal/zathurarc"    "${HOME}/.config/zathura/zathurarc"
+source "${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh"
+
+mkdir -p "${dunstconf%/*}" "${zathuraconf%/*}"
+
+mv -n "$dunstconf" "$dunstconf.bak"
+mv -n "$zathuraconf" "$zathuraconf.bak"
+
+ln -sf "${XDG_CACHE_HOME:-$HOME/.cache}/wal/dunstrc" "$dunstconf"
+ln -sf "${XDG_CACHE_HOME:-$HOME/.cache}/wal/zathurarc" "$zathuraconf"
 
 fix_sequences() {
         e=$'\e'
@@ -14,14 +20,13 @@ fix_sequences() {
         background_color="$(echo -e "${sequences}\c" | grep --color=never -Eo "${e}]11[^${e}\\\\]*?${e}\\\\" | grep --color=never -Eo "#[0-9A-Fa-f]{6}")"
         cursor_color="$(echo -e "${sequences}\c" | grep --color=never -Eo "${e}]12[^${e}\\\\]*?${e}\\\\" | grep --color=never -Eo "#[0-9A-Fa-f]{6}")"
 
-for term in /dev/pts/{0..9}*
-do
-echo -e "\e]4;256;${cursor_color}\a\c" > "${term}" 2>/dev/null
-echo -e "\e]4;258;${background_color}\a\c" > "${term}" 2>/dev/null
-echo -e "\e]4;259;${foreground_color}\a\c" > "${term}" 2>/dev/null
-done
+	for term in /dev/pts/{0..9}*; do
+		echo -e "\e]4;256;${cursor_color}\a\c" > "${term}" 2>/dev/null
+		echo -e "\e]4;258;${background_color}\a\c" > "${term}" 2>/dev/null
+		echo -e "\e]4;259;${foreground_color}\a\c" > "${term}" 2>/dev/null
+	done
 }
 
-fix_sequences <"${HOME}/.cache/wal/sequences"
+fix_sequences <"${XDG_CACHE_HOME:-$HOME/.cache}/wal/sequences"
 
-pkill dunst; dunst &
+pkill dunst; setsid -f dunst

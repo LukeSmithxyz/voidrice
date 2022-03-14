@@ -26,7 +26,7 @@ asktype() { \
 	esac
 	}
 
-drives=$(lsblk -nrpo "name,type,size,mountpoint" | awk '$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "%s (%s)\n",$4,$3}')
+drives=$(lsblk -nrpo "name,type,size,mountpoint,label" | awk -F':' '{gsub(/ /,":")}$4!~/\/boot|\/efi|\/home$|SWAP/&&length($4)>1{printf "%s (%s) %s\n",$4,$3,$5}')
 
 if ! grep simple-mtpfs /etc/mtab; then
 	[ -z "$drives" ] && echo "No drives to unmount." &&  exit
