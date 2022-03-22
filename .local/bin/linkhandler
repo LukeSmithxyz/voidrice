@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Feed script a url or file location.
 # If an image, it will view in sxiv,
@@ -9,7 +9,11 @@
 # If no url given. Opens browser. For using script as $BROWSER.
 [ -z "$1" ] && { "$BROWSER"; exit; }
 
-case "$1" in
+
+link_without_query_params="$(echo "$1" | cut -d? -f1)"
+
+
+case "$link_without_query_params" in
 	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*odysee.com*)
 		setsid -f mpv -quiet "$1" >/dev/null 2>&1 ;;
 	*png|*jpg|*jpe|*jpeg|*gif)
