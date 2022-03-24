@@ -16,6 +16,7 @@ alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	rm="rm -vI" \
+	df="df -h" \
 	bc="bc -ql" \
 	mkd="mkdir -pv" \
 	yt="youtube-dl --add-metadata -i" \
