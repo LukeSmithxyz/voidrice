@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# Get a one-time password, or add a OTP secret to your pass-otp store.
+
+# The assumption of this script is that all otp passwords are stored with the
+# suffix `-otp`. This script automatically appends newly added otps as such.
+
+# For OTP passwords to be generated properly, it is important for the local
+# computer to have its time properly synced. This can be done with the command
+# below which requires the package `ntp`.
+
+ifinstalled pass pass-otp
+
+dir="${PASSWORD_STORE_DIR}"
+
+choice="$({ echo "🆕add" ; echo "🕙sync-time" ; ls ${dir}/*-otp.gpg ;} | sed "s/.*\///;s/-otp.gpg//" | dmenu -p "Pick a 2FA:")"
+
+case $choice in
+	🆕add )
+		ifinstalled maim zbar xclip || exit 1
+
+		temp="$dir/temp.png"
+		otp="otp-test-script"
+		trap 'shred -fu $temp; pass rm $otp' HUP INT QUIT TERM PWR EXIT
+
+		notify-send "Scan the image." "Scan the OTP QR code."
+
+		maim -s "$temp" || exit 1
+		info="$(zbarimg -q "$temp")"
+		info="${info#QR-Code:}"
+		issuer="$(echo "$info" | grep -o "issuer=[A-z0-9]\+")"
+		name="${issuer#issuer=}"
+
+		if echo "$info" | pass otp insert "$otp"; then
+			while true ; do
+				export name="$(dmenu -p "Give this One Time Password a one-word name:")"
+				echo "$name" | grep -q -- "^[A-z0-9-]\+$" && break
+			done
+			pass mv "$otp" "$name-otp"
+			notify-send "Successfully added." "$name-otp has been created."
+		else
+			notify-send "No OTP data found." "Try to scan the image again more precisely."
+		fi
+
+		;;
+	🕙sync-time )
+		ifinstalled ntp || exit 1
+		notify-send -u low "🕙 Synchronizing Time..." "Synching time with remote NTP servers..."
+		updatedata="$(sudo ntpdate pool.ntp.org)" &&
+		notify-send -u low "🕙 Synchronizing Time..." "Done. Time changed by ${updatedata#*offset }"
+		;;
+	*) pass otp -c ${choice}-otp ;;
+esac

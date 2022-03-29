@@ -5,9 +5,8 @@
 # it informs the user that they need that command to continue. This is used in
 # various other scripts for clarity's sake.
 
-for x in "$@";do
-	notify() { notify-send "📦 $x" "must be installed for this function." && exit 1 ;}
-	which_out="$( /usr/bin/which "$x" >/dev/null 2>&1 )" && exit 0 #you might have compiled the prog, and not install the repo pkg...
-	pkgname="$(pacman -Qqo "$which_out"  >/dev/null 2>&1 )" #...thats why two variables.
-	pacman -Qq "$pkgname" >/dev/null 2>&1 || notify
+for x in "$@"; do
+	if ! which "$x" >/dev/null 2>&1 && ! pacman -Qq "$x" >/dev/null 2>&1; then
+ 		notify-send "📦 $x" "must be installed for this function." && exit 1 ;
+	fi
 done
