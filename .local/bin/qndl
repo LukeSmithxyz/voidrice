@@ -5,7 +5,7 @@
 base="$(basename "$1")"
 notify-send "⏳ Queuing $base..."
 cmd="$2"
-[ -z "$cmd" ] && cmd="youtube-dl --add-metadata -ic"
+[ -z "$cmd" ] && cmd="yt-dlp --embed-metadata -ic"
 idnum="$(tsp $cmd "$1")"
 realname="$(echo "$base" | sed "s/?\(source\|dest\).*//;s/%20/ /g")"
 tsp -D "$idnum" mv "$base" "$realname"
