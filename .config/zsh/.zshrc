@@ -35,7 +35,7 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-# Change cursor shape for different vi modes.
+# Change cursor shape for different vi modes. It may possibly brake st TERM hence it uses xterm
 function zle-keymap-select () {
     case $KEYMAP in
         vicmd) echo -ne '\e[1 q';;      # block
@@ -50,6 +50,16 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+### List of cursor styles
+### 0  ===>  blinking block.
+### 1  ===>  blinking block.
+### 2  ===>  steady block.
+### 3  ===>  blinking underline.
+### 4  ===>  steady underline.
+### 5  ===>  blinking bar, xterm.
+### 6  ===>  steady bar, xterm.
+
 
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
