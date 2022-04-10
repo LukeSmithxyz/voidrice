@@ -90,6 +90,14 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd chmod ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	clear; printf "Mode: "
+	read -r mod
+	chmod $mod $fx
+}}
+
 cmd setbg "$1"
 cmd bulkrename $vidir
 
@@ -102,6 +110,7 @@ map D delete
 map E extract
 map C copyto
 map M moveto
+map <c-m> chmod
 map <c-n> push :mkdir<space>
 map <c-r> reload
 map <c-s> set hidden!
