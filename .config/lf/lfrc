@@ -90,6 +90,14 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd chmod ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "Mode: "
+	read mod
+	chmod $mod $fx
+}}
+
 cmd setbg "$1"
 cmd bulkrename $vidir
 
