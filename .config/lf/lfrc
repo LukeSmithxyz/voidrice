@@ -114,8 +114,8 @@ map O $mimeopen --ask $f
 map A rename # at the very end
 map c push A<c-u> # new rename
 map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extention
-map a push A<a-b> # after extention
+map i push A<a-b><a-b><a-f> # before extension
+map a push A<a-b> # after extension
 map B bulkrename
 map b $setbg $f
 
