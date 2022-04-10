@@ -4,7 +4,7 @@
 # have this script run via vim.
 #
 # Compiles .tex. groff (.mom, .ms), .rmd, .md, .org.  Opens .sent files as sent
-# presentations. Runs scripts based on extention or shebang.
+# presentations. Runs scripts based on extension or shebang.
 #
 # Note that .tex files which you wish to compile with XeLaTeX should have the
 # string "xelatex" somewhere in a comment/command in the first 5 lines.
