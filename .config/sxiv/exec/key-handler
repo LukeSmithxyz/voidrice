@@ -20,7 +20,7 @@ do
 	"f")
 		convert -flop "$file" "$file" ;;
 	"y")
-		echo -n "$file" | tr -d '\n' | xclip -selection clipboard &&
+		echo "$file" | tr -d '\n' | xclip -selection clipboard &&
 		notify-send "$file copied to clipboard" & ;;
 	"Y")
 		readlink -f "$file" | tr -d '\n' | xclip -selection clipboard &&
