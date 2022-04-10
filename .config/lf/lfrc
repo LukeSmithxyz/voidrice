@@ -110,6 +110,7 @@ map D delete
 map E extract
 map C copyto
 map M moveto
+map <c-m> chmod
 map <c-n> push :mkdir<space>
 map <c-r> reload
 map <c-s> set hidden!
