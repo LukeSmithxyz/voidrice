@@ -5,10 +5,10 @@
 # highlighting an area to copy. scrotcucks on suicidewatch right now.
 
 case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dmenu -l 6 -i -p "Screenshot which area?")" in
-	"a selected area") maim -s pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
-	"current window") maim -i "$(xdotool getactivewindow)" pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
-	"full screen") maim pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
-	"a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
-	"current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
-	"full screen (copy)") maim | xclip -selection clipboard -t image/png ;;
+    "a selected area") maim -s pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
+    "current window") maim -q -d 0.2 -i "$(xdotool getactivewindow)" pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
+    "full screen") maim -q -d 0.2 pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
+    "a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
+    "current window (copy)") maim -q -d 0.2 -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
+    "full screen (copy)") maim -q -d 0.2 | xclip -selection clipboard -t image/png ;;
 esac
