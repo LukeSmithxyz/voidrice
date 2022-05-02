@@ -4,7 +4,7 @@ export ZSH="$HOME/.config/zsh/oh-my-zsh"
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
-HISTFILE=~/.cache/zsh/history
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
 
 ZSH_THEME="agnoster"
 DEFAULT_USER=$(whoami)
@@ -15,11 +15,8 @@ DEFAULT_USER=$(whoami)
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
 
 # Basic auto/tab complete:
-autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
-_comp_options+=(globdots)		# Include hidden files.
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
@@ -32,7 +29,6 @@ plugins=(git colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
-motdmaker && cat ~/.cache/motd
+_comp_options+=(globdots)
 
-# Load syntax highlighting; should be last.
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+motdmaker && cat ~/.cache/motd
