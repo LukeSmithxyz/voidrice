@@ -7,7 +7,7 @@
 #	If wal is installed, also generates a colorscheme.
 
 # Location of link to wallpaper link.
-bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
+bgloc="${XDG_DATA_HOME:-$HOME/.local/share}/bg"
 
 # Configuration files of applications that have their themes changed by pywal.
 dunstconf="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
