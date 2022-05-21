@@ -3,7 +3,7 @@
 # first argument is the video link, second is the quality (360, 480 or 1080)
 # 13/07/20 - Arthur Bais
 
-instance=$(echo "$1" | sed "s/\/w.\+//")
-vidid=$(echo "$1" | sed "s/.\+\///")
+instance=$(echo "$1" | sed "s|/w.\+||")
+vidid=$(echo "$1" | sed "s|.\+/||")
 link=$(curl -s "$instance/api/v1/videos/$vidid" | grep -o "$instance/download/torrents/.\{37\}$2.torrent")
 transadd "$link"
