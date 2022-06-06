@@ -6,6 +6,11 @@
 # if a music file or pdf, it will download,
 # otherwise it opens link in browser.
 
+# If -c passed, read from clipboard
+while getopts 'c' o; do case "${o}" in
+	c) set "$(xclip -o)";;
+esac done
+
 # If no url given. Opens browser. For using script as $BROWSER.
 [ -z "$1" ] && { "$BROWSER"; exit; }
 
