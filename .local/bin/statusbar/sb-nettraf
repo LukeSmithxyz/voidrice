@@ -17,7 +17,7 @@ update() {
         read -r i < "$arg"
         sum=$(( sum + i ))
     done
-    cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
+    cache=/tmp/${1##*/}
     [ -f "$cache" ] && read -r old < "$cache" || old=0
     printf %d\\n "$sum" > "$cache"
     printf %d\\n $(( sum - old ))
