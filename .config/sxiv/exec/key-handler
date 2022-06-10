@@ -4,12 +4,12 @@ do
         case "$1" in
         "w") setbg "$file" & ;;
         "c")
-		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | awk '{print $2}' | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")"
+		[ -z "$destdir" ] && destdir="$(sed "s/#.*$//;/^\s*$/d" ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | awk '{print $2}' | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")"
 		[ ! -d "$destdir" ] && notify-send "$destdir is not a directory, cancelled." && exit
 		cp "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file copied to $destdir." &
 		;;
         "m")
-		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | awk '{print $2}' | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")"
+		[ -z "$destdir" ] && destdir="$(sed "s/#.*$//;/^\s*$/d" ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | awk '{print $2}' | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")"
 		[ ! -d "$destdir" ] && notify-send "$destdir is not a directory, cancelled." && exit
 		mv "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file moved to $destdir." &
 		;;
