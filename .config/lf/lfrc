@@ -90,6 +90,12 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+cmd symlink ${{
+  ln -s "$fx" "/tmp/$(basename $fx)"
+  lf -remote "send toggle /tmp/$(basename $fx)"
+  lf -remote "send cut"
+}}
+
 cmd setbg "$1"
 cmd bulkrename $vidir
 
@@ -118,6 +124,7 @@ map i push A<a-b><a-b><a-f> # before extension
 map a push A<a-b> # after extension
 map B bulkrename
 map b $setbg $f
+map sl symlink
 
 map <c-e> down
 map <c-y> up
