@@ -50,7 +50,7 @@ asktype() { \
 	}
 
 anddrives=$(simple-mtpfs -l 2>/dev/null)
-usbdrives="$(lsblk -rpo "name,type,size,label,mountpoint" | grep 'part\|rom' | sed 's/ /:/g' | awk -F':' '$5==""{printf "%s (%s) %s\n",$1,$3,$4}')"
+usbdrives="$(lsblk -rpo "name,type,size,label,mountpoint,fstype" | grep -v crypto_LUKS | grep 'part\|rom' | sed 's/ /:/g' | awk -F':' '$5==""{printf "%s (%s) %s\n",$1,$3,$4}')"
 
 if [ -z "$usbdrives" ]; then
 	[ -z "$anddrives" ] && echo "No USB drive or Android device detected" && exit
