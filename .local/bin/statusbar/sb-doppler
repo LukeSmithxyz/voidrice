@@ -4,7 +4,28 @@
 
 secs=600 # Download a new doppler radar if one hasn't been downloaded in $secs seconds.
 radarloc="${XDG_CACHE_HOME:-$HOME/.cache}/radar"
+radarger="${XDG_CACHE_HOME:-$HOME/.cache}/radarger"
 doppler="${XDG_CACHE_HOME:-$HOME/.cache}/doppler.gif"
+
+pickger() { chosenger="$(echo "BAW: Baden-Württemberg
+BAY: Bavaria
+BBB: Berlin
+BBB: Brandenburg
+HES: Hesse
+MVP: Mecklenburg-Western Pomerania
+NIB: Lower Saxony
+NIB: Bremen
+NRW: North Rhine-Westphalia
+RPS: Rhineland-Palatinate
+RPS: Saarland
+SAC: Saxony
+SAA: Saxony-Anhalt
+SHH: Schleswig-Holstein
+SHH: Hamburg
+THU: Thuringia" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | sed "s/:.*//" | tr "[:upper:]" "[:lower:]")"
+
+# Secondary sanity check of selection and ensure user did not escape for Germany.
+echo "$chosenger" | grep -q "[a-z]" && echo "$chosenger" > "$radarger" ;}
 
 pickloc() { chosen="$(echo "US: Northeast
 US: Southeast
@@ -229,20 +250,27 @@ continentcode=$(echo "$chosen" | sed "s/:.*//")
 radarcode=$(echo "$chosen" | sed "s/..: // ; s/:.*//")
 
 # Sanity check of selection and ensure user did not escape.
-echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
+echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" 
 
-getdoppler() {
-	cont="$(sed "s/,.*//" "$radarloc")"
+# Prompts for choosing region if in Germany.
+case $(cut -c 4- "$radarloc") in
+	DE) pickger ;;
+	*) ;;
+esac ;}
+
+getdoppler() { cont="$(sed "s/,.*//" "$radarloc")"
 	loc="$(cut -c 4- "$radarloc")"
-	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
-	if [ "$cont" = "US" ] ; then
-		curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;
-	elif [ "$cont" = "EU" ] ; then
-		curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;
-	elif [ "$cont" = "AF" ] ; then
-		curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;
-	fi
-}
+	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc"
+	case $cont in
+		US) curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;;
+		EU) case $loc in
+			DE) [ ! -f "$radarger" ] && pickger 
+			ger="$(cat "$radarger")"
+			curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${ger}_akt.gif" > "$doppler" ;;
+			*) curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
+		esac ;;
+		AF) curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
+	esac ;}
 
 showdoppler() { setsid -f mpv --no-osc --loop=inf --no-terminal "$doppler" ;}
 
