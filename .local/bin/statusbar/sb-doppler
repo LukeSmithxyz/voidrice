@@ -222,7 +222,23 @@ AF: TZ: Tanzania
 AF: TN: Tunisia
 AF: ZM: Zambia
 AF: KE: Kenya
-AF: AO: Angola" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
+AF: AO: Angola
+DE: BAW: Baden-Württemberg
+DE: BAY: Bavaria
+DE: BBB: Berlin
+DE: BBB: Brandenburg
+DE: HES: Hesse
+DE: MVP: Mecklenburg-Western Pomerania
+DE: NIB: Lower Saxony
+DE: NIB: Bremen
+DE: NRW: North Rhine-Westphalia
+DE: RPS: Rhineland-Palatinate
+DE: RPS: Saarland
+DE: SAC: Saxony
+DE: SAA: Saxony-Anhalt
+DE: SHH: Schleswig-Holstein
+DE: SHH: Hamburg
+DE: THU: Thuringia" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
 
 # Set continent code and radar code.
 continentcode=$(echo "$chosen" | sed "s/:.*//")
@@ -241,6 +257,9 @@ getdoppler() {
 		curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;
 	elif [ "$cont" = "AF" ] ; then
 		curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;
+	elif [ "$cont" = "DE" ] ; then
+		loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
+		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${loc}_akt.gif" > "$doppler" ;
 	fi
 }
 
