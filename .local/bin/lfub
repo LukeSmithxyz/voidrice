@@ -14,7 +14,7 @@ cleanup() {
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	lf "$@"
 else
-	[ ! -d "$HOME/.cache/lf" ] && mkdir -p "$HOME/.cache/lf"
+	[ -d "$HOME/.cache/lf" ] || mkdir -p "$HOME/.cache/lf"
 	export FIFO_UEBERZUG="$HOME/.cache/lf/ueberzug-$$"
 	mkfifo "$FIFO_UEBERZUG"
 	ueberzug layer -s <"$FIFO_UEBERZUG" -p json &

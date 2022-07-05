@@ -2,7 +2,7 @@
 
 # Requires ffmpeg
 
-[ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
+[ -f "$2" ] || printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
 
 echo "Enter the album/book title:"; read -r booktitle
 echo "Enter the artist/author:"; read -r author
@@ -14,7 +14,7 @@ ext="${1#*.}"
 # Get a safe file name from the book.
 escbook="$(echo "$booktitle" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
 
-! mkdir -p "$escbook" &&
+mkdir -p "$escbook" ||
     echo "Do you have write access in this directory?" &&
     exit 1
 

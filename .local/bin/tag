@@ -30,7 +30,7 @@ shift $((OPTIND - 1))
 
 file="$1"
 
-[ ! -f "$file" ] && echo "Provide file to tag." && err
+[ -f "$file" ] || echo "Provide file to tag." && err
 
 [ -z "$title" ] && echo "Enter a title." && read -r title
 [ -z "$artist" ] && echo "Enter an artist." && read -r artist

@@ -266,7 +266,7 @@ getdoppler() {
 showdoppler() { setsid -f mpv --no-osc --loop=inf --no-terminal "$doppler" ;}
 
 case $BLOCK_BUTTON in
-	1) [ ! -f "$radarloc" ] && pickloc && getdoppler
+	1) [ -f "$radarloc" ] || pickloc && getdoppler
 	[ $(($(date '+%s') - $(stat -c %Y "$doppler"))) -gt "$secs" ] && getdoppler
 	showdoppler ;;
 	2) pickloc && getdoppler && showdoppler ;;

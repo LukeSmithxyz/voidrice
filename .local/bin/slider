@@ -94,10 +94,10 @@ do
 	if [ -f "$content" ]; then
 		# If images have already been made in a previous run, do not recreate
 		# them unless -r was given.
-		{ [ ! -f "$prepdir/$base" ] || [ -n "${redo+x}" ] ;} &&
+		{ [ -f "$prepdir/$base" ] && [ -n "${redo+x}" ] ;} &&
 			convert -size "${res:-1920x1080}" canvas:"${bgc:-black}" -gravity center "$content" -resize 1920x1080 -composite "$prepdir/$base"
 	else
-		{ [ ! -f "$prepdir/$base" ] || [ -n "${redo+x}" ] ;} &&
+		{ [ -f "$prepdir/$base" ] && [ -n "${redo+x}" ] ;} &&
 			convert -size "${res:-1920x1080}" -background "${bgc:-black}" -fill "${fgc:-white}" -font "${font:-Sans}" -pointsize "${ppt:-150}" -gravity center label:"$content" "$prepdir/$base"
 	fi
 
