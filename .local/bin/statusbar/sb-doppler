@@ -251,16 +251,13 @@ getdoppler() {
 	cont="$(sed "s/,.*//" "$radarloc")"
 	loc="$(cut -c 4- "$radarloc")"
 	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
-	if [ "$cont" = "US" ] ; then
-		curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;
-	elif [ "$cont" = "EU" ] ; then
-		curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;
-	elif [ "$cont" = "AF" ] ; then
-		curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;
-	elif [ "$cont" = "DE" ] ; then
-		loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
-		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${loc}_akt.gif" > "$doppler" ;
-	fi
+	case "$cont" in	
+		"US") curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;;
+		"EU") curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
+		"AF") curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
+		"DE") loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
+		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${loc}_akt.gif" > "$doppler" ;;
+	esac
 }
 
 showdoppler() { setsid -f mpv --no-osc --loop=inf --no-terminal "$doppler" ;}
