@@ -240,18 +240,21 @@ DE: SHH: Schleswig-Holstein
 DE: SHH: Hamburg
 DE: THU: Thuringia" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
 
-# Set continent code and radar code.
-continentcode=$(echo "$chosen" | sed "s/:.*//")
-radarcode=$(echo "$chosen" | sed "s/..: // ; s/:.*//")
+# Ensure user did not escape.
+[ -z "$chosen" ] && exit 1
 
-# Sanity check of selection and ensure user did not escape.
-echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
+# Set continent code and radar code.
+continentcode=${chosen%%:*}
+radarcode=${chosen#* } radarcode=${radarcode%:*}
+
+# Print codes to $radarloc file.
+ printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
 
 getdoppler() {
-	cont="$(sed "s/,.*//" "$radarloc")"
-	loc="$(cut -c 4- "$radarloc")"
+	cont=$(cut -c -2 "$radarloc")
+	loc=$(cut -c 4- "$radarloc")
 	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
-	case "$cont" in	
+	case "$cont" in
 		"US") curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;;
 		"EU") curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
 		"AF") curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
