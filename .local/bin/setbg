@@ -17,13 +17,12 @@ trueloc="$(readlink -f "$1")" &&
 case "$(file --mime-type -b "$trueloc")" in
 	image/* ) ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..." ;;
 	inode/directory ) ln -sf "$(find "$trueloc" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen." ;;
-	*) notify-send "Error" "Not a valid image." ; exit 1;;
+	*) notify-send "🖼️ Error" "Not a valid image or directory." ; exit 1;;
 esac
 
 # If pywal is installed, use it.
 if command -v wal >/dev/null 2>&1 ; then
-	wal -i "$(readlink -f $bgloc)" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1 &&
-	pidof dwm >/dev/null && xdotool key super+F12
+	wal -n -i "$(readlink -f $bgloc)" -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun" >/dev/null 2>&1
 # If pywal is removed, return config files to normal.
 else
 	[ -f "$dunstconf.bak" ] && unlink "$dunstconf" && mv "$dunstconf.bak" "$dunstconf"
@@ -31,3 +30,5 @@ else
 fi
 
 xwallpaper --zoom "$bgloc"
+# If running, dwm hit the key to refresh the color scheme.
+pidof dwm >/dev/null && xdotool key super+F5
