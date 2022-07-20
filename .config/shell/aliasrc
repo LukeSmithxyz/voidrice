@@ -11,7 +11,7 @@ for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
 	alias $command="sudo $command"
 done; unset command
 
-se() { cd ~/.local/bin; $EDITOR $(fzf) ;}
+se() { curdir=$(pwd); cd ~/.local/bin; selection=$(fzf); [ -n "$selection" ] && $EDITOR "$selection" ; cd "$curdir" ;}
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
