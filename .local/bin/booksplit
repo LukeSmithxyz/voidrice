@@ -9,7 +9,7 @@ echo "Enter the artist/author:"; read -r author
 echo "Enter the publication year:"; read -r year
 
 inputaudio="$1"
-ext="${1#*.}"
+ext="${1##*.}"
 
 # Get a safe file name from the book.
 escbook="$(echo "$booktitle" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
@@ -25,12 +25,12 @@ cmd="ffmpeg -i \"$inputaudio\" -nostdin -y"
 
 while read -r x;
 do
-    end="$(echo "$x" | cut -d'	' -f1)"
+    end="$(echo "$x" | cut -d' ' -f1)"
     file="$escbook/$(printf "%.2d" "$track")-$esctitle.$ext"
     if [ -n "$start" ]; then
 	cmd="$cmd -metadata artist=\"$author\" -metadata title=\"$title\" -metadata album=\"$booktitle\" -metadata year=\"$year\" -metadata track=\"$track\" -metadata total=\"$total\" -ss \"$start\" -to \"$end\" -vn -c:a copy \"$file\" "
     fi
-    title="$(echo "$x" | cut -d'	' -f2-)"
+    title="$(echo "$x" | cut -d' ' -f2-)"
     esctitle="$(echo "$title" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
     track="$((track+1))"
     start="$end"
