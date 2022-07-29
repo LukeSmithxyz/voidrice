@@ -9,7 +9,7 @@ echo "Enter the artist/author:"; read -r author
 echo "Enter the publication year:"; read -r year
 
 inputaudio="$1"
-ext="${1#*.}"
+ext="${1##*.}"
 
 # Get a safe file name from the book.
 escbook="$(echo "$booktitle" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g")"
