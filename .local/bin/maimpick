@@ -8,6 +8,9 @@
 output="$(date '+%y%m%d-%H%M-%S').png"
 xclip_cmd="xclip -sel clip -t image/png"
 
+# Picture output location
+cd $HOME/Pictures || mkdir $HOME/Pictures && cd $HOME/Pictures  
+
 case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dmenu -l 6 -i -p "Screenshot which area?")" in
     "a selected area") maim -s pic-selected-"${output}" ;;
     "current window") maim -q -d 0.2 -i "$(xdotool getactivewindow)" pic-window-"${output}" ;;
