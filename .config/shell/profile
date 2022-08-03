@@ -13,7 +13,7 @@ unsetopt PROMPT_SP
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="brave"
+export BROWSER="librewolf"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
