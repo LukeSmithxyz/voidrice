@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This function is needed if there are multiple instances of the window manager.
+
+export WM="dwm"
+wmpid(){
+	tree="$(pstree -ps $$)"
+	tree="${tree#*$WM(}"
+	echo "${tree%%)*}"
+}
+
+eval wmpid
