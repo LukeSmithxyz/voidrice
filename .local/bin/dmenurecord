@@ -91,10 +91,7 @@ askrecording() { \
 	esac
 	}
 
-asktoend() { \
-	response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?") &&
-	[ "$response" = "Yes" ] &&  killrecording
-	}
+asktoend() { prompt "Recording still active. End recording?" && killrecording }
 
 videoselected()
 {
