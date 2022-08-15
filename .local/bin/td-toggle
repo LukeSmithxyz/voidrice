@@ -4,9 +4,9 @@
 
 if pidof transmission-daemon >/dev/null ;
 then
-	[ "$(printf "No\\nYes" | dmenu -i -p "Turn off transmission-daemon?")" = "Yes" ] && killall transmission-daemon && notify-send "transmission-daemon disabled."
+	prompt "Turn off transmission-daemon?" && killall transmission-daemon && notify-send "transmission-daemon disabled."
 else
 	ifinstalled transmission-cli || exit
-	[ "$(printf "No\\nYes" | dmenu -i -p "Turn on transmission daemon?")" = "Yes" ] && transmission-daemon && notify-send "transmission-daemon enabled."
+	prompt "Turn on transmission daemon?" && transmission-daemon && notify-send "transmission-daemon enabled."
 fi
 sleep 3 && pkill -RTMIN+7 "${STATUSBAR:-dwmblocks}"
