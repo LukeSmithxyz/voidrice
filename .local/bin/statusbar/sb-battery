@@ -3,6 +3,24 @@
 # Prints all batteries, their percentage remaining and an emoji corresponding
 # to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
 
+# Increase/decrease brightness with x%
+update_brightness() {
+	# Increase or decrease brightness?
+	echo "$1" | grep -q '-' \
+		&& readonly action="-dec $(echo "$1" | sed 's/-//')" \
+		|| readonly action="-inc $1"
+
+	# If xbacklight returns non-zero, we might have an OLED screen -> use xrandr to change the gamma
+	if ! xbacklight $action ; then
+		xrandr | grep connected | grep -v dis | cut -d' ' -f1 | while read monitor; do
+	 		brightness_current="$(xrandr --current --verbose | grep "$monitor" -A 5 | grep Brightness | cut -d' ' -f2)"
+			brightness_new="$(echo "$brightness_current * ((100+$1)/100)" | bc -l | sed 's/0*$//')"
+
+			xrandr --output "$monitor" --brightness "$brightness_new"
+	 	done
+	 fi
+}
+
 case $BLOCK_BUTTON in
 	3) notify-send "🔋 Battery module" "🔋: discharging
 🛑: not charging
@@ -11,8 +29,8 @@ case $BLOCK_BUTTON in
 ⚡: charged
 ❗: battery very low!
 - Scroll to change adjust xbacklight." ;;
-	4) xbacklight -inc 10 ;;
-	5) xbacklight -dec 10 ;;
+	4) update_brightness 10 ;;
+	5) update_brightness -10 ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
