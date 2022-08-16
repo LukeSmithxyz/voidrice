@@ -13,17 +13,9 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-#echoing mute doenst work yet need help here
-[ $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep 'MUTED') = true ] && echo 🔇 && exit
+wp="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+vol="$(echo $wp | awk '{print $2}')"
 
-vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ':' -f 2)"
+ismuted="$(echo "$wp" | awk '{print $3}')"
 
-if [ "$vol" -gt "70" ]; then
-	icon="🔊"
-elif [ "$vol" -lt "30" ]; then
-	icon="🔈"
-else
-	icon="🔉"
-fi
-
-echo "$icon$vol%"
+[ -n "$ismuted" ] && echo "🔇"
