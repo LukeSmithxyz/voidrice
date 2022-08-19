@@ -18,6 +18,8 @@ cd "$dir" || exit 1
 
 textype() { \
 	command="pdflatex"
+  	texroot=$(grep -Poi "^ *% *\! *tex root *= *\w+(?:\.\w*)?" "$file" | cut -d "=" -f 2 | tr -d "[:blank:]")
+  	[ -n "$texroot" ] && base=$texroot && echo "Compiling from TeX root: $texroot"
 	( head -n5 "$file" | grep -qi 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -qi addbibresource "$file" &&
