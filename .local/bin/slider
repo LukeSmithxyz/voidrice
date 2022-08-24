@@ -9,7 +9,7 @@
 # Application cache if not stated elsewhere.
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/slider"
 
-while getopts "hvrpi:c:a:o:d:f:t:e:x:" o; do case "${o}" in
+while getopts "hvrpi:c:a:o:d:f:t:e:x:s:" o; do case "${o}" in
 	c) bgc="$OPTARG" ;;
 	t) fgc="$OPTARG" ;;
 	f) font="$OPTARG" ;;
