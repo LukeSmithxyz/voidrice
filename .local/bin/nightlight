@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# toggle for a "nightlight" color temperature
+# requires xsct
+
+colortemp="$(xsct | cut -d' ' -f5)"
+
+if [ "$colortemp" -ge "6500" ]; then
+	xsct 2700 && notify-send "🌙 Night Light On"
+else
+	xsct 0 && notify-send "☀️ Night Light Off"
+fi
