@@ -33,6 +33,9 @@ for battery in /sys/class/power_supply/BAT?*; do
 	capacity="$(cat "$battery/capacity" 2>&1)"
 	# Will make a warn variable if discharging and low
 	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
+	# Show nightlight status
+	colortemp="$(xsct | cut -d' ' -f5)"
+	[ "$colortemp" -lt 6500 ] && night=" 🌙"
 	# Prints the info
-	printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
+	printf "%s%s%d%%%s" "$status" "$warn" "$capacity" "$night"; unset warn
 done && printf "\\n"
