@@ -3,6 +3,7 @@
 # toggle for a "nightlight" color temperature
 # requires xsct
 
+ifinstalled "xsct" || exit
 colortemp="$(xsct | cut -d' ' -f5)"
 
 if [ "$colortemp" -ge "6500" ]; then
