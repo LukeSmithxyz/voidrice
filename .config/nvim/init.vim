@@ -1,4 +1,5 @@
 let mapleader =","
+let maplocalleader =","
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -80,6 +81,8 @@ let g:vimtex#re#neocomplete =
       \ . ')'
 
 lua <<EOF
+require('nvim-autopairs').setup({})
+
 local rt = require('rust-tools')
 rt.setup({
     server = {
