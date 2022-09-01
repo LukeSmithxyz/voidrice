@@ -11,8 +11,8 @@ colortemp="$(xsct | cut -d' ' -f5)"
 
 if [ "$colortemp" -ge "6500" ]; then
 	notify-send "🌙 Night Light Enabled (${settemp}K)"
-	for i in $(seq 6500 -100 ${settemp}); do xsct $i; sleep 0.1; done
+	for i in $(seq 6500 -100 ${settemp}); do xsct $i; sleep 0.05; done
 else
 	notify-send "☀️ Night Light Disabled"
-	for i in $(seq ${settemp} 100 6500); do xsct $i; sleep 0.1; done
+	for i in $(seq ${settemp} 100 6500); do xsct $i; sleep 0.05; done
 fi
