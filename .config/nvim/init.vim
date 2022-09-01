@@ -9,26 +9,174 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'tpope/vim-surround'
+Plug 'windwp/nvim-autopairs'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
 Plug 'lukesmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'onsails/lspkind.nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-omni'
+Plug 'simrat39/rust-tools.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+Plug 'RRethy/vim-illuminate'
+Plug 'lervag/vimtex'
 call plug#end()
 
 set title
-set bg=light
 set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
 set noshowmode
 set noruler
-set laststatus=0
+set laststatus=2
 set noshowcmd
+set completeopt=menuone,noinsert,noselect
+set signcolumn=yes
+
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:lightline = { 'colorscheme': 'tokyonight' }
+colorscheme tokyonight
+
+let g:vimtex_view_method = 'zathura'
+let g:vimtex#re#neocomplete =
+      \ '\v\\%('
+      \ .  '%(\a*cite|Cite)\a*\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|%(\a*cites|Cites)%(\s*\([^)]*\)){0,2}'
+      \     . '%(%(\s*\[[^]]*\]){0,2}\s*\{[^}]*\})*'
+      \     . '%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|bibentry\s*\{[^}]*'
+      \ . '|%(text|block)cquote\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|%(for|hy)\w*cquote\*?\{[^}]*}%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|defbibentryset\{[^}]*}\{[^}]*'
+      \ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|%(include%(only)?|input|subfile)\s*\{[^}]*'
+      \ . '|([cpdr]?(gls|Gls|GLS)|acr|Acr|ACR)\a*\s*\{[^}]*'
+      \ . '|(ac|Ac|AC)\s*\{[^}]*'
+      \ . '|includepdf%(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone%(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|%(usepackage|RequirePackage|PassOptionsToPackage)%(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|documentclass%(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|begin%(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|end%(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|\a*'
+      \ . ')'
+
+lua <<EOF
+local rt = require('rust-tools')
+rt.setup({
+    server = {
+        on_attach = function(_, bufnr)
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end,
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy",
+                }
+            }
+        }
+    },
+    tools = { -- rust-tools options
+        autoSetHints = true,
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+})
+
+local sign = function(name, text)
+    vim.fn.sign_define(name, {
+        texthl = name,
+        text = text,
+        numhl = '',
+    })
+end
+
+sign('DiagnosticSignError', '')
+sign('DiagnosticSignWarn', '')
+sign('DiagnosticSignHint', '')
+sign('DiagnosticSignInfo', '')
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+local cmp = require("cmp")
+local lspkind = require('lspkind')
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+    mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
+    },
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = 'symbol',
+            maxwidth = 50,
+            preset = 'codicons',
+        }),
+    },
+    sources = {
+        { name = "nvim_lua" },
+        { name = "nvim_lsp", keyword_length = 3 },
+        { name = "nvim_lsp_signature_help" },
+        { name = "vsnip" },
+        { name = "path" },
+        { name = "buffer", keyword_length = 5 },
+    },
+    experimental = {
+        ghost_text = true,
+    },
+})
+
+require('lspconfig').texlab.setup({})
+
+require('lsp_lines').setup()
+EOF
+
 
 " Some basics:
 	nnoremap c "_c
@@ -40,8 +188,6 @@ set noshowcmd
 	set expandtab
 	set tabstop=4
 	set shiftwidth=4
-" Enable autocompletion:
-	set wildmode=longest,list,full
 " Disables automatic commenting on newline:
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Perform dot commands over visual blocks:
@@ -145,7 +291,6 @@ function! ToggleHiddenAll()
         set noshowcmd
     else
         let s:hidden_all = 0
-        set showmode
         set ruler
         set laststatus=2
         set showcmd
