@@ -4,8 +4,6 @@
 # toggle for a "nightlight" color temperature
 # edit value of settemp to your desired color temperature (minimum is 700)
 
-ifinstalled "xsct" || exit
-
 settemp="2700"
 colortemp="$(xsct | cut -d' ' -f5)"
 
