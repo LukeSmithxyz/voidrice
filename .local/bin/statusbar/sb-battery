@@ -37,5 +37,5 @@ for battery in /sys/class/power_supply/BAT?*; do
 	colortemp="$(xsct | cut -d' ' -f5)"
 	[ "$colortemp" -lt 6500 ] && night=" 🌙"
 	# Prints the info
-	printf "%s%s%d%%%s" "$status" "$warn" "$capacity" "$night"; unset warn
+	printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
 done && printf "$night" "\\n"
