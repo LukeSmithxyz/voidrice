@@ -29,11 +29,13 @@ power_on() {
 toggle_power() {
 	if power_on; then
 		bluetoothctl power off
+		pkill -RTMIN+2 "${STATUSBAR:-dwmblocks}"
 		show_menu
 	else
 		rfkill list bluetooth | grep -q 'blocked: yes' && rfkill unblock bluetooth && sleep 3
 
 		bluetoothctl power on
+		pkill -RTMIN+2 "${STATUSBAR:-dwmblocks}"
 		show_menu
 	fi
 }
@@ -48,8 +50,8 @@ scan_on() {
 # Toggles scanning state
 toggle_scan() {
 	scan_on &&
-		kill "$(pgrep -f 'bluetoothctl scan on')" && bluetoothctl scan off && show_menu ||
-		{ bluetoothctl scan on & echo 'Scanning...' && sleep 5 && show_menu; }
+		pkill -f 'bluetoothctl scan on' && bluetoothctl scan off && show_menu ||
+		{ bluetoothctl scan on & notify-send 'Scanning...' && sleep 5 && show_menu; }
 }
 
 # Checks if controller is able to pair to devices
@@ -108,6 +110,8 @@ toggle_paired() {
 	device_paired "$1" &&
 		bluetoothctl remove "$1" && device_menu "$device" ||
 		{ bluetoothctl pair "$1" && device_menu "$device"; }
+
+	pkill -RTMIN+2 "${STATUSBAR:-dwmblocks}"
 }
 
 # Checks if a device is trusted
@@ -141,15 +145,13 @@ device_menu() {
 
 	paired=$(device_paired "$mac")
     	trusted=$(device_trusted "$mac")
-    	options="${connected}\n${paired}\n${trusted}\n${divider}\n${goback}\nExit"
+    	options="${connected}\n${paired}\n${trusted}\n${goback}\nExit"
 
     	# Open dmenu, read chosen option
     	chosen="$(printf '%b' "$options" | $dmenu_command "$device_name")"
 
     	# Match chosen option to command
     	case $chosen in
-        	"" | "$divider")
-			echo 'No option chosen.' ;;
         	"$connected")
             		toggle_connection "$mac" ;;
         	"$paired")
@@ -158,6 +160,8 @@ device_menu() {
             		toggle_trust "$mac" ;;
         	"$goback")
             		show_menu ;;
+		*)
+			exit ;;
     	esac
 }
 
@@ -177,7 +181,7 @@ show_menu() {
         	discoverable=$(discoverable_on)
 
         	# Options passed to dmenu
-        	options="${devices}\n${divider}\n${power}\n${scan}\n${pairable}\n${discoverable}\nExit"
+        	options="${devices:+$devices\n$divider\n}${power}\n${scan}\n${pairable}\n${discoverable}\nExit"
 	else
         	power='Power: off'
         	options="$power\nExit"
@@ -188,8 +192,8 @@ show_menu() {
 
     	# Match chosen option to command
     	case $chosen in
-        	"" | "$divider")
-            		echo 'No option chosen.' ;;
+        	"" | "$divider" | 'Exit')
+            		exit ;;
         	"$power")
             		toggle_power ;;
         	"$scan")
