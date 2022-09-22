@@ -9,7 +9,7 @@
 # computer to have its time properly synced. This can be done with the command
 # below which requires the package `ntp`.
 
-ifinstalled pass pass-otp
+ifinstalled pass pass-otp || exit 1
 
 dir="${PASSWORD_STORE_DIR}"
 
