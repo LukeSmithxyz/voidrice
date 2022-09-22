@@ -54,7 +54,11 @@ Total=$total
 Date=$date
 Genre=$genre
 Comment=$comment" | opustags -i -S "$file" ;;
-	*.mp3) eyeD3 -Q --remove-all -a "$artist" -A "$album" -t "$title" -n "$track" -N "$total" -Y "$date" "$file" ;;
+	*.mp3) eyeD3 -Q --remove-all -a "$artist" -t "$title" -A "$album" -n "$track" \
+		${total:+-N "$total"} \
+		${date:+-Y "$date"} \
+		${genre:+-G "$genre"} \
+		${comment:+-c "$comment"} "$file" ;;
 	*.flac) echo "TITLE=$title
 ARTIST=$artist
 ALBUM=$album
