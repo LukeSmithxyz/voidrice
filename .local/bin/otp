@@ -9,31 +9,29 @@
 # computer to have its time properly synced. This can be done with the command
 # below which requires the package `ntp`.
 
-ifinstalled pass pass-otp
+ifinstalled pass pass-otp || exit 1
 
 dir="${PASSWORD_STORE_DIR}"
 
-choice="$({ echo "🆕add" ; echo "🕙sync-time" ; ls ${dir}/*-otp.gpg ;} | sed "s/.*\///;s/-otp.gpg//" | dmenu -p "Pick a 2FA:")"
+choice="$({ echo "🆕add" ; echo "🕙sync-time" ; ls "$dir"/*-otp.gpg ;} | sed "s/.*\///;s/-otp.gpg//" | dmenu -p "Pick a 2FA:")"
 
 case $choice in
 	🆕add )
-		ifinstalled maim zbar xclip || exit 1
+		ifinstalled maim zbar || exit 1
 
-		temp="$dir/temp.png"
+		temp=$(mktemp -p "$XDG_RUNTIME_DIR" --suffix=.png)
 		otp="otp-test-script"
-		trap 'shred -fu $temp; pass rm $otp' HUP INT QUIT TERM PWR EXIT
+		trap 'rm -f $temp; pass rm -f $otp' HUP INT QUIT TERM PWR EXIT
 
 		notify-send "Scan the image." "Scan the OTP QR code."
 
 		maim -s "$temp" || exit 1
 		info="$(zbarimg -q "$temp")"
 		info="${info#QR-Code:}"
-		issuer="$(echo "$info" | grep -o "issuer=[A-z0-9]\+")"
-		name="${issuer#issuer=}"
 
 		if echo "$info" | pass otp insert "$otp"; then
 			while true ; do
-				export name="$(dmenu -p "Give this One Time Password a one-word name:")"
+				export name="$(echo | dmenu -p "Give this One Time Password a one-word name:")"
 				echo "$name" | grep -q -- "^[A-z0-9-]\+$" && break
 			done
 			pass mv "$otp" "$name-otp"
@@ -41,7 +39,6 @@ case $choice in
 		else
 			notify-send "No OTP data found." "Try to scan the image again more precisely."
 		fi
-
 		;;
 	🕙sync-time )
 		ifinstalled ntp || exit 1
