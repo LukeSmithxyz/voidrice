@@ -11,7 +11,9 @@ case $BLOCK_BUTTON in
 🔌: charging
 ⚡: charged
 ❗: battery very low!
-- Scroll to change adjust xbacklight." ;;
+🌙: Night Light enabled
+- Scroll to change adjust xbacklight.
+- Left click to activate Night Light." ;;
 	4) xbacklight -inc 10 ;;
 	5) xbacklight -dec 10 ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
