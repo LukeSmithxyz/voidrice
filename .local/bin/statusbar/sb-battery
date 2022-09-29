@@ -13,7 +13,7 @@ case $BLOCK_BUTTON in
 ❗: battery very low!
 🌙: Night Light enabled
 - Scroll to change adjust xbacklight.
-- Left click to activate Night Light." ;;
+- Click to activate Night Light." ;;
 	4) xbacklight -inc 10 ;;
 	5) xbacklight -dec 10 ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
