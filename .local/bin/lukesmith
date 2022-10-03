@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Opens the greatest website of all times
+$BROWSER lukesmith.xyz
