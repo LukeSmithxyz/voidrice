@@ -22,17 +22,17 @@ import os.path
 import random
 from os import environ, scandir
 
-VERSION = "1.1"
+VERSION = "1.2"
 BANNER = f"""\
-pyquotes {VERSION} - Copyright (C) 2021  Jenny Rakete
+pyquotes {VERSION} -- Copyright (C) 2022  rakete
 This is free software; see the beginning of this file for copying conditions.
-There is NO warranty; 
+There is NO warranty;
 not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."""
 
 QUOTEPATH = (
-    environ["QUOTEPATH"] if "QUOTEPATH" in environ else "/usr/share/pyquotes"
+    environ["QUOTEPATH"] if "QUOTEPATH" in environ else
+        f"{ os.path.expanduser('~') }/.local/share/pyquotes"
 )
-
 
 def get_arguments():
     parser = argparse.ArgumentParser()
