@@ -1,0 +1,122 @@
+#!/usr/bin/python3
+
+"""
+Copyright (C) 2021  Jenny Rakete
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
+import argparse
+import os.path
+import random
+from os import environ, scandir
+
+VERSION = "1.1"
+BANNER = f"""\
+pyquotes {VERSION} - Copyright (C) 2021  Jenny Rakete
+This is free software; see the beginning of this file for copying conditions.
+There is NO warranty; 
+not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."""
+
+QUOTEPATH = (
+    environ["QUOTEPATH"] if "QUOTEPATH" in environ else "/usr/share/pyquotes"
+)
+
+
+def get_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("quotedirs", action="extend", nargs="*",
+                        help="list of quotedirs to select quotes from")
+    parser.add_argument("-l", "--list", action="store_true",
+                        help="list all known quotedirs")
+    parser.add_argument("-V", "--version", action="store_true",
+                        help="print version information")
+
+    options = parser.parse_args()
+
+    return options
+
+
+def parse_arguments(options: argparse.Namespace):
+    if options.version:
+        print(BANNER)
+        exit()
+
+    if len(options.quotedirs) == 0:
+        options.quotedirs = [quotedir.name for quotedir in get_quotedirs()]
+
+    if options.list:
+        list_quotedirs(options.quotedirs)
+        exit()
+
+
+def get_quotedirs():
+    try:
+        return [quote_dir for quote_dir
+                in scandir(QUOTEPATH)
+                if quote_dir.is_dir()]
+    except FileNotFoundError:
+        print(f"quotepath `{QUOTEPATH}` does not exist. "
+              "Is $QUOTEPATH set correctly?")
+        exit(1)
+
+
+def list_quotedirs(quote_dirs: list):
+    output = {}
+    total_quotes = 0
+    for quote_dir in quote_dirs:
+        output[quote_dir] = len(
+            [_ for _ in scandir(QUOTEPATH + os.path.sep + quote_dir)])
+        total_quotes += output[quote_dir]
+    print("\n".join(
+        ["{percentage:.2f}%\t {name} ({amount})".format(
+            percentage=(output[name] / total_quotes * 100),
+            name=name,
+            amount=output[name],
+        ) for name in output]
+    ))
+
+
+def get_quote(quotedirs: list):
+    quote_files = []
+
+    for quotedir in quotedirs:
+        try:
+            new_quote_files = [file for file
+                               in scandir(QUOTEPATH + os.path.sep + quotedir)
+                               if file.is_file()]
+        except FileNotFoundError:
+            print(f"quotedir `{quotedir}` not found in `{QUOTEPATH}`. ")
+            exit(1)
+        quote_files += [quote_file for quote_file
+                        in new_quote_files
+                        if quote_file.name.endswith(".quote")]
+
+    quote_file = random.choice(quote_files)
+    with open(quote_file.path) as quote_file:
+        return "".join(quote_file.readlines())
+
+
+def main():
+    options = get_arguments()
+    parse_arguments(options)
+
+    quote = get_quote(options.quotedirs)
+
+    print(quote, end="\n" * (quote[-1] != "\n"))
+
+
+if __name__ == "__main__":
+    main()
