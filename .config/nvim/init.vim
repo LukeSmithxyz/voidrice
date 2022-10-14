@@ -18,11 +18,11 @@ Plug 'jreybert/vimagit'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
-Plug 'ap/vim-css-color'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 set title
-set bg=light
+set bg=dark
 set go=a
 set mouse=a
 set nohlsearch
@@ -31,6 +31,15 @@ set noshowmode
 set noruler
 set laststatus=0
 set noshowcmd
+
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+let g:gruvbox_transparent_bg='1'
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
 
 " Some basics:
 	nnoremap c "_c
