@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+[ -e "$1" ] || exit 1
+getfsroot() {
+  printf "%s" "$(df "$1" --output=target | tail -1)"
+}
+
+filepath="$(realpath "$1")"
+filename="$(basename "$1")"
+fsroot="$(getfsroot "$1")"
+[ "$fsroot" = "$(getfsroot "${XDG_DATA_HOME:-$HOME/.local/share}")" ] \
+  && basedir="${XDG_DATA_HOME:-$HOME/.local/share}/Trash" \
+  || basedir="${fsroot}/.Trash"
+infodir="$basedir/info"
+filedir="$basedir/files"
+
+mkdir -p "$infodir" 1>/dev/null 2>&1
+mkdir -p "$filedir" 1>/dev/null 2>&1
+find "$filedir" -regex ".*$filename.*" | grep -oP '\d' | sort -n | tail -1 | (
+ext=$(($(cat /dev/stdin)+1))
+filedest="$filedir/$filename.~${ext:-1}~";
+command mv -f "$filepath" "$filedest";
+cat <<EOF > "$infodir/$(basename "$filedest")"
+[Trash Info]
+Path=$filepath
+DeletionDate=$(date +%Y%m%dT%T)
+EOF
+)
