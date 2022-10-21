@@ -9,7 +9,7 @@ list() {
   for file in "$1"/*; do
     [ "$(head -1 "$file")" = "[Trash Info]" ] && \
     fpath=$(grep Path "$file" | cut -d '=' -f2) && \
-    echo "$fpath" | grep -qP "^$2" && \
+    echo "$fpath" | grep -qP "^$2/[^/]+$" && \
     printf "%s %s %s\n" \
       "$(basename "$file")" \
       "$fpath" \
