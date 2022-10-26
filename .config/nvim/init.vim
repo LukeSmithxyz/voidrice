@@ -35,6 +35,8 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'lervag/vimtex'
+Plug 'yuezk/vim-js'
+Plug 'MaxMEllon/vim-jsx-pretty'
 call plug#end()
 
 set title
@@ -53,6 +55,8 @@ let g:tokyonight_style = "night"
 let g:tokyonight_italic_functions = 1
 let g:lightline = { 'colorscheme': 'tokyonight' }
 colorscheme tokyonight
+
+let g:used_javascript_libs = 'react'
 
 let g:vimtex_view_method = 'zathura'
 let g:vimtex#re#neocomplete =
@@ -87,8 +91,15 @@ local rt = require('rust-tools')
 rt.setup({
     server = {
         on_attach = function(_, bufnr)
-            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, {
+                buffer = bufnr
+            })
+            vim.keymap.set(
+                "n",
+                "<Leader>a",
+                rt.code_action_group.code_action_group,
+                { buffer = bufnr }
+            )
         end,
         settings = {
             ["rust-analyzer"] = {
@@ -176,6 +187,7 @@ cmp.setup({
 })
 
 require('lspconfig').texlab.setup({})
+require('lspconfig').tsserver.setup({})
 
 require('lsp_lines').setup()
 EOF
