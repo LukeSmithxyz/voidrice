@@ -7,6 +7,10 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+# Adds `~/.local/share/cargo/bin/` to $PATH
+export PATH="$PATH:${$(find ~/.local/share/cargo/bin -type d -printf %p:)%%:}"
+# Adds `/usr/bin/vendor_perl` to $PATH
+export PATH="$PATH:${$(find /usr/bin/vendor_perl -type d -printf %p:)%%:}"
 
 unsetopt PROMPT_SP
 
