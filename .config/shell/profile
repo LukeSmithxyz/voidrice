@@ -17,7 +17,7 @@ unsetopt PROMPT_SP
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="kitty"
-export BROWSER="brave"
+export BROWSER="firefox"
 export READER="zathura"
 export FILE="lf"
 
