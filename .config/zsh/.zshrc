@@ -27,7 +27,8 @@ _comp_options+=(globdots)		# Include hidden files.
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
-
+# Use keychain to load ssh-agent
+eval `keychain --eval --quiet --noask --agents ssh id_rsa ~/.ssh/id_rsa`
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
