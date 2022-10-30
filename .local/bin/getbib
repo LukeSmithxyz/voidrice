@@ -4,7 +4,7 @@
 if [ -f "$1" ]; then
 	# Try to get DOI from pdfinfo or pdftotext output.
 	doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
-	doi=$(pdftotext "$1" 2>/dev/null - | grep -io "doi:.*" -m 1) ||
+	doi=$(pdftotext "$1" 2>/dev/null - | sed -n '/[dD][oO][iI]:/{s/.*[dD][oO][iI]:\s*\(\S\+[[:alnum:]]\).*/\1/p;q}') ||
 	exit 1
 else
 	doi="$1"

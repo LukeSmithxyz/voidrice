@@ -6,7 +6,8 @@ secs=600 # Download a new doppler radar if one hasn't been downloaded in $secs s
 radarloc="${XDG_CACHE_HOME:-$HOME/.cache}/radar"
 doppler="${XDG_CACHE_HOME:-$HOME/.cache}/doppler.gif"
 
-pickloc() { chosen="$(echo "US: Northeast
+pickloc() { chosen="$(echo "US: CONUS: Continental United States
+US: Northeast
 US: Southeast
 US: PacNorthWest
 US: PacSouthWest
@@ -55,7 +56,7 @@ US: KUDX: Rapid City, SD
 US: KRIW: Riverton, WY
 US: KSGF: Springfield, MO
 US: KLSX: St. LOUIS, MO
-US: KFSD: Sioux Falls, IA
+US: KFSD: Sioux Falls, SD
 US: KTWX: Topeka, KS
 US: KICT: Wichita, KS
 US: KVWX: Paducah, KY
@@ -255,7 +256,7 @@ getdoppler() {
 	loc=$(cut -c 4- "$radarloc")
 	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
 	case "$cont" in
-		"US") curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;;
+		"US") curl -sL "https://radar.weather.gov/ridge/standard/${loc}_loop.gif" > "$doppler" ;;
 		"EU") curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
 		"AF") curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
 		"DE") loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
@@ -276,4 +277,4 @@ After $secs seconds, new clicks will also automatically update the doppler RADAR
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-echo 🗺️
+echo 🌅

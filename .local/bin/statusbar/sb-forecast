@@ -29,7 +29,7 @@ esac
 
 # The test if our forcecast is updated to the day. If it isn't download a new
 # weather report from wttr.in with the above function.
-[ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
+[ -s "$weatherreport" ] && [ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
 	getforecast
 
 showweather
