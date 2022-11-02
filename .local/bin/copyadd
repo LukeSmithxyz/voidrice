@@ -1,0 +1,2 @@
+#!/bin/bash
+bash -c 'printf "%b\n%b" "$(xsel -b)" "$(xsel)" | xsel -ib ; xsel -c'
