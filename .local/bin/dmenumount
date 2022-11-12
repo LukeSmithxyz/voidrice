@@ -31,13 +31,19 @@ mountusb() { \
 	notify-send "💻 USB mounting" "$chosen mounted to $mp."
 	}
 
+androidcrash() { \
+	notify-send "🚫 Error" "Failed to mount Android device to $mp."
+	namei -l "$mp" | sed '1d' | awk '{ print $2 }' | grep $(whoami) || notify-send "⚠️ Error complement" "You probably chose a directory for which you do not have the rights"
+	exit 1
+	}
+
 mountandroid() { \
 	chosen="$(echo "$anddrives" | dmenu -i -p "Which Android device?")" || exit 1
 	chosen="$(echo "$chosen" | cut -d : -f 1)"
 	getmount "$HOME -maxdepth 3 -type d"
         simple-mtpfs --device "$chosen" "$mp"
 	echo "OK" | dmenu -i -p "Tap Allow on your phone if it asks for permission and then press enter" || exit 1
-	simple-mtpfs --device "$chosen" "$mp"
+	simple-mtpfs --device "$chosen" "$mp" || androidcrash
 	notify-send "🤖 Android Mounting" "Android device mounted to $mp."
 	}
 
