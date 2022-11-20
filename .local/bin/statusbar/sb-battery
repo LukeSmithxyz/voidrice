@@ -4,13 +4,16 @@
 # to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
 
 case $BLOCK_BUTTON in
+	1) nightlight ;;
 	3) notify-send "🔋 Battery module" "🔋: discharging
 🛑: not charging
 ♻: stagnant charge
 🔌: charging
 ⚡: charged
 ❗: battery very low!
-- Scroll to change adjust xbacklight." ;;
+🌙: Night Light enabled
+- Scroll to change adjust xbacklight.
+- Click to activate Night Light." ;;
 	4) xbacklight -inc 10 ;;
 	5) xbacklight -dec 10 ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
@@ -32,6 +35,9 @@ for battery in /sys/class/power_supply/BAT?*; do
 	capacity="$(cat "$battery/capacity" 2>&1)"
 	# Will make a warn variable if discharging and low
 	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
+	# Show nightlight status
+	colortemp="$(xsct | cut -d' ' -f5)"
+	[ "$colortemp" -lt 6500 ] && night=" 🌙"
 	# Prints the info
 	printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
-done && printf "\\n"
+done && printf "$night" "\\n"

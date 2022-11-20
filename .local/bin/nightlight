@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# requires xsct
+# toggle for a "nightlight" color temperature
+# edit value of settemp to your desired color temperature (minimum is 700)
+
+settemp="2700"
+colortemp="$(xsct | cut -d' ' -f5)"
+
+if [ "$colortemp" -ge "6500" ]; then
+	notify-send "🌙 Night Light Enabled (${settemp}K)"
+	for i in $(seq 6500 -100 ${settemp}); do xsct $i; sleep 0.05; done
+else
+	notify-send "☀️ Night Light Disabled"
+	for i in $(seq ${settemp} 100 6500); do xsct $i; sleep 0.05; done
+fi
