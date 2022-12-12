@@ -39,5 +39,5 @@ awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
 	printf(\"abbr %s \42\$EDITOR %s\42 \n\",\$1,\$2) >> \"$fish_shortcuts\"  ;
 	printf(\"map %s :e %s<CR> \n\",\$1,\$2)          >> \"$vifm_shortcuts\"  ;
 	printf(\"map %s shell \$EDITOR %s \n\",\$1,\$2)  >> \"$ranger_shortcuts\" ;
-	printf(\"map <c-e>%s \$\$EDITOR \42%s\42 \n\",\$1,\$2)   >> \"$lf_shortcuts\" ;
+	printf(\"map <c-v>%s \$\$EDITOR \42%s\42 \n\",\$1,\$2)   >> \"$lf_shortcuts\" ;
 	printf(\"cmap ;%s %s\n\",\$1,\$2)                    >> \"$vim_shortcuts\" }"
