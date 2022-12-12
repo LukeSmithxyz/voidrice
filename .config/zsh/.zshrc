@@ -20,6 +20,7 @@ HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
