@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import subprocess
+import time
+
+import dmenu
+import pyperclip
+
+PASSWORD_STORE_PATH = Path("~/.config/password-store").expanduser()
+
+
+class Password:
+    def __init__(self, file):
+        self.file = file
+        self.parent_tuples = self.file.parent.parts[5:]
+        self.parent = "".join(self.parent_tuples)
+
+    def get_display_name(self):
+        display_name = []
+        for parent in self.parent_tuples:
+            display_name.append(f"{parent}/")
+        parent = "".join(display_name)
+        return f"{parent}{self.file.stem}"
+
+    def __repr__(self) -> str:
+        if self.parent == "password-store":
+            return f"{self.file.stem}"
+        return f"{self.parent}/{self.file.stem}"
+
+
+class Passwords(list):
+    def __init__(self):
+        list.__init__(self, self.read_files())
+        self.display_names = [password.get_display_name() for password in self]
+
+    def read_files(self):
+        files = PASSWORD_STORE_PATH.glob("**/*.gpg")
+        return [Password(file) for file in files]
+
+
+def main():
+    options = Passwords()
+    selected_password = dmenu.show(
+        options.display_names,
+        prompt="Select password",
+    )
+
+    pyperclip.copy(
+        subprocess.run(
+            ["pass", str(selected_password)],
+            input=str(selected_password),
+            stdout=subprocess.PIPE,
+            universal_newlines=True,
+        ).stdout.strip()
+    )
+    time.sleep(5)
+    pyperclip.copy("")
+
+
+if __name__ == "__main__":
+    main()
