@@ -12,6 +12,7 @@ map K zoom in
 map J zoom out
 map i recolor
 map p print
+map g goto top
 
 set default-bg                     "{background}"
 set default-fg                     "{foreground}"

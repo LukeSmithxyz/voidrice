@@ -27,18 +27,18 @@ mountusb() { \
 		"vfat") sudo -A mount -t vfat "$chosen" "$mp" -o rw,umask=0000;;
 		"exfat") sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)";;
 		*) sudo -A mount "$chosen" "$mp"; user="$(whoami)"; ug="$(groups | awk '{print $1}')"; sudo -A chown "$user":"$ug" "$mp";;
-	esac
-	notify-send "💻 USB mounting" "$chosen mounted to $mp."
+	esac && notify-send "💻 USB mounting" "$chosen mounted to $mp." ||
+		notify-send "💻 Drive failed to mount." "Probably a permissions issue or drive is already mounted."
 	}
 
 mountandroid() { \
 	chosen="$(echo "$anddrives" | dmenu -i -p "Which Android device?")" || exit 1
 	chosen="$(echo "$chosen" | cut -d : -f 1)"
 	getmount "$HOME -maxdepth 3 -type d"
-        simple-mtpfs --device "$chosen" "$mp"
 	echo "OK" | dmenu -i -p "Tap Allow on your phone if it asks for permission and then press enter" || exit 1
-	simple-mtpfs --device "$chosen" "$mp"
-	notify-send "🤖 Android Mounting" "Android device mounted to $mp."
+	simple-mtpfs --device "$chosen" "$mp" &&
+		notify-send "🤖 Android Mounting" "Android device mounted to $mp." ||
+		notify-send "🤖 Android failed mounting." "Probably a permissions issue or phone is already mounted."
 	}
 
 asktype() { \
