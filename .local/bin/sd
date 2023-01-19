@@ -3,7 +3,16 @@
 # Open a terminal window in the same directory as the currently active window.
 
 PID=$(xprop -id "$(xprop -root | sed -n "/_NET_ACTIVE_WINDOW/ s/^.*# // p")" | sed -n "/PID/ s/^.*= // p")
-PID=$(pstree -lpATna "$PID" | grep -v '\-\(lf,[0-9]\+ -server\|(st-urlhandler,[0-9]\+)\|xclip,[0-9]\+\)' | sed -n '$s/.*,\([0-9]\+\).*/\1/p')
+
+# Some programs don't expose their current working directory at /proc/"$PID"/cwd, so we have to exclude them.
+exclude='lf -server
+st-urlhandler
+less
+git
+xclip'
+
+regexFormat=$(echo "$exclude" | sed 's|^\(\S\+\)\(.*\)$|\1,[0-9]\\+\2|; $! s/$/\\|/' | tr -d '\n')
+PID=$(pstree -lpATna "$PID" | grep -v "\-\($regexFormat\)" | sed -n '$s/.*,\([0-9]\+\).*/\1/p')
 cwd=$(readlink /proc/"$PID"/cwd)
 [ "$PWD" != "$cwd" ] && [ -d "$cwd" ] && { cd "$cwd" || exit 1; }
 "$TERMINAL"
