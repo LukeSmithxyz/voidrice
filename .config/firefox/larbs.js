@@ -30,3 +30,9 @@ user_pref("dom.push.enabled", false);
 
 // Disable the pocket antifeature:
 user_pref("extensions.pocket.enabled", false);
+
+// Don't autodelete cookies on shutdown:
+user_pref("clearOnShutdown.cookies", false);
+
+// Enable custom userChrome.js:
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
