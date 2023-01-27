@@ -16,7 +16,7 @@ alldrives="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
 # Get all LUKS drives
 allluks="$(echo "$alldrives" | grep crypto_LUKS)"
 # Get a list of the LUKS drive UUIDs already decrypted.
-decrypted="$(ls /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
+decrypted="$(ls /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")" || true
 # Functioning for formatting drives correctly for dmenu:
 filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6}' ; }
 
