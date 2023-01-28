@@ -16,7 +16,7 @@ alldrives="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
 # Get all LUKS drives
 allluks="$(echo "$alldrives" | grep crypto_LUKS)" || true
 # Get a list of the LUKS drive UUIDs already decrypted.
-decrypted="$(ls /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
+decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
 # Functioning for formatting drives correctly for dmenu:
 filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6}' ; }
 
@@ -46,7 +46,7 @@ chosen="$(echo "$alldrives" | dmenu -p "Mount which drive?" -i)"
 
 # Function for prompting user for a mountpoint.
 getmount(){
-	mp="$(find /mnt /media /mount /home -maxdepth 5 -type d 2>/dev/null | dmenu -i -p "Mount this drive where?")"
+	mp="$(find /mnt /media /mount /home -maxdepth 1 -type d 2>/dev/null | dmenu -i -p "Mount this drive where?")"
 	test -n "$mp"
 	if [ ! -d "$mp" ]; then
 		mkdiryn=$(printf "No\\nYes" | dmenu -i -p "$mp does not exist. Create it?")
@@ -75,7 +75,7 @@ case "$chosen" in
 		# Decrypt in a terminal window
 		${TERMINAL:-st} -n floatterm -g 60x1 -e sudo cryptsetup open "$chosen" "usb$num"
 		# Check if now decrypted.
-		test -b /dev/mapper/usb$num
+		test -b "/dev/mapper/usb$num"
 
 		getmount
 		sudo mount "/dev/mapper/usb$num"  "$mp"
