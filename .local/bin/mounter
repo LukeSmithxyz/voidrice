@@ -14,7 +14,7 @@ phones="$(simple-mtpfs -l 2>/dev/null | sed "s/^/📱/")"
 # Check for drives.
 alldrives="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
 # Get all LUKS drives
-allluks="$(echo "$alldrives" | grep crypto_LUKS)"
+allluks="$(echo "$alldrives" | grep crypto_LUKS)" || true
 # Get a list of the LUKS drive UUIDs already decrypted.
 decrypted="$(ls /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
 # Functioning for formatting drives correctly for dmenu:
