@@ -32,7 +32,7 @@ user_pref("dom.push.enabled", false);
 user_pref("extensions.pocket.enabled", false);
 
 // Don't autodelete cookies on shutdown:
-user_pref("clearOnShutdown.cookies", false);
+user_pref("privacy.clearOnShutdown.cookies", false);
 
 // Enable custom userChrome.js:
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
