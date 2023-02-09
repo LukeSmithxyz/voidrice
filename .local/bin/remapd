@@ -2,8 +2,10 @@
 
 # Rerun the remaps script whenever a new input device is added.
 
-while : ; do
-    remaps
-    dmesg -W -f kern | grep "input:" -q
-    sleep 1
+trap "rm -f /tmp/udev_pipe" HUP INT QUIT ILL TRAP BUS TERM
+mkfifo -m 600 /tmp/udev_pipe
+udevadm monitor -u -t seat -s input -s usb >>/tmp/udev_pipe &
+while :; do
+	grep -q "add" /tmp/udev_pipe && grep -q " bind" /tmp/udev_pipe
+	remaps us:dvorak
 done
