@@ -1,9 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 # Rerun the remaps script whenever a new input device is added.
 
-while : ; do
-    remaps
-    dmesg -W -f kern | grep "input:" -q
-    sleep 1
+while :; do
+	remaps
+	grep -qP -m1 '[^un]bind.+\/[^:]+\(usb\)' <(udevadm monitor -u -t seat -s input -s usb)
 done
