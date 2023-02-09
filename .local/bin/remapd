@@ -2,10 +2,9 @@
 
 # Rerun the remaps script whenever a new input device is added.
 
-trap "rm -f /tmp/udev_pipe; exit" HUP INT QUIT ILL TRAP BUS TERM
-mkfifo -m 600 /tmp/udev_pipe
-udevadm monitor -u -t seat -s input -s usb >>/tmp/udev_pipe &
 while :; do
-	grep -q "add" /tmp/udev_pipe && grep -q " bind" /tmp/udev_pipe
+    udevadm monitor -u -t seat -s input -s usb | grep --line-buffer -m1 -P '[^un]bind'
+    sleep 1
 	remaps us:dvorak
 done
+
