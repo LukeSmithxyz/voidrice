@@ -23,6 +23,17 @@ notify-send "Device unmounted." "$chosen has been unmounted."
 # Close the chosen drive if decrypted.
 cryptid="$(echo "$lsblkoutput" | grep "/${chosen#*/}$")"
 cryptid="${cryptid%% *}"
-test -b /dev/mapper/"${cryptid##*/}"
-sudo -A cryptsetup close "$cryptid"
-notify-send "🔒Device dencryption closed." "Drive is now securely locked again."
+
+test -b /dev/mapper/"${cryptid##*/}" &&
+	sudo -A cryptsetup close "$cryptid" &&
+	notify-send "🔒Device dencryption closed." "Drive is now securely locked again."
+
+# Ask to eject drive if possible.
+mntline=$(echo "$lsblkoutput" | tac | grep -m1 -n "/${chosen#*/}" | cut -d':' -f1)
+[ -n "$mntline" ] &&
+	devlabel=$(echo "$lsblkoutput" | tac | tail -n +"$mntline" | grep -m1 '[^ ]* disk' | cut -d'/' -f3 | cut -d' ' -f1) &&
+	samedrivemounts=$(echo "$lsblkoutput" | tac | awk "\$1~/$devlabel/&&!devfound{devfound=1;cnt=0}devfound{if(\$2~/disk/||cnt>1){print cnt;exit}if(\$4){cnt+=1}}") &&
+	[ "$samedrivemounts" = 1 ] &&
+		[ $(printf "No\nYes" | dmenu -p 'Device fully unmounted. Eject this drive?') == 'Yes' ] &&
+			sudo -A sh -c "echo 'offline' > /sys/block/$devlabel/device/state; echo '1' > /sys/block/$devlabel/device/delete" &&
+			notify-send "Device ejected." "Drive can now be removed safely."
