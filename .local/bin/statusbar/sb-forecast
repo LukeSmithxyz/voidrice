@@ -3,39 +3,42 @@
 # Displays today's precipication chance (☔), and daily low (🥶) and high (🌞).
 # Usually intended for the statusbar.
 
-weather_report="${XDG_CACHE_HOME:-$HOME/.cache}/weather-report"
+weatherreport="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
 
 # Get a weather report from 'wttr.in' and save it locally.
-get_forecast() { curl -sf "wttr.in/$LOCATION" > "$weather_report" || exit 1; }
+getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1; }
 
-# Forecast should be updated only once a day
-check_forecast() {
-	[ -s "$weather_report" ] && [ "$(stat -c %y "$weather_report" 2>/dev/null |
+# Forecast should be updated only once a day.
+checkforecast() {
+	[ -s "$weatherreport" ] && [ "$(stat -c %y "$weatherreport" 2>/dev/null |
 		cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ]
 }
 
-get_precip_chance() {
-	sed '16q;d' "$weather_report" | # Extract line 16 from file
+getprecipchance() {
+	echo "$weatherdata" | sed '16q;d' |    # Extract line 16 from file
 		grep -wo "[0-9]*%" |           # Find a sequence of digits followed by '%'
 		sort -rn |                     # Sort in descending order
 		head -1q                       # Extract first line
 }
 
-get_daily_high_low() {
-	sed '13q;d' "$weather_report" |   # Extract line 13 from file
+getdailyhighlow() {
+	echo "$weatherdata" | sed '13q;d' |      # Extract line 13 from file
 		grep -o "m\\([-+]\\)*[0-9]\\+" | # Find temperatures in the format "m<signed number>"
 		sed 's/[+m]//g' |                # Remove '+' and 'm'
 		sort -n -k 2n |                  # Sort in ascending order
 		sed -e 1b -e '$!d'               # Extract the first and last lines
 }
 
-show_weather() {
-	printf "☔%s 🥶%s° 🌞%s°\n" "$(get_precip_chance)" $(get_daily_high_low)
+readfile() { weatherdata="$(cat "$weatherreport")" ;}
+
+showweather() {
+	readfile
+	printf "☔%s 🥶%s° 🌞%s°\n" "$(getprecipchance)" $(getdailyhighlow)
 }
 
 case $BLOCK_BUTTON in
-	1) setsid -f "$TERMINAL" -e less -Srf "$weather_report" ;;
-	2) get_forecast && show_weather ;;
+	1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
+	2) getforecast && showweather ;;
 	3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
 ☔: Chance of rain/snow
@@ -44,6 +47,6 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-check_forecast || get_forecast
+checkforecast || getforecast
 
-show_weather
+showweather
