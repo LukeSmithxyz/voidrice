@@ -3,7 +3,7 @@
 # Displays today's precipication chance (☔), and daily low (🥶) and high (🌞).
 # Usually intended for the statusbar.
 
-weather_report="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
+weather_report="${XDG_CACHE_HOME:-$HOME/.cache}/weather-report"
 
 # Get a weather report from 'wttr.in' and save it locally.
 get_forecast() { curl -sf "wttr.in/$LOCATION" > "$weather_report" || exit 1; }
