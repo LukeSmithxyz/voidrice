@@ -12,11 +12,11 @@ set -e
 # Check for phones.
 phones="$(simple-mtpfs -l 2>/dev/null | sed "s/^/📱/")"
 # Check for drives.
-alldrives="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
+lsblkoutput="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
 # Get all LUKS drives
-allluks="$(echo "$alldrives" | grep crypto_LUKS)" || true
+allluks="$(echo "$lsblkoutput" | grep crypto_LUKS)" || true
 # Get a list of the LUKS drive UUIDs already decrypted.
-decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
+decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")" || true
 # Functioning for formatting drives correctly for dmenu:
 filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6}' ; }
 
@@ -33,7 +33,7 @@ unopenedluks="$(for drive in $allluks; do
 done | filter)"
 
 # Get all normal, non-encrypted or decrypted partitions that are not mounted.
-normalparts="$(echo "$alldrives"| grep -v crypto_LUKS | grep 'part\|rom\|crypt' | sed "s/^/💾 /" | filter )"
+normalparts="$(echo "$lsblkoutput"| grep -v crypto_LUKS | grep 'part\|rom\|crypt' | sed "s/^/💾 /" | filter )"
 
 # Add all to one variable. If no mountable drives found, exit.
 alldrives="$(echo "$phones
@@ -59,7 +59,7 @@ case "$chosen" in
 		chosen="${chosen%% *}"
 		chosen="${chosen:1}"	# This is a bashism.
 		getmount
-		sudo mount "$chosen" "$mp"
+		sudo -A mount "$chosen" "$mp"
 		notify-send "💾Drive Mounted." "$chosen mounted to $mp."
 		;;
 
@@ -78,7 +78,7 @@ case "$chosen" in
 		test -b "/dev/mapper/usb$num"
 
 		getmount
-		sudo mount "/dev/mapper/usb$num"  "$mp"
+		sudo -A mount "/dev/mapper/usb$num"  "$mp"
 		notify-send "🔓Decrypted drive Mounted." "$chosen decrypted and mounted to $mp."
 		;;
 
