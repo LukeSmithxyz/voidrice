@@ -1,20 +1,40 @@
 #!/bin/sh
 
-# Displays todays precipication chance (☔) and daily low (🥶) and high (🌞).
+# Displays today's precipication chance (☔), and daily low (🥶) and high (🌞).
 # Usually intended for the statusbar.
 
-# If we have internet, get a weather report from wttr.in and store it locally.
-# You could set up a shell alias to view the full file in a pager in the
-# terminal if desired. This function will only be run once a day when needed.
 weatherreport="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
-getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1 ;}
 
-# Some very particular and terse stream manipulation. We get the maximum
-# precipitation chance and the daily high and low from the downloaded file and
-# display them with coresponding emojis.
-showweather() { printf "%s" "$(sed '16q;d' "$weatherreport" |
-	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')"
-sed '13q;d' "$weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sed 's/+//g' | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " 🥶" $1 "°","🌞" $2 "°"}' ;}
+# Get a weather report from 'wttr.in' and save it locally.
+getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1; }
+
+# Forecast should be updated only once a day.
+checkforecast() {
+	[ -s "$weatherreport" ] && [ "$(stat -c %y "$weatherreport" 2>/dev/null |
+		cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ]
+}
+
+getprecipchance() {
+	echo "$weatherdata" | sed '16q;d' |    # Extract line 16 from file
+		grep -wo "[0-9]*%" |           # Find a sequence of digits followed by '%'
+		sort -rn |                     # Sort in descending order
+		head -1q                       # Extract first line
+}
+
+getdailyhighlow() {
+	echo "$weatherdata" | sed '13q;d' |      # Extract line 13 from file
+		grep -o "m\\([-+]\\)*[0-9]\\+" | # Find temperatures in the format "m<signed number>"
+		sed 's/[+m]//g' |                # Remove '+' and 'm'
+		sort -n -k 2n |                  # Sort in ascending order
+		sed -e 1b -e '$!d'               # Extract the first and last lines
+}
+
+readfile() { weatherdata="$(cat "$weatherreport")" ;}
+
+showweather() {
+	readfile
+	printf "☔%s 🥶%s° 🌞%s°\n" "$(getprecipchance)" $(getdailyhighlow)
+}
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
@@ -27,9 +47,6 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-# The test if our forcecast is updated to the day. If it isn't download a new
-# weather report from wttr.in with the above function.
-[ -s "$weatherreport" ] && [ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
-	getforecast
+checkforecast || getforecast
 
 showweather
