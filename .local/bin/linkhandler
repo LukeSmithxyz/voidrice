@@ -16,7 +16,7 @@ link=$(echo $1 | sed 's/.*\///;s/%20/ /g')
 [ ${#link} -ge 255 ] && link=$(echo $link | cut -c 100-)
 
 case "$url" in
-	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*odysee.com*)
+	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtube.com/shorts*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*odysee.com*)
 		setsid -f mpv -quiet "$url" >/dev/null 2>&1 ;;
 	*png|*jpg|*jpe|*jpeg|*gif)
 		curl -sL "$url" > "/tmp/$link" && sxiv -a "/tmp/$link"  >/dev/null 2>&1 & ;;
