@@ -39,30 +39,29 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
     }
 
 morescreen() { # If multi-monitor is selected and there are more than two screens.
-        primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
-        secondary=$(echo "$screens" | grep -v "$primary" | dmenu -i -p "Select secondary display:")
-        direction=$(printf "left-of\\nbelow\\nabove\\nright-of" | dmenu -i -p "What side of $primary should $secondary be on?")
-        tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | dmenu -i -p "Select third display:")
-        tertiary_placement=$(echo "$screens" | grep -v "$tertiary" | dmenu -i -p "Around which display should $tertiary be on?")
-        tertiary_direction=$(printf "$(whichprimary "$tertiary_placement" "$primary" "$direction")" | dmenu -i -p "What side of $tertiary_placement should $tertiary be on?")
-        xrandr --output "$primary" --auto --output "$secondary" --"$direction" "$primary" --auto --output "$tertiary" --"$tertiary_direction" "$tertiary_placement" --auto
+    primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
+    secondary=$(echo "$screens" | grep -v "$primary" | dmenu -i -p "Select secondary display:")
+    direction=$(printf "left-of\\nbelow\\nabove\\nright-of" | dmenu -i -p "What side of $primary should $secondary be on?")
+    tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | dmenu -i -p "Select third display:")
+    tertiary_placement=$(echo "$screens" | grep -v "$tertiary" | dmenu -i -p "Around which display should $tertiary be on?")
+    tertiary_direction=$(printf "$(whichprimary "$tertiary_placement" "$primary" "$direction")" | dmenu -i -p "What side of $tertiary_placement should $tertiary be on?")
+    xrandr --output "$primary" --auto --output "$secondary" --"$direction" "$primary" --auto --output "$tertiary" --"$tertiary_direction" "$tertiary_placement" --auto
 	}
 
 whichprimary() { # Check done in order to verify direction inconsistencies in case of choosing tertiary display around the primary one
-        if [ "$tertiary_placement" == "$primary" ] 
-                then 
-                        printf "left-of\\nbelow\\nabove\\nright-of" | grep -v $direction;
-                else
-                        printf "left-of\\nbelow\\nabove\\nright-of" | grep -v "$(sideavailability "$direction")";
-        fi ;}
+	if [ "$tertiary_placement" == "$primary" ]; then 
+        printf "left-of\\nbelow\\nabove\\nright-of" | grep -v $direction;
+    else
+        printf "left-of\\nbelow\\nabove\\nright-of" | grep -v "$(sideavailability "$direction")";
+	fi ;}
 
 sideavailability() { # Gives the opposite side available in case of tertiary display being around the secondary one
-        case "$(printf "left-of\\nbelow\\nabove\\nright-of" | grep -v $1)" in 
-                "left-of") printf "right-of";;
-                "below") printf "above";;
-                "above") printf "below";;
-                "right-of") printf "left-of";;
-        esac ;}
+	case "$(printf "left-of\\nbelow\\nabove\\nright-of" | grep -v $1)" in 
+        "left-of") printf "right-of";;
+        "below") printf "above";;
+        "above") printf "below";;
+        "right-of") printf "left-of";;
+	esac ;}
 
 multimon() { # Multi-monitor handler.
 	case "$(echo "$screens" | wc -l)" in
