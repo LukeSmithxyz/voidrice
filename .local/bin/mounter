@@ -59,7 +59,7 @@ case "$chosen" in
 		chosen="${chosen%% *}"
 		chosen="${chosen:1}"	# This is a bashism.
 		getmount
-		sudo -A mount "$chosen" "$mp"
+		sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
 		notify-send "💾Drive Mounted." "$chosen mounted to $mp."
 		;;
 
@@ -78,7 +78,7 @@ case "$chosen" in
 		test -b "/dev/mapper/usb$num"
 
 		getmount
-		sudo -A mount "/dev/mapper/usb$num"  "$mp"
+		sudo -A mount "/dev/mapper/usb$num" "$mp" -o uid="$(id -u)",gid="$(id -g)"
 		notify-send "🔓Decrypted drive Mounted." "$chosen decrypted and mounted to $mp."
 		;;
 
