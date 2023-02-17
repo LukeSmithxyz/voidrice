@@ -87,7 +87,7 @@ case "$chosen" in
 		echo "OK" | dmenu -i -p "Tap Allow on your phone if it asks for permission and then press enter"
 		chosen="${chosen%%:*}"
 		chosen="${chosen:1}"	# This is a bashism.
-		simple-mtpfs --device "$chosen" "$mp"
+		sudo -A simple-mtpfs -o allow_other --device "$chosen" "$mp"
 		notify-send "🤖 Android Mounted." "Android device mounted to $mp."
 		;;
 esac
