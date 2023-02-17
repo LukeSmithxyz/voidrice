@@ -4,7 +4,7 @@
 # replace the older `dmenumount` which had extra steps and couldn't handle
 # encrypted drives.
 # TODO: Remove already mounted Android phones from prompt.
-# TODO: Try mount first for drives if in fstab to avoid directory prompt?
+# TODO: Try decrypt for drives in crtypttab
 # TODO: Add some support for connecting iPhones (although they are annoying).
 
 set -e
@@ -54,11 +54,18 @@ getmount(){
 	fi
 }
 
+attemptmount(){
+		# Attempt to mount without a mountpoint, to see if drive is in fstab.
+		sudo -A mount "$chosen" || return 1
+		notify-send "💾Drive Mounted." "$chosen mounted."
+		exit
+}
+
 case "$chosen" in
 	💾*)
 		chosen="${chosen%% *}"
 		chosen="${chosen:1}"	# This is a bashism.
-		getmount
+		attemptmount || getmount
 		sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
 		notify-send "💾Drive Mounted." "$chosen mounted to $mp."
 		;;
@@ -77,14 +84,14 @@ case "$chosen" in
 		# Check if now decrypted.
 		test -b "/dev/mapper/usb$num"
 
-		getmount
+		attemptmount || getmount
 		sudo -A mount "/dev/mapper/usb$num" "$mp" -o uid="$(id -u)",gid="$(id -g)"
 		notify-send "🔓Decrypted drive Mounted." "$chosen decrypted and mounted to $mp."
 		;;
 
 	📱*)
+		notify-send "❗Note" "Remember to allow file access on your phone now."
 		getmount
-		echo "OK" | dmenu -i -p "Tap Allow on your phone if it asks for permission and then press enter"
 		chosen="${chosen%%:*}"
 		chosen="${chosen:1}"	# This is a bashism.
 		sudo -A simple-mtpfs -o allow_other --device "$chosen" "$mp"
