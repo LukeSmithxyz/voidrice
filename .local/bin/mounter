@@ -11,6 +11,9 @@ set -e
 
 # Check for phones.
 phones="$(simple-mtpfs -l 2>/dev/null | sed "s/^/📱/")"
+for NUMBER in $(echo "$phones" | sed -rn 's/.([0-9]).*/\1/gp'); do
+	[[ $(sed -rn 's/simple-mtpfs-([0-9]).*/\1/gp' /etc/mtab) = $NUMBER ]] && phones="$(echo "$phones" | sed "/$NUMBER: .*/d")"
+done
 # Check for drives.
 lsblkoutput="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
 # Get all LUKS drives
@@ -94,7 +97,7 @@ case "$chosen" in
 		getmount
 		chosen="${chosen%%:*}"
 		chosen="${chosen:1}"	# This is a bashism.
-		sudo -A simple-mtpfs -o allow_other --device "$chosen" "$mp"
+		sudo -A simple-mtpfs -o allow_other -o fsname="simple-mtpfs-$chosen" --device "$chosen" "$mp"
 		notify-send "🤖 Android Mounted." "Android device mounted to $mp."
 		;;
 esac
