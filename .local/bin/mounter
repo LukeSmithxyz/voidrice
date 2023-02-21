@@ -3,29 +3,36 @@
 # Mounts Android Phones and USB drives (encrypted or not). This script will
 # replace the older `dmenumount` which had extra steps and couldn't handle
 # encrypted drives.
-# TODO: Remove already mounted Android phones from prompt.
 # TODO: Try decrypt for drives in crtypttab
 # TODO: Add some support for connecting iPhones (although they are annoying).
 
-set -e
+IFS='
+'
+# Function for escaping cell-phone names.
+escape(){ echo "$@" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g" ;}
 
 # Check for phones.
 phones="$(simple-mtpfs -l 2>/dev/null | sed "s/^/📱/")"
-for NUMBER in $(echo "$phones" | sed -rn 's/.([0-9]).*/\1/gp'); do
-	[[ $(sed -rn 's/simple-mtpfs-([0-9]).*/\1/gp' /etc/mtab) = $NUMBER ]] && phones="$(echo "$phones" | sed "/$NUMBER: .*/d")"
-done
+mountedphones="$(grep "simple-mtpfs" /etc/mtab)"
+# If there are already mounted phones, remove them from the list of mountables.
+[ -n "$mountedphones" ] && phones="$(for phone in $phones; do
+	for mounted in $mountedphones; do
+		escphone="$(escape "$phone")"
+		[[ "$mounted" =~ "$escphone" ]] && break 1
+	done && continue 1
+	echo "$phone"
+done)"
+
 # Check for drives.
 lsblkoutput="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
 # Get all LUKS drives
-allluks="$(echo "$lsblkoutput" | grep crypto_LUKS)" || true
+allluks="$(echo "$lsblkoutput" | grep crypto_LUKS)"
 # Get a list of the LUKS drive UUIDs already decrypted.
-decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")" || true
+decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
 # Functioning for formatting drives correctly for dmenu:
 filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6}' ; }
 
 # Get only LUKS drives that are not decrypted.
-IFS='
-'
 unopenedluks="$(for drive in $allluks; do
 	uuid="${drive%% *}"
 	uuid="${uuid//-}"	# This is a bashism.
@@ -42,6 +49,10 @@ normalparts="$(echo "$lsblkoutput"| grep -v crypto_LUKS | grep 'part\|rom\|crypt
 alldrives="$(echo "$phones
 $unopenedluks
 $normalparts" | sed "/^$/d;s/ *$//")"
+
+# Quit the script if a sequential command fails.
+set -e
+
 test -n "$alldrives"
 
 # Feed all found drives to dmenu and get user choice.
@@ -95,9 +106,9 @@ case "$chosen" in
 	📱*)
 		notify-send "❗Note" "Remember to allow file access on your phone now."
 		getmount
-		chosen="${chosen%%:*}"
-		chosen="${chosen:1}"	# This is a bashism.
-		sudo -A simple-mtpfs -o allow_other -o fsname="simple-mtpfs-$chosen" --device "$chosen" "$mp"
+		number="${chosen%%:*}"
+		number="${chosen:1}"	# This is a bashism.
+		sudo -A simple-mtpfs -o allow_other -o fsname="simple-mtpfs-$(escape "$chosen")" --device "$number" "$mp"
 		notify-send "🤖 Android Mounted." "Android device mounted to $mp."
 		;;
 esac
