@@ -2,8 +2,7 @@
 
 # Open a terminal window in the same directory as the currently active window.
 
-windowPID=$(xprop -id "$(xprop -root | sed -n "/_NET_ACTIVE_WINDOW/ s/^.*# // p")" | sed -n "/PID/ s/^.*= // p")
-PIDlist=$(pstree -lpATna "$windowPID" | sed -En 's/.*,([0-9]+).*/\1/p' | tac)
+PIDlist=$(pstree -lpATna "$(xdotool getactivewindow getwindowpid)" | sed -En 's/.*,([0-9]+).*/\1/p' | tac)
 for PID in $PIDlist; do
 	cmdline=$(ps -o args= -p "$PID")
 	process_group_leader=$(ps -o comm= -p "$(ps -o pgid= -p "$PID" | tr -d ' ')")
