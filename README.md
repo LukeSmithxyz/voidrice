@@ -42,7 +42,7 @@ curl -LO larbs.xyz/larbs.sh
 ```
 
 or clone the repo files directly to your home directory and install the
-[dependencies](https://github.com/LukeSmithxyz/LARBS/blob/master/progs.csv).
+[dependencies](https://github.com/LukeSmithxyz/LARBS/blob/master/static/progs.csv).
 
 ## Default Desktop Artwork
 

@@ -39,9 +39,9 @@ case "$ext" in
 	java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
 	m) octave "$file" ;;
 	md)	if  [ -x "$(command -v lowdown)" ]; then
-			lowdown --parse-no-intraemph "$file" -Tms | groff -mpdfmark -ms -kept > "$base".pdf
+			lowdown --parse-no-intraemph "$file" -Tms | groff -mpdfmark -ms -kept -T pdf > "$base".pdf
 		elif [ -x "$(command -v groffdown)" ]; then
-			groffdown -i "$file" | groff > "$base.pdf"
+			groffdown -i "$file" | groff -T pdf > "$base".pdf
 		else
 			pandoc -t ms --highlight-style=kate -s -o "$base".pdf "$file"
 		fi ; ;;
@@ -51,7 +51,7 @@ case "$ext" in
 	py) python "$file" ;;
 	[rR]md) Rscript -e "rmarkdown::render('$file', quiet=TRUE)" ;;
 	rs) cargo build ;;
-	sass) sassc -a "$file" "$base.css" ;;
+	sass) sassc -a "$file" "$base".css ;;
 	scad) openscad -o "$base".stl "$file" ;;
 	sent) setsid -f sent "$file" 2>/dev/null ;;
 	tex) textype "$file" ;;
