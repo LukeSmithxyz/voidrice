@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Video viewer
+Exec=/usr/bin/mpv -quiet %f
