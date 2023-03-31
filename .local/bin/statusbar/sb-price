@@ -18,17 +18,15 @@ filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
-updateprice() { curl -sf -m 3 $currency.$url/{1$1,$1$interval} --output "$pricefile" --output "$chartfile" ||
+updateprice() { curl -sf -m 1 --fail-early $currency.$url/{1$1,$1$interval} --output "$pricefile" --output "$chartfile" ||
 	rm -f "$pricefile" "$chartfile" ;}
 
 [ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] &&
-	updateprice "$1"
+	updateme="1"
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Srf "$chartfile" ;;
-	2) notify-send -u low "$3 Updating..." "Updating $2 price..."
-		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now
-\$$(cat "$pricefile")" ;;
+	2) notify-send -u low "$3 Updating..." "Updating $2 price..." ; updateme="1" ; showupdate="1" ;;
 	3) uptime="$(date -d "$filestat" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
 		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
@@ -38,6 +36,12 @@ case $BLOCK_BUTTON in
 	$uptime</b>" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
+
+[ -n "$updateme" ] &&
+	updateprice "$1" &&
+	[ -n "$showupdate" ] &&
+	notify-send "$3 Update complete." "$2 price is now
+\$$(cat "$pricefile")"
 
 case "$currency" in
 	usd) symb="$" ;;
