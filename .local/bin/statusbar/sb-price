@@ -18,7 +18,7 @@ filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
-updateprice() { curl -sf -m 1 --fail-early $currency.$url/{1$1,$1$interval} --output "$pricefile" --output "$chartfile" ||
+updateprice() { curl -sf $currency.$url/{1$1,$1$interval} --output "$pricefile" --output "$chartfile" ||
 	rm -f "$pricefile" "$chartfile" ;}
 
 [ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] &&
@@ -38,10 +38,21 @@ case $BLOCK_BUTTON in
 esac
 
 [ -n "$updateme" ] &&
-	updateprice "$1" &&
-	[ -n "$showupdate" ] &&
-	notify-send "$3 Update complete." "$2 price is now
-\$$(cat "$pricefile")"
+	if [ -n "$showupdate" ]; then
+		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now \$$(cat "$pricefile")"
+	else
+		# get dwmblocks signal numbers corresponding to currency
+		case "$1" in
+			lbc)  sig="22" ;;
+			bat)  sig="20" ;;
+			link) sig="25" ;;
+			xmr)  sig="24" ;;
+			eth)  sig="23" ;;
+			btc)  sig="21" ;;
+		esac
+
+		( updateprice "$1" && pkill -RTMIN+"$sig" "${STATUSBAR:-dwmblocks}") & echo; exit
+	fi
 
 case "$currency" in
 	usd) symb="$" ;;

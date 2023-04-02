@@ -6,5 +6,6 @@
 # https://www.maketecheasier.com/ip-address-geolocation-lookups-linux/
 
 ifinstalled "geoip" || exit
-addr="$(curl ifconfig.me 2>/dev/null)" || exit
+ipfile="$XDG_RUNTIME_DIR/iplocate"
+addr=$(cat "$ipfile") && rm "$ipfile" || { ( curl -s ifconfig.me > "$ipfile" && pkill -RTMIN+27 "${STATUSBAR:-dwmblocks}") & echo; exit; }
 grep "flag: " "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji" | grep "$(geoiplookup "$addr" | sed 's/.*, //')" | sed "s/flag: //;s/;.*//"
