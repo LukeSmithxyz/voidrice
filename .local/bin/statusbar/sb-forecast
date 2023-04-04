@@ -48,4 +48,4 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-checkforecast && showweather || { ( getforecast && pkill -RTMIN+5 "${STATUSBAR:-dwmblocks}") & echo; }
+checkforecast && showweather || { ( getforecast && pkill -RTMIN+"${1:-5}" "${STATUSBAR:-dwmblocks}") & echo; }
