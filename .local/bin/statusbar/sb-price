@@ -1,19 +1,22 @@
 #!/bin/sh
 
 # Usage:
-#	price <dwmblocks signal> <url> <Name of currency> <icon> <Price to show in>
-#	price 20 bat "Basic Attention Token" 🦁
+#	price <url> <Name of currency> <icon> <Price to show in (optional)> <dwmblocks signal (optional)>
+#	price bat "Basic Attention Token" 🦁
 # When the name of the currency is multi-word, put it in quotes.
 
-[ -z "$4" ] && exit 1
+[ -z "$3" ] && exit 1
 
-# use $5 as currency, if not passed in use "usd" as default
+# handle optional parameters in $4 and/or $5
+echo "$4" | grep -q '^[0-9]' &&
+	currency='usd' && sig=$4 ||
+	{ currency="${4:-usd}"; sig=$5; }
+
 url="${CRYPTOURL:-rate.sx}"
-currency="${5:-usd}"
 interval="@14d"	# History contained in chart preceded by '@' (7d = 7 days)
 dir="${XDG_CACHE_HOME:-$HOME/.cache}/crypto-prices"
-pricefile="$dir/$2-$currency"
-chartfile="$dir/$2-$currency-chart"
+pricefile="$dir/$1-$currency"
+chartfile="$dir/$1-$currency-chart"
 filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
@@ -26,9 +29,9 @@ updateprice() { curl -sf $currency.$url/{1$1,$1$interval} --output "$pricefile" 
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Srf "$chartfile" ;;
-	2) notify-send -u low "$4 Updating..." "Updating $3 price..." ; updateme="1" ; showupdate="1" ;;
+	2) notify-send -u low "$3 Updating..." "Updating $2 price..." ; updateme="1" ; showupdate="1" ;;
 	3) uptime="$(date -d "$filestat" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
-		notify-send "$4 $3 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
+		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
 - Middle click to update.
 - Shows 🔃 if updating prices.
@@ -39,9 +42,11 @@ esac
 
 [ -n "$updateme" ] &&
 	if [ -n "$showupdate" ]; then
-		updateprice "$2" && notify-send "$4 Update complete." "$3 price is now \$$(cat "$pricefile")"
+		updateprice "$1" && notify-send "$3 Update complete." "$2 price is now \$$(cat "$pricefile")"
 	else
-		( updateprice "$2" && pkill -RTMIN+"$1" "${STATUSBAR:-dwmblocks}") & echo; exit
+		[ -n "$sig" ] &&
+			{ ( updateprice "$1" && pkill -RTMIN+"$sig" "${STATUSBAR:-dwmblocks}" ) & echo; exit; } ||
+			updateprice "$1"
 	fi
 
 case "$currency" in
@@ -51,4 +56,4 @@ case "$currency" in
 	btc) symb="" ;;
 esac
 
-[ -f "$pricefile" ] && printf "$4$symb%0.2f" "$(cat "$pricefile")"
+[ -f "$pricefile" ] && printf "$3$symb%0.2f" "$(cat "$pricefile")"
