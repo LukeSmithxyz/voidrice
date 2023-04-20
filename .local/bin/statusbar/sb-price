@@ -1,24 +1,34 @@
 #!/bin/sh
 
 # Usage:
-#	price <url> <Name of currency> <icon> <Price to show in>
-#	price bat "Basic Attention Token" 🦁
+#	price <currency-base currency> <name of currency> <icon> <signal>
+#	price bat-btc "Basic Attention Token" 🦁 24
+#	This will give the price of BAT denominated in BTC and will update on
+#	signal 24.
 # When the name of the currency is multi-word, put it in quotes.
 
-[ -z "$3" ] && exit 1
+[ -z "$1" ] && exit 1
 
-# use $4 as currency, if not passed in use "usd" as default
 url="${CRYPTOURL:-rate.sx}"
-currency="${4:-usd}"
+target="${1%%-*}"
+denom="${1##*-}"
+name="${2:-$1}"
+icon="${3:-💰}"
+case "$denom" in
+	"$target"|usd) denom="usd"; symb="$" ;;
+	gbp) symb="£" ;;
+	eur) symb="€" ;;
+	btc) symb="" ;;
+esac
 interval="@14d"	# History contained in chart preceded by '@' (7d = 7 days)
 dir="${XDG_CACHE_HOME:-$HOME/.cache}/crypto-prices"
-pricefile="$dir/$1-$currency"
-chartfile="$dir/$1-$currency-chart"
+pricefile="$dir/$target-$denom"
+chartfile="$dir/$target-$denom-chart"
 filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
-updateprice() { curl -sf -m 1 --fail-early $currency.$url/{1$1,$1$interval} --output "$pricefile" --output "$chartfile" ||
+updateprice() { curl -sf -m 1 --fail-early $denom.$url/{1$target,$target$interval} --output "$pricefile" --output "$chartfile" ||
 	rm -f "$pricefile" "$chartfile" ;}
 
 [ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] &&
@@ -26,9 +36,9 @@ updateprice() { curl -sf -m 1 --fail-early $currency.$url/{1$1,$1$interval} --ou
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Srf "$chartfile" ;;
-	2) notify-send -u low "$3 Updating..." "Updating $2 price..." ; updateme="1" ; showupdate="1" ;;
+	2) notify-send -u low "$icon Updating..." "Updating $name price..." ; updateme="1" ; showupdate="1" ;;
 	3) uptime="$(date -d "$filestat" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
-		notify-send "$3 $2 module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
+		notify-send "$icon $name module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
 - Middle click to update.
 - Shows 🔃 if updating prices.
@@ -38,16 +48,9 @@ case $BLOCK_BUTTON in
 esac
 
 [ -n "$updateme" ] &&
-	updateprice "$1" &&
+	updateprice "$target" &&
 	[ -n "$showupdate" ] &&
-	notify-send "$3 Update complete." "$2 price is now
+	notify-send "$icon Update complete." "$name price is now
 \$$(cat "$pricefile")"
 
-case "$currency" in
-	usd) symb="$" ;;
-	gbp) symb="£" ;;
-	eur) symb="€" ;;
-	btc) symb="" ;;
-esac
-
-[ -f "$pricefile" ] && printf "$3$symb%0.2f" "$(cat "$pricefile")"
+[ -f "$pricefile" ] && printf "%s%s%0.2f" "$icon" "$symb" "$(cat "$pricefile")"
