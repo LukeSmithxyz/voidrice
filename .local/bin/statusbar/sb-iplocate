@@ -5,7 +5,11 @@
 #
 # https://www.maketecheasier.com/ip-address-geolocation-lookups-linux/
 
-ifinstalled "geoip" || exit
+ifinstalled "geoip" || exit 1
+
 ipfile="$XDG_RUNTIME_DIR/iplocate"
-addr=$(cat "$ipfile") && rm "$ipfile" || { ( curl -s ifconfig.me > "$ipfile" && pkill -RTMIN+"${1:-27}" "${STATUSBAR:-dwmblocks}") & echo; exit; }
-grep "flag: " "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji" | grep "$(geoiplookup "$addr" | sed 's/.*, //')" | sed "s/flag: //;s/;.*//"
+addr=$(cat "$ipfile" 2>/dev/null) && addr=$(geoiplookup "$addr" 2>/dev/null) && rm "$ipfile" || { ( curl --retry 5 -sfm 10 ifconfig.me > "$ipfile" && pkill -RTMIN+"${1:-27}" "${STATUSBAR:-dwmblocks}" ) & echo; exit; }
+name="${addr##*, }"
+flag="$(grep "flag: $name" "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji")"
+flag="${flag%% *}"
+printf "%s %s\\n" "$flag" "$name"

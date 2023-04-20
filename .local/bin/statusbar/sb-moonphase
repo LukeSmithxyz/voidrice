@@ -5,7 +5,7 @@
 moonfile="${XDG_DATA_HOME:-$HOME/.local/share}/moonphase"
 
 [ -s "$moonfile" ] && [ "$(stat -c %y "$moonfile" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
-	{ ( curl -sf "wttr.in/?format=%m" > "$moonfile" && pkill -RTMIN+"${1:-17}" "${STATUSBAR:-dwmblocks}" ) & echo; exit; }
+	{ ( curl --retry 5 -sfm 10 "wttr.in/?format=%m" > "$moonfile" && pkill -RTMIN+"${1:-17}" "${STATUSBAR:-dwmblocks}" ) & echo; exit; }
 
 icon="$(cat "$moonfile")"
 
