@@ -1,0 +1,6 @@
+#!/bin/bash
+
+temp_file=$(mktemp)
+locate -d ~/.config/.mymlocate.db -b -r '.*\.\(mp4\|mkv\|webm\|mov\|m4v\wmv\|flv\|avi\)$' | awk -F/ '{name=$NF; gsub(/\.(mp4|mkv|webm|mov|m4v|wmv|flv|avi)$/, "", name); print name "\t" $0}' > "$temp_file"
+chosen_file_name_and_path=$(cut -f1 "$temp_file" | dmenu -i -l 10 -p "Select a video file:")
+mpv "$(awk -F'\t' -v chosen="$chosen_file_name_and_path" '$1 == chosen {print $2; exit}' "$temp_file")" && rm "$temp_file"
