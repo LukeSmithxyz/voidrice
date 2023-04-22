@@ -1,0 +1,23 @@
+#!/bin/sh
+
+FILE="~/.local/share/larbs/urlquery"
+
+URL_FROM_CLIPBOARD=$(xclip -o)
+
+if echo "$URL_FROM_CLIPBOARD" | grep -q "^http"; then
+    URL_ALREADY_EXISTS=$(jq --arg url "$URL_FROM_CLIPBOARD" 'map(.[1] == $url) | any' "$FILE")
+
+    if [ "$URL_ALREADY_EXISTS" = "true" ]; then
+        notify-send "The URL is already in the list."
+        exit 1
+    fi
+
+    URL_NAME=$(dmenu -l 0 -p "Enter a name for the URL")
+
+    if [ -n "$URL_NAME" ]; then
+        jq --arg name "$URL_NAME" --arg url "$URL_FROM_CLIPBOARD" '. += [[$name, $url]]' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE" &&
+	notify-send "$URL_NAME is bookmarked."
+    fi
+else
+    notify-send "The clipboard content is not a valid URL."
+fi
