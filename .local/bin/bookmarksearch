@@ -2,6 +2,8 @@
 
 FILE="~/.local/share/larbs/urlquery"
 
+OBJ_SELECTED=$(jq -r ".[][0]" "$FILE" | rofi -dmenu -l 10 -p "Select a website")
+
 ENTRY_EXISTS=$(jq -r --arg sel "$OBJ_SELECTED" 'map(.[0] == $sel) | any' "$FILE")
 
 if [ -z "$OBJ_SELECTED" ] || ([ "$ENTRY_EXISTS" = "false" ] && [ "$OBJ_SELECTED" != "@@" ]); then
