@@ -4,6 +4,6 @@
 # headphones are added or removed.
 
 while :; do
-	grep -qP -m1 '^jack\/headphone' <(acpi_listen)
+	grep -qP -m1 '^jack\/headphone' <(acpi_listen) || exit 1
 	pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}"
 done
