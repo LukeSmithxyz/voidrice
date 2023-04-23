@@ -4,15 +4,37 @@ FILE="~/.local/share/larbs/urlquery"
 
 OBJ_SELECTED=$(jq -r ".[][0]" "$FILE" | dmenu -l 10 -p "Select a website")
 
-if [ -z "$OBJ_SELECTED" ]; then
-    exit 1
-fi
+add_new_bookmark() {
+    URL_FROM_CLIPBOARD=$(xclip-o)
 
-URLQUERY=$(jq -r --arg sel "$OBJ_SELECTED" 'map(select(.[0] == $sel))[0][1]' "$FILE")
+    if echo "$URL_FROM_CLIPBOARD" | grep -q "^http"; then
+        URL_ALREADY_EXISTS=$(jq --arg url "$URL_FROM_CLIPBOARD" 'map(.[1] == $url) | any' "$FILE")
 
-if echo "$URLQUERY" | grep -q "search"; then
-    OBJ_KEYWORDS=$(dmenu -l 0 -p "Enter keywords" | tr " " "+")
-    firefox "${URLQUERY}${OBJ_KEYWORDS}"
+        if [ "$URL_ALREADY_EXISTS" = "true" ]; then
+            notify-send "The URL is already in the list."
+            exit 1
+        fi
+
+        URL_NAME=$(dmenu -l 0 -p "Enter a name for the URL")
+
+        if [ -n "$URL_NAME" ]; then
+            jq --arg name "$URL_NAME" --arg url "$URL_FROM_CLIPBOARD" '. += [[$name, $url]]' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE" &&
+	    notify-send "$URL_NAME is bookmarked"
+        fi
+    else
+        notify-send "The clipboard content is not a valid URL."
+    fi
+}
+
+if [ "$OBJ_SELECTED" = "@@" ]; then
+    add_new_bookmark
 else
-    firefox "${URLQUERY}"
+    URLQUERY=$(jq -r --arg sel "$OBJ_SELECTED" 'map(select(.[0] == $sel))[0][1]' "$FILE")
+
+    if echo "$URLQUERY" | grep -q "search"; then
+        OBJ_KEYWORDS=$(dmenu -l 0 -p "Enter keywords" | tr " " "+")
+        firefox "${URLQUERY}${OBJ_KEYWORDS}"
+    else
+        firefox "${URLQUERY}"
+    fi
 fi
