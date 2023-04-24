@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Update the volume module in the statusbar whenever
-# headphones are added or removed.
+# headphones and monitors are added or removed.
 
 while :; do
-	grep -qP -m1 '^jack\/headphone' <(acpi_listen) || exit 1
+	grep -q -m1 '^jack/headphone\|^jack/lineout' <(acpi_listen) || exit 1
 	pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}"
 done
