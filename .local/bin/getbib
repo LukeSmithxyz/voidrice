@@ -1,14 +1,82 @@
-#!/bin/sh
-[ -z "$1" ] && echo "Give either a pdf file or a DOI as an argument." && exit
+#!/bin/bash
 
-if [ -f "$1" ]; then
-	# Try to get DOI from pdfinfo or pdftotext output.
-	doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
-	doi=$(pdftotext "$1" 2>/dev/null - | sed -n '/[dD][oO][iI]:/{s/.*[dD][oO][iI]:\s*\(\S\+[[:alnum:]]\).*/\1/p;q}') ||
-	exit 1
-else
-	doi="$1"
+BIB_FILE="$HOME/latex/uni.bib"
+CORRECTION_METHOD="sed -n -E 's/.*((DOI|doi)((\.(org))?\/?|:? *))([^: ]+[^ .]).*/doi:\6/p; T; q'"
+
+function get_doi_from_pdf {
+    local pdf="$1"
+    local doi
+    doi=$(pdfinfo "$pdf" 2>/dev/null | eval "$CORRECTION_METHOD")
+    if [ -z "$doi" ]; then
+        doi=$(pdftotext -q -l 1 "$pdf" - 2>/dev/null | eval "$CORRECTION_METHOD")
+    fi
+    echo "$doi"
+}
+
+function normalize_doi {
+    local doi="$1"
+    echo "${doi,,}"
+}
+
+function process_doi {
+    local doi="$1"
+    local bibtex_entry
+    bibtex_entry=$(curl -s "https://api.crossref.org/works/$doi/transform/application/x-bibtex" -w "\\n" | sed '/^@[a-z]\+{[^[:space:]]\+[0-9]\{4\},/{
+    s/\([A-Z]\)/\L\1/g
+    s/_//g
+    s/\([0-9]\{2\}\)[0-9]*/\1/g
+}')
+    red_color='\033[0;31m'
+    reset_color='\033[0m'
+
+    echo -e "${red_color}$bibtex_entry${reset_color}"
+
+    if [[ -z "$bibtex_entry" || ! "$bibtex_entry" =~ ^@ ]]; then
+        echo "Failed to fetch bibtex entry for DOI: $doi"
+        return 1
+    fi
+
+    local normalized_doi="${doi#doi:}"
+    if ! grep -q -E "doi\s*=\s*\{${normalized_doi//(/\\(}\}" "$BIB_FILE"; then
+        if [ -s "$BIB_FILE" ]; then
+            echo "" >> "$BIB_FILE"
+        fi
+        echo "$bibtex_entry" >> "$BIB_FILE"
+        echo "Added bibtex entry for DOI: $doi"
+    else
+        echo "Bibtex entry for DOI: $doi already exists in the file."
+    fi
+}
+
+if [ -z "$1" ]; then
+    echo "Give either a pdf file or a DOI or a directory path including PDFs as an argument."
+    exit 1
 fi
 
-# Check crossref.org for the bib citation.
-curl -s "https://api.crossref.org/works/$doi/transform/application/x-bibtex" -w "\\n"
+if [ -d "$1" ]; then
+    for pdf in "$1"/*.pdf; do
+        doi=$(get_doi_from_pdf "$pdf")
+        if [ -n "$doi" ]; then
+            doi=$(normalize_doi "$doi")
+            process_doi "$doi"
+        else
+            echo "Could not find DOI in PDF file: $pdf"
+        fi
+    done
+elif [ -f "$1" ] && [[ "$1" =~ \.pdf$ ]]; then
+    doi=$(get_doi_from_pdf "$1")
+    if [ -n "$doi" ]; then
+        doi=$(normalize_doi "$doi")
+        process_doi "$doi"
+    else
+        echo "Could not find DOI in PDF file: $1"
+    fi
+else
+    doi=$(echo "$1" | eval "$CORRECTION_METHOD")
+    if [ -n "$doi" ]; then
+        doi=$(normalize_doi "$doi")
+        process_doi "$doi"
+    else
+        echo "Invalid DOI provided: $1"
+    fi
+fi
