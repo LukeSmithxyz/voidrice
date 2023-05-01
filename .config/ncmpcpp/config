@@ -30,3 +30,4 @@ progressbar_color = black:b
 progressbar_elapsed_color = blue:b
 statusbar_color = red
 statusbar_time_color = cyan:b
+execute_on_song_change="pkill -RTMIN+11 dwmblocks"
