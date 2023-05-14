@@ -20,7 +20,7 @@ se() {
 
 weath() {
 	[ -z "$1" ] && less -S ${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport ||
-		curl --retry 5 -sm 10 "${WTTRURL:-wttr.in}/$1" | less -S
+		curl -sm 5 "${WTTRURL:-wttr.in}/$1" | less -S
 	;}
 
 # Verbosity and settings that you pretty much just always are going to want.
