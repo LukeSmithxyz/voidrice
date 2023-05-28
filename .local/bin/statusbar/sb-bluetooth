@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# Shows names of paired and connected bluetooth devices if bluetooth is on
+
+case $BLOCK_BUTTON in
+	1) dmenubluetooth; pkill -RTMIN+2 dwmblocks ;;
+	3) notify-send " Bluetooth module" "\- Shows paired devices.
+- Click to configure bluetooth." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+if bluetoothctl show | grep -q 'Powered: yes'; then
+	printf ''
+
+        i=0; while IFS= read -r device; do
+            	if bluetoothctl info "$device" | grep -q 'Connected: yes'; then
+                	device_alias=$(bluetoothctl info "$device" | grep 'Alias' | cut -d ' ' -f 2-)
+
+                	[ $i = 0 ] &&
+                    		printf "$device_alias" ||
+		    		printf ', %s' "$device_alias"
+
+                	i=$((i + 1))
+        	fi
+	done <<-EOT
+	$(bluetoothctl devices Paired | cut -d ' ' -f 2)
+	EOT
+
+        printf "\n"
+else
+	echo ''
+fi
