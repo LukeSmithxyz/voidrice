@@ -26,7 +26,7 @@ update_data() {
   local channel_url="$2"
   local data_file="${DATA_DIR}/${channel_name}.tsv"
 
-  yt-dlp -j --flat-playlist --skip-download "$channel_url" | jq -r '[.title, .url, .view_count, .duration] | @tsv' > "$data_file" &
+yt-dlp -j --flat-playlist --skip-download --extractor-args youtubetab:approximate_date "$channel_url" | jq -r '[.title, .url, .view_count, .duration, .upload_date] | @tsv' > "$data_file" &
 }
 
 update_all_channels() {
@@ -49,7 +49,7 @@ get_videos() {
       sort -nr -t$'\t' -k4 "$data_file" | cut -f1
       ;;
     *)
-      cut -f1 "$data_file"
+      sort -nr -t$'\t' -k5 "$data_file" | cut -f1
       ;;
   esac
 }
@@ -116,20 +116,20 @@ get_all_videos() {
       sort -nr -t$'\t' -k4 "$all_videos_file" | cut -f1
       ;;
     *)
-      cut -f1 "$all_videos_file"
+      sort -nr -t$'\t' -k5 "$all_videos_file" | cut -f1
       ;;
   esac
 }
 
 browse_all_channels() {
   while true; do
-    video_title=$(get_all_videos | dmenu -i -l 20 -p "Choose a video or enter @@sv or @@sd to sort by view count or duration")
+    video_title=$(get_all_videos | dmenu -i -l 20 -p "Choose a video or enter @@sv or @@sd")
 
     if [[ -z "$video_title" ]]; then
       break
     elif [[ $video_title == "@@sv" ]] || [[ $video_title == "@@sd" ]]; then
       sort_option="$video_title"
-      video_title=$(get_all_videos "$sort_option" | l 20 -dmenu -i -p "Choose a video")
+      video_title=$(get_all_videos "$sort_option" | dmenu -i -l 20 -dmenu -i -p "Choose a video")
     fi
 
     if [[ -n "$video_title" ]] && [[ $video_title != "@@sv" ]] && [[ $video_title != "@@sd" ]]; then
@@ -152,7 +152,7 @@ browse_all_channels() {
           add_to_watch_later "$video_title" "$channel_name"
           ;;
         *)
-          echo "Invalid action"
+          continue
           ;;
       esac
     fi
