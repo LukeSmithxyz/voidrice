@@ -14,4 +14,4 @@ else
 	. "$HOME/.xprofile"
 fi
 
-ssh-agent dwm
+exec dbus-launch --exit-with-session dwm
