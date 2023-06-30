@@ -38,7 +38,10 @@ cmd open ${{
             shopt -s nullglob
             dir="$0"
             selected_file="$1"
-            images=($(ls "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl} | sort -V))
+            images=()
+            for file in "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
+                [[ -f "$file" ]] && images+=("$file")
+            done
 	    for ((i=0; i<${#images[@]}; i++)); do
                 [[ "${images[i]}" = "$selected_file" ]] && {
                     sxiv -abiof "${images[@]:i}" "${images[@]:0:i}"
