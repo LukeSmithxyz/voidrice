@@ -42,9 +42,10 @@ cmd open ${{
             for file in "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
                 [[ -f "$file" ]] && images+=("$file")
             done
-	    for ((i=0; i<${#images[@]}; i++)); do
+            for ((i=0; i<${#images[@]}; i++)); do
                 [[ "${images[i]}" = "$selected_file" ]] && {
-                    sxiv -abiof "${images[@]:i}" "${images[@]:0:i}"
+                    images=( "${images[@]:i}" "${images[@]:0:i}" )
+                    sxiv -abfio "${images[@]}"
                     break
                 }
             done
