@@ -1,6 +1,8 @@
 #!/bin/sh
 
-find . -depth -name '*' -print0 | xargs -0 -n1 -P10 -I{} sh -c '
+[ "$(id -u)" = "0" ] && echo "This script should not be run as root" >&2 && exit 1
+
+find . -depth \( -name '.*' -prune \) -o -name '*' -print0 | xargs -0 -n1 -P10 -I{} sh -c '
     generate_unique_name() {
         base_name="$1"; ext="$2"; dest_path="$3"; count=1
         [ -z "$ext" ] && new_name="$base_name" || new_name="${base_name}.${ext}"
@@ -10,7 +12,6 @@ find . -depth -name '*' -print0 | xargs -0 -n1 -P10 -I{} sh -c '
         done
         echo "$new_name"
     }
-
     process_item() {
         item_path="$1"; [ "$item_path" = "." ] && return
         dir_name=$(dirname "$item_path"); base_name=$(basename "$item_path")
