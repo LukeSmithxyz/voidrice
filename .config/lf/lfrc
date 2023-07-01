@@ -44,7 +44,7 @@ cmd open ${{
             done
             for ((i=0; i<${#images[@]}; i++)); do
                 [[ "${images[i]}" = "$selected_file" ]] && {
-                    sxiv -na "$((i + 1))" "${images[@]}"
+                    sxiv -aon "$((i + 1))" "${images[@]}"
                     break
                 }
             done
