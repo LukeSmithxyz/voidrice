@@ -38,10 +38,6 @@ cmd open ${{
             shopt -s nullglob
             dir="$0"
             selected_file="$1"
-	image/*) bash -c '
-            shopt -s nullglob
-            dir="$0"
-            selected_file="$1"
             images=()
             for file in "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
                 [[ -f "$file" ]] && images+=("$file")
