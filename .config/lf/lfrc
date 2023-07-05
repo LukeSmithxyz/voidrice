@@ -38,21 +38,24 @@ cmd open ${{
             shopt -s nullglob
             dir="$0"
             selected_file="$1"
+            selection="$2"
+            IFS=":" read -r -a selected_files <<< "$selection"
             images=()
-            for file in "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
+            for file in "${selected_files[@]}" "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
                 [[ -f "$file" ]] && images+=("$file")
             done
             sorted_images=()
             while IFS= read -r line; do
                 sorted_images+=("$line")
-            done < <(printf "%s\n" "${images[@]}" | sort -V)
+            done < <(printf "%s\n" "${images[@]}" | sort -fV)
             for ((i=0; i<${#sorted_images[@]}; i++)); do
                 [[ "${sorted_images[i]}" = "$selected_file" ]] && {
                     setsid sxiv -aon "$((i + 1))" "${sorted_images[@]}"
                     break
                 }
             done
-        ' "$PWD" "$fx";;
+            lf -remote "send $id unselect"
+        ' "$PWD" "$fx" "$fs" "$id";;
 	audio/*|video/x-ms-asf) mpv --audio-display=no $f ;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
