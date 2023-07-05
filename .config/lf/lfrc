@@ -42,10 +42,13 @@ cmd open ${{
             for file in "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
                 [[ -f "$file" ]] && images+=("$file")
             done
-            images=($(printf "%s\n" "${images[@]}" | sort -V))
-            for ((i=0; i<${#images[@]}; i++)); do
-                [[ "${images[i]}" = "$selected_file" ]] && {
-                    setsid sxiv -aon "$((i + 1))" "${images[@]}"
+            sorted_images=()
+            while IFS= read -r line; do
+                sorted_images+=("$line")
+            done < <(printf "%s\n" "${images[@]}" | sort -V)
+            for ((i=0; i<${#sorted_images[@]}; i++)); do
+                [[ "${sorted_images[i]}" = "$selected_file" ]] && {
+                    setsid sxiv -aon "$((i + 1))" "${sorted_images[@]}"
                     break
                 }
             done
