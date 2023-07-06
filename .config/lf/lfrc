@@ -34,13 +34,25 @@ cmd open ${{
         text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR $fx;;
 	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|avif\|tif\|ico\)\(_large\)*$" |
-		setsid -f sxiv -aio 2>/dev/null | while read -r file; do
-			[ -z "$file" ] && continue
-			lf -remote "send select \"$file\""
-			lf -remote "send toggle"
-		done &
-		;;
+	image/*) bash -c '
+            shopt -s nullglob
+            dir="$0"
+            selected_file="$1"
+            images=()
+            for file in "$dir"/*.{jpg,jpeg,png,webp,bmp,tiff,tif,raw,ico,exif,heic,heif,gif,avif,jxl,JPG,PNG}; do
+                [[ -f "$file" ]] && images+=("$file")
+            done
+            sorted_images=()
+            while IFS= read -r line; do
+                sorted_images+=("$line")
+            done < <(printf "%s\n" "${images[@]}" | sort -fV)
+            for ((i=0; i<${#sorted_images[@]}; i++)); do
+                [[ "${sorted_images[i]}" = "$selected_file" ]] && {
+                    setsid sxiv -aon "$((i + 1))" "${sorted_images[@]}"
+                    break
+                }
+            done
+        ' "$PWD" "$fx";;
 	audio/*|video/x-ms-asf) mpv --audio-display=no $f ;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
