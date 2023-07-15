@@ -9,7 +9,7 @@ These are the dotfiles deployed by [LARBS](https://larbs.xyz) and as seen on
 	- zsh (shell)
 	- lf (file manager)
 	- mpd/ncmpcpp (music)
-	- sxiv (image/gif viewer)
+	- nsxiv (image/gif viewer)
 	- mpv (video player)
 	- other stuff like xdg default programs, inputrc and more, etc.
 - I try to minimize what's directly in `~` so:
