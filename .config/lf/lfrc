@@ -48,7 +48,7 @@ cmd open ${{
             done < <(printf "%s\n" "${images[@]}" | sort -fV)
             for ((i=0; i<${#sorted_images[@]}; i++)); do
                 [[ "${sorted_images[i]}" = "$selected_file" ]] && {
-                    setsid sxiv -aon "$((i + 1))" "${sorted_images[@]}"
+                    setsid nsxiv -aon "$((i + 1))" "${sorted_images[@]}"
                     break
                 }
             done
