@@ -49,6 +49,7 @@ cmd open ${{
         application/octet-stream) case ${f##*.} in
 			doc|docx|xls|xlsx|odt|ppt|pptx) setsid -f libreoffice $fx >/dev/null 2>&1 ;;
 			ghw) setsid -f gtkwave $f >/dev/null 2>&1 ;;
+			ts) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 			*) setsid -f zathura $fx >/dev/null 2>&1 ;;
 	   	esac ;;
 	*) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
