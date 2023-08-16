@@ -7,7 +7,7 @@ url="${WTTRURL:-wttr.in}"
 weatherreport="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
 
 # Get a weather report from 'wttr.in' and save it locally.
-getforecast() { curl --retry 5 -sfm 10 "$url/$LOCATION" > "$weatherreport" || exit 1; }
+getforecast() { curl -sf "$url/$LOCATION" > "$weatherreport"; }
 
 # Forecast should be updated only once a day.
 checkforecast() {
@@ -38,7 +38,7 @@ showweather() {
 }
 
 case $BLOCK_BUTTON in
-	1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
+	1) setsid -f "$TERMINAL" -e less -Sf "$weatherreport" ;;
 	2) getforecast && showweather ;;
 	3) notify-send "🌈 Weather module" "\- Left click for full forecast.
 - Middle click to update forecast.
@@ -48,4 +48,9 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-checkforecast && showweather || { ( getforecast && pkill -RTMIN+"${1:-5}" "${STATUSBAR:-dwmblocks}") & echo; }
+checkforecast && showweather ||
+	{ [ -z "$(pgrep 'sb-forecast' | tail -n +3)" ] &&
+		( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
+		getforecast; do sleep 60; done &&
+		pkill -RTMIN+"${1:-5}" "${STATUSBAR:-dwmblocks}" ) &
+	echo; }

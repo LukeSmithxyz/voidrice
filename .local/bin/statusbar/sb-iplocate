@@ -8,7 +8,12 @@
 ifinstalled "geoip" || exit 1
 
 ipfile="$XDG_RUNTIME_DIR/iplocate"
-addr=$(cat "$ipfile" 2>/dev/null) && addr=$(geoiplookup "$addr" 2>/dev/null) && rm "$ipfile" || { ( curl --retry 5 -sfm 10 ifconfig.me > "$ipfile" && pkill -RTMIN+"${1:-27}" "${STATUSBAR:-dwmblocks}" ) & echo; exit; }
+addr=$(cat "$ipfile" 2>/dev/null) && addr=$(geoiplookup "$addr" 2>/dev/null) && rm "$ipfile" ||
+	{ [ -z "$(pgrep 'sb-iplocate' | tail -n +3)" ] &&
+		( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
+		curl -sf ifconfig.me > "$ipfile"; do sleep 60; done &&
+		pkill -RTMIN+"${1:-27}" "${STATUSBAR:-dwmblocks}" ) &
+	echo; exit; }
 name="${addr##*, }"
 flag="$(grep "flag: $name" "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji")"
 flag="${flag%% *}"
