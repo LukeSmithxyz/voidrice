@@ -11,7 +11,7 @@ getforecast() { curl -sf "$url/$LOCATION" --output "$weatherreport" && touch "$w
 
 # Forecast should be updated only once a day.
 checkforecast() {
-	[ -s "$weatherreport" ] && [ "$(stat -c %y "$weatherreport" 2>/dev/null |
+	[ "$(stat -c %y "$weatherreport" 2>/dev/null |
 		cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ]
 }
 
