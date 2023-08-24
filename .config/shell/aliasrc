@@ -16,12 +16,26 @@ done; unset command
 se() {
 	choice="$(find ~/.local/bin -mindepth 1 -printf '%P\n' | fzf)"
 	[ -f "$HOME/.local/bin/$choice" ] && $EDITOR "$HOME/.local/bin/$choice"
-	;}
+	}
 
 weath() {
-	[ -z "$1" ] && less -S ${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport ||
-		curl -sm 5 "${WTTRURL:-wttr.in}/$1" | less -S
-	;}
+	if [ "$1" = 'cp' ]; then
+		[ -z "$2" ] && sed 's/\x1b\[[^m]*m//g' "${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport" | xclip -selection clipboard &&
+			notify-send "Weather forecast for '$LOCATION' copied to clipboard." ||
+				{ data="$(curl -sfm 5 "${WTTRURL:-wttr.in}/$2?T")" &&
+				notify-send "Weather forecast for '$2' copied to clipboard." &&
+				echo "$data" | xclip -selection clipboard ||
+				notify-send 'Failed to get weather forecast!' 'Check your internet connection and if the location is correct.'; }
+	else
+		[ -n "$2" ] &&
+			notify-send "Invalid option '$1'! The only valid option is 'cp'." &&
+			return 1
+
+		[ -z "$1" ] && less -S "${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport" ||
+			data="$(curl -sfm 5 "${WTTRURL:-wttr.in}/$1")" && echo "$data" | less -S ||
+				notify-send 'Failed to get weather forecast!' 'Check your internet connection and if the location is correct.'
+	fi
+	}
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
