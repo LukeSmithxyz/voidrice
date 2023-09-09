@@ -1,18 +1,15 @@
-#!/bin/sh
+#!/bin/dash
 
 URLQUERY_FILE="~/.local/share/larbs/urlquery"
 ACTION_MENU='@@'
 
 read_bookmarks() {
-  if [ ! -f "$URLQUERY_FILE" ] || [ ! -s "$URLQUERY_FILE" ]; then
-    echo "[]"
-  else
-    jq '.' "$URLQUERY_FILE"
-  fi
+  [ -f "$URLQUERY_FILE" ] && [ -s "$URLQUERY_FILE" ] && jq '.' "$URLQUERY_FILE" || echo "[]"
 }
 
 write_bookmarks() {
-  echo "$1" > "${URLQUERY_FILE}.tmp" && mv "${URLQUERY_FILE}.tmp" "$URLQUERY_FILE"
+  echo "$1" > "${URLQUERY_FILE}.tmp"
+  mv "${URLQUERY_FILE}.tmp" "$URLQUERY_FILE"
 }
 
 update_bookmark_popularity() {
@@ -22,74 +19,55 @@ update_bookmark_popularity() {
 contains_search() {
   case "$1" in
     *"search"*) return 0 ;;
+    *"wiki"*) return 0 ;;
     *) return 1 ;;
   esac
 }
 
 bookmarks=$(read_bookmarks)
 
-  while true; do
-  SELECTION=$(echo "$bookmarks" | jq -r '. | sort_by(.[2]) | reverse | .[] | .[0]' | dmenu -l 10 -p "Bookmarks")
+while true; do
+  SELECTION=$(echo "$bookmarks" | jq -r '. | sort_by(.[2]) | reverse | .[] | .[0]' | dmenu -i -l 10 -p "Bookmarks")
 
-  if [ -z "$SELECTION" ] || [ "$SELECTION" != "$ACTION_MENU" ]; then
-    write_bookmarks "$bookmarks"
-    break
-  fi
+  [ -z "$SELECTION" ] || [ "$SELECTION" != "$ACTION_MENU" ] && write_bookmarks "$bookmarks" && break
 
-  ACTION=$(echo "Add a New Bookmark\nDelete a Bookmark\nEdit a Bookmark" | dmenu -l 3 -p "Action")
-
+  ACTION=$(echo "Add a New Bookmark\nDelete a Bookmark\nEdit a Bookmark" | dmenu -i -l 3 -p "Action")
   case "$ACTION" in
     "Add a New Bookmark")
       URL=$(xclip -o)
-  if echo "$URL" | grep -q "^http"; then
-  if ! echo "$bookmarks" | jq -e --arg url "$URL" '.[] | select(.[1] == $url)' > /dev/null; then
-    NAME=$(dmenu -l 0 -p "Name")
-    bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg url "$URL" '. |= .+ [[ $name, $url, 0 ]]')
-    notify-send "'$NAME' is bookmarked."
-  else
-    notify-send "The URL is already in the list."
-      fi
-  else
-  notify-send "The clipboard content is not a valid URL."
-      fi
+      echo "$URL" | grep -q "^http" && {
+        ! echo "$bookmarks" | jq -e --arg url "$URL" '.[] | select(.[1] == $url)' > /dev/null && {
+          NAME=$(dmenu -i -l 0 -p "Name")
+          bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg url "$URL" '. |= .+ [[ $name, $url, 0 ]]')
+          notify-send "'$NAME' is bookmarked."
+        } || notify-send "The URL is already in the list."
+      } || notify-send "The clipboard content is not a valid URL."
       ;;
     "Delete a Bookmark")
       NAME=$(echo "$bookmarks" | jq -r '.[] | .[0]' | dmenu -p "Delete")
-      if [ -n "$NAME" ]; then
-       bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" 'del(.[] | select(.[0] == $name))')
-       notify-send "'$NAME' is deleted."
-      fi
+      [ -n "$NAME" ] && {
+        bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" 'del(.[] | select(.[0] == $name))')
+        notify-send "'$NAME' is deleted."
+      }
       ;;
     "Edit a Bookmark")
       NAME=$(echo "$bookmarks" | jq -r '.[] | .[0]' | dmenu -p "Edit")
-      FIELD=$(echo "name\nURL" | dmenu -l 2 -p "Edit")
-
-     if [ -n "$NAME" ] && [ -n "$FIELD" ]; then
-       NEW_VALUE=$(dmenu -l 0 -p "New $FIELD")
-     if [ "$FIELD" = "name" ]; then
-       bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg new_name "$NEW_VALUE" '(.[] | select(.[0] == $name))[0] = $new_name')
-     else
-       bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg new_url "$NEW_VALUE" '(.[] | select(.[0] == $name))[1] = $new_url')
-     fi
-       notify-send "'$NAME' is updated."
-     fi
-     ;;
+      FIELD=$(echo "name\nURL" | dmenu -i -l 2 -p "Edit")
+      [ -n "$NAME" ] && [ -n "$FIELD" ] && {
+        NEW_VALUE=$(dmenu -i -l 0 -p "New $FIELD")
+        [ "$FIELD" = "name" ] && bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg new_name "$NEW_VALUE" '(.[] | select(.[0] == $name))[0] = $new_name') || bookmarks=$(echo "$bookmarks" | jq --arg name "$NAME" --arg new_url "$NEW_VALUE" '(.[] | select(.[0] == $name))[1] = $new_url')
+        notify-send "'$NAME' is updated."
+      }
+      ;;
   esac
 done
 
-if [ -n "$SELECTION" ] && [ "$SELECTION" != "$ACTION_MENU" ]; then
+[ -n "$SELECTION" ] && [ "$SELECTION" != "$ACTION_MENU" ] && {
   URL=$(echo "$bookmarks" | jq -r --arg name "$SELECTION" '.[] | select(.[0] == $name) | .[1]')
-
-  if [ -z "$URL" ] || [ "$URL" = "null" ]; then
-    exit 0
-  fi
-
-  if contains_search "$URL"; then
-    QUERY=$(dmenu -l 0 -p "Search")
-    URL="${URL}${QUERY}"
-  fi
-
-  bookmarks=$(echo "$bookmarks" | update_bookmark_popularity "$SELECTION")
-  write_bookmarks "$bookmarks"
-  $BROWSER "$URL"
-fi
+  [ -z "$URL" ] || [ "$URL" = "null" ] || {
+    contains_search "$URL" && QUERY=$(dmenu -i -l 0 -p "Search") && URL="${URL}${QUERY}"
+    bookmarks=$(echo "$bookmarks" | update_bookmark_popularity "$SELECTION")
+    write_bookmarks "$bookmarks"
+    $BROWSER "$URL"
+  }
+}
