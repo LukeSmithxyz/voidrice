@@ -95,24 +95,32 @@ cmd copyto ${{
 cmd setbg "$1"
 
 cmd bulkrename ${{
-    tmpfile_old="$(mktemp)"
-    tmpfile_new="$(mktemp)"
+tmpfile_old="$(mktemp)"
+tmpfile_new="$(mktemp)"
+tmpfile_ext="$(mktemp)"
 
-    [ -n "$fs" ] && fs=$(basename -a $fs) || fs=$(ls)
+[ -n "$fs" ] && fs=$(basename -a $fs | sort -fV) || fs=$(find . -maxdepth 1 -type f | cut -c 3- | sort -fV)
 
-    echo "$fs" > "$tmpfile_old"
-    echo "$fs" > "$tmpfile_new"
-    $EDITOR "$tmpfile_new"
+for f in $fs; do
+    echo "${f%.*}" >> "$tmpfile_old"
+    echo "${f##*.}" >> "$tmpfile_ext"
+done
 
-    [ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new"; exit 1; }
+cp "$tmpfile_old" "$tmpfile_new"
+$EDITOR "$tmpfile_new"
 
-    paste "$tmpfile_old" "$tmpfile_new" | while IFS="$(printf '\t')" read -r src dst
-    do
-        [ "$src" = "$dst" ] || [ -e "$dst" ] || mv -- "$src" "$dst"
-    done
+[ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new" "$tmpfile_ext"; exit 1; }
 
-    rm -f "$tmpfile_old" "$tmpfile_new"
-    lf -remote "send $id unselect"
+exec 3<"$tmpfile_old"
+exec 4<"$tmpfile_ext"
+exec 5<"$tmpfile_new"
+
+while IFS= read -r old_name <&3 && IFS= read -r ext <&4 && IFS= read -r new_name <&5; do
+    [ "$old_name" = "$new_name" ] || [ -e "$new_name.$ext" ] || mv -- "$old_name.$ext" "$new_name.$ext"
+done
+
+rm -f "$tmpfile_old" "$tmpfile_new" "$tmpfile_ext"
+lf -remote "send $id unselect"
 }}
 
 # Bindings
