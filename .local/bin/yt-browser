@@ -1,70 +1,120 @@
-#!/bin/bash
-
-declare -A CHANNELS
-CHANNELS=(
-  ["Luke Smith"]="https://www.youtube.com/@LukeSmithxyz/videos"
-  ["Mental Outlaw"]="https://www.youtube.com/@MentalOutlaw/videos"
-  ["Sabine Hossenfelder"]="https://www.youtube.com/@SabineHossenfelder/videos"
-  ["Veritasium"]="https://www.youtube.com/@veritasium/videos"
-  # Add More Channels
-)
-
-declare -A CATEGORIES
-CATEGORIES=(
-  ["Tech"]="Luke Smith|Mental Outlaw"
-  ["Science"]="Sabine Hossenfelder|Veritasium"
-  # Add More Categories and Channels
-)
+#!/bin/dash
 
 DATA_DIR="$HOME/.cache/youtube_channels"
 DOWNLOAD_DIR="$HOME/ytvideos"
-WATCH_LATER_LIST="${DATA_DIR}/watch_later.list"
-mkdir -p "$DATA_DIR" "$DOWNLOAD_DIR"
+CATEGORY_LIST="$HOME/.local/share/categories.txt"
+CHANNEL_LIST="$HOME/.local/share/channels.txt"
+CUSTOM_LIST_DIR="$DATA_DIR/custom_lists"
 
-update_data() {
-  local channel_name="$1"
-  local channel_url="$2"
-  local data_file="${DATA_DIR}/${channel_name}.tsv"
+mkdir -p "$DATA_DIR" "$DOWNLOAD_DIR" "$CUSTOM_LIST_DIR"
 
-yt-dlp -j --flat-playlist --skip-download --extractor-args youtubetab:approximate_date "$channel_url" | jq -r '[.title, .url, .view_count, .duration, .upload_date] | @tsv' > "$data_file" &
-}
+sort_videos() {
+  local data_file="$1"
+  local sort_option="$2"
 
-update_all_channels() {
-  for channel_name in "${!CHANNELS[@]}"; do
-    update_data "$channel_name" "${CHANNELS[$channel_name]}"
-  done
-  wait
+  case $sort_option in
+    "@@sv") sort -nr -t"	" -k3 "$data_file" ;;
+    "@@sd") sort -nr -t"	" -k4 "$data_file" ;;
+         *) sort -nr -t"	" -k5 "$data_file" ;;
+  esac | cut -f1
 }
 
 get_videos() {
   local channel_name="$1"
   local sort_option="$2"
-  local data_file="${DATA_DIR}/${channel_name}.tsv"
-
-  case $sort_option in
-    "@@sv")
-      sort -nr -t$'\t' -k3 "$data_file" | cut -f1
-      ;;
-    "@@sd")
-      sort -nr -t$'\t' -k4 "$data_file" | cut -f1
-      ;;
-    *)
-      sort -nr -t$'\t' -k5 "$data_file" | cut -f1
-      ;;
-  esac
+  local data_file="$DATA_DIR/$channel_name.tsv"
+  sort_videos "$data_file" "$sort_option"
 }
 
 video_url() {
   local channel_name="$1"
   local video_title="$2"
-  local data_file="${DATA_DIR}/${channel_name}.tsv"
-  grep -F "$video_title" "$data_file" | cut -f2
+  local data_file="$DATA_DIR/$channel_name.tsv"
+  sed -n "s/$video_title\t\([^\t]*\)\t.*$/\1/p" "$data_file"
+}
+
+rofi_action() {
+  echo "Watch\nDownload\nSend To a List" | dmenu -i -l 3 -p "Choose an action for the video"
+}
+
+rofi_custom_list_action() {
+  echo "$(ls "$CUSTOM_LIST_DIR")\nCreate a List\nDelete a List" | dmenu -i -l 10 -p "Choose an action or list" 
+}
+
+list_video_action() {
+  echo "Watch\nDownload\nDelete" | dmenu -i -l 3 -p "Choose an action for the video"
+}
+
+add_to_list() {
+  local video_title="$1"
+  local channel_name="$2"
+  local list_name="$3"
+  echo "$channel_name: $video_title" >> "$CUSTOM_LIST_DIR/$list_name"
+}
+
+custom_list_menu() {
+  while true; do
+    local list="$(rofi_custom_list_action)"
+    [ -z "$list" ] && return
+    case "$list" in
+      "Create a List")
+        local new_list=$(dmenu -i -l 0 -p "Enter the name of the new list")
+        [ -n "$new_list" ] && touch "$CUSTOM_LIST_DIR/$new_list"
+        ;;
+      "Delete a List")
+        local delete_list=$(ls "$CUSTOM_LIST_DIR" | dmenu -i -l 10 -p "Choose a list to delete")
+        [ -n "$delete_list" ] && rm "$CUSTOM_LIST_DIR/$delete_list"
+        ;;
+      *)
+        custom_list_video_menu "$list"
+        ;;
+    esac
+  done
+}
+
+custom_list_video_menu() {
+  local list_name="$1"
+  local video_info
+  local video_title
+  local channel_name
+  while true; do
+    video_info=$(cat "$CUSTOM_LIST_DIR/$list_name" | dmenu -i -l 20 -p "Choose a video")
+    [ -z "$video_info" ] && return
+    channel_name="${video_info%%: *}"
+    video_title="${video_info##*: }"
+    custom_list_video_action_menu "$video_title" "$channel_name" "$list_name"
+  done
+}
+
+custom_list_video_action_menu() {
+  local video_title="$1"
+  local channel_name="$2"
+  local list_name="$3"
+
+  local action
+  action=$(list_video_action)
+
+  case $action in
+    Watch)
+      play_video "$video_title" "$channel_name"
+      ;;
+    Download)
+      download_video "$video_title" "$channel_name" && notify-send "Downloading has finished."
+      ;;
+    Delete)
+      escaped_video_title="$(echo "$video_title" | tr -d '|')"
+      sed -i "/$escaped_video_title/d" "$CUSTOM_LIST_DIR/$list_name"
+      ;;
+    *)
+      return
+      ;;
+  esac
 }
 
 play_video() {
   local video_title="$1"
   local channel_name="$2"
-  local video_url=$(video_url "$channel_name" "$video_title")
+  local video_url="$(video_url "$channel_name" "$video_title")"
   mpv "$video_url"
 }
 
@@ -72,219 +122,122 @@ download_video() {
   local video_title="$1"
   local channel_name="$2"
   local video_url=$(video_url "$channel_name" "$video_title")
-  local channel_download_dir="${DOWNLOAD_DIR}/${channel_name}"
+  local channel_download_dir="$DOWNLOAD_DIR/$channel_name"
   mkdir -p "$channel_download_dir"
-  yt-dlp -o "${channel_download_dir}/%(title)s.%(ext)s" "$video_url"
-}
-
-add_to_watch_later() {
-  local video_title="$1"
-  local channel_name="$2"
-  echo "${channel_name}: ${video_title}" >> "$WATCH_LATER_LIST"
-}
-
-play_watch_later() {
-  local line="$1"
-  local channel_name="${line%%: *}"
-  local video_title="${line#*: }"
-  play_video "$video_title" "$channel_name"
-}
-
-delete_from_watch_later() {
-  local video_line="$1"
-  local tmp_list="${DATA_DIR}/watch_later_tmp.list"
-  grep -vF "$video_line" "$WATCH_LATER_LIST" > "$tmp_list"
-  mv "$tmp_list" "$WATCH_LATER_LIST"
+  yt-dlp -o "$channel_download_dir/%(title)s.%(ext)s" "$video_url"
 }
 
 get_all_videos() {
   local sort_option="$1"
-  local all_videos_file="${DATA_DIR}/all_videos.tsv"
+  local all_videos_file="$DATA_DIR/all_videos.tsv"
 
-  # Combine all channel video data into a single file
   rm -f "$all_videos_file"
-  for channel_name in "${!CHANNELS[@]}"; do
-    cat "${DATA_DIR}/${channel_name}.tsv" >> "$all_videos_file"
-  done
+  while IFS= read -r line
+  do
+    local channel_name="${line%%=*}"
+    cat "$DATA_DIR/$channel_name.tsv" >> "$all_videos_file"
+  done < "$CHANNEL_LIST"
 
-  # Sort videos based on the specified criteria
-  case $sort_option in
-    "@@sv")
-      sort -nr -t$'\t' -k3 "$all_videos_file" | cut -f1
-      ;;
-    "@@sd")
-      sort -nr -t$'\t' -k4 "$all_videos_file" | cut -f1
-      ;;
-    *)
-      sort -nr -t$'\t' -k5 "$all_videos_file" | cut -f1
-      ;;
-  esac
+  sort_videos "$all_videos_file" "$sort_option"
 }
 
 browse_all_channels() {
   while true; do
     video_title=$(get_all_videos | dmenu -i -l 20 -p "Choose a video or enter @@sv or @@sd")
 
-    if [[ -z "$video_title" ]]; then
-      break
-    elif [[ $video_title == "@@sv" ]] || [[ $video_title == "@@sd" ]]; then
-      sort_option="$video_title"
-      video_title=$(get_all_videos "$sort_option" | dmenu -i -l 20 -dmenu -i -p "Choose a video")
-    fi
+    [ -z "$video_title" ] && break || {
+      [ "$video_title" = "@@sv" -o "$video_title" = "@@sd" ] && sort_option="$video_title" && video_title=$(get_all_videos "$sort_option" | i -l 20 -dmenu -i -p "Choose a video")
+    }
 
-    if [[ -n "$video_title" ]] && [[ $video_title != "@@sv" ]] && [[ $video_title != "@@sd" ]]; then
-      for channel_name in "${!CHANNELS[@]}"; do
-        if grep -qF "$video_title" "${DATA_DIR}/${channel_name}.tsv"; then
-          break
-        fi
-      done
+    [ -n "$video_title" -a "$video_title" != "@@sv" -a "$video_title" != "@@sd" ] && {
+      while read -r line; do
+        channel_name="${line%%=*}"
+        grep -qF "$video_title" "${DATA_DIR}/${channel_name}.tsv" && break
+      done < "$CHANNEL_LIST"
 
-      action=$(echo -e "Watch\nDownload\nAdd to Watch Later" | dmenu -i -l 3 -p "Choose an action for the video")
-
-      case $action in
-        Watch)
-          play_video "$video_title" "$channel_name"
-          ;;
-        Download)
-          download_video "$video_title" "$channel_name" && notify-send "Downloading has finished."
-          ;;
-        "Add to Watch Later")
-          add_to_watch_later "$video_title" "$channel_name"
-          ;;
-        *)
-          continue
-          ;;
-      esac
-    fi
+      video_action_menu "$video_title" "$channel_name"
+    }
   done
 }
 
-# Main script
-update_choice=$(echo -e "No\nYes" | dmenu -i -l 2 -p "Do you want to update the database? (Yes/No)")
-case $update_choice in
-  Yes)
-    update_all_channels
-    ;;
-  No)
-    ;;
-  *)
-    echo "Invalid option"
-    exit 1
-    ;;
-esac
+category_menu() {
+  while true; do
+    local category=$(echo "$(cut -d= -f1 "$CATEGORY_LIST")" | dmenu -i -l 12 -p "Choose a category")
+    [ -z "$category" ] && return
+
+    channel_menu "$category"
+  done
+}
+
+channel_menu() {
+  local category="$1"
+  local channels
+  local channel_name
+  local IFS="|"
+
+  channels=$(sed -n "s/^${category}=\(.*\)$/\1/p" "$CATEGORY_LIST")
+  set -- $channels
+
+  while true; do
+    channel_name=$(printf '%s\n' "$@" | dmenu -i -l 20 -p "Choose a channel")
+    [ -z "$channel_name" ] && return
+
+    video_menu "$channel_name"
+  done
+}
+
+video_menu() {
+  local channel_name="$1"
+  local video_title
+  local sort_option
+
+  while true; do
+    video_title=$(get_videos "$channel_name" | dmenu -i -l 20 -p "Choose a video")
+    [ -z "$video_title" ] && return
+    [ "$video_title" = "@@sv" -o "$video_title" = "@@sd" ] && {
+      sort_option="$video_title"
+      video_title=$(get_videos "$channel_name" "$sort_option" | dmenu -i -l 20 -p "Choose a video")
+    }
+
+    video_action_menu "$video_title" "$channel_name"
+  done
+}
+
+video_action_menu() {
+  local video_title="$1"
+  local channel_name="$2"
+
+  while [ -n "$video_title" ] && [ "$video_title" != "@@sv" ] && [ "$video_title" != "@@sd" ]; do
+    local action
+    action=$(rofi_action)
+
+    case $action in
+      Watch)
+        play_video "$video_title" "$channel_name"
+        ;;
+      Download)
+        download_video "$video_title" "$channel_name" && notify-send "Downloading has finished."
+        ;;
+      "Send To a List")
+        list_name=$(ls "$CUSTOM_LIST_DIR" | dmenu -i -l 10 -p "Choose a list")
+        [ -n "$list_name" ] && add_to_list "$video_title" "$channel_name" "$list_name"
+        ;;
+      *)
+        return
+        ;;
+    esac
+  done
+}
 
 while true; do
-	main_choice=$(echo -e "All Channels\nCategories\nWatch Later List\n$(printf '%s\n' "${!CHANNELS[@]}")" | dmenu -i -l 20 -p "Choose an Option or a Channel")
+  main_choice=$(echo "All Channels\nCategories\nCustom Lists\n$(cut -d= -f1 "$CHANNEL_LIST")" | dmenu -i -l 20 -p "Choose an Option or a Category")
 
-  if [[ -z "$main_choice" ]]; then
-    break
-  elif [[ $main_choice == "All Channels" ]]; then
-    browse_all_channels
-  elif [[ $main_choice == "Categories" ]]; then
-    while true; do
-      category=$(echo -e "$(printf '%s\n' "${!CATEGORIES[@]}")" | dmenu -i -l 12 -p "Choose a category")
+  [ -z "$main_choice" ] && exit
 
-      if [[ -z "$category" ]]; then
-        break
-      fi
-
-      while true; do
-        IFS="|" read -ra channels <<< "${CATEGORIES[$category]}"
-        channel_name=$(printf '%s\n' "${channels[@]}" | dmenu -i -l 20 -p "Choose a channel")
-
-        if [[ -z "$channel_name" ]]; then
-          break
-        fi
-
-        while true; do
-          video_title=$(get_videos "$channel_name" | dmenu -i -l 20 -p "Choose a video")
-
-          if [[ -z "$video_title" ]]; then
-            break
-          elif [[ $video_title == "@@sv" ]] || [[ $video_title == "@@sd" ]]; then
-            sort_option="$video_title"
-            video_title=$(get_videos "$channel_name" "$sort_option" | dmenu -i -l 20 -p "Choose a video")
-          fi
-
-          if [[ -n "$video_title" ]] && [[ $video_title != "@@sv" ]] && [[ $video_title != "@@sd" ]]; then
-            action=$(echo -e "Watch\nDownload\nAdd to Watch Later" | dmenu -i -l 3 -p "Choose an action for the video")
-
-            case $action in
-              Watch)
-                play_video "$video_title" "$channel_name"
-                ;;
-              Download)
-                download_video "$video_title" "$channel_name" && notify-send "Downloading has finished."
-                ;;
-              "Add to Watch Later")
-                add_to_watch_later "$video_title" "$channel_name"
-                ;;
-              *)
-                echo "Invalid action"
-                ;;
-            esac
-          fi
-        done
-      done
-    done
-  elif [[ $main_choice == "Watch Later List" ]]; then
-    while true; do
-      video_line=$(cat "$WATCH_LATER_LIST" | dmenu -i -l 5 -p "Choose a video from Watch Later List")
-
-      if [[ -z "$video_line" ]]; then
-        break
-      fi
-
-      action=$(echo -e "Watch\nDownload\nDelete" | dmenu -i -l 3 -p "Choose an action for the video")
-
-      case $action in
-        Watch)
-          play_watch_later "$video_line"
-          ;;
-        Download)
-          channel_name="${video_line%%: *}"
-          video_title="${video_line#*: }"
-          download_video "$video_title" "$channel_name"
-          ;;
-        Delete)
-          delete_from_watch_later "$video_line"
-          ;;
-        *)
-          echo "Invalid action"
-          ;;
-      esac
-    done
-  else
-    channel_name="$main_choice"
-
-    while true; do
-      video_title=$(get_videos "$channel_name" | dmenu -i -l 20 -p "Choose a video or enter @@sv or @@sd to sort by view count or duration")
-
-      if [[ -z "$video_title" ]]; then
-        break
-      elif [[ $video_title == "@@sv" ]] || [[ $video_title == "@@sd" ]]; then
-        sort_option="$video_title"
-        video_title=$(get_videos "$channel_name" "$sort_option" | l 20 -dmenu -i -p "Choose a video")
-      fi
-
-      if [[ -n "$video_title" ]] && [[ $video_title != "@@sv" ]] && [[ $video_title != "@@sd" ]]; then
-        action=$(echo -e "Watch\nDownload\nAdd to Watch Later" | dmenu -i -l 3 -p "Choose an action for the video")
-
-        case $action in
-          Watch)
-            play_video "$video_title" "$channel_name"
-            ;;
-          Download)
-            download_video "$video_title" "$channel_name" && notify-send "Downloading has finished."
-            ;;
-          "Add to Watch Later")
-            add_to_watch_later "$video_title" "$channel_name"
-            ;;
-          *)
-            echo "Invalid action"
-            ;;
-        esac
-      fi
-    done
-  fi
+  case "$main_choice" in
+    "All Channels") browse_all_channels ;;
+    "Categories") category_menu ;;
+    "Custom Lists") custom_list_menu ;;
+              *) video_menu "$main_choice" ;;
+  esac
 done
