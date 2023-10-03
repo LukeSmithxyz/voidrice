@@ -51,11 +51,11 @@ esac
 		updateprice && notify-send "$icon Update complete." "$name price is now \$$(cat "$pricefile")"
 	else
 		[ -n "$4" ] &&
-			{ [ -z "$(pgrep 'sb-price' | tail -n +3)" ] &&
+			( flock -n 9 &&
 				( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
 				updateprice; do sleep 60; done &&
 				pkill -RTMIN+"$4" "${STATUSBAR:-dwmblocks}" ) &
-			echo; exit; } ||
+			echo; exit ) 9>/tmp/sb-price.lock ||
 			updateprice
 	fi
 
