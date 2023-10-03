@@ -24,7 +24,7 @@ set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
-set autoquit on
+set autoquit true
 
 # cmds/functions
 cmd open ${{
@@ -35,7 +35,7 @@ cmd open ${{
 	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
 	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|avif\|tif\|ico\)\(_large\)*$" |
-		setsid -f sxiv -aio 2>/dev/null | while read -r file; do
+		setsid -f nsxiv -aio 2>/dev/null | while read -r file; do
 			[ -z "$file" ] && continue
 			lf -remote "send select \"$file\""
 			lf -remote "send toggle"
@@ -93,7 +93,27 @@ cmd copyto ${{
 }}
 
 cmd setbg "$1"
-cmd bulkrename $vidir
+
+cmd bulkrename ${{
+    tmpfile_old="$(mktemp)"
+    tmpfile_new="$(mktemp)"
+
+    [ -n "$fs" ] && fs=$(basename -a $fs) || fs=$(ls)
+
+    echo "$fs" > "$tmpfile_old"
+    echo "$fs" > "$tmpfile_new"
+    $EDITOR "$tmpfile_new"
+
+    [ "$(wc -l < "$tmpfile_old")" -eq "$(wc -l < "$tmpfile_new")" ] || { rm -f "$tmpfile_old" "$tmpfile_new"; exit 1; }
+
+    paste "$tmpfile_old" "$tmpfile_new" | while IFS="$(printf '\t')" read -r src dst
+    do
+        [ "$src" = "$dst" ] || [ -e "$dst" ] || mv -- "$src" "$dst"
+    done
+
+    rm -f "$tmpfile_old" "$tmpfile_new"
+    lf -remote "send $id unselect"
+}}
 
 # Bindings
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
@@ -113,11 +133,11 @@ map X !$f
 map o &mimeopen "$f"
 map O $mimeopen --ask "$f"
 
-map A rename # at the very end
+map A :rename; cmd-end # at the very end
 map c push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extension
-map a push A<a-b> # after extension
+map I :rename; cmd-home # at the very beginning
+map i :rename # before extension
+map a :rename; cmd-right # after extension
 map B bulkrename
 map b $setbg $f
 

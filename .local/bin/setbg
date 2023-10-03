@@ -13,11 +13,18 @@ bgloc="${XDG_DATA_HOME:-$HOME/.local/share}/bg"
 dunstconf="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
 zathuraconf="${XDG_CONFIG_HOME:-$HOME/.config}/zathura/zathurarc"
 
+# Give -s as parameter to make notifications silent.
+while getopts "s" o; do case "${o}" in
+	s) silent='1' ;;
+esac done
+
+shift $((OPTIND - 1))
+
 trueloc="$(readlink -f "$1")" &&
 case "$(file --mime-type -b "$trueloc")" in
-	image/* ) ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..." ;;
-	inode/directory ) ln -sf "$(find "$trueloc" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen." ;;
-	*) notify-send "🖼️ Error" "Not a valid image or directory." ; exit 1;;
+	image/* ) ln -sf "$trueloc" "$bgloc" && [ -z "$silent" ] && notify-send -i "$bgloc" "Changing wallpaper..." ;;
+	inode/directory ) ln -sf "$(find "$trueloc" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && [ -z "$silent" ] && notify-send -i "$bgloc" "Random Wallpaper chosen." ;;
+	*) [ -z "$silent" ] && notify-send "🖼️ Error" "Not a valid image or directory." ; exit 1;;
 esac
 
 # If pywal is installed, use it.
