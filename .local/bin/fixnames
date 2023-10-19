@@ -2,7 +2,7 @@
 
 [ "$(id -u)" = "0" ] && echo "This script should not be run as root" >&2 && exit 1
 
-find . -depth -type d -path '*/.*' -prune -o -print0 | xargs -0 -P 0 -I {} dash -c '
+find . -depth \( -path '*/.*' -o -path '*/.*/*' \) -prune -o \( -type f -o -type d \) -print0 | xargs -0 -P 0 -I {} dash -c '
 
 base="${1##*/}"
 path="${1%/*}"
