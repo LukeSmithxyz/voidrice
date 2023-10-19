@@ -1,35 +1,18 @@
-#!/bin/sh
+#!/bin/dash
 
 [ "$(id -u)" = "0" ] && echo "This script should not be run as root" >&2 && exit 1
 
-find . -type d -path '*/.*' -prune -o -print0 | xargs -0 -n1 -P10 -I{} sh -c '
-    generate_unique_name() {
-        base_name="$1"; ext="$2"; dest_path="$3"; count=1
-        [ -z "$ext" ] && new_name="$base_name" || new_name="${base_name}.${ext}"
-        while [ -e "${dest_path}/${new_name}" ]; do
-            [ -z "$ext" ] && new_name="${base_name}_${count}" || new_name="${base_name}_${count}.${ext}"
-            count=$(( count + 1 ))
-        done
-        echo "$new_name"
-    }
-    process_item() {
-        item_path="$1"; 
-        [ "$item_path" = "." ] && return
-        dir_name=$(dirname "$item_path"); base_name=$(basename "$item_path")
-        [ -d "$item_path" ] && {
-            new_name=$(echo "$base_name" | sed -E "s/[^a-zA-Z0-9 _.-]+//g; s/[ .-]+/_/g; s/_+/_/g; s/^_//; s/_$//; s/(.*)/\L\1/")
-            [ -z "$new_name" ] && new_name="untitled"
-        } || {
-            file_ext="${base_name##*.}"
-            base_name_no_ext="${base_name%.*}"
-            new_base_name_no_ext=$(echo "$base_name_no_ext" | sed -E "s/[^a-zA-Z0-9 _.-]+//g; s/[ .-]+/_/g; s/_+/_/g; s/^_//; s/_$//; s/(.*)/\L\1/")
-            [ -z "$new_base_name_no_ext" ] && new_base_name_no_ext="untitled"
-            [ -z "$file_ext" ] || [ "$file_ext" = "$base_name_no_ext" ] && new_name="$new_base_name_no_ext" || new_name="${new_base_name_no_ext}.${file_ext}"
-        }
-        [ "$base_name" != "$new_name" ] && {
-            [ -e "${dir_name}/${new_name}" ] && new_name=$(generate_unique_name "${new_name%.*}" "${new_name##*.}" "$dir_name")
-            mv "$item_path" "${dir_name}/${new_name}" 2>/dev/null || true
-        }
-    }
-    process_item "{}"
-' 2>/dev/null
+find . -depth -type d -path '*/.*' -prune -o -print0 | xargs -0 -P 0 -I {} dash -c '
+
+base="${1##*/}"
+path="${1%/*}"
+
+pattern="s/[^a-zA-Z0-9 ._-]//g; s/[ .-]/_/g; s/_+/_/g; s/^_+//; s/_+$//; s/[A-Z]/\L&/g"
+
+[ -f "$1" ] && pattern="$pattern; s/_([^_]+)$/.\\1/"
+
+new_name="$(echo "$base" | sed -E "$pattern")"
+
+[ "$base" != "$new_name" ] && [ -e "$path/$new_name" ] && new_name="${$}_${new_name}"
+[ "$base" != "$new_name" ] && mv "$1" "$path/$new_name"
+' _ {}
