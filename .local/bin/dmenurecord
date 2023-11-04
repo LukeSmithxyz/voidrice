@@ -9,7 +9,7 @@
 #
 # If there is already a running instance, user will be prompted to end it.
 
-getdim() { xrandr | sed -n "s/\s*\([0-9]\+x[0-9]\+\).*\*.*/\1/p" ;}
+getdim() { xrandr | grep -oP '(?<=current ).*(?=,)' | tr -d ' ' ;}
 
 updateicon() { \
 	echo "$1" > /tmp/recordingicon
