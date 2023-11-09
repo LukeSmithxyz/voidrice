@@ -1,10 +1,4 @@
 #!/bin/sh
-
-tempfile=$(mktemp)
-locate -d ~/.config/.mymlocate.db -b -r '.*\.\(mp4\|mkv\|webm\|mov\|m4v\|wmv\|flv\|avi\)$' > "$tempfile"
-
-chosen_name=$(sed 's|.*/||; s/\.[^.]*$//' "$tempfile" | dmenu -i -l 10 -p "Select a video file:")
-chosen_path=$(grep "/$chosen_name\." "$tempfile")
-
-mpv "$chosen_path"
-rm -f "$tempfile"
+video_files=$(locate -d ~/.config/.mymlocate.db -b -r '.*\.\(mp4\|mkv\|webm\|mov\|m4v\|wmv\|flv\|avi\)$')
+chosen_file=$(echo "$video_files" | sed 's|.*/||; s/\.[^.]*$//' | dmenu -p "Select Video")
+mpv "$(echo "$video_files" | grep "/$chosen_file.")"
