@@ -13,10 +13,6 @@ image() {
 	fi
 }
 
-ifub() {
-	[ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && command -V ueberzug >/dev/null 2>&1
-}
-
 # Note that the cache file name is a function of file information, meaning if
 # an image appears in multiple places across the machine, it will not have to
 # be regenerated once seen.
@@ -32,7 +28,7 @@ case "$(file --dereference --brief --mime-type -- "$1")" in
 	image/*) image "$1" "$2" "$3" "$4" "$5" "$1" ;;
 	text/html) lynx -width="$4" -display_charset=utf-8 -dump "$1" ;;
 	text/troff) man ./ "$1" | col -b ;;
-	text/* | */xml | application/json | application/x-ndjson) bat --terminal-width "$(($4-2))" -f "$1" ;;
+	text/* | */xml | application/json | application/x-ndjson) bat -p --theme ansi --terminal-width "$(($4-2))" -f "$1" ;;
 	audio/* | application/octet-stream) mediainfo "$1" || exit 1 ;;
 	video/* )
 		CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | cut -d' ' -f1)"
