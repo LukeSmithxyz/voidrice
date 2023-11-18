@@ -130,6 +130,69 @@ cmd bulkrename ${{
     lf -remote "send $id unselect"
 }}
 
+
+cmd encodetomp3 ${{
+   clear;
+   set -f;
+
+   is_valid_filetype=0;
+
+   #Variables for notify-send
+   converted_filenames="";
+   converted_files_count=0;
+   videos_without_audio_streams="";
+   videos_without_audio_streams_count=0;
+
+   for pickedFilepath in $fx; do
+      case $pickedFilepath in
+	*.mp4)
+	  is_valid_filetype=1 ;;
+	*.webm)
+	  is_valid_filetype=1 ;;
+	*.mkv)
+	  is_valid_filetype=1 ;;
+      esac
+
+      if [[ is_valid_filetype -eq 0 ]]; then
+         echo 'Skipping ${pickedFilepath}' && continue 1 ;
+      fi;
+
+      parsed_MP3=$(echo "$pickedFilepath" | sed 's/\(.mp4\|.webm\|.mkv\)/.mp3/' | sed 's|.*\/||');
+      parsed_MP3="~/Music/${parsed_MP3}";
+
+      #Using ffprobe because videos without audiostream result in exit code 1 which stops this entire loop of many files
+      #Remove (alongside its 2 variables) if you don't record videos without audio (which are admittedly rare)
+      if [[ $(ffprobe -loglevel error -show_entries stream=codec_type -of csv=p=0 "$pickedFilepath") != *"audio"* ]]; then
+	  ((videos_without_audio_streams_count=videos_without_audio_streams_count+1));
+	  videos_without_audio_streams="$videos_without_audio_streams"$'\n'"$pickedFilepath";
+	  continue 1;
+      fi
+
+      ffmpeg -i "$pickedFilepath" "$parsed_MP3";
+
+      ((converted_files_count=converted_files_count+1));
+      converted_filenames="$converted_filenames"$'\n'"$pickedFilepath";
+
+      if [[ $# -eq 1 ]]; then
+	rm -f -- $pickedFilepath;
+      fi
+   done
+
+   #Notify the results to the user
+   if [[ $converted_files_count -gt 0 ]]; then
+      converted_filenames=$(echo "$converted_filenames" | sed 's|.*\/||');
+      notify-send "Converted MP3 Files($converted_files_count): $converted_filenames";
+   fi;
+
+   if [[ $videos_without_audio_streams_count -gt 0 ]]; then
+      videos_without_audio_streams=$(echo "$videos_without_audio_streams" | sed 's|.*\/||');
+      notify-send "Videos without audio stream($videos_without_audio_streams_count): $videos_without_audio_streams";
+   fi;
+
+   #Uncomment the below line if you want to automatically unselect the original converted video files
+   #lf -remote "send $id unselect";
+}}
+
 # Bindings
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
 map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf)"
@@ -163,6 +226,9 @@ map V push :!nvim<space>
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 
 map Y $printf "%s" "$fx" | xclip -selection clipboard
+
+map b encodetomp3
+map <a-b> encodetomp3 delete_after_encoding
 
 # Source Bookmarks
 source "~/.config/lf/shortcutrc"
