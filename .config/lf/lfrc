@@ -85,6 +85,65 @@ cmd delete ${{
 	[ $ans = "y" ] && rm -rf -- $fx
 }}
 
+
+cmd compressvideo ${{
+   clear;
+   set -f;
+
+   is_mp4_already=0;
+   converted_filenames=""; #notify-send variable
+   converted_files_count=0; #notify-send variable
+   compressionRatio="31"; #30 is impossible to notice difference
+
+   echo "Compression Ratio? (default: 31, maximum: 50)";
+   read compressionRatio;
+
+   #If not a number (e.g. empty), give default 31 value
+   if ! [[ $compressionRatio =~ '^[0-9]+$' ]]; then
+      compressionRatio="31"
+   fi
+
+   for pickedFilepath in $fx; do
+      is_valid_filetype=0;
+
+      #could instead use ffprobe but would get more complicated as the filetype suffix becomes unknown
+      case $pickedFilepath in
+         *.mp4)
+            is_valid_filetype=1 && is_mp4_already=1;;
+         *.webm)
+            is_valid_filetype=1 && is_mp4_already=0;;
+         *.mkv)
+            is_valid_filetype=1 && is_mp4_already=0;;
+      esac
+
+      if [[ $is_valid_filetype -eq 0 ]]; then
+         continue 1 ;
+      fi;
+
+      if [[ $is_mp4_already -eq 1 ]]; then
+         tempFilepath=$(echo "$pickedFilepath" | sed 's|.mp4|(CONVERTING).mp4|');
+         mv -f "$pickedFilepath" "$tempFilepath";
+
+         ffmpeg -i "$tempFilepath" -vcodec libx265 -crf "$compressionRatio" "$pickedFilepath";
+         rm -f -- "$tempFilepath";
+      else
+         newFilepath=$(echo "$pickedFilepath" | sed 's/\(.webm\|.mkv\)/.mp4/');
+         ffmpeg -i "$pickedFilepath" -vcodec libx265 -crf "$compressionRatio" "$newFilepath";
+         rm -f -- "$pickedFilepath";
+      fi
+
+      ((converted_files_count=converted_files_count+1));
+      converted_filenames="$converted_filenames"$'\n'"$pickedFilepath";
+
+   done
+
+   #Notify the user of the results
+   if [[ $converted_files_count -gt 0 ]]; then
+      converted_filenames=$(echo "$converted_filenames" | sed 's|.*\/||');
+      notify-send "Compressed Videos($converted_files_count): $converted_filenames";
+   fi;
+}}
+
 cmd moveto ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
@@ -163,6 +222,8 @@ map V push :!nvim<space>
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 
 map Y $printf "%s" "$fx" | xclip -selection clipboard
+
+map <a-x> compressvideo
 
 # Source Bookmarks
 source "~/.config/lf/shortcutrc"
