@@ -46,7 +46,7 @@ add_bookmark() {
 
 delete_bookmark() {
     NAME=$(get_selection)
-    [ -z "$NAME" ] && error_notify "Failed to delete the bookmark."
+    [ -z "$NAME" ] && error_notify "Failed to delete the bookmark." && return
     sed "/^$NAME=/d" "$URLQUERY_FILE" > "$URLQUERY_FILE.tmp"
     mv "$URLQUERY_FILE.tmp" "$URLQUERY_FILE"
     [ ! -s "$URLQUERY_FILE" ] || ! grep -qE "\S" "$URLQUERY_FILE" && rm "$URLQUERY_FILE"
@@ -70,7 +70,7 @@ edit_url() {
 
 edit_bookmark() {
     NAME=$(get_selection)
-    [ -z "$NAME" ] && error_notify "Failed to edit the bookmark."
+    [ -z "$NAME" ] && error_notify "Failed to edit the bookmark." && return
     FIELD=$(echo "Name\nURL" | DMENU 2 "Edit")
     case "$FIELD" in
     "Name") edit_name "$NAME" ;;
@@ -93,6 +93,9 @@ open_bookmark() {
 ensure_file_exists
 
 LINE_COUNT=$(wc -l < "$URLQUERY_FILE")
+
+[ "$LINE_COUNT" -ge "15" ] && LINE_COUNT="15"
+
 SELECTION=$(get_selection)
 [ -z "$SELECTION" ] && exit
 
