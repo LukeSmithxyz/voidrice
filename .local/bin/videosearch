@@ -1,4 +1,4 @@
 #!/bin/sh
 video_files=$(locate -d ~/.config/.mymlocate.db -b -r '.*\.\(mp4\|mkv\|webm\|mov\|m4v\|wmv\|flv\|avi\)$')
-chosen_file=$(echo "$video_files" | sed 's|.*/||; s/\.[^.]*$//' | dmenu -l 10 -p "Select Video")
+chosen_file=$(echo "$video_files" | sed 's|.*/||; s/\.[^.]*$//' | dmenu -i -l 10 -p "Select Video")
 mpv "$(echo "$video_files" | grep -F "/$chosen_file.")"
