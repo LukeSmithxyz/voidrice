@@ -4,7 +4,9 @@ while ! ping -c 1 9.9.9.9 > /dev/null 2>&1; do sleep 0.5; done
 
 DATA_DIR="$HOME/.cache/youtube_channels"
 CHANNEL_LIST="$HOME/.local/share/channels.txt"
-mkdir -p "$DATA_DIR"
+mkdir -p "$DATA_DIR"; touch $CHANNEL_LIST
+
+[ ! -s $CHANNEL_LIST ] && notify-send "You don't have any channels in "channels.txt". Refer to documentation."
 
 compare_data() {
   local channel_name="$1"
