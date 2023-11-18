@@ -1,6 +1,6 @@
 #!/bin/dash
 
-sleep 16
+while ! ping -c 1 9.9.9.9 > /dev/null 2>&1; do sleep 0.5; done
 
 DATA_DIR="$HOME/.cache/youtube_channels"
 CHANNEL_LIST="$HOME/.local/share/channels.txt"
