@@ -81,6 +81,7 @@ edit_bookmark() {
 
 open_bookmark() {
     URL=$(grep "^$SELECTION=" "$URLQUERY_FILE" | cut -d= -f2-)
+    [ -z "$URL" ] && notify-send "Bookmark not found." && exit 1
     case "$URL" in
     *"search"*|*"wiki"*)
         QUERY=$(DMENU 0 "Search")
