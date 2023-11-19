@@ -40,7 +40,7 @@ add_bookmark() {
     URL=$($CLIPBOARD)
     is_valid_url "$URL" || error_notify "The clipboard content is not a valid URL."
     grep -q "=$URL$" "$URLQUERY_FILE" && notify-send "The URL is already in the list." && return
-    NAME=$(DMENU 0 "Name")
+    NAME=$(echo "" | DMENU 0 "Name")
     [ -n "$NAME" ] && echo "${NAME}=${URL}" >> "$URLQUERY_FILE" && notify-send "'$NAME' is bookmarked."
 }
 
@@ -55,7 +55,7 @@ delete_bookmark() {
 
 edit_name() {
     OLD_NAME="$1"
-    NEW_NAME=$(DMENU 0 "New Name")
+    NEW_NAME=$(echo "" | DMENU 0 "New Name")
     [ -z "$NEW_NAME" ] && return
     URL=$(grep "^$OLD_NAME=" "$URLQUERY_FILE" | cut -d= -f2)
     update_file "^$OLD_NAME=" "$NEW_NAME=$URL"
@@ -63,7 +63,7 @@ edit_name() {
 
 edit_url() {
     NAME="$1"
-    NEW_URL=$(DMENU 0 "New URL")
+    NEW_URL=$(echo "" | DMENU 0 "New URL")
     [ -z "$NEW_URL" ] && return
     update_file "^$NAME=.*" "$NAME=$NEW_URL"
 }
@@ -84,7 +84,7 @@ open_bookmark() {
     [ -z "$URL" ] && notify-send "Bookmark not found." && exit 1
     case "$URL" in
     *"search"*|*"wiki"*)
-        QUERY=$(DMENU 0 "Search")
+        QUERY=$(echo "" | DMENU 0 "Search")
         URL="${URL}${QUERY}"
         ;;
     esac
