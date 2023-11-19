@@ -93,7 +93,7 @@ cmd compressvideo ${{
    converted_files_count=0; #notify-send variable
 
    echo "Compression Rate? (default: 31, maximum: 50)";
-   read compressionRate;
+   read -N 2 compressionRate;
 
    #If not a number (e.g. empty), give default 31 value
    if ! [[ $compressionRate =~ ^[0-5][0-9]$ ]]; then
