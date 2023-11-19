@@ -130,12 +130,11 @@ cmd bulkrename ${{
     lf -remote "send $id unselect"
 }}
 
-
 cmd encodetomp3 ${{
    clear;
    set -f;
 
-   is_valid_filetype=0;
+   music_folder="${MUSIC}";
 
    #Variables for notify-send
    converted_filenames="";
@@ -145,20 +144,14 @@ cmd encodetomp3 ${{
 
    for pickedFilepath in $fx; do
       case $pickedFilepath in
-	*.mp4)
-	  is_valid_filetype=1 ;;
-	*.webm)
-	  is_valid_filetype=1 ;;
-	*.mkv)
-	  is_valid_filetype=1 ;;
+	*.mp4 | *.webm | *.mkv)
+	  ;;
+	*)
+	   echo 'Skipping ${pickedFilepath}' && continue 1;;
       esac
 
-      if [[ is_valid_filetype -eq 0 ]]; then
-         echo 'Skipping ${pickedFilepath}' && continue 1 ;
-      fi;
-
       parsed_MP3=$(echo "$pickedFilepath" | sed 's/\(.mp4\|.webm\|.mkv\)/.mp3/' | sed 's|.*\/||');
-      parsed_MP3="~/Music/${parsed_MP3}";
+      parsed_MP3="${music_folder}/${parsed_MP3}";
 
       #Using ffprobe because videos without audiostream result in exit code 1 which stops this entire loop of many files
       #Remove (alongside its 2 variables) if you don't record videos without audio (which are admittedly rare)
@@ -178,15 +171,15 @@ cmd encodetomp3 ${{
       fi
    done
 
-   #Notify the results to the user
+   #Notify the user of the results
    if [[ $converted_files_count -gt 0 ]]; then
       converted_filenames=$(echo "$converted_filenames" | sed 's|.*\/||');
-      notify-send "Converted MP3 Files($converted_files_count): $converted_filenames";
+      notify-send "Converted MP3 Files($converted_files_count):" "$converted_filenames";
    fi;
 
    if [[ $videos_without_audio_streams_count -gt 0 ]]; then
       videos_without_audio_streams=$(echo "$videos_without_audio_streams" | sed 's|.*\/||');
-      notify-send "Videos without audio stream($videos_without_audio_streams_count): $videos_without_audio_streams";
+      notify-send "Videos without audio stream($videos_without_audio_streams_count):" "$videos_without_audio_streams";
    fi;
 
    #Uncomment the below line if you want to automatically unselect the original converted video files
