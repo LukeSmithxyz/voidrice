@@ -134,8 +134,6 @@ cmd encodetomp3 ${{
    clear;
    set -f;
 
-   music_folder="${MUSIC}";
-
    #Variables for notify-send
    converted_filenames="";
    converted_files_count=0;
@@ -151,7 +149,7 @@ cmd encodetomp3 ${{
       esac
 
       parsed_MP3=$(echo "$pickedFilepath" | sed 's/\(.mp4\|.webm\|.mkv\)/.mp3/' | sed 's|.*\/||');
-      parsed_MP3="${music_folder}/${parsed_MP3}";
+      parsed_MP3="~/Music/${parsed_MP3}";
 
       #Using ffprobe because videos without audiostream result in exit code 1 which stops this entire loop of many files
       #Remove (alongside its 2 variables) if you don't record videos without audio (which are admittedly rare)
@@ -171,7 +169,7 @@ cmd encodetomp3 ${{
       fi
    done
 
-   #Notify the user of the results
+   #Notify the results to the user
    if [[ $converted_files_count -gt 0 ]]; then
       converted_filenames=$(echo "$converted_filenames" | sed 's|.*\/||');
       notify-send "Converted MP3 Files($converted_files_count):" "$converted_filenames";
