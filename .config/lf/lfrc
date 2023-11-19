@@ -96,10 +96,9 @@ cmd compressvideo ${{
    read compressionRate;
 
    #If not a number (e.g. empty), give default 31 value
-   #if ! [[ $cr =~ "^[0-5][0-9]$" ]]; then
-      #echo "IS NOT A NUMBER" && sleep 1;
-      #compressionRate="31";
-   #fi
+   if ! [[ $compressionRate =~ ^[0-5][0-9]$ ]]; then
+      compressionRate="31";
+   fi
 
    for pickedFilepath in $fx; do
       #could instead use ffprobe but would get more complicated as the filetype suffix becomes unknown
