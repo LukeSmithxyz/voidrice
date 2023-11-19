@@ -2,6 +2,13 @@
 
 while ! ping -c 1 9.9.9.9 > /dev/null 2>&1; do sleep 0.5; done
 
+# "~/.local/share/channels.txt" looks like below:
+# Luke Smith=https://www.youtube.com/@LukeSmithxyz/videos
+# Mental Outlaw=https://www.youtube.com/@MentalOutlaw/videos
+
+# ~/.local/share/categories.txt looks like below:
+# Tech=Luke Smith|Mental Outlaw
+
 INSTALLER="sudo pacman -S --noconfirm"
 DATA_DIR="$HOME/.cache/youtube_channels"
 CHANNEL_LIST="$HOME/.local/share/channels.txt"
