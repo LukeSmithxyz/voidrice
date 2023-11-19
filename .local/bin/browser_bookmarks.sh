@@ -4,8 +4,7 @@ URLQUERY_FILE="$HOME/.local/share/urlquery"
 CLIPBOARD="xclip -o"
 ACTION_MENU='@@'
 
-# For additional search function, add keywords under open_bookmark function's 
-# case condition next to search and wiki keywords.
+# For additional search function, see information on open_bookmark function below 
 
 DMENU() {
     dmenu -i -l $1 -p "$2"
@@ -86,7 +85,7 @@ open_bookmark() {
     URL=$(grep "^$SELECTION=" "$URLQUERY_FILE" | cut -d= -f2-)
     [ -z "$URL" ] && notify-send "Bookmark not found." && exit 1
     case "$URL" in
-    *"search"*|*"wiki"*|*"packages"*)
+    *"search"*|*"wiki"*|*"packages"*) # Add your additional search keywords here similarly.
         QUERY=$(echo "" | DMENU 0 "Search")
         URL="${URL}${QUERY}"
         ;;
