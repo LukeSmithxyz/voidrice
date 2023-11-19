@@ -1,6 +1,6 @@
 #!/bin/dash
 
-command -v locate >/dev/null || {
+command -v locate dash >/dev/null || {
     sudo pacman -S mlocate &&
     notify-send "Locate not found. Installing..." || {
         notify-send "Failed. Run the script once on terminal OR change sudo permissions."
@@ -11,7 +11,7 @@ command -v locate >/dev/null || {
 [ -s "$HOME/.config/.mymlocate.db" ] || {
     notify-send "You have no database. Creating it..."
     disk_path=$(echo "" | dmenu -l 0 -p "Enter the disk path (e.g '/mnt/harddisk'): ")
-    doas updatedb -o ~/.config/.mymlocate.db -U "$disk_path" || {
+    sudo updatedb -o ~/.config/.mymlocate.db -U "$disk_path" || {
         notify-send "Failed. Run the script once on terminal OR change doas permissions."
         exit 1
     }
