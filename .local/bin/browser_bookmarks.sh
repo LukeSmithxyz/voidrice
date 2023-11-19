@@ -4,6 +4,9 @@ URLQUERY_FILE="$HOME/.local/share/urlquery"
 CLIPBOARD="xclip -o"
 ACTION_MENU='@@'
 
+# For additional search function, add keywords under open_bookmark function's 
+# case condition next to search and wiki keywords.
+
 DMENU() {
     dmenu -i -l $1 -p "$2"
 }
@@ -16,7 +19,7 @@ error_notify() {
 ensure_file_exists() {
     [ -f "$URLQUERY_FILE" ] || {
         notify-send "$URLQUERY_FILE does not exist. Creating it now."
-        touch "$URLQUERY_FILE"
+        echo "SearXNG=https://searx.tiekoetter.com/search?q=" > "$URLQUERY_FILE"
     }
 }
 
@@ -83,7 +86,7 @@ open_bookmark() {
     URL=$(grep "^$SELECTION=" "$URLQUERY_FILE" | cut -d= -f2-)
     [ -z "$URL" ] && notify-send "Bookmark not found." && exit 1
     case "$URL" in
-    *"search"*|*"wiki"*)
+    *"search"*|*"wiki"*|*"packages"*)
         QUERY=$(echo "" | DMENU 0 "Search")
         URL="${URL}${QUERY}"
         ;;
