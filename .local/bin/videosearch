@@ -12,7 +12,7 @@ command -v locate >/dev/null || {
     notify-send "You have no database. Creating it..."
     disk_path=$(echo "" | rofi -dmenu -l 0 -p "Enter the disk path (e.g '/mnt/harddisk'): ")
     sudo updatedb -o ~/.config/.mymlocate.db -U "$disk_path" || {
-        notify-send "Failed. Run the script once on terminal OR change doas permissions."
+        notify-send "Failed. Run the script once on terminal OR change sudo permissions."
         exit 1
     }
 }
