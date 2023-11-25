@@ -55,7 +55,7 @@ esac
 				( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
 				updateprice; do sleep 60; done &&
 				pkill -RTMIN+"$4" "${STATUSBAR:-dwmblocks}" ) &
-			echo; exit ) 9>/tmp/sb-price.lock ||
+			echo; exit ) 9>"${XDG_RUNTIME_DIR}/sb-price.lock" ||
 			updateprice
 	fi
 
