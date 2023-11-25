@@ -155,6 +155,8 @@ map i :rename # before extension
 map a :rename; cmd-right # after extension
 map B bulkrename
 map b $setbg $f
+map f # Intentionally empty so zsh shortcuts apply
+map F # Intentionally empty so zsh shortcuts apply
 
 map <c-e> down
 map <c-y> up
