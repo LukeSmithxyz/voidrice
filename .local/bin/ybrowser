@@ -14,7 +14,7 @@ mkdir -p "$DATA_DIR" "$DOWNLOAD_DIR" "$CUSTOM_LIST_DIR"
 }
 
 DMENU() {
-    dmenu -i -l $1 -p "$2"
+    dmenu -i -l "$1" -p "$2"
 }
 
 sort_videos() {
@@ -39,7 +39,7 @@ video_url() {
   channel_name="$1"
   video_title="$2"
   data_file="$DATA_DIR/$channel_name.tsv"
-  sed -n "s/$video_title\t\([^\t]*\)\t.*$/\1/p" "$data_file"
+  grep -F "$video_title" "$data_file" | cut -f2
 }
 
 rofi_action() {
@@ -156,7 +156,7 @@ get_all_videos() {
 browse_all_channels() {
   while video_title=$(get_all_videos | DMENU 20 "Choose a video or enter @@sv or @@sd"); do
     [ -z "$video_title" ] && break
-    [ "$video_title" = "@@sv" -o "$video_title" = "@@sd" ] && video_title=$(get_all_videos "$video_title" | DMENU 20 "Choose a video")
+    [ "$video_title" = "@@sv" ] || [ "$video_title" = "@@sd" ] && video_title=$(get_all_videos "$video_title" | DMENU 20 "Choose a video")
 
     grep -lF "$video_title" "${DATA_DIR}"/*.tsv | head -n 1 | while read -r video_file; do
       channel_name=$(basename "$video_file" .tsv)
