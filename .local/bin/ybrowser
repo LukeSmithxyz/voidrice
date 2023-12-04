@@ -180,7 +180,7 @@ channel_menu() {
   IFS="|"
 
   channels=$(sed -n "s/^${category}=\(.*\)$/\1/p" "$CATEGORY_LIST")
-  set -- "$channels"
+  set -- $channels
 
   while true; do
     channel_name=$(printf '%s\n' "$@" | DMENU 20 "Choose a channel")
