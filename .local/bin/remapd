@@ -4,5 +4,5 @@
 
 while :; do
 	remaps
-	watch -n1 -g xinput --list
+	watch -gn1 sh -c 'xinput --list | grep keyboard'
 done
