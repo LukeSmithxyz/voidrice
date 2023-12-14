@@ -4,5 +4,5 @@
 
 while :; do
 	remaps
-	watch -gn1 sh -c 'xinput --list | grep keyboard'
+	watch -gn1 sh -c 'xinput --list | grep keyboard' >/dev/null 2>&1
 done
