@@ -14,7 +14,7 @@ case $BLOCK_BUTTON in
 🌐: ethernet working
 🔒: vpn is active
 " ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 # Wifi
