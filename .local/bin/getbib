@@ -36,7 +36,7 @@ process_doi() {
     printf "${red_color}%s${reset_color}\n" "$bibtex_entry"
     [ -z "$bibtex_entry" ] && [ "$(echo "$bibtex_entry" | cut -c2)" != "@" ] && echo "Failed to fetch bibtex entry for DOI: $doi" && return 1
 
-    grep -Fq "doi = {${doi}}" "$BIB_FILE" || {
+    grep -iFq "doi = {${doi}}" "$BIB_FILE" || {
         [ -s "$BIB_FILE" ] && echo "" >> "$BIB_FILE"
         echo "$bibtex_entry" >> "$BIB_FILE"
         echo "Added bibtex entry for DOI: $doi"
