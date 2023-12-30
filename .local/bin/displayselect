@@ -32,7 +32,7 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
     else
 
         primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
-        secondary=$(echo "$screens" | grep -v "$primary")
+        secondary=$(echo "$screens" | grep -v ^"$primary"$)
         direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
         xrandr --output "$primary" --auto --scale 1.0x1.0 --output "$secondary" --"$direction"-of "$primary" --auto --scale 1.0x1.0
     fi
@@ -40,9 +40,9 @@ twoscreen() { # If multi-monitor is selected and there are two screens.
 
 morescreen() { # If multi-monitor is selected and there are more than two screens.
 	primary=$(echo "$screens" | dmenu -i -p "Select primary display:")
-	secondary=$(echo "$screens" | grep -v "$primary" | dmenu -i -p "Select secondary display:")
+	secondary=$(echo "$screens" | grep -v ^"$primary"$ | dmenu -i -p "Select secondary display:")
 	direction=$(printf "left\\nright" | dmenu -i -p "What side of $primary should $secondary be on?")
-	tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | dmenu -i -p "Select third display:")
+	tertiary=$(echo "$screens" | grep -v ^"$primary"$ | grep -v ^"$secondary"$ | dmenu -i -p "Select third display:")
 	xrandr --output "$primary" --auto --output "$secondary" --"$direction"-of "$primary" --auto --output "$tertiary" --"$(printf "left\\nright" | grep -v "$direction")"-of "$primary" --auto
 	}
 
