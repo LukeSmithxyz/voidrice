@@ -1,18 +1,7 @@
 #!/bin/sh
 
-# The famous "get a menu of emojis to copy" script.
-
-# Get user selection via dmenu from emoji file.
-chosen=$(cut -d ';' -f1 ~/.local/share/larbs/chars/* | dmenu -i -l 30 | sed "s/ .*//")
-
-# Exit if none chosen.
-[ -z "$chosen" ] && exit
-
-# If you run this command with an argument, it will automatically insert the
-# character. Otherwise, show a message that the emoji has been copied.
-if [ -n "$1" ]; then
-	xdotool type "$chosen"
-else
-	printf "%s" "$chosen" | xclip -selection clipboard
-	notify-send "'$chosen' copied to clipboard." &
-fi
+emoji=$(curl -s https://raw.githubusercontent.com/jchook/emoji-menu/master/data/emojis.txt | dmenu -i -p "Emojis" -l 20)
+chosen=$(echo "$emoji" | awk '{print $1}')
+printf "%s" "$chosen" | xclip -sel c
+notify-send "$chosen copied to clipboard" &
+xdotool type "$chosen"
