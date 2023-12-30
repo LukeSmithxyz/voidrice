@@ -28,8 +28,7 @@ filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
-updateprice() { curl -sf -m 1 --fail-early $denom.$url/{1$target,$target$interval} --output "$pricefile" --output "$chartfile" ||
-	rm -f "$pricefile" "$chartfile" ;}
+updateprice() { curl -sf --fail-early $denom.$url/{1$target,$target$interval} --output "$pricefile" --output "$chartfile" && touch "$pricefile" "$chartfile"; }
 
 [ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] &&
 	updateme="1"
@@ -48,9 +47,16 @@ case $BLOCK_BUTTON in
 esac
 
 [ -n "$updateme" ] &&
-	updateprice "$target" &&
-	[ -n "$showupdate" ] &&
-	notify-send "$icon Update complete." "$name price is now
-\$$(cat "$pricefile")"
+	if [ -n "$showupdate" ]; then
+		updateprice && notify-send "$icon Update complete." "$name price is now \$$(cat "$pricefile")"
+	else
+		[ -n "$4" ] &&
+			( flock -n 9 &&
+				( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
+				updateprice; do sleep 60; done &&
+				pkill -RTMIN+"$4" "${STATUSBAR:-dwmblocks}" ) &
+			echo; exit ) 9>"${XDG_RUNTIME_DIR}/sb-price.lock" ||
+			updateprice
+	fi
 
 [ -f "$pricefile" ] && printf "%s%s%0.2f" "$icon" "$symb" "$(cat "$pricefile")"
