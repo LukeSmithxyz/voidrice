@@ -80,7 +80,8 @@ case "$chosen" in
 		chosen="${chosen%% *}"
 		chosen="${chosen:1}"	# This is a bashism.
 		attemptmount || getmount
-		sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+		# ext4 does not support uid,gid
+		[ $(lsblk -npro "fstype" $chosen) == ext[2-4] ] && sudo -A mount "$chosen" "$mp" -o user="$USER",rw || sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
 		notify-send "💾Drive Mounted." "$chosen mounted to $mp."
 		;;
 
