@@ -39,7 +39,7 @@ case "${ext}" in
     scad) openscad -o "${base}.stl" "${file}" ;;
     sent) setsid -f sent "${file}" 2> "/dev/null" ;;
     tex)
-	    textarget="$(get_comp_root.sh "${file}" || echo "${file}")"
+	    textarget="$(getcomproot "${file}" || echo "${file}")"
 	    command="pdflatex"
 	    head -n5 "${textarget}" | grep -qi "xelatex" && command="xelatex"
 	    ${command} --output-directory="${textarget%/*}" "${textarget%.*}" &&
