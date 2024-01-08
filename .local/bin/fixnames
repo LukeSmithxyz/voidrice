@@ -1,18 +1,23 @@
 #!/bin/dash
 
-[ "$(id -u)" = "0" ] && echo "This script should not be run as root" >&2 && exit 1
+[ -z "${1}" ] && {
+        printf "%s\n" "Specify a file path as an argument. e.g., fixnames <path>" >&2
+        exit "1"
+}
 
-find . -depth \( -path '*/.*' -o -path '*/.*/*' \) -prune -o \( -type f -o -type d \) -print0 | xargs -0 -P 0 -I {} dash -c '
+[ "$(id -u)" = "0" ] && printf "%s\n" "This script should not be run as root" >&2 && exit "1"
+
+find "${1}" -depth \( -path '*/.*' -o -path '*/.*/*' -o -path '.' \) -prune -o \( -type f -o -type d \) -print0 | sort -zr | xargs -0 -P "0" -I {} dash -c '
 
 base="${1##*/}"
 path="${1%/*}"
 
 pattern="s/[^a-zA-Z0-9 ._-]//g; s/[ .-]/_/g; s/_+/_/g; s/^_+//; s/_+$//; s/[A-Z]/\L&/g"
 
-[ -f "$1" ] && pattern="$pattern; s/_([^_]+)$/.\\1/"
+[ -f "${1}" ] && pattern="${pattern}; s/_([^_]+)$/.\\1/"
 
-new_name="$(echo "$base" | sed -E "$pattern")"
+new_name="$(printf "%s\n" "${base}" | sed -E "${pattern}")"
 
-[ "$base" != "$new_name" ] && [ -e "$path/$new_name" ] && new_name="${$}_${new_name}"
-[ "$base" != "$new_name" ] && mv "$1" "$path/$new_name"
+[ "${base}" != "${new_name}" ] && [ -e "${path}/${new_name}" ] && new_name="${$}_${new_name}"
+[ "${base}" != "${new_name}" ] && mv "${1}" "${path}/${new_name}"
 ' _ {}
