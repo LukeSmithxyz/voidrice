@@ -182,48 +182,6 @@ US: KVAX: Jacksonville, FL
 US: KJGX: Peachtree City/atlanta, GA
 US: KVNX: Norman, OK
 US: KVBX: Vandenberg Afb: Orcutt, CA
-EU: Europe
-EU: GB: Great Brittain
-EU: SCAN: Scandinavia. Norway, Sweden And Denmark
-EU: ALPS: The Alps
-EU: NL: The Netherlands
-EU: DE: Germany
-EU: SP: Spain
-EU: FR: France
-EU: IT: Italy
-EU: PL: Poland
-EU: GR: Greece
-EU: TU: Turkey
-EU: RU: Russia
-EU: BA: Bahrain
-EU: BC: Botswana
-EU: SE: Republic of Seychelles
-EU: HU: Hungary
-EU: UK: Ukraine
-AF: AF: Africa
-AF: WA: West Africa
-AF: ZA: South Africa
-AF: DZ: Algeria
-AF: CE: Canary Islands
-AF: NG: Nigeria
-AF: TD: Chad
-AF: CG: Democratic Republic of Congo
-AF: EG: Egypt
-AF: ET: Ethiopia
-AF: CM: Cameroon
-AF: IS: Israel
-AF: LY: Libya
-AF: MG: Madagascar
-AF: MO: Morocco
-AF: BW: Namibia
-AF: SA: Saudi Arabia
-AF: SO: Somalia
-AF: SD: Sudan
-AF: TZ: Tanzania
-AF: TN: Tunisia
-AF: ZM: Zambia
-AF: KE: Kenya
-AF: AO: Angola
 DE: BAW: Baden-Württemberg
 DE: BAY: Bavaria
 DE: BBB: Berlin
@@ -239,28 +197,29 @@ DE: SAC: Saxony
 DE: SAA: Saxony-Anhalt
 DE: SHH: Schleswig-Holstein
 DE: SHH: Hamburg
-DE: THU: Thuringia" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
+DE: THU: Thuringia
+NL: The Netherlands" | dmenu -r -i -l 50 -p "Select a radar to use as default:")"
 
 # Ensure user did not escape.
 [ -z "$chosen" ] && exit 1
 
-# Set continent code and radar code.
-continentcode=${chosen%%:*}
+# Set country code and radar code.
+countrycode=${chosen%%:*}
 radarcode=${chosen#* } radarcode=${radarcode%:*}
 
 # Print codes to $radarloc file.
- printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
+ printf "%s,%s\\n" "$countrycode" "$radarcode" > "$radarloc" ;}
 
 getdoppler() {
-	cont=$(cut -c -2 "$radarloc")
-	loc=$(cut -c 4- "$radarloc")
-	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
-	case "$cont" in
-		"US") curl -sL "https://radar.weather.gov/ridge/standard/${loc}_loop.gif" > "$doppler" ;;
-		"EU") curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
-		"AF") curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
-		"DE") loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
-		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${loc}_akt.gif" > "$doppler" ;;
+	country=$(cut -c -2 "$radarloc")
+	province=$(cut -c 4- "$radarloc")
+	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $province."
+	case "$country" in
+		"US") province="$(echo "$province" | tr "[:lower:]" "[:upper:]")"
+		curl -sL "https://radar.weather.gov/ridge/standard/${province}_loop.gif" > "$doppler" ;;
+		"DE") province="$(echo "$province" | tr "[:upper:]" "[:lower:]")"
+		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${province}_akt.gif" > "$doppler" ;;
+		"NL") curl -sL "https://cdn.knmi.nl/knmi/map/general/weather-map.gif" > "$doppler" ;;
 	esac
 }
 
