@@ -28,7 +28,7 @@ awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
 	printf(\"map g%s :cd %s<CR>\nmap t%s <tab>:cd %s<CR><tab>\nmap M%s <tab>:cd %s<CR><tab>:mo<CR>\nmap Y%s <tab>:cd %s<CR><tab>:co<CR> \n\",\$1,\$2, \$1, \$2, \$1, \$2, \$1, \$2)       >> \"$vifm_shortcuts\" ;
 	printf(\"config.bind(';%s', \42set downloads.location.directory %s ;; hint links download\42) \n\",\$1,\$2) >> \"$qute_shortcuts\" ;
 	printf(\"map g%s cd %s\nmap t%s tab_new %s\nmap m%s shell mv -v %%s %s\nmap Y%s shell cp -rv %%s %s \n\",\$1,\$2,\$1,\$2, \$1, \$2, \$1, \$2) >> \"$ranger_shortcuts\" ;
-	printf(\"map C%s cd \42%s\42 \n\",\$1,\$2)           >> \"$lf_shortcuts\" ;
+	printf(\"map f%s cd \42%s\42 \n\",\$1,\$2)           >> \"$lf_shortcuts\" ;
 	printf(\"cmap ;%s %s\n\",\$1,\$2)                    >> \"$vim_shortcuts\" }"
 
 # Format the `files` file in the correct syntax and sent it to both configs.
@@ -39,5 +39,5 @@ awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
 	printf(\"abbr %s \42\$EDITOR %s\42 \n\",\$1,\$2) >> \"$fish_shortcuts\"  ;
 	printf(\"map %s :e %s<CR> \n\",\$1,\$2)          >> \"$vifm_shortcuts\"  ;
 	printf(\"map %s shell \$EDITOR %s \n\",\$1,\$2)  >> \"$ranger_shortcuts\" ;
-	printf(\"map E%s \$\$EDITOR \42%s\42 \n\",\$1,\$2)   >> \"$lf_shortcuts\" ;
+	printf(\"map F%s \$\$EDITOR \42%s\42 \n\",\$1,\$2)   >> \"$lf_shortcuts\" ;
 	printf(\"cmap ;%s %s\n\",\$1,\$2)                    >> \"$vim_shortcuts\" }"
