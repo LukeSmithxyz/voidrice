@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Input locations.
 bmdirs="${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs"
 bmfiles="${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-files"
 
@@ -13,31 +14,85 @@ qute_shortcuts="/dev/null"
 fish_shortcuts="/dev/null"
 vifm_shortcuts="/dev/null"
 
+write_dirs() {
+    while IFS= read -r line; do
+        shortcut=$(echo "$line" | cut -d' ' -f1)
+        path_raw=$(echo "$line" | cut -d' ' -f2)
+        path=$(eval "echo $path_raw")
+
+        printf "%s=\"cd %s && ls -A\" \\\\\n" \
+            "$shortcut" "$path" \
+            >>"$shell_shortcuts"
+        printf "hash -d %s=%s\n" \
+            "$shortcut" "$path" \
+            >>"$zsh_named_dirs"
+        printf "abbr %s \"cd %s; and ls -A\"\n" \
+            "$shortcut" "$path" \
+            >>"$fish_shortcuts"
+        printf "map g%s :cd %s<CR>\nmap t%s <tab>:cd %s<CR><tab>\nmap M%s <tab>:cd %s<CR><tab>:mo<CR>\nmap Y%s <tab>:cd %s<CR><tab>:co<CR> \n" \
+            "$shortcut" "$path" \
+            "$shortcut" "$path" \
+            "$shortcut" "$path" \
+            "$shortcut" "$path" \
+            >>"$vifm_shortcuts"
+        printf "config.bind(';%s', \"set downloads.location.directory %s ;; hint links download\") \n" \
+            "$shortcut" "$path" \
+            >>"$qute_shortcuts"
+        printf "map g%s cd %s\nmap t%s tab_new %s\nmap m%s shell mv -v %%s %s\nmap Y%s shell cp -rv %%s %s \n" \
+            "$shortcut" "$path" \
+            "$shortcut" "$path" \
+            "$shortcut" "$path" \
+            "$shortcut" "$path" \
+            >>"$ranger_shortcuts"
+        printf "map C%s cd \"%s\"\n" \
+            "$shortcut" "$path" \
+            >>"$lf_shortcuts"
+        printf "cmap ;%s %s\n" \
+            "$shortcut" "$path" \
+            >>"$vim_shortcuts"
+    done
+}
+
+write_files() {
+    while IFS= read -r line; do
+        shortcut=$(echo "$line" | cut -d' ' -f1)
+        path_raw=$(echo "$line" | cut -d' ' -f2)
+        path=$(eval "echo $path_raw")
+
+        printf "%s=\"\$EDITOR %s\" \\\\\n" \
+            "$shortcut" "$path" \
+            >>"$shell_shortcuts"
+        printf "hash -d %s=%s \n" \
+            "$shortcut" "$path" \
+            >>"$zsh_named_dirs"
+        printf "abbr %s \"\$EDITOR %s\" \n" \
+            "$shortcut" "$path" \
+            >>"$fish_shortcuts"
+        printf "map %s :e %s<CR> \n" \
+            "$shortcut" "$path" \
+            >>"$vifm_shortcuts"
+        printf "map %s shell \$EDITOR %s \n" \
+            "$shortcut" "$path" \
+            >>"$ranger_shortcuts"
+        printf "map E%s \$\$EDITOR \"%s\" \n" \
+            "$shortcut" "$path" \
+            >>"$lf_shortcuts"
+        printf "cmap ;%s %s\n" \
+            "$shortcut" "$path" \
+            >>"$vim_shortcuts"
+    done
+}
+
+filter() {
+    input=$1
+    sed 's/#.*//;/^$/d;s/ \+/ /g' "$input"
+}
+
 # Remove, prepare files
 rm -f "$lf_shortcuts" "$ranger_shortcuts" "$qute_shortcuts" "$zsh_named_dirs" "$vim_shortcuts" 2>/dev/null
-printf "# vim: filetype=sh\\n" > "$fish_shortcuts"
-printf "# vim: filetype=sh\\nalias " > "$shell_shortcuts"
-printf "\" vim: filetype=vim\\n" > "$vifm_shortcuts"
+printf "# vim: filetype=sh\\n" >"$fish_shortcuts"
+printf "# vim: filetype=sh\\nalias " >"$shell_shortcuts"
+printf "\" vim: filetype=vim\\n" >"$vifm_shortcuts"
 
-# Format the `directories` file in the correct syntax and sent it to all three configs.
-eval "echo \"$(cat "$bmdirs")\"" | \
-awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
-	printf(\"%s=\42cd %s && ls -A\42 \\\\\n\",\$1,\$2)   >> \"$shell_shortcuts\" ;
-	printf(\"hash -d %s=%s \n\",\$1,\$2)                 >> \"$zsh_named_dirs\"  ;
-	printf(\"abbr %s \42cd %s; and ls -A\42\n\",\$1,\$2) >> \"$fish_shortcuts\"  ;
-	printf(\"map g%s :cd %s<CR>\nmap t%s <tab>:cd %s<CR><tab>\nmap M%s <tab>:cd %s<CR><tab>:mo<CR>\nmap Y%s <tab>:cd %s<CR><tab>:co<CR> \n\",\$1,\$2, \$1, \$2, \$1, \$2, \$1, \$2)       >> \"$vifm_shortcuts\" ;
-	printf(\"config.bind(';%s', \42set downloads.location.directory %s ;; hint links download\42) \n\",\$1,\$2) >> \"$qute_shortcuts\" ;
-	printf(\"map g%s cd %s\nmap t%s tab_new %s\nmap m%s shell mv -v %%s %s\nmap Y%s shell cp -rv %%s %s \n\",\$1,\$2,\$1,\$2, \$1, \$2, \$1, \$2) >> \"$ranger_shortcuts\" ;
-	printf(\"map C%s cd \42%s\42 \n\",\$1,\$2)           >> \"$lf_shortcuts\" ;
-	printf(\"cmap ;%s %s\n\",\$1,\$2)                    >> \"$vim_shortcuts\" }"
-
-# Format the `files` file in the correct syntax and sent it to both configs.
-eval "echo \"$(cat "$bmfiles")\"" | \
-awk "!/^\s*#/ && !/^\s*\$/ {gsub(\"\\\s*#.*$\",\"\");
-	printf(\"%s=\42\$EDITOR %s\42 \\\\\n\",\$1,\$2)  >> \"$shell_shortcuts\" ;
-	printf(\"hash -d %s=%s \n\",\$1,\$2)             >> \"$zsh_named_dirs\"  ;
-	printf(\"abbr %s \42\$EDITOR %s\42 \n\",\$1,\$2) >> \"$fish_shortcuts\"  ;
-	printf(\"map %s :e %s<CR> \n\",\$1,\$2)          >> \"$vifm_shortcuts\"  ;
-	printf(\"map %s shell \$EDITOR %s \n\",\$1,\$2)  >> \"$ranger_shortcuts\" ;
-	printf(\"map E%s \$\$EDITOR \42%s\42 \n\",\$1,\$2)   >> \"$lf_shortcuts\" ;
-	printf(\"cmap ;%s %s\n\",\$1,\$2)                    >> \"$vim_shortcuts\" }"
+filter "$bmdirs" | write_dirs
+filter "$bmfiles" | write_files
