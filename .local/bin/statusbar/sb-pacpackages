@@ -23,7 +23,7 @@ case $BLOCK_BUTTON in
 	3) notify-send "🎁 Upgrade module" "📦: number of upgradable packages
 - Left click to upgrade packages
 - Middle click to show upgradable packages" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/📦/;s/^📦0$//g"

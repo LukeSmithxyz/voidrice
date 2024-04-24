@@ -5,6 +5,11 @@
 #
 # https://www.maketecheasier.com/ip-address-geolocation-lookups-linux/
 
-ifinstalled "geoip" || exit
-addr="$(curl ifconfig.me 2>/dev/null)" || exit
-grep "flag: " "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji" | grep "$(geoiplookup "$addr" | sed 's/.*, //')" | sed "s/flag: //;s/;.*//"
+set -e
+
+ifinstalled "geoip"
+addr="$(geoiplookup "$(curl -sfm 1 ifconfig.me 2>/dev/null)")"
+name="${addr##*, }"
+flag="$(grep "flag: $name" "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji")"
+flag="${flag%% *}"
+printf "%s %s\\n" "$flag" "$name"

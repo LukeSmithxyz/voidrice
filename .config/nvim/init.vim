@@ -8,13 +8,15 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	autocmd VimEnter * PlugInstall
 endif
 
+map ,, :keepp /<++><CR>ca<
+imap ,, <esc>:keepp /<++><CR>ca<
+
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'tpope/vim-surround'
 Plug 'windwp/nvim-autopairs'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
-Plug 'lukesmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
@@ -224,11 +226,19 @@ EOF
     endif
 
 " vimling:
-	nm <leader><leader>d :call ToggleDeadKeys()<CR>
-	imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
-	nm <leader><leader>i :call ToggleIPA()<CR>
-	imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
-	nm <leader><leader>q :call ToggleProse()<CR>
+	nm <leader>d :call ToggleDeadKeys()<CR>
+	imap <leader>d <esc>:call ToggleDeadKeys()<CR>a
+	nm <leader>i :call ToggleIPA()<CR>
+	imap <leader>i <esc>:call ToggleIPA()<CR>a
+	nm <leader>q :call ToggleProse()<CR>
+
+" vim-airline
+	if !exists('g:airline_symbols')
+  	    let g:airline_symbols = {}
+	endif
+	let g:airline_symbols.colnr = ' C:'
+	let g:airline_symbols.linenr = ' L:'
+	let g:airline_symbols.maxlinenr = '☰ '
 
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
@@ -250,10 +260,10 @@ EOF
 	nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler "<c-r>%"<CR>
+	map <leader>c :w! \| !compiler "%:p"<CR>
 
 " Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+	map <leader>p :!opout "%:p"<CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
@@ -267,7 +277,7 @@ EOF
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+	cabbrev w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Enable Goyo by default for mutt writing
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
@@ -279,7 +289,8 @@ EOF
  	autocmd BufWritePre * let currPos = getpos(".")
 	autocmd BufWritePre * %s/\s\+$//e
 	autocmd BufWritePre * %s/\n\+\%$//e
-	autocmd BufWritePre *.[ch] %s/\%$/\r/e
+  autocmd BufWritePre *.[ch] %s/\%$/\r/e " add trailing newline for ANSI C standard
+  autocmd BufWritePre *neomutt* %s/^--$/-- /e " dash-dash-space signature delimiter in emails
   	autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
@@ -312,3 +323,8 @@ function! ToggleHiddenAll()
     endif
 endfunction
 nnoremap <leader>h :call ToggleHiddenAll()<CR>
+" Load command shortcuts generated from bm-dirs and bm-files via shortcuts script.
+" Here leader is ";".
+" So ":vs ;cfz" will expand into ":vs /home/<user>/.config/zsh/.zshrc"
+" if typed fast without the timeout.
+silent! source ~/.config/nvim/shortcuts.vim

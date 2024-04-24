@@ -8,12 +8,11 @@ if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xrandr" ]; then
 fi
 setbg &          # set the background with the `setbg` script
 #xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &  # Uncomment to use Xresources colors/settings on startup
-remaps &         # run the remaps script, switching caps/esc and more; check it for more info
 
-autostart="mpd xcompmgr dunst unclutter"
+autostart="mpd xcompmgr dunst unclutter remapd"
 
 for program in $autostart; do
-	pidof -s "$program" || "$program" &
+	pidof -sx "$program" || "$program" &
 done >/dev/null 2>&1
 
 # Ensure that xrdb has finished running before moving on to start the WM/DE.

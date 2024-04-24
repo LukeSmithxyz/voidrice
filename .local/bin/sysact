@@ -17,7 +17,7 @@ case "$(printf "🔒 lock\n🚪 leave $WM\n♻️ renew $WM\n🐻 hibernate\n�
 	'🔒 lock') slock ;;
 	"🚪 leave $WM") kill -TERM "$(wmpid)" ;;
 	"♻️ renew $WM") kill -HUP "$(wmpid)" ;;
-	'🐻 hibernate') slock $ctl hibernate ;;
+	'🐻 hibernate') slock $ctl hibernate -i ;;
 	'💤 sleep') slock $ctl suspend -i ;;
 	'🔃 reboot') $ctl reboot -i ;;
 	'🖥️shutdown') $ctl poweroff -i ;;

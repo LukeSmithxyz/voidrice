@@ -6,7 +6,8 @@ secs=600 # Download a new doppler radar if one hasn't been downloaded in $secs s
 radarloc="${XDG_CACHE_HOME:-$HOME/.cache}/radar"
 doppler="${XDG_CACHE_HOME:-$HOME/.cache}/doppler.gif"
 
-pickloc() { chosen="$(echo "US: Northeast
+pickloc() { chosen="$(echo "US: CONUS: Continental United States
+US: Northeast
 US: Southeast
 US: PacNorthWest
 US: PacSouthWest
@@ -55,7 +56,7 @@ US: KUDX: Rapid City, SD
 US: KRIW: Riverton, WY
 US: KSGF: Springfield, MO
 US: KLSX: St. LOUIS, MO
-US: KFSD: Sioux Falls, IA
+US: KFSD: Sioux Falls, SD
 US: KTWX: Topeka, KS
 US: KICT: Wichita, KS
 US: KVWX: Paducah, KY
@@ -183,7 +184,7 @@ US: KVNX: Norman, OK
 US: KVBX: Vandenberg Afb: Orcutt, CA
 EU: Europe
 EU: GB: Great Brittain
-EU: SCAN: Scandinavia
+EU: SCAN: Scandinavia. Norway, Sweden And Denmark
 EU: ALPS: The Alps
 EU: NL: The Netherlands
 EU: DE: Germany
@@ -222,26 +223,45 @@ AF: TZ: Tanzania
 AF: TN: Tunisia
 AF: ZM: Zambia
 AF: KE: Kenya
-AF: AO: Angola" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
+AF: AO: Angola
+DE: BAW: Baden-Württemberg
+DE: BAY: Bavaria
+DE: BBB: Berlin
+DE: BBB: Brandenburg
+DE: HES: Hesse
+DE: MVP: Mecklenburg-Western Pomerania
+DE: NIB: Lower Saxony
+DE: NIB: Bremen
+DE: NRW: North Rhine-Westphalia
+DE: RPS: Rhineland-Palatinate
+DE: RPS: Saarland
+DE: SAC: Saxony
+DE: SAA: Saxony-Anhalt
+DE: SHH: Schleswig-Holstein
+DE: SHH: Hamburg
+DE: THU: Thuringia" | dmenu -r -i -l 50 -p "Select a radar to use as default:" | tr "[:lower:]" "[:upper:]")"
+
+# Ensure user did not escape.
+[ -z "$chosen" ] && exit 1
 
 # Set continent code and radar code.
-continentcode=$(echo "$chosen" | sed "s/:.*//")
-radarcode=$(echo "$chosen" | sed "s/..: // ; s/:.*//")
+continentcode=${chosen%%:*}
+radarcode=${chosen#* } radarcode=${radarcode%:*}
 
-# Sanity check of selection and ensure user did not escape.
-echo "$radarcode" | grep -q "^[A-Z]\+$" && printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
+# Print codes to $radarloc file.
+ printf "%s,%s\\n" "$continentcode" "$radarcode" > "$radarloc" ;}
 
 getdoppler() {
-	cont="$(sed "s/,.*//" "$radarloc")"
-	loc="$(cut -c 4- "$radarloc")"
+	cont=$(cut -c -2 "$radarloc")
+	loc=$(cut -c 4- "$radarloc")
 	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
-	if [ "$cont" = "US" ] ; then
-		curl -sL "https://radar.weather.gov/ridge/lite/${loc}_loop.gif" > "$doppler" ;
-	elif [ "$cont" = "EU" ] ; then
-		curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;
-	elif [ "$cont" = "AF" ] ; then
-		curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;
-	fi
+	case "$cont" in
+		"US") curl -sL "https://radar.weather.gov/ridge/standard/${loc}_loop.gif" > "$doppler" ;;
+		"EU") curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
+		"AF") curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
+		"DE") loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
+		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${loc}_akt.gif" > "$doppler" ;;
+	esac
 }
 
 showdoppler() { setsid -f mpv --no-osc --loop=inf --no-terminal "$doppler" ;}
@@ -254,7 +274,7 @@ case $BLOCK_BUTTON in
 	3) notify-send "🗺️ Doppler RADAR module" "\- Left click for local Doppler RADAR.
 - Middle click to update RADAR location.
 After $secs seconds, new clicks will also automatically update the doppler RADAR."  ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-echo 🗺️
+echo 🌅

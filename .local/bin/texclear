@@ -9,7 +9,7 @@ case "$1" in
 	dir=$(dirname "$file")
 	base="${file%.*}"
 	find "$dir"  -maxdepth 1 -type f -regextype gnu-awk -regex "^$base\\.(4tc|xref|tmp|pyc|pyg|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" -delete
-	rm -rdf "$dir/_minted-$(basename -- $base)"
+	rm -rdf "$dir/_minted-$(basename -- "$base")"
 	;;
 	*) printf "Give .tex file as argument.\\n" ;;
 esac
