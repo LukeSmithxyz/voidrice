@@ -11,6 +11,6 @@ echo "    Disk space remaining:\t`df -h | grep '% /$' | awk '{print $4}'` (`df -
 
 echo >> $motd
 
-pyquotes >> $motd
+fortune -s >> $motd
 
 echo -e "\n    n-j0y ur stay, `whoami`\n" >> $motd
