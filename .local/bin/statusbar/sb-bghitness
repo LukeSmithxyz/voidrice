@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# show the current brightness level.
+
+case $BLOCK_BUTTON in
+ 	1) setsid -w -f "$TERMINAL" -e brightnessctl; pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}" ;;
+ 	3) notify-send "💡 Brightness module" "\- Shows brightness level ☀️." ;;
+ 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esact
+
+brightness=$(brightnessctl -m | grep -m 1 "backlight" | cut -d "," -f 4)
+
+echo "💡 $brightness"
