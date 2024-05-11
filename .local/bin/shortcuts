@@ -14,7 +14,10 @@ fish_shortcuts="/dev/null"
 vifm_shortcuts="/dev/null"
 
 # Remove, prepare files
-rm -f "$lf_shortcuts" "$ranger_shortcuts" "$qute_shortcuts" "$zsh_named_dirs" "$vim_shortcuts" 2>/dev/null
+for file in "$lf_shortcuts" "$ranger_shortcuts" "$qute_shortcuts" "$zsh_named_dirs" "$vim_shortcuts"; do
+	test -f "$file" && rm -f "$file" 2>/dev/null
+done
+
 printf "# vim: filetype=sh\\n" > "$fish_shortcuts"
 printf "# vim: filetype=sh\\nalias " > "$shell_shortcuts"
 printf "\" vim: filetype=vim\\n" > "$vifm_shortcuts"
