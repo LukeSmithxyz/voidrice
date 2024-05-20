@@ -21,6 +21,8 @@ Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 call plug#end()
 
+colorscheme vim
+
 set title
 set bg=light
 set go=a
