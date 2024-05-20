@@ -24,7 +24,7 @@ call plug#end()
 colorscheme vim
 
 set title
-set bg=light
+set bg=dark
 set go=a
 set mouse=a
 set nohlsearch
