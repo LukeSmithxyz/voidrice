@@ -45,7 +45,7 @@ case $BLOCK_BUTTON in
 ☔: Chance of rain/snow
 🥶: Daily low
 🌞: Daily high" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 checkforecast || getforecast

@@ -15,4 +15,4 @@ else
 fi
 # Activate dbus variables
 dbus-update-activation-environment --all
-ssh-agent dwm
+dbus-launch ssh-agent dwm

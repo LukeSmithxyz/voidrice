@@ -10,7 +10,7 @@ case $BLOCK_BUTTON in
 - Shows 🔃 if syncing mail
 - Left click opens neomutt
 - Middle click syncs mail" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"

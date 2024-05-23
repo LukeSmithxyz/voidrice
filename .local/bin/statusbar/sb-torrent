@@ -23,5 +23,5 @@ Module shows number of torrents:
 🔽: downloading
 ✅: done
 🌱: done and seeding" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac

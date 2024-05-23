@@ -274,7 +274,7 @@ case $BLOCK_BUTTON in
 	3) notify-send "🗺️ Doppler RADAR module" "\- Left click for local Doppler RADAR.
 - Middle click to update RADAR location.
 After $secs seconds, new clicks will also automatically update the doppler RADAR."  ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 echo 🌅
