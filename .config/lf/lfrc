@@ -25,6 +25,8 @@ set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
 set autoquit true
+# Enable wrap-around scrolling
+set wrapscroll true
 
 # cmds/functions
 cmd open ${{
