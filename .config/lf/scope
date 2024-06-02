@@ -30,6 +30,11 @@ image/svg+xml)
 	[ ! -f "$CACHE" ] && inkscape --convert-dpi-method=none -o "$CACHE.png" --export-overwrite -D --export-png-color-mode=RGBA_16 "$1"
 	image "$CACHE.png" "$2" "$3" "$4" "$5" "$1"
 	;;
+  image/x-xcf)
+    CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}')"
+    [ ! -f "$CACHE.jpg" ] && convert "$1[0]" "$CACHE.jpg"
+    image "$CACHE.jpg" "$2" "$3" "$4" "$5" "$1"
+  ;;
 	image/*) image "$1" "$2" "$3" "$4" "$5" "$1" ;;
 	text/html) lynx -width="$4" -display_charset=utf-8 -dump "$1" ;;
 	text/troff) man ./ "$1" | col -b ;;
