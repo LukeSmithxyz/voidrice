@@ -1,0 +1,15 @@
+#!/bin/sh
+f() {
+        r="$(locate -d "${XDG_CONFIG_HOME}/.p.db" -b -r ".*\.\(${1}\)$")"
+        o="$(printf "%s\n" "${r}" | sed 's|.*/||;s/\.[^.]*$//' | dmenu -i -p "${c}" -l "20")"
+        [ "${o}" ] && ${2} "$(printf "%s\n" "${r}" | grep -Fm "1" "/${o}.")"
+}
+c="$(printf "Video\nDoc\nImage\nOffice\nMusic\n" | dmenu -i -p "Categories" -l "5")"
+case "${c}" in
+        "Video") f "mp4\|mkv\|webm\|mov\|m4v\|wmv\|flv\|avi\|gif\|m2ts" "mpv" ;;
+        "Doc") f "pdf\|djvu\|ps\|epub\|mobi\|cb." "zathura --mode fullscreen" ;;
+        "Image") f "jpg\|jpeg\|webp\|png\|jxl" "nsxiv -bfq" ;;
+        "Office") f "xls\|xlsx\|ods\|doc\|docx\|ppt\|pptx\|odp" "libreoffice" ;;
+        "Music") f "mp3\|wav\|flac\|ogg\|m4a\|opus" "mpv --no-video" ;;
+        *) exit "0" ;;
+esac
