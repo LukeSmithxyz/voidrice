@@ -4,8 +4,12 @@
 
 moonfile="${XDG_DATA_HOME:-$HOME/.local/share}/moonphase"
 
-[ -s "$moonfile" ] && [ "$(stat -c %y "$moonfile" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
-	{ curl -sf "wttr.in/?format=%m" > "$moonfile" || exit 1 ;}
+[ "$(stat -c %y "$moonfile" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
+	( flock -n 9 &&
+		( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
+		curl -sf "wttr.in/?format=%m" --output "$moonfile" && touch "$moonfile"; do sleep 60; done &&
+		pkill -RTMIN+"${1:-17}" "${STATUSBAR:-dwmblocks}" ) &
+	echo; exit ) 9>"${XDG_RUNTIME_DIR}/sb-moonphase.lock"
 
 icon="$(cat "$moonfile")"
 
