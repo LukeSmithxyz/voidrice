@@ -55,11 +55,8 @@ eb() {
 o() {
         u="$(grep "^${s}=" "${f}" | cut -d= -f2-)"
         [ "${u}" ] || eno "Bookmark not found"
-        case "${u}" in
-                *"search"* | *"wiki"* | *"packages"*)
-                        q="$(pr "" | d "0" "Search")"
-                        u="${u}${q}"
-                        ;;
+        case "${u}" in *"search"* | *"wiki"* | *"packages"*)
+			q="$(pr "" | d "0" "Search")"; u="${u}${q}" ;;
         esac
         "${BROWSER}" "${u}" || eno "Failed to open: ${u}"
 }
