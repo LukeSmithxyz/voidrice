@@ -1,144 +1,77 @@
-#!/bin/dash
-
-URLQUERY_FILE="${HOME}/.local/share/urlquery"
-ACTION_MENU="@@"
-
-# For additional search function, see information on open_bookmark function below
-
-CLIPBOARD() {
-	xclip -o
+#!/bin/sh
+f="${XDG_DATA_HOME}/urls"
+am="@@"
+d() { dmenu -i -l "${1}" -p "${2}"; }
+no() { notify-send "Bookmarks" "${1}"; }
+eno() { no "${1}"; exit; }
+pr() { printf "%s\n" "${@}"; }
+ch() {
+        [ -f "${f}" ] || {
+                no "${f} does not exist. Creating it now."
+                pr "SearXNG=https://searx.tiekoetter.com/search?q=" > "${f}"
+		pr "YouTube=https://www.youtube.com/results?search_query=" >> "${f}"
+        }
 }
-
-DMENU() {
-	dmenu -i -l "${1}" -p "${2}"
+gs() { cut -d= -f1 "${f}" | d "${l}" "Bookmarks"; }
+up() { sed -i "s|${1}.*$|${2}|" "${f}"; }
+val() { pr "${1}" | grep -qE '^https?://[^\s/$.?#].[^\s]*$'; }
+add() {
+        u="$(xclip -o)"
+        val "${u}" || eno "Clipboard not valid"
+        grep -q "=${u}$" "${f}" && no "URL already saved" && exit
+        n="$(pr "" | d "0" "Name")"
+        [ "${n}" ] && pr "${n}=${u}" >> "${f}" && no "'${n}' bookmarked"
 }
-
-error_notify() {
-	notify-send "${1}"
-	exit "1"
+del() {
+        n="$(gs)"
+        [ "${n}" ] || eno "Failed to delete bookmark"
+        sed -i "/^${n}=.*/d" "${f}"
+        [ -s "${f}" ] && grep -q "\S" "${f}" || rm "${f}"
+        no "'${n}' is deleted."
 }
-
-ensure_file_exists() {
-	[ -f "${URLQUERY_FILE}" ] || {
-		notify-send "${URLQUERY_FILE} does not exist. Creating it now."
-		printf "SearXNG=https://searx.tiekoetter.com/search?q=\n" > "${URLQUERY_FILE}"
-	}
+en() {
+        on="${1}"
+        nn="$(pr "" | d "0" "New Name")"
+        [ "${nn}" ] || exit
+        u="$(grep "^${on}=" "${f}" | cut -d= -f2)"
+        up "^${on}=" "${nn}=${u}"
 }
-
-get_selection() {
-	cut -d= -f1 "${URLQUERY_FILE}" | DMENU "${LINE_COUNT}" "Bookmarks"
+eu() {
+        n="${1}"
+        nu="$(pr "" | d "0" "New URL")"
+        [ "${nu}" ] || exit
+        up "${n}=" "${n}=${nu}"
 }
-
-update_file() {
-	pattern="${1}"
-	replacement="${2}"
-
-	sed "/${pattern}/c\\${replacement}" "${URLQUERY_FILE}" > "${URLQUERY_FILE}.tmp" &&
-			mv "${URLQUERY_FILE}.tmp" "${URLQUERY_FILE}" ||
-				error_notify "Failed to update the file."
+eb() {
+        n="$(gs)"
+        [ "${n}" ] || eno "Failed to edit bookmark"
+        fi="$(pr "NAME" "URL" | d "2" "Edit")"
+        case "${fi}" in
+                "NAME") en "${n}" ;;
+                "URL") eu "${n}" ;;
+        esac
+        no "'${n}' is updated."
 }
-
-is_valid_url() {
-	printf "%s\n" "${1}" | grep -qE "^https?://[^[:space:]/?#][^[:space:]]+$"
+o() {
+        u="$(grep "^${s}=" "${f}" | cut -d= -f2-)"
+        [ "${u}" ] || eno "Bookmark not found"
+        case "${u}" in
+                *"search"* | *"wiki"* | *"packages"*)
+                        q="$(pr "" | d "0" "Search")"
+                        u="${u}${q}"
+                        ;;
+        esac
+        "${BROWSER}" "${u}" || eno "Failed to open: ${u}"
 }
-
-add_bookmark() {
-	URL="$(CLIPBOARD)"
-
-	is_valid_url "${URL}" || error_notify "The clipboard content is not a valid URL."
-
-	grep -q "=${URL}$" "${URLQUERY_FILE}" &&
-		notify-send "The URL is already in the list." && return
-
-	NAME="$(printf "" | DMENU "0" "Name")"
-
-	[ -n "${NAME}" ] && printf "%s\n" "${NAME}=${URL}" >> "${URLQUERY_FILE}" &&
-		notify-send "'${NAME}' is bookmarked."
-}
-
-delete_bookmark() {
-	NAME="$(get_selection)"
-
-	[ -z "${NAME}" ] && error_notify "Failed to delete the bookmark." && return
-
-	sed "/^${NAME}=/d" "${URLQUERY_FILE}" > "${URLQUERY_FILE}.tmp"
-	mv "${URLQUERY_FILE}.tmp" "${URLQUERY_FILE}"
-
-	[ -s "${URLQUERY_FILE}" ] && grep -qE "\S" "${URLQUERY_FILE}" || rm "${URLQUERY_FILE}"
-
-	notify-send "'${NAME}' is deleted."
-}
-
-edit_name() {
-	OLD_NAME="${1}"
-	NEW_NAME="$(printf "" | DMENU "0" "New Name")"
-
-	[ -z "${NEW_NAME}" ] && return
-
-	URL="$(grep "^${OLD_NAME}=" "${URLQUERY_FILE}" | cut -d= -f2)"
-
-	update_file "^${OLD_NAME}=" "${NEW_NAME}=${URL}"
-}
-
-edit_url() {
-	NAME="${1}"
-	NEW_URL="$(echo "" | DMENU "0" "New URL")"
-
-	[ -z "${NEW_URL}" ] && return
-
-	update_file "^${NAME}=.*" "${NAME}=${NEW_URL}"
-}
-
-edit_bookmark() {
-	NAME="$(get_selection)"
-
-	[ -z "${NAME}" ] && error_notify "Failed to edit the bookmark." && return
-
-	FIELD="$(printf "Name\nURL\n" | DMENU "2" "Edit")"
-
-	case "${FIELD}" in
-		"Name")edit_name "${NAME}";;
-		"URL")edit_url "${NAME}"
-	esac
-
-	notify-send "'${NAME}' is updated."
-}
-
-open_bookmark() {
-	URL="$(grep "^${SELECTION}=" "${URLQUERY_FILE}" | cut -d= -f2-)"
-
-	[ -z "${URL}" ] && notify-send "Bookmark not found." && exit "1"
-
-	case "${URL}" in
-		*"search"* | *"wiki"* | *"packages"*) QUERY="$(echo "" | DMENU "0" "Search")"
-		URL="${URL}${QUERY}"
-		;;
-	esac
-
-	"${BROWSER}" "${URL}" || notify-send "Failed to open the URL."
-}
-
-ensure_file_exists
-
-LINE_COUNT="$(wc -l < "${URLQUERY_FILE}")"
-
-[ "${LINE_COUNT}" -ge "15" ] && LINE_COUNT="15"
-
-SELECTION="$(get_selection)"
-
-[ -z "${SELECTION}" ] && exit
-
-case "${SELECTION}" in
-        "${ACTION_MENU}")
-                ACTION="$(printf "Add\nDelete\nEdit\n" | DMENU "3" "Action")"
-
-		case "${ACTION}" in
-                        "Add") add_bookmark ;;
-                        "Delete") delete_bookmark ;;
-                        "Edit") edit_bookmark ;;
-                esac
+ch
+l="$(wc -l < "${f}")"
+[ "${l}" -gt "21" ] && l="21"
+s="$(gs)"
+case "${s}" in
+        "${am}")
+                a="$(pr "Add" "Delete" "Edit" | d "3" "Action")"
+                case "${a}" in "Add") add ;; "Delete") del ;; "Edit") eb ;; esac
                 ;;
-        *)
-                open_bookmark
-                ;;
+        "") exit ;;
+        *) o ;;
 esac
