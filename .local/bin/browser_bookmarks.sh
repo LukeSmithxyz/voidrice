@@ -18,7 +18,7 @@ val() { pr "${1}" | grep -qE '^https?://[^\s/$.?#].[^\s]*$'; }
 add() {
         u="$(xclip -o)"
         val "${u}" || eno "Clipboard not valid"
-        grep -q "=${u}$" "${f}" && no "URL already saved" && exit
+        grep -q "=${u}$" "${f}" && eno "URL already saved"
         n="$(pr "" | d "0" "Name")"
         [ "${n}" ] && pr "${n}=${u}" >> "${f}" && no "'${n}' bookmarked"
 }
