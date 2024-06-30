@@ -46,10 +46,7 @@ eb() {
         n="$(gs)"
         [ "${n}" ] || eno "Failed to edit bookmark"
         fi="$(pr "NAME" "URL" | d "2" "Edit")"
-        case "${fi}" in
-                "NAME") en "${n}" ;;
-                "URL") eu "${n}" ;;
-        esac
+        case "${fi}" in "NAME") en "${n}" ;; "URL") eu "${n}" ;; esac
         no "'${n}' is updated."
 }
 o() {
@@ -57,7 +54,7 @@ o() {
         [ "${u}" ] || eno "Bookmark not found"
         case "${u}" in *"search"* | *"wiki"* | *"packages"*)
 			q="$(pr "" | d "0" "Search")"; u="${u}${q}" ;;
-        esac
+	esac
         "${BROWSER}" "${u}" || eno "Failed to open: ${u}"
 }
 ch
