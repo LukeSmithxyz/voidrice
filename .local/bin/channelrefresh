@@ -1,79 +1,61 @@
 #!/bin/dash
+while ! ping -c 1 "9.9.9.9"; do sleep "0.5"; done
+dd="${XDG_CACHE_HOME}/ychannels"
+chl="${XDG_DATA_HOME}/channels"
+ctg="${XDG_DATA_HOME}/categories"
+n() { notify-send -i "${XDG_CONFIG_HOME}/dunst/yt.png" -u "critical" "${1}"; }
 
-while ! ping -c 1 9.9.9.9 > /dev/null 2>&1; do sleep 0.5; done
-
-# "~/.local/share/channels.txt" looks like below:
-# Luke Smith=https://www.youtube.com/@LukeSmithxyz/videos
-# Mental Outlaw=https://www.youtube.com/@MentalOutlaw/videos
-
-# ~/.local/share/categories.txt looks like below:
-# Tech=Luke Smith|Mental Outlaw
-
-INSTALLER="sudo pacman -S --noconfirm"
-DATA_DIR="$HOME/.cache/youtube_channels"
-CHANNEL_LIST="$HOME/.local/share/channels.txt"
-mkdir -p "$DATA_DIR" && touch "$CHANNEL_LIST"
-
-error_handling() {
-    [ -s "$CHANNEL_LIST" ] || {
-	    notify-send "You don't have any channels in 'channels.txt'."
-	    exit 1
-    }
-    grep -q "^.*=https://www.youtube.com/@[[:alnum:]]*/videos$" "$CHANNEL_LIST" || {
-	    notify-send "'channels.txt' formatting is wrong."
-	    exit 1
-    }
-    for pkg in yt-dlp mpv jq; do
-        command -v "$pkg" >/dev/null || {
-            notify-send "$pkg is not installed. Installing..."
-            $INSTALLER "$pkg" || {
-                notify-send "Failed to install $pkg."
-                exit 1
-            }
-    }
-    done
-}    
-
-compare_data() {
-  local channel_name="$1"
-  local data_file="${DATA_DIR}/${channel_name}.tsv"
-  local old_data_file="${DATA_DIR}/${channel_name}_old.tsv"
-
-    [ -e "$old_data_file" ] && {
-    old_urls=$(cut -f2 "$old_data_file")
-    new_urls=$(cut -f2 "$data_file")
-
-    echo "$old_urls" | sort > temp1
-    echo "$new_urls" | sort > temp2
-    new_videos=$(comm -13 temp1 temp2 | wc -l)
-    rm temp1 temp2
-
-    [ "$new_videos" -gt 0 ] && notify-send -u critical "$channel_name | $new_videos videos"
-  }
+eh() {
+	[ ! -s "${chl}" ] && [ ! -s "${ctg}" ] && {
+        	printf "%s\n" \
+                	"Luke Smith=https://www.youtube.com/@LukeSmithxyz/videos" \
+                	"Mental Outlaw=https://www.youtube.com/@MentalOutlaw/videos" \
+                	> "${chl}"
+        	printf "%s\n" "Tech=Luke Smith|Mental Outlaw" > "${ctg}"
+		sudo pacman -S --needed --noconfirm mpv yt-dlp jq || n "Failed to install mpv jq yt-dlp"
+	}
 }
 
-update_data() {
-  local channel_name="$1"
-  local channel_url="$2"
-  local data_file="${DATA_DIR}/${channel_name}.tsv"
-  local old_data_file="${DATA_DIR}/${channel_name}_old.tsv"
-
-  mv "$data_file" "$old_data_file" 2>/dev/null
-
-  yt-dlp -j --flat-playlist --skip-download --extractor-args youtubetab:approximate_date "$channel_url" | jq -r '[.title, .url, .view_count, .duration, .upload_date] | @tsv' > "$data_file"
+mkdir -p "${dd}" && touch "${chl}"
+comd() {
+        chn="${1}"
+        df="${dd}/${chn}.tsv"
+        odf="${dd}/${chn}_old.tsv"
+        [ -f "${odf}" ] && {
+                ou="$(cut -f2 "${odf}")"
+                nu="$(cut -f2 "${df}")"
+                printf "%s\n" "${ou}" | sort > "t1"
+                printf "%s\n" "${nu}" | sort > "t2"
+                nv="$(comm -13 "t1" "t2" | wc -l)"
+                rm -f "t1" "t2"
+                [ "${nv}" -gt "0" ] && n "${chn} | ${nv} videos."
+        }
 }
-
-update_all_channels() {
-  while IFS="=" read -r channel_name channel_url; do
-    update_data "$channel_name" "$channel_url" &
-  done < "$CHANNEL_LIST"
-
-  wait
-
-  while IFS="=" read -r channel_name channel_url; do
-    compare_data "$channel_name"
-  done < "$CHANNEL_LIST"
+ud() {
+        chn="${1}"
+        cu="${2}"
+        df="${dd}/${chn}.tsv"
+        odf="${dd}/${chn}_old.tsv"
+        mv -f "${df}" "${odf}" 2> "/dev/null"
+        yt-dlp -j --flat-playlist --skip-download --extractor-args \
+                "youtubetab:approximate_date" "${cu}" |
+                jq -r '[.title, .url, .view_count, .duration, .upload_date] | @tsv' > "${df}"
 }
+uac() {
+        while IFS="=" read -r chn cu; do
+                ud "${chn}" "${cu}" &
+        done < "${chl}"
+        wait
+        while IFS="=" read -r chn cu; do
+                comd "${chn}"
+        done < "${chl}"
 
-error_handling
-update_all_channels
+        avf="${dd}/all_videos.tsv"
+        rm -f "${avf}"
+        while IFS= read -r line; do
+                cn="${line%%=*}"
+                cat "${dd}/${cn}.tsv" >> "${avf}"
+        done < "${chl}"
+}
+eh
+uac
