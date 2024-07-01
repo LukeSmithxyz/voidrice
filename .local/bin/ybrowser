@@ -11,7 +11,7 @@ d() {
         l="$(pr "${i}" | wc -l)"
         [ "${l}" -gt "21" ] && l="21"
         [ "${i}" ] || l="0"
-        pr "${i}" | rofi -dmenu -i -l "${l}" -p "${1}"
+        pr "${i}" | dmenu -i -l "${l}" -p "${1}"
 }
 n() { notify-send -i "${XDG_CONFIG_HOME}/dunst/yt.png" "${1}"; }
 sv() {
