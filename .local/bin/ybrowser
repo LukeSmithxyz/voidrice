@@ -1,255 +1,186 @@
-#!/bin/dash
-
-DATA_DIR="$HOME/.cache/youtube_channels"
-DOWNLOAD_DIR="$HOME/ytvideos"
-CATEGORY_LIST="$HOME/.local/share/categories.txt"
-CHANNEL_LIST="$HOME/.local/share/channels.txt"
-CUSTOM_LIST_DIR="$DATA_DIR/custom_lists"
-
-mkdir -p "$DATA_DIR" "$DOWNLOAD_DIR" "$CUSTOM_LIST_DIR"
-
-[ "$(find "$DATA_DIR" -maxdepth 1 -type f -name "*.tsv" 2>/dev/null)" ] || {
-	notify-send "You need to run "channelrefresh" script first."
-        exit 1
+#!/bin/sh
+dd="${XDG_CACHE_HOME}/ychannels"
+yd="${HOME}/ytvideos"
+cl="${XDG_DATA_HOME}/categories"
+chl="${XDG_DATA_HOME}/channels"
+cld="${XDG_DATA_HOME}/clists"
+mkdir -p "${dd}" "${yd}" "${cld}"
+pr() { printf "%s\n" "${@}"; }
+d() {
+        i="$(cat)"
+        l="$(pr "${i}" | wc -l)"
+        [ "${l}" -gt "21" ] && l="21"
+        [ "${i}" ] || l="0"
+        pr "${i}" | rofi -dmenu -i -l "${l}" -p "${1}"
 }
-
-DMENU() {
-    dmenu -i -l "$1" -p "$2"
+n() { notify-send -i "${XDG_CONFIG_HOME}/dunst/yt.png" "${1}"; }
+sv() {
+        df="${1}"
+        so="${2}"
+        case "${so}" in
+                "@@sv") sort -nr -t"	" -k3 "${df}" ;;
+                "@@sd") sort -nr -t"	" -k4 "${df}" ;;
+                *) sort -nr -t"	" -k5 "${df}" ;;
+        esac | cut -f1
 }
-
-sort_videos() {
-  data_file="$1"
-  sort_option="$2"
-
-  case $sort_option in
-    "@@sv") sort -nr -t"	" -k3 "$data_file" ;;
-    "@@sd") sort -nr -t"	" -k4 "$data_file" ;;
-         *) sort -nr -t"	" -k5 "$data_file" ;;
-  esac | cut -f1
+gv() {
+        cn="${1}"
+        so="${2}"
+        df="${dd}/${cn}.tsv"
+        sv "${df}" "${so}"
 }
-
-get_videos() {
-  channel_name="$1"
-  sort_option="$2"
-  data_file="$DATA_DIR/$channel_name.tsv"
-  sort_videos "$data_file" "$sort_option"
+vu() {
+        cn="${1}"
+        vt="${2}"
+        df="${dd}/${cn}.tsv"
+        grep -F "${vt}" "${df}" | cut -f2
 }
-
-video_url() {
-  channel_name="$1"
-  video_title="$2"
-  data_file="$DATA_DIR/$channel_name.tsv"
-  grep -F "$video_title" "$data_file" | cut -f2
+ma() {
+        pr "WATCH" "DOWNLOAD" "SEND TO A LIST" | d "Actions"
 }
-
-rofi_action() {
-  echo "WATCH\nDOWNLOAD\nSEND TO A LIST" | DMENU 3 "Choose an action for the video"
+ca() {
+        lsts="$(pr "${cld}"/* | sed 's|.*/||')"
+        [ "${lsts}" = "*" ] && lsts=""
+        pr "${lsts}" "## CREATE LIST ##" "## DELETE LIST ##" | d "Lists"
 }
-
-rofi_custom_list_action() {
-  echo "$(find "$CUSTOM_LIST_DIR" -maxdepth 1 -type f -exec basename {} \;)
-#### CREATE A LIST ####
-#### DELETE A LIST ####" | DMENU 10 "Choose an action or list"
+lva() {
+        pr "WATCH" "DOWNLOAD" "DELETE" | d "Actions"
 }
-
-list_video_action() {
-  echo "WATCH\nDOWNLOAD\nDELETE" | DMENU 3 "Choose an action for the video"
+atl() {
+        vt="${1}"
+        cn="${2}"
+        ln="${3}"
+        pr "${cn}: ${vt}" >> "${cld}/${ln}"
 }
-
-add_to_list() {
-  video_title="$1"
-  channel_name="$2"
-  list_name="$3"
-  echo "$channel_name: $video_title" >> "$CUSTOM_LIST_DIR/$list_name"
+clm() {
+        while true; do
+                lst="$(ca)"
+                case "${lst}" in
+                        "## CREATE LIST ##")
+                                nlst="$(pr | d "Name")"
+                                [ "${nlst}" ] && touch "${cld}/${nlst}"
+                                ;;
+                        "## DELETE LIST ##")
+                                dlst="$(find "${cld}" -mindepth "1" -exec basename {} \; | d "Delete List")"
+                                [ "${dlst}" ] && rm -f "${cld}/${dlst}"
+                                ;;
+                        "") return ;;
+                        *) cvm "${lst}" ;;
+                esac
+        done
 }
-
-custom_list_menu() {
-  while true; do
-    list="$(rofi_custom_list_action)"
-    [ -z "$list" ] && return
-    case "$list" in
-      *CREATE*)
-        new_list=$(echo "" | DMENU 0 "Enter the name of the new list")
-        [ -n "$new_list" ] && touch "$CUSTOM_LIST_DIR/$new_list"
-        ;;
-      *DELETE*)
-        delete_list=$(find "$CUSTOM_LIST_DIR" -maxdepth 1 -type f -exec basename {} \; |
-		DMENU 10 "Choose a list to delete")
-        [ -n "$delete_list" ] && rm "$CUSTOM_LIST_DIR/$delete_list"
-        ;;
-      *)
-        custom_list_video_menu "$list"
-        ;;
-    esac
-  done
+cvm() {
+        ln="${1}"
+        while true; do
+                vi=$(d "Videos" < "${cld}/${ln}")
+                [ "${vi}" ] || return
+                cn="${vi%%: *}"
+                vt="${vi##*: }"
+                clvm "${vt}" "${cn}" "${ln}"
+        done
 }
-
-custom_list_video_menu() {
-  list_name="$1"
-  while true; do
-    video_info=$(DMENU 20 "Choose a video" < "$CUSTOM_LIST_DIR/$list_name")
-    [ -z "$video_info" ] && return
-    channel_name="${video_info%%: *}"
-    video_title="${video_info##*: }"
-    custom_list_video_action_menu "$video_title" "$channel_name" "$list_name"
-  done
+clvm() {
+        vt="${1}"
+        cn="${2}"
+        ln="${3}"
+        ac="$(lva)"
+        case "${ac}" in
+                "WATCH") vp "${ac}" "${vt}" "${cn}" ;;
+                "DOWNLOAD") vp "${ac}" "${vt}" "${cn}" && n "Download finished" ;;
+                "DELETE") sed -i "/${vt}/d" "${cld}/${ln}" ;;
+                *) return ;;
+        esac
 }
-
-custom_list_video_action_menu() {
-  video_title="$1"
-  channel_name="$2"
-  list_name="$3"
-
-  action=$(list_video_action)
-
-  case $action in
-    WATCH)
-      video_process WATCH "$video_title" "$channel_name"
-      ;;
-    DOWNLOAD)
-      video_process DOWNLOAD "$video_title" "$channel_name" && notify-send "Downloading has finished."
-      ;;
-    DELETE)
-      escaped_video_title="$(echo "$video_title" | sed 's/[][\^$.\/|*+?(){}#]/\\&/g')"
-      sed "/$escaped_video_title/d" "$CUSTOM_LIST_DIR/$list_name" > "$CUSTOM_LIST_DIR/${list_name}.tmp" &&
-	  mv "$CUSTOM_LIST_DIR/${list_name}.tmp" "$CUSTOM_LIST_DIR/$list_name"
-      ;;
-    *)
-      return
-      ;;
-  esac
+vp() {
+        ac="${1}"
+        vt="${2}"
+        cn="${3}"
+        vu="$(vu "${cn}" "${vt}")"
+        case "${ac}" in
+                "WATCH") mpv "${vu}" ;;
+                "DOWNLOAD")
+                        cdd="${yd}/${cn}"
+                        mkdir -p "${cdd}"
+                        yt-dlp -o "${cdd}/%(title)s.%(ext)s" "${vu}"
+                        n "Download finished"
+                        ;;
+        esac
 }
-
-video_process() {
-    action="$1"
-    video_title="$2"
-    channel_name="$3"
-    video_url=$(video_url "$channel_name" "$video_title")
-
-    case "$action" in
-        WATCH)
-            mpv "$video_url"
-            ;;
-        DOWNLOAD)
-            local channel_download_dir="$DOWNLOAD_DIR/$channel_name"
-            mkdir -p "$channel_download_dir"
-            yt-dlp -o "$channel_download_dir/%(title)s.%(ext)s" "$video_url"
-            notify-send "Downloading has finished."
-            ;;
-    esac
+gav() {
+        so="${1}"
+        avf="${dd}/all_videos.tsv"
+        sv "${avf}" "${so}"
 }
-
-get_all_videos() {
-  sort_option="$1"
-  all_videos_file="$DATA_DIR/all_videos.tsv"
-
-  rm -f "$all_videos_file"
-  while IFS= read -r line
-  do
-    channel_name="${line%%=*}"
-    cat "$DATA_DIR/$channel_name.tsv" >> "$all_videos_file"
-  done < "$CHANNEL_LIST"
-
-  sort_videos "$all_videos_file" "$sort_option"
+bac() {
+        while vt="$(gav | d "Videos | Sort: @@s{v,d}")"; do
+                [ "${vt}" ] || break
+                [ "${vt}" = "@@sv" ] || [ "${vt}" = "@@sd" ] && {
+                        vt=$(gav "${vt}" | d "Videos")
+                        [ "${vt}" ] || continue
+                }
+                grep -lF "${vt}" "${dd}"/*.tsv | head -n "1" | while read -r "vf"; do
+                        vam "${vt}" "$(basename "${vf}" .tsv)"
+                        break
+                done
+        done
 }
-
-browse_all_channels() {
-  while video_title=$(get_all_videos | DMENU 20 "Choose a video or enter @@sv or @@sd"); do
-    [ -z "$video_title" ] && break
-    [ "$video_title" = "@@sv" ] || [ "$video_title" = "@@sd" ] && video_title=$(get_all_videos "$video_title" | DMENU 20 "Choose a video")
-
-    grep -lF "$video_title" "${DATA_DIR}"/*.tsv | head -n 1 | while read -r video_file; do
-      channel_name=$(basename "$video_file" .tsv)
-      video_action_menu "$video_title" "$channel_name"
-      break
-    done
-  done
+cm() {
+        while true; do
+                c="$(cut -d= -f1 "${cl}" | d "Categories")"
+                [ "${c}" ] || return
+                chm "${c}"
+        done
 }
-
-category_menu() {
-  while true; do
-    category="$(cut -d= -f1 "$CATEGORY_LIST" | DMENU 12 "Choose a category")"
-    [ -z "$category" ] && return
-
-    channel_menu "$category"
-  done
+chm() {
+        c="${1}"
+        IFS="|"
+        ch="$(sed -n "s/^${c}=\(.*\)$/\1/p" "${cl}")"
+        set -- ${ch}
+        while true; do
+                cn="$(pr "${@}" | d "Channels")"
+                [ "${cn}" ] || return
+                vm "${cn}"
+        done
 }
-
-channel_menu() {
-  category="$1"
-  IFS="|"
-
-  channels=$(sed -n "s/^${category}=\(.*\)$/\1/p" "$CATEGORY_LIST")
-  set -- $channels
-
-  while true; do
-    channel_name=$(printf '%s\n' "$@" | DMENU 20 "Choose a channel")
-    [ -z "$channel_name" ] && return
-
-    video_menu "$channel_name"
-  done
+vm() {
+        cn="${1}"
+        while true; do
+                vt=$(gv "${cn}" | d "Videos")
+                [ "${vt}" ] || return
+                [ "${vt}" = "@@sv" ] || [ "${vt}" = "@@sd" ] && {
+                        so="${vt}"
+                        vt="$(gv "${cn}" "${so}" | d "Videos")"
+                }
+                vam "${vt}" "${cn}"
+        done
 }
-
-video_menu() {
-  channel_name="$1"
-
-  while true; do
-    video_title=$(get_videos "$channel_name" | DMENU 20 "Choose a video")
-    [ -z "$video_title" ] && return
-    [ "$video_title" = "@@sv" ] || [ "$video_title" = "@@sd" ] && {
-      sort_option="$video_title"
-      video_title=$(get_videos "$channel_name" "$sort_option" | DMENU 20 "Choose a video")
-    }
-
-    video_action_menu "$video_title" "$channel_name"
-  done
+vam() {
+        vt="${1}"
+        cn="${2}"
+        while [ "${vt}" ] && [ "${vt}" != "@@sv" ] && [ "${vt}" != "@@sd" ]; do
+                ac="$(ma)"
+                case "${ac}" in
+                        "WATCH") vp "${ac}" "${vt}" "${cn}" ;;
+                        "DOWNLOAD") vp "${ac}" "${vt}" "${cn}" && n "Download finished" ;;
+                        "SEND TO A LIST")
+                                ln="$(find "${cld}" -mindepth "1" -exec basename {} \; | d "Lists")"
+                                [ "${ln}" ] && atl "${vt}" "${cn}" "${ln}" && n "${vt} > list: ${ln}"
+                                ;;
+                        *) return ;;
+                esac
+        done
 }
-
-video_action_menu() {
-  video_title="$1"
-  channel_name="$2"
-
-  while [ -n "$video_title" ] && [ "$video_title" != "@@sv" ] && [ "$video_title" != "@@sd" ]; do
-    action=$(rofi_action)
-
-    case $action in
-      WATCH)
-	video_process WATCH "$video_title" "$channel_name"
-        ;;
-      DOWNLOAD)
-        video_process DOWNLOAD "$video_title" "$channel_name" && notify-send "Downloading has finished."
-        ;;
-      "SEND TO A LIST")
-        list_name=$(find "$CUSTOM_LIST_DIR" -maxdepth 1 -type f -exec basename {} \; | DMENU 10 "Choose a list")
-        [ -n "$list_name" ] && add_to_list "$video_title" "$channel_name" "$list_name" &&
-		notify-send "$video_title is added to the list: $list_name"
-        ;;
-      *)
-        return
-        ;;
-    esac
-  done
+mm() {
+        pr " ## ALL CHANNELS ##" " ## CATEGORIES ##" " ## CUSTOM LISTS ##" \
+                "$(cut -d= -f1 "${chl}")" | d "YouTube"
 }
-
-main_menu() {
-  options=" #### ALL CHANNELS ####
- #### CATEGORIES ####
- #### CUSTOM LISTS ####
-$(cut -d= -f1 "$CHANNEL_LIST")"
-
-  echo "$options" | DMENU 20 "Choose an Option or a Category"
-}
-
 while true; do
-
-  main_choice=$(main_menu)
-
-  [ -z "$main_choice" ] && exit
-
-  case "$main_choice" in
-    *ALL\ CHANNELS*) browse_all_channels       ;;
-    *CATEGORIES*   ) category_menu             ;;
-    *CUSTOM\ LISTS*) custom_list_menu          ;;
-                  *) video_menu "$main_choice" ;;
-  esac
+        mc="$(mm)"
+        case "${mc}" in
+                " ## ALL CHANNELS ##") bac ;;
+                " ## CATEGORIES ##") cm ;;
+                " ## CUSTOM LISTS ##") clm ;;
+                "") exit ;;
+                *) vm "${mc}" ;;
+        esac
 done
