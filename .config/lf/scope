@@ -13,6 +13,11 @@ image() {
 	fi
 }
 
+# For ImageMagick 6 <-> 7 compatibility.
+if type magick >/dev/null 2>&1; then
+    alias convert='magick'
+fi
+
 # Note that the cache file name is a function of file information, meaning if
 # an image appears in multiple places across the machine, it will not have to
 # be regenerated once seen.

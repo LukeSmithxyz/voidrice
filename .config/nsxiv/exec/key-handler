@@ -1,4 +1,10 @@
 #!/bin/sh
+
+# For ImageMagick 6 <-> 7 compatibility.
+if type magick >/dev/null 2>&1; then
+    alias convert='magick'
+fi
+
 while read -r file
 do
         case "$1" in
