@@ -9,12 +9,12 @@ output="$(date '+%y%m%d-%H%M-%S').png"
 xclip_cmd="xclip -sel clip -t image/png"
 ocr_cmd="xclip -sel clip"
 
-case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)\\nOCR a selected area (copy)" | dmenu -l 7 -i -p "Screenshot which area?")" in
+case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)\\ncopy selected image to text" | dmenu -l 7 -i -p "Screenshot which area?")" in
     "a selected area") maim -u -s pic-selected-"${output}" ;;
     "current window") maim -B -q -d 0.2 -i "$(xdotool getactivewindow)" pic-window-"${output}" ;;
     "full screen") maim -q -d 0.2 pic-full-"${output}" ;;
     "a selected area (copy)") maim -u -s | ${xclip_cmd} ;;
     "current window (copy)") maim -q -d 0.2 -i "$(xdotool getactivewindow)" | ${xclip_cmd} ;;
     "full screen (copy)") maim -q -d 0.2 | ${xclip_cmd} ;;
-    "a selected area (OCR)") tmpfile=$(mktemp /tmp/ocr-XXXXXX.png) && maim -u -s > "$tmpfile" && tesseract "$tmpfile" - -l eng | ${ocr_cmd} && rm "$tmpfile" ;;
+    "copy selected image to text") tmpfile=$(mktemp /tmp/ocr-XXXXXX.png) && maim -u -s > "$tmpfile" && tesseract "$tmpfile" - -l eng | ${ocr_cmd} && rm "$tmpfile" ;;
 esac
