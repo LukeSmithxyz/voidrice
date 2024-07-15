@@ -79,8 +79,13 @@ case "$chosen" in
 	💾*)
 		chosen="${chosen%% *}"
 		chosen="${chosen:1}"	# This is a bashism.
+		parttype="$(echo "$lsblkoutput" | grep "$chosen")"
 		attemptmount || getmount
-		sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+		case "${parttype##* }" in
+			vfat) sudo -A mount -t vfat "$chosen" "$mp" -o rw,umask=0000 ;;
+			btrfs) sudo -A mount "$chosen" "$mp" ;;
+			*) sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)" ;;
+		esac
 		notify-send "💾Drive Mounted." "$chosen mounted to $mp."
 		;;
 
