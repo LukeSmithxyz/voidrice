@@ -257,7 +257,7 @@ getdoppler() {
 	notify-send "🌦️ Doppler RADAR" "Pulling most recent Doppler RADAR for $loc."
 	case "$cont" in
 		"US") curl -sL "https://radar.weather.gov/ridge/standard/${loc}_loop.gif" > "$doppler" ;;
-		"EU") curl -sL "https://api.sat24.com/animated/${loc}/rainTMC/2/" > "$doppler" ;;
+		"EU") curl -sL "https://neige.meteociel.fr/satellite/anim_vis_fr.gif" > "$doppler" ;;
 		"AF") curl -sL "https://api.sat24.com/animated/${loc}/rain/2/" > "$doppler" ;;
 		"DE") loc="$(echo "$loc" | tr "[:upper:]" "[:lower:]")"
 		curl -sL "https://www.dwd.de/DWD/wetter/radar/radfilm_${loc}_akt.gif" > "$doppler" ;;
