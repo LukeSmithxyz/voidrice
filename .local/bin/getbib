@@ -1,14 +1,71 @@
 #!/bin/sh
-[ -z "$1" ] && echo "Give either a pdf file or a DOI as an argument." && exit
 
-if [ -f "$1" ]; then
-	# Try to get DOI from pdfinfo or pdftotext output.
-	doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
-	doi=$(pdftotext "$1" 2>/dev/null - | sed -n '/[dD][oO][iI]:/{s/.*[dD][oO][iI]:\s*\(\S\+[[:alnum:]]\).*/\1/p;q}') ||
-	exit 1
-else
-	doi="$1"
-fi
+BIB_FILE="${HOME}/latex/uni.bib"
+[ -f "${BIB_FILE}" ] || BIB_FILE="${2:-$(find "${HOME}" -path "${HOME}/.*" \
+	-prune -o -type "f" -name "*.bib" -print -quit)}"
 
-# Check crossref.org for the bib citation.
-curl -s "https://api.crossref.org/works/$doi/transform/application/x-bibtex" -w "\\n"
+{ [ -f "${BIB_FILE}" ] || [ "${2}" ]; } || {
+	printf "%s\n" "Create a .bib file or provide as \$2." && exit "1"
+}
+
+filter() {
+	sed -n -E 's/.*((DOI|doi)((\.(org))?\/?|:? *))([^: ]+[^ .]).*/\6/p; T; q'
+}
+
+fpdf() {
+        pdf="${1}"
+	doi="$(pdfinfo "${pdf}" 2> "/dev/null" | filter)"
+
+	[ "${doi}" ] || doi="$(pdftotext -q -l "2" "${pdf}" - 2> "/dev/null" | filter)"
+
+	[ "${doi}" ] || printf "%s\n" "No DOI found for PDF: ${pdf}" >&2
+
+	printf "%s\n" "${doi}"
+}
+
+arrange() {
+	sed 's/\}, /\},\n	/g
+		s/, /,\n	/
+		s/ }/\n}/
+		s/,\s*pages=/,\n\tpages=/' |
+        sed '1s/^ *//
+        	1s/[0-9]*\([0-9]\{2\}\)/\1/
+        	1s/_//
+        	1s/.*/\L&/
+		s/.*=/\L&/
+		s/=/ = /'
+}
+
+doi2bib() {
+        doi="${1#doi:}"
+	url="https://api.crossref.org/works/${doi}/transform/application/x-bibtex"
+        entry="$(curl -kLsS --no-fail "${url}" | arrange)"
+        red='\033[0;31m'
+        reset='\033[0m'
+
+        printf "${red}%s${reset}\n" "${entry}"
+
+	[ "${entry%"${entry#?}"}" != "@" ] && {
+		printf "%s\n" "Failed to fetch bibtex entry for DOI: ${doi}"
+		return "1"
+	}
+
+	grep -iFq "doi = {${doi}}" "${BIB_FILE}" 2> "/dev/null" && {
+		printf "%s\n" "Bibtex entry for DOI: ${doi} already exists in the file."
+	} || {
+		[ -s "${BIB_FILE}" ] && printf "\n" >> "${BIB_FILE}"
+		printf "%s\n" "${entry}" >> "${BIB_FILE}"
+		printf "%s\n" "Added bibtex entry for DOI: ${doi}"
+        }
+}
+
+[ "${1}" ] || {
+	printf "%s\n" "Give either a pdf file or a DOI or a directory path that has PDFs as an argument."
+	exit "1"
+}
+
+[ -f "${1}" ] && doi="$(fpdf "${1}")" && doi2bib "${doi}" && exit "0"
+
+[ -d "${1}" ] && for i in "${1}"/*.pdf; do doi="$(fpdf "${i}")" && doi2bib "${doi}"; done && exit "0"
+
+doi="$(printf "%s\n" "${1}" | filter)" && doi2bib "${doi}"
