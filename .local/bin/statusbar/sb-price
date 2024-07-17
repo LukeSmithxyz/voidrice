@@ -28,7 +28,9 @@ filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
-updateprice() { curl -sf -m 1 --fail-early $denom.$url/{1$target,$target$interval} --output "$pricefile" --output "$chartfile" ||
+updateprice() { curl -sf \
+	--fail-early "${denom}.${url}/1${target}" "${denom}.${url}/${target}${interval}" \
+	--output "$pricefile" --output "$chartfile" ||
 	rm -f "$pricefile" "$chartfile" ;}
 
 [ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] &&
