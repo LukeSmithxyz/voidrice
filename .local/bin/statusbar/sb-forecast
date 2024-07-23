@@ -7,7 +7,9 @@ url="${WTTRURL:-wttr.in}"
 weatherreport="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
 
 # Get a weather report from 'wttr.in' and save it locally.
-getforecast() { curl -sf "$url/$LOCATION" --output "$weatherreport" && touch "$weatherreport"; }
+getforecast() { { grep -q -m1 '^up$' /sys/class/net/w*/operstate || grep -q -m1 '^up$' /sys/class/net/e*/operstate; } &&
+	curl -sf "$url/$LOCATION" --output "$weatherreport" && touch "$weatherreport"
+}
 
 # Forecast should be updated only once a day.
 checkforecast() {
@@ -34,6 +36,7 @@ readfile() { weatherdata="$(cat "$weatherreport")" ;}
 
 showweather() {
 	readfile
+	# shellcheck disable=SC2046,SC2183
 	printf "☔%s 🥶%s° 🌞%s°\n" "$(getprecipchance)" $(getdailyhighlow)
 }
 
@@ -45,12 +48,18 @@ case $BLOCK_BUTTON in
 ☔: Chance of rain/snow
 🥶: Daily low
 🌞: Daily high" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
+# shellcheck disable=SC2015
 checkforecast && showweather ||
-	( flock -n 9  &&
-		( until { [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] || [ "$(cat /sys/class/net/e*/operstate)" = 'up' ]; } &&
-		getforecast; do sleep 60; done &&
-		pkill -RTMIN+"${1:-5}" "${STATUSBAR:-dwmblocks}" ) &
+	( flock -n 9 &&
+		( tries=0; while [ $tries -ne 100 ]; do
+			getforecast && break ||
+				{ tries=$((tries+1)); sleep .1; }
+		done
+		! checkforecast &&
+			until getforecast; do sleep 60; done
+		pkill -RTMIN+"${1:-5}" "${STATUSBAR:-dwmblocks}"
+		) &
 	echo ) 9>"${XDG_RUNTIME_DIR}/sb-forecast.lock"
