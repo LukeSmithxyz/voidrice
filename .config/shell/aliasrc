@@ -14,7 +14,7 @@ for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
 done; unset command
 
 se() {
-	s=("${HOME}/.local/bin/"*)
+	s=("${HOME}/.local/bin/"**/*(.))
 	c="$(print -lnr ${s:t:r} | fzf)"
 	[[ "${c}" ]] && "${EDITOR}" ${${(M)s:#*/${c}*}[1]}
 }
