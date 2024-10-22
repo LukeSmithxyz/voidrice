@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Usage
+#   sb-ticker
+# Sample output
+#   ^DJI: 0.09%
+#   CL=F: -1.88%
+# Description
+#   displays/retrieves the latest percent-change in stock market quotes listed in $XDG_CONFIG_HOME/tickers.
+#       defaults to S&P 500, Dow Jones Industrial, and the Nasdaq
+#
+#   intended to be used in the statusbar, which will display the first quote price in the output
+
+url="terminal-stocks.dev"
+pricefile="${XDG_CACHE_HOME:-$HOME/.cache}/stock-prices"
+tickerfile="${XDG_CONFIG_HOME:-$HOME/.config}/tickers"
+
+[ -f "$tickerfile" ] && tickers="$(cat "$tickerfile")" || tickers="^GSPC,^DJI,^IXIC";
+
+checkprice() {
+    [ -s "$pricefile" ] && [ "$(stat -c %y "$pricefile" 2>/dev/null |
+        cut -d':' -f1)" != "$(date '+%Y-%m-%d %H')" ]
+}
+
+getchange() {
+    mapfile -t changes < <(sed -e 's/  / /g' "$pricefile" | grep -oe '[m-]\+[0-9]\+\.[0-9]\+' | sed 's/[m ]/;/g')
+    IFS=',' read -ra TICKER <<< "$tickers"
+    for idx in "${!TICKER[@]}"; do
+        printf "%s: %s%%\n" "${TICKER[$idx]}" "${changes[$idx]//;/}"
+    done
+}
+
+updateprice() { curl -sfm 10 "$url/$tickers" --output "$pricefile" || rm -f "$pricefile" ; }
+
+case $BLOCK_BUTTON in
+    1) setsid "$TERMINAL" -e less -Srf "$pricefile" ;;
+    2) notify-send -u low "Updating..." "Updating prices" ; updateme="1" ;;
+    3) notify-send "Current prices:" "Current stock prices:\n<b>$(getchange)</b>
+
+LEFT MOUSE BUTTON: show price file
+MIDDLE MOUSE BUTTON: update stock prices
+RIGHT MOUSE BUTTON: Get stock overview" ;;
+    6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+[ -n "$updateme" ] && updateprice
+
+[ -f "$pricefile" ] && getchange
+
+checkprice && updateprice
