@@ -1,0 +1,115 @@
+#!/bin/sh
+
+# Searches the website for RSS feeds and adds them to newsboat url list. Can
+# also find hidden RSS feeds on various websites, namely Youtube, Reddit,
+# Vimeo, Github, Gitlab and Medium. Gets site url as $1 or (if not present)
+# from X clipboard. Gets tags as $2. If it finds more than one feed, calls
+# dmenu for the user to choose which one to add. I have bound it to a keyboard
+# shortcut so i copy a site link and easily add its feed to the reader.
+
+# Inspired by and based on the logic of this extension:
+# https://github.com/shevabam/get-rss-feed-url-extension
+
+# This script requires rssadd to add feeds to the list.
+
+getlink () {
+	local url="$1"
+	feeds="$(curl -s "$url" | grep -Ex '.*type=.*(rss|rdf|atom).*' | sed 's/ //g')"
+	url="$(echo $url | sed 's|^\(https://[^/]*/\).*|\1|')"
+
+	for rsspath in $feeds; do
+		rsspath="$(echo $rsspath | sed -n "s|.*href=['\"]\([^'\"]*\)['\"].*|\1|p")"
+	if echo "$rsspath" | grep "http" > /dev/null; then
+		link="$rsspath"
+	elif echo "$rsspath" | grep -E "^/" > /dev/null; then
+		link="$url$(echo $rsspath | sed 's|^/||')"
+	else
+		link="$url$rsspath"
+	fi
+	echo $link
+	done
+}
+
+getRedditRss() {
+	echo "${1%/}.rss"
+}
+
+getYoutubeRss() {
+	local url="$1"
+	path=$(echo "$url" | sed -e 's|^http[s]*://||')
+	case "$path" in
+		*"/channel/"*) channel_id="$(echo $path | sed -r 's|.*channel/([^/]*).*|\1|')" && feed="https://www.youtube.com/feeds/videos.xml?channel_id=${channel_id}" ;;
+		*"/c/"*|*"/user/"*)
+			feed=$(wget -q "$url" -O tmp_rssget_yt \
+			&& sed -n 's|.*\("rssUrl":"[^"]*\).*|\1|; p' tmp_rssget_yt \
+			| grep rssUrl \
+			| sed 's|"rssUrl":"||') ;;
+	esac
+	echo "$feed"
+}
+
+getVimeoRss() {
+    local url="$1"
+        if echo "$url" | grep -q "/videos$"; then
+            feed_url=$(echo "$url" | sed 's/\/videos$//' | sed 's/\/$/\/rss/')
+        else
+            feed_url="${url}/videos/rss"
+        fi
+    echo "$feed_url"
+}
+
+getGithubRss () {
+	local url="${1%/}"
+	if echo $url | grep -E "github.com/[^/]*/[a-zA-Z0-9].*" >/dev/null ; then
+		echo "${url}/commits.atom"
+		echo "${url}/releases.atom"
+		echo "${url}/tags.atom"
+	elif echo $url | grep -E "github.com/[^/]*(/)" >/dev/null ; then
+		echo "${url}.atom"
+	fi
+}
+
+getGitlabRss () {
+	local url="${1%/}"
+	echo "${url}.atom"
+}
+
+getMediumRss () {
+	echo $1 | sed 's|/tag/|/feed/|'
+}
+
+
+if [ -n "$1" ] ; then
+	url="$1"
+else
+	url="$(xclip -selection clipboard -o)"
+	[ -z "$url" ] && echo "usage: $0 url 'tag1 tag2 tag3'" && exit 1
+fi
+
+declare -a list=()
+
+yt_regex="^(http(s)?://)?((w){3}\.)?(youtube\.com|invidio\.us|invidious\.flokinet\.to|invidious\.materialio\.us|iv\.datura\.network|invidious\.perennialte\.ch|invidious\.fdn\.fr|invidious\.private\.coffee|invidious\.protokolla\.fi|invidious\.privacyredirect\.com|yt\.artemislena\.eu|yt\.drgnz\.club|invidious\.incogniweb\.net|yewtu\.be|inv\.tux\.pizza|invidious\.reallyaweso\.me|iv\.melmac\.space|inv\.us\.projectsegfau\.lt|inv\.nadeko\.net|invidious\.darkness\.services|invidious\.jing\.rocks|invidious\.privacydev\.net|inv\.in\.projectsegfau\.lt|invidious\.drgns\.space)/(channel|user|c).+"
+reddit_regex="^(http(s)?://)?((w){3}\.)?reddit\.com.*"
+vimeo_regex="^(http(s)?://)?((w){3}.)?vimeo\.com.*"
+if echo $url | grep -Ex "$yt_regex" >/dev/null ; then
+	list="$(getYoutubeRss "$url")"
+elif echo $url | grep -Ex "$reddit_regex" >/dev/null ; then
+	list="$(getRedditRss "$url")"
+# vimeo actually works with getlink
+elif echo $url | grep -E "$vimeo_regex" >/dev/null ; then
+	list="$(getVimeoRss "$url")"
+elif echo $url | grep -E "github.com" >/dev/null ; then
+	list="$(getGithubRss "$url")"
+# gitlab also works with getlink
+elif echo $url | grep -E "gitlab.com/[a-zA-Z0-9].*" >/dev/null ; then
+	list="$(getGitlabRss "$url")"
+elif echo $url | grep -E "medium.com/tag" >/dev/null ; then
+	list="$(getMediumRss "$url")"
+else
+	list="$(getlink "$url")"
+fi
+
+[ "$(echo "$list" | wc -l)" -eq 1 ] && chosen_link="$list" || chosen_link=$(printf '%s\n' "${list[@]}" | dmenu -p "Choose a feed:")
+tags="$2"
+ifinstalled rssadd && rssadd "$chosen_link" "$tags"
+echo "$chosen_link" "$tags"
