@@ -1,0 +1,10 @@
+$bibtex_use = 1.5;
+$cleanup_includes_cusdep_generated = 1;
+$cleanup_includes_generated = 1;
+$out_dir = "out";
+$pdf_mode = 5;
+$silent = 1;
+
+# SyncTeX
+push(@generated_exts, ("synctex.*"));
+push(@extra_xelatex_options, '-synctex=1') ;
