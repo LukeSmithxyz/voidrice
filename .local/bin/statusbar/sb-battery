@@ -16,6 +16,9 @@ case $BLOCK_BUTTON in
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
+# Flag file to track if low battery notification has been sent
+NOTIFY_FLAG="/tmp/low_battery_notified"
+
 # Loop through all attached batteries and format the info
 for battery in /sys/class/power_supply/BAT?*; do
 	# If non-first battery, print a space separator.
@@ -34,4 +37,8 @@ for battery in /sys/class/power_supply/BAT?*; do
 	[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
 	# Prints the info
 	printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
+  # Remove the flag file if the status changes from discharging to something else
+  [ "$status" != "🔋" ] && rm -f "$NOTIFY_FLAG"
+  # Send critical notification if battery is low and discharging
+  [ -f "$NOTIFY_FLAG" ] || { [ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && notify-send -u critical "Battery Warning" "🔋❗ Battery is low: $capacity%" && touch "$NOTIFY_FLAG"; }
 done && printf "\\n"
