@@ -33,6 +33,7 @@ case "${ext}" in
 	    pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}" ;;
     org) emacs "${file}" --batch -u "${USER}" -f org-latex-export-to-pdf ;;
     py) python "${file}" ;;
+    rink) rink -f "${file}" ;;
     [rR]md) Rscript -e "rmarkdown::render('${file}', quiet=TRUE)" ;;
     rs) cargo build ;;
     sass) sassc -a "${file}" "${base}.css" ;;
