@@ -20,6 +20,7 @@ case "${ext}" in
     [0-9]) preconv "${file}" | refer -PS -e | groff -mandoc -T pdf > "${base}.pdf" ;;
     mom|ms) preconv "${file}" | refer -PS -e | groff -T pdf -m"${ext}" > "${base}.pdf" ;;
     c) cc "${file}" -o "${base}" && "./${base}" ;;
+    cob) cobc -x -o "$base" "$file" && "$base" ;;
     cpp) g++ "${file}" -o "${base}" && "./${base}" ;;
     cs) mcs "${file}" && mono "${base}.exe" ;;
     go) go run "${file}" ;;
@@ -33,6 +34,7 @@ case "${ext}" in
 	    pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}" ;;
     org) emacs "${file}" --batch -u "${USER}" -f org-latex-export-to-pdf ;;
     py) python "${file}" ;;
+    rink) rink -f "${file}" ;;
     [rR]md) Rscript -e "rmarkdown::render('${file}', quiet=TRUE)" ;;
     rs) cargo build ;;
     sass) sassc -a "${file}" "${base}.css" ;;
