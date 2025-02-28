@@ -93,7 +93,8 @@ cmd delete ${{
 
 cmd moveto ${{
 	set -f
-	dest=$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs" | fzf --prompt 'Move to where? ' | sed 's|~|$HOME|')
+	clear; tput cup $(($(tput lines)/3))
+	dest=$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs" | fzf --layout=reverse --height 40% --prompt 'Move to where? ' | sed 's|~|$HOME|')
 	[ -z "$dest" ] && exit
 	destpath=$(eval printf '%s' \"$dest\")
 	clear; tput cup $(($(tput lines)/3)); tput bold
@@ -110,7 +111,8 @@ cmd moveto ${{
 
 cmd copyto ${{
 	set -f
-	dest=$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs" | fzf --prompt 'Copy to where? ' | sed 's|~|$HOME|')
+	clear; tput cup $(($(tput lines)/3))
+	dest=$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs" | fzf --layout=reverse --height 40% --prompt 'Copy to where? ' | sed 's|~|$HOME|')
 	[ -z "$dest" ] && exit
 	destpath=$(eval printf '%s' \"$dest\")
 	clear; tput cup $(($(tput lines)/3)); tput bold
