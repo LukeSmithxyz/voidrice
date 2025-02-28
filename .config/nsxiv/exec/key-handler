@@ -14,11 +14,11 @@ do
 		mv "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file moved to $destdir." &
 		;;
 	"r")
-		magick -rotate 90 "$file" "$file" ;;
+		magick "$file" -rotate 90 "$file" ;;
 	"R")
-		magick -rotate -90 "$file" "$file" ;;
+		magick "$file" -rotate -90 "$file" ;;
 	"f")
-		magick -flop "$file" "$file" ;;
+		magick "$file" -flop "$file" ;;
 	"y")
 		printf "%s" "$file" | tr -d '\n' | xclip -selection clipboard &&
 		notify-send "$file copied to clipboard" & ;;
