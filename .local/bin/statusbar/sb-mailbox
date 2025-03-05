@@ -4,13 +4,13 @@
 # When clicked, brings up `neomutt`.
 
 case $BLOCK_BUTTON in
-	1) setsid -f "$TERMINAL" -e neomutt ;;
+	1) setsid -w -f "$TERMINAL" -e neomutt; pkill -RTMIN+12 "${STATUSBAR:-dwmblocks}" ;;
 	2) setsid -f mw -Y >/dev/null ;;
 	3) notify-send "📬 Mail module" "\- Shows unread mail
 - Shows 🔃 if syncing mail
 - Left click opens neomutt
 - Middle click syncs mail" ;;
-	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
