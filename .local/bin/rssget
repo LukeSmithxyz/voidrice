@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Searches the website for RSS feeds and adds them to newsboat url list. Can
 # also find hidden RSS feeds on various websites, namely Youtube, Reddit,
