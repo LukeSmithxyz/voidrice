@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/zsh
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -10,13 +10,16 @@
 
 # sudo not required for some system commands
 for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
+	# shellcheck disable=SC2139
 	alias $command="sudo $command"
 done; unset command
 
 se() {
-	s=("${HOME}/.local/bin/"**/*(.))
-	c="$(print -lnr ${s:t:r} | fzf)"
-	[[ "${c}" ]] && "${EDITOR}" ${${(M)s:#*/${c}*}[1]}
+	local -r bindir=~sc/
+	s=("${bindir}"**/*(.))
+	# shellcheck disable=SC2086
+	c="$(print -lnr ${s/$bindir/} | fzf)"
+	[[ "${c}" ]] && "${EDITOR}" "$bindir$c"
 }
 
 # Verbosity and settings that you pretty much just always are going to want.
