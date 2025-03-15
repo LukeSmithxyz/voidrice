@@ -10,12 +10,14 @@
 
 # sudo not required for some system commands
 for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
+	# shellcheck disable=SC2139
 	alias $command="sudo $command"
 done; unset command
 
 se() {
 	local -r bindir=~sc/
 	s=("${bindir}"**/*(.))
+	# shellcheck disable=SC2086
 	c="$(print -lnr ${s/$bindir/} | fzf)"
 	[[ "${c}" ]] && "${EDITOR}" "$bindir$c"
 }
