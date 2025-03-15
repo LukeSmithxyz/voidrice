@@ -14,9 +14,10 @@ for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
 done; unset command
 
 se() {
-	s=("${HOME}/.local/bin/"**/*(.))
-	c="$(print -lnr ${s:t:r} | fzf)"
-	[[ "${c}" ]] && "${EDITOR}" ${${(M)s:#*/${c}*}[1]}
+	local -r bindir=~sc/
+	s=("${bindir}"**/*(.))
+	c="$(print -lnr ${s/$bindir/} | fzf)"
+	[[ "${c}" ]] && "${EDITOR}" "$bindir$c"
 }
 
 # Verbosity and settings that you pretty much just always are going to want.
