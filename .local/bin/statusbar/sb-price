@@ -24,22 +24,27 @@ interval="@14d"	# History contained in chart preceded by '@' (7d = 7 days)
 dir="${XDG_CACHE_HOME:-$HOME/.cache}/crypto-prices"
 pricefile="$dir/$target-$denom"
 chartfile="$dir/$target-$denom-chart"
-filestat="$(stat -c %x "$pricefile" 2>/dev/null)"
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
-updateprice() { curl -sf \
-	--fail-early "${denom}.${url}/1${target}" "${denom}.${url}/${target}${interval}" \
-	--output "$pricefile" --output "$chartfile" ||
-	rm -f "$pricefile" "$chartfile" ;}
+checkprice() {
+	[ "$(stat -c %y "$pricefile" 2>/dev/null |
+		cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ]
+}
 
-[ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] &&
-	updateme="1"
+updateprice() { { grep -q -m1 '^up$' /sys/class/net/w*/operstate || grep -q -m1 '^up$' /sys/class/net/e*/operstate; } &&
+	curl -sf \
+		--fail-early "${denom}.${url}/1${target}" "${denom}.${url}/${target}${interval}" \
+		--output "$pricefile" --output "$chartfile" &&
+		touch "$pricefile" "$chartfile"
+}
+
+checkprice || updateme="1"
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e less -Srf "$chartfile" ;;
 	2) notify-send -u low "$icon Updating..." "Updating $name price..." ; updateme="1" ; showupdate="1" ;;
-	3) uptime="$(date -d "$filestat" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
+	3) uptime="$(date -d "$(stat -c %x "$pricefile" 2>/dev/null)" '+%D at %T' | sed "s|$(date '+%D')|Today|")"
 		notify-send "$icon $name module" "\- <b>Exact price: \$$(cat "$pricefile")</b>
 - Left click for chart of changes.
 - Middle click to update.
@@ -50,9 +55,22 @@ case $BLOCK_BUTTON in
 esac
 
 [ -n "$updateme" ] &&
-	updateprice "$target" &&
-	[ -n "$showupdate" ] &&
-	notify-send "$icon Update complete." "$name price is now
-\$$(cat "$pricefile")"
+	if [ -n "$showupdate" ]; then
+		updateprice && notify-send "$icon Update complete." "$name price is now \$$(cat "$pricefile")"
+	else
+		# shellcheck disable=SC2015
+		[ -n "$4" ] &&
+			( flock -n 9 &&
+				( tries=0; while [ $tries -ne 100 ]; do
+					updateprice && break ||
+						{ tries=$((tries+1)); sleep .1; }
+				done
+				! checkprice &&
+					until updateprice; do sleep 60; done
+				pkill -RTMIN+"$4" "${STATUSBAR:-dwmblocks}"
+				) &
+			echo; exit ) 9>"${XDG_RUNTIME_DIR}/sb-price.lock" ||
+				updateprice
+	fi
 
 [ -f "$pricefile" ] && printf "%s%s%0.2f" "$icon" "$symb" "$(cat "$pricefile")"
