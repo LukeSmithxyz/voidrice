@@ -272,23 +272,17 @@ cmp.setup({
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 
-local diagnostics_auto_enabled = true
-local diagnostics_autocmd_id = nil
-
 vim.diagnostic.config({
 	virtual_text = false, -- Disable virtual text to avoid clutter
 	signs = true, -- Show signs in the gutter
 	underline = true, -- Underline errors
 	update_in_insert = false, -- Don’t update diagnostics in insert mode
-	float = {
-		border = "rounded", -- Optional: nicer border for hover window
-		source = "always", -- Show error source
-		header = "",
-		prefix = "",
-	},
 })
--- Keybinding to toggle diagnostic auto-display
-vim.keymap.set('n', '<leader>e', toggle_diagnostics_auto, { desc = "Toggle diagnostic auto-display" })
 
--- Optional: Manual trigger to show diagnostics immediately
-vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
+-- Automatically show diagnostics on hover
+vim.o.updatetime = 250 -- Adjust delay for hover (in milliseconds)
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, { focusable = false })
+	end,
+})
