@@ -7,4 +7,4 @@ bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
-bind ,<Space> nohlsearch
+bind --mode=normal <Escape> composite mode normal ; hidecmdline ; nohlsearch
