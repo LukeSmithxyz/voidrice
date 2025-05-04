@@ -5,10 +5,25 @@
 #
 # https://www.maketecheasier.com/ip-address-geolocation-lookups-linux/
 
-set -e
+ifinstalled "geoip" || exit 1
 
-ifinstalled "geoip"
-addr="$(geoiplookup "$(curl -sfm 1 ifconfig.me 2>/dev/null)")"
+getip() {
+	{ grep -q -m1 '^up$' /sys/class/net/w*/operstate || grep -q -m1 '^up$' /sys/class/net/e*/operstate; } &&
+		curl -sf api.ipify.org --output "$ipfile"
+}
+
+ipfile="$XDG_RUNTIME_DIR/iplocate"
+addr=$(cat "$ipfile" 2>/dev/null) && addr=$(geoiplookup "$addr" 2>/dev/null) && rm "$ipfile" ||
+	( flock -n 9 &&
+		( tries=0; while [ $tries -ne 100 ]; do
+			getip && break ||
+				{ tries=$((tries+1)); sleep .1; }
+		done
+		! [ -f "$ipfile" ] &&
+			until getip; do sleep 60; done &&
+		pkill -RTMIN+"${1:-27}" "${STATUSBAR:-dwmblocks}"
+		) &
+	echo; exit ) 9>"${XDG_RUNTIME_DIR}/sb-iplocate.lock"
 name="${addr##*, }"
 flag="$(grep "flag: $name" "${XDG_DATA_HOME:-$HOME/.local/share}/larbs/emoji")"
 flag="${flag%% *}"
