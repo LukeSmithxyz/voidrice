@@ -40,16 +40,22 @@
 😑 expressionless face
 😶 face without mouth
 🫥 dotted line face
+😶‍🌫️ face in clouds
 😏 smirking face
 😒 unamused face
 🙄 face with rolling eyes
 😬 grimacing face
+😮‍💨 face exhaling
 🤥 lying face
+🫨 shaking face
+🙂‍↔️ head shaking horizontally
+🙂‍↕️ head shaking vertically
 😌 relieved face
 😔 pensive face
 😪 sleepy face
 🤤 drooling face
 😴 sleeping face
+🫩 face with bags under eyes
 😷 face with medical mask
 🤒 face with thermometer
 🤕 face with head-bandage
@@ -60,6 +66,7 @@
 🥶 cold face
 🥴 woozy face
 😵 face with crossed-out eyes
+😵‍💫 face with spiral eyes
 🤯 exploding head
 🤠 cowboy hat face
 🥳 partying face
@@ -76,6 +83,7 @@
 😯 hushed face
 😲 astonished face
 😳 flushed face
+🫪 distorted face
 🥺 pleading face
 🥹 face holding back tears
 😦 frowning face with open mouth
@@ -94,7 +102,7 @@
 😫 tired face
 🥱 yawning face
 😤 face with steam from nose
-😡 pouting face
+😡 enraged face
 😠 angry face
 🤬 face with symbols on mouth
 😈 smiling face with horns
@@ -121,7 +129,6 @@
 🙈 see-no-evil monkey
 🙉 hear-no-evil monkey
 🙊 speak-no-evil monkey
-💋 kiss mark
 💌 love letter
 💘 heart with arrow
 💝 heart with ribbon
@@ -133,28 +140,35 @@
 💟 heart decoration
 ❣️ heart exclamation
 💔 broken heart
+❤️‍🔥 heart on fire
+❤️‍🩹 mending heart
 ❤️ red heart
+🩷 pink heart
 🧡 orange heart
 💛 yellow heart
 💚 green heart
 💙 blue heart
+🩵 light blue heart
 💜 purple heart
 🤎 brown heart
 🖤 black heart
+🩶 grey heart
 🤍 white heart
+💋 kiss mark
 💯 hundred points
 💢 anger symbol
+🫯 fight cloud
 💥 collision
 💫 dizzy
 💦 sweat droplets
 💨 dashing away
 🕳️ hole
-💣 bomb
 💬 speech balloon
+👁️‍🗨️ eye in speech bubble
 🗨️ left speech bubble
 🗯️ right anger bubble
 💭 thought balloon
-💤 zzz
+💤 ZZZ
 👋 waving hand
 🤚 raised back of hand
 🖐️ hand with fingers splayed
@@ -164,6 +178,8 @@
 🫲 leftwards hand
 🫳 palm down hand
 🫴 palm up hand
+🫷 leftwards pushing hand
+🫸 rightwards pushing hand
 👌 OK hand
 🤌 pinched fingers
 🤏 pinching hand
@@ -222,93 +238,325 @@
 👱 person: blond hair
 👨 man
 🧔 person: beard
+🧔‍♂️ man: beard
+🧔‍♀️ woman: beard
+👨‍🦰 man: red hair
+👨‍🦱 man: curly hair
+👨‍🦳 man: white hair
+👨‍🦲 man: bald
 👩 woman
+👩‍🦰 woman: red hair
+🧑‍🦰 person: red hair
+👩‍🦱 woman: curly hair
+🧑‍🦱 person: curly hair
+👩‍🦳 woman: white hair
+🧑‍🦳 person: white hair
+👩‍🦲 woman: bald
+🧑‍🦲 person: bald
+👱‍♀️ woman: blond hair
+👱‍♂️ man: blond hair
 🧓 older person
 👴 old man
 👵 old woman
 🙍 person frowning
+🙍‍♂️ man frowning
+🙍‍♀️ woman frowning
 🙎 person pouting
+🙎‍♂️ man pouting
+🙎‍♀️ woman pouting
 🙅 person gesturing NO
+🙅‍♂️ man gesturing NO
+🙅‍♀️ woman gesturing NO
 🙆 person gesturing OK
+🙆‍♂️ man gesturing OK
+🙆‍♀️ woman gesturing OK
 💁 person tipping hand
+💁‍♂️ man tipping hand
+💁‍♀️ woman tipping hand
 🙋 person raising hand
+🙋‍♂️ man raising hand
+🙋‍♀️ woman raising hand
 🧏 deaf person
+🧏‍♂️ deaf man
+🧏‍♀️ deaf woman
 🙇 person bowing
+🙇‍♂️ man bowing
+🙇‍♀️ woman bowing
 🤦 person facepalming
+🤦‍♂️ man facepalming
+🤦‍♀️ woman facepalming
 🤷 person shrugging
+🤷‍♂️ man shrugging
+🤷‍♀️ woman shrugging
+🧑‍⚕️ health worker
+👨‍⚕️ man health worker
+👩‍⚕️ woman health worker
+🧑‍🎓 student
+👨‍🎓 man student
+👩‍🎓 woman student
+🧑‍🏫 teacher
+👨‍🏫 man teacher
+👩‍🏫 woman teacher
+🧑‍⚖️ judge
+👨‍⚖️ man judge
+👩‍⚖️ woman judge
+🧑‍🌾 farmer
+👨‍🌾 man farmer
+👩‍🌾 woman farmer
+🧑‍🍳 cook
+👨‍🍳 man cook
+👩‍🍳 woman cook
+🧑‍🔧 mechanic
+👨‍🔧 man mechanic
+👩‍🔧 woman mechanic
+🧑‍🏭 factory worker
+👨‍🏭 man factory worker
+👩‍🏭 woman factory worker
+🧑‍💼 office worker
+👨‍💼 man office worker
+👩‍💼 woman office worker
+🧑‍🔬 scientist
+👨‍🔬 man scientist
+👩‍🔬 woman scientist
+🧑‍💻 technologist
+👨‍💻 man technologist
+👩‍💻 woman technologist
+🧑‍🎤 singer
+👨‍🎤 man singer
+👩‍🎤 woman singer
+🧑‍🎨 artist
+👨‍🎨 man artist
+👩‍🎨 woman artist
+🧑‍✈️ pilot
+👨‍✈️ man pilot
+👩‍✈️ woman pilot
+🧑‍🚀 astronaut
+👨‍🚀 man astronaut
+👩‍🚀 woman astronaut
+🧑‍🚒 firefighter
+👨‍🚒 man firefighter
+👩‍🚒 woman firefighter
 👮 police officer
+👮‍♂️ man police officer
+👮‍♀️ woman police officer
 🕵️ detective
+🕵️‍♂️ man detective
+🕵️‍♀️ woman detective
 💂 guard
+💂‍♂️ man guard
+💂‍♀️ woman guard
 🥷 ninja
 👷 construction worker
+👷‍♂️ man construction worker
+👷‍♀️ woman construction worker
 🫅 person with crown
 🤴 prince
 👸 princess
 👳 person wearing turban
+👳‍♂️ man wearing turban
+👳‍♀️ woman wearing turban
 👲 person with skullcap
 🧕 woman with headscarf
 🤵 person in tuxedo
+🤵‍♂️ man in tuxedo
+🤵‍♀️ woman in tuxedo
 👰 person with veil
+👰‍♂️ man with veil
+👰‍♀️ woman with veil
 🤰 pregnant woman
 🫃 pregnant man
 🫄 pregnant person
 🤱 breast-feeding
+👩‍🍼 woman feeding baby
+👨‍🍼 man feeding baby
+🧑‍🍼 person feeding baby
 👼 baby angel
 🎅 Santa Claus
 🤶 Mrs. Claus
+🧑‍🎄 Mx Claus
 🦸 superhero
+🦸‍♂️ man superhero
+🦸‍♀️ woman superhero
 🦹 supervillain
+🦹‍♂️ man supervillain
+🦹‍♀️ woman supervillain
 🧙 mage
+🧙‍♂️ man mage
+🧙‍♀️ woman mage
 🧚 fairy
+🧚‍♂️ man fairy
+🧚‍♀️ woman fairy
 🧛 vampire
+🧛‍♂️ man vampire
+🧛‍♀️ woman vampire
 🧜 merperson
+🧜‍♂️ merman
+🧜‍♀️ mermaid
 🧝 elf
+🧝‍♂️ man elf
+🧝‍♀️ woman elf
 🧞 genie
+🧞‍♂️ man genie
+🧞‍♀️ woman genie
 🧟 zombie
+🧟‍♂️ man zombie
+🧟‍♀️ woman zombie
 🧌 troll
+🫈 hairy creature
 💆 person getting massage
+💆‍♂️ man getting massage
+💆‍♀️ woman getting massage
 💇 person getting haircut
+💇‍♂️ man getting haircut
+💇‍♀️ woman getting haircut
 🚶 person walking
+🚶‍♂️ man walking
+🚶‍♀️ woman walking
+🚶‍➡️ person walking facing right
+🚶‍♀️‍➡️ woman walking facing right
+🚶‍♂️‍➡️ man walking facing right
 🧍 person standing
+🧍‍♂️ man standing
+🧍‍♀️ woman standing
 🧎 person kneeling
+🧎‍♂️ man kneeling
+🧎‍♀️ woman kneeling
+🧎‍➡️ person kneeling facing right
+🧎‍♀️‍➡️ woman kneeling facing right
+🧎‍♂️‍➡️ man kneeling facing right
+🧑‍🦯 person with white cane
+🧑‍🦯‍➡️ person with white cane facing right
+👨‍🦯 man with white cane
+👨‍🦯‍➡️ man with white cane facing right
+👩‍🦯 woman with white cane
+👩‍🦯‍➡️ woman with white cane facing right
+🧑‍🦼 person in motorized wheelchair
+🧑‍🦼‍➡️ person in motorized wheelchair facing right
+👨‍🦼 man in motorized wheelchair
+👨‍🦼‍➡️ man in motorized wheelchair facing right
+👩‍🦼 woman in motorized wheelchair
+👩‍🦼‍➡️ woman in motorized wheelchair facing right
+🧑‍🦽 person in manual wheelchair
+🧑‍🦽‍➡️ person in manual wheelchair facing right
+👨‍🦽 man in manual wheelchair
+👨‍🦽‍➡️ man in manual wheelchair facing right
+👩‍🦽 woman in manual wheelchair
+👩‍🦽‍➡️ woman in manual wheelchair facing right
 🏃 person running
+🏃‍♂️ man running
+🏃‍♀️ woman running
+🏃‍➡️ person running facing right
+🏃‍♀️‍➡️ woman running facing right
+🏃‍♂️‍➡️ man running facing right
+🧑‍🩰 ballet dancer
 💃 woman dancing
 🕺 man dancing
 🕴️ person in suit levitating
 👯 people with bunny ears
+👯‍♂️ men with bunny ears
+👯‍♀️ women with bunny ears
 🧖 person in steamy room
+🧖‍♂️ man in steamy room
+🧖‍♀️ woman in steamy room
 🧗 person climbing
+🧗‍♂️ man climbing
+🧗‍♀️ woman climbing
 🤺 person fencing
 🏇 horse racing
 ⛷️ skier
 🏂 snowboarder
 🏌️ person golfing
+🏌️‍♂️ man golfing
+🏌️‍♀️ woman golfing
 🏄 person surfing
+🏄‍♂️ man surfing
+🏄‍♀️ woman surfing
 🚣 person rowing boat
+🚣‍♂️ man rowing boat
+🚣‍♀️ woman rowing boat
 🏊 person swimming
+🏊‍♂️ man swimming
+🏊‍♀️ woman swimming
 ⛹️ person bouncing ball
+⛹️‍♂️ man bouncing ball
+⛹️‍♀️ woman bouncing ball
 🏋️ person lifting weights
+🏋️‍♂️ man lifting weights
+🏋️‍♀️ woman lifting weights
 🚴 person biking
+🚴‍♂️ man biking
+🚴‍♀️ woman biking
 🚵 person mountain biking
+🚵‍♂️ man mountain biking
+🚵‍♀️ woman mountain biking
 🤸 person cartwheeling
+🤸‍♂️ man cartwheeling
+🤸‍♀️ woman cartwheeling
 🤼 people wrestling
+🤼‍♂️ men wrestling
+🤼‍♀️ women wrestling
 🤽 person playing water polo
+🤽‍♂️ man playing water polo
+🤽‍♀️ woman playing water polo
 🤾 person playing handball
+🤾‍♂️ man playing handball
+🤾‍♀️ woman playing handball
 🤹 person juggling
+🤹‍♂️ man juggling
+🤹‍♀️ woman juggling
 🧘 person in lotus position
+🧘‍♂️ man in lotus position
+🧘‍♀️ woman in lotus position
 🛀 person taking bath
 🛌 person in bed
+🧑‍🤝‍🧑 people holding hands
 👭 women holding hands
 👫 woman and man holding hands
 👬 men holding hands
 💏 kiss
+👩‍❤️‍💋‍👨 kiss: woman, man
+👨‍❤️‍💋‍👨 kiss: man, man
+👩‍❤️‍💋‍👩 kiss: woman, woman
 💑 couple with heart
-👪 family
+👩‍❤️‍👨 couple with heart: woman, man
+👨‍❤️‍👨 couple with heart: man, man
+👩‍❤️‍👩 couple with heart: woman, woman
+👨‍👩‍👦 family: man, woman, boy
+👨‍👩‍👧 family: man, woman, girl
+👨‍👩‍👧‍👦 family: man, woman, girl, boy
+👨‍👩‍👦‍👦 family: man, woman, boy, boy
+👨‍👩‍👧‍👧 family: man, woman, girl, girl
+👨‍👨‍👦 family: man, man, boy
+👨‍👨‍👧 family: man, man, girl
+👨‍👨‍👧‍👦 family: man, man, girl, boy
+👨‍👨‍👦‍👦 family: man, man, boy, boy
+👨‍👨‍👧‍👧 family: man, man, girl, girl
+👩‍👩‍👦 family: woman, woman, boy
+👩‍👩‍👧 family: woman, woman, girl
+👩‍👩‍👧‍👦 family: woman, woman, girl, boy
+👩‍👩‍👦‍👦 family: woman, woman, boy, boy
+👩‍👩‍👧‍👧 family: woman, woman, girl, girl
+👨‍👦 family: man, boy
+👨‍👦‍👦 family: man, boy, boy
+👨‍👧 family: man, girl
+👨‍👧‍👦 family: man, girl, boy
+👨‍👧‍👧 family: man, girl, girl
+👩‍👦 family: woman, boy
+👩‍👦‍👦 family: woman, boy, boy
+👩‍👧 family: woman, girl
+👩‍👧‍👦 family: woman, girl, boy
+👩‍👧‍👧 family: woman, girl, girl
 🗣️ speaking head
 👤 bust in silhouette
 👥 busts in silhouette
 🫂 people hugging
+👪 family
+🧑‍🧑‍🧒 family: adult, adult, child
+🧑‍🧑‍🧒‍🧒 family: adult, adult, child, child
+🧑‍🧒 family: adult, child
+🧑‍🧒‍🧒 family: adult, child, child
 👣 footprints
+🫆 fingerprint
 🐵 monkey face
 🐒 monkey
 🦍 gorilla
@@ -316,17 +564,21 @@
 🐶 dog face
 🐕 dog
 🦮 guide dog
+🐕‍🦺 service dog
 🐩 poodle
 🐺 wolf
 🦊 fox
 🦝 raccoon
 🐱 cat face
 🐈 cat
+🐈‍⬛ black cat
 🦁 lion
 🐯 tiger face
 🐅 tiger
 🐆 leopard
 🐴 horse face
+🫎 moose
+🫏 donkey
 🐎 horse
 🦄 unicorn
 🦓 zebra
@@ -362,6 +614,7 @@
 🦔 hedgehog
 🦇 bat
 🐻 bear
+🐻‍❄️ polar bear
 🐨 koala
 🐼 panda
 🦥 sloth
@@ -388,6 +641,10 @@
 🦩 flamingo
 🦚 peacock
 🦜 parrot
+🪽 wing
+🐦‍⬛ black bird
+🪿 goose
+🐦‍🔥 phoenix
 🐸 frog
 🐊 crocodile
 🐢 turtle
@@ -400,6 +657,7 @@
 🐳 spouting whale
 🐋 whale
 🐬 dolphin
+🫍 orca
 🦭 seal
 🐟 fish
 🐠 tropical fish
@@ -408,6 +666,12 @@
 🐙 octopus
 🐚 spiral shell
 🪸 coral
+🪼 jellyfish
+🦀 crab
+🦞 lobster
+🦐 shrimp
+🦑 squid
+🦪 oyster
 🐌 snail
 🦋 butterfly
 🐛 bug
@@ -435,6 +699,7 @@
 🌻 sunflower
 🌼 blossom
 🌷 tulip
+🪻 hyacinth
 🌱 seedling
 🪴 potted plant
 🌲 evergreen tree
@@ -450,11 +715,14 @@
 🍃 leaf fluttering in wind
 🪹 empty nest
 🪺 nest with eggs
+🍄 mushroom
+🪾 leafless tree
 🍇 grapes
 🍈 melon
 🍉 watermelon
 🍊 tangerine
 🍋 lemon
+🍋‍🟩 lime
 🍌 banana
 🍍 pineapple
 🥭 mango
@@ -481,10 +749,13 @@
 🥦 broccoli
 🧄 garlic
 🧅 onion
-🍄 mushroom
 🥜 peanuts
 🫘 beans
 🌰 chestnut
+🫚 ginger root
+🫛 pea pod
+🍄‍🟫 brown mushroom
+🫜 root vegetable
 🍞 bread
 🥐 croissant
 🥖 baguette bread
@@ -536,11 +807,6 @@
 🥟 dumpling
 🥠 fortune cookie
 🥡 takeout box
-🦀 crab
-🦞 lobster
-🦐 shrimp
-🦑 squid
-🦪 oyster
 🍦 soft ice cream
 🍧 shaved ice
 🍨 ice cream
@@ -591,6 +857,7 @@
 🧭 compass
 🏔️ snow-capped mountain
 ⛰️ mountain
+🛘 landslide
 🌋 volcano
 🗻 mount fuji
 🏕️ camping
@@ -857,11 +1124,10 @@
 🎯 bullseye
 🪀 yo-yo
 🪁 kite
+🔫 water pistol
 🎱 pool 8 ball
 🔮 crystal ball
 🪄 magic wand
-🧿 nazar amulet
-🪬 hamsa
 🎮 video game
 🕹️ joystick
 🎰 slot machine
@@ -906,6 +1172,7 @@
 🩳 shorts
 👙 bikini
 👚 woman’s clothes
+🪭 folding hand fan
 👛 purse
 👜 handbag
 👝 clutch bag
@@ -920,6 +1187,7 @@
 👡 woman’s sandal
 🩰 ballet shoes
 👢 woman’s boot
+🪮 hair pick
 👑 crown
 👒 woman’s hat
 🎩 top hat
@@ -950,14 +1218,18 @@
 🎧 headphone
 📻 radio
 🎷 saxophone
+🎺 trumpet
+🪊 trombone
 🪗 accordion
 🎸 guitar
 🎹 musical keyboard
-🎺 trumpet
 🎻 violin
 🪕 banjo
 🥁 drum
 🪘 long drum
+🪇 maracas
+🪈 flute
+🪉 harp
 📱 mobile phone
 📲 mobile phone with arrow
 ☎️ telephone
@@ -1011,8 +1283,9 @@
 📑 bookmark tabs
 🔖 bookmark
 🏷️ label
-💰 money bag
 🪙 coin
+💰 money bag
+🪎 treasure chest
 💴 yen banknote
 💵 dollar banknote
 💶 euro banknote
@@ -1077,7 +1350,7 @@
 🛠️ hammer and wrench
 🗡️ dagger
 ⚔️ crossed swords
-🔫 water pistol
+💣 bomb
 🪃 boomerang
 🏹 bow and arrow
 🛡️ shield
@@ -1090,11 +1363,13 @@
 ⚖️ balance scale
 🦯 white cane
 🔗 link
+⛓️‍💥 broken chain
 ⛓️ chains
 🪝 hook
 🧰 toolbox
 🧲 magnet
 🪜 ladder
+🪏 shovel
 ⚗️ alembic
 🧪 test tube
 🧫 petri dish
@@ -1138,6 +1413,8 @@
 ⚰️ coffin
 🪦 headstone
 ⚱️ funeral urn
+🧿 nazar amulet
+🪬 hamsa
 🗿 moai
 🪧 placard
 🪪 identification card
@@ -1200,6 +1477,7 @@
 ☮️ peace symbol
 🕎 menorah
 🔯 dotted six-pointed star
+🪯 khanda
 ♈ Aries
 ♉ Taurus
 ♊ Gemini
@@ -1235,6 +1513,7 @@
 🔅 dim button
 🔆 bright button
 📶 antenna bars
+🛜 wireless
 📳 vibration mode
 📴 mobile phone off
 ♀️ female sign
@@ -1276,6 +1555,7 @@
 ©️ copyright
 ®️ registered
 ™️ trade mark
+🫟 splatter
 #️⃣ keycap: #
 *️⃣ keycap: *
 0️⃣ keycap: 0
@@ -1367,6 +1647,9 @@
 🎌 crossed flags
 🏴 black flag
 🏳️ white flag
+🏳️‍🌈 rainbow flag
+🏳️‍⚧️ transgender flag
+🏴‍☠️ pirate flag
 🇦🇨 flag: Ascension Island
 🇦🇩 flag: Andorra
 🇦🇪 flag: United Arab Emirates
@@ -1418,6 +1701,7 @@
 🇨🇳 flag: China
 🇨🇴 flag: Colombia
 🇨🇵 flag: Clipperton Island
+🇨🇶 flag: Sark
 🇨🇷 flag: Costa Rica
 🇨🇺 flag: Cuba
 🇨🇻 flag: Cape Verde
