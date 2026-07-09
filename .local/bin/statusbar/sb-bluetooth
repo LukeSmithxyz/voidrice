@@ -3,12 +3,12 @@
 # now for the case statment 
 case $BLOCK_BUTTON in
     1) setsid -f "$TERMINAL" -e bluetui ;;
-    2) toggle_bt; pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}" ;;
+    2) bluetoothctl power toggle; pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}" ;;
     3) notify-send " Bluetooth module" "Shows bluetooth status:
-BT: bluetooth enabled
-BT: bluetooth disabled
-- left click to open bluetui
-- middle click to toggle bluetooth on/off" ;;
+🔵BT: Bluetooth enabled
+⚫BT: Bluetooth disabled
+- Left click to open bluetui
+- Middle click to toggle bluetooth on/off" ;;
     6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
@@ -20,8 +20,8 @@ esac
 
 # found old commit for sb-bluetooth nd in there reccomended use timeout
 
-if timeout 0.1s bluetoothctl show | grep -q "Powered: yes"; then
-    echo "BT"
+if timeout 0.5s bluetoothctl show | grep -q "Powered: yes"; then
+    echo "🔵BT"
 else
-    echo "BT off"
+    echo "⚫BT"
 fi
