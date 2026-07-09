@@ -2,3 +2,9 @@
 
 # Shows bluetooth status and helper actions.
 
+# need way to check if bt is on/off
+# will dep on bluetoothctl
+
+if bluetoothctl show | grep -q "Powered: yes"; then
+    echo "BT"
+fi
