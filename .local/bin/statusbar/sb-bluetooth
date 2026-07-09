@@ -1,10 +1,22 @@
 #!/bin/sh
 
+# now for the case statment 
+case $BLOCK_BUTTON in
+    1) setsid -f "$TERMINAL" -e bluetui ;;
+
+    6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
 # Shows bluetooth status and helper actions.
 
 # need way to check if bt is on/off
 # will dep on bluetoothctl
+# also gotta think of a good icon
 
-if bluetoothctl show | grep -q "Powered: yes"; then
+# found old commit for sb-bluetooth nd in there reccomended use timeout
+
+if timeout 0.1s bluetoothctl show | grep -q "Powered: yes"; then
     echo "BT"
+else
+    echo "BT off"
 fi
