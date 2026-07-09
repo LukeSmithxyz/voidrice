@@ -3,7 +3,7 @@
 # now for the case statment 
 case $BLOCK_BUTTON in
     1) setsid -f "$TERMINAL" -e bluetui ;;
-
+    2) toggle_bt; pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}" ;;
     6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
