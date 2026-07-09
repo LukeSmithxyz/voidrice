@@ -4,6 +4,11 @@
 case $BLOCK_BUTTON in
     1) setsid -f "$TERMINAL" -e bluetui ;;
     2) toggle_bt; pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}" ;;
+    3) notify-send " Bluetooth module" "Shows bluetooth status:
+BT: bluetooth enabled
+BT: bluetooth disabled
+- left click to open bluetui
+- middle click to toggle bluetooth on/off" ;;
     6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
