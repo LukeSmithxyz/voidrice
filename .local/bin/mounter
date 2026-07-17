@@ -83,7 +83,7 @@ case "$chosen" in
 		attemptmount || getmount
 		case "${parttype##* }" in
 			vfat) sudo -A mount -t vfat "$chosen" "$mp" -o rw,umask=0000 ;;
-			btrfs) sudo -A mount "$chosen" "$mp" ;;
+			ext4|btrfs) sudo -A mount "$chosen" "$mp" ;;
 			*) sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)" ;;
 		esac
 		notify-send "💾Drive Mounted." "$chosen mounted to $mp."
@@ -94,17 +94,22 @@ case "$chosen" in
 		chosen="${chosen:1}"	# This is a bashism.
 		# Number the drive.
 		while true; do
-			[ -f "/dev/mapper/usb$num" ] || break
+			[ -e "/dev/mapper/usb$num" ] || break
 			num="$(printf "%02d" "$((num +1))")"
 		done
 
 		# Decrypt in a terminal window
 		${TERMINAL:-st} -n floatterm -g 60x1 -e sudo cryptsetup open "$chosen" "usb$num"
+
 		# Check if now decrypted.
 		test -b "/dev/mapper/usb$num"
 
 		attemptmount || getmount
-		sudo -A mount "/dev/mapper/usb$num" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+		case "$(lsblk -no FSTYPE "/dev/mapper/usb$num")" in
+			vfat) sudo -A mount -t vfat "/dev/mapper/usb$num" "$mp" -o rw,umask=0000 ;;
+			ext4|btrfs) sudo -A mount "/dev/mapper/usb$num" "$mp" ;;
+			*) sudo -A mount "/dev/mapper/usb$num" "$mp" -o uid="$(id -u)",gid="$(id -g)" ;;
+		esac
 		notify-send "🔓Decrypted drive Mounted." "$chosen decrypted and mounted to $mp."
 		;;
 
