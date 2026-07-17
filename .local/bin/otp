@@ -13,15 +13,15 @@ ifinstalled pass pass-otp || exit 1
 
 dir="${PASSWORD_STORE_DIR}"
 
-choice="$({ echo "🆕add" ; echo "🕙sync-time" ; ls "$dir"/*-otp.gpg ;} | sed "s/.*\///;s/-otp.gpg//" | dmenu -p "Pick a 2FA:")"
+choice="$({ echo "🆕add" ; echo "🕙sync-time" ; find "$dir" -type f -iname '*-otp.gpg' ;} | sed "s/.*\///;s/-otp.gpg//" | dmenu -p "Pick a 2FA:")"
 
 case $choice in
 	🆕add )
-		ifinstalled maim zbar || exit 1
+		ifinstalled maim zbar xclip || exit 1
 
 		temp=$(mktemp -p "$XDG_RUNTIME_DIR" --suffix=.png)
 		otp="otp-test-script"
-		trap 'rm -f $temp; pass rm -f $otp' HUP INT QUIT TERM PWR EXIT
+		trap 'shred -fu $temp; pass rm -f $otp' HUP INT QUIT TERM PWR EXIT
 
 		notify-send "Scan the image." "Scan the OTP QR code."
 
