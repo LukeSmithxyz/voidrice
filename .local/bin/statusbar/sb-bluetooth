@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Shows bluetooth status and helper actions.
+# Requires bluetoothctl and bluetui
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e bluetui ;;
+	2) bluetoothctl power "$(timeout 1s bluetoothctl show | grep -q "Powered: yes" && echo off || echo on)" &&
+		pkill -RTMIN+20 "${STATUSBAR:-dwmblocks}"
+		;;
+	3) notify-send "Bluetooth module" "Shows bluetooth status:
+🔵BT: Bluetooth enabled
+⚫BT: Bluetooth disabled
+- Left click to open bluetui
+- Middle click to toggle bluetooth on/off" ;;
+	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+if timeout 0.5s bluetoothctl show | grep -q "Powered: yes"; then
+	echo "🔵BT"
+else
+	echo "⚫BT"
+fi
