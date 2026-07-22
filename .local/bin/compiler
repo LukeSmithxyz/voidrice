@@ -24,11 +24,11 @@ case "${ext}" in
     h) sudo make install ;;
     java) javac -d classes "${file}" && java -cp classes "${base}" ;;
     m) octave "${file}" ;;
-    md) [ -x "$(command -v lowdown)" ] && \
-	    lowdown --parse-no-intraemph "${file}" -Tms | groff -mpdfmark -ms -kept -T pdf > "${base}.pdf" || \
-	    [ -x "$(command -v groffdown)" ] && \
-	    groffdown -i "${file}" | groff -T pdf > "${base}.pdf" || \
-	    pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}" ;;
+    md) { command -v lowdown &&
+	    lowdown --parse-no-intraemph "${file}" -Tms | groff -ms -kept -T pdf >"${base}.pdf" ;} ||
+	{ command -v groffdown &&
+	    groffdown -i "${file}" | groff -T pdf >"${base}.pdf" ;} ||
+	pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}" ;;
     org) emacs "${file}" --batch -u "${USER}" -f org-latex-export-to-pdf ;;
     py) python "${file}" ;;
     rink) rink -f "${file}" ;;
