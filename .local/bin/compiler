@@ -28,7 +28,7 @@ case "${ext}" in
 	    lowdown --parse-no-intraemph "${file}" -Tms | groff -ms -kept -T pdf >"${base}.pdf" ;} ||
 	{ command -v groffdown &&
 	    groffdown -i "${file}" | groff -T pdf >"${base}.pdf" ;} ||
-	pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}" ;;
+	pandoc -t ms --highlight-style="kate" -s "${file}" | groff -ms -kept -T pdf >"${base}.pdf" ;;
     org) emacs "${file}" --batch -u "${USER}" -f org-latex-export-to-pdf ;;
     py) python "${file}" ;;
     rink) rink -f "${file}" ;;
