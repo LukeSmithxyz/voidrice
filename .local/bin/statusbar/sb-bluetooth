@@ -16,8 +16,4 @@ case $BLOCK_BUTTON in
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-if timeout 0.5s bluetoothctl show | grep -q "Powered: yes"; then
-	echo "🔵BT"
-else
-	echo "⚫BT"
-fi
+timeout 0.5s bluetoothctl show | grep -q "Powered: yes" && echo "🔵BT" || echo "⚫BT"
