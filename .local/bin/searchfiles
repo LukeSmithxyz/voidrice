@@ -1,0 +1,17 @@
+#!/bin/dash
+p() { printf "%s\n" "${@}"; }
+d() { dmenu -l "15" -p "${1}"; }
+f() {
+        r="$(locate -b -e --regex -d "${XDG_CONFIG_HOME}/.p.db" "(${1})$")"
+        o="$(p "${r}" | sed 's|.*/||; s/\.[^.]*$//' | d "${c}")"
+        [ "${o}" ] && ${2} "$(p "${r}" | grep -Fm "1" "/${o}.")"
+}
+c="$(p "Doc" "Image" "Music" "Office" "Video" | d "Categories")"
+case "${c}" in
+        "Doc") f "cb.|djvu|epup|mobi|p(df|s)" "zathura --mode fullscreen" ;;
+        "Image") f "j(pe?g|xl)|png|webp" "nsxiv -bfq" ;;
+        "Music") f "flac|m(p3|4a)|o(gg|pus)|wav" "mpv" ;;
+        "Office") f "(doc|ppt|xls)x?|od(p|s)" "libreoffice" ;;
+        "Video") f "avi|flv|gif|m(2ts|p4)|m(4|o|k)v|w(ebm|mv)" "mpv" ;;
+        *) exit ;;
+esac
