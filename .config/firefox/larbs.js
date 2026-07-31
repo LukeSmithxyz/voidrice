@@ -25,9 +25,6 @@ user_pref("network.cookie.lifetimePolicy", 0);
 // Disable push notifications:
 user_pref("dom.push.enabled", false);
 
-// Disable the pocket antifeature:
-user_pref("extensions.pocket.enabled", false);
-
 // Don't autodelete cookies on shutdown:
 user_pref("privacy.clearOnShutdown.cookies", false);
 
