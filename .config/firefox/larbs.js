@@ -34,8 +34,5 @@ user_pref("privacy.clearOnShutdown.cookies", false);
 // Enable custom userChrome.js:
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
-// Disable Firefox sync and its menu entries
-user_pref("identity.fxaccounts.enabled", false);
-
 // Fix the issue where right mouse button instantly clicks
 user_pref("ui.context_menus.after_mouseup", true);
