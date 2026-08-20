@@ -22,8 +22,6 @@ user_pref("dom.security.https_only_mode", false);
 // Keep cookies until expiration or user deletion:
 user_pref("network.cookie.lifetimePolicy", 0);
 
-user_pref("dom.webnotifications.serviceworker.enabled", false);
-
 // Disable push notifications:
 user_pref("dom.push.enabled", false);
 
