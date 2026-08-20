@@ -22,8 +22,6 @@ user_pref("dom.security.https_only_mode", false);
 // Keep cookies until expiration or user deletion:
 user_pref("network.cookie.lifetimePolicy", 0);
 
-user_pref("dom.webnotifications.serviceworker.enabled", false);
-
 // Disable push notifications:
 user_pref("dom.push.enabled", false);
 
@@ -35,9 +33,6 @@ user_pref("privacy.clearOnShutdown.cookies", false);
 
 // Enable custom userChrome.js:
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-
-// This could otherwise cause some issues on bank logins and other annoying sites:
-user_pref("network.http.referer.XOriginPolicy", 0);
 
 // Disable Firefox sync and its menu entries
 user_pref("identity.fxaccounts.enabled", false);
