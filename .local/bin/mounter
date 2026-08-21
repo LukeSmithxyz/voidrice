@@ -35,7 +35,7 @@ filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6
 # Get only LUKS drives that are not decrypted.
 unopenedluks="$(for drive in $allluks; do
 	uuid="${drive%% *}"
-	uuid="${uuid//-}"	# This is a bashism.
+	uuid="$(echo "$uuid" | tr -d '-')"
 	[ -n "$decrypted" ] && for open in $decrypted; do
 		[ "$uuid" = "$open" ] && break 1
 	done && continue 1
@@ -78,7 +78,7 @@ attemptmount(){
 case "$chosen" in
 	💾*)
 		chosen="${chosen%% *}"
-		chosen="${chosen:1}"	# This is a bashism.
+		chosen="${chosen#?}"
 		parttype="$(echo "$lsblkoutput" | grep "$chosen")"
 		attemptmount || getmount
 		case "${parttype##* }" in
@@ -91,7 +91,7 @@ case "$chosen" in
 
 	🔒*)
 		chosen="${chosen%% *}"
-		chosen="${chosen:1}"	# This is a bashism.
+		chosen="${chosen#?}"
 		# Number the drive.
 		while true; do
 			[ -e "/dev/mapper/usb$num" ] || break
@@ -117,7 +117,7 @@ case "$chosen" in
 		notify-send "❗Note" "Remember to allow file access on your phone now."
 		getmount
 		number="${chosen%%:*}"
-		number="${chosen:1}"	# This is a bashism.
+		number="${chosen#?}"
 		sudo -A simple-mtpfs -o allow_other -o fsname="simple-mtpfs-$(escape "$chosen")" --device "$number" "$mp"
 		notify-send "🤖 Android Mounted." "Android device mounted to $mp."
 		;;
