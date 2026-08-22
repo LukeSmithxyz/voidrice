@@ -9,4 +9,9 @@ case $BLOCK_BUTTON in
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-free --mebi | sed -n '2{p;q}' | awk '{printf ("🧠%2.2fGiB/%2.2fGiB\n", ( $3 / 1024), ($2 / 1024))}'
+free="$(free --mebi)"
+free="${free#*Mem:}"
+
+set -- $free
+
+printf "🧠%2.2fGiB/%2.2fGiB\n" "$(( $2 * 100 / 1024 ))e-2" "$(( $1 * 100 / 1024 ))e-2"
