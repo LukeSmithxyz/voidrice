@@ -1,17 +1,26 @@
 #!/bin/sh
-# works on any init system
-# requirements: dmenu, xorg-setxkbmap
-kb="$(setxkbmap -query | grep -oP 'layout:\s*\K\w+')" || exit 1
+
+# Displays current keyboard layout.
+# Requires xorg-setxkbmap.
+
+kb="$(setxkbmap -query | while read -r key value; do
+	[ "$key" = "layout:" ] && { echo "$value"; break ;}
+done)"
 
 case $BLOCK_BUTTON in
-	1) kb_choice="$(awk '/! layout/{flag=1; next} /! variant/{flag=0} flag {print $2, "- " $1}' /usr/share/X11/xkb/rules/base.lst | dmenu -l 15)"
-	[ -z "$kb_choice" ] && exit 0
-	kb="$(echo "$kb_choice" | awk '{print $3}')"
-	setxkbmap "$kb"
-	pkill -RTMIN+30 "${STATUSBAR:-dwmblocks}";;
-	3) notify-send "⌨  Keyboard/language module" "$(printf "%s" "\- Current layout: $(setxkbmap -query | grep -oP 'layout:\s*\K\w+')")
-- Left click to change keyboard.";;
+	1) kb_choice="$(cat /usr/share/X11/xkb/rules/base.lst)"
+	kb_choice="${kb_choice#*! layout*}"
+	kb_choice="${kb_choice%%! variant*}"
+	kb_choice="$(echo "$kb_choice" | while read -r iso layout; do
+		[ -z "$iso" ] || printf "%s - %s\n" "$layout" "$iso"
+	done | dmenu -i -l 15)"
+	kb_choice="${kb_choice##* }"
+	[ -z "$kb_choice" ] && exit
+	setxkbmap "$kb_choice"
+	pkill -RTMIN+30 "${STATUSBAR:-dwmblocks}" ;;
+	3) notify-send "⌨  Keyboard/language module" "Current layout: $kb
+- Left click to change keyboard." ;;
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-echo "$kb"
+printf "%s\n" "$kb"
