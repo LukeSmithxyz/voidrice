@@ -4,11 +4,9 @@
 # Some changes by Luke
 # Rebuild by Tenyun
 
-# This block displays the number running background tasks.  Requires tsp.
+# Displays the number running background tasks.
+# Requires tsp.
 
-num=$(tsp -l | awk -v numr=0 -v numq=0 '{if (/running/)numr++; if (/queued/)numq++} END{print numr+numq"("numq")"}')
-
-# Handle mouse clicks
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e tsp -l ;;
 	3) notify-send "Tasks module" "🤖: number of running/queued background tasks
@@ -16,5 +14,13 @@ case $BLOCK_BUTTON in
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-[ "$num" != "0(0)" ] &&
-	echo "🤖$num"
+tsp -l | {
+	numr=0
+	numq=0
+	while read -r line; do case "$line" in
+		*running* ) numr=$((numr + 1)) ;;
+		*queued* ) numq=$((numq + 1)) ;;
+	esac; done
+	num="$((numr + numq))($numq)"
+	[ "$num" != "0(0)" ] && printf "🤖%s\n" "$num"
+}
