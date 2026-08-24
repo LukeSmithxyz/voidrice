@@ -8,7 +8,7 @@
 
 url="${1:-$(xclip -o)}"
 
-tmpfile="/tmp/$(printf %s "$url" | sed "s/.*\///;s/%20/ /g")"
+tmpfile="/tmp/$(echo "$url" | sed "s/.*\///;s/%20/ /g")"
 
 case "$url" in
 	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtube.com/shorts*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*odysee.com*)
