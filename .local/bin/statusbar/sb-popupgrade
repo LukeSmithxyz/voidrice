@@ -1,9 +1,12 @@
 #!/bin/sh
 
-printf "Beginning upgrade.\\n"
+printf "Beginning upgrade.\n"
 
-yay -Syu
+sudo pacman -Syu
+
+command -v yay >/dev/null 2>&1 && yay -Su
+
 pkill -RTMIN+8 "${STATUSBAR:-dwmblocks}"
 
-printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
+printf "\nUpgrade complete.\nPress any key to exit window."
 read -r _
