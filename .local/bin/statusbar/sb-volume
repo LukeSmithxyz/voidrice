@@ -16,24 +16,16 @@ esac
 vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
 
 # If muted, print 🔇 and exit.
-[ "$vol" != "${vol%\[MUTED\]}" ] && echo 🔇 && exit
+[ "$vol" != "${vol%\[MUTED\]}" ] && { printf "🔇\n"; exit ;}
 
-vol="${vol#Volume: }"
-
-split() {
-	# For ommiting the . without calling and external program.
-	IFS=$2
-	set -- $1
-	printf '%s' "$@"
-}
-
-vol="$(printf "%.0f" "$(split "$vol" ".")")"
+# Omit the '.' without calling an external program.
+vol="$(IFS=.; set -- ${vol#Volume: }; printf "%.0f" "$1$2")"
 
 case 1 in
 	$((vol >= 70)) ) icon="🔊" ;;
 	$((vol >= 30)) ) icon="🔉" ;;
 	$((vol >= 1)) ) icon="🔈" ;;
-	* ) echo 🔇 && exit ;;
+	* ) printf "🔇\n"; exit ;;
 esac
 
-echo "$icon$vol%"
+printf "%s%d%%\n" "$icon" "$vol"
