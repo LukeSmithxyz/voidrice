@@ -20,7 +20,7 @@ tsp -l | {
 	while read -r line; do case "$line" in
 		*running* ) numr=$((numr + 1)) ;;
 		*queued* ) numq=$((numq + 1)) ;;
-	esac; done
+	esac done
 	num="$((numr + numq))($numq)"
 	[ "$num" != "0(0)" ] && printf "🤖%s\n" "$num"
 }

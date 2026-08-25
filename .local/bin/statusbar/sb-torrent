@@ -25,7 +25,7 @@ transmission-remote -l | {
 		*Idle* ) idle=$((idle + 1)) ;;
 		*Uploading* ) upload=$((upload + 1)) ;;
 		*%* ) download=$((download + 1)) ;;
-	esac; done
+	esac done
 	[ $stopped -gt 0 ] && torrents="$torrents 🛑$stopped"
 	[ $idle -gt 0 ] && torrents="$torrents 🕰️$idle"
 	[ $upload -gt 0 ] && torrents="$torrents ⬆️$upload"
