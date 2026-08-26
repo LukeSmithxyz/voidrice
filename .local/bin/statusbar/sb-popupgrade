@@ -8,5 +8,5 @@ command -v yay >/dev/null 2>&1 && yay -Su
 
 pkill -RTMIN+8 "${STATUSBAR:-dwmblocks}"
 
-printf "\nUpgrade complete.\nPress any key to exit window."
+printf "\nUpgrade complete.\nPress <Enter> to exit window.\n"
 read -r _
