@@ -9,7 +9,7 @@
 
 report="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
 
-data="$([ -z "$1" ] && cat "$report" 2>/dev/null || curl -sfm 5 "${WTTRURL:-wttr.in}/$1${copy:+?T}")" ||
+data="$([ -z "$1" ] && cat "$report" 2>/dev/null || curl -sfm 5 "${WTTRURL:-wttr.is}/$1?F${copy:+T}")" ||
 	{ printf "Failed to get weather forecast!\nCheck your internet connection and the supplied location.\n" >&2; exit 1 ;}
 
 [ -n "$copy" ] && {
