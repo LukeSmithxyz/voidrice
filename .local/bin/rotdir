@@ -11,10 +11,10 @@
 
 base="$(basename "$1")"
 
-for i in $(ls "$PWD"); do
+ls "$PWD" | { while read -r i; do
 	[ "$i" = "$base" ] && m=1
 	case "$m" in
 		1 ) echo "$i" ;;
 		* ) lines="$lines$i\n" ;;
 	esac
-done; echo "$lines"
+done; echo "$lines" ;}
