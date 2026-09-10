@@ -34,11 +34,13 @@ cmd open ${{
         text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR $fx;;
 	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|avif\|tif\|ico\)\(_large\)*$" |
-		setsid -f nsxiv -aio 2>/dev/null | while read -r file; do
+	image/*)
+		images="$(lf -remote "query $id files" | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|avif\|tif\|ico\)\(_large\)*$")"
+		num_current="$(echo "$images" | nl -n ln | grep -F $f)"
+		num_current="${num_current%% *}"
+		echo "$images" | setsid -f nsxiv -aio -n $num_current 2>/dev/null | while read -r file; do
 			[ -z "$file" ] && continue
-			lf -remote "send select \"$file\""
-			lf -remote "send toggle"
+			lf -remote "send $id toggle \"$file\""
 		done &
 		;;
 	audio/*|video/x-ms-asf) mpv --audio-display=no $f ;;
