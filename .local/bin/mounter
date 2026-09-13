@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Mounts Android Phones and USB drives (encrypted or not). This script will
 # replace the older `dmenumount` which had extra steps and couldn't handle
@@ -12,15 +12,14 @@ IFS='
 escape(){ echo "$@" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g" ;}
 
 # Check for phones.
-phones="$(simple-mtpfs -l 2>/dev/null | sed "s/^/📱/")"
 mountedphones="$(grep "simple-mtpfs" /etc/mtab)"
 # If there are already mounted phones, remove them from the list of mountables.
-[ -n "$mountedphones" ] && phones="$(for phone in $phones; do
-	for mounted in $mountedphones; do
-		escphone="$(escape "$phone")"
-		[[ "$mounted" =~ "$escphone" ]] && break 1
-	done && continue 1
-	echo "$phone"
+phones="$(simple-mtpfs -l 2>/dev/null | while read -r phone; do
+	escphone="$(escape "$phone")"
+	case "$mountedphones" in
+		*"$escphone"* ) ;;
+		* ) echo "📱$phone" ;;
+	esac
 done)"
 
 # Check for drives.
@@ -35,7 +34,7 @@ filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6
 # Get only LUKS drives that are not decrypted.
 unopenedluks="$(for drive in $allluks; do
 	uuid="${drive%% *}"
-	uuid="${uuid//-}"	# This is a bashism.
+	uuid="$(echo "$uuid" | tr -d '-')"
 	[ -n "$decrypted" ] && for open in $decrypted; do
 		[ "$uuid" = "$open" ] && break 1
 	done && continue 1
@@ -78,7 +77,7 @@ attemptmount(){
 case "$chosen" in
 	💾*)
 		chosen="${chosen%% *}"
-		chosen="${chosen:1}"	# This is a bashism.
+		chosen="${chosen#?}"
 		parttype="$(echo "$lsblkoutput" | grep "$chosen")"
 		attemptmount || getmount
 		case "${parttype##* }" in
@@ -91,7 +90,7 @@ case "$chosen" in
 
 	🔒*)
 		chosen="${chosen%% *}"
-		chosen="${chosen:1}"	# This is a bashism.
+		chosen="${chosen#?}"
 		# Number the drive.
 		while true; do
 			[ -e "/dev/mapper/usb$num" ] || break
@@ -117,7 +116,7 @@ case "$chosen" in
 		notify-send "❗Note" "Remember to allow file access on your phone now."
 		getmount
 		number="${chosen%%:*}"
-		number="${chosen:1}"	# This is a bashism.
+		number="${chosen#?}"
 		sudo -A simple-mtpfs -o allow_other -o fsname="simple-mtpfs-$(escape "$chosen")" --device "$number" "$mp"
 		notify-send "🤖 Android Mounted." "Android device mounted to $mp."
 		;;
