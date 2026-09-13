@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Plays a radio station stream from ~/.local/share/radio-list
+
+# Requires mpv and socat.
+
+stations="${XDG_DATA_HOME:-$HOME/.local/share}/radio-list"
+read -r radiopid </tmp/radio-pid
+
+[ "$1" = togglemute ] && { echo '{"command":["cycle","mute"]}' \
+	| socat - "UNIX-CONNECT:/tmp/mpvSockets/$radiopid" >/dev/null 2>&1
+pkill -RTMIN+28 "${STATUSBAR:-dwmblocks}"; exit ;}
+
+[ -S "/tmp/mpvSockets/$radiopid" ] && {
+	station="$(echo '{ "command": ["get_property", "metadata/by-key/icy-name"] }' \
+		| socat - "UNIX-CONNECT:/tmp/mpvSockets/$radiopid" 2>/dev/null)"
+	case "$station" in
+		*'"property not found"'*|*'"property unavailable"'* )
+			station="$(echo '{ "command": ["get_property", "media-title"] }' \
+			| socat - "UNIX-CONNECT:/tmp/mpvSockets/$radiopid" 2>/dev/null)"
+	esac
+	station="${station#*:\"}"
+	station="${station%%\"*}"
+	response=$(printf "No\nYes" | dmenu -i -p "$station: Stop radio?")
+	[ "$response" = "Yes" ] && {
+		kill "$radiopid"
+		rm -f /tmp/radio-pid
+	}
+	pkill -RTMIN+28 "${STATUSBAR:-dwmblocks}"
+	exit
+}
+
+chosen=$(dmenu -p "Radio:" -i -l 10 <"$stations")
+[ -z "$chosen" ] && exit
+
+mpv "$chosen" >/dev/null 2>&1 &
+
+echo $! >/tmp/radio-pid; sleep .1
+pkill -RTMIN+28 "${STATUSBAR:-dwmblocks}"

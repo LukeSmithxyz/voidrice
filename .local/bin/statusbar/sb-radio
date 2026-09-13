@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Displays the currently playing song. The station must be sending out an
+# "icy-title", otherwise the "media-title" is shown.
+
+# Requires mpv and socat.
+
+case $BLOCK_BUTTON in
+	1) setsid -f dmenuradio ;;
+	2) dmenuradio togglemute ;;
+	3) notify-send "📻 Radio module" "\- Shows currently playing radio station.
+- Middle click to mute." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+read -r radiopid </tmp/radio-pid
+[ -S "/tmp/mpvSockets/$radiopid" ] || exit
+
+title="$(echo '{ "command": ["get_property", "metadata/by-key/icy-title"] }' \
+	| socat - "UNIX-CONNECT:/tmp/mpvSockets/$radiopid" 2>/dev/null)"
+
+case "$title" in
+	*'"property not found"'*|*'"property unavailable"'* )
+		title="$(echo '{ "command": ["get_property", "media-title"] }' \
+		| socat - "UNIX-CONNECT:/tmp/mpvSockets/$radiopid" 2>/dev/null)" ;;
+esac
+
+title="${title#*:\"}"
+title="${title%%\",*}"
+
+mutestate="$(echo '{ "command": ["get_property", "mute"] }' \
+	| socat - "UNIX-CONNECT:/tmp/mpvSockets/$radiopid" 2>/dev/null)"
+mutestate="${mutestate#*:}"
+mutestate="${mutestate%%,*}"
+
+[ "$mutestate" = true ] && muted=" 🔇"
+
+printf "📻 %s%s\n" "$title" "$muted"
