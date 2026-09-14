@@ -43,9 +43,22 @@ getYoutubeRss() {
 			feed=$(wget -q "$url" -O tmp_rssget_yt \
 			&& sed -n 's|.*\("rssUrl":"[^"]*\).*|\1|; p' tmp_rssget_yt \
 			| grep rssUrl \
-			| sed 's|"rssUrl":"||') ;;
+			| sed 's|"rssUrl":"||')
+			rm tmp_rssget_yt ;;
+		*"@"*) feed=$(wget -q "$url" -O tmp_rssget_yt \
+			&& sed -n 's|.*"\(https://www\.youtube\.com/feeds/videos\.xml?channel_id=[^"]*\)".*|\1|p' tmp_rssget_yt)
+			rm tmp_rssget_yt ;;
+		*"watch"*) channel_id=$(wget -q "$url" -O tmp_rssget_yt \
+			&& sed -n 's|.*"/channel/\([^"]*\)",.*|\1|p;' tmp_rssget_yt  | head -1)
+			feed="https://www.youtube.com/feeds/videos.xml?channel_id=${channel_id}"
+			rm tmp_rssget_yt ;;
 	esac
 	echo "$feed"
+}
+
+getTelegramRss() {
+	username=$(echo "$1" | sed 's|.*/t.me/||')
+	echo "https://rss-bridge.org/bridge01/?action=display&username=$username&bridge=TelegramBridge&format=Atom"
 }
 
 getVimeoRss() {
@@ -83,12 +96,12 @@ if [ -n "$1" ] ; then
 	url="$1"
 else
 	url="$(xclip -selection clipboard -o)"
-	[ -z "$url" ] && echo "usage: $0 url 'tag1 tag2 tag3'" && exit 1
+	[ -z "$url" ] && echo "usage: $0 url 'tag1 tag2 tag3 # comment'" && exit 1
 fi
 
 declare -a list=()
 
-yt_regex="^(http(s)?://)?((w){3}\.)?(youtube\.com|invidio\.us|invidious\.flokinet\.to|invidious\.materialio\.us|iv\.datura\.network|invidious\.perennialte\.ch|invidious\.fdn\.fr|invidious\.private\.coffee|invidious\.protokolla\.fi|invidious\.privacyredirect\.com|yt\.artemislena\.eu|yt\.drgnz\.club|invidious\.incogniweb\.net|yewtu\.be|inv\.tux\.pizza|invidious\.reallyaweso\.me|iv\.melmac\.space|inv\.us\.projectsegfau\.lt|inv\.nadeko\.net|invidious\.darkness\.services|invidious\.jing\.rocks|invidious\.privacydev\.net|inv\.in\.projectsegfau\.lt|invidious\.drgns\.space)/(channel|user|c).+"
+yt_regex="^(http(s)?://)?((w){3}\.)?(youtube\.com|invidio\.us|invidious\.flokinet\.to|invidious\.materialio\.us|iv\.datura\.network|invidious\.perennialte\.ch|invidious\.fdn\.fr|invidious\.private\.coffee|invidious\.protokolla\.fi|invidious\.privacyredirect\.com|yt\.artemislena\.eu|yt\.drgnz\.club|invidious\.incogniweb\.net|yewtu\.be|inv\.tux\.pizza|invidious\.reallyaweso\.me|iv\.melmac\.space|inv\.us\.projectsegfau\.lt|inv\.nadeko\.net|invidious\.darkness\.services|invidious\.jing\.rocks|invidious\.privacydev\.net|inv\.in\.projectsegfau\.lt|invidious\.drgns\.space)/(channel|user|c|@|watch).+"
 reddit_regex="^(http(s)?://)?((w){3}\.)?reddit\.com.*"
 vimeo_regex="^(http(s)?://)?((w){3}.)?vimeo\.com.*"
 if echo $url | grep -Ex "$yt_regex" >/dev/null ; then
@@ -100,6 +113,8 @@ elif echo $url | grep -E "$vimeo_regex" >/dev/null ; then
 	list="$(getVimeoRss "$url")"
 elif echo $url | grep -E "github.com" >/dev/null ; then
 	list="$(getGithubRss "$url")"
+elif echo $url | grep -E "t.me" >/dev/null ; then
+	list="$(getTelegramRss "$url")"
 # gitlab also works with getlink
 elif echo $url | grep -E "gitlab.com/[a-zA-Z0-9].*" >/dev/null ; then
 	list="$(getGitlabRss "$url")"
