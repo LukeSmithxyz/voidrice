@@ -1,0 +1,10 @@
+" Scrolling
+bind j scrollpx 0 50
+bind k scrollpx 0 -50
+
+" Search
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind --mode=normal <Escape> composite mode normal ; hidecmdline ; nohlsearch
