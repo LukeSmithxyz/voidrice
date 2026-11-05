@@ -254,6 +254,7 @@ local servers = {
 	'bashls',		-- bash			-- bash-language-server
 	'cssls',		-- CSS			-- vscode-css-languageserver
 	'openscad_lsp',		-- OpenSCAD		-- openscad-lsp
+	'nginx_language_server'	-- nginx		-- nginx-language-server
 }
 -- Automatically set up each LSP server in the list
 for _, server in ipairs(servers) do
