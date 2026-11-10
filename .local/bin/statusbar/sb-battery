@@ -10,9 +10,9 @@ case $BLOCK_BUTTON in
 🔌: charging
 ⚡: charged
 ❗: battery very low!
-- Scroll to change adjust xbacklight." ;;
-	4) xbacklight -inc 10 ;;
-	5) xbacklight -dec 10 ;;
+- Scroll to change adjust brightnessctl." ;;
+	4) light -A 10 ;;
+	5) light -U 10 ;;
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

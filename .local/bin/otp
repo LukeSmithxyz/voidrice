@@ -31,7 +31,7 @@ case $choice in
 
 		if echo "$info" | pass otp insert "$otp"; then
 			while [ "${num:-0}" -lt 3 ] ; do
-				export name="$(prinf | dmenu -p "Give this One Time Password a one-word name:")"
+				export name="$(printf "" | dmenu -p "Give this One Time Password a one-word name:")"
 				echo "$name" | grep -q -- "^[A-Za-z0-9-]\+$" && break
 				num="$((num + 1))"
 			done

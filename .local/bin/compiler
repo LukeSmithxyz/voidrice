@@ -6,29 +6,33 @@
 # Compiles .tex. groff (.mom, .ms), .rmd, .md, .org.  Opens .sent files as sent
 # presentations. Runs scripts based on extension or shebang.
 
-file="${1}"
+file="$(readlink -f "${1}")"
 ext="${file##*.}"
-dir=${file%/*}
+dir="${file%/*}"
 base="${file%.*}"
+name="${base##*/}"
 
 cd "${dir}" || exit "1"
 
 case "${ext}" in
     [0-9]) preconv "${file}" | refer -PS -e | groff -mandoc -T pdf > "${base}.pdf" ;;
     mom|ms) preconv "${file}" | refer -PS -e | groff -T pdf -m"${ext}" > "${base}.pdf" ;;
-    c) cc "${file}" -o "${base}" && "./${base}" ;;
-    cob) cobc -x -o "$base" "$file" && "$base" ;;
-    cpp) g++ "${file}" -o "${base}" && "./${base}" ;;
+    c) cc "${file}" -o "${base}" && "./${name}" ;;
+    cob) cobc -x -o "$base" "$file" && "./${name}" ;;
+    cpp) g++ "${file}" -o "${base}" && "./${name}" ;;
     cs) mcs "${file}" && mono "${base}.exe" ;;
     go) go run "${file}" ;;
     h) sudo make install ;;
-    java) javac -d classes "${file}" && java -cp classes "${base}" ;;
+    java) javac -d classes "${file}" && java -cp classes "${name}" ;;
     m) octave "${file}" ;;
-    md) [ -x "$(command -v lowdown)" ] && \
-	    lowdown --parse-no-intraemph "${file}" -Tms | groff -mpdfmark -ms -kept -T pdf > "${base}.pdf" || \
-	    [ -x "$(command -v groffdown)" ] && \
-	    groffdown -i "${file}" | groff -T pdf > "${base}.pdf" || \
-	    pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}" ;;
+    md) if [ -x "$(command -v lowdown)" ]; then
+	    lowdown --parse-no-intraemph --parse-math -s -Tlatex "${file}" > "${base}.tex" &&
+		latexmk -interaction=nonstopmode -halt-on-error "${base}.tex"
+	elif [ -x "$(command -v groffdown)" ]; then
+	    groffdown -i "${file}" | groff -T pdf > "${base}.pdf"
+	else
+	    pandoc -t ms --highlight-style="kate" -s -o "${base}.pdf" "${file}"
+	fi ;;
     org) emacs "${file}" --batch -u "${USER}" -f org-latex-export-to-pdf ;;
     py) python "${file}" ;;
     rink) rink -f "${file}" ;;
