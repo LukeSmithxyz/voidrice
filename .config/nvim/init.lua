@@ -434,3 +434,33 @@ vim.api.nvim_set_keymap('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpo
 vim.api.nvim_set_keymap('n', '<leader>B', "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>dr', "<cmd>lua require'dap'.repl.open()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>dl', "<cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
+
+
+-- Agentic.nvim - agentty ACP
+local agentic = require("agentic")
+
+agentic.setup({
+    provider = "agentty",
+
+    acp_providers = {
+        ["agentty"] = {
+            name = "Agentty",
+            command = "agentty",
+            args = {
+                "acp",
+                "--profile", "ask",
+                "--sandbox", "on",
+            },
+        },
+    },
+})
+
+vim.keymap.set("n", "<leader>aa", agentic.toggle,
+    { desc = "Toggle AI chat" })
+
+vim.keymap.set("n", "<leader>an", agentic.new_session,
+    { desc = "New AI session" })
+
+vim.keymap.set({ "n", "v" }, "<leader>ac",
+    agentic.add_selection_or_file_to_context,
+    { desc = "Add AI context" })
