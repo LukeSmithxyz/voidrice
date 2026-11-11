@@ -37,6 +37,8 @@ Plug('mfussenegger/nvim-dap')
 Plug('nvim-neotest/nvim-nio')
 Plug('rcarriga/nvim-dap-ui')
 Plug('mfussenegger/nvim-dap-python')
+-- AI Agent (ACP Support)
+Plug('carlos-algms/agentic.nvim')
 vim.fn['plug#end']()
 
 -- General settings
