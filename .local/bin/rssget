@@ -39,7 +39,7 @@ getYoutubeRss() {
 	path=$(echo "$url" | sed -e 's|^http[s]*://||')
 	case "$path" in
 		*"/channel/"*) channel_id="$(echo $path | sed -r 's|.*channel/([^/]*).*|\1|')" && feed="https://www.youtube.com/feeds/videos.xml?channel_id=${channel_id}" ;;
-		*"/c/"*|*"/user/"*)
+		*"/c/"*|*"/user/"*|*"/@"*)
 			feed=$(wget -q "$url" -O tmp_rssget_yt \
 			&& sed -n 's|.*\("rssUrl":"[^"]*\).*|\1|; p' tmp_rssget_yt \
 			| grep rssUrl \
@@ -88,7 +88,7 @@ fi
 
 declare -a list=()
 
-yt_regex="^(http(s)?://)?((w){3}\.)?(youtube\.com|invidio\.us|invidious\.flokinet\.to|invidious\.materialio\.us|iv\.datura\.network|invidious\.perennialte\.ch|invidious\.fdn\.fr|invidious\.private\.coffee|invidious\.protokolla\.fi|invidious\.privacyredirect\.com|yt\.artemislena\.eu|yt\.drgnz\.club|invidious\.incogniweb\.net|yewtu\.be|inv\.tux\.pizza|invidious\.reallyaweso\.me|iv\.melmac\.space|inv\.us\.projectsegfau\.lt|inv\.nadeko\.net|invidious\.darkness\.services|invidious\.jing\.rocks|invidious\.privacydev\.net|inv\.in\.projectsegfau\.lt|invidious\.drgns\.space)/(channel|user|c).+"
+yt_regex="^(http(s)?://)?((w){3}\.)?(youtube\.com|invidio\.us|invidious\.flokinet\.to|invidious\.materialio\.us|iv\.datura\.network|invidious\.perennialte\.ch|invidious\.fdn\.fr|invidious\.private\.coffee|invidious\.protokolla\.fi|invidious\.privacyredirect\.com|yt\.artemislena\.eu|yt\.drgnz\.club|invidious\.incogniweb\.net|yewtu\.be|inv\.tux\.pizza|invidious\.reallyaweso\.me|iv\.melmac\.space|inv\.us\.projectsegfau\.lt|inv\.nadeko\.net|invidious\.darkness\.services|invidious\.jing\.rocks|invidious\.privacydev\.net|inv\.in\.projectsegfau\.lt|invidious\.drgns\.space)/(channel|user|c|@).+"
 reddit_regex="^(http(s)?://)?((w){3}\.)?reddit\.com.*"
 vimeo_regex="^(http(s)?://)?((w){3}.)?vimeo\.com.*"
 if echo $url | grep -Ex "$yt_regex" >/dev/null ; then
